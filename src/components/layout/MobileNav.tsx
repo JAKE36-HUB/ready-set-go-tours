@@ -80,9 +80,22 @@ export function MobileNav({ isOpen, onClose }: MobileNavProps) {
                   priority
                 />
               </Link>
-              <Button variant="ghost" size="icon" onClick={onClose} aria-label="Close menu">
-                <X className="w-5 h-5" />
-              </Button>
+              <div className="flex items-center gap-1">
+                <button
+                  onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+                  className="flex items-center justify-center w-9 h-9 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-300 transition-colors"
+                  aria-label="Toggle dark mode"
+                >
+                  {mounted ? (
+                    theme === "dark" ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />
+                  ) : (
+                    <div className="w-4 h-4" />
+                  )}
+                </button>
+                <Button variant="ghost" size="icon" onClick={onClose} aria-label="Close menu">
+                  <X className="w-5 h-5" />
+                </Button>
+              </div>
             </div>
 
             <motion.nav
@@ -196,25 +209,6 @@ export function MobileNav({ isOpen, onClose }: MobileNavProps) {
                   <Clock className="w-4 h-4 text-amber-500" />
                   {CONTACT_INFO.hours}
                 </div>
-              </div>
-
-              <div className="flex items-center justify-between px-4 py-3 rounded-xl bg-slate-50 dark:bg-slate-800/50">
-                <span className="text-sm font-medium text-slate-700 dark:text-slate-300">Appearance</span>
-                <button
-                  onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-                  className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-white dark:bg-slate-700 text-sm text-slate-700 dark:text-slate-300 shadow-sm hover:shadow transition-all"
-                  aria-label="Toggle dark mode"
-                >
-                  {mounted ? (
-                    theme === "dark" ? (
-                      <><Sun className="w-4 h-4 text-amber-500" /> Light</>
-                    ) : (
-                      <><Moon className="w-4 h-4 text-sky-500" /> Dark</>
-                    )
-                  ) : (
-                    <div className="w-4 h-4" />
-                  )}
-                </button>
               </div>
 
               <div className="flex items-center justify-center gap-3">
