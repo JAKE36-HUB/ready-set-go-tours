@@ -80,22 +80,9 @@ export function MobileNav({ isOpen, onClose }: MobileNavProps) {
                   priority
                 />
               </Link>
-              <div className="flex items-center gap-1">
-                <button
-                  onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-                  className="flex items-center justify-center w-9 h-9 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-300 transition-colors"
-                  aria-label="Toggle dark mode"
-                >
-                  {mounted ? (
-                    theme === "dark" ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />
-                  ) : (
-                    <div className="w-4 h-4" />
-                  )}
-                </button>
-                <Button variant="ghost" size="icon" onClick={onClose} aria-label="Close menu">
-                  <X className="w-5 h-5" />
-                </Button>
-              </div>
+              <Button variant="ghost" size="icon" onClick={onClose} aria-label="Close menu">
+                <X className="w-5 h-5" />
+              </Button>
             </div>
 
             <motion.nav
@@ -178,7 +165,23 @@ export function MobileNav({ isOpen, onClose }: MobileNavProps) {
                   </motion.div>
                 )
               })}
-            </motion.nav>
+                <motion.div variants={itemVariants} className="pt-2 mt-2 border-t border-slate-100 dark:border-slate-800">
+                  <button
+                    onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+                    className="flex w-full items-center gap-3 px-4 py-3.5 rounded-xl text-sm font-medium text-slate-700 hover:bg-slate-50 dark:text-slate-300 dark:hover:bg-slate-800 transition-all"
+                  >
+                    {mounted ? (
+                      theme === "dark" ? (
+                        <><Sun className="w-4 h-4 text-amber-500" /> Light Mode</>
+                      ) : (
+                        <><Moon className="w-4 h-4 text-sky-500" /> Dark Mode</>
+                      )
+                    ) : (
+                      <div className="w-4 h-4" />
+                    )}
+                  </button>
+                </motion.div>
+              </motion.nav>
 
             <motion.div
               initial={{ opacity: 0, y: 20 }}
