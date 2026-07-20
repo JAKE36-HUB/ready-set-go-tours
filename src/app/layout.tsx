@@ -30,6 +30,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
+  verification: { google: "fvt1eU1DntqnkIjRNvfumhsw1vcNjEBJszDGExmfDXs" },
   title: {
     default: "Ready Set Go Tours & Travel | Luxury Kenya & Tanzania Safaris",
     template: "%s | Ready Set Go Tours & Travel",
