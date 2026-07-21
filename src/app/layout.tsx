@@ -6,6 +6,7 @@ import { ThemeProvider } from "@/components/layout/ThemeProvider";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { WhatsAppButton } from "@/components/layout/WhatsAppButton";
+import { AiChat } from "@/components/layout/AiChat";
 import { CookieConsent } from "@/components/layout/CookieConsent";
 import { ScrollToTop } from "@/components/layout/ScrollToTop";
 import { BreadcrumbJsonLd } from "@/components/JsonLd";
@@ -152,6 +153,7 @@ export default function RootLayout({
           <Header />
           <main className="flex-1">{children}</main>
           <Footer />
+          <AiChat />
           <WhatsAppButton />
           <ScrollToTop />
           <CookieConsent />
