@@ -166,6 +166,7 @@ export function MoreServices({ onReserve }: { onReserve?: (name: string) => void
                     <Link
                       href={`/services/${service.slug}`}
                       className={cn("flex-1 inline-flex items-center justify-center gap-1.5 h-10 rounded-xl bg-slate-100 dark:bg-slate-700 hover:bg-slate-200 dark:hover:bg-slate-600 text-slate-700 dark:text-slate-200 text-sm font-medium transition-all")}
+                      aria-label={`Learn more about ${service.title}`}
                     >
                       Learn More <ArrowRight className="size-3.5" />
                     </Link>
