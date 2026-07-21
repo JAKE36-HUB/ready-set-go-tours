@@ -44,6 +44,7 @@ export function StepActivities({
             onKeyDown={(e) => { if (e.key === "Enter") addActivity() }}
             placeholder="e.g. Hot air balloon safari, Maasai village visit..."
             className="flex-1 h-11 px-4 rounded-xl bg-white/5 border border-white/10 text-white text-sm placeholder-white/30 focus:outline-none focus:ring-2 focus:ring-emerald-400/30 focus:border-emerald-400/50 transition-all"
+            aria-label="Add an activity"
           />
           <button
             type="button"
@@ -63,7 +64,7 @@ export function StepActivities({
             {value.map((a) => (
               <span key={a} className="inline-flex items-center gap-1.5 text-xs bg-emerald-500/20 text-emerald-300 px-3 py-1.5 rounded-full ring-1 ring-emerald-500/30">
                 {a}
-                <button type="button" onClick={() => removeActivity(a)} className="hover:text-white transition-colors">
+                <button type="button" onClick={() => removeActivity(a)} className="hover:text-white transition-colors" aria-label={`Remove ${a}`}>
                   <X className="w-3 h-3" />
                 </button>
               </span>

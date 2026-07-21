@@ -433,11 +433,13 @@ function HeaderSearchModal({ onClose }: { onClose: () => void }) {
               onChange={(e) => setQuery(e.target.value)}
               placeholder="Search destinations, tours, packages..."
               className="w-full h-14 pl-12 pr-12 bg-transparent text-base text-slate-900 placeholder:text-slate-400 focus:outline-none dark:text-white dark:placeholder:text-slate-500"
+              aria-label="Search destinations, tours, packages"
             />
             {query && (
               <button
                 onClick={() => setQuery("")}
                 className="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 dark:hover:text-slate-300"
+                aria-label="Clear search"
               >
                 <X className="w-4 h-4" />
               </button>

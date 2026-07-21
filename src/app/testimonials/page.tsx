@@ -122,6 +122,7 @@ export default function TestimonialsPage() {
                       className={`w-2.5 h-2.5 rounded-full transition-all ${
                         i === currentSlide ? "bg-sky-500 w-8" : "bg-muted hover:bg-muted/80"
                       }`}
+                      aria-label={`Go to testimonial ${i + 1}`}
                     />
                   ))}
                 </div>
@@ -129,12 +130,14 @@ export default function TestimonialsPage() {
                   <button
                     onClick={() => { prevSlide(); resetAutoplay(); }}
                     className="w-9 h-9 rounded-full border border-input flex items-center justify-center hover:bg-muted transition-colors"
+                    aria-label="Previous testimonial"
                   >
                     <ChevronLeft className="size-4" />
                   </button>
                   <button
                     onClick={() => { nextSlide(); resetAutoplay(); }}
                     className="w-9 h-9 rounded-full border border-input flex items-center justify-center hover:bg-muted transition-colors"
+                    aria-label="Next testimonial"
                   >
                     <ChevronRight className="size-4" />
                   </button>

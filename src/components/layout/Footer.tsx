@@ -168,11 +168,13 @@ export function Footer() {
                     placeholder="Enter your email"
                     required
                     className="h-10 bg-slate-800 border-slate-700 text-slate-300 placeholder:text-slate-500 focus:border-sky-500"
+                    aria-label="Email address for newsletter"
                   />
                 </div>
                 <Button
                   type="submit"
                   className="h-10 px-4 bg-gradient-to-r from-sky-500 to-cyan-400 text-white border-0 hover:shadow-lg hover:scale-105 transition-all duration-300"
+                  aria-label="Subscribe to newsletter"
                 >
                   <ArrowRight className="w-4 h-4" />
                 </Button>

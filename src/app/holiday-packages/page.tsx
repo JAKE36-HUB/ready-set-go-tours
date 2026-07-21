@@ -145,6 +145,7 @@ function HolidayPackagesContent() {
                     value={sortBy}
                     onChange={(e) => setSortBy(e.target.value)}
                     className="text-sm bg-transparent border border-input rounded-lg px-3 py-1.5 outline-none focus:border-sky-500"
+                    aria-label="Sort packages"
                   >
                     {SORT_OPTIONS.map((opt) => (
                       <option key={opt.value} value={opt.value}>
@@ -341,6 +342,7 @@ function HolidayPackagesContent() {
               <button
                 onClick={() => setShowCompare(false)}
                 className="w-8 h-8 rounded-lg hover:bg-muted flex items-center justify-center"
+                aria-label="Close compare"
               >
                 <X className="size-4" />
               </button>

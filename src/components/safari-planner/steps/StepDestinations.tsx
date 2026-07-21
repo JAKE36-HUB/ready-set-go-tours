@@ -91,6 +91,7 @@ export function StepDestinations({
             onKeyDown={(e) => { if (e.key === "Enter") addCustom() }}
             placeholder="e.g. Lake Natron, Amboseli, Zanzibar..."
             className="flex-1 h-11 px-4 rounded-xl bg-white/5 border border-white/10 text-white text-sm placeholder-white/30 focus:outline-none focus:ring-2 focus:ring-emerald-400/30 focus:border-emerald-400/50 transition-all"
+            aria-label="Add a custom destination"
           />
           <button
             type="button"
@@ -114,7 +115,7 @@ export function StepDestinations({
                 className="inline-flex items-center gap-1.5 text-xs bg-emerald-500/20 text-emerald-300 px-3 py-1.5 rounded-full ring-1 ring-emerald-500/30"
               >
                 {d.name}
-                <button type="button" onClick={() => removeCustom(d.id)} className="hover:text-white transition-colors">
+                <button type="button" onClick={() => removeCustom(d.id)} className="hover:text-white transition-colors" aria-label={`Remove ${d.name}`}>
                   <X className="w-3 h-3" />
                 </button>
               </span>

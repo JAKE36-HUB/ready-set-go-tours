@@ -76,6 +76,7 @@ export default function FAQPage() {
                 onChange={(e) => setSearch(e.target.value)}
                 placeholder="Search questions..."
                 className="w-full h-12 pl-12 pr-4 rounded-xl border border-input bg-card text-foreground placeholder:text-muted-foreground focus:border-sky-500 focus:ring-3 focus:ring-sky-500/20 outline-none transition-all text-sm"
+                aria-label="Search frequently asked questions"
               />
             </div>
           </AnimatedSection>

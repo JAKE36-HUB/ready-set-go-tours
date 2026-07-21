@@ -32,6 +32,7 @@ export function StepAccommodation({
           placeholder="Describe your ideal accommodation — e.g. 'A luxury tented camp in the Mara with river views' or 'Budget-friendly lodge near the park gate'..."
           rows={4}
           className="w-full px-4 py-3 rounded-2xl bg-white/5 border border-white/10 text-white text-sm placeholder-white/30 focus:outline-none focus:ring-2 focus:ring-emerald-400/30 focus:border-emerald-400/50 transition-all resize-none"
+          aria-label="Describe your ideal accommodation"
         />
       </div>
 

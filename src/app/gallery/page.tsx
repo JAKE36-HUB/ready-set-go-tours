@@ -111,6 +111,7 @@ export default function GalleryPage() {
           <button
             onClick={closeLightbox}
             className="absolute top-4 right-4 z-50 w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white transition-colors"
+            aria-label="Close lightbox"
           >
             <X className="size-5" />
           </button>
@@ -119,6 +120,7 @@ export default function GalleryPage() {
           <button
             onClick={(e) => { e.stopPropagation(); prev(); }}
             className="absolute left-4 z-50 w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white transition-colors"
+            aria-label="Previous image"
           >
             <ChevronLeft className="size-5" />
           </button>
@@ -127,6 +129,7 @@ export default function GalleryPage() {
           <button
             onClick={(e) => { e.stopPropagation(); next(); }}
             className="absolute right-4 z-50 w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white transition-colors"
+            aria-label="Next image"
           >
             <ChevronRight className="size-5" />
           </button>

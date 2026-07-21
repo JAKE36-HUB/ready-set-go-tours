@@ -87,6 +87,7 @@ export default function MountainTrekkingPage() {
                   value={sortBy}
                   onChange={(e) => setSortBy(e.target.value)}
                   className="text-sm bg-transparent border border-slate-200 dark:border-slate-700 rounded-lg px-3 py-1.5 outline-none focus:border-violet-500 text-slate-700 dark:text-slate-300"
+                  aria-label="Sort mountain treks"
                 >
                   {SORT_OPTIONS.map((opt) => (
                     <option key={opt.value} value={opt.value}>

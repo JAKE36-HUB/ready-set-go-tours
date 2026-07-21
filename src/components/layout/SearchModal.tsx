@@ -108,11 +108,13 @@ export function SearchModal({ isOpen, onClose }: SearchModalProps) {
               onChange={(e) => setQuery(e.target.value)}
               placeholder="Search destinations, tours, packages..."
               className="w-full h-16 pl-14 pr-14 bg-transparent text-base sm:text-lg text-slate-900 placeholder:text-slate-400 focus:outline-none dark:text-white dark:placeholder:text-slate-500"
+              aria-label="Search destinations, tours, packages"
             />
             {query && (
               <button
                 onClick={() => setQuery("")}
                 className="absolute right-5 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 dark:hover:text-slate-300 transition-colors"
+                aria-label="Clear search"
               >
                 <X className="w-5 h-5" />
               </button>
