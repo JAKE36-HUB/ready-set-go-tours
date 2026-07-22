@@ -1,0 +1,195 @@
+"use client"
+
+import { useEffect, useState, useCallback } from "react"
+import { useParams, useRouter } from "next/navigation"
+import { ArrowLeft, Plus, X, Save } from "lucide-react"
+import { Button } from "@/components/ui/button"
+import { Input } from "@/components/ui/input"
+import { Textarea } from "@/components/ui/textarea"
+import { Label } from "@/components/ui/label"
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
+
+
+function slugify(text: string) {
+  return text.toLowerCase().replace(/[^\w\s-]/g, "").replace(/\s+/g, "-").replace(/-+/g, "-").trim()
+}
+
+function ArrayInput({ label, values, onChange, placeholder }: { label: string; values: string[]; onChange: (v: string[]) => void; placeholder?: string }) {
+  const [input, setInput] = useState("")
+  const add = () => {
+    const val = input.trim()
+    if (val && !values.includes(val)) { onChange([...values, val]); setInput("") }
+  }
+  return (
+    <div className="space-y-2">
+      <Label>{label}</Label>
+      <div className="flex gap-2">
+        <Input value={input} onChange={(e) => setInput(e.target.value)} placeholder={placeholder}
+          onKeyDown={(e) => { if (e.key === "Enter") { e.preventDefault(); add() } }} />
+        <Button type="button" variant="outline" onClick={add} size="icon" className="shrink-0"><Plus className="w-4 h-4" /></Button>
+      </div>
+      {values.length > 0 && (
+        <div className="flex flex-wrap gap-1.5">
+          {values.map((v, i) => (
+            <span key={i} className="inline-flex items-center gap-1 px-2.5 py-1 rounded-md bg-slate-100 dark:bg-slate-800 text-xs text-slate-700 dark:text-slate-300">
+              {v}<button type="button" onClick={() => onChange(values.filter((_, j) => j !== i))} className="hover:text-red-500"><X className="w-3 h-3" /></button>
+            </span>
+          ))}
+        </div>
+      )}
+    </div>
+  )
+}
+
+export default function EditDealPage() {
+  const params = useParams()
+  const router = useRouter()
+  const [loading, setLoading] = useState(true)
+  const [saving, setSaving] = useState(false)
+  const [form, setForm] = useState({
+    title: "", slug: "", description: "", discount: "", code: "", image: "", type: "special",
+    original_price: "", deal_price: "", price_kes: "", valid_until: "", duration: "",
+    accommodation: "", meals: "", featured: false,
+    highlights: [] as string[], included: [] as string[],
+    itinerary: [] as { day: string; description: string }[],
+  })
+
+  useEffect(() => {
+    async function load() {
+      try {
+        const res = await fetch(`/api/admin/deals/${params.id}`)
+        const json = await res.json()
+        if (json.data) {
+          const d = json.data
+          setForm({
+            title: d.title || "", slug: d.slug || "", description: d.description || "",
+            discount: d.discount || "", code: d.code || "", image: d.image || "",
+            type: d.type || "special", original_price: String(d.original_price ?? ""),
+            deal_price: String(d.deal_price ?? ""), price_kes: String(d.price_kes ?? ""),
+            valid_until: d.valid_until || "", duration: d.duration || "",
+            accommodation: d.accommodation || "", meals: d.meals || "",
+            featured: d.featured || false,
+            highlights: d.highlights || [], included: d.included || [],
+            itinerary: d.itinerary || [],
+          })
+        }
+      } catch { alert("Failed to load deal") }
+      finally { setLoading(false) }
+    }
+    load()
+  }, [params.id])
+
+  const handleTitleChange = useCallback((title: string) => {
+    setForm((prev) => ({ ...prev, title, slug: slugify(title) }))
+  }, [])
+
+  function addItineraryItem() {
+    setForm((p) => ({ ...p, itinerary: [...p.itinerary, { day: `Day ${p.itinerary.length + 1}`, description: "" }] }))
+  }
+
+  async function handleSubmit(e: React.FormEvent) {
+    e.preventDefault()
+    if (!form.title || !form.slug) return
+    setSaving(true)
+    try {
+      const res = await fetch(`/api/admin/deals/${params.id}`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          ...form,
+          original_price: Number(form.original_price) || 0,
+          deal_price: Number(form.deal_price) || 0,
+          price_kes: form.price_kes ? Number(form.price_kes) : null,
+        }),
+      })
+      if (res.ok) { router.push("/admin/deals"); router.refresh() }
+      else { const err = await res.json(); alert(err.error || "Failed to update deal") }
+    } catch { alert("Network error") }
+    finally { setSaving(false) }
+  }
+
+  if (loading) return <div className="flex justify-center py-12"><div className="animate-spin rounded-full h-8 w-8 border-b-2 border-sky-500" /></div>
+
+  return (
+    <div className="max-w-2xl mx-auto space-y-6">
+      <div className="flex items-center gap-3">
+        <Button variant="ghost" size="icon" onClick={() => router.push("/admin/deals")} aria-label="Back">
+          <ArrowLeft className="w-4 h-4" />
+        </Button>
+        <div><h2 className="text-lg font-semibold text-slate-900 dark:text-white">Edit Deal</h2><p className="text-sm text-slate-500 dark:text-slate-400">{form.title}</p></div>
+      </div>
+      <form onSubmit={handleSubmit} className="space-y-6">
+        <div className="rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-6 space-y-5">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div className="space-y-2"><Label>Title *</Label><Input value={form.title} onChange={(e) => handleTitleChange(e.target.value)} required /></div>
+            <div className="space-y-2"><Label>Slug *</Label><Input value={form.slug} onChange={(e) => setForm((p) => ({ ...p, slug: e.target.value }))} required /></div>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div className="space-y-2">
+              <Label>Type</Label>
+              <Select value={form.type} onValueChange={(v) => setForm((p) => ({ ...p, type: v ?? "special" }))}>
+                <SelectTrigger><SelectValue /></SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="early-bird">Early Bird</SelectItem>
+                  <SelectItem value="last-minute">Last Minute</SelectItem>
+                  <SelectItem value="group">Group</SelectItem>
+                  <SelectItem value="seasonal">Seasonal</SelectItem>
+                  <SelectItem value="combo">Combo</SelectItem>
+                  <SelectItem value="special">Special</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+            <div className="space-y-2"><Label>Duration</Label><Input value={form.duration} onChange={(e) => setForm((p) => ({ ...p, duration: e.target.value }))} /></div>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+            <div className="space-y-2"><Label>Original Price (USD)</Label><Input type="number" value={form.original_price} onChange={(e) => setForm((p) => ({ ...p, original_price: e.target.value }))} /></div>
+            <div className="space-y-2"><Label>Deal Price (USD)</Label><Input type="number" value={form.deal_price} onChange={(e) => setForm((p) => ({ ...p, deal_price: e.target.value }))} /></div>
+            <div className="space-y-2"><Label>Price (KES)</Label><Input type="number" value={form.price_kes} onChange={(e) => setForm((p) => ({ ...p, price_kes: e.target.value }))} /></div>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div className="space-y-2"><Label>Discount Label</Label><Input value={form.discount} onChange={(e) => setForm((p) => ({ ...p, discount: e.target.value }))} /></div>
+            <div className="space-y-2"><Label>Promo Code</Label><Input value={form.code} onChange={(e) => setForm((p) => ({ ...p, code: e.target.value }))} /></div>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div className="space-y-2"><Label>Valid Until</Label><Input value={form.valid_until} onChange={(e) => setForm((p) => ({ ...p, valid_until: e.target.value }))} /></div>
+            <div className="space-y-2"><Label>Image URL</Label><Input value={form.image} onChange={(e) => setForm((p) => ({ ...p, image: e.target.value }))} /></div>
+          </div>
+          <div className="flex items-center gap-2">
+            <input type="checkbox" id="featured" checked={form.featured} onChange={(e) => setForm((p) => ({ ...p, featured: e.target.checked }))}
+              className="w-4 h-4 rounded border-slate-300 dark:border-slate-600 text-sky-500 focus:ring-sky-500" />
+            <Label htmlFor="featured">Featured deal</Label>
+          </div>
+          <div className="space-y-2"><Label>Description</Label><Textarea value={form.description} onChange={(e) => setForm((p) => ({ ...p, description: e.target.value }))} rows={4} /></div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div className="space-y-2"><Label>Accommodation</Label><Input value={form.accommodation} onChange={(e) => setForm((p) => ({ ...p, accommodation: e.target.value }))} /></div>
+            <div className="space-y-2"><Label>Meals</Label><Input value={form.meals} onChange={(e) => setForm((p) => ({ ...p, meals: e.target.value }))} /></div>
+          </div>
+        </div>
+        <div className="rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-6 space-y-5">
+          <h3 className="text-sm font-semibold text-slate-900 dark:text-white">Details</h3>
+          <ArrayInput label="Highlights" values={form.highlights} onChange={(v) => setForm((p) => ({ ...p, highlights: v }))} />
+          <ArrayInput label="Included" values={form.included} onChange={(v) => setForm((p) => ({ ...p, included: v }))} />
+          <div className="space-y-3">
+            <div className="flex items-center justify-between">
+              <Label>Itinerary</Label>
+              <Button type="button" variant="outline" size="sm" onClick={addItineraryItem}><Plus className="w-3.5 h-3.5 mr-1" /> Add Day</Button>
+            </div>
+            {form.itinerary.map((item, i) => (
+              <div key={i} className="flex gap-2 items-start p-3 rounded-lg bg-slate-50 dark:bg-slate-800/50">
+                <div className="flex-1 space-y-2">
+                  <Input value={item.day} onChange={(e) => { const u = [...form.itinerary]; u[i] = { ...u[i], day: e.target.value }; setForm((p) => ({ ...p, itinerary: u })) }} />
+                  <Textarea value={item.description} onChange={(e) => { const u = [...form.itinerary]; u[i] = { ...u[i], description: e.target.value }; setForm((p) => ({ ...p, itinerary: u })) }} rows={2} />
+                </div>
+                <button type="button" onClick={() => setForm((p) => ({ ...p, itinerary: p.itinerary.filter((_, j) => j !== i) }))} className="mt-1 text-slate-400 hover:text-red-500"><X className="w-4 h-4" /></button>
+              </div>
+            ))}
+          </div>
+        </div>
+        <div className="flex justify-end gap-3">
+          <Button variant="outline" onClick={() => router.push("/admin/deals")}>Cancel</Button>
+          <Button type="submit" disabled={saving}><Save className="w-4 h-4 mr-1.5" />{saving ? "Saving..." : "Save Changes"}</Button>
+        </div>
+      </form>
+    </div>
+  )
+}

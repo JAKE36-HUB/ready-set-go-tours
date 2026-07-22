@@ -14,7 +14,7 @@ import { cn } from "@/lib/utils"
 const footerColumns = [
   {
     title: "Quick Links",
-    links: NAV_ITEMS.map((item) => ({ label: item.label, href: item.href })),
+    links: [...NAV_ITEMS.map((item) => ({ label: item.label, href: item.href })), { label: "Admin Panel", href: "/admin" }],
   },
   {
     title: "Popular Destinations",
