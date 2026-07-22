@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useMemo, Suspense } from "react";
+import { useState, useMemo, Suspense, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
@@ -8,7 +8,8 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { BookingModal } from "@/components/layout/BookingModal";
 import AnimatedSection from "@/components/AnimatedSection";
-import { TOUR_PACKAGES, PACKAGE_FILTERS, USD_TO_KES } from "@/lib/constants";
+import { PACKAGE_FILTERS, USD_TO_KES } from "@/lib/constants";
+import { getSupabase } from "@/lib/supabase";
 import {
   Clock,
   Hotel,
@@ -47,9 +48,21 @@ function HolidayPackagesContent() {
   const [compareIds, setCompareIds] = useState<number[]>([]);
   const [showCompare, setShowCompare] = useState(false);
   const [bookingTour, setBookingTour] = useState<string | null>(null);
+  const [packages, setPackages] = useState<any[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    (async () => {
+      try {
+        const { data } = await getSupabase().from("tour_packages").select("*").order("name");
+        if (data) setPackages(data.map((p: any) => ({ ...p, priceKES: p.price_kes })));
+      } catch {}
+      setLoading(false);
+    })();
+  }, []);
 
   const filtered = useMemo(() => {
-    let pkgs = [...TOUR_PACKAGES];
+    let pkgs = [...packages];
 
     if (activeFilter !== "All") {
       pkgs = pkgs.filter(
@@ -84,7 +97,7 @@ function HolidayPackagesContent() {
     );
   };
 
-  const compared = TOUR_PACKAGES.filter((p) => compareIds.includes(p.id));
+  const compared = packages.filter((p) => compareIds.includes(p.id));
 
   return (
     <main className="min-h-screen">
@@ -171,6 +184,11 @@ function HolidayPackagesContent() {
           </AnimatedSection>
 
           {/* Packages Grid */}
+          {loading ? (
+            <div className="flex items-center justify-center py-20">
+              <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-sky-500"></div>
+            </div>
+          ) : (
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {filtered.map((pkg, i) => (
               <AnimatedSection key={pkg.id} delay={i * 0.05}>
@@ -281,7 +299,7 @@ function HolidayPackagesContent() {
                     </div>
 
                     <div className="flex flex-wrap gap-1.5 mb-5">
-                      {pkg.activities.slice(0, 4).map((act) => (
+                      {pkg.activities.slice(0, 4).map((act: any) => (
                         <span
                           key={act}
                           className={`inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] ${
@@ -322,6 +340,7 @@ function HolidayPackagesContent() {
               </AnimatedSection>
             ))}
           </div>
+          )}
 
           {filtered.length === 0 && (
             <div className="text-center py-20">

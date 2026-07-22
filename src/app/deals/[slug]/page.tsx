@@ -1,9 +1,11 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import { useParams, notFound } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
-import { DEALS, COMPANY, USD_TO_KES } from "@/lib/constants";
+import { COMPANY, USD_TO_KES } from "@/lib/constants";
+import { getSupabase } from "@/lib/supabase";
 import { TourPackageJsonLd, BreadcrumbJsonLd } from "@/components/JsonLd";
 import { Tag, Clock, Users, Gift, Percent, Star, Shield, ChevronRight, Check, ArrowLeft, Calendar, Hotel, Utensils, MapPin, Phone } from "lucide-react";
 import AnimatedSection from "@/components/AnimatedSection";
@@ -20,8 +22,35 @@ const DEAL_ICONS: Record<string, React.ElementType> = {
 export default function DealDetailPage() {
   const params = useParams();
   const slug = params.slug as string;
+  const [deal, setDeal] = useState<any>(null);
+  const [loading, setLoading] = useState(true);
+  const [related, setRelated] = useState<any[]>([]);
 
-  const deal = DEALS.find((d) => d.slug === slug);
+  useEffect(() => {
+    (async () => {
+      try {
+        const { data } = await getSupabase().from("deals").select("*").eq("slug", slug).single();
+        if (data) setDeal({ ...data, originalPrice: (data as any).original_price, dealPrice: (data as any).deal_price, priceKES: (data as any).price_kes, validUntil: (data as any).valid_until });
+      } catch {}
+      setLoading(false);
+    })();
+  }, [slug]);
+
+  useEffect(() => {
+    (async () => {
+      try {
+        const currentSlug = slug;
+        const { data } = await getSupabase().from("deals").select("*").eq("featured", true).neq("slug", currentSlug).limit(3);
+        if (data) setRelated(data.map((d: any) => ({ ...d, originalPrice: d.original_price, dealPrice: d.deal_price, priceKES: d.price_kes, validUntil: d.valid_until })));
+      } catch {}
+    })();
+  }, [slug]);
+
+  if (loading) return (
+    <main className="min-h-screen flex items-center justify-center">
+      <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-emerald-500"></div>
+    </main>
+  );
   if (!deal) notFound();
 
   const Icon = DEAL_ICONS[deal.type] || Tag;
@@ -133,7 +162,7 @@ export default function DealDetailPage() {
               <AnimatedSection>
                 <h2 className="text-2xl font-bold text-foreground mb-4">Highlights</h2>
                 <div className="grid sm:grid-cols-2 gap-3">
-                  {deal.highlights.map((h) => (
+                  {deal.highlights.map((h: any) => (
                     <div key={h} className="flex items-start gap-3 p-4 rounded-xl bg-card ring-1 ring-foreground/5">
                       <Star className="size-5 text-emerald-500 shrink-0 mt-0.5 fill-emerald-500/20" />
                       <span className="text-sm text-foreground">{h}</span>
@@ -146,7 +175,7 @@ export default function DealDetailPage() {
               <AnimatedSection>
                 <h2 className="text-2xl font-bold text-foreground mb-4">Your Itinerary</h2>
                 <div className="space-y-0">
-                  {deal.itinerary.map((item, idx) => (
+                  {deal.itinerary.map((item: any, idx: number) => (
                     <div key={idx} className="relative flex gap-6 pb-8 last:pb-0">
                       {/* Timeline line */}
                       {idx < deal.itinerary.length - 1 && (
@@ -211,7 +240,7 @@ export default function DealDetailPage() {
                 <div className="rounded-2xl bg-card ring-1 ring-foreground/10 p-6">
                   <h3 className="font-semibold text-foreground mb-4">What&apos;s Included</h3>
                   <ul className="space-y-3">
-                    {deal.included.map((item) => (
+                    {deal.included.map((item: any) => (
                       <li key={item} className="flex items-start gap-3 text-sm text-muted-foreground">
                         <Check className="size-4 text-emerald-500 shrink-0 mt-0.5" />
                         {item}
@@ -265,9 +294,7 @@ export default function DealDetailPage() {
             </h2>
           </AnimatedSection>
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {DEALS.filter((d) => d.slug !== deal.slug && d.featured)
-              .slice(0, 3)
-              .map((related) => (
+            {related.map((related: any) => (
                 <AnimatedSection key={related.id}>
                   <Link href={`/deals/${related.slug}`} className="group block rounded-xl overflow-hidden bg-card ring-1 ring-foreground/10 hover:ring-emerald-500/30 transition-all duration-500">
                     <div className="relative h-44 overflow-hidden">

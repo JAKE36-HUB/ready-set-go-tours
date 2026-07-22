@@ -1,6 +1,7 @@
 "use client"
 
 import { useEffect, useState, useCallback } from "react"
+import { motion } from "framer-motion"
 import { useParams, useRouter } from "next/navigation"
 import { ArrowLeft, Plus, X, Save, Heart, ImageIcon, Info, List, Sparkles } from "lucide-react"
 import { Button } from "@/components/ui/button"
@@ -27,13 +28,14 @@ function ArrayInput({ label, values, onChange, placeholder }: { label: string; v
         <Button type="button" variant="outline" onClick={add} size="icon" className="shrink-0"><Plus className="w-4 h-4" /></Button>
       </div>
       {values.length > 0 && (
-        <div className="flex flex-wrap gap-1.5">
+        <motion.div layout className="flex flex-wrap gap-1.5">
           {values.map((v, i) => (
-            <span key={i} className="inline-flex items-center gap-1 px-2.5 py-1 rounded-md bg-slate-100 dark:bg-slate-800 text-xs text-slate-700 dark:text-slate-300">
+            <motion.span key={v + i} initial={{ opacity: 0, scale: 0.8 }} animate={{ opacity: 1, scale: 1 }}
+              className="inline-flex items-center gap-1 px-2.5 py-1 rounded-md bg-slate-100 dark:bg-slate-800 text-xs text-slate-700 dark:text-slate-300 ring-1 ring-slate-200 dark:ring-slate-700">
               {v}<button type="button" onClick={() => onChange(values.filter((_, j) => j !== i))} className="hover:text-red-500"><X className="w-3 h-3" /></button>
-            </span>
+            </motion.span>
           ))}
-        </div>
+        </motion.div>
       )}
     </div>
   )
@@ -41,13 +43,9 @@ function ArrayInput({ label, values, onChange, placeholder }: { label: string; v
 
 function Skeleton() {
   return (
-    <div className="space-y-8 max-w-2xl mx-auto">
-      <div className="h-24 rounded-2xl bg-slate-100 dark:bg-slate-800 animate-pulse" />
-      <div className="space-y-4">
-        {[...Array(3)].map((_, i) => (
-          <div key={i} className="h-48 rounded-xl bg-slate-100 dark:bg-slate-800 animate-pulse" />
-        ))}
-      </div>
+    <div className="space-y-8 max-w-3xl mx-auto">
+      <div className="h-28 rounded-2xl bg-gradient-to-br from-slate-200 to-slate-300 dark:from-slate-800 dark:to-slate-700 animate-pulse" />
+      <div className="space-y-4">{[...Array(3)].map((_, i) => (<div key={i} className="h-52 rounded-xl bg-slate-100 dark:bg-slate-800 animate-pulse" />))}</div>
     </div>
   )
 }
@@ -107,45 +105,47 @@ export default function EditHoneymoonPage() {
   if (loading) return <Skeleton />
 
   return (
-    <div className="max-w-2xl mx-auto space-y-8">
-      {/* Header */}
-      <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-rose-600 via-rose-500 to-pink-400 p-6">
-        <div className="absolute top-0 right-0 w-40 h-40 bg-white/10 rounded-full blur-2xl -translate-y-1/2 translate-x-1/4" />
+    <div className="max-w-3xl mx-auto space-y-8">
+      <motion.div initial={{ opacity: 0, y: -10 }}
+        className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-rose-600 via-rose-500 to-pink-400 p-6 sm:p-8">
+        <div className="absolute inset-0">
+          <div className="absolute top-[-30%] right-[-10%] w-[60%] h-[60%] bg-white/10 rounded-full blur-3xl" />
+          <div className="absolute bottom-[-20%] left-[-10%] w-[40%] h-[40%] bg-pink-300/10 rounded-full blur-3xl" />
+        </div>
         <div className="relative z-10 flex items-center gap-4">
-          <button onClick={() => router.push("/admin/honeymoon-packages")} className="w-9 h-9 rounded-xl bg-white/20 flex items-center justify-center hover:bg-white/30 transition-colors">
+          <button onClick={() => router.push("/admin/honeymoon-packages")} className="w-9 h-9 rounded-xl bg-white/20 backdrop-blur-sm flex items-center justify-center hover:bg-white/30 transition-colors">
             <ArrowLeft className="w-4 h-4 text-white" />
           </button>
-          <div className="w-10 h-10 rounded-xl bg-white/20 flex items-center justify-center">
+          <div className="w-10 h-10 rounded-xl bg-white/20 backdrop-blur-sm flex items-center justify-center">
             <Heart className="w-5 h-5 text-white" />
           </div>
           <div className="flex-1 min-w-0">
             <h1 className="text-lg font-bold text-white truncate">Edit Honeymoon Package</h1>
             <p className="text-sm text-white/80 truncate">{form.name}</p>
           </div>
-          <div className="hidden sm:flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/20 text-xs text-white font-medium">
-            <Sparkles className="w-3 h-3" />
-            Editing
+          <div className="hidden sm:flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/20 backdrop-blur-sm text-xs text-white font-medium">
+            <Sparkles className="w-3 h-3" /> Editing
           </div>
         </div>
-      </div>
+      </motion.div>
 
       <form onSubmit={handleSubmit} className="space-y-6">
-        {/* Image preview */}
         {form.image && (
-          <div className="relative rounded-xl overflow-hidden border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900">
+          <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }}
+            className="relative rounded-xl overflow-hidden border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 shadow-sm">
             <div className="aspect-video relative">
               <img src={form.image} alt="Preview" className="w-full h-full object-cover"
                 onError={(e) => { (e.target as HTMLImageElement).style.display = "none" }} />
             </div>
-            <div className="absolute top-2 left-2 px-2 py-1 rounded-md bg-black/60 text-xs text-white flex items-center gap-1.5">
+            <div className="absolute top-2 left-2 px-2 py-1 rounded-md bg-black/60 backdrop-blur-sm text-xs text-white flex items-center gap-1.5">
               <ImageIcon className="w-3 h-3" /> Preview
             </div>
-          </div>
+          </motion.div>
         )}
 
-        {/* Basic Information */}
-        <div className="rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 overflow-hidden">
-          <div className="px-6 pt-6 pb-1">
+        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }}
+          className="rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 overflow-hidden hover:shadow-md transition-shadow">
+          <div className="px-6 pt-6 pb-1 border-b border-slate-100 dark:border-slate-800">
             <div className="flex items-center gap-2.5 mb-1">
               <div className="w-7 h-7 rounded-lg bg-rose-100 dark:bg-rose-500/10 flex items-center justify-center">
                 <Info className="w-3.5 h-3.5 text-rose-600 dark:text-rose-400" />
@@ -169,11 +169,11 @@ export default function EditHoneymoonPage() {
               <div className="space-y-2"><Label>Transport</Label><Input value={form.transport} onChange={(e) => setForm((p) => ({ ...p, transport: e.target.value }))} /></div>
             </div>
           </div>
-        </div>
+        </motion.div>
 
-        {/* Package Details */}
-        <div className="rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 overflow-hidden">
-          <div className="px-6 pt-6 pb-1">
+        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.15 }}
+          className="rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 overflow-hidden hover:shadow-md transition-shadow">
+          <div className="px-6 pt-6 pb-1 border-b border-slate-100 dark:border-slate-800">
             <div className="flex items-center gap-2.5 mb-1">
               <div className="w-7 h-7 rounded-lg bg-rose-100 dark:bg-rose-500/10 flex items-center justify-center">
                 <Info className="w-3.5 h-3.5 text-rose-600 dark:text-rose-400" />
@@ -189,11 +189,11 @@ export default function EditHoneymoonPage() {
             </div>
             <div className="space-y-2"><Label>Description</Label><Textarea value={form.description} onChange={(e) => setForm((p) => ({ ...p, description: e.target.value }))} rows={4} /></div>
           </div>
-        </div>
+        </motion.div>
 
-        {/* Lists */}
-        <div className="rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 overflow-hidden">
-          <div className="px-6 pt-6 pb-1">
+        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }}
+          className="rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 overflow-hidden hover:shadow-md transition-shadow">
+          <div className="px-6 pt-6 pb-1 border-b border-slate-100 dark:border-slate-800">
             <div className="flex items-center gap-2.5 mb-1">
               <div className="w-7 h-7 rounded-lg bg-rose-100 dark:bg-rose-500/10 flex items-center justify-center">
                 <List className="w-3.5 h-3.5 text-rose-600 dark:text-rose-400" />
@@ -207,17 +207,17 @@ export default function EditHoneymoonPage() {
             <ArrayInput label="Highlights" values={form.highlights} onChange={(v) => setForm((p) => ({ ...p, highlights: v }))} />
             <ArrayInput label="Included" values={form.included} onChange={(v) => setForm((p) => ({ ...p, included: v }))} />
           </div>
-        </div>
+        </motion.div>
 
-        {/* Footer actions */}
-        <div className="flex justify-end gap-3 pb-8">
-          <Button variant="outline" onClick={() => router.push("/admin/honeymoon-packages")} className="border-slate-200 dark:border-slate-700">Cancel</Button>
+        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.3 }}
+          className="flex items-center justify-between gap-3 pb-8">
+          <Button variant="outline" onClick={() => router.push("/admin/honeymoon-packages")}
+            className="border-slate-200 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-800">Cancel</Button>
           <Button type="submit" disabled={saving}
-            className="bg-gradient-to-r from-rose-500 to-pink-400 text-white border-0 hover:shadow-lg hover:shadow-rose-500/20">
-            <Save className="w-4 h-4 mr-1.5" />
-            {saving ? "Saving..." : "Save Changes"}
+            className="bg-gradient-to-r from-rose-500 to-pink-400 text-white border-0 hover:shadow-lg hover:shadow-rose-500/25 transition-all min-w-[140px]">
+            <Save className="w-4 h-4 mr-1.5" />{saving ? "Saving..." : "Save Changes"}
           </Button>
-        </div>
+        </motion.div>
       </form>
     </div>
   )

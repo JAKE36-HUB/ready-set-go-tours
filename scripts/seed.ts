@@ -5,6 +5,7 @@ import {
   HONEYMOON_PACKAGES,
   DESTINATIONS,
   GALLERY,
+  BLOG_POSTS,
 } from "../src/lib/constants"
 
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL
@@ -114,6 +115,21 @@ async function seed() {
   const { error: galErr } = await supabase.from("gallery").insert(images)
   if (galErr) console.error("  Error:", galErr.message)
   else console.log(`  Inserted ${images.length} gallery images`)
+
+  console.log("Seeding blog_posts...")
+  const posts = BLOG_POSTS.map((p) => ({
+    slug: p.slug,
+    title: p.title,
+    excerpt: p.excerpt || "",
+    content: p.content || [],
+    image: p.image || "",
+    author: p.author || "",
+    date: p.date || "",
+    category: p.category || "",
+  }))
+  const { error: blogErr } = await supabase.from("blog_posts").upsert(posts, { onConflict: "slug" })
+  if (blogErr) console.error("  Error:", blogErr.message)
+  else console.log(`  Inserted ${posts.length} blog posts`)
 
   console.log("\nDone!")
 }

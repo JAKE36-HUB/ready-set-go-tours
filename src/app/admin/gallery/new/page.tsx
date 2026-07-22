@@ -1,6 +1,7 @@
 "use client"
 
 import { useState } from "react"
+import { motion } from "framer-motion"
 import { useRouter } from "next/navigation"
 import { ArrowLeft, Save, ImageIcon, Info } from "lucide-react"
 import { Button } from "@/components/ui/button"
@@ -30,14 +31,18 @@ export default function NewGalleryImagePage() {
   }
 
   return (
-    <div className="max-w-2xl mx-auto space-y-8">
-      <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-purple-600 via-purple-500 to-violet-400 p-6">
-        <div className="absolute top-0 right-0 w-40 h-40 bg-white/10 rounded-full blur-2xl -translate-y-1/2 translate-x-1/4" />
+    <div className="max-w-3xl mx-auto space-y-8">
+      <motion.div initial={{ opacity: 0, y: -10 }}
+        className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-purple-600 via-purple-500 to-violet-400 p-6 sm:p-8">
+        <div className="absolute inset-0">
+          <div className="absolute top-[-30%] right-[-10%] w-[60%] h-[60%] bg-white/10 rounded-full blur-3xl" />
+          <div className="absolute bottom-[-20%] left-[-10%] w-[40%] h-[40%] bg-violet-300/10 rounded-full blur-3xl" />
+        </div>
         <div className="relative z-10 flex items-center gap-4">
-          <button onClick={() => router.push("/admin/gallery")} className="w-9 h-9 rounded-xl bg-white/20 flex items-center justify-center hover:bg-white/30 transition-colors">
+          <button onClick={() => router.push("/admin/gallery")} className="w-9 h-9 rounded-xl bg-white/20 backdrop-blur-sm flex items-center justify-center hover:bg-white/30 transition-colors">
             <ArrowLeft className="w-4 h-4 text-white" />
           </button>
-          <div className="w-10 h-10 rounded-xl bg-white/20 flex items-center justify-center">
+          <div className="w-10 h-10 rounded-xl bg-white/20 backdrop-blur-sm flex items-center justify-center">
             <ImageIcon className="w-5 h-5 text-white" />
           </div>
           <div>
@@ -45,23 +50,25 @@ export default function NewGalleryImagePage() {
             <p className="text-sm text-white/80">Add an image to the gallery</p>
           </div>
         </div>
-      </div>
+      </motion.div>
 
       <form onSubmit={handleSubmit} className="space-y-6">
         {form.src && (
-          <div className="relative rounded-xl overflow-hidden border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900">
+          <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }}
+            className="relative rounded-xl overflow-hidden border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 shadow-sm">
             <div className="aspect-video relative">
               <img src={form.src} alt="Preview" className="w-full h-full object-cover"
                 onError={(e) => { (e.target as HTMLImageElement).style.display = "none" }} />
             </div>
-            <div className="absolute top-2 left-2 px-2 py-1 rounded-md bg-black/60 text-xs text-white flex items-center gap-1.5">
+            <div className="absolute top-2 left-2 px-2 py-1 rounded-md bg-black/60 backdrop-blur-sm text-xs text-white flex items-center gap-1.5">
               <ImageIcon className="w-3 h-3" /> Preview
             </div>
-          </div>
+          </motion.div>
         )}
 
-        <div className="rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 overflow-hidden">
-          <div className="px-6 pt-6 pb-1">
+        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }}
+          className="rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 overflow-hidden hover:shadow-md transition-shadow">
+          <div className="px-6 pt-6 pb-1 border-b border-slate-100 dark:border-slate-800">
             <div className="flex items-center gap-2.5 mb-1">
               <div className="w-7 h-7 rounded-lg bg-purple-100 dark:bg-purple-500/10 flex items-center justify-center">
                 <Info className="w-3.5 h-3.5 text-purple-600 dark:text-purple-400" />
@@ -93,15 +100,17 @@ export default function NewGalleryImagePage() {
               <div className="space-y-2"><Label>Height (px)</Label><Input type="number" value={form.height} onChange={(e) => setForm((p) => ({ ...p, height: e.target.value }))} placeholder="600" /></div>
             </div>
           </div>
-        </div>
+        </motion.div>
 
-        <div className="flex justify-end gap-3 pb-8">
-          <Button variant="outline" onClick={() => router.push("/admin/gallery")} className="border-slate-200 dark:border-slate-700">Cancel</Button>
+        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.3 }}
+          className="flex items-center justify-between gap-3 pb-8">
+          <Button variant="outline" onClick={() => router.push("/admin/gallery")}
+            className="border-slate-200 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-800">Cancel</Button>
           <Button type="submit" disabled={saving}
-            className="bg-gradient-to-r from-purple-500 to-violet-400 text-white border-0 hover:shadow-lg hover:shadow-purple-500/20">
+            className="bg-gradient-to-r from-purple-500 to-violet-400 text-white border-0 hover:shadow-lg hover:shadow-purple-500/25 transition-all min-w-[140px]">
             <Save className="w-4 h-4 mr-1.5" />{saving ? "Saving..." : "Add Image"}
           </Button>
-        </div>
+        </motion.div>
       </form>
     </div>
   )

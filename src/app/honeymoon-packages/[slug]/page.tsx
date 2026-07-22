@@ -1,10 +1,11 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { useParams, notFound } from "next/navigation"
 import Image from "next/image"
 import Link from "next/link"
-import { HONEYMOON_PACKAGES, COMPANY, USD_TO_KES } from "@/lib/constants"
+import { COMPANY, USD_TO_KES } from "@/lib/constants"
+import { getSupabase } from "@/lib/supabase"
 import {
   Heart, Star, Clock, MapPin, Check, ArrowLeft, Shield, Gift, Sparkles, MessageCircle,
 } from "lucide-react"
@@ -15,10 +16,26 @@ import AnimatedSection from "@/components/AnimatedSection"
 export default function HoneymoonDetailPage() {
   const params = useParams()
   const slug = params.slug as string
-  const pkg = HONEYMOON_PACKAGES.find((p) => p.slug === slug)
-  if (!pkg) notFound()
-
+  const [pkg, setPkg] = useState<any>(null);
+  const [loading, setLoading] = useState(true);
   const [bookingOpen, setBookingOpen] = useState(false)
+
+  useEffect(() => {
+    (async () => {
+      try {
+        const { data } = await getSupabase().from("honeymoon_packages").select("*").eq("slug", slug).single();
+        if (data) setPkg({ ...data, priceKES: (data as any).price_kes });
+      } catch {}
+      setLoading(false);
+    })();
+  }, [slug]);
+
+  if (loading) return (
+    <main className="min-h-screen flex items-center justify-center">
+      <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-rose-500"></div>
+    </main>
+  );
+  if (!pkg) notFound();
 
   return (
     <main className="min-h-screen">
@@ -102,7 +119,7 @@ export default function HoneymoonDetailPage() {
               <AnimatedSection>
                 <h2 className="text-2xl font-bold text-foreground mb-4">Highlights</h2>
                 <div className="grid sm:grid-cols-2 gap-3">
-                  {pkg.highlights.map((h) => (
+                  {pkg.highlights.map((h: any) => (
                     <div key={h} className="flex items-start gap-3 p-4 rounded-xl bg-card ring-1 ring-foreground/5">
                       <Star className="size-5 text-rose-500 shrink-0 mt-0.5 fill-rose-500/20" />
                       <span className="text-sm text-foreground">{h}</span>
@@ -114,7 +131,7 @@ export default function HoneymoonDetailPage() {
               <AnimatedSection>
                 <h2 className="text-2xl font-bold text-foreground mb-4">Activities</h2>
                 <div className="flex flex-wrap gap-2">
-                  {pkg.activities.map((a) => (
+                  {pkg.activities.map((a: any) => (
                     <span key={a} className="inline-flex items-center gap-1.5 text-sm bg-card ring-1 ring-foreground/10 text-foreground px-4 py-2 rounded-full">
                       <Sparkles className="size-4 text-rose-500 shrink-0" />
                       {a}
@@ -165,7 +182,7 @@ export default function HoneymoonDetailPage() {
                 <div className="rounded-2xl bg-card ring-1 ring-foreground/10 p-6">
                   <h3 className="font-semibold text-foreground mb-4">What&apos;s Included</h3>
                   <ul className="space-y-3">
-                    {pkg.included.map((item) => (
+                    {pkg.included.map((item: any) => (
                       <li key={item} className="flex items-start gap-3 text-sm text-muted-foreground">
                         <Check className="size-4 text-emerald-500 shrink-0 mt-0.5" />
                         {item}

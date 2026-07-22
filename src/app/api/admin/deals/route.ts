@@ -1,10 +1,11 @@
-import { auth } from "@clerk/nextjs/server"
+import { requireUser } from "@/lib/api-auth"
 import { NextResponse } from "next/server"
+import type { NextRequest } from "next/server"
 import { getSupabaseAdmin } from "@/lib/supabase-admin"
 
-export async function GET() {
-  const { userId } = await auth()
-  if (!userId) return NextResponse.json({ error: "Unauthorized" }, { status: 401 })
+export async function GET(request: NextRequest) {
+  const user = await requireUser(request)
+  if (!user) return NextResponse.json({ error: "Unauthorized" }, { status: 401 })
 
   const sb = getSupabaseAdmin()
   const { data, error } = await sb
@@ -17,8 +18,8 @@ export async function GET() {
 }
 
 export async function POST(request: Request) {
-  const { userId } = await auth()
-  if (!userId) return NextResponse.json({ error: "Unauthorized" }, { status: 401 })
+  const user = await requireUser(request)
+  if (!user) return NextResponse.json({ error: "Unauthorized" }, { status: 401 })
 
   const body = await request.json()
   const { title, slug, description, discount, code, image, type, original_price, deal_price, price_kes, valid_until, highlights, featured, duration, accommodation, meals, included, itinerary } = body

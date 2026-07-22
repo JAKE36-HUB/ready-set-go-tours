@@ -1,11 +1,12 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import dynamic from "next/dynamic"
-import { HONEYMOON_PACKAGES, COMPANY, USD_TO_KES } from "@/lib/constants";
+import { COMPANY, USD_TO_KES } from "@/lib/constants";
+import { getSupabase } from "@/lib/supabase";
 import { Heart, Star, MapPin, Clock, Plane, ChevronRight, Sparkles, Gift, Shield, Check, ArrowRight, Phone, Quote, FileText } from "lucide-react";
 import AnimatedSection from "@/components/AnimatedSection";
 
@@ -20,10 +21,22 @@ const typeDefs = [
 
 export default function HoneymoonPage() {
   const [selected, setSelected] = useState<string>("all");
+  const [packages, setPackages] = useState<any[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    (async () => {
+      try {
+        const { data } = await getSupabase().from("honeymoon_packages").select("*").order("name");
+        if (data) setPackages(data.map((p: any) => ({ ...p, priceKES: p.price_kes })));
+      } catch {}
+      setLoading(false);
+    })();
+  }, []);
 
   const filtered = selected === "all"
-    ? HONEYMOON_PACKAGES
-    : HONEYMOON_PACKAGES.filter((p) => p.slug.includes(selected));
+    ? packages
+    : packages.filter((p) => p.slug.includes(selected));
 
   return (
     <main className="min-h-screen">
@@ -89,7 +102,12 @@ export default function HoneymoonPage() {
       {/* Packages grid */}
       <section className="py-16 px-6">
         <div className="max-w-7xl mx-auto">
-          <AnimatePresence mode="wait">
+            {loading ? (
+              <div className="flex items-center justify-center py-20 col-span-full">
+                <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-rose-500"></div>
+              </div>
+            ) : (
+            <AnimatePresence mode="wait">
             <motion.div
               key={selected}
               initial={{ opacity: 0, y: 20 }}
@@ -158,7 +176,7 @@ export default function HoneymoonPage() {
                     <div className="mb-6">
                       <h4 className="text-xs font-semibold uppercase tracking-wider text-slate-400 mb-3">Highlights</h4>
                       <div className="grid grid-cols-2 gap-2">
-                        {pkg.highlights.map((h) => (
+                        {pkg.highlights.map((h: any) => (
                           <div key={h} className="flex items-start gap-2 text-sm text-slate-600 dark:text-slate-300">
                             <Star className="size-3.5 text-rose-400 shrink-0 mt-0.5 fill-rose-400" />
                             {h}
@@ -170,7 +188,7 @@ export default function HoneymoonPage() {
                     <div className="mb-6">
                       <h4 className="text-xs font-semibold uppercase tracking-wider text-slate-400 mb-3">Included</h4>
                       <div className="grid grid-cols-2 gap-1.5">
-                        {pkg.included.map((i) => (
+                        {pkg.included.map((i: any) => (
                           <div key={i} className="flex items-center gap-1.5 text-xs text-slate-500">
                             <Check className="size-3 text-emerald-500 shrink-0" />
                             {i}
@@ -208,6 +226,7 @@ export default function HoneymoonPage() {
               ))}
             </motion.div>
           </AnimatePresence>
+            )}
         </div>
       </section>
 

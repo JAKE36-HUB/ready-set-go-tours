@@ -1,12 +1,22 @@
-import { clerkMiddleware, createRouteMatcher } from "@clerk/nextjs/server"
+import { createClient } from "@/lib/supabase-server"
+import { NextResponse } from "next/server"
+import type { NextRequest } from "next/server"
 
-const isAdminRoute = createRouteMatcher(["/admin(.*)"])
+export async function middleware(request: NextRequest) {
+  const { supabase, supabaseResponse } = createClient(request)
 
-export default clerkMiddleware(async (auth, req) => {
-  if (isAdminRoute(req)) {
-    await auth.protect()
+  const {
+    data: { user },
+  } = await supabase.auth.getUser()
+
+  if (!user && request.nextUrl.pathname.startsWith("/admin")) {
+    const url = request.nextUrl.clone()
+    url.pathname = "/sign-in"
+    return NextResponse.redirect(url)
   }
-})
+
+  return supabaseResponse
+}
 
 export const config = {
   matcher: ["/((?!.+\\.[\\w]+$|_next).*)", "/", "/(api|trpc)(.*)"],

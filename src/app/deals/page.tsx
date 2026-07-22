@@ -1,10 +1,11 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import AnimatedSection from "@/components/AnimatedSection";
-import { DEALS, COMPANY, USD_TO_KES } from "@/lib/constants";
+import { COMPANY, USD_TO_KES } from "@/lib/constants";
+import { getSupabase } from "@/lib/supabase";
 import { Tag, Clock, Users, Gift, Percent, Star, Shield, ChevronRight, Sparkles, Zap } from "lucide-react";
 
 const DEAL_ICONS: Record<string, React.ElementType> = {
@@ -18,9 +19,27 @@ const DEAL_ICONS: Record<string, React.ElementType> = {
 
 export default function DealsPage() {
   const [filter, setFilter] = useState<string>("all");
+  const [deals, setDeals] = useState<any[]>([]);
+  const [loading, setLoading] = useState(true);
 
-  const featuredDeals = DEALS.filter((d) => d.featured);
-  const filteredDeals = filter === "all" ? DEALS : DEALS.filter((d) => d.type === filter);
+  useEffect(() => {
+    (async () => {
+      try {
+        const { data } = await getSupabase().from("deals").select("*").order("created_at", { ascending: false });
+        if (data) setDeals(data.map((d: any) => ({
+          ...d,
+          originalPrice: d.original_price,
+          dealPrice: d.deal_price,
+          priceKES: d.price_kes,
+          validUntil: d.valid_until,
+        })));
+      } catch {}
+      setLoading(false);
+    })();
+  }, []);
+
+  const featuredDeals = deals.filter((d) => d.featured);
+  const filteredDeals = filter === "all" ? deals : deals.filter((d) => d.type === filter);
 
   return (
     <main className="min-h-screen">
@@ -52,7 +71,17 @@ export default function DealsPage() {
         </div>
       </section>
 
+      {/* Loading */}
+      {loading && (
+        <section className="py-20 px-6">
+          <div className="flex items-center justify-center">
+            <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-emerald-500"></div>
+          </div>
+        </section>
+      )}
+
       {/* Featured Deals */}
+      {!loading && (
       <section className="py-20 px-6 bg-gradient-to-b from-emerald-950/5 to-transparent">
         <div className="max-w-7xl mx-auto">
           <AnimatedSection>
@@ -115,7 +144,7 @@ export default function DealsPage() {
                         Use code: <span className="font-mono font-bold text-foreground">{deal.code}</span>
                       </div>
                       <ul className="space-y-1.5 mb-6">
-                        {deal.highlights.slice(0, 3).map((h) => (
+                        {deal.highlights.slice(0, 3).map((h: any) => (
                           <li key={h} className="flex items-start gap-2 text-sm text-muted-foreground">
                             <ChevronRight className="size-4 text-emerald-500 shrink-0 mt-0.5" />
                             {h}
@@ -133,8 +162,10 @@ export default function DealsPage() {
           </div>
         </div>
       </section>
+      )}
 
       {/* All Deals */}
+      {!loading && (
       <section className="py-20 px-6">
         <div className="max-w-7xl mx-auto">
           <AnimatedSection>
@@ -238,6 +269,7 @@ export default function DealsPage() {
           </div>
         </div>
       </section>
+      )}
 
       {/* Why Book With Us */}
       <section className="py-20 px-6 bg-gradient-to-b from-transparent to-emerald-950/5">

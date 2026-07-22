@@ -2,7 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import Script from "next/script";
 import "./globals.css";
-import { ClerkProvider } from "@clerk/nextjs";
+import { SupabaseProvider } from "@/lib/supabase-auth";
 import { ThemeProvider } from "@/components/layout/ThemeProvider";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
@@ -150,7 +150,7 @@ export default function RootLayout({
           }}
         />
         <BreadcrumbJsonLd items={[{ name: "Home", item: "/" }]} />
-        <ClerkProvider>
+        <SupabaseProvider>
         <ThemeProvider>
           <Header />
           <main className="flex-1">{children}</main>
@@ -160,7 +160,7 @@ export default function RootLayout({
           <ScrollToTop />
           <CookieConsent />
         </ThemeProvider>
-        </ClerkProvider>
+        </SupabaseProvider>
       </body>
     </html>
   );

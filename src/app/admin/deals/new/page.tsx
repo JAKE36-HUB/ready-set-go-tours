@@ -1,6 +1,7 @@
 "use client"
 
 import { useState, useCallback } from "react"
+import { motion } from "framer-motion"
 import { useRouter } from "next/navigation"
 import { ArrowLeft, Plus, X, Save, Tag, ImageIcon, Info, List } from "lucide-react"
 import { Button } from "@/components/ui/button"
@@ -28,13 +29,14 @@ function ArrayInput({ label, values, onChange, placeholder }: { label: string; v
         <Button type="button" variant="outline" onClick={add} size="icon" className="shrink-0"><Plus className="w-4 h-4" /></Button>
       </div>
       {values.length > 0 && (
-        <div className="flex flex-wrap gap-1.5">
+        <motion.div layout className="flex flex-wrap gap-1.5">
           {values.map((v, i) => (
-            <span key={i} className="inline-flex items-center gap-1 px-2.5 py-1 rounded-md bg-slate-100 dark:bg-slate-800 text-xs text-slate-700 dark:text-slate-300">
+            <motion.span key={v + i} initial={{ opacity: 0, scale: 0.8 }} animate={{ opacity: 1, scale: 1 }}
+              className="inline-flex items-center gap-1 px-2.5 py-1 rounded-md bg-slate-100 dark:bg-slate-800 text-xs text-slate-700 dark:text-slate-300 ring-1 ring-slate-200 dark:ring-slate-700">
               {v}<button type="button" onClick={() => onChange(values.filter((_, j) => j !== i))} className="hover:text-red-500"><X className="w-3 h-3" /></button>
-            </span>
+            </motion.span>
           ))}
-        </div>
+        </motion.div>
       )}
     </div>
   )
@@ -88,15 +90,18 @@ export default function NewDealPage() {
   }
 
   return (
-    <div className="max-w-2xl mx-auto space-y-8">
-      {/* Header */}
-      <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-amber-600 via-amber-500 to-orange-400 p-6">
-        <div className="absolute top-0 right-0 w-40 h-40 bg-white/10 rounded-full blur-2xl -translate-y-1/2 translate-x-1/4" />
+    <div className="max-w-3xl mx-auto space-y-8">
+      <motion.div initial={{ opacity: 0, y: -10 }}
+        className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-amber-600 via-amber-500 to-orange-400 p-6 sm:p-8">
+        <div className="absolute inset-0">
+          <div className="absolute top-[-30%] right-[-10%] w-[60%] h-[60%] bg-white/10 rounded-full blur-3xl" />
+          <div className="absolute bottom-[-20%] left-[-10%] w-[40%] h-[40%] bg-orange-300/10 rounded-full blur-3xl" />
+        </div>
         <div className="relative z-10 flex items-center gap-4">
-          <button onClick={() => router.push("/admin/deals")} className="w-9 h-9 rounded-xl bg-white/20 flex items-center justify-center hover:bg-white/30 transition-colors">
+          <button onClick={() => router.push("/admin/deals")} className="w-9 h-9 rounded-xl bg-white/20 backdrop-blur-sm flex items-center justify-center hover:bg-white/30 transition-colors">
             <ArrowLeft className="w-4 h-4 text-white" />
           </button>
-          <div className="w-10 h-10 rounded-xl bg-white/20 flex items-center justify-center">
+          <div className="w-10 h-10 rounded-xl bg-white/20 backdrop-blur-sm flex items-center justify-center">
             <Tag className="w-5 h-5 text-white" />
           </div>
           <div>
@@ -104,25 +109,25 @@ export default function NewDealPage() {
             <p className="text-sm text-white/80">Add a new special offer</p>
           </div>
         </div>
-      </div>
+      </motion.div>
 
       <form onSubmit={handleSubmit} className="space-y-6">
-        {/* Image preview */}
         {form.image && (
-          <div className="relative rounded-xl overflow-hidden border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900">
+          <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }}
+            className="relative rounded-xl overflow-hidden border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 shadow-sm">
             <div className="aspect-video relative">
               <img src={form.image} alt="Preview" className="w-full h-full object-cover"
                 onError={(e) => { (e.target as HTMLImageElement).style.display = "none" }} />
             </div>
-            <div className="absolute top-2 left-2 px-2 py-1 rounded-md bg-black/60 text-xs text-white flex items-center gap-1.5">
+            <div className="absolute top-2 left-2 px-2 py-1 rounded-md bg-black/60 backdrop-blur-sm text-xs text-white flex items-center gap-1.5">
               <ImageIcon className="w-3 h-3" /> Preview
             </div>
-          </div>
+          </motion.div>
         )}
 
-        {/* Basic Information */}
-        <div className="rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 overflow-hidden">
-          <div className="px-6 pt-6 pb-1">
+        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }}
+          className="rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 overflow-hidden hover:shadow-md transition-shadow">
+          <div className="px-6 pt-6 pb-1 border-b border-slate-100 dark:border-slate-800">
             <div className="flex items-center gap-2.5 mb-1">
               <div className="w-7 h-7 rounded-lg bg-amber-100 dark:bg-amber-500/10 flex items-center justify-center">
                 <Info className="w-3.5 h-3.5 text-amber-600 dark:text-amber-400" />
@@ -159,11 +164,11 @@ export default function NewDealPage() {
               <div className="space-y-2"><Label>Price (KES)</Label><Input type="number" value={form.price_kes} onChange={(e) => setForm((p) => ({ ...p, price_kes: e.target.value }))} placeholder="Optional" /></div>
             </div>
           </div>
-        </div>
+        </motion.div>
 
-        {/* Offer Details */}
-        <div className="rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 overflow-hidden">
-          <div className="px-6 pt-6 pb-1">
+        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.15 }}
+          className="rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 overflow-hidden hover:shadow-md transition-shadow">
+          <div className="px-6 pt-6 pb-1 border-b border-slate-100 dark:border-slate-800">
             <div className="flex items-center gap-2.5 mb-1">
               <div className="w-7 h-7 rounded-lg bg-amber-100 dark:bg-amber-500/10 flex items-center justify-center">
                 <Info className="w-3.5 h-3.5 text-amber-600 dark:text-amber-400" />
@@ -181,7 +186,7 @@ export default function NewDealPage() {
               <div className="space-y-2"><Label>Valid Until</Label><Input value={form.valid_until} onChange={(e) => setForm((p) => ({ ...p, valid_until: e.target.value }))} placeholder="e.g. Dec 31, 2026" /></div>
               <div className="space-y-2"><Label>Image URL</Label><Input value={form.image} onChange={(e) => setForm((p) => ({ ...p, image: e.target.value }))} placeholder="https://..." /></div>
             </div>
-            <div className="flex items-center gap-3 p-3 rounded-lg bg-amber-50 dark:bg-amber-500/5 border border-amber-200 dark:border-amber-800">
+            <div className="flex items-center gap-3 p-3 rounded-lg bg-amber-50/80 dark:bg-amber-500/5 border border-amber-200 dark:border-amber-800 hover:border-amber-300 dark:hover:border-amber-700 transition-colors">
               <input type="checkbox" id="featured" checked={form.featured} onChange={(e) => setForm((p) => ({ ...p, featured: e.target.checked }))}
                 className="w-4 h-4 rounded border-slate-300 dark:border-slate-600 text-amber-500 focus:ring-amber-500" />
               <Label htmlFor="featured" className="text-sm font-medium cursor-pointer">Featured deal <span className="text-xs text-slate-500 dark:text-slate-400 font-normal">(shown prominently on the site)</span></Label>
@@ -192,11 +197,11 @@ export default function NewDealPage() {
               <div className="space-y-2"><Label>Meals</Label><Input value={form.meals} onChange={(e) => setForm((p) => ({ ...p, meals: e.target.value }))} /></div>
             </div>
           </div>
-        </div>
+        </motion.div>
 
-        {/* Lists & Itinerary */}
-        <div className="rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 overflow-hidden">
-          <div className="px-6 pt-6 pb-1">
+        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }}
+          className="rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 overflow-hidden hover:shadow-md transition-shadow">
+          <div className="px-6 pt-6 pb-1 border-b border-slate-100 dark:border-slate-800">
             <div className="flex items-center gap-2.5 mb-1">
               <div className="w-7 h-7 rounded-lg bg-amber-100 dark:bg-amber-500/10 flex items-center justify-center">
                 <List className="w-3.5 h-3.5 text-amber-600 dark:text-amber-400" />
@@ -211,32 +216,35 @@ export default function NewDealPage() {
             <div className="space-y-3">
               <div className="flex items-center justify-between">
                 <Label>Itinerary</Label>
-                <Button type="button" variant="outline" size="sm" onClick={addItineraryItem} className="border-amber-200 dark:border-amber-800 text-amber-700 dark:text-amber-400 hover:bg-amber-50 dark:hover:bg-amber-900/20">
+                <Button type="button" variant="outline" size="sm" onClick={addItineraryItem}
+                  className="border-amber-200 dark:border-amber-800 text-amber-700 dark:text-amber-400 hover:bg-amber-50 dark:hover:bg-amber-900/20">
                   <Plus className="w-3.5 h-3.5 mr-1" /> Add Day
                 </Button>
               </div>
               {form.itinerary.map((item, i) => (
-                <div key={i} className="flex gap-2 items-start p-3 rounded-lg bg-amber-50/50 dark:bg-amber-500/5 border border-amber-100 dark:border-amber-900">
+                <motion.div key={i} initial={{ opacity: 0, y: -5 }} animate={{ opacity: 1, y: 0 }}
+                  className="flex gap-2 items-start p-3 rounded-lg bg-amber-50/50 dark:bg-amber-500/5 border border-amber-100 dark:border-amber-900">
                   <div className="flex-1 space-y-2">
                     <Input value={item.day} onChange={(e) => updateItineraryItem(i, "day", e.target.value)} placeholder="Day title" className="text-sm font-medium" />
                     <Textarea value={item.description} onChange={(e) => updateItineraryItem(i, "description", e.target.value)} placeholder="Description for this day..." rows={2} />
                   </div>
-                  <button type="button" onClick={() => removeItineraryItem(i)} className="mt-1 text-slate-400 hover:text-red-500"><X className="w-4 h-4" /></button>
-                </div>
+                  <button type="button" onClick={() => removeItineraryItem(i)} className="mt-1 text-slate-400 hover:text-red-500 transition-colors"><X className="w-4 h-4" /></button>
+                </motion.div>
               ))}
             </div>
           </div>
-        </div>
+        </motion.div>
 
-        {/* Footer actions */}
-        <div className="flex justify-end gap-3 pb-8">
-          <Button variant="outline" onClick={() => router.push("/admin/deals")} className="border-slate-200 dark:border-slate-700">Cancel</Button>
+        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.3 }}
+          className="flex items-center justify-between gap-3 pb-8">
+          <Button variant="outline" onClick={() => router.push("/admin/deals")}
+            className="border-slate-200 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-800">Cancel</Button>
           <Button type="submit" disabled={saving}
-            className="bg-gradient-to-r from-amber-500 to-orange-400 text-white border-0 hover:shadow-lg hover:shadow-amber-500/20">
+            className="bg-gradient-to-r from-amber-500 to-orange-400 text-white border-0 hover:shadow-lg hover:shadow-amber-500/25 transition-all min-w-[140px]">
             <Save className="w-4 h-4 mr-1.5" />
             {saving ? "Saving..." : "Save Deal"}
           </Button>
-        </div>
+        </motion.div>
       </form>
     </div>
   )

@@ -1,14 +1,17 @@
 import type { Metadata } from "next"
-import { DEALS } from "@/lib/constants"
+import { getSupabase } from "@/lib/supabase"
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { slug } = await params
-  const deal = DEALS.find((d) => d.slug === slug)
-  if (!deal) return {}
-  return {
-    title: deal.title,
-    description: deal.description.slice(0, 160),
-  }
+  try {
+    const { data } = await getSupabase()
+      .from("deals")
+      .select("title, description")
+      .eq("slug", slug)
+      .single()
+    if (data) return { title: data.title, description: data.description?.slice(0, 160) }
+  } catch {}
+  return {}
 }
 
 export default function Layout({ children }: { children: React.ReactNode }) {
