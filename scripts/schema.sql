@@ -105,6 +105,20 @@ CREATE TABLE IF NOT EXISTS blog_posts (
   updated_at TIMESTAMPTZ DEFAULT NOW()
 );
 
+CREATE TABLE IF NOT EXISTS visitors (
+  id SERIAL PRIMARY KEY,
+  session_id TEXT NOT NULL,
+  page TEXT NOT NULL DEFAULT '',
+  referrer TEXT DEFAULT '',
+  user_agent TEXT DEFAULT '',
+  ip TEXT DEFAULT '',
+  country TEXT DEFAULT '',
+  city TEXT DEFAULT '',
+  entered_at TIMESTAMPTZ DEFAULT NOW(),
+  last_active_at TIMESTAMPTZ DEFAULT NOW(),
+  duration_seconds INT DEFAULT 0
+);
+
 -- Enable Row Level Security (optional - admin API uses service role)
 ALTER TABLE tour_packages ENABLE ROW LEVEL SECURITY;
 ALTER TABLE deals ENABLE ROW LEVEL SECURITY;

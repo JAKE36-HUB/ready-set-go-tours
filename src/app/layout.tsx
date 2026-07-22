@@ -11,6 +11,7 @@ import { AiChat } from "@/components/layout/AiChat";
 import { CookieConsent } from "@/components/layout/CookieConsent";
 import { ScrollToTop } from "@/components/layout/ScrollToTop";
 import { BreadcrumbJsonLd } from "@/components/JsonLd";
+import VisitorTracker from "@/components/admin/VisitorTracker";
 
 export const viewport: Viewport = {
   width: "device-width",
@@ -151,6 +152,7 @@ export default function RootLayout({
         />
         <BreadcrumbJsonLd items={[{ name: "Home", item: "/" }]} />
         <SupabaseProvider>
+        <VisitorTracker />
         <ThemeProvider>
           <Header />
           <main className="flex-1">{children}</main>

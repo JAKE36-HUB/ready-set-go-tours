@@ -20,6 +20,7 @@ import {
   ChevronRight,
   User,
   Sparkles,
+  Activity,
 } from "lucide-react"
 import { cn } from "@/lib/utils"
 
@@ -31,6 +32,7 @@ const NAV_ITEMS = [
   { href: "/admin/destinations", label: "Destinations", icon: MapPin },
   { href: "/admin/gallery", label: "Gallery", icon: Images },
   { href: "/admin/blog", label: "Blog Posts", icon: FileText },
+  { href: "/admin/visitors", label: "Visitors", icon: Activity },
 ]
 
 export default function AdminLayout({ children }: { children: React.ReactNode }) {

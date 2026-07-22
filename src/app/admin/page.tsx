@@ -2,7 +2,7 @@
 
 import { useEffect, useState, useMemo } from "react"
 import { motion, AnimatePresence } from "framer-motion"
-import { Package, Tag, Heart, MapPin, Images, FileText, TrendingUp, Plus, ArrowRight, Sparkles, ExternalLink, Clock, Zap, BarChart3, PieChart, Globe, Users, RefreshCw, ChevronRight, Eye, Edit3, Layers, Target, AlertCircle, CheckCircle2 } from "lucide-react"
+import { Package, Tag, Heart, MapPin, Images, FileText, TrendingUp, Plus, ArrowRight, Sparkles, ExternalLink, Clock, Zap, BarChart3, PieChart, Globe, Users, RefreshCw, ChevronRight, Eye, Edit3, Layers, Target, AlertCircle, CheckCircle2, AlertTriangle, Calendar } from "lucide-react"
 import { getSupabase } from "@/lib/supabase"
 import { Button } from "@/components/ui/button"
 import { useRouter } from "next/navigation"
@@ -126,6 +126,9 @@ export default function AdminDashboard() {
   const [recent, setRecent] = useState<RecentItem[]>([])
   const [greeting, setGreeting] = useState("")
   const [mounted, setMounted] = useState(false)
+  const [dealsExpiry, setDealsExpiry] = useState<{ expired: number; expiringSoon: number; active: number; list: { id: number; title: string; slug: string; validUntil: string; daysLeft: number }[] }>({ expired: 0, expiringSoon: 0, active: 0, list: [] })
+  const [freshness, setFreshness] = useState<{ fresh: number; stale30: number; stale60: number; stale90: number; staleItems: { name: string; section: string; days: number }[] }>({ fresh: 0, stale30: 0, stale60: 0, stale90: 0, staleItems: [] })
+  const [visitorStats, setVisitorStats] = useState({ today: 0, views: 0, total: 0 })
 
   useEffect(() => { setMounted(true) }, [])
 
@@ -168,6 +171,52 @@ export default function AdminDashboard() {
         ]
         all.sort((a, b) => new Date(b.updated_at ?? b.created_at ?? "").getTime() - new Date(a.updated_at ?? a.created_at ?? "").getTime())
         setRecent(all.slice(0, 8))
+
+        // Deals expiry
+        const { data: allDeals } = await sb.from("deals").select("id,title,slug,valid_until,discount,image,featured")
+        const now = new Date()
+        const expiryList: any[] = []
+        let expired = 0, expiringSoon = 0, active = 0
+        for (const d of allDeals || []) {
+          if (!d.valid_until) { active++; continue }
+          const daysLeft = Math.ceil((new Date(d.valid_until).getTime() - now.getTime()) / (1000 * 60 * 60 * 24))
+          if (daysLeft < 0) expired++
+          else if (daysLeft <= 30) { expiringSoon++; expiryList.push({ id: d.id, title: d.title, slug: d.slug, validUntil: d.valid_until, daysLeft }) }
+          else active++
+        }
+        expiryList.sort((a, b) => a.daysLeft - b.daysLeft)
+        setDealsExpiry({ expired, expiringSoon, active, list: expiryList.slice(0, 5) })
+
+        // Content freshness
+        const [tourD2, dealD3, hmD3, destD3, galD3, blogD3] = await Promise.all([
+          sb.from("tour_packages").select("id,name,updated_at"),
+          sb.from("deals").select("id,title,updated_at"),
+          sb.from("honeymoon_packages").select("id,name,updated_at"),
+          sb.from("destinations").select("id,name,updated_at"),
+          sb.from("gallery").select("id,alt,created_at"),
+          sb.from("blog_posts").select("id,title,updated_at"),
+        ])
+        let fresh = 0, stale30 = 0, stale60 = 0, stale90 = 0
+        const staleItems: any[] = []
+        const daysSince = (dateStr: string) => Math.floor((now.getTime() - new Date(dateStr).getTime()) / (1000 * 60 * 60 * 24))
+        for (const p of tourD2?.data || []) { const d = daysSince(p.updated_at); if (d >= 90) { stale90++; staleItems.push({ name: p.name, section: "tour_packages", days: d }) } else if (d >= 60) { stale60++; staleItems.push({ name: p.name, section: "tour_packages", days: d }) } else if (d >= 30) { stale30++; staleItems.push({ name: p.name, section: "tour_packages", days: d }) } else fresh++ }
+        for (const p of dealD3?.data || []) { const d = daysSince(p.updated_at); if (d >= 90) { stale90++; staleItems.push({ name: p.title, section: "deals", days: d }) } else if (d >= 60) { stale60++; staleItems.push({ name: p.title, section: "deals", days: d }) } else if (d >= 30) { stale30++; staleItems.push({ name: p.title, section: "deals", days: d }) } else fresh++ }
+        for (const p of hmD3?.data || []) { const d = daysSince(p.updated_at); if (d >= 90) { stale90++; staleItems.push({ name: p.name, section: "honeymoon_packages", days: d }) } else if (d >= 60) { stale60++; staleItems.push({ name: p.name, section: "honeymoon_packages", days: d }) } else if (d >= 30) { stale30++; staleItems.push({ name: p.name, section: "honeymoon_packages", days: d }) } else fresh++ }
+        for (const p of destD3?.data || []) { const d = daysSince(p.updated_at); if (d >= 90) { stale90++; staleItems.push({ name: p.name, section: "destinations", days: d }) } else if (d >= 60) { stale60++; staleItems.push({ name: p.name, section: "destinations", days: d }) } else if (d >= 30) { stale30++; staleItems.push({ name: p.name, section: "destinations", days: d }) } else fresh++ }
+        for (const p of galD3?.data || []) { const d = daysSince(p.created_at); if (d >= 90) { stale90++; staleItems.push({ name: p.alt || "Untitled", section: "gallery", days: d }) } else if (d >= 60) { stale60++; staleItems.push({ name: p.alt || "Untitled", section: "gallery", days: d }) } else if (d >= 30) { stale30++; staleItems.push({ name: p.alt || "Untitled", section: "gallery", days: d }) } else fresh++ }
+        for (const p of blogD3?.data || []) { const d = daysSince(p.updated_at); if (d >= 90) { stale90++; staleItems.push({ name: p.title, section: "blog_posts", days: d }) } else if (d >= 60) { stale60++; staleItems.push({ name: p.title, section: "blog_posts", days: d }) } else if (d >= 30) { stale30++; staleItems.push({ name: p.title, section: "blog_posts", days: d }) } else fresh++ }
+        staleItems.sort((a, b) => b.days - a.days)
+        setFreshness({ fresh, stale30, stale60, stale90, staleItems: staleItems.slice(0, 5) })
+
+        // Visitor stats
+        const todayStart = new Date()
+        todayStart.setHours(0, 0, 0, 0)
+        const { data: visitorRows } = await sb.from("visitors").select("session_id,entered_at").gte("entered_at", todayStart.toISOString())
+        const todaySessions = new Set((visitorRows || []).map((v: any) => v.session_id))
+        const { count: totalVisits } = await sb.from("visitors").select("id", { count: "exact", head: true })
+        const { data: allSessions } = await sb.from("visitors").select("session_id")
+        const allUnique = new Set((allSessions || []).map((v: any) => v.session_id))
+        setVisitorStats({ today: todaySessions.size, views: visitorRows?.length || 0, total: allUnique.size })
       } catch {} finally { setLoading(false) }
     }
     loadData()
@@ -461,6 +510,141 @@ export default function AdminDashboard() {
           </div>
         </motion.div>
       </div>
+
+      {/* Deals Expiry + Content Freshness */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        {/* Deals Expiry Alert */}
+        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.5 }}
+          className="rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-5">
+          <div className="flex items-center justify-between mb-4">
+            <div>
+              <h3 className="text-sm font-semibold text-slate-900 dark:text-white flex items-center gap-2">
+                <AlertTriangle className="w-4 h-4 text-amber-500" />Deals Expiry Alert
+              </h3>
+              <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">Track deal expiration dates</p>
+            </div>
+            <Calendar className="w-8 h-8 text-slate-200 dark:text-slate-700" />
+          </div>
+          <div className="flex items-center gap-3 mb-4">
+            <div className="flex-1 p-3 rounded-xl bg-red-50 dark:bg-red-500/10 border border-red-100 dark:border-red-900/50 text-center">
+              <p className="text-lg font-bold text-red-600 dark:text-red-400 tabular-nums">{dealsExpiry.expired}</p>
+              <p className="text-xs text-red-500">Expired</p>
+            </div>
+            <div className="flex-1 p-3 rounded-xl bg-amber-50 dark:bg-amber-500/10 border border-amber-100 dark:border-amber-900/50 text-center">
+              <p className="text-lg font-bold text-amber-600 dark:text-amber-400 tabular-nums">{dealsExpiry.expiringSoon}</p>
+              <p className="text-xs text-amber-500">Expiring Soon</p>
+            </div>
+            <div className="flex-1 p-3 rounded-xl bg-emerald-50 dark:bg-emerald-500/10 border border-emerald-100 dark:border-emerald-900/50 text-center">
+              <p className="text-lg font-bold text-emerald-600 dark:text-emerald-400 tabular-nums">{dealsExpiry.active}</p>
+              <p className="text-xs text-emerald-500">Active</p>
+            </div>
+          </div>
+          {dealsExpiry.expiringSoon > 0 && (
+            <div className="space-y-1">
+              <p className="text-xs font-medium text-slate-500 dark:text-slate-400 mb-2">Expiring soon</p>
+              {dealsExpiry.list.map((d) => (
+                <div key={d.id} className="flex items-center justify-between p-2 rounded-lg bg-amber-50 dark:bg-amber-500/10 text-xs">
+                  <span className="font-medium text-slate-700 dark:text-slate-300 truncate">{d.title}</span>
+                  <span className="text-amber-600 dark:text-amber-400 shrink-0 ml-2 tabular-nums">{d.daysLeft}d left</span>
+                </div>
+              ))}
+            </div>
+          )}
+          {dealsExpiry.expired > 0 && (
+            <div className="mt-2 p-2 rounded-lg bg-red-50 dark:bg-red-500/10 text-xs text-red-600 dark:text-red-400">
+              {dealsExpiry.expired} deal{dealsExpiry.expired > 1 ? "s have" : " has"} expired — update or remove them
+            </div>
+          )}
+          {dealsExpiry.expired === 0 && dealsExpiry.expiringSoon === 0 && (
+            <p className="text-xs text-slate-400 text-center py-4">All deals are active with no upcoming expirations</p>
+          )}
+        </motion.div>
+
+        {/* Content Freshness Score */}
+        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.55 }}
+          className="rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-5">
+          <div className="flex items-center justify-between mb-4">
+            <div>
+              <h3 className="text-sm font-semibold text-slate-900 dark:text-white flex items-center gap-2">
+                <RefreshCw className="w-4 h-4 text-emerald-500" />Content Freshness
+              </h3>
+              <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">Days since last update</p>
+            </div>
+          </div>
+          <div className="flex items-center gap-2 mb-4">
+            <div className="flex-1 p-3 rounded-xl bg-emerald-50 dark:bg-emerald-500/10 border border-emerald-100 dark:border-emerald-900/50 text-center">
+              <p className="text-lg font-bold text-emerald-600 dark:text-emerald-400 tabular-nums">{freshness.fresh}</p>
+              <p className="text-xs text-emerald-500">Fresh</p>
+            </div>
+            <div className="flex-1 p-3 rounded-xl bg-amber-50 dark:bg-amber-500/10 border border-amber-100 dark:border-amber-900/50 text-center">
+              <p className="text-lg font-bold text-amber-600 dark:text-amber-400 tabular-nums">{freshness.stale30}</p>
+              <p className="text-xs text-amber-500">30+ days</p>
+            </div>
+            <div className="flex-1 p-3 rounded-xl bg-orange-50 dark:bg-orange-500/10 border border-orange-100 dark:border-orange-900/50 text-center">
+              <p className="text-lg font-bold text-orange-600 dark:text-orange-400 tabular-nums">{freshness.stale60}</p>
+              <p className="text-xs text-orange-500">60+ days</p>
+            </div>
+            <div className="flex-1 p-3 rounded-xl bg-red-50 dark:bg-red-500/10 border border-red-100 dark:border-red-900/50 text-center">
+              <p className="text-lg font-bold text-red-600 dark:text-red-400 tabular-nums">{freshness.stale90}</p>
+              <p className="text-xs text-red-500">90+ days</p>
+            </div>
+          </div>
+          {/* Mini bar */}
+          {(freshness.stale30 + freshness.stale60 + freshness.stale90) > 0 && (
+            <div className="h-1.5 rounded-full bg-slate-100 dark:bg-slate-800 overflow-hidden flex">
+              <div className="h-full bg-emerald-500 transition-all duration-500" style={{ width: `${(freshness.fresh / Math.max(freshness.fresh + freshness.stale30 + freshness.stale60 + freshness.stale90, 1)) * 100}%` }} />
+              <div className="h-full bg-amber-500 transition-all duration-500" style={{ width: `${(freshness.stale30 / Math.max(freshness.fresh + freshness.stale30 + freshness.stale60 + freshness.stale90, 1)) * 100}%` }} />
+              <div className="h-full bg-orange-500 transition-all duration-500" style={{ width: `${(freshness.stale60 / Math.max(freshness.fresh + freshness.stale30 + freshness.stale60 + freshness.stale90, 1)) * 100}%` }} />
+              <div className="h-full bg-red-500 transition-all duration-500" style={{ width: `${(freshness.stale90 / Math.max(freshness.fresh + freshness.stale30 + freshness.stale60 + freshness.stale90, 1)) * 100}%` }} />
+            </div>
+          )}
+          {freshness.staleItems.length > 0 && (
+            <div className="mt-3 space-y-1">
+              <p className="text-xs font-medium text-slate-500 dark:text-slate-400">Stale items needing attention</p>
+              {freshness.staleItems.map((item, i) => (
+                <div key={i} className="flex items-center justify-between p-2 rounded-lg bg-slate-50 dark:bg-slate-800/50 text-xs">
+                  <span className="text-slate-700 dark:text-slate-300 truncate">{item.name}</span>
+                  <span className="text-slate-400 shrink-0 ml-2 tabular-nums">{item.days}d ago</span>
+                </div>
+              ))}
+            </div>
+          )}
+          {freshness.stale30 === 0 && freshness.stale60 === 0 && freshness.stale90 === 0 && (
+            <p className="text-xs text-slate-400 text-center py-4">All content is fresh — great job!</p>
+          )}
+        </motion.div>
+      </div>
+
+      {/* Visitor Stats */}
+      <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.6 }}
+        className="rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-5">
+        <div className="flex items-center justify-between mb-4">
+          <div>
+            <h3 className="text-sm font-semibold text-slate-900 dark:text-white flex items-center gap-2">
+              <Users className="w-4 h-4 text-purple-500" />Visitor Activity
+            </h3>
+            <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">Today's site traffic summary</p>
+          </div>
+          <button onClick={() => router.push("/admin/visitors")}
+            className="text-xs text-purple-500 hover:text-purple-600 flex items-center gap-1 font-medium">
+            Details <ChevronRight className="w-3 h-3" />
+          </button>
+        </div>
+        <div className="flex items-center gap-4">
+          <div className="flex-1 p-4 rounded-xl bg-gradient-to-br from-purple-50 to-violet-50 dark:from-purple-500/5 dark:to-violet-500/5 border border-purple-100 dark:border-purple-900/30 text-center">
+            <p className="text-2xl font-bold text-purple-600 dark:text-purple-400 tabular-nums">{visitorStats.today}</p>
+            <p className="text-xs text-purple-500 mt-0.5">Today's Visitors</p>
+          </div>
+          <div className="flex-1 p-4 rounded-xl bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-blue-500/5 dark:to-indigo-500/5 border border-blue-100 dark:border-blue-900/30 text-center">
+            <p className="text-2xl font-bold text-blue-600 dark:text-blue-400 tabular-nums">{visitorStats.views}</p>
+            <p className="text-xs text-blue-500 mt-0.5">Page Views Today</p>
+          </div>
+          <div className="flex-1 p-4 rounded-xl bg-gradient-to-br from-slate-50 to-slate-100 dark:from-slate-500/5 dark:to-slate-500/10 border border-slate-100 dark:border-slate-900/30 text-center">
+            <p className="text-2xl font-bold text-slate-600 dark:text-slate-400 tabular-nums">{visitorStats.total}</p>
+            <p className="text-xs text-slate-500 mt-0.5">All-Time Visitors</p>
+          </div>
+        </div>
+      </motion.div>
     </div>
   )
 }
