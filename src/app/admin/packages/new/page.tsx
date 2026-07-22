@@ -2,7 +2,7 @@
 
 import { useState, useCallback } from "react"
 import { useRouter } from "next/navigation"
-import { ArrowLeft, Plus, X, Save } from "lucide-react"
+import { ArrowLeft, Plus, X, Save, Package, ImageIcon, Info, List } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
@@ -10,24 +10,11 @@ import { Label } from "@/components/ui/label"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 
 function slugify(text: string) {
-  return text
-    .toLowerCase()
-    .replace(/[^\w\s-]/g, "")
-    .replace(/\s+/g, "-")
-    .replace(/-+/g, "-")
-    .trim()
+  return text.toLowerCase().replace(/[^\w\s-]/g, "").replace(/\s+/g, "-").replace(/-+/g, "-").trim()
 }
 
-interface ArrayInputProps {
-  label: string
-  values: string[]
-  onChange: (values: string[]) => void
-  placeholder?: string
-}
-
-function ArrayInput({ label, values, onChange, placeholder }: ArrayInputProps) {
+function ArrayInput({ label, values, onChange, placeholder }: { label: string; values: string[]; onChange: (v: string[]) => void; placeholder?: string }) {
   const [input, setInput] = useState("")
-
   const add = () => {
     const val = input.trim()
     if (val && !values.includes(val)) {
@@ -35,29 +22,20 @@ function ArrayInput({ label, values, onChange, placeholder }: ArrayInputProps) {
       setInput("")
     }
   }
-
   return (
     <div className="space-y-2">
       <Label>{label}</Label>
       <div className="flex gap-2">
-        <Input
-          value={input}
-          onChange={(e) => setInput(e.target.value)}
-          placeholder={placeholder || `Add ${label.toLowerCase()}...`}
-          onKeyDown={(e) => { if (e.key === "Enter") { e.preventDefault(); add() } }}
-        />
-        <Button type="button" variant="outline" onClick={add} size="icon" className="shrink-0">
-          <Plus className="w-4 h-4" />
-        </Button>
+        <Input value={input} onChange={(e) => setInput(e.target.value)} placeholder={placeholder || `Add ${label.toLowerCase()}...`}
+          onKeyDown={(e) => { if (e.key === "Enter") { e.preventDefault(); add() } }} />
+        <Button type="button" variant="outline" onClick={add} size="icon" className="shrink-0"><Plus className="w-4 h-4" /></Button>
       </div>
       {values.length > 0 && (
         <div className="flex flex-wrap gap-1.5">
           {values.map((v, i) => (
             <span key={i} className="inline-flex items-center gap-1 px-2.5 py-1 rounded-md bg-slate-100 dark:bg-slate-800 text-xs text-slate-700 dark:text-slate-300">
               {v}
-              <button type="button" onClick={() => onChange(values.filter((_, j) => j !== i))} className="hover:text-red-500">
-                <X className="w-3 h-3" />
-              </button>
+              <button type="button" onClick={() => onChange(values.filter((_, j) => j !== i))} className="hover:text-red-500"><X className="w-3 h-3" /></button>
             </span>
           ))}
         </div>
@@ -70,21 +48,9 @@ export default function NewPackagePage() {
   const router = useRouter()
   const [saving, setSaving] = useState(false)
   const [form, setForm] = useState({
-    name: "",
-    slug: "",
-    type: "safari",
-    image: "",
-    price: "",
-    price_kes: "",
-    duration: "",
-    accommodation: "",
-    meals: "",
-    transport: "",
-    description: "",
-    activities: [] as string[],
-    highlights: [] as string[],
-    included: [] as string[],
-    excluded: [] as string[],
+    name: "", slug: "", type: "safari", image: "", price: "", price_kes: "",
+    duration: "", accommodation: "", meals: "", transport: "", description: "",
+    activities: [] as string[], highlights: [] as string[], included: [] as string[], excluded: [] as string[],
   })
 
   const handleNameChange = useCallback((name: string) => {
@@ -99,123 +65,161 @@ export default function NewPackagePage() {
       const res = await fetch("/api/admin/packages", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          ...form,
-          price: Number(form.price) || 0,
-          price_kes: form.price_kes ? Number(form.price_kes) : null,
-        }),
+        body: JSON.stringify({ ...form, price: Number(form.price) || 0, price_kes: form.price_kes ? Number(form.price_kes) : null }),
       })
-      if (res.ok) {
-        router.push("/admin/packages")
-        router.refresh()
-      } else {
-        const err = await res.json()
-        alert(err.error || "Failed to create package")
-      }
-    } catch {
-      alert("Network error")
-    } finally {
-      setSaving(false)
-    }
+      if (res.ok) { router.push("/admin/packages"); router.refresh() }
+      else { const err = await res.json(); alert(err.error || "Failed to create package") }
+    } catch { alert("Network error") }
+    finally { setSaving(false) }
   }
 
   return (
-    <div className="max-w-2xl mx-auto space-y-6">
-      <div className="flex items-center gap-3">
-        <Button variant="ghost" size="icon" onClick={() => router.push("/admin/packages")} aria-label="Back">
-          <ArrowLeft className="w-4 h-4" />
-        </Button>
-        <div>
-          <h2 className="text-lg font-semibold text-slate-900 dark:text-white">New Package</h2>
-          <p className="text-sm text-slate-500 dark:text-slate-400">Add a new tour package</p>
+    <div className="max-w-2xl mx-auto space-y-8">
+      {/* Header */}
+      <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-sky-600 via-sky-500 to-cyan-400 p-6">
+        <div className="absolute top-0 right-0 w-40 h-40 bg-white/10 rounded-full blur-2xl -translate-y-1/2 translate-x-1/4" />
+        <div className="relative z-10 flex items-center gap-4">
+          <button onClick={() => router.push("/admin/packages")} className="w-9 h-9 rounded-xl bg-white/20 flex items-center justify-center hover:bg-white/30 transition-colors">
+            <ArrowLeft className="w-4 h-4 text-white" />
+          </button>
+          <div className="w-10 h-10 rounded-xl bg-white/20 flex items-center justify-center">
+            <Package className="w-5 h-5 text-white" />
+          </div>
+          <div>
+            <h1 className="text-lg font-bold text-white">New Package</h1>
+            <p className="text-sm text-white/80">Add a new tour package</p>
+          </div>
         </div>
       </div>
 
       <form onSubmit={handleSubmit} className="space-y-6">
-        <div className="rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-6 space-y-5">
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <div className="space-y-2">
-              <Label>Name *</Label>
-              <Input value={form.name} onChange={(e) => handleNameChange(e.target.value)} placeholder="e.g. 7-Day Kenya Safari" required />
+        {/* Image preview */}
+        {form.image && (
+          <div className="relative rounded-xl overflow-hidden border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900">
+            <div className="aspect-video relative">
+              <img src={form.image} alt="Preview" className="w-full h-full object-cover"
+                onError={(e) => { (e.target as HTMLImageElement).style.display = "none" }} />
             </div>
-            <div className="space-y-2">
-              <Label>Slug *</Label>
-              <Input value={form.slug} onChange={(e) => setForm((p) => ({ ...p, slug: e.target.value }))} placeholder="auto-generated" required />
-            </div>
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <div className="space-y-2">
-              <Label>Type</Label>
-              <Select value={form.type} onValueChange={(v) => setForm((p) => ({ ...p, type: v ?? "safari" }))}>
-                <SelectTrigger><SelectValue /></SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="safari">Safari</SelectItem>
-                  <SelectItem value="group">Group</SelectItem>
-                  <SelectItem value="luxury">Luxury</SelectItem>
-                  <SelectItem value="mountain">Mountain</SelectItem>
-                </SelectContent>
-              </Select>
-            </div>
-            <div className="space-y-2">
-              <Label>Duration</Label>
-              <Input value={form.duration} onChange={(e) => setForm((p) => ({ ...p, duration: e.target.value }))} placeholder="e.g. 7 Days / 6 Nights" />
+            <div className="absolute top-2 left-2 px-2 py-1 rounded-md bg-black/60 text-xs text-white flex items-center gap-1.5">
+              <ImageIcon className="w-3 h-3" /> Preview
             </div>
           </div>
+        )}
 
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-            <div className="space-y-2">
-              <Label>Price (USD)</Label>
-              <Input type="number" value={form.price} onChange={(e) => setForm((p) => ({ ...p, price: e.target.value }))} placeholder="0" />
+        {/* Basic Information */}
+        <div className="rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 overflow-hidden">
+          <div className="px-6 pt-6 pb-1">
+            <div className="flex items-center gap-2.5 mb-1">
+              <div className="w-7 h-7 rounded-lg bg-sky-100 dark:bg-sky-500/10 flex items-center justify-center">
+                <Info className="w-3.5 h-3.5 text-sky-600 dark:text-sky-400" />
+              </div>
+              <h3 className="text-sm font-semibold text-slate-900 dark:text-white">Basic Information</h3>
             </div>
-            <div className="space-y-2">
-              <Label>Price (KES)</Label>
-              <Input type="number" value={form.price_kes} onChange={(e) => setForm((p) => ({ ...p, price_kes: e.target.value }))} placeholder="Optional" />
-            </div>
-            <div className="space-y-2">
-              <Label>Image URL</Label>
-              <Input value={form.image} onChange={(e) => setForm((p) => ({ ...p, image: e.target.value }))} placeholder="https://..." />
-            </div>
+            <p className="text-xs text-slate-500 dark:text-slate-400 ml-9">Name, slug, type, and pricing</p>
           </div>
-
-          <div className="space-y-2">
-            <Label>Accommodation</Label>
-            <Input value={form.accommodation} onChange={(e) => setForm((p) => ({ ...p, accommodation: e.target.value }))} placeholder="e.g. Luxury tented camps" />
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <div className="space-y-2">
-              <Label>Meals</Label>
-              <Input value={form.meals} onChange={(e) => setForm((p) => ({ ...p, meals: e.target.value }))} placeholder="e.g. Full board" />
+          <div className="p-6 space-y-5">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div className="space-y-2">
+                <Label>Name *</Label>
+                <Input value={form.name} onChange={(e) => handleNameChange(e.target.value)} placeholder="e.g. 7-Day Kenya Safari" required />
+              </div>
+              <div className="space-y-2">
+                <Label>Slug *</Label>
+                <Input value={form.slug} onChange={(e) => setForm((p) => ({ ...p, slug: e.target.value }))} placeholder="auto-generated" required />
+              </div>
             </div>
-            <div className="space-y-2">
-              <Label>Transport</Label>
-              <Input value={form.transport} onChange={(e) => setForm((p) => ({ ...p, transport: e.target.value }))} placeholder="e.g. 4x4 Jeep" />
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div className="space-y-2">
+                <Label>Type</Label>
+                <Select value={form.type} onValueChange={(v) => setForm((p) => ({ ...p, type: v ?? "safari" }))}>
+                  <SelectTrigger><SelectValue /></SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="safari">Safari</SelectItem>
+                    <SelectItem value="group">Group</SelectItem>
+                    <SelectItem value="luxury">Luxury</SelectItem>
+                    <SelectItem value="mountain">Mountain</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+              <div className="space-y-2">
+                <Label>Duration</Label>
+                <Input value={form.duration} onChange={(e) => setForm((p) => ({ ...p, duration: e.target.value }))} placeholder="e.g. 7 Days / 6 Nights" />
+              </div>
             </div>
-          </div>
-
-          <div className="space-y-2">
-            <Label>Description</Label>
-            <Textarea
-              value={form.description}
-              onChange={(e) => setForm((p) => ({ ...p, description: e.target.value }))}
-              placeholder="Describe the package..."
-              rows={4}
-            />
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+              <div className="space-y-2">
+                <Label>Price (USD)</Label>
+                <Input type="number" value={form.price} onChange={(e) => setForm((p) => ({ ...p, price: e.target.value }))} placeholder="0" />
+              </div>
+              <div className="space-y-2">
+                <Label>Price (KES)</Label>
+                <Input type="number" value={form.price_kes} onChange={(e) => setForm((p) => ({ ...p, price_kes: e.target.value }))} placeholder="Optional" />
+              </div>
+              <div className="space-y-2">
+                <Label>Image URL</Label>
+                <Input value={form.image} onChange={(e) => setForm((p) => ({ ...p, image: e.target.value }))} placeholder="https://..." />
+              </div>
+            </div>
           </div>
         </div>
 
-        <div className="rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-6 space-y-5">
-          <h3 className="text-sm font-semibold text-slate-900 dark:text-white">Details</h3>
-          <ArrayInput label="Activities" values={form.activities} onChange={(v) => setForm((p) => ({ ...p, activities: v }))} placeholder="e.g. Game drives" />
-          <ArrayInput label="Highlights" values={form.highlights} onChange={(v) => setForm((p) => ({ ...p, highlights: v }))} placeholder="e.g. View the Big Five" />
-          <ArrayInput label="Included" values={form.included} onChange={(v) => setForm((p) => ({ ...p, included: v }))} placeholder="e.g. Park fees" />
-          <ArrayInput label="Excluded" values={form.excluded} onChange={(v) => setForm((p) => ({ ...p, excluded: v }))} placeholder="e.g. International flights" />
+        {/* Package Details */}
+        <div className="rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 overflow-hidden">
+          <div className="px-6 pt-6 pb-1">
+            <div className="flex items-center gap-2.5 mb-1">
+              <div className="w-7 h-7 rounded-lg bg-sky-100 dark:bg-sky-500/10 flex items-center justify-center">
+                <Info className="w-3.5 h-3.5 text-sky-600 dark:text-sky-400" />
+              </div>
+              <h3 className="text-sm font-semibold text-slate-900 dark:text-white">Package Details</h3>
+            </div>
+            <p className="text-xs text-slate-500 dark:text-slate-400 ml-9">Accommodation, meals, transport, and description</p>
+          </div>
+          <div className="p-6 space-y-5">
+            <div className="space-y-2">
+              <Label>Accommodation</Label>
+              <Input value={form.accommodation} onChange={(e) => setForm((p) => ({ ...p, accommodation: e.target.value }))} placeholder="e.g. Luxury tented camps" />
+            </div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div className="space-y-2">
+                <Label>Meals</Label>
+                <Input value={form.meals} onChange={(e) => setForm((p) => ({ ...p, meals: e.target.value }))} placeholder="e.g. Full board" />
+              </div>
+              <div className="space-y-2">
+                <Label>Transport</Label>
+                <Input value={form.transport} onChange={(e) => setForm((p) => ({ ...p, transport: e.target.value }))} placeholder="e.g. 4x4 Jeep" />
+              </div>
+            </div>
+            <div className="space-y-2">
+              <Label>Description</Label>
+              <Textarea value={form.description} onChange={(e) => setForm((p) => ({ ...p, description: e.target.value }))} placeholder="Describe the package..." rows={4} />
+            </div>
+          </div>
         </div>
 
-        <div className="flex justify-end gap-3">
-          <Button variant="outline" onClick={() => router.push("/admin/packages")}>Cancel</Button>
-          <Button type="submit" disabled={saving}>
+        {/* Lists */}
+        <div className="rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 overflow-hidden">
+          <div className="px-6 pt-6 pb-1">
+            <div className="flex items-center gap-2.5 mb-1">
+              <div className="w-7 h-7 rounded-lg bg-sky-100 dark:bg-sky-500/10 flex items-center justify-center">
+                <List className="w-3.5 h-3.5 text-sky-600 dark:text-sky-400" />
+              </div>
+              <h3 className="text-sm font-semibold text-slate-900 dark:text-white">Lists</h3>
+            </div>
+            <p className="text-xs text-slate-500 dark:text-slate-400 ml-9">Activities, highlights, inclusions, and exclusions</p>
+          </div>
+          <div className="p-6 space-y-5">
+            <ArrayInput label="Activities" values={form.activities} onChange={(v) => setForm((p) => ({ ...p, activities: v }))} placeholder="e.g. Game drives" />
+            <ArrayInput label="Highlights" values={form.highlights} onChange={(v) => setForm((p) => ({ ...p, highlights: v }))} placeholder="e.g. View the Big Five" />
+            <ArrayInput label="Included" values={form.included} onChange={(v) => setForm((p) => ({ ...p, included: v }))} placeholder="e.g. Park fees" />
+            <ArrayInput label="Excluded" values={form.excluded} onChange={(v) => setForm((p) => ({ ...p, excluded: v }))} placeholder="e.g. International flights" />
+          </div>
+        </div>
+
+        {/* Footer actions */}
+        <div className="flex justify-end gap-3 pb-8">
+          <Button variant="outline" onClick={() => router.push("/admin/packages")} className="border-slate-200 dark:border-slate-700">Cancel</Button>
+          <Button type="submit" disabled={saving}
+            className="bg-gradient-to-r from-sky-500 to-cyan-400 text-white border-0 hover:shadow-lg hover:shadow-sky-500/20">
             <Save className="w-4 h-4 mr-1.5" />
             {saving ? "Saving..." : "Save Package"}
           </Button>
