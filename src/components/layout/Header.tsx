@@ -201,8 +201,8 @@ export function Header() {
                   : "text-slate-700 hover:text-sky-600 hover:bg-sky-50 dark:text-slate-300 dark:hover:text-sky-400"
               )}
             >
-              <Phone className="w-3.5 h-3.5" />
-              <span className="hidden lg:inline">{COMPANY.phone}</span>
+              <Phone className="w-3.5 h-3.5 shrink-0" />
+              <span className="hidden lg:inline whitespace-nowrap">{COMPANY.phone}</span>
             </a>
 
             <Link href="/contact">
@@ -355,8 +355,8 @@ function MobileNavContent({ onClose }: { onClose: () => void }) {
           href={`tel:${COMPANY.phone}`}
           className="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm text-slate-700 hover:bg-slate-50 dark:text-slate-300 dark:hover:bg-slate-800 transition-colors"
         >
-          <Phone className="w-4 h-4 text-sky-500" />
-          {COMPANY.phone}
+          <Phone className="w-4 h-4 text-sky-500 shrink-0" />
+          <span className="whitespace-nowrap">{COMPANY.phone}</span>
         </a>
         <Link
           href="/contact"
