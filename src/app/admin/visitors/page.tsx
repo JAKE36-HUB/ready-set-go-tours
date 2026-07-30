@@ -3,7 +3,6 @@
 import { useEffect, useState } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { Users, Eye, Clock, Globe, ArrowUpDown, Search, RefreshCw, Activity } from "lucide-react"
-import { getSupabase } from "@/lib/supabase"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 
@@ -58,41 +57,11 @@ export default function AdminVisitors() {
   async function loadData() {
     setLoading(true)
     try {
-      const sb = getSupabase()
-      const today = new Date()
-      today.setHours(0, 0, 0, 0)
-
-      const { data: all } = await sb
-        .from("visitors")
-        .select("*")
-        .order(sortField, { ascending: sortDir === "asc" })
-        .limit(200)
-
-      if (!all) return
-
-      setVisitors(all as Visitor[])
-
-      const todayRecords = all.filter((v: any) => new Date(v.entered_at) >= today)
-      const todaySessions = new Set(todayRecords.map((v: any) => v.session_id))
-      const totalDuration = all.reduce((sum: number, v: any) => sum + (v.duration_seconds || 0), 0)
-      const totalSessions = new Set(all.map((v: any) => v.session_id))
-
-      const pageCounts: Record<string, number> = {}
-      for (const v of all) {
-        pageCounts[v.page] = (pageCounts[v.page] || 0) + 1
-      }
-      const topPages = Object.entries(pageCounts)
-        .sort((a, b) => b[1] - a[1])
-        .slice(0, 10)
-        .map(([page, count]) => ({ page, count }))
-
-      setStats({
-        todayVisitors: todaySessions.size,
-        todayViews: todayRecords.length,
-        avgDuration: totalSessions.size > 0 ? Math.round(totalDuration / totalSessions.size) : 0,
-        totalVisitors: totalSessions.size,
-        topPages,
-      })
+      const res = await fetch(`/api/admin/visitors?sortField=${sortField}&sortDir=${sortDir}&limit=200`)
+      if (!res.ok) return
+      const json = await res.json()
+      setVisitors(json.visitors || [])
+      setStats(json.stats || { todayVisitors: 0, todayViews: 0, avgDuration: 0, totalVisitors: 0, topPages: [] })
     } catch {} finally {
       setLoading(false)
     }
@@ -113,7 +82,6 @@ export default function AdminVisitors() {
 
   return (
     <div className="space-y-6">
-      {/* Header */}
       <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
         className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 p-6">
         <div className="absolute inset-0">
@@ -133,7 +101,6 @@ export default function AdminVisitors() {
         </div>
       </motion.div>
 
-      {/* Stats */}
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
         <motion.div initial={{ opacity: 0, y: 15 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }}
           className="rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-4">
@@ -169,7 +136,6 @@ export default function AdminVisitors() {
         </motion.div>
       </div>
 
-      {/* Top Pages + Search */}
       <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3 }}
           className="lg:col-span-1 rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-5">
@@ -189,7 +155,6 @@ export default function AdminVisitors() {
           </div>
         </motion.div>
 
-        {/* Table */}
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.35 }}
           className="lg:col-span-3 rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-5">
           <div className="flex items-center justify-between mb-4">
