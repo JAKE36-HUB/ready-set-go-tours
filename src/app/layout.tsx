@@ -5,6 +5,7 @@ import { SupabaseProvider } from "@/lib/supabase-auth";
 import { ThemeProvider } from "@/components/layout/ThemeProvider";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
+import { Analytics } from "@vercel/analytics/react";
 import { ClientWidgets } from "@/components/ClientWidgets";
 
 export const viewport: Viewport = {
@@ -133,6 +134,7 @@ export default function RootLayout({
             }),
           }}
         />
+        <Analytics />
         <SupabaseProvider>
         <ThemeProvider>
           <Header />
