@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server"
+import { rateLimit, badRequest, tooManyRequests, serverError } from "@/lib/security"
 
 const SYSTEM_PROMPT = `You are a helpful travel assistant for Ready Set Go Tours & Travel, a premier luxury tour operator based in Nairobi, Kenya. You specialize in bespoke safaris and travel experiences across Kenya and Tanzania.
 
@@ -29,15 +30,26 @@ Keep responses friendly, informative, and concise. If asked about pricing, menti
 
 export async function POST(request: Request) {
   try {
-    const { messages } = await request.json()
-    const apiKey = process.env.OPENROUTER_API_KEY
-
-    if (!apiKey) {
-      return NextResponse.json(
-        { error: "OpenRouter API key not configured" },
-        { status: 500 }
-      )
+    const ip = request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() || "unknown"
+    if (!rateLimit(`chat:${ip}`, 20, 60_000)) {
+      return tooManyRequests()
     }
+
+    const { messages } = await request.json()
+
+    if (!Array.isArray(messages) || messages.length === 0) {
+      return badRequest("Invalid messages")
+    }
+
+    const apiKey = process.env.OPENROUTER_API_KEY
+    if (!apiKey) {
+      return serverError()
+    }
+
+    const sanitizedMessages = messages.slice(-10).map((m: { role?: string; content?: string }) => ({
+      role: m.role === "user" ? "user" : "assistant",
+      content: typeof m.content === "string" ? m.content.slice(0, 2000) : "",
+    }))
 
     const response = await fetch("https://openrouter.ai/api/v1/chat/completions", {
       method: "POST",
@@ -51,7 +63,7 @@ export async function POST(request: Request) {
         model: "openai/gpt-4o-mini",
         messages: [
           { role: "system", content: SYSTEM_PROMPT },
-          ...messages.slice(-10),
+          ...sanitizedMessages,
         ],
         max_tokens: 600,
         temperature: 0.7,
@@ -59,19 +71,12 @@ export async function POST(request: Request) {
     })
 
     if (!response.ok) {
-      const error = await response.text()
-      return NextResponse.json(
-        { error: `OpenRouter API error: ${error}` },
-        { status: response.status }
-      )
+      return serverError()
     }
 
     const data = await response.json()
     return NextResponse.json({ content: data.choices[0].message.content })
-  } catch (error) {
-    return NextResponse.json(
-      { error: "Internal server error" },
-      { status: 500 }
-    )
+  } catch {
+    return serverError()
   }
 }

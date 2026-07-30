@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Geist } from "next/font/google";
+import { GeistSans } from "geist/font/sans";
 import "./globals.css";
 import { SupabaseProvider } from "@/lib/supabase-auth";
 import { ThemeProvider } from "@/components/layout/ThemeProvider";
@@ -15,12 +15,6 @@ export const viewport: Viewport = {
     { media: "(prefers-color-scheme: dark)", color: "#0c0c0c" },
   ],
 };
-
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-  display: "swap",
-});
 
 export const metadata: Metadata = {
   verification: { google: "Tu2nq2Pl9nDmApYtFt6GsuYhhzyzhlSWzFM3nNq3Lm0" },
@@ -100,7 +94,7 @@ export default function RootLayout({
       lang="en"
       suppressHydrationWarning
       data-scroll-behavior="smooth"
-      className={`${geistSans.variable} antialiased`}
+      className={`${GeistSans.variable} antialiased`}
     >
       <head>
         <link rel="preconnect" href="https://i.pinimg.com" />

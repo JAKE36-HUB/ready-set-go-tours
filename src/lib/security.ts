@@ -24,6 +24,7 @@ export function verifyOrigin(request: Request): boolean {
   if (candidates.length === 0) return true
 
   return candidates.some((url) => {
+    if (!url) return false
     try {
       const parsed = new URL(url)
       return (

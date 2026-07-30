@@ -1,6 +1,7 @@
 import { requireUser } from "@/lib/api-auth"
 import { NextResponse } from "next/server"
 import { getSupabaseAdmin } from "@/lib/supabase-admin"
+import { sanitizeObject } from "@/lib/security"
 
 export async function GET(_request: Request, { params }: { params: Promise<{ id: string }> }) {
   const user = await requireUser(_request)
@@ -25,11 +26,12 @@ export async function PUT(request: Request, { params }: { params: Promise<{ id: 
 
   const { id } = await params
   const body = await request.json()
+  const sanitized = sanitizeObject(body, ["title", "slug", "description", "discount", "code", "image", "type", "original_price", "deal_price", "price_kes", "valid_until", "highlights", "featured", "duration", "accommodation", "meals", "included", "itinerary"])
 
   const sb = getSupabaseAdmin()
   const { data, error } = await sb
     .from("deals")
-    .update({ ...body, updated_at: new Date().toISOString() })
+    .update({ ...sanitized, updated_at: new Date().toISOString() })
     .eq("id", id)
     .select()
     .single()

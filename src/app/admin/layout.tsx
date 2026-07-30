@@ -67,7 +67,14 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
   }
 
   if (!user) {
-    return <>{children}</>
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-slate-50 dark:bg-slate-950">
+        <div className="flex flex-col items-center gap-3">
+          <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-sky-500" />
+          <p className="text-sm text-slate-500">Redirecting to sign in...</p>
+        </div>
+      </div>
+    )
   }
 
   return (
