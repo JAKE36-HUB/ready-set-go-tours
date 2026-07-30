@@ -2,7 +2,6 @@
 
 import { useState, useEffect } from "react"
 import Link from "next/link"
-import { motion } from "framer-motion"
 
 import { Button } from "@/components/ui/button"
 
@@ -16,10 +15,9 @@ export function StickyMobileCTA() {
   }, [])
 
   return (
-    <motion.div
-      initial={{ y: 100 }}
-      animate={{ y: show ? 0 : 100 }}
-      className="fixed bottom-0 left-0 right-0 z-50 bg-white/95 dark:bg-slate-900/95 backdrop-blur-lg border-t border-slate-200 dark:border-slate-800 p-3 md:hidden"
+    <div
+      className="fixed bottom-0 left-0 right-0 z-50 bg-white/95 dark:bg-slate-900/95 backdrop-blur-lg border-t border-slate-200 dark:border-slate-800 p-3 md:hidden transition-transform duration-300 ease-out"
+      style={{ transform: show ? "translateY(0)" : "translateY(100%)" }}
     >
       <div className="flex items-center gap-3 max-w-lg mx-auto">
         <Link href="/deals" className="flex-1">
@@ -33,6 +31,6 @@ export function StickyMobileCTA() {
           </Button>
         </Link>
       </div>
-    </motion.div>
+    </div>
   )
 }

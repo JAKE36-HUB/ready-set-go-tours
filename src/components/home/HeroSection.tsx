@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react"
 import Image from "next/image"
 import Link from "next/link"
-import { motion, useScroll, useTransform } from "framer-motion"
+import { motion } from "framer-motion"
 import { Percent } from "lucide-react"
 
 import { Button } from "@/components/ui/button"
@@ -12,17 +12,11 @@ const HERO_IMAGES = [
   "https://i.pinimg.com/736x/21/2b/24/212b2433f246414a170ec177d76168f2.jpg",
   "https://i.pinimg.com/736x/11/56/82/1156825aa06be3206b2a1454ada4af1b.jpg",
   "https://i.pinimg.com/736x/98/66/ec/9866ec45a7a8400d3fdc9e0642ff1e99.jpg",
-  "https://i.pinimg.com/736x/83/3d/29/833d2927fbfa457ee52f221b05df57c1.jpg",
-  "https://i.pinimg.com/736x/c0/0c/f7/c00cf734544618ee6da72490b328a66e.jpg",
-  "https://i.pinimg.com/736x/f5/e3/99/f5e3997c40125ec8b26b9e3687de6d36.jpg",
 ]
 
 export function HeroSection() {
   const [mounted, setMounted] = useState(false)
   const [currentImage, setCurrentImage] = useState(0)
-  const { scrollY } = useScroll()
-  const bgY = useTransform(scrollY, [0, 500], [0, 150])
-  const opacity = useTransform(scrollY, [0, 300], [1, 0])
 
   // eslint-disable-next-line react-hooks/set-state-in-effect
   useEffect(() => { setMounted(true) }, [])
@@ -38,15 +32,13 @@ export function HeroSection() {
   const titleWords = ["Where", "the", "Wilderness", "Speaks"]
 
   return (
-    <section className="relative h-screen min-h-[700px] flex items-center overflow-hidden bg-black">
-      <motion.div className="absolute inset-0" style={{ y: bgY }}>
+    <section className="relative h-screen min-h-[600px] flex items-center overflow-hidden bg-black">
+      <div className="absolute inset-0">
         {HERO_IMAGES.map((img, i) => (
-          <motion.div
+          <div
             key={img}
-            className="absolute inset-0"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: i === currentImage ? 1 : 0 }}
-            transition={{ duration: 1.2, ease: "easeInOut" }}
+            className="absolute inset-0 transition-opacity duration-1000 ease-in-out"
+            style={{ opacity: i === currentImage ? 1 : 0 }}
           >
             <Image
               src={img}
@@ -54,11 +46,12 @@ export function HeroSection() {
               fill
               sizes="100vw"
               className="object-cover scale-110 brightness-[1.15] contrast-[1.05]"
-              priority={i < 2}
+              priority={i === 0}
+              loading={i === 0 ? "eager" : "lazy"}
             />
-          </motion.div>
+          </div>
         ))}
-      </motion.div>
+      </div>
 
       <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/25 to-black/70" />
       <div className="absolute inset-0 bg-gradient-to-r from-black/20 via-transparent to-black/20" />
@@ -66,7 +59,6 @@ export function HeroSection() {
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute -top-40 -right-40 w-96 h-96 bg-emerald-500/10 rounded-full blur-[150px]" />
         <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-teal-500/10 rounded-full blur-[120px]" />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-amber-500/5 rounded-full blur-[200px]" />
       </div>
 
       <div className="absolute inset-0 opacity-[0.03]" style={{ backgroundImage: "radial-gradient(circle at 1px 1px, white 1px, transparent 0)", backgroundSize: "50px 50px" }} />
@@ -86,7 +78,7 @@ export function HeroSection() {
         ))}
       </div>
 
-      <motion.div style={{ opacity }} className="relative z-10 w-full">
+      <div className="relative z-10 w-full">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-4xl mx-auto lg:mx-0 text-center lg:text-left">
             <motion.div
@@ -158,7 +150,7 @@ export function HeroSection() {
             </motion.div>
           </div>
         </div>
-      </motion.div>
+      </div>
 
       <motion.div
         initial={{ opacity: 0 }}
@@ -177,25 +169,17 @@ export function HeroSection() {
                 <span className="w-1 h-1 rounded-full bg-emerald-400" />
                 Custom Itineraries
               </span>
-              <span className="flex items-center gap-1.5">
+              <span className="hidden sm:flex items-center gap-1.5">
                 <span className="w-1 h-1 rounded-full bg-emerald-400" />
                 24/7 Support
               </span>
             </div>
-            <motion.div
-              animate={{ y: [0, 4, 0] }}
-              transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-              className="hidden sm:flex items-center gap-2 text-xs text-white/20"
-            >
+            <div className="hidden sm:flex items-center gap-2 text-xs text-white/20">
               <span>Scroll to explore</span>
               <div className="w-4 h-6 rounded-full border border-white/20 flex items-start justify-center pt-1">
-                <motion.div
-                  animate={{ y: [0, 4, 0] }}
-                  transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
-                  className="w-0.5 h-1.5 rounded-full bg-white/40"
-                />
+                <div className="w-0.5 h-1.5 rounded-full bg-white/40 animate-bounce" />
               </div>
-            </motion.div>
+            </div>
           </div>
         </div>
       </motion.div>

@@ -65,10 +65,10 @@ export function Footer() {
               <Image
                 src="/logo.png"
                 alt="Ready Set Go Tours"
-                width={320}
-                height={152}
-                className="h-24 w-auto object-contain"
-                priority
+                width={240}
+                height={114}
+                className="h-20 w-auto object-contain"
+                loading="lazy"
               />
             </Link>
             <p className="text-sm leading-relaxed text-slate-400 max-w-sm">

@@ -1,17 +1,11 @@
 import type { Metadata, Viewport } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Geist } from "next/font/google";
 import "./globals.css";
 import { SupabaseProvider } from "@/lib/supabase-auth";
 import { ThemeProvider } from "@/components/layout/ThemeProvider";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
-import { WhatsAppButton } from "@/components/layout/WhatsAppButton";
-import { AiChat } from "@/components/layout/AiChat";
-import { CookieConsent } from "@/components/layout/CookieConsent";
-import { ScrollToTop } from "@/components/layout/ScrollToTop";
-import { BreadcrumbJsonLd } from "@/components/JsonLd";
-import VisitorTracker from "@/components/admin/VisitorTracker";
-import PopupBanner from "@/components/admin/PopupBanner";
+import { ClientWidgets } from "@/components/ClientWidgets";
 
 export const viewport: Viewport = {
   width: "device-width",
@@ -25,11 +19,7 @@ export const viewport: Viewport = {
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
+  display: "swap",
 });
 
 export const metadata: Metadata = {
@@ -110,9 +100,12 @@ export default function RootLayout({
       lang="en"
       suppressHydrationWarning
       data-scroll-behavior="smooth"
-      className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+      className={`${geistSans.variable} antialiased`}
     >
-      <head />
+      <head>
+        <link rel="preconnect" href="https://i.pinimg.com" />
+        <link rel="preconnect" href="https://images.unsplash.com" />
+      </head>
       <body className="min-h-screen flex flex-col bg-background text-foreground">
         <script
           id="schema-org"
@@ -146,18 +139,12 @@ export default function RootLayout({
             }),
           }}
         />
-        <BreadcrumbJsonLd items={[{ name: "Home", item: "/" }]} />
         <SupabaseProvider>
-        <VisitorTracker />
         <ThemeProvider>
           <Header />
           <main className="flex-1">{children}</main>
           <Footer />
-          <AiChat />
-          <WhatsAppButton />
-          <ScrollToTop />
-          <CookieConsent />
-          <PopupBanner />
+          <ClientWidgets />
         </ThemeProvider>
         </SupabaseProvider>
       </body>

@@ -3,7 +3,7 @@
 import { useRef } from "react"
 import Image from "next/image"
 import Link from "next/link"
-import { motion, useInView, useScroll, useTransform } from "framer-motion"
+import { motion, useInView } from "framer-motion"
 import { ArrowRight, MessageCircle, Shield, CheckCircle2 } from "lucide-react"
 
 import { Button } from "@/components/ui/button"
@@ -11,21 +11,20 @@ import { Button } from "@/components/ui/button"
 export function FinalCTA() {
   const ref = useRef<HTMLDivElement>(null)
   const isInView = useInView(ref, { once: true, margin: "-100px" })
-  const { scrollY } = useScroll()
-  const bgY = useTransform(scrollY, [0, 500], [0, 100])
 
   return (
     <section className="relative py-32 overflow-hidden bg-slate-950">
-      <motion.div className="absolute inset-0" style={{ y: bgY }}>
+      <div className="absolute inset-0">
         <Image
           src="https://i.pinimg.com/736x/ce/f6/d6/cef6d689ef0cdfd6df6180dee63f669c.jpg"
           alt="African sunset silhouette"
           fill
           sizes="100vw"
           className="object-cover brightness-[1.1]"
+          loading="lazy"
         />
         <div className="absolute inset-0 bg-gradient-to-r from-slate-950/90 via-slate-950/70 to-slate-950/50" />
-      </motion.div>
+      </div>
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
