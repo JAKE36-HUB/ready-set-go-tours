@@ -9,15 +9,40 @@ export async function middleware(request: NextRequest) {
     data: { user },
   } = await supabase.auth.getUser()
 
-  if (!user && request.nextUrl.pathname.startsWith("/admin")) {
+  const path = request.nextUrl.pathname
+
+  // Protect admin pages
+  if (path.startsWith("/admin") && !user) {
     const url = request.nextUrl.clone()
     url.pathname = "/sign-in"
     return NextResponse.redirect(url)
+  }
+
+  // Protect admin API routes
+  if (path.startsWith("/api/admin") && !user) {
+    return NextResponse.json({ error: "Unauthorized" }, { status: 401 })
+  }
+
+  // CSRF protection for mutation API routes
+  if (path.startsWith("/api/admin") && ["POST", "PUT", "DELETE", "PATCH"].includes(request.method)) {
+    const origin = request.headers.get("origin")
+    const host = request.headers.get("host")
+
+    if (origin) {
+      try {
+        const originHost = new URL(origin).hostname
+        if (originHost !== host && !originHost.endsWith(".vercel.app") && originHost !== "localhost") {
+          return NextResponse.json({ error: "Forbidden" }, { status: 403 })
+        }
+      } catch {
+        return NextResponse.json({ error: "Invalid origin" }, { status: 403 })
+      }
+    }
   }
 
   return supabaseResponse
 }
 
 export const config = {
-  matcher: ["/((?!.+\\.[\\w]+$|_next).*)", "/", "/(api|trpc)(.*)"],
+  matcher: ["/admin/:path*", "/api/admin/:path*"],
 }

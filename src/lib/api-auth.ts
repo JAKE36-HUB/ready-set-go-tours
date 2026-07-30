@@ -1,10 +1,8 @@
 import { createServerClient } from "@supabase/ssr"
+import { cookies } from "next/headers"
 
 export async function requireUser(request: Request) {
-  const cookies = request.headers.get("cookie")?.split("; ").filter(Boolean).map((c) => {
-    const [name, ...rest] = c.split("=")
-    return { name, value: rest.join("=") }
-  }) || []
+  const cookieStore = await cookies()
 
   const supabase = createServerClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
@@ -12,9 +10,17 @@ export async function requireUser(request: Request) {
     {
       cookies: {
         getAll() {
-          return cookies
+          return cookieStore.getAll()
         },
-        setAll() {},
+        setAll(cookiesToSet) {
+          try {
+            cookiesToSet.forEach(({ name, value, options }) =>
+              cookieStore.set(name, value, options)
+            )
+          } catch {
+            // Called from a Server Component — ignore
+          }
+        },
       },
     }
   )
