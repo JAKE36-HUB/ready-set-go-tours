@@ -41,7 +41,7 @@ export function TrustStrip() {
               transition={{ duration: 0.4, delay: idx * 0.08 }}
               className="text-center"
             >
-              <div className="text-2xl sm:text-3xl font-bold text-amber-500 tabular-nums">
+              <div className="text-2xl sm:text-3xl font-bold text-amber-500 tabular-nums whitespace-nowrap">
                 <Counter value={stat.value} isInView={isInView} />
               </div>
               <div className="text-[11px] sm:text-xs text-slate-400 dark:text-slate-500 mt-0.5 font-medium">{stat.label}</div>
