@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Script from "next/script";
 import { FAQ_ITEMS } from "@/lib/constants";
 import { BreadcrumbJsonLd } from "@/components/JsonLd";
 
@@ -56,7 +55,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
         { name: "Home", item: "/" },
         { name: "FAQ", item: "/faq" },
       ]} />
-      <Script
+      <script
         id="faq-schema"
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}

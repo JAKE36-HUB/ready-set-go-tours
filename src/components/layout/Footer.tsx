@@ -63,11 +63,11 @@ export function Footer() {
           <div className="lg:col-span-4 space-y-6">
             <Link href="/" className="flex items-center gap-2.5 group">
               <Image
-                src="https://readysetgosafaris.com/wp-content/uploads/2025/10/Ready-Set-go-Tours-Travel-Limited-1.png"
-                alt={COMPANY.shortName}
+                src="/logo.png"
+                alt="Ready Set Go Tours"
                 width={320}
                 height={152}
-                className="h-20 w-auto object-contain brightness-0 invert"
+                className="h-24 w-auto object-contain"
                 priority
               />
             </Link>

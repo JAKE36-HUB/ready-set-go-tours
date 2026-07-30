@@ -105,6 +105,36 @@ CREATE TABLE IF NOT EXISTS blog_posts (
   updated_at TIMESTAMPTZ DEFAULT NOW()
 );
 
+CREATE TABLE IF NOT EXISTS popups (
+  id SERIAL PRIMARY KEY,
+  title TEXT NOT NULL,
+  content TEXT DEFAULT '',
+  image TEXT DEFAULT '',
+  link_url TEXT DEFAULT '',
+  link_text TEXT DEFAULT 'Learn More',
+  position TEXT DEFAULT 'center',
+  delay_seconds INT DEFAULT 0,
+  start_date TIMESTAMPTZ,
+  end_date TIMESTAMPTZ,
+  is_active BOOLEAN DEFAULT FALSE,
+  show_once BOOLEAN DEFAULT TRUE,
+  created_at TIMESTAMPTZ DEFAULT NOW(),
+  updated_at TIMESTAMPTZ DEFAULT NOW()
+);
+
+ALTER TABLE popups DISABLE ROW LEVEL SECURITY;
+
+-- Storage bucket for popup images (run this too)
+INSERT INTO storage.buckets (id, name, public) VALUES ('popups', 'popups', true)
+ON CONFLICT (id) DO NOTHING;
+
+-- Allow public read access to popup images
+CREATE POLICY "Public Read Popups" ON storage.objects FOR SELECT USING (bucket_id = 'popups');
+-- Allow authenticated upload to popup images
+CREATE POLICY "Auth Upload Popups" ON storage.objects FOR INSERT WITH CHECK (bucket_id = 'popups' AND auth.role() = 'authenticated');
+-- Allow authenticated delete from popup images
+CREATE POLICY "Auth Delete Popups" ON storage.objects FOR DELETE USING (bucket_id = 'popups' AND auth.role() = 'authenticated');
+
 CREATE TABLE IF NOT EXISTS visitors (
   id SERIAL PRIMARY KEY,
   session_id TEXT NOT NULL,

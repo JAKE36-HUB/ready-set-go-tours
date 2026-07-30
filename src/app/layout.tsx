@@ -1,6 +1,5 @@
 import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
-import Script from "next/script";
 import "./globals.css";
 import { SupabaseProvider } from "@/lib/supabase-auth";
 import { ThemeProvider } from "@/components/layout/ThemeProvider";
@@ -12,6 +11,7 @@ import { CookieConsent } from "@/components/layout/CookieConsent";
 import { ScrollToTop } from "@/components/layout/ScrollToTop";
 import { BreadcrumbJsonLd } from "@/components/JsonLd";
 import VisitorTracker from "@/components/admin/VisitorTracker";
+import PopupBanner from "@/components/admin/PopupBanner";
 
 export const viewport: Viewport = {
   width: "device-width",
@@ -114,9 +114,8 @@ export default function RootLayout({
     >
       <head />
       <body className="min-h-screen flex flex-col bg-background text-foreground">
-        <Script
+        <script
           id="schema-org"
-          strategy="beforeInteractive"
           type="application/ld+json"
           dangerouslySetInnerHTML={{
             __html: JSON.stringify({
@@ -131,21 +130,18 @@ export default function RootLayout({
               address: {
                 "@type": "PostalAddress",
                 streetAddress: "Nairobi",
-                addressLocality: "Kenya",
+                addressRegion: "Nairobi",
                 addressCountry: "KE",
               },
               aggregateRating: {
                 "@type": "AggregateRating",
                 ratingValue: "4.9",
-                reviewCount: "15000",
+                bestRating: "5",
+                ratingCount: "127",
               },
-              priceRange: "$$$",
-              image: "https://readysetgosafaris.com/og-image.jpg",
               sameAs: [
                 "https://facebook.com/readysetgotours",
-                "https://instagram.com/readysetgotours",
-                "https://twitter.com/readysetgo_ke",
-                "https://youtube.com/@readysetgotours",
+                "https://instagram.com/readysetgosafaris",
               ],
             }),
           }}
@@ -161,6 +157,7 @@ export default function RootLayout({
           <WhatsAppButton />
           <ScrollToTop />
           <CookieConsent />
+          <PopupBanner />
         </ThemeProvider>
         </SupabaseProvider>
       </body>

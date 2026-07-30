@@ -21,6 +21,7 @@ import {
   User,
   Sparkles,
   Activity,
+  Megaphone,
 } from "lucide-react"
 import { cn } from "@/lib/utils"
 
@@ -33,6 +34,7 @@ const NAV_ITEMS = [
   { href: "/admin/gallery", label: "Gallery", icon: Images },
   { href: "/admin/blog", label: "Blog Posts", icon: FileText },
   { href: "/admin/visitors", label: "Visitors", icon: Activity },
+  { href: "/admin/popups", label: "Popups", icon: Megaphone },
 ]
 
 export default function AdminLayout({ children }: { children: React.ReactNode }) {

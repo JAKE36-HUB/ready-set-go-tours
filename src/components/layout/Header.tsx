@@ -63,13 +63,13 @@ export function Header() {
         transition={{ duration: 0.6, ease: "easeOut" }}
       >
         <div className="mx-auto flex h-20 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
-          <Link href="/" className="flex items-center gap-2.5 group shrink-0 rounded-lg dark:bg-white/90 dark:px-2">
+          <Link href="/" className="flex items-center gap-2.5 group shrink-0">
             <Image
-              src="https://readysetgosafaris.com/wp-content/uploads/2025/10/Ready-Set-go-Tours-Travel-Limited-1.png"
-              alt={COMPANY.shortName}
+              src="/logo.png"
+              alt="Ready Set Go Tours"
               width={280}
               height={133}
-              className="h-16 w-auto object-contain transition-all duration-300"
+              className="h-20 w-auto object-contain transition-all duration-300"
               priority
             />
           </Link>

@@ -70,13 +70,13 @@ export function MobileNav({ isOpen, onClose }: MobileNavProps) {
             className="absolute right-0 top-0 bottom-0 w-full max-w-sm bg-white dark:bg-slate-950 shadow-2xl flex flex-col"
           >
             <div className="flex items-center justify-between p-4 border-b border-slate-100 dark:border-slate-800">
-              <Link href="/" className="flex items-center gap-2.5 shrink-0 rounded-lg dark:bg-white/90 dark:px-2" onClick={onClose}>
+              <Link href="/" className="flex items-center gap-2.5 shrink-0" onClick={onClose}>
                 <Image
-                  src="https://readysetgosafaris.com/wp-content/uploads/2025/10/Ready-Set-go-Tours-Travel-Limited-1.png"
-                  alt={COMPANY.shortName}
+                  src="/logo.png"
+                  alt="Ready Set Go Tours"
                   width={240}
                   height={114}
-                  className="h-[60px] w-auto object-contain"
+                  className="h-16 w-auto object-contain"
                   priority
                 />
               </Link>

@@ -1,4 +1,4 @@
-import Script from "next/script";
+
 
 interface BreadcrumbItem {
   name: string;
@@ -18,7 +18,7 @@ export function BreadcrumbJsonLd({ items }: { items: BreadcrumbItem[] }) {
     })),
   };
   return (
-    <Script
+    <script
       id="breadcrumb-jsonld"
       type="application/ld+json"
       dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
@@ -62,7 +62,7 @@ export function TourPackageJsonLd({
     },
   };
   return (
-    <Script
+    <script
       id="tour-package-jsonld"
       type="application/ld+json"
       dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
@@ -99,7 +99,7 @@ export function ArticleJsonLd({
   };
   if (datePublished) schema.datePublished = datePublished;
   return (
-    <Script
+    <script
       id="article-jsonld"
       type="application/ld+json"
       dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
@@ -132,7 +132,7 @@ export function ServiceJsonLd({
     },
   };
   return (
-    <Script
+    <script
       id="service-jsonld"
       type="application/ld+json"
       dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}

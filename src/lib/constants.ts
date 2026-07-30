@@ -1181,7 +1181,7 @@ export const STATISTICS: Statistic[] = [
   { icon: "Users", value: "15,000+", label: "Happy Travelers" },
   { icon: "MapPin", value: "50+", label: "Destinations" },
   { icon: "Star", value: "2,000+", label: "5-Star Reviews" },
-  { icon: "Award", value: "15+", label: "Years Experience" },
+  { icon: "Award", value: "3+", label: "Years Experience" },
   { icon: "Car", value: "25+", label: "Safari Vehicles" },
   { icon: "Globe", value: "95%", label: "Client Satisfaction" },
   { icon: "Hotel", value: "200+", label: "Partner Lodges" },
