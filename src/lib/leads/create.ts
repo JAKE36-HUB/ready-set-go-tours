@@ -55,36 +55,53 @@ export async function createLead(sb: import("@supabase/supabase-js").SupabaseCli
   const s = (v: unknown) => sanitizeString(v, MAX_FIELD)
   const source = s(input.source) || "contact_form"
 
-  const { data, error } = await sb
+  const base = {
+    name: s(input.name),
+    phone: s(input.phone),
+    email: s(input.email),
+    country: s(input.country),
+    destination: s(input.destination),
+    travel_date: s(input.travel_date),
+    budget: s(input.budget),
+    adults: s(input.adults),
+    children: s(input.children),
+    message: s(input.message),
+    source,
+    page: s(input.page),
+    utm_source: s(input.utm_source),
+    utm_medium: s(input.utm_medium),
+    utm_campaign: s(input.utm_campaign),
+    browser: s(input.browser),
+    device: s(input.device),
+    ip: s(input.ip),
+    ip_country: s(input.ip_country),
+  }
+
+  let insertPayload: Record<string, unknown> = base
+  if (typeof input.popup_lead_id === "number") {
+    insertPayload = { ...base, popup_lead_id: input.popup_lead_id }
+  }
+
+  let { data, error } = await sb
     .from("leads")
-    .insert({
-      name: s(input.name),
-      phone: s(input.phone),
-      email: s(input.email),
-      country: s(input.country),
-      destination: s(input.destination),
-      travel_date: s(input.travel_date),
-      budget: s(input.budget),
-      adults: s(input.adults),
-      children: s(input.children),
-      message: s(input.message),
-      source,
-      page: s(input.page),
-      utm_source: s(input.utm_source),
-      utm_medium: s(input.utm_medium),
-      utm_campaign: s(input.utm_campaign),
-      browser: s(input.browser),
-      device: s(input.device),
-      ip: s(input.ip),
-      ip_country: s(input.ip_country),
-      popup_lead_id: typeof input.popup_lead_id === "number" ? input.popup_lead_id : null,
-    })
+    .insert(insertPayload)
     .select("id")
     .single()
 
+  if (error && /popup_lead_id/i.test(error.message)) {
+    const { data: retry, error: retryErr } = await sb
+      .from("leads")
+      .insert(base)
+      .select("id")
+      .single()
+    if (retryErr) throw new Error(retryErr.message)
+    data = retry
+    error = null
+  }
+
   if (error) throw new Error(error.message)
 
-  const leadId = data.id as number
+  const leadId = (data as { id: number }).id as number
 
   await sb.from("lead_events").insert({
     lead_id: leadId,
