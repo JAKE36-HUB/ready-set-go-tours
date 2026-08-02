@@ -15,6 +15,7 @@ export const COMPANY = {
   copyright: "© 2026 Ready Set Go Tours & Travel. All rights reserved.",
   phone: "+254 797 867 411",
   email: "readysetgotoursandtravel43@gmail.com",
+  bookingsEmail: "bookings@readysetgosafaris.com",
   whatsapp: "+254797867411",
   address: "Nairobi, Kenya",
   hours: "Mon–Sat: 8:00 AM – 6:00 PM (EAT)",
@@ -33,6 +34,7 @@ export const USD_TO_KES = 130;
 export const CONTACT_INFO = {
   phone: COMPANY.phone,
   email: COMPANY.email,
+  bookingsEmail: COMPANY.bookingsEmail,
   address: COMPANY.address,
   hours: COMPANY.hours,
   whatsapp: COMPANY.whatsapp,

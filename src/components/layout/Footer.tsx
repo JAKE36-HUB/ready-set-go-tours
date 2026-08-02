@@ -144,6 +144,15 @@ export function Footer() {
                 </a>
               </li>
               <li>
+                <a
+                  href={`mailto:${CONTACT_INFO.bookingsEmail}`}
+                  className="flex items-start gap-3 text-sm text-slate-400 hover:text-sky-400 transition-colors duration-200"
+                >
+                  <Mail className="w-4 h-4 mt-0.5 text-sky-500 shrink-0" />
+                  {CONTACT_INFO.bookingsEmail}
+                </a>
+              </li>
+              <li>
                 <div className="flex items-start gap-3 text-sm text-slate-400">
                   <MapPin className="w-4 h-4 mt-0.5 text-orange-500 shrink-0" />
                   {CONTACT_INFO.address}

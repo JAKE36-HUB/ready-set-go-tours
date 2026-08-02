@@ -204,6 +204,13 @@ export function MobileNav({ isOpen, onClose }: MobileNavProps) {
                   <Mail className="w-4 h-4 text-sky-500" />
                   {CONTACT_INFO.email}
                 </a>
+                <a
+                  href={`mailto:${CONTACT_INFO.bookingsEmail}`}
+                  className="flex items-center gap-3 px-4 py-3 rounded-xl text-sm text-slate-700 hover:bg-slate-50 dark:text-slate-300 dark:hover:bg-slate-800 transition-colors"
+                >
+                  <Mail className="w-4 h-4 text-sky-500" />
+                  {CONTACT_INFO.bookingsEmail}
+                </a>
                 <div className="flex items-center gap-3 px-4 py-3 rounded-xl text-sm text-slate-700 dark:text-slate-300">
                   <MapPin className="w-4 h-4 text-orange-500" />
                   {CONTACT_INFO.address}

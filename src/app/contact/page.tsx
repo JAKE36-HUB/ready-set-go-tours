@@ -23,6 +23,7 @@ const CONTACT_INFO = [
   { icon: MapPin, label: "Visit Us", value: COMPANY.address, desc: "Our Nairobi headquarters", color: "text-sky-500", bg: "bg-sky-500/10", gradient: "from-sky-500/20 to-blue-600/10" },
   { icon: Phone, label: "Call Us", value: COMPANY.phone, desc: "Mon–Sat 8AM–6PM EAT", color: "text-emerald-500", bg: "bg-emerald-500/10", gradient: "from-emerald-500/20 to-teal-600/10" },
   { icon: Mail, label: "Email Us", value: COMPANY.email, desc: "We reply within 24hrs", color: "text-amber-500", bg: "bg-amber-500/10", gradient: "from-amber-500/20 to-orange-600/10" },
+  { icon: Mail, label: "Bookings", value: COMPANY.bookingsEmail, desc: "For safari & travel bookings", color: "text-orange-500", bg: "bg-orange-500/10", gradient: "from-orange-500/20 to-rose-600/10" },
   { icon: MessageCircle, label: "WhatsApp", value: COMPANY.whatsapp, desc: "Fastest response", color: "text-green-500", bg: "bg-green-500/10", gradient: "from-green-500/20 to-emerald-600/10" },
   { icon: Clock, label: "Office Hours", value: COMPANY.hours, desc: "East Africa Time (EAT)", color: "text-violet-500", bg: "bg-violet-500/10", gradient: "from-violet-500/20 to-purple-600/10" },
 ];
@@ -262,7 +263,7 @@ export default function ContactPage() {
               Prefer to reach us directly? Here&apos;s every way to get in touch with our team.
             </p>
           </AnimatedSection>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-4">
             {CONTACT_INFO.map((info, i) => (
               <AnimatedSection key={info.label} delay={i * 0.05}>
                 <motion.div
@@ -631,6 +632,13 @@ export default function ContactPage() {
               >
                 <Mail className="size-4" />
                 {COMPANY.email}
+              </a>
+              <a
+                href={`mailto:${COMPANY.bookingsEmail}`}
+                className="inline-flex items-center justify-center gap-2 h-12 px-6 rounded-xl bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-400 hover:to-amber-400 text-white text-sm font-semibold shadow-xl shadow-orange-500/25 transition-all"
+              >
+                <Mail className="size-4" />
+                {COMPANY.bookingsEmail}
               </a>
             </div>
           </AnimatedSection>
