@@ -187,12 +187,41 @@ function CTAs({ config, onCTA, center = true }: { config: PopupConfig; onCTA: (c
   )
 }
 
+function youtubeIdFromUrl(url: string): string | null {
+  const clean = url.trim()
+  const patterns = [
+    /(?:youtube\.com|youtube-nocookie\.com)\/watch\?v=([\w-]{6,})/i,
+    /(?:youtube\.com|youtube-nocookie\.com)\/(?:embed|shorts|live)\/([\w-]{6,})/i,
+    /youtu\.be\/([\w-]{6,})/i,
+  ]
+  for (const re of patterns) {
+    const m = clean.match(re)
+    if (m) return m[1]
+  }
+  return null
+}
+
+function vimeoIdFromUrl(url: string): string | null {
+  const m = url.trim().match(/vimeo\.com\/(?:video\/)?(\d{6,})/i)
+  return m ? m[1] : null
+}
+
 function VideoEmbed({ url }: { url: string }) {
-  if (/youtube\.com\/embed|youtu\.be/.test(url)) {
-    const src = url.replace("watch?v=", "embed/")
+  const ytId = youtubeIdFromUrl(url)
+  const vimeoId = vimeoIdFromUrl(url)
+  if (ytId || vimeoId) {
+    const src = ytId
+      ? `https://www.youtube-nocookie.com/embed/${ytId}`
+      : `https://player.vimeo.com/video/${vimeoId}`
     return (
       <div className="relative w-full aspect-video rounded-lg overflow-hidden bg-black">
-        <iframe src={src} className="absolute inset-0 w-full h-full" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen title="Popup video" />
+        <iframe
+          src={src}
+          className="absolute inset-0 w-full h-full"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowFullScreen
+          title="Popup video"
+        />
       </div>
     )
   }
