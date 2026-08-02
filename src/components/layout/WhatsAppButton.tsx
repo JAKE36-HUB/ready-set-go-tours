@@ -3,8 +3,29 @@
 import { MessageCircle } from "lucide-react"
 import { COMPANY } from "@/lib/constants"
 
+const TRACKED_KEY = "rsgt_wa_clicked"
+
 export function WhatsAppButton() {
   const whatsappUrl = `https://wa.me/${COMPANY.whatsapp}?text=Hello%21%20I%27d%20like%20to%20inquire%20about%20your%20travel%20services.`
+
+  function handleClick() {
+    try {
+      if (!localStorage.getItem(TRACKED_KEY)) {
+        localStorage.setItem(TRACKED_KEY, "1")
+        fetch("/api/leads", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            source: "whatsapp",
+            message: "WhatsApp chat request",
+            page: window.location.pathname,
+          }),
+        }).catch(() => {})
+      }
+    } catch {
+      /* storage unavailable */
+    }
+  }
 
   return (
     <div className="fixed bottom-6 right-6 z-40 group animate-[wiggle_1s_ease-in-out_1s_1]">
@@ -12,6 +33,7 @@ export function WhatsAppButton() {
         href={whatsappUrl}
         target="_blank"
         rel="noopener noreferrer"
+        onClick={handleClick}
         className="relative flex items-center justify-center w-14 h-14 rounded-full bg-gradient-to-br from-emerald-400 to-emerald-600 text-white shadow-lg shadow-emerald-500/30 hover:shadow-emerald-500/50 hover:scale-110 active:scale-95 transition-all duration-300"
         aria-label="Chat with us on WhatsApp"
       >

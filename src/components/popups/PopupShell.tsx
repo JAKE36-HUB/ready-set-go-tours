@@ -2,12 +2,14 @@
 
 import { useEffect, useRef, useState } from "react"
 import { motion } from "framer-motion"
+import Image from "next/image"
 import { X } from "lucide-react"
 import type { PopupCTA, PopupConfig } from "@/lib/popups/types"
 import { Countdown } from "./Countdown"
 import { SpinWheel } from "./SpinWheel"
 import { ScratchCard } from "./ScratchCard"
 import { LeadForm } from "./LeadForm"
+import { AdaptiveImage, type ImageOrientation } from "./AdaptiveImage"
 import { parseCountdown } from "@/lib/popups/engine"
 
 export interface ActivePopup {
@@ -232,6 +234,14 @@ export function PopupShell({ popup, onClose, onCTA, onLeadSuccess }: Props) {
 
   const imageUrl = c.heroImage || c.backgroundImage
 
+  const [orientation, setOrientation] = useState<ImageOrientation | null>(null)
+  const widthClass =
+    orientation === "portrait"
+      ? "max-w-[280px]"
+      : orientation === "landscape"
+        ? "max-w-lg"
+        : "max-w-md"
+
   const base = (children: React.ReactNode, popAnim: object, wrap: string) => (
     <div className="fixed inset-0 z-[150] flex items-center justify-center overflow-y-auto p-4" role="dialog" aria-modal="true">
       <motion.div {...overlayAnim} className="absolute inset-0 bg-black/60 backdrop-blur-sm" onClick={onClose} />
@@ -243,13 +253,16 @@ export function PopupShell({ popup, onClose, onCTA, onLeadSuccess }: Props) {
   )
 
   const modalCard = (children: React.ReactNode) => (
-    <div className={`${bodyCls} w-full max-w-md overflow-hidden`}>
+    <div className={`${bodyCls} w-full ${widthClass} overflow-hidden`}>
       {imageUrl && (
-        <div className="relative h-44 w-full overflow-hidden">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src={imageUrl} alt="" className="w-full h-full object-cover" loading="lazy" />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
-        </div>
+        <AdaptiveImage
+          src={imageUrl}
+          alt=""
+          maxHeight={560}
+          overlay
+          onMeasure={(o) => setOrientation(o)}
+          className="rounded-t-2xl"
+        />
       )}
       <div className="p-6 flex flex-col gap-3 text-center">{children}</div>
     </div>
@@ -278,8 +291,7 @@ export function PopupShell({ popup, onClose, onCTA, onLeadSuccess }: Props) {
         <div className="relative overflow-hidden">
           {imageUrl && (
             <>
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src={imageUrl} alt="" className="absolute inset-0 w-full h-full object-cover" loading="lazy" />
+              <Image src={imageUrl} alt="" fill sizes="100vw" quality={80} className="object-cover object-center" />
               <div className="absolute inset-0 bg-gradient-to-r from-black/85 via-black/70 to-black/40" />
             </>
           )}
@@ -344,11 +356,7 @@ export function PopupShell({ popup, onClose, onCTA, onLeadSuccess }: Props) {
       >
         <div className={`${bodyCls} overflow-hidden`}>
           {imageUrl ? (
-            <div className="relative h-32 w-full overflow-hidden">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src={imageUrl} alt="" className="w-full h-full object-cover" loading="lazy" />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
-            </div>
+            <AdaptiveImage src={imageUrl} alt="" maxHeight={170} className="rounded-t-2xl" />
           ) : (
             <div className="h-2 bg-gradient-to-r from-amber-500 to-orange-500" />
           )}
@@ -373,16 +381,12 @@ export function PopupShell({ popup, onClose, onCTA, onLeadSuccess }: Props) {
         aria-modal="true"
       >
         <div className="relative h-full bg-white/95 dark:bg-slate-900/95 backdrop-blur-xl shadow-2xl flex flex-col">
-          <div className="relative h-40 shrink-0 overflow-hidden">
-            {imageUrl ? (
-              <>
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src={imageUrl} alt="" className="w-full h-full object-cover" loading="lazy" />
-                <div className="absolute inset-0 bg-gradient-to-t from-slate-900/70 to-transparent" />
-              </>
-            ) : (
-              <div className="w-full h-full bg-gradient-to-br from-amber-500 to-orange-600" />
-            )}
+        <div className="relative h-auto shrink-0 overflow-hidden">
+          {imageUrl ? (
+            <AdaptiveImage src={imageUrl} alt="" maxHeight={300} overlay />
+          ) : (
+            <div className="w-full h-40 bg-gradient-to-br from-amber-500 to-orange-600" />
+          )}
             <button onClick={onClose} aria-label="Close popup" className="absolute top-3 right-3 rounded-full bg-black/40 hover:bg-black/60 p-1.5 text-white transition">
               <X className="w-4 h-4" />
             </button>
@@ -404,8 +408,7 @@ export function PopupShell({ popup, onClose, onCTA, onLeadSuccess }: Props) {
         <div className="absolute inset-0">
           {imageUrl ? (
             <>
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src={imageUrl} alt="" className="w-full h-full object-cover" loading="lazy" />
+              <Image src={imageUrl} alt="" fill sizes="100vw" quality={80} className="object-cover object-center" />
               <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/50 to-black/30" />
             </>
           ) : (
@@ -440,10 +443,7 @@ export function PopupShell({ popup, onClose, onCTA, onLeadSuccess }: Props) {
           {c.video ? (
             <VideoEmbed url={c.video} />
           ) : imageUrl ? (
-            <div className="relative aspect-video rounded-lg overflow-hidden">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src={imageUrl} alt="" className="w-full h-full object-cover" loading="lazy" />
-            </div>
+            <AdaptiveImage src={imageUrl} alt="" maxHeight={420} className="rounded-lg" />
           ) : null}
           <div className="flex flex-col gap-3 text-center mt-4">{sharedContent}</div>
         </motion.div>
@@ -511,10 +511,7 @@ export function PopupShell({ popup, onClose, onCTA, onLeadSuccess }: Props) {
         {step === 0 ? (
           <div className="p-6 flex flex-col gap-3 text-center">
             {imageUrl && (
-              <div className="relative -mx-6 -mt-6 mb-1 h-40 overflow-hidden">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src={imageUrl} alt="" className="w-full h-full object-cover" loading="lazy" />
-              </div>
+              <AdaptiveImage src={imageUrl} alt="" maxHeight={280} className="-mx-6 -mt-6 mb-1 rounded-t-2xl" />
             )}
             <ContentSection config={cfg} />
             <UrgencyRow config={cfg} />
@@ -539,11 +536,7 @@ export function PopupShell({ popup, onClose, onCTA, onLeadSuccess }: Props) {
     return base(
       <div className={`${bodyCls} w-full max-w-md overflow-hidden`}>
         {imageUrl && (
-          <div className="relative h-36 w-full overflow-hidden">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src={imageUrl} alt="" className="w-full h-full object-cover" loading="lazy" />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
-          </div>
+          <AdaptiveImage src={imageUrl} alt="" maxHeight={400} overlay />
         )}
         <div className="p-6 flex flex-col gap-3 text-center">
           <ContentSection config={cfg} />

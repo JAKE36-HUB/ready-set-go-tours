@@ -67,26 +67,60 @@ export function StepQuote({
     setSubmitting(true)
     setError(null)
     try {
-      const emailjs = await import("@emailjs/browser")
-      await emailjs.default.send(
-        process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID!,
-        process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID!,
-        {
-          to_email: COMPANY.email,
-          fullName: data.fullName,
-          email: data.email,
-          phone: data.phone || "Not provided",
-          country: data.country || "Not provided",
-          destinations,
-          activities: data.activities.join(", "),
-          accommodation,
-          travelDates: `${data.startDate} to ${data.endDate}`,
-          guests: `${data.adults} adults, ${data.children} children`,
-          notes: data.notes || "None",
-          source: "Safari Itinerary Builder",
-        },
-        process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY!
-      )
+      let crmOk = false
+      try {
+        const res = await fetch("/api/leads", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            source: "package_inquiry",
+            name: data.fullName,
+            email: data.email,
+            phone: data.phone || "",
+            country: data.country || "",
+            destination: destinations,
+            travel_date: `${data.startDate} to ${data.endDate}`,
+            adults: String(data.adults),
+            children: String(data.children),
+            message: `${data.activities.join(", ")}${accommodation ? `\nAccommodation: ${accommodation}` : ""}\n${data.notes || ""}`.trim(),
+            page: "safari-planner",
+          }),
+        })
+        crmOk = res.ok
+      } catch {
+        crmOk = false
+      }
+
+      let emailOk = false
+      try {
+        const emailjs = await import("@emailjs/browser")
+        await emailjs.default.send(
+          process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID!,
+          process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID!,
+          {
+            to_email: COMPANY.email,
+            fullName: data.fullName,
+            email: data.email,
+            phone: data.phone || "Not provided",
+            country: data.country || "Not provided",
+            destinations,
+            activities: data.activities.join(", "),
+            accommodation,
+            travelDates: `${data.startDate} to ${data.endDate}`,
+            guests: `${data.adults} adults, ${data.children} children`,
+            notes: data.notes || "None",
+            source: "Safari Itinerary Builder",
+          },
+          process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY!
+        )
+        emailOk = true
+      } catch (err) {
+        console.warn("EmailJS failed:", err)
+      }
+
+      if (!crmOk && !emailOk) {
+        throw new Error("Submission failed")
+      }
       setSubmitted(true)
     } catch {
       setError("Failed to send. Please try again or contact us directly.")

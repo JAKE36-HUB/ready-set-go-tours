@@ -24,11 +24,19 @@ import {
   Megaphone,
   BarChart3,
   Users,
+  Inbox,
+  KanbanSquare,
 } from "lucide-react"
 import { cn } from "@/lib/utils"
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query"
+import { Toaster } from "@/components/ui/sonner"
+import { RealtimeProvider } from "@/components/admin/realtime/RealtimeProvider"
+import NotificationCenter from "@/components/admin/realtime/NotificationCenter"
 
 const NAV_ITEMS = [
   { href: "/admin", label: "Dashboard", icon: LayoutDashboard },
+  { href: "/admin/leads", label: "Lead Inbox", icon: Inbox },
+  { href: "/admin/leads/pipeline", label: "Lead Pipeline", icon: KanbanSquare },
   { href: "/admin/packages", label: "Tour Packages", icon: Package },
   { href: "/admin/deals", label: "Deals", icon: Tag },
   { href: "/admin/honeymoon-packages", label: "Honeymoon", icon: Heart },
@@ -40,6 +48,15 @@ const NAV_ITEMS = [
   { href: "/admin/popups/analytics", label: "Popup Analytics", icon: BarChart3 },
   { href: "/admin/popups/leads", label: "Popup Leads", icon: Users },
 ]
+
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      staleTime: 15_000,
+      refetchOnWindowFocus: false,
+    },
+  },
+})
 
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
   const pathname = usePathname()
@@ -82,7 +99,9 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
   }
 
   return (
-    <div className="min-h-screen bg-slate-50 dark:bg-slate-950 flex">
+    <QueryClientProvider client={queryClient}>
+      <RealtimeProvider>
+        <div className="min-h-screen bg-slate-50 dark:bg-slate-950 flex">
       {/* Mobile overlay */}
       {sidebarOpen && (
         <div
@@ -181,6 +200,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
             </h1>
           </div>
           <div className="flex items-center gap-3">
+            <NotificationCenter />
             <div className="flex items-center gap-2 h-9 px-3 rounded-lg bg-slate-100 dark:bg-slate-800/80 text-xs text-slate-600 dark:text-slate-400">
               <div className="w-5 h-5 rounded-full bg-gradient-to-br from-sky-400 to-cyan-400 flex items-center justify-center">
                 <User className="w-3 h-3 text-white" />
@@ -193,6 +213,9 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
         {/* Page content */}
         <main className="flex-1 overflow-y-auto p-4 lg:p-6">{children}</main>
       </div>
-    </div>
+      <Toaster position="top-right" richColors />
+      </div>
+      </RealtimeProvider>
+    </QueryClientProvider>
   )
 }

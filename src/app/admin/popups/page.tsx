@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react"
 import { motion } from "framer-motion"
-import { Plus, Edit, Trash2, Megaphone, AlertCircle, BarChart3, Users, Eye, MousePointerClick, Trophy } from "lucide-react"
+import { Plus, Edit, Trash2, Megaphone, AlertCircle, BarChart3, Users, Eye, MousePointerClick, Trophy, Copy } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { cn } from "@/lib/utils"
@@ -65,6 +65,23 @@ export default function PopupsPage() {
   }
 
   useEffect(() => { load() }, [])
+
+  async function handleDuplicate(popup: Popup) {
+    const res = await fetch(`/api/admin/popups/${popup.id}`)
+    const json = await res.json()
+    if (!json.data) return
+    const d = json.data
+    const dupRes = await fetch("/api/admin/popups", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        config: { ...(d.config || {}), name: `${d.title} (Copy)`, status: "draft" },
+        variant_of: null,
+        traffic_split: null,
+      }),
+    })
+    if (dupRes.ok) load()
+  }
 
   async function handleDelete(id: number) {
     if (!confirm("Delete this popup? Its analytics and leads history will be kept.")) return
@@ -235,6 +252,11 @@ export default function PopupsPage() {
                           <Button variant="ghost" size="icon" className="w-8 h-8"
                             onClick={() => router.push(`/admin/popups/${popup.id}/edit`)}>
                             <Edit className="w-3.5 h-3.5" />
+                          </Button>
+                          <Button variant="ghost" size="icon" className="w-8 h-8"
+                            title="Duplicate campaign"
+                            onClick={() => handleDuplicate(popup)}>
+                            <Copy className="w-3.5 h-3.5" />
                           </Button>
                           <Button variant="ghost" size="icon" className="w-8 h-8 text-red-500 hover:text-red-600"
                             onClick={() => handleDelete(popup.id)}>

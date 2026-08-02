@@ -7,6 +7,7 @@ import { getSupabase } from "@/lib/supabase"
 import { Button } from "@/components/ui/button"
 import { useRouter } from "next/navigation"
 import { cn } from "@/lib/utils"
+import { LeadStatsWidgets, LeadRemindersPanel } from "@/components/admin/leads/LeadDashboardWidgets"
 
 interface Stat {
   label: string
@@ -297,6 +298,26 @@ export default function AdminDashboard() {
       </motion.div>
 
       {/* Stats Grid */}
+      <div className="space-y-6">
+        <LeadStatsWidgets />
+        <div className="grid lg:grid-cols-3 gap-6">
+          <div className="lg:col-span-2">
+            <LeadRemindersPanel />
+          </div>
+          <div className="lg:col-span-1">
+            <div className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-5">
+              <h3 className="flex items-center gap-2 font-bold text-sm mb-3">
+                <Users className="w-4 h-4 text-sky-500" />
+                Lead Pipeline
+              </h3>
+              <button onClick={() => router.push("/admin/leads/pipeline")} className="w-full rounded-xl bg-gradient-to-r from-amber-500 to-orange-500 text-white py-2.5 text-sm font-semibold hover:opacity-90 transition-opacity">
+                Open Pipeline Board
+              </button>
+              <p className="text-[11px] text-slate-400 mt-2">Drag leads between stages: New → Contacted → Quote → Negotiating → Booked</p>
+            </div>
+          </div>
+        </div>
+      </div>
       <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.15 }}
         className="grid grid-cols-2 lg:grid-cols-6 gap-3">
         {stats.map((stat, i) => (

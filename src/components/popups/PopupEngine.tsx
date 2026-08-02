@@ -1,4 +1,4 @@
-"use client"
+﻿"use client"
 
 import { useCallback, useEffect, useRef, useState } from "react"
 import { AnimatePresence } from "framer-motion"
@@ -48,6 +48,25 @@ export function PopupEngine() {
     const session = sessionRef.current
     const ctrl = new AbortController()
 
+    if (typeof window !== "undefined" && /^\/(contact|book|booking)/.test(window.location.pathname)) {
+      try {
+        const pending = window.sessionStorage.getItem("rsgt_pp_pending_conv")
+        if (pending) {
+          const [pid, variant] = pending.split(":")
+          sendEvent({
+            popup_id: Number(pid),
+            variant: variant || "A",
+            event_type: "conversion",
+            page: window.location.pathname,
+            session_id: session.id,
+            device: session.device,
+          })
+          markConverted(Number(pid))
+          window.sessionStorage.removeItem("rsgt_pp_pending_conv")
+        }
+      } catch {}
+    }
+
     fetch(`/api/popup?session=${session.id}`, {
       headers: { "x-rsgt-session": session.id },
       signal: ctrl.signal,
@@ -69,7 +88,12 @@ export function PopupEngine() {
     return () => ctrl.abort()
   }, [])
 
-  const dismiss = useCallback(() => {
+  const dismiss = useCallback((clearPending = true) => {
+    if (clearPending) {
+      try {
+        window.sessionStorage.removeItem("rsgt_pp_pending_conv")
+      } catch {}
+    }
     setCurrent(null)
   }, [])
 
@@ -93,6 +117,9 @@ export function PopupEngine() {
       shownIdsRef.current.add(p.id)
       markShown(p.id)
       openedAtRef.current = Date.now()
+      try {
+        window.sessionStorage.setItem("rsgt_pp_pending_conv", `${p.id}:${p.variant}`)
+      } catch {}
       setCurrent({
         id: p.id,
         variant: p.variant,
@@ -177,7 +204,7 @@ export function PopupEngine() {
           window.location.href = cta.url
         }
       }
-      dismiss()
+      dismiss(false)
     },
     [current, dismiss, trackClose]
   )

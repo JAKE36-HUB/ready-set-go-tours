@@ -1,4 +1,5 @@
 import type { PopupConfig, PopupType } from "./types"
+import { COMPANY } from "@/lib/constants"
 
 export interface PopupTemplate {
   id: string
@@ -9,7 +10,7 @@ export interface PopupTemplate {
   build: () => PopupConfig
 }
 
-const WA_NUMBER = "254712345678"
+const WA_NUMBER = COMPANY.whatsapp.replace(/\D/g, "")
 const wa = (text: string) =>
   `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(text)}`
 

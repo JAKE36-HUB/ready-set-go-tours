@@ -48,6 +48,15 @@ export function Footer() {
       setSubscribed(true)
       setEmail("")
       setTimeout(() => setSubscribed(false), 3000)
+      fetch("/api/leads", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          source: "newsletter",
+          email,
+          page: typeof window !== "undefined" ? window.location.pathname : "",
+        }),
+      }).catch(() => {})
     }
   }
 

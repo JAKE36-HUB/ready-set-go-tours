@@ -14,6 +14,7 @@ import {
 } from "@/lib/popups/types"
 import { POPUP_TEMPLATES, getTemplate } from "@/lib/popups/templates"
 import ImageUpload from "@/components/admin/ImageUpload"
+import { SmartImageInfo } from "@/components/popups/AdaptiveImage"
 import { PopupShell } from "@/components/popups/PopupShell"
 import { Button } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
@@ -353,10 +354,16 @@ export function PopupForm({
         <div className="rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-5 space-y-5">
           <div className="grid md:grid-cols-2 gap-4">
             <Field label="Hero Image">
-              <ImageUpload currentImage={cfg.content.heroImage} onUpload={(u) => updContent("heroImage", u)} />
+              <ImageUpload currentImage={cfg.content.heroImage} onUpload={(u) => updContent("heroImage", u)} compress />
+              <div className="mt-1.5">
+                <SmartImageInfo src={cfg.content.heroImage} />
+              </div>
             </Field>
             <Field label="Background Image">
-              <ImageUpload currentImage={cfg.content.backgroundImage} onUpload={(u) => updContent("backgroundImage", u)} />
+              <ImageUpload currentImage={cfg.content.backgroundImage} onUpload={(u) => updContent("backgroundImage", u)} compress />
+              <div className="mt-1.5">
+                <SmartImageInfo src={cfg.content.backgroundImage} />
+              </div>
             </Field>
           </div>
           <div className="grid md:grid-cols-2 gap-4">

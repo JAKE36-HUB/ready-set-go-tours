@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server"
 import { getSupabaseAdmin } from "@/lib/supabase-admin"
 import { rateLimit, tooManyRequests, badRequest, sanitizeString } from "@/lib/security"
+import { createLead } from "@/lib/leads/create"
 
 export const dynamic = "force-dynamic"
 
@@ -22,24 +23,28 @@ export async function POST(req: NextRequest) {
 
     const sb = getSupabaseAdmin()
 
-    const { error } = await sb.from("popup_leads").insert({
-      popup_id: Number(popup_id),
-      popup_name: s(popup_name),
-      variant: s(variant) || "A",
-      name: s(name),
-      phone: s(phone),
-      email: s(email),
-      country: s(country),
-      destination: s(destination),
-      travel_date: s(travel_date),
-      budget: s(budget),
-      adults: s(adults),
-      children: s(children),
-      message: s(message),
-      source: s(source),
-      utm_campaign: s(utm_campaign),
-      page: s(page),
-    })
+    const { data: popupLead, error } = await sb
+      .from("popup_leads")
+      .insert({
+        popup_id: Number(popup_id),
+        popup_name: s(popup_name),
+        variant: s(variant) || "A",
+        name: s(name),
+        phone: s(phone),
+        email: s(email),
+        country: s(country),
+        destination: s(destination),
+        travel_date: s(travel_date),
+        budget: s(budget),
+        adults: s(adults),
+        children: s(children),
+        message: s(message),
+        source: s(source),
+        utm_campaign: s(utm_campaign),
+        page: s(page),
+      })
+      .select("id")
+      .single()
 
     if (error) return NextResponse.json({ error: error.message }, { status: 500 })
 
@@ -51,6 +56,23 @@ export async function POST(req: NextRequest) {
       session_id: s(body.session_id),
       source: s(source),
       utm_campaign: s(utm_campaign),
+    })
+
+    await createLead(sb, {
+      name,
+      phone,
+      email,
+      country,
+      destination,
+      travel_date,
+      budget,
+      adults,
+      children,
+      message,
+      source: "popup_lead",
+      page: s(page),
+      utm_campaign,
+      popup_lead_id: popupLead?.id,
     })
 
     return NextResponse.json({ ok: true })

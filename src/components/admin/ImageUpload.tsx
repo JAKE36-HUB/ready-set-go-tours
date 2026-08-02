@@ -10,10 +10,65 @@ import { cn } from "@/lib/utils"
 interface Props {
   currentImage?: string
   onUpload: (url: string) => void
+  compress?: boolean
 }
 
-export default function ImageUpload({ currentImage, onUpload }: Props) {
+const MAX_WIDTH = 1920
+const MAX_BYTES_OPTIMIZED = 1.5 * 1024 * 1024
+
+async function decodeImage(file: File): Promise<HTMLImageElement | ImageBitmap> {
+  if ("createImageBitmap" in window) {
+    try {
+      return await createImageBitmap(file)
+    } catch {
+      /* fall through to Image decode */
+    }
+  }
+  return await new Promise<HTMLImageElement>((resolve, reject) => {
+    const img = new Image()
+    img.onload = () => resolve(img)
+    img.onerror = () => reject(new Error("decode failed"))
+    img.src = URL.createObjectURL(file)
+  })
+}
+
+function encodeImage(source: HTMLImageElement | ImageBitmap, file: File): Promise<Blob> {
+  const w = source.width
+  const h = source.height
+  const scale = Math.min(1, MAX_WIDTH / w)
+  const width = Math.max(1, Math.round(w * scale))
+  const height = Math.max(1, Math.round(h * scale))
+
+  const canvas = document.createElement("canvas")
+  canvas.width = width
+  canvas.height = height
+  const ctx = canvas.getContext("2d")
+  if (!ctx) return Promise.reject(new Error("canvas unavailable"))
+  ctx.imageSmoothingEnabled = true
+  ctx.imageSmoothingQuality = "high"
+  ctx.drawImage(source, 0, 0, width, height)
+
+  const isTransparent = file.type === "image/png" || file.type === "image/gif" || file.type === "image/webp"
+
+  const toBlob = (type: string, quality?: number) =>
+    new Promise<Blob | null>((resolve) => canvas.toBlob(resolve, type, quality))
+
+  return (async () => {
+    const webp = await toBlob("image/webp", 0.82)
+    if (webp) return webp
+    if (!isTransparent) {
+      const jpeg = await toBlob("image/jpeg", 0.85)
+      if (jpeg) return jpeg
+    }
+    const png = await toBlob("image/png")
+    if (png) return png
+    return file
+  })()
+}
+
+export default function ImageUpload({ currentImage, onUpload, compress = false }: Props) {
   const [uploading, setUploading] = useState(false)
+  const [phase, setPhase] = useState<"optimize" | "upload" | null>(null)
   const [preview, setPreview] = useState(currentImage || "")
   const [error, setError] = useState("")
   const inputRef = useRef<HTMLInputElement>(null)
@@ -23,16 +78,32 @@ export default function ImageUpload({ currentImage, onUpload }: Props) {
     if (file.size > 5 * 1024 * 1024) { setError("Image must be under 5MB"); return }
     setError("")
     setUploading(true)
+
     try {
-      const ext = file.name.split(".").pop()
+      let blob: Blob = file
+      let ext = file.name.split(".").pop()?.toLowerCase() || "jpg"
+
+      if (compress) {
+        setPhase("optimize")
+        const source = await decodeImage(file)
+        if (source.width > MAX_WIDTH || file.size > MAX_BYTES_OPTIMIZED) {
+          blob = await encodeImage(source, file)
+          ext = blob.type === "image/webp" ? "webp" : blob.type === "image/jpeg" ? "jpg" : "png"
+        }
+      }
+
+      setPhase("upload")
       const path = `popup_${Date.now()}.${ext}`
       const sb = getSupabase()
-      const { error: uploadErr } = await sb.storage.from("popups").upload(path, file)
+      const { error: uploadErr } = await sb.storage.from("popups").upload(path, blob, {
+        contentType: blob.type,
+        cacheControl: "31536000",
+      })
       if (uploadErr) { setError(uploadErr.message); return }
       const { data: { publicUrl } } = sb.storage.from("popups").getPublicUrl(path)
       setPreview(publicUrl)
       onUpload(publicUrl)
-    } catch { setError("Upload failed") } finally { setUploading(false) }
+    } catch { setError("Upload failed") } finally { setUploading(false); setPhase(null) }
   }
 
   function clearImage() {
@@ -60,11 +131,18 @@ export default function ImageUpload({ currentImage, onUpload }: Props) {
                 uploading && "opacity-50 cursor-not-allowed"
               )}>
               {uploading ? (
-                <Loader2 className="w-8 h-8 text-fuchsia-500 animate-spin" />
+                <>
+                  <Loader2 className="w-8 h-8 text-fuchsia-500 animate-spin" />
+                  <span className="text-xs text-slate-500">
+                    {phase === "optimize" ? "Optimizing image…" : "Uploading…"}
+                  </span>
+                </>
               ) : (
                 <>
                   <Upload className="w-8 h-8 text-slate-300 dark:text-slate-600" />
-                  <span className="text-xs text-slate-400">Click to upload image (max 5MB)</span>
+                  <span className="text-xs text-slate-400">
+                    {compress ? "Click to upload (auto-compressed to WebP, max 1920px)" : "Click to upload image (max 5MB)"}
+                  </span>
                 </>
               )}
             </button>

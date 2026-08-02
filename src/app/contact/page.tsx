@@ -114,25 +114,63 @@ export default function ContactPage() {
     setStatus("submitting");
     setErrorMessage("");
     try {
-      await emailjs.send(
-        process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID!,
-        process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID!,
-        {
-          to_email: "readysetgotoursandtravel43@gmail.com",
-          fullName: data.fullName,
-          email: data.email,
-          phone: data.phone,
-          country: data.country,
-          destination: data.destination,
-          package: data.package || "Not specified",
-          travelDate: data.travelDate,
-          adults: data.adults,
-          children: data.children || "0",
-          budget: data.budget,
-          specialRequests: data.specialRequests || "None",
-        },
-        process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY!
-      );
+      const crmPayload = {
+        source: "contact_form",
+        name: data.fullName,
+        email: data.email,
+        phone: data.phone,
+        country: data.country,
+        destination: data.destination || data.package,
+        travel_date: data.travelDate,
+        budget: data.budget,
+        adults: data.adults,
+        children: data.children || "0",
+        message: data.specialRequests || "",
+        page: "/contact",
+      };
+
+      let crmOk = false;
+      try {
+        const res = await fetch("/api/leads", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(crmPayload),
+        });
+        crmOk = res.ok;
+      } catch {
+        crmOk = false;
+      }
+
+      let emailOk = false;
+      try {
+        await emailjs.send(
+          process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID!,
+          process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID!,
+          {
+            to_email: "readysetgotoursandtravel43@gmail.com",
+            fullName: data.fullName,
+            email: data.email,
+            phone: data.phone,
+            country: data.country,
+            destination: data.destination,
+            package: data.package || "Not specified",
+            travelDate: data.travelDate,
+            adults: data.adults,
+            children: data.children || "0",
+            budget: data.budget,
+            specialRequests: data.specialRequests || "None",
+          },
+          process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY!
+        );
+        emailOk = true;
+      } catch (err) {
+        console.warn("EmailJS failed:", err);
+      }
+
+      if (!crmOk && !emailOk) {
+        throw new Error("Submission failed");
+      }
+
       setStatus("success");
       reset();
     } catch (err: unknown) {

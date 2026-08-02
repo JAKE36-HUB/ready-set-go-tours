@@ -46,8 +46,6 @@ export async function GET(req: NextRequest) {
     const { data, error } = await sb
       .from("popups")
       .select("*")
-      .in("status", ["active", "scheduled"])
-      .order("priority", { ascending: false })
       .limit(100)
 
     if (error) return NextResponse.json({ popups: [], meta: { country, device, language } })
@@ -57,6 +55,8 @@ export async function GET(req: NextRequest) {
 
     const valid = (data as unknown as PopupRecord[]).filter((p) => {
       const cfg = configFromRecord(p)
+      const status = p.status || (p.is_active ? "active" : "draft")
+      if (!["active", "scheduled"].includes(status)) return false
 
       if (p.status === "scheduled" && p.start_date && new Date(p.start_date) > now) return false
       if (p.start_date && new Date(p.start_date) > now) return false
