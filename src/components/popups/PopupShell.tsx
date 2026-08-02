@@ -1,6 +1,6 @@
 ﻿"use client"
 
-import { useEffect, useRef, useState } from "react"
+import { useEffect, useMemo, useRef, useState } from "react"
 import { motion } from "framer-motion"
 import Image from "next/image"
 import { X } from "lucide-react"
@@ -9,7 +9,8 @@ import { Countdown } from "./Countdown"
 import { SpinWheel } from "./SpinWheel"
 import { ScratchCard } from "./ScratchCard"
 import { LeadForm } from "./LeadForm"
-import { AdaptiveImage, type ImageOrientation } from "./AdaptiveImage"
+import { AdaptiveImage, useImageDims } from "./AdaptiveImage"
+import { computeSmartLayout, useViewport } from "@/lib/popups/adaptive"
 import { parseCountdown } from "@/lib/popups/engine"
 
 export interface ActivePopup {
@@ -234,18 +235,25 @@ export function PopupShell({ popup, onClose, onCTA, onLeadSuccess }: Props) {
 
   const imageUrl = c.heroImage || c.backgroundImage
 
-  const [orientation, setOrientation] = useState<ImageOrientation | null>(null)
+  const dims = useImageDims(imageUrl)
+  const { vw, vh } = useViewport()
+  const smart = useMemo(
+    () => computeSmartLayout({ imgW: dims?.w || 0, imgH: dims?.h || 0, vw, vh, chromeH: 240 }),
+    [dims, vw, vh]
+  )
   const widthClass =
-    orientation === "portrait"
-      ? "max-w-[280px]"
-      : orientation === "landscape"
-        ? "max-w-lg"
-        : "max-w-md"
+    !dims
+      ? "max-w-md"
+      : dims.orientation === "portrait"
+        ? "max-w-[340px]"
+        : dims.orientation === "landscape"
+          ? "max-w-2xl"
+          : "max-w-md"
 
   const base = (children: React.ReactNode, popAnim: object, wrap: string) => (
     <div className="fixed inset-0 z-[150] flex items-center justify-center overflow-y-auto p-4" role="dialog" aria-modal="true">
       <motion.div {...overlayAnim} className="absolute inset-0 bg-black/60 backdrop-blur-sm" onClick={onClose} />
-      <motion.div {...popAnim} className={`relative ${wrap}`}>
+      <motion.div {...popAnim} className={`relative ${wrap} my-auto`}>
         {closeBtn}
         {children}
       </motion.div>
@@ -253,14 +261,19 @@ export function PopupShell({ popup, onClose, onCTA, onLeadSuccess }: Props) {
   )
 
   const modalCard = (children: React.ReactNode) => (
-    <div className={`${bodyCls} w-full ${widthClass} overflow-hidden`}>
+    <div
+      className={`${bodyCls} w-full ${widthClass} overflow-hidden`}
+      style={{ maxWidth: smart.popupW || undefined, maxHeight: smart.popupH || undefined }}
+    >
       {imageUrl && (
         <AdaptiveImage
           src={imageUrl}
           alt=""
-          maxHeight={560}
+          exactHeight={smart.imageH || 280}
+          contain
+          backdrop
           overlay
-          onMeasure={(o) => setOrientation(o)}
+          blurUp
           className="rounded-t-2xl"
         />
       )}
@@ -356,7 +369,7 @@ export function PopupShell({ popup, onClose, onCTA, onLeadSuccess }: Props) {
       >
         <div className={`${bodyCls} overflow-hidden`}>
           {imageUrl ? (
-            <AdaptiveImage src={imageUrl} alt="" maxHeight={170} className="rounded-t-2xl" />
+            <AdaptiveImage src={imageUrl} alt="" maxHeight={170} contain backdrop className="rounded-t-2xl" />
           ) : (
             <div className="h-2 bg-gradient-to-r from-amber-500 to-orange-500" />
           )}
@@ -383,7 +396,7 @@ export function PopupShell({ popup, onClose, onCTA, onLeadSuccess }: Props) {
         <div className="relative h-full bg-white/95 dark:bg-slate-900/95 backdrop-blur-xl shadow-2xl flex flex-col">
         <div className="relative h-auto shrink-0 overflow-hidden">
           {imageUrl ? (
-            <AdaptiveImage src={imageUrl} alt="" maxHeight={300} overlay />
+            <AdaptiveImage src={imageUrl} alt="" maxHeight={300} overlay contain backdrop />
           ) : (
             <div className="w-full h-40 bg-gradient-to-br from-amber-500 to-orange-600" />
           )}
@@ -443,7 +456,7 @@ export function PopupShell({ popup, onClose, onCTA, onLeadSuccess }: Props) {
           {c.video ? (
             <VideoEmbed url={c.video} />
           ) : imageUrl ? (
-            <AdaptiveImage src={imageUrl} alt="" maxHeight={420} className="rounded-lg" />
+            <AdaptiveImage src={imageUrl} alt="" maxHeight={420} contain backdrop className="rounded-lg" />
           ) : null}
           <div className="flex flex-col gap-3 text-center mt-4">{sharedContent}</div>
         </motion.div>
@@ -511,7 +524,7 @@ export function PopupShell({ popup, onClose, onCTA, onLeadSuccess }: Props) {
         {step === 0 ? (
           <div className="p-6 flex flex-col gap-3 text-center">
             {imageUrl && (
-              <AdaptiveImage src={imageUrl} alt="" maxHeight={280} className="-mx-6 -mt-6 mb-1 rounded-t-2xl" />
+              <AdaptiveImage src={imageUrl} alt="" maxHeight={280} contain backdrop className="-mx-6 -mt-6 mb-1 rounded-t-2xl" />
             )}
             <ContentSection config={cfg} />
             <UrgencyRow config={cfg} />
@@ -536,7 +549,7 @@ export function PopupShell({ popup, onClose, onCTA, onLeadSuccess }: Props) {
     return base(
       <div className={`${bodyCls} w-full max-w-md overflow-hidden`}>
         {imageUrl && (
-          <AdaptiveImage src={imageUrl} alt="" maxHeight={400} overlay />
+          <AdaptiveImage src={imageUrl} alt="" maxHeight={400} contain backdrop overlay />
         )}
         <div className="p-6 flex flex-col gap-3 text-center">
           <ContentSection config={cfg} />
