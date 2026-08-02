@@ -2,6 +2,7 @@ import { requireUser } from "@/lib/api-auth"
 import { NextResponse } from "next/server"
 import type { NextRequest } from "next/server"
 import { getSupabaseAdmin } from "@/lib/supabase-admin"
+import { recordFromConfig, type PopupConfig } from "@/lib/popups/types"
 
 export async function GET(request: NextRequest) {
   const user = await requireUser(request)
@@ -22,27 +23,21 @@ export async function POST(request: Request) {
   if (!user) return NextResponse.json({ error: "Unauthorized" }, { status: 401 })
 
   const body = await request.json()
-  const { title, content, image, link_url, link_text, position, delay_seconds, start_date, end_date, is_active, show_once } = body
+  const config = body.config as PopupConfig | undefined
 
-  if (!title) {
-    return NextResponse.json({ error: "Title is required" }, { status: 400 })
+  if (!config?.name && !body.title) {
+    return NextResponse.json({ error: "Popup name is required" }, { status: 400 })
   }
+
+  const base = recordFromConfig(config || { name: body.title, content: { title: body.title } } as PopupConfig)
 
   const sb = getSupabaseAdmin()
   const { data, error } = await sb
     .from("popups")
     .insert({
-      title,
-      content: content || "",
-      image: image || "",
-      link_url: link_url || "",
-      link_text: link_text || "Learn More",
-      position: position || "center",
-      delay_seconds: delay_seconds || 0,
-      start_date: start_date || null,
-      end_date: end_date || null,
-      is_active: is_active || false,
-      show_once: show_once !== false,
+      ...base,
+      variant_of: body.variant_of || null,
+      traffic_split: typeof body.traffic_split === "number" ? body.traffic_split : null,
     })
     .select()
     .single()

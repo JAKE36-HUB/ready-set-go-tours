@@ -7,7 +7,7 @@ const AiChat = dynamic(() => import("@/components/layout/AiChat").then(m => m.Ai
 const CookieConsent = dynamic(() => import("@/components/layout/CookieConsent").then(m => m.CookieConsent), { ssr: false })
 const ScrollToTop = dynamic(() => import("@/components/layout/ScrollToTop").then(m => m.ScrollToTop), { ssr: false })
 const VisitorTracker = dynamic(() => import("@/components/admin/VisitorTracker"), { ssr: false })
-const PopupBanner = dynamic(() => import("@/components/admin/PopupBanner"), { ssr: false })
+const PopupEngine = dynamic(() => import("@/components/popups/PopupEngine").then(m => m.PopupEngine), { ssr: false })
 
 export function ClientWidgets() {
   return (
@@ -17,7 +17,7 @@ export function ClientWidgets() {
       <WhatsAppButton />
       <ScrollToTop />
       <CookieConsent />
-      <PopupBanner />
+      <PopupEngine />
     </>
   )
 }
