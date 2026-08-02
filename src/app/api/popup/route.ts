@@ -58,8 +58,7 @@ export async function GET(req: NextRequest) {
       const status = p.status || (p.is_active ? "active" : "draft")
       if (!["active", "scheduled"].includes(status)) return false
 
-      if (p.status === "scheduled" && p.start_date && new Date(p.start_date) > now) return false
-      if (p.start_date && new Date(p.start_date) > now) return false
+      if (p.status !== "active" && p.start_date && new Date(p.start_date) > now) return false
       if (p.end_date && new Date(p.end_date) < now) return false
 
       const t = cfg.targeting
