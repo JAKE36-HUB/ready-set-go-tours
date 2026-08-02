@@ -1,8 +1,8 @@
 "use client"
 
-import { useState, useRef } from "react"
-import { motion } from "framer-motion"
-import { Upload, X, ImageIcon, Loader2 } from "lucide-react"
+import { useState, useRef, useEffect } from "react"
+import { AnimatePresence, motion } from "framer-motion"
+import { Upload, X, ImageIcon, Loader2, Maximize2 } from "lucide-react"
 import { getSupabase } from "@/lib/supabase"
 import { Button } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
@@ -70,8 +70,16 @@ export default function ImageUpload({ currentImage, onUpload, compress = false }
   const [uploading, setUploading] = useState(false)
   const [phase, setPhase] = useState<"optimize" | "upload" | null>(null)
   const [preview, setPreview] = useState(currentImage || "")
+  const [lightbox, setLightbox] = useState(false)
   const [error, setError] = useState("")
   const inputRef = useRef<HTMLInputElement>(null)
+
+  useEffect(() => {
+    if (!lightbox) return
+    const onKey = (e: KeyboardEvent) => e.key === "Escape" && setLightbox(false)
+    window.addEventListener("keydown", onKey)
+    return () => window.removeEventListener("keydown", onKey)
+  }, [lightbox])
 
   async function handleFile(file: File) {
     if (!file.type.startsWith("image/")) { setError("Please select an image file"); return }
@@ -117,8 +125,16 @@ export default function ImageUpload({ currentImage, onUpload, compress = false }
       <div className="flex items-center gap-3">
         <div className="flex-1">
           {preview ? (
-            <div className="relative w-full h-40 rounded-xl overflow-hidden border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800">
-              <img src={preview} alt="" className="w-full h-full object-cover" />
+            <div className="relative w-full h-56 md:h-72 rounded-xl overflow-hidden border border-slate-200 dark:border-slate-700 bg-slate-100 dark:bg-slate-800">
+              <img
+                src={preview}
+                alt="Uploaded image preview"
+                className="w-full h-full object-contain cursor-zoom-in transition-transform hover:scale-[1.02]"
+                onClick={() => setLightbox(true)}
+              />
+              <div className="absolute top-2 left-2 flex items-center gap-1 rounded-full bg-black/50 text-white text-[10px] font-semibold px-2 py-1 backdrop-blur">
+                <Maximize2 className="w-3 h-3" /> Click to preview full size
+              </div>
               <button type="button" onClick={clearImage}
                 className="absolute top-2 right-2 w-7 h-7 rounded-full bg-black/50 hover:bg-black/70 text-white flex items-center justify-center transition-colors">
                 <X className="w-3.5 h-3.5" />
@@ -152,6 +168,32 @@ export default function ImageUpload({ currentImage, onUpload, compress = false }
       {error && <p className="text-xs text-red-500">{error}</p>}
       <input ref={inputRef} type="file" accept="image/*" className="hidden"
         onChange={(e) => { const f = e.target.files?.[0]; if (f) handleFile(f) }} />
+
+      <AnimatePresence>
+        {lightbox && preview && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-[300] bg-black/95 flex items-center justify-center p-6"
+            onClick={() => setLightbox(false)}
+          >
+            <button className="absolute top-4 right-4 p-2 rounded-full bg-white/10 hover:bg-white/20 text-white transition-colors" aria-label="Close preview">
+              <X className="w-5 h-5" />
+            </button>
+            <motion.img
+              initial={{ scale: 0.92, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.92, opacity: 0 }}
+              transition={{ type: "spring", damping: 26, stiffness: 280 }}
+              src={preview}
+              alt="Full size preview"
+              className="max-w-full max-h-full object-contain rounded-lg shadow-2xl"
+              onClick={(e) => e.stopPropagation()}
+            />
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   )
 }
