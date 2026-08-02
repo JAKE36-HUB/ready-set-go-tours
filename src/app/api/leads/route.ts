@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server"
 import { getSupabaseAdmin } from "@/lib/supabase-admin"
-import { rateLimit, tooManyRequests, badRequest, sanitizeString } from "@/lib/security"
+import { rateLimit, verifyOrigin, tooManyRequests, badRequest, sanitizeString } from "@/lib/security"
 import { createLead } from "@/lib/leads/create"
 import { browserLabel, deviceLabel } from "@/lib/leads/types"
 
@@ -11,6 +11,10 @@ const ALLOWED_SOURCES = ["contact_form", "booking", "newsletter", "whatsapp", "p
 
 export async function POST(req: NextRequest) {
   try {
+    if (!verifyOrigin(req)) {
+      return NextResponse.json({ error: "Forbidden" }, { status: 403 })
+    }
+
     const ip = req.headers.get("x-forwarded-for")?.split(",")[0]?.trim() || "unknown"
     if (!rateLimit(`lead:${ip}`, 20, 60_000)) {
       return tooManyRequests()
@@ -25,6 +29,12 @@ export async function POST(req: NextRequest) {
     const email = s(body.email).toLowerCase()
     const name = s(body.name)
     const phone = s(body.phone)
+
+    if (email) {
+      if (!rateLimit(`lead-email:${email}`, 5, 10 * 60 * 1000)) {
+        return tooManyRequests()
+      }
+    }
 
     if (source === "newsletter") {
       if (!email || !email.includes("@")) return badRequest("Email required")

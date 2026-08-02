@@ -1,9 +1,9 @@
 "use client"
 
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { useRouter } from "next/navigation"
 import { createBrowserClient } from "@supabase/ssr"
-import { Eye, EyeOff, Loader2 } from "lucide-react"
+import { Eye, EyeOff, Loader2, ShieldCheck } from "lucide-react"
 
 export default function SignInPage() {
   const router = useRouter()
@@ -13,37 +13,51 @@ export default function SignInPage() {
   const [error, setError] = useState("")
   const [loading, setLoading] = useState(false)
 
+  useEffect(() => {
+    let active = true
+    const supabase = createBrowserClient(
+      process.env.NEXT_PUBLIC_SUPABASE_URL!,
+      process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
+    )
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      if (active && session) {
+        window.location.href = "/admin"
+      }
+    })
+    return () => {
+      active = false
+    }
+  }, [])
+
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault()
     setError("")
     setLoading(true)
 
     try {
-      const supabase = createBrowserClient(
-        process.env.NEXT_PUBLIC_SUPABASE_URL!,
-        process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
-      )
-
-      const { error: authError } = await supabase.auth.signInWithPassword({
-        email,
-        password,
+      const res = await fetch("/api/auth/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, password }),
       })
 
-      if (authError) {
-        setError(authError.message)
+      const data = await res.json().catch(() => ({}))
+
+      if (!res.ok) {
+        setError(data.error || "Unable to sign in. Please try again.")
         return
       }
 
       window.location.href = "/admin"
     } catch {
-      setError("An unexpected error occurred")
+      setError("Network error — please try again.")
     } finally {
       setLoading(false)
     }
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-50 to-sky-50 dark:from-slate-950 dark:to-slate-900 px-4">
+    <div className="h-screen supports-[height:100dvh]:h-dvh flex items-center justify-center bg-gradient-to-br from-slate-50 to-sky-50 dark:from-slate-950 dark:to-slate-900 px-4">
       <div className="w-full max-w-sm space-y-8">
         <div className="text-center">
           <div className="mx-auto w-12 h-12 rounded-xl bg-gradient-to-br from-sky-500 to-cyan-400 flex items-center justify-center mb-4 shadow-lg shadow-sky-500/20">
@@ -51,6 +65,10 @@ export default function SignInPage() {
           </div>
           <h1 className="text-lg font-semibold text-slate-900 dark:text-white">Admin Sign In</h1>
           <p className="text-sm text-slate-500 dark:text-slate-400 mt-1">Ready Set Go Tours & Travel</p>
+          <p className="text-[11px] text-slate-400 dark:text-slate-500 mt-2 flex items-center justify-center gap-1">
+            <ShieldCheck className="w-3 h-3" />
+            Authorized admin emails only
+          </p>
         </div>
 
         <form onSubmit={handleSubmit} className="space-y-5">
@@ -70,6 +88,7 @@ export default function SignInPage() {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               placeholder="admin@example.com"
+              autoComplete="username"
               required
               className="w-full h-11 px-4 rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white placeholder:text-slate-400 focus:border-sky-500 focus:ring-2 focus:ring-sky-500/30 outline-none transition-all"
             />
@@ -86,6 +105,7 @@ export default function SignInPage() {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder="••••••••"
+                autoComplete="current-password"
                 required
                 className="w-full h-11 px-4 pr-11 rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white placeholder:text-slate-400 focus:border-sky-500 focus:ring-2 focus:ring-sky-500/30 outline-none transition-all"
               />

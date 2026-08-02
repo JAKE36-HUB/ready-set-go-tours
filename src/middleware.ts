@@ -1,6 +1,7 @@
 import { createClient } from "@/lib/supabase-server"
 import { NextResponse } from "next/server"
 import type { NextRequest } from "next/server"
+import { isAdminEmail } from "@/lib/admin-access"
 
 export async function middleware(request: NextRequest) {
   const { supabase, supabaseResponse } = createClient(request)
@@ -18,9 +19,20 @@ export async function middleware(request: NextRequest) {
     return NextResponse.redirect(url)
   }
 
+  // Admin email allowlist — deny anyone not in ADMIN_EMAILS
+  if (path.startsWith("/admin") && user && path !== "/admin/denied" && !isAdminEmail(user.email)) {
+    const url = request.nextUrl.clone()
+    url.pathname = "/admin/denied"
+    return NextResponse.redirect(url)
+  }
+
   // Protect admin API routes
   if (path.startsWith("/api/admin") && !user) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 })
+  }
+
+  if (path.startsWith("/api/admin") && user && !isAdminEmail(user.email)) {
+    return NextResponse.json({ error: "Forbidden" }, { status: 403 })
   }
 
   // CSRF protection for mutation API routes

@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server"
 import { getSupabaseAdmin } from "@/lib/supabase-admin"
-import { rateLimit, tooManyRequests, badRequest, sanitizeString } from "@/lib/security"
+import { rateLimit, verifyOrigin, tooManyRequests, badRequest, sanitizeString } from "@/lib/security"
 import { createLead } from "@/lib/leads/create"
 
 export const dynamic = "force-dynamic"
@@ -9,6 +9,10 @@ const MAX_FIELD = 500
 
 export async function POST(req: NextRequest) {
   try {
+    if (!verifyOrigin(req)) {
+      return NextResponse.json({ error: "Forbidden" }, { status: 403 })
+    }
+
     const ip = req.headers.get("x-forwarded-for")?.split(",")[0]?.trim() || "unknown"
     if (!rateLimit(`popup-lead:${ip}`, 10, 60_000)) {
       return tooManyRequests()
@@ -20,6 +24,12 @@ export async function POST(req: NextRequest) {
     if (!popup_id) return badRequest("Missing popup_id")
 
     const s = (v: any) => sanitizeString(v, MAX_FIELD)
+
+    if (email) {
+      if (!rateLimit(`popup-lead-email:${s(email).toLowerCase()}`, 3, 10 * 60 * 1000)) {
+        return tooManyRequests()
+      }
+    }
 
     const sb = getSupabaseAdmin()
 

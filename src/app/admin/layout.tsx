@@ -101,7 +101,12 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
   return (
     <QueryClientProvider client={queryClient}>
       <RealtimeProvider>
-        <div className="min-h-screen bg-slate-50 dark:bg-slate-950 flex">
+        {pathname === "/admin/denied" ? (
+          <div className="h-screen supports-[height:100dvh]:h-dvh overflow-hidden bg-slate-50 dark:bg-slate-950">
+            <main className="h-full overflow-y-auto">{children}</main>
+          </div>
+        ) : (
+          <div className="h-screen supports-[height:100dvh]:h-dvh overflow-hidden bg-slate-50 dark:bg-slate-950 flex">
       {/* Mobile overlay */}
       {sidebarOpen && (
         <div
@@ -215,6 +220,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
       </div>
       <Toaster position="top-right" richColors />
       </div>
+        )}
       </RealtimeProvider>
     </QueryClientProvider>
   )
