@@ -14,7 +14,9 @@ export const contactFormSchema = z.object({
   specialRequests: z.string().optional(),
 });
 
-export const bookingFormSchema = contactFormSchema;
+export const bookingFormSchema = contactFormSchema.extend({
+  days: z.string().min(1, "Please indicate number of days"),
+});
 
 export const newsletterSchema = z.object({
   email: z.string().email("Please enter a valid email address"),

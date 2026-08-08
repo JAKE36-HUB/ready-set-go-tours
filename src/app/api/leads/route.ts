@@ -66,6 +66,7 @@ export async function POST(req: NextRequest) {
       country: s(body.country),
       destination: s(body.destination),
       travel_date: s(body.travel_date),
+      days: s(body.days),
       budget: s(body.budget),
       adults: s(body.adults),
       children: s(body.children),

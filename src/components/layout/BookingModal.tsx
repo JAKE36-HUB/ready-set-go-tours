@@ -15,6 +15,7 @@ import {
   CheckCircle,
   XCircle,
   Loader2,
+  Clock,
 } from "lucide-react"
 
 import { Button } from "@/components/ui/button"
@@ -80,6 +81,7 @@ export function BookingModal({ open, onOpenChange, initialPackage }: BookingModa
       destination: "",
       package: "",
       travelDate: "",
+      days: "",
       adults: "",
       children: "",
       budget: "",
@@ -118,6 +120,7 @@ export function BookingModal({ open, onOpenChange, initialPackage }: BookingModa
         country: data.country,
         destination: data.destination || data.package,
         travel_date: data.travelDate,
+        days: data.days,
         budget: data.budget,
         adults: data.adults,
         children: data.children || "0",
@@ -151,6 +154,7 @@ export function BookingModal({ open, onOpenChange, initialPackage }: BookingModa
             destination: data.destination,
             package: data.package || "Not specified",
             travelDate: data.travelDate,
+            days: data.days,
             adults: data.adults,
             children: data.children || "0",
             budget: data.budget,
@@ -409,6 +413,30 @@ export function BookingModal({ open, onOpenChange, initialPackage }: BookingModa
                 </div>
                 {errors.travelDate?.message && (
                   <p className="text-xs text-red-500 mt-1">{errors.travelDate?.message}</p>
+                )}
+              </div>
+
+              {/* Number of Days */}
+              <div className="space-y-1.5">
+                <Label
+                  htmlFor="days"
+                  className="text-xs font-medium text-slate-700 dark:text-slate-300"
+                >
+                  Number of Days
+                </Label>
+                <div className="relative">
+                  <Clock className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400 pointer-events-none" />
+                  <Input
+                    id="days"
+                    type="number"
+                    min="1"
+                    placeholder="7"
+                    {...register("days")}
+                    className="h-10 pl-10 text-sm"
+                  />
+                </div>
+                {errors.days?.message && (
+                  <p className="text-xs text-red-500 mt-1">{errors.days?.message}</p>
                 )}
               </div>
             </div>

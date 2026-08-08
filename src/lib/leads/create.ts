@@ -9,6 +9,7 @@ export interface LeadInput {
   country?: unknown
   destination?: unknown
   travel_date?: unknown
+  days?: unknown
   budget?: unknown
   adults?: unknown
   children?: unknown
@@ -62,6 +63,7 @@ export async function createLead(sb: import("@supabase/supabase-js").SupabaseCli
     country: s(input.country),
     destination: s(input.destination),
     travel_date: s(input.travel_date),
+    days: s(input.days),
     budget: s(input.budget),
     adults: s(input.adults),
     children: s(input.children),
@@ -92,6 +94,16 @@ export async function createLead(sb: import("@supabase/supabase-js").SupabaseCli
     const { data: retry, error: retryErr } = await sb
       .from("leads")
       .insert(base)
+      .select("id")
+      .single()
+    if (retryErr) throw new Error(retryErr.message)
+    data = retry
+    error = null
+  } else if (error && /days/i.test(error.message)) {
+    const { days, ...baseWithoutDays } = base
+    const { data: retry, error: retryErr } = await sb
+      .from("leads")
+      .insert(baseWithoutDays)
       .select("id")
       .single()
     if (retryErr) throw new Error(retryErr.message)
