@@ -8,15 +8,14 @@ export const contactFormSchema = z.object({
   destination: z.string().min(2, "Please select or enter a destination"),
   package: z.string().optional(),
   travelDate: z.string().min(1, "Please select a preferred travel date"),
+  days: z.string().min(1, "Please indicate number of days"),
   adults: z.string().min(1, "Please indicate number of adults"),
   children: z.string().optional(),
   budget: z.string().min(1, "Please select a budget range"),
   specialRequests: z.string().optional(),
 });
 
-export const bookingFormSchema = contactFormSchema.extend({
-  days: z.string().min(1, "Please indicate number of days"),
-});
+export const bookingFormSchema = contactFormSchema;
 
 export const newsletterSchema = z.object({
   email: z.string().email("Please enter a valid email address"),

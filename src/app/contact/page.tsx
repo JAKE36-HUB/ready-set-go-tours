@@ -70,7 +70,7 @@ export default function ContactPage() {
     resolver: zodResolver(contactFormSchema),
     defaultValues: {
       fullName: "", email: "", phone: "", country: "",
-      destination: "", package: "", travelDate: "", adults: "",
+      destination: "", package: "", travelDate: "", days: "", adults: "",
       children: "", budget: "", specialRequests: "",
     },
   });
@@ -89,7 +89,7 @@ export default function ContactPage() {
       return valid;
     }
     if (from === "trip") {
-      const valid = await trigger(["destination", "travelDate", "budget"]);
+      const valid = await trigger(["destination", "travelDate", "days", "budget"]);
       return valid;
     }
     if (from === "party") {
@@ -123,6 +123,7 @@ export default function ContactPage() {
         country: data.country,
         destination: data.destination || data.package,
         travel_date: data.travelDate,
+        days: data.days,
         budget: data.budget,
         adults: data.adults,
         children: data.children || "0",
@@ -156,6 +157,7 @@ export default function ContactPage() {
             destination: data.destination,
             package: data.package || "Not specified",
             travelDate: data.travelDate,
+            days: data.days,
             adults: data.adults,
             children: data.children || "0",
             budget: data.budget,
@@ -498,6 +500,11 @@ export default function ContactPage() {
                                     {errors.travelDate && <p className="text-xs text-destructive">{errors.travelDate.message}</p>}
                                   </div>
                                   <div className="space-y-1.5">
+                                    <Label htmlFor="days" className="text-xs">Number of Days *</Label>
+                                    <Input id="days" type="number" min="1" {...register("days")} placeholder="7" className="h-9" />
+                                    {errors.days && <p className="text-xs text-destructive">{errors.days.message}</p>}
+                                  </div>
+                                  <div className="space-y-1.5">
                                     <Label htmlFor="budget" className="text-xs">Budget Range *</Label>
                                     <select id="budget" {...register("budget")}
                                       className="flex h-9 w-full rounded-lg border border-input bg-transparent px-2.5 py-1 text-sm outline-none focus:border-sky-500 focus:ring-3 focus:ring-sky-500/20">
@@ -553,6 +560,7 @@ export default function ContactPage() {
                                     <div><span className="text-muted-foreground">Country:</span> <span className="font-medium">{values.country}</span></div>
                                     <div><span className="text-muted-foreground">Destination:</span> <span className="font-medium">{values.destination}</span></div>
                                     <div><span className="text-muted-foreground">Travel Date:</span> <span className="font-medium">{values.travelDate}</span></div>
+                                    <div><span className="text-muted-foreground">Days:</span> <span className="font-medium">{values.days}</span></div>
                                     <div><span className="text-muted-foreground">Budget:</span> <span className="font-medium">{values.budget}</span></div>
                                     <div><span className="text-muted-foreground">Adults:</span> <span className="font-medium">{values.adults}</span></div>
                                     {values.children && <div><span className="text-muted-foreground">Children:</span> <span className="font-medium">{values.children}</span></div>}
