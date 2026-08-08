@@ -26,6 +26,7 @@ import {
   Users,
   Inbox,
   KanbanSquare,
+  ShieldCheck,
 } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query"
@@ -47,6 +48,7 @@ const NAV_ITEMS = [
   { href: "/admin/popups", label: "Popups", icon: Megaphone },
   { href: "/admin/popups/analytics", label: "Popup Analytics", icon: BarChart3 },
   { href: "/admin/popups/leads", label: "Popup Leads", icon: Users },
+  { href: "/admin/security", label: "Security", icon: ShieldCheck },
 ]
 
 const queryClient = new QueryClient({

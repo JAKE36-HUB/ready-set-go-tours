@@ -45,6 +45,19 @@ export async function middleware(request: NextRequest) {
     return NextResponse.redirect(url)
   }
 
+  // MFA enforcement — if the user has 2FA enrolled, require an aal2 session
+  if (user) {
+    const { data: aal } = await supabase.auth.mfa.getAuthenticatorAssuranceLevel()
+    if (aal?.nextLevel === "aal2" && aal.currentLevel !== "aal2") {
+      if (path.startsWith("/api/admin")) {
+        return NextResponse.json({ error: "Two-factor authentication required" }, { status: 401 })
+      }
+      const url = request.nextUrl.clone()
+      url.pathname = "/sign-in"
+      return NextResponse.redirect(url)
+    }
+  }
+
   // Protect admin API routes
   if (path.startsWith("/api/admin") && !user) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 })

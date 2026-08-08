@@ -72,5 +72,11 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: "Invalid email or password." }, { status: 401 })
   }
 
+  // If the user has 2FA enrolled, require the authenticator step before granting admin access
+  const { data: aal } = await supabase.auth.mfa.getAuthenticatorAssuranceLevel()
+  if (aal?.nextLevel === "aal2") {
+    return NextResponse.json({ ok: true, mfaRequired: true })
+  }
+
   return NextResponse.json({ ok: true })
 }
