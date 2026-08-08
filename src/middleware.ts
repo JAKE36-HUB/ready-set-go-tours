@@ -4,13 +4,32 @@ import type { NextRequest } from "next/server"
 import { isAdminEmail } from "@/lib/admin-access"
 
 export async function middleware(request: NextRequest) {
+  const path = request.nextUrl.pathname
+
+  // Old blog URLs now live under /travel-guide
+  if (path === "/blog" || path.startsWith("/blog/")) {
+    const url = request.nextUrl.clone()
+    url.pathname = "/travel-guide" + path.slice("/blog".length)
+    return NextResponse.redirect(url, 308)
+  }
+
+  // Canonical lowercase paths (Google sometimes indexes capitalized URLs)
+  if (path !== path.toLowerCase()) {
+    const url = request.nextUrl.clone()
+    url.pathname = path.toLowerCase()
+    return NextResponse.redirect(url, 308)
+  }
+
+  // Public routes need no auth work
+  if (!path.startsWith("/admin") && !path.startsWith("/api/admin")) {
+    return NextResponse.next()
+  }
+
   const { supabase, supabaseResponse } = createClient(request)
 
   const {
     data: { user },
   } = await supabase.auth.getUser()
-
-  const path = request.nextUrl.pathname
 
   // Protect admin pages
   if (path.startsWith("/admin") && !user) {
@@ -56,5 +75,5 @@ export async function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/admin/:path*", "/api/admin/:path*"],
+  matcher: ["/((?!_next/static|_next/image|favicon\\.ico|.*\\..*).*)"],
 }

@@ -9,6 +9,7 @@ import { getSupabase } from "@/lib/supabase";
 import { TourPackageJsonLd, BreadcrumbJsonLd } from "@/components/JsonLd";
 import { Tag, Clock, Users, Gift, Percent, Star, Shield, ChevronRight, Check, ArrowLeft, Calendar, Hotel, Utensils, MapPin, Phone } from "lucide-react";
 import AnimatedSection from "@/components/AnimatedSection";
+import FetchRetry from "@/components/FetchRetry";
 
 const DEAL_ICONS: Record<string, React.ElementType> = {
   "early-bird": Clock,
@@ -25,16 +26,30 @@ export default function DealDetailPage() {
   const [deal, setDeal] = useState<any>(null);
   const [loading, setLoading] = useState(true);
   const [related, setRelated] = useState<any[]>([]);
+  const [fetchFailed, setFetchFailed] = useState(false);
+  const [attempt, setAttempt] = useState(0);
 
   useEffect(() => {
+    let cancelled = false;
+    setLoading(true);
+    setFetchFailed(false);
     (async () => {
       try {
-        const { data } = await getSupabase().from("deals").select("*").eq("slug", slug).single();
+        const { data, error } = await getSupabase().from("deals").select("*").eq("slug", slug).single();
+        if (cancelled) return;
+        if (error) {
+          if (error.code !== "PGRST116") setFetchFailed(true);
+          return;
+        }
         if (data) setDeal({ ...data, originalPrice: (data as any).original_price, dealPrice: (data as any).deal_price, priceKES: (data as any).price_kes, validUntil: (data as any).valid_until });
-      } catch {}
-      setLoading(false);
+      } catch {
+        if (!cancelled) setFetchFailed(true);
+      } finally {
+        if (!cancelled) setLoading(false);
+      }
     })();
-  }, [slug]);
+    return () => { cancelled = true; };
+  }, [slug, attempt]);
 
   useEffect(() => {
     (async () => {
@@ -51,6 +66,7 @@ export default function DealDetailPage() {
       <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-emerald-500"></div>
     </main>
   );
+  if (fetchFailed) return <FetchRetry label="deal" onRetry={() => setAttempt((a) => a + 1)} />;
   if (!deal) notFound();
 
   const Icon = DEAL_ICONS[deal.type] || Tag;

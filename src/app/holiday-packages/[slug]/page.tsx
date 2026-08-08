@@ -15,6 +15,7 @@ import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { BookingModal } from "@/components/layout/BookingModal"
 import AnimatedSection from "@/components/AnimatedSection"
+import FetchRetry from "@/components/FetchRetry"
 
 const typeColors: Record<string, string> = {
   safari: "bg-emerald-500/15 text-emerald-300 border-emerald-500/30",
@@ -29,23 +30,37 @@ export default function PackageDetailPage() {
   const [pkg, setPkg] = useState<any>(null);
   const [loading, setLoading] = useState(true);
   const [bookingOpen, setBookingOpen] = useState(false)
+  const [fetchFailed, setFetchFailed] = useState(false);
+  const [attempt, setAttempt] = useState(0);
 
   useEffect(() => {
+    let cancelled = false;
+    setLoading(true);
+    setFetchFailed(false);
     (async () => {
       try {
         const { data, error } = await getSupabase().from("tour_packages").select("*").eq("slug", slug).single();
+        if (cancelled) return;
+        if (error) {
+          if (error.code !== "PGRST116") setFetchFailed(true);
+          return;
+        }
         if (data) setPkg({ ...data, priceKES: (data as any).price_kes });
-        else if (error) setPkg(null);
-      } catch {}
-      setLoading(false);
+      } catch {
+        if (!cancelled) setFetchFailed(true);
+      } finally {
+        if (!cancelled) setLoading(false);
+      }
     })();
-  }, [slug]);
+    return () => { cancelled = true; };
+  }, [slug, attempt]);
 
   if (loading) return (
     <main className="min-h-screen flex items-center justify-center">
       <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-emerald-500"></div>
     </main>
   );
+  if (fetchFailed) return <FetchRetry label="package" onRetry={() => setAttempt((a) => a + 1)} />;
   if (!pkg) notFound();
 
   return (
