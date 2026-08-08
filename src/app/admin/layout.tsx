@@ -2,7 +2,7 @@
 
 import Link from "next/link"
 import { usePathname, useRouter } from "next/navigation"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { useSupabase } from "@/lib/supabase-auth"
 import { createBrowserClient } from "@supabase/ssr"
 import {
@@ -75,6 +75,10 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
     router.push("/")
     router.refresh()
   }
+
+  useEffect(() => {
+    if (!isLoading && !user) router.replace("/sign-in")
+  }, [isLoading, user, router])
 
   if (isLoading) {
     return (

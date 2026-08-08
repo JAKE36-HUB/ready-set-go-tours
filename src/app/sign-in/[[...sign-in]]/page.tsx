@@ -37,7 +37,18 @@ export default function SignInPage() {
           setMfaRequired(true)
           return
         }
+        setError("Your 2FA setup needs attention — open Admin → Security to finish it.")
+        return
       }
+      // Guard against redirect loops: never bounce back to /admin more than once per 15s
+      try {
+        const last = Number(sessionStorage.getItem("rsg-loop-guard") || 0)
+        if (Date.now() - last < 15000) {
+          setError("Still having trouble? Sign out and sign back in, or clear your browser cache.")
+          return
+        }
+        sessionStorage.setItem("rsg-loop-guard", String(Date.now()))
+      } catch {}
       if (active) window.location.href = "/admin"
     })
     return () => {
