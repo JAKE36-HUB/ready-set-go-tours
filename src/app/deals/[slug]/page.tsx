@@ -1,15 +1,13 @@
-"use client";
-
-import { useState, useEffect } from "react";
-import { useParams, notFound } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
+import { notFound } from "next/navigation";
 import { COMPANY, USD_TO_KES } from "@/lib/constants";
 import { getSupabase } from "@/lib/supabase";
 import { TourPackageJsonLd, BreadcrumbJsonLd } from "@/components/JsonLd";
-import { Tag, Clock, Users, Gift, Percent, Star, Shield, ChevronRight, Check, ArrowLeft, Calendar, Hotel, Utensils, MapPin, Phone } from "lucide-react";
+import { Tag, Clock, Users, Gift, Percent, Star, Shield, Check, ArrowLeft, Calendar, Hotel, Utensils, Phone } from "lucide-react";
 import AnimatedSection from "@/components/AnimatedSection";
-import FetchRetry from "@/components/FetchRetry";
+
+export const revalidate = 3600;
 
 const DEAL_ICONS: Record<string, React.ElementType> = {
   "early-bird": Clock,
@@ -20,53 +18,31 @@ const DEAL_ICONS: Record<string, React.ElementType> = {
   special: Star,
 };
 
-export default function DealDetailPage() {
-  const params = useParams();
-  const slug = params.slug as string;
-  const [deal, setDeal] = useState<any>(null);
-  const [loading, setLoading] = useState(true);
-  const [related, setRelated] = useState<any[]>([]);
-  const [fetchFailed, setFetchFailed] = useState(false);
-  const [attempt, setAttempt] = useState(0);
+export default async function DealDetailPage({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}) {
+  const { slug } = await params;
 
-  useEffect(() => {
-    let cancelled = false;
-    setLoading(true);
-    setFetchFailed(false);
-    (async () => {
-      try {
-        const { data, error } = await getSupabase().from("deals").select("*").eq("slug", slug).single();
-        if (cancelled) return;
-        if (error) {
-          if (error.code !== "PGRST116") setFetchFailed(true);
-          return;
-        }
-        if (data) setDeal({ ...data, originalPrice: (data as any).original_price, dealPrice: (data as any).deal_price, priceKES: (data as any).price_kes, validUntil: (data as any).valid_until });
-      } catch {
-        if (!cancelled) setFetchFailed(true);
-      } finally {
-        if (!cancelled) setLoading(false);
-      }
-    })();
-    return () => { cancelled = true; };
-  }, [slug, attempt]);
+  let deal: any = null;
+  let related: any[] = [];
+  try {
+    const { data } = await getSupabase()
+      .from("deals")
+      .select("*")
+      .eq("slug", slug)
+      .single();
+    if (data) deal = { ...data, originalPrice: (data as any).original_price, dealPrice: (data as any).deal_price, priceKES: (data as any).price_kes, validUntil: (data as any).valid_until };
 
-  useEffect(() => {
-    (async () => {
-      try {
-        const currentSlug = slug;
-        const { data } = await getSupabase().from("deals").select("*").eq("featured", true).neq("slug", currentSlug).limit(3);
-        if (data) setRelated(data.map((d: any) => ({ ...d, originalPrice: d.original_price, dealPrice: d.deal_price, priceKES: d.price_kes, validUntil: d.valid_until })));
-      } catch {}
-    })();
-  }, [slug]);
-
-  if (loading) return (
-    <main className="min-h-screen flex items-center justify-center">
-      <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-emerald-500"></div>
-    </main>
-  );
-  if (fetchFailed) return <FetchRetry label="deal" onRetry={() => setAttempt((a) => a + 1)} />;
+    const { data: relatedData } = await getSupabase()
+      .from("deals")
+      .select("*")
+      .eq("featured", true)
+      .neq("slug", slug)
+      .limit(3);
+    if (relatedData) related = relatedData.map((d: any) => ({ ...d, originalPrice: d.original_price, dealPrice: d.deal_price, priceKES: d.price_kes, validUntil: d.valid_until }));
+  } catch {}
   if (!deal) notFound();
 
   const Icon = DEAL_ICONS[deal.type] || Tag;

@@ -14,7 +14,7 @@ export function BreadcrumbJsonLd({ items }: { items: BreadcrumbItem[] }) {
       "@type": "ListItem",
       position: i + 1,
       name: item.name,
-      item: `https://readysetgosafaris.com${item.item}`,
+      item: `https://www.readysetgosafaris.com${item.item}`,
     })),
   };
   return (
@@ -47,13 +47,13 @@ export function TourPackageJsonLd({
     name,
     description,
     image,
-    url: `https://readysetgosafaris.com${url}`,
+    url: `https://www.readysetgosafaris.com${url}`,
     offers: {
       "@type": "Offer",
       price,
       priceCurrency: "USD",
       availability: "https://schema.org/InStock",
-      url: `https://readysetgosafaris.com${url}`,
+      url: `https://www.readysetgosafaris.com${url}`,
     },
     additionalProperty: {
       "@type": "PropertyValue",
@@ -91,7 +91,7 @@ export function ArticleJsonLd({
     headline: title,
     description,
     image,
-    url: `https://readysetgosafaris.com${url}`,
+    url: `https://www.readysetgosafaris.com${url}`,
     author: {
       "@type": "Person",
       name: authorName || "Ready Set Go Tours & Travel",
@@ -124,11 +124,11 @@ export function ServiceJsonLd({
     name,
     description,
     image,
-    url: `https://readysetgosafaris.com${url}`,
+    url: `https://www.readysetgosafaris.com${url}`,
     provider: {
       "@type": "TravelAgency",
       name: "Ready Set Go Tours & Travel",
-      url: "https://readysetgosafaris.com",
+      url: "https://www.readysetgosafaris.com",
     },
   };
   return (

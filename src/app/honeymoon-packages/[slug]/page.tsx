@@ -1,60 +1,51 @@
-"use client"
-
-import { useState, useEffect } from "react"
-import { useParams, notFound } from "next/navigation"
-import Image from "next/image"
-import Link from "next/link"
-import { COMPANY, USD_TO_KES } from "@/lib/constants"
-import { getSupabase } from "@/lib/supabase"
+import Image from "next/image";
+import Link from "next/link";
+import { notFound } from "next/navigation";
+import { COMPANY, USD_TO_KES } from "@/lib/constants";
+import { getSupabase } from "@/lib/supabase";
+import { TourPackageJsonLd, BreadcrumbJsonLd } from "@/components/JsonLd";
 import {
   Heart, Star, Clock, MapPin, Check, ArrowLeft, Shield, Gift, Sparkles, MessageCircle,
 } from "lucide-react"
-import { Button } from "@/components/ui/button"
-import { BookingModal } from "@/components/layout/BookingModal"
-import AnimatedSection from "@/components/AnimatedSection"
-import FetchRetry from "@/components/FetchRetry"
+import BookingButton from "@/components/BookingButton";
+import AnimatedSection from "@/components/AnimatedSection";
 
-export default function HoneymoonDetailPage() {
-  const params = useParams()
-  const slug = params.slug as string
-  const [pkg, setPkg] = useState<any>(null);
-  const [loading, setLoading] = useState(true);
-  const [bookingOpen, setBookingOpen] = useState(false)
-  const [fetchFailed, setFetchFailed] = useState(false);
-  const [attempt, setAttempt] = useState(0);
+export const revalidate = 3600;
 
-  useEffect(() => {
-    let cancelled = false;
-    setLoading(true);
-    setFetchFailed(false);
-    (async () => {
-      try {
-        const { data, error } = await getSupabase().from("honeymoon_packages").select("*").eq("slug", slug).single();
-        if (cancelled) return;
-        if (error) {
-          if (error.code !== "PGRST116") setFetchFailed(true);
-          return;
-        }
-        if (data) setPkg({ ...data, priceKES: (data as any).price_kes });
-      } catch {
-        if (!cancelled) setFetchFailed(true);
-      } finally {
-        if (!cancelled) setLoading(false);
-      }
-    })();
-    return () => { cancelled = true; };
-  }, [slug, attempt]);
+export default async function HoneymoonDetailPage({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}) {
+  const { slug } = await params;
 
-  if (loading) return (
-    <main className="min-h-screen flex items-center justify-center">
-      <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-rose-500"></div>
-    </main>
-  );
-  if (fetchFailed) return <FetchRetry label="package" onRetry={() => setAttempt((a) => a + 1)} />;
+  let pkg: any = null;
+  try {
+    const { data } = await getSupabase()
+      .from("honeymoon_packages")
+      .select("*")
+      .eq("slug", slug)
+      .single();
+    if (data) pkg = { ...data, priceKES: (data as any).price_kes };
+  } catch {}
   if (!pkg) notFound();
 
   return (
-    <main className="min-h-screen">
+    <>
+      <BreadcrumbJsonLd items={[
+        { name: "Home", item: "/" },
+        { name: "Honeymoon Packages", item: "/honeymoon-packages" },
+        { name: pkg.name, item: `/honeymoon-packages/${slug}` },
+      ]} />
+      <TourPackageJsonLd
+        name={pkg.name}
+        description={pkg.description.slice(0, 160)}
+        image={pkg.image}
+        price={pkg.price}
+        duration={pkg.duration}
+        url={`/honeymoon-packages/${slug}`}
+      />
+      <main className="min-h-screen">
       <section className="relative h-[55vh] min-h-[420px] flex items-end justify-center overflow-hidden">
         <Image
           src={pkg.image}
@@ -104,12 +95,12 @@ export default function HoneymoonDetailPage() {
             </div>
           </div>
           <div className="flex items-center gap-3">
-            <Button
-              onClick={() => setBookingOpen(true)}
+            <BookingButton
+              packageName={pkg.name}
               className="h-10 px-5 bg-gradient-to-r from-rose-500 to-pink-600 hover:from-rose-600 hover:to-pink-700 text-white text-sm font-semibold shadow-lg"
             >
               Book Now
-            </Button>
+            </BookingButton>
             <a
               href={`https://wa.me/${COMPANY.whatsapp}?text=Hi!%20I'm%20interested%20in%20${encodeURIComponent(pkg.name)}`}
               target="_blank"
@@ -216,12 +207,12 @@ export default function HoneymoonDetailPage() {
                     Reserve your romantic escape now.
                   </p>
                   <div className="space-y-3">
-                    <Button
-                      onClick={() => setBookingOpen(true)}
+                    <BookingButton
+                      packageName={pkg.name}
                       className="w-full h-11 bg-gradient-to-r from-rose-500 to-pink-600 hover:from-rose-600 hover:to-pink-700 text-white font-semibold shadow-lg"
                     >
                       Book Now
-                    </Button>
+                    </BookingButton>
                     <a
                       href={`https://wa.me/${COMPANY.whatsapp}?text=Hi!%20I'm%20interested%20in%20${encodeURIComponent(pkg.name)}`}
                       target="_blank"
@@ -238,12 +229,7 @@ export default function HoneymoonDetailPage() {
           </div>
         </div>
       </section>
-
-      <BookingModal
-        open={bookingOpen}
-        onOpenChange={setBookingOpen}
-        initialPackage={pkg.name}
-      />
     </main>
+    </>
   )
 }

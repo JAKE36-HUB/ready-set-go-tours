@@ -1,66 +1,42 @@
-"use client"
-
-import { useState, useEffect } from "react"
-import { useParams, notFound } from "next/navigation"
-import Image from "next/image"
-import Link from "next/link"
-import { COMPANY } from "@/lib/constants"
-import { getSupabase } from "@/lib/supabase"
-import { TourPackageJsonLd, BreadcrumbJsonLd } from "@/components/JsonLd"
+import Image from "next/image";
+import Link from "next/link";
+import { notFound } from "next/navigation";
+import { COMPANY } from "@/lib/constants";
+import { getSupabase } from "@/lib/supabase";
+import { TourPackageJsonLd, BreadcrumbJsonLd } from "@/components/JsonLd";
 import {
-  Clock, Users, MapPin, Star, Check, X, ArrowLeft,
-  Hotel, Utensils, Car, Compass, Shield, MessageCircle, Calendar,
-} from "lucide-react"
-import { Button } from "@/components/ui/button"
-import { Badge } from "@/components/ui/badge"
-import { BookingModal } from "@/components/layout/BookingModal"
-import AnimatedSection from "@/components/AnimatedSection"
-import FetchRetry from "@/components/FetchRetry"
+  Clock, Star, Check, X, ArrowLeft,
+  Hotel, Utensils, Car, Compass, MessageCircle,
+} from "lucide-react";
+import { Badge } from "@/components/ui/badge";
+import BookingButton from "@/components/BookingButton";
+import AnimatedSection from "@/components/AnimatedSection";
+
+export const revalidate = 3600;
 
 const typeColors: Record<string, string> = {
   safari: "bg-emerald-500/15 text-emerald-300 border-emerald-500/30",
   group: "bg-teal-500/15 text-teal-300 border-teal-500/30",
   luxury: "bg-amber-500/15 text-amber-300 border-amber-500/30",
   mountain: "bg-violet-500/15 text-violet-300 border-violet-500/30",
-}
+};
 
-export default function PackageDetailPage() {
-  const params = useParams()
-  const slug = params.slug as string
-  const [pkg, setPkg] = useState<any>(null);
-  const [loading, setLoading] = useState(true);
-  const [bookingOpen, setBookingOpen] = useState(false)
-  const [fetchFailed, setFetchFailed] = useState(false);
-  const [attempt, setAttempt] = useState(0);
+export default async function PackageDetailPage({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}) {
+  const { slug } = await params;
 
-  useEffect(() => {
-    let cancelled = false;
-    setLoading(true);
-    setFetchFailed(false);
-    (async () => {
-      try {
-        const { data, error } = await getSupabase().from("tour_packages").select("*").eq("slug", slug).single();
-        if (cancelled) return;
-        if (error) {
-          if (error.code !== "PGRST116") setFetchFailed(true);
-          return;
-        }
-        if (data) setPkg({ ...data, priceKES: (data as any).price_kes });
-      } catch {
-        if (!cancelled) setFetchFailed(true);
-      } finally {
-        if (!cancelled) setLoading(false);
-      }
-    })();
-    return () => { cancelled = true; };
-  }, [slug, attempt]);
-
-  if (loading) return (
-    <main className="min-h-screen flex items-center justify-center">
-      <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-emerald-500"></div>
-    </main>
-  );
-  if (fetchFailed) return <FetchRetry label="package" onRetry={() => setAttempt((a) => a + 1)} />;
+  let pkg: any = null;
+  try {
+    const { data } = await getSupabase()
+      .from("tour_packages")
+      .select("*")
+      .eq("slug", slug)
+      .single();
+    if (data) pkg = { ...data, priceKES: (data as any).price_kes };
+  } catch {}
   if (!pkg) notFound();
 
   return (
@@ -133,12 +109,12 @@ export default function PackageDetailPage() {
             )}
           </div>
           <div className="flex items-center gap-3">
-            <Button
-              onClick={() => setBookingOpen(true)}
+            <BookingButton
+              packageName={pkg.name}
               className="h-10 px-5 bg-gradient-to-r from-emerald-500 to-emerald-600 hover:from-emerald-600 hover:to-emerald-700 text-white text-sm font-semibold shadow-lg"
             >
               Reserve Now
-            </Button>
+            </BookingButton>
             <a
               href={`https://wa.me/${COMPANY.whatsapp}?text=Hi!%20I'm%20interested%20in%20${encodeURIComponent(pkg.name)}`}
               target="_blank"
@@ -261,12 +237,12 @@ export default function PackageDetailPage() {
                     Reserve your spot now. Group joining safaris fill up fast!
                   </p>
                   <div className="space-y-3">
-                    <Button
-                      onClick={() => setBookingOpen(true)}
+                    <BookingButton
+                      packageName={pkg.name}
                       className="w-full h-11 bg-gradient-to-r from-emerald-500 to-emerald-600 hover:from-emerald-600 hover:to-emerald-700 text-white font-semibold shadow-lg"
                     >
                       Reserve Now
-                    </Button>
+                    </BookingButton>
                     <a
                       href={`https://wa.me/${COMPANY.whatsapp}?text=Hi!%20I'm%20interested%20in%20${encodeURIComponent(pkg.name)}`}
                       target="_blank"
@@ -283,12 +259,6 @@ export default function PackageDetailPage() {
           </div>
         </div>
       </section>
-
-      <BookingModal
-        open={bookingOpen}
-        onOpenChange={setBookingOpen}
-        initialPackage={pkg.name}
-      />
     </main>
     </>
   )
