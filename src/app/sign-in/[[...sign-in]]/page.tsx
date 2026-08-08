@@ -24,10 +24,21 @@ export default function SignInPage() {
       process.env.NEXT_PUBLIC_SUPABASE_URL!,
       process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
     )
-    supabase.auth.getSession().then(({ data: { session } }) => {
-      if (active && session) {
-        window.location.href = "/admin"
+    supabase.auth.getSession().then(async ({ data: { session } }) => {
+      if (!active || !session) return
+      // If a session exists but 2FA is enrolled and not yet verified, resume the code step
+      // instead of redirecting (prevents a redirect loop with the middleware).
+      const { data: aal } = await supabase.auth.mfa.getAuthenticatorAssuranceLevel()
+      if (aal?.nextLevel === "aal2" && aal.currentLevel !== "aal2") {
+        const { data: factors } = await supabase.auth.mfa.listFactors()
+        const verified = factors?.totp.find((f) => f.status === "verified")
+        if (verified) {
+          setFactorId(verified.id)
+          setMfaRequired(true)
+          return
+        }
       }
+      if (active) window.location.href = "/admin"
     })
     return () => {
       active = false
@@ -65,7 +76,8 @@ export default function SignInPage() {
         const { data: factors } = await supabase.auth.mfa.listFactors()
         const verified = factors?.totp.find((f) => f.status === "verified")
         if (!verified) {
-          window.location.href = "/admin"
+          setError("Your 2FA setup is incomplete — finish it in Admin → Security, then sign in again.")
+          setMfaRequired(false)
           return
         }
         setFactorId(verified.id)

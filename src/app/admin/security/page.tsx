@@ -31,9 +31,17 @@ export default function SecurityPage() {
     if (verified) {
       setEnrolled(true)
       setFactor(verified)
+      setPendingFactorId("")
     } else {
       setEnrolled(false)
       setFactor(null)
+      // A pending (unverified) factor blocks re-enrollment — offer to finish or cancel it
+      const pending = factors?.totp.find((f) => f.status !== "verified")
+      setPendingFactorId(pending?.id ?? "")
+      if (pending?.id) {
+        setQrCode("")
+        setSecret("")
+      }
     }
     const { data: aal } = await supabase.auth.mfa.getAuthenticatorAssuranceLevel()
     setAal2(aal?.currentLevel === "aal2")
@@ -128,6 +136,36 @@ export default function SecurityPage() {
       setCopied(true)
       setTimeout(() => setCopied(false), 1500)
     } catch {}
+  }
+
+  async function cancelPending() {
+    if (!pendingFactorId) return
+    if (!confirm("Cancel this unfinished 2FA setup? You can then start fresh.")) return
+    setRemoving(true)
+    try {
+      const supabase = createBrowserClient(
+        process.env.NEXT_PUBLIC_SUPABASE_URL!,
+        process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
+      )
+      const { data: { user } } = await supabase.auth.getUser()
+      const res = await fetch("/api/admin/mfa-factor", {
+        method: "DELETE",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ userId: user?.id, factorId: pendingFactorId }),
+      })
+      if (!res.ok) {
+        const data = await res.json().catch(() => ({}))
+        toast.error(data.error || "Could not cancel setup")
+        return
+      }
+      toast.success("Setup cancelled")
+      setPendingFactorId("")
+      await refresh()
+    } catch {
+      toast.error("Network error — please try again.")
+    } finally {
+      setRemoving(false)
+    }
   }
 
   if (loading) {
@@ -254,6 +292,49 @@ export default function SecurityPage() {
             </button>
           </div>
         </form>
+      ) : pendingFactorId ? (
+        <div className="rounded-xl border border-amber-200 dark:border-amber-800/50 bg-amber-50 dark:bg-amber-950/30 p-5 space-y-4">
+          <div className="flex items-center gap-2 text-amber-600 dark:text-amber-400">
+            <ShieldAlert className="w-5 h-5" />
+            <p className="text-sm font-semibold">Setup in progress</p>
+          </div>
+          <p className="text-xs text-amber-700/80 dark:text-amber-400/80 leading-relaxed">
+            A 2FA setup was started but not finished. If you already scanned the QR code into your
+            authenticator app, enter the 6-digit code below to finish. Otherwise cancel it and start
+            over.
+          </p>
+          <form onSubmit={verifyEnroll} className="space-y-4">
+            <input
+              type="text"
+              inputMode="numeric"
+              autoComplete="one-time-code"
+              value={verifyCode}
+              onChange={(e) => setVerifyCode(e.target.value.replace(/\D/g, "").slice(0, 6))}
+              placeholder="000000"
+              required
+              className="w-full h-11 px-4 text-center text-2xl tracking-[0.5em] font-mono rounded-lg border border-amber-200 dark:border-amber-800 bg-white dark:bg-slate-800 text-slate-900 dark:text-white placeholder:text-slate-300 dark:placeholder:text-slate-600 focus:border-amber-500 focus:ring-2 focus:ring-amber-500/30 outline-none transition-all"
+            />
+            <div className="flex items-center gap-3">
+              <button
+                type="submit"
+                disabled={verifying || verifyCode.length !== 6}
+                className="inline-flex items-center gap-2 h-10 px-5 rounded-lg bg-gradient-to-r from-sky-500 to-cyan-400 hover:from-sky-600 hover:to-cyan-500 text-white text-sm font-semibold shadow-md shadow-sky-500/20 disabled:opacity-50 disabled:cursor-not-allowed transition-all"
+              >
+                {verifying && <Loader2 className="size-4 animate-spin" />}
+                {verifying ? "Verifying..." : "Finish setup"}
+              </button>
+              <button
+                type="button"
+                onClick={cancelPending}
+                disabled={removing}
+                className="inline-flex items-center gap-2 h-10 px-4 rounded-lg border border-amber-300 dark:border-amber-700 text-amber-600 dark:text-amber-400 text-xs font-medium hover:bg-amber-100 dark:hover:bg-amber-900/40 disabled:opacity-50 transition-colors"
+              >
+                {removing ? <Loader2 className="size-3.5 animate-spin" /> : <Trash2 className="size-3.5" />}
+                Cancel setup
+              </button>
+            </div>
+          </form>
+        </div>
       ) : (
         <div className="rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-5 space-y-4">
           <div className="flex items-center gap-2 text-amber-600 dark:text-amber-400">
