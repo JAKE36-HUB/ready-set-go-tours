@@ -52,8 +52,13 @@ export async function middleware(request: NextRequest) {
       if (path.startsWith("/api/admin")) {
         return NextResponse.json({ error: "Two-factor authentication required" }, { status: 401 })
       }
+      // Dedicated code-entry page — the sign-in page is NOT part of this redirect chain,
+      // so stale cached sign-in pages can never bounce us back into a loop.
+      if (path === "/admin/verify-mfa") {
+        return NextResponse.next()
+      }
       const url = request.nextUrl.clone()
-      url.pathname = "/sign-in"
+      url.pathname = "/admin/verify-mfa"
       return NextResponse.redirect(url)
     }
   }
