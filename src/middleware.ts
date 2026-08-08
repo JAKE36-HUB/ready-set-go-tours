@@ -20,6 +20,9 @@ const WP_REDIRECTS: Record<string, string> = {
   "/destinations/kenya": "/kenya-tours",
   "/destinations/mt-kenya-climbing": "/mountain-trekking",
   "/destinations/mt-kilimanjaro-climbing": "/mountain-trekking",
+  "/destinations/combined-kenya-tanzania-safaris": "/holiday-packages",
+  "/home": "/",
+  "/index.html": "/",
   "/terms-and-conditions": "/privacy-policy",
   "/trip-listing": "/holiday-packages",
   "/trip-search-result": "/holiday-packages",
@@ -41,6 +44,7 @@ function wpRedirect(path: string): string | null {
     if (lower.includes("beach")) return "/beach-holidays"
     return "/holiday-packages"
   }
+  if (path.startsWith("/packages/") || path === "/packages") return "/holiday-packages"
   if (path.startsWith("/trip-tag/")) return "/holiday-packages"
   if (path.startsWith("/author/")) return "/travel-guide"
   if (path.startsWith("/wp-")) return "/"

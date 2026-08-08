@@ -1,8 +1,40 @@
 import type { MetadataRoute } from "next";
 import { BLOG_POSTS, SERVICES } from "@/lib/constants";
+import { getSupabaseAdmin } from "@/lib/supabase-admin";
 
-export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = "https://readysetgosafaris.com";
+export const revalidate = 3600;
+
+const baseUrl = "https://www.readysetgosafaris.com";
+
+async function fetchDynamicUrls(): Promise<
+  { url: string; lastModified?: string }[]
+> {
+  try {
+    const sb = getSupabaseAdmin();
+    const [pkgs, deals, honeymoons] = await Promise.all([
+      sb.from("tour_packages").select("slug,updated_at"),
+      sb.from("deals").select("slug,updated_at"),
+      sb.from("honeymoon_packages").select("slug,updated_at"),
+    ]);
+
+    const map = (rows: { slug: string; updated_at?: string }[] | null, prefix: string) =>
+      (rows ?? []).map((r) => ({
+        url: `${baseUrl}/${prefix}/${r.slug}`,
+        lastModified: r.updated_at,
+      }));
+
+    return [
+      ...map(pkgs.data, "holiday-packages"),
+      ...map(deals.data, "deals"),
+      ...map(honeymoons.data, "honeymoon-packages"),
+    ];
+  } catch {
+    return [];
+  }
+}
+
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+  const dynamic = await fetchDynamicUrls();
 
   const blogEntries: MetadataRoute.Sitemap = BLOG_POSTS.map((post) => ({
     url: `${baseUrl}/travel-guide/${post.slug}`,
@@ -81,6 +113,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
     ...blogEntries,
     ...serviceEntries,
+    ...dynamic,
     {
       url: `${baseUrl}/mountain-trekking`,
       lastModified: new Date(),

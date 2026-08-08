@@ -45,7 +45,7 @@ export const metadata: Metadata = {
   authors: [{ name: "Ready Set Go Tours & Travel" }],
   creator: "Ready Set Go Tours & Travel",
   publisher: "Ready Set Go Tours & Travel",
-  metadataBase: new URL("https://readysetgosafaris.com"),
+  metadataBase: new URL("https://www.readysetgosafaris.com"),
   openGraph: {
     type: "website",
     locale: "en_US",

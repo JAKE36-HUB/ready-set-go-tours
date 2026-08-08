@@ -5,8 +5,8 @@ export default function robots(): MetadataRoute.Robots {
     rules: {
       userAgent: "*",
       allow: "/",
-      disallow: "/api/",
+      disallow: ["/api/", "/admin", "/sign-in"],
     },
-    sitemap: "https://readysetgosafaris.com/sitemap.xml",
+    sitemap: "https://www.readysetgosafaris.com/sitemap.xml",
   };
 }
