@@ -3,13 +3,60 @@ import { NextResponse } from "next/server"
 import type { NextRequest } from "next/server"
 import { isAdminEmail } from "@/lib/admin-access"
 
+// Old WordPress site URLs (still indexed by Google) → new site pages
+const WP_REDIRECTS: Record<string, string> = {
+  "/about-us": "/about",
+  "/contact-us": "/contact",
+  "/faqs": "/faq",
+  "/honeymoon-safaris": "/honeymoon-packages",
+  "/kenya-safaris": "/kenya-tours",
+  "/kenya-safaris-budget-camping": "/kenya-tours",
+  "/kenya-lodge-safaris": "/kenya-tours",
+  "/tanzania-safaris": "/tanzania-tours",
+  "/combined-kenya-tanzania-safaris": "/holiday-packages",
+  "/category/travel-guide": "/travel-guide",
+  "/travelers-information": "/travel-guide",
+  "/destination": "/holiday-packages",
+  "/destinations/kenya": "/kenya-tours",
+  "/destinations/mt-kenya-climbing": "/mountain-trekking",
+  "/destinations/mt-kilimanjaro-climbing": "/mountain-trekking",
+  "/terms-and-conditions": "/privacy-policy",
+  "/trip-listing": "/holiday-packages",
+  "/trip-search-result": "/holiday-packages",
+  "/trip-types": "/holiday-packages",
+  "/enquiry-thank-you-page": "/contact",
+  "/thank-you": "/contact",
+  "/checkout": "/",
+  "/wishlist": "/",
+  "/wp-travel-engine-cart": "/",
+  "/wp-travel-engine-checkout": "/",
+  "/a-guide-to-rocky-mountain-vacations": "/travel-guide",
+}
+
+function wpRedirect(path: string): string | null {
+  if (path === "/trip" || path.startsWith("/trip/")) {
+    const lower = path.toLowerCase()
+    if (lower.includes("honeymoon")) return "/honeymoon-packages"
+    if (lower.includes("kilimanjaro") || lower.includes("mountain")) return "/mountain-trekking"
+    if (lower.includes("beach")) return "/beach-holidays"
+    return "/holiday-packages"
+  }
+  if (path.startsWith("/trip-tag/")) return "/holiday-packages"
+  if (path.startsWith("/author/")) return "/travel-guide"
+  if (path.startsWith("/wp-")) return "/"
+  if (path === "/blog" || path.startsWith("/blog/")) return "/travel-guide"
+  return WP_REDIRECTS[path] ?? null
+}
+
 export async function middleware(request: NextRequest) {
   const path = request.nextUrl.pathname
+  const barePath = path.length > 1 && path.endsWith("/") ? path.slice(0, -1) : path
 
-  // Old blog URLs now live under /travel-guide
-  if (path === "/blog" || path.startsWith("/blog/")) {
+  // Old WordPress site URLs → current pages (Google still links to them)
+  const wpDest = wpRedirect(barePath)
+  if (wpDest) {
     const url = request.nextUrl.clone()
-    url.pathname = "/travel-guide" + path.slice("/blog".length)
+    url.pathname = wpDest
     return NextResponse.redirect(url, 308)
   }
 
