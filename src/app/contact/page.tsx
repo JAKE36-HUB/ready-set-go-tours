@@ -12,6 +12,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import AnimatedSection from "@/components/AnimatedSection";
 import { contactFormSchema, type ContactFormData } from "@/lib/schemas";
+import { trackLeadConversion } from "@/lib/analytics";
 import { COMPANY } from "@/lib/constants";
 import {
   MapPin, Phone, Mail, MessageCircle, Clock, Send, CheckCircle, Loader2,
@@ -176,6 +177,7 @@ export default function ContactPage() {
 
       setStatus("success");
       reset();
+      trackLeadConversion();
     } catch (err: unknown) {
       setStatus("error");
       console.error("EmailJS error:", err);
