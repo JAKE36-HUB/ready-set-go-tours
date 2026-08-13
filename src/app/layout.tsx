@@ -6,6 +6,7 @@ import { ThemeProvider } from "@/components/layout/ThemeProvider";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { Analytics } from "@vercel/analytics/react";
+import Script from "next/script";
 import { ClientWidgets } from "@/components/ClientWidgets";
 
 export const viewport: Viewport = {
@@ -112,7 +113,7 @@ export default function RootLayout({
               name: "Ready Set Go Tours & Travel",
               description:
                 "Premier luxury tour operator based in Nairobi, Kenya, specializing in bespoke safaris and travel experiences across Kenya and Tanzania.",
-              url: "https://readysetgosafaris.com",
+              url: "https://www.readysetgosafaris.com",
               telephone: "+254797867411",
               email: "jaketish2@gmail.com",
               address: {
@@ -135,6 +136,19 @@ export default function RootLayout({
           }}
         />
         <Analytics />
+        <Script
+          id="gtag-ads"
+          strategy="afterInteractive"
+          src="https://www.googletagmanager.com/gtag/js?id=AW-18369134468"
+        />
+        <Script id="gtag-ads-init" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'AW-18369134468');
+          `}
+        </Script>
         <SupabaseProvider>
         <ThemeProvider>
           <Header />
