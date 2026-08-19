@@ -99,8 +99,6 @@ export default function RootLayout({
       className={`${GeistSans.variable} antialiased`}
     >
       <head>
-        <link rel="preconnect" href="https://i.pinimg.com" />
-        <link rel="preconnect" href="https://images.unsplash.com" />
       </head>
       <body className="min-h-screen flex flex-col bg-background text-foreground">
         <script

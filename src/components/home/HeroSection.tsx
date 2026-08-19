@@ -1,4 +1,4 @@
-"use client"
+﻿"use client"
 
 import { useState, useEffect } from "react"
 import Image from "next/image"
@@ -9,9 +9,9 @@ import { Percent } from "lucide-react"
 import { Button } from "@/components/ui/button"
 
 const HERO_IMAGES = [
-  "https://i.pinimg.com/736x/21/2b/24/212b2433f246414a170ec177d76168f2.jpg",
-  "https://i.pinimg.com/736x/11/56/82/1156825aa06be3206b2a1454ada4af1b.jpg",
-  "https://i.pinimg.com/736x/98/66/ec/9866ec45a7a8400d3fdc9e0642ff1e99.jpg",
+  "/images/local/pin_212b2433f246414a170ec177d76168f2.jpg",
+  "/images/local/pin_1156825aa06be3206b2a1454ada4af1b.jpg",
+  "/images/local/pin_9866ec45a7a8400d3fdc9e0642ff1e99.jpg",
 ]
 
 export function HeroSection() {
@@ -125,7 +125,7 @@ export function HeroSection() {
               transition={{ duration: 0.6, delay: 0.7 }}
               className="text-base sm:text-lg text-white/50 max-w-xl mb-10 leading-relaxed font-light tracking-wide"
             >
-              Curated safaris across Kenya and Tanzania. Every detail, every moment — crafted around you.
+              Curated safaris across Kenya and Tanzania. Every detail, every moment â€” crafted around you.
             </motion.p>
 
             <motion.div
@@ -144,7 +144,7 @@ export function HeroSection() {
               </Link>
               <Link href="/contact">
                 <Button variant="outline" className="h-14 px-8 text-base font-medium bg-transparent border-white/20 text-white/80 hover:bg-white/5 hover:text-white hover:border-white/40 transition-all duration-300">
-                  Plan Your Trip
+                  Get a Free Quote
                 </Button>
               </Link>
             </motion.div>

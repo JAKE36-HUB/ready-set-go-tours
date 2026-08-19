@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+﻿import type { Metadata } from "next";
 import Image from "next/image";
 import { MapPin, Calendar, Star, Compass, Hotel, Check } from "lucide-react";
 import { KENYA_DESTINATIONS_INFO, COMPANY } from "@/lib/constants";
@@ -7,7 +7,7 @@ import KenyaTourInteractive from "./Interactive";
 import { BreadcrumbJsonLd } from "@/components/JsonLd";
 
 export const metadata: Metadata = {
-  title: `Kenya Tours & Safaris | ${COMPANY.name}`,
+  title: "Kenya Tours & Safaris",
   description:
     "Discover Kenya's iconic wildlife destinations with Ready Set Go Tours & Travel. Explore Masai Mara, Amboseli, Samburu, and more on luxury guided safaris from Nairobi.",
   keywords: [
@@ -50,7 +50,7 @@ export default function KenyaToursPage() {
       {/* Hero */}
       <section className="relative h-[70vh] min-h-[520px] flex items-center justify-center overflow-hidden">
         <Image
-          src="https://i.pinimg.com/736x/5e/d9/e7/5ed9e7896df91ef4ad2acdc3d37b0b21.jpg"
+          src="/images/local/pin_5ed9e7896df91ef4ad2acdc3d37b0b21.jpg"
           alt="Kenya savanna safari landscape"
           fill
           priority
@@ -72,7 +72,7 @@ export default function KenyaToursPage() {
             </h1>
             <p className="text-lg sm:text-xl text-sky-100/80 max-w-2xl mx-auto leading-relaxed">
               From the rolling savannahs of the Masai Mara to the elephant herds beneath
-              Kilimanjaro — discover why Kenya is Africa&apos;s most celebrated safari
+              Kilimanjaro â€” discover why Kenya is Africa&apos;s most celebrated safari
               destination.
             </p>
           </AnimatedSection>

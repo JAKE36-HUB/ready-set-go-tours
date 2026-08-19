@@ -55,7 +55,6 @@ export default function AdminVisitors() {
   const [sortDir, setSortDir] = useState<"desc" | "asc">("desc")
 
   async function loadData() {
-    setLoading(true)
     try {
       const res = await fetch(`/api/admin/visitors?sortField=${sortField}&sortDir=${sortDir}&limit=200`)
       if (!res.ok) return
@@ -67,7 +66,9 @@ export default function AdminVisitors() {
     }
   }
 
-  useEffect(() => { loadData() }, [sortField, sortDir])
+  useEffect(() => {
+    ;(async () => { await loadData() })()
+  }, [sortField, sortDir])
 
   const filtered = visitors.filter((v) => {
     if (!search) return true

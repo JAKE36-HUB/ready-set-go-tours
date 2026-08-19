@@ -14,7 +14,9 @@ let audioCtx: AudioContext | null = null
 export function playChime() {
   if (!soundEnabled()) return
   try {
-    audioCtx = audioCtx || new (window.AudioContext || (window as any).webkitAudioContext)()
+    const AudioCtor = window.AudioContext || (window as unknown as { webkitAudioContext?: typeof AudioContext }).webkitAudioContext
+    if (!AudioCtor) return
+    audioCtx = audioCtx || new AudioCtor()
     if (audioCtx.state === "suspended") audioCtx.resume()
     const now = audioCtx.currentTime
     const notes = [880, 1174.66]

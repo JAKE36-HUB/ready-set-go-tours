@@ -26,10 +26,10 @@ export async function GET(request: NextRequest) {
 
   const lines = [
     headers.join(","),
-    ...rows.map((r: any) =>
+    ...rows.map((r: Record<string, unknown>) =>
       [
         r.id,
-        new Date(r.created_at).toISOString(),
+        new Date(r.created_at as string).toISOString(),
         r.popup_name,
         r.variant,
         r.name,

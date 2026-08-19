@@ -22,10 +22,10 @@ interface Stat {
 interface RecentItem {
   id: number
   name: string
-  slug: string
-  type: string
-  image: string | null
-  updated_at: string
+  slug?: string
+  type?: string
+  image?: string | null
+  updated_at?: string
   created_at?: string
   section: string
 }
@@ -76,12 +76,10 @@ const sectionTextColor: Record<string, string> = {
 function DonutChart({ data }: { data: { label: string; value: number; color: string }[] }) {
   const total = data.reduce((s, d) => s + d.value, 0)
   if (total === 0) return <div className="flex items-center justify-center h-40 text-xs text-slate-400">No data</div>
-  let cumulative = 0
-  const segments = data.map((d) => {
-    const start = cumulative
-    cumulative += (d.value / total) * 360
-    return { ...d, start, end: cumulative }
-  })
+  const segments = data.reduce<{ label: string; value: number; color: string; start: number; end: number }[]>((acc, d) => {
+    const start = acc.length > 0 ? acc[acc.length - 1].end : 0
+    return [...acc, { ...d, start, end: start + (d.value / total) * 360 }]
+  }, [])
   const r = 36, cx = 40, cy = 40, circ = 2 * Math.PI * r
   return (
     <svg viewBox="0 0 80 80" className="w-full h-full">
@@ -125,20 +123,15 @@ export default function AdminDashboard() {
   ])
   const [loading, setLoading] = useState(true)
   const [recent, setRecent] = useState<RecentItem[]>([])
-  const [greeting, setGreeting] = useState("")
-  const [mounted, setMounted] = useState(false)
+  const [greeting] = useState(() => {
+    const h = new Date().getHours()
+    if (h < 12) return "Good morning"
+    if (h < 17) return "Good afternoon"
+    return "Good evening"
+  })
   const [dealsExpiry, setDealsExpiry] = useState<{ expired: number; expiringSoon: number; active: number; list: { id: number; title: string; slug: string; validUntil: string; daysLeft: number }[] }>({ expired: 0, expiringSoon: 0, active: 0, list: [] })
   const [freshness, setFreshness] = useState<{ fresh: number; stale30: number; stale60: number; stale90: number; staleItems: { name: string; section: string; days: number }[] }>({ fresh: 0, stale30: 0, stale60: 0, stale90: 0, staleItems: [] })
   const [visitorStats, setVisitorStats] = useState({ today: 0, views: 0, total: 0 })
-
-  useEffect(() => { setMounted(true) }, [])
-
-  useEffect(() => {
-    const h = new Date().getHours()
-    if (h < 12) setGreeting("Good morning")
-    else if (h < 17) setGreeting("Good afternoon")
-    else setGreeting("Good evening")
-  }, [])
 
   useEffect(() => {
     async function loadData() {
@@ -163,12 +156,12 @@ export default function AdminDashboard() {
         setStats((prev) => prev.map((s, i) => ({ ...s, count: counts[i] })))
 
         const all: RecentItem[] = [
-          ...(pkgD.data || []).map((p: any) => ({ ...p, name: p.name, section: "tour_packages", type: p.type })),
-          ...(dealD.data || []).map((d: any) => ({ ...d, name: d.title, section: "deals", type: d.type })),
-          ...(hmD.data || []).map((h: any) => ({ ...h, name: h.name, section: "honeymoon_packages", type: "honeymoon" })),
-          ...(destD.data || []).map((d: any) => ({ ...d, name: d.name, section: "destinations", type: "destination" })),
-          ...(galD.data || []).map((g: any) => ({ ...g, name: g.alt || "Untitled", section: "gallery", type: "gallery" })),
-          ...(blogD.data || []).map((b: any) => ({ ...b, name: b.title, section: "blog_posts", type: "blog" })),
+          ...(pkgD.data || []).map((p) => ({ ...p, name: p.name, section: "tour_packages", type: p.type })),
+          ...(dealD.data || []).map((d) => ({ ...d, name: d.title, section: "deals", type: d.type })),
+          ...(hmD.data || []).map((h) => ({ ...h, name: h.name, section: "honeymoon_packages", type: "honeymoon" })),
+          ...(destD.data || []).map((d) => ({ ...d, name: d.name, section: "destinations", type: "destination" })),
+          ...(galD.data || []).map((g) => ({ ...g, name: g.alt || "Untitled", section: "gallery", type: "gallery" })),
+          ...(blogD.data || []).map((b) => ({ ...b, name: b.title, section: "blog_posts", type: "blog" })),
         ]
         all.sort((a, b) => new Date(b.updated_at ?? b.created_at ?? "").getTime() - new Date(a.updated_at ?? a.created_at ?? "").getTime())
         setRecent(all.slice(0, 8))
@@ -176,7 +169,7 @@ export default function AdminDashboard() {
         // Deals expiry
         const { data: allDeals } = await sb.from("deals").select("id,title,slug,valid_until,discount,image,featured")
         const now = new Date()
-        const expiryList: any[] = []
+        const expiryList: { id: number; title: string; slug: string; validUntil: string; daysLeft: number }[] = []
         let expired = 0, expiringSoon = 0, active = 0
         for (const d of allDeals || []) {
           if (!d.valid_until) { active++; continue }
@@ -198,7 +191,7 @@ export default function AdminDashboard() {
           sb.from("blog_posts").select("id,title,updated_at"),
         ])
         let fresh = 0, stale30 = 0, stale60 = 0, stale90 = 0
-        const staleItems: any[] = []
+        const staleItems: { name: string; section: string; days: number }[] = []
         const daysSince = (dateStr: string) => Math.floor((now.getTime() - new Date(dateStr).getTime()) / (1000 * 60 * 60 * 24))
         for (const p of tourD2?.data || []) { const d = daysSince(p.updated_at); if (d >= 90) { stale90++; staleItems.push({ name: p.name, section: "tour_packages", days: d }) } else if (d >= 60) { stale60++; staleItems.push({ name: p.name, section: "tour_packages", days: d }) } else if (d >= 30) { stale30++; staleItems.push({ name: p.name, section: "tour_packages", days: d }) } else fresh++ }
         for (const p of dealD3?.data || []) { const d = daysSince(p.updated_at); if (d >= 90) { stale90++; staleItems.push({ name: p.title, section: "deals", days: d }) } else if (d >= 60) { stale60++; staleItems.push({ name: p.title, section: "deals", days: d }) } else if (d >= 30) { stale30++; staleItems.push({ name: p.title, section: "deals", days: d }) } else fresh++ }
@@ -213,14 +206,14 @@ export default function AdminDashboard() {
         const todayStart = new Date()
         todayStart.setHours(0, 0, 0, 0)
         const { data: visitorRows } = await sb.from("visitors").select("session_id,entered_at").gte("entered_at", todayStart.toISOString())
-        const todaySessions = new Set((visitorRows || []).map((v: any) => v.session_id))
+        const todaySessions = new Set((visitorRows || []).map((v) => v.session_id))
         const { count: totalVisits } = await sb.from("visitors").select("id", { count: "exact", head: true })
         const { data: allSessions } = await sb.from("visitors").select("session_id")
-        const allUnique = new Set((allSessions || []).map((v: any) => v.session_id))
+        const allUnique = new Set((allSessions || []).map((v) => v.session_id))
         setVisitorStats({ today: todaySessions.size, views: visitorRows?.length || 0, total: allUnique.size })
       } catch {} finally { setLoading(false) }
     }
-    loadData()
+    ;(async () => { await loadData() })()
   }, [])
 
   const total = stats.reduce((sum, s) => sum + s.count, 0)
@@ -644,7 +637,7 @@ export default function AdminDashboard() {
             <h3 className="text-sm font-semibold text-slate-900 dark:text-white flex items-center gap-2">
               <Users className="w-4 h-4 text-purple-500" />Visitor Activity
             </h3>
-            <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">Today's site traffic summary</p>
+            <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">Today&apos;s site traffic summary</p>
           </div>
           <button onClick={() => router.push("/admin/visitors")}
             className="text-xs text-purple-500 hover:text-purple-600 flex items-center gap-1 font-medium">
@@ -654,7 +647,7 @@ export default function AdminDashboard() {
         <div className="flex items-center gap-4">
           <div className="flex-1 p-4 rounded-xl bg-gradient-to-br from-purple-50 to-violet-50 dark:from-purple-500/5 dark:to-violet-500/5 border border-purple-100 dark:border-purple-900/30 text-center">
             <p className="text-2xl font-bold text-purple-600 dark:text-purple-400 tabular-nums">{visitorStats.today}</p>
-            <p className="text-xs text-purple-500 mt-0.5">Today's Visitors</p>
+            <p className="text-xs text-purple-500 mt-0.5">Today&apos;s Visitors</p>
           </div>
           <div className="flex-1 p-4 rounded-xl bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-blue-500/5 dark:to-indigo-500/5 border border-blue-100 dark:border-blue-900/30 text-center">
             <p className="text-2xl font-bold text-blue-600 dark:text-blue-400 tabular-nums">{visitorStats.views}</p>

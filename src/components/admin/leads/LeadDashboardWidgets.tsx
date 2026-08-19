@@ -1,5 +1,6 @@
 "use client"
 
+import { useEffect, useState } from "react"
 import { useQuery } from "@tanstack/react-query"
 import { motion } from "framer-motion"
 import { Timer, TrendingUp, Users, MailOpen, Plane, Wallet, MessageCircle, BellRing, CheckCircle2 } from "lucide-react"
@@ -77,9 +78,15 @@ export function LeadRemindersPanel() {
     },
     refetchInterval: 60000,
   })
+  const [now, setNow] = useState(() => Date.now())
+
+  useEffect(() => {
+    const iv = setInterval(() => setNow(Date.now()), 60000)
+    return () => clearInterval(iv)
+  }, [])
 
   const reminders = (data?.reminders || []).filter((r) => !r.done).slice(0, 8)
-  const overdue = reminders.filter((r) => new Date(r.due_at).getTime() < Date.now())
+  const overdue = reminders.filter((r) => new Date(r.due_at).getTime() < now)
 
   return (
     <div className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-5">
@@ -102,7 +109,7 @@ export function LeadRemindersPanel() {
       ) : (
         <div className="space-y-2">
           {reminders.map((r) => {
-            const isOverdue = new Date(r.due_at).getTime() < Date.now()
+            const isOverdue = new Date(r.due_at).getTime() < now
             return (
               <div
                 key={r.id}

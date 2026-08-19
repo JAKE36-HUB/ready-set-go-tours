@@ -13,7 +13,7 @@ export default function NewPopupPage() {
   useEffect(() => {
     fetch("/api/admin/popups")
       .then((r) => r.json())
-      .then((j) => setAllPopups((j.data || []).map((p: any) => ({ id: p.id, title: p.title }))))
+      .then((j) => setAllPopups((j.data || []).map((p: { id: number; title: string }) => ({ id: p.id, title: p.title }))))
       .catch(() => {})
   }, [])
 

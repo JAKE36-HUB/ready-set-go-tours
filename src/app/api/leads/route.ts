@@ -83,8 +83,8 @@ export async function POST(req: NextRequest) {
     })
 
     return NextResponse.json({ ok: true })
-  } catch (e: any) {
+  } catch (e) {
     console.error("POST /api/leads failed:", e)
-    return NextResponse.json({ error: e?.message || "Internal error" }, { status: 500 })
+    return NextResponse.json({ error: e instanceof Error ? e.message : "Internal error" }, { status: 500 })
   }
 }

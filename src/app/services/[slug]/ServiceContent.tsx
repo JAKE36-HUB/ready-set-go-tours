@@ -67,7 +67,7 @@ const TRUST_STATS: Record<string, { value: string; label: string }[]> = {
     { value: "200+", label: "Vetted Properties" },
     { value: "4,200+", label: "Bookings Completed" },
     { value: "4.9", label: "Guest Rating" },
-    { value: "15+", label: "Years Experience" },
+    { value: "3+", label: "Years Experience" },
   ],
   "air-ticketing": [
     { value: "50+", label: "Airline Partners" },
@@ -368,7 +368,7 @@ export default function ServiceContent({ service }: Props) {
                 onClick={() => setBookingOpen(true)}
                 className="inline-flex items-center justify-center gap-2 h-12 px-8 rounded-xl bg-gradient-to-r from-emerald-500 to-emerald-600 hover:from-emerald-400 hover:to-emerald-500 text-white font-semibold shadow-lg shadow-emerald-500/25 transition-all"
               >
-                Book Now
+                Get a Free Quote
               </button>
               <a
                 href={`https://wa.me/${COMPANY.whatsapp}?text=Hi!%20I'm%20interested%20in%20${encodeURIComponent(service.title)}`}

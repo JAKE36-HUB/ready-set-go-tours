@@ -17,7 +17,24 @@ const typeDefs = [
   { key: "beach", label: "Beach Only", icon: Heart },
 ];
 
-export default function HoneymoonGrid({ packages }: { packages: any[] }) {
+export interface HoneymoonCard {
+  id: number;
+  slug: string;
+  name: string;
+  image: string;
+  description: string;
+  price: number;
+  priceKES: number | null;
+  duration: string;
+  accommodation: string;
+  meals: string;
+  transport: string;
+  highlights: string[];
+  activities: string[];
+  included: string[];
+}
+
+export default function HoneymoonGrid({ packages }: { packages: HoneymoonCard[] }) {
   const [selected, setSelected] = useState<string>("all");
 
   const filtered = selected === "all"
@@ -128,7 +145,7 @@ export default function HoneymoonGrid({ packages }: { packages: any[] }) {
                       <div className="mb-6">
                         <h4 className="text-xs font-semibold uppercase tracking-wider text-slate-400 mb-3">Highlights</h4>
                         <div className="grid grid-cols-2 gap-2">
-                          {pkg.highlights.map((h: any) => (
+                          {pkg.highlights.map((h: string) => (
                             <div key={h} className="flex items-start gap-2 text-sm text-slate-600 dark:text-slate-300">
                               <Star className="size-3.5 text-rose-400 shrink-0 mt-0.5 fill-rose-400" />
                               {h}
@@ -140,7 +157,7 @@ export default function HoneymoonGrid({ packages }: { packages: any[] }) {
                       <div className="mb-6">
                         <h4 className="text-xs font-semibold uppercase tracking-wider text-slate-400 mb-3">Included</h4>
                         <div className="grid grid-cols-2 gap-1.5">
-                          {pkg.included.map((i: any) => (
+                          {pkg.included.map((i: string) => (
                             <div key={i} className="flex items-center gap-1.5 text-xs text-slate-500">
                               <Check className="size-3 text-emerald-500 shrink-0" />
                               {i}
@@ -154,7 +171,7 @@ export default function HoneymoonGrid({ packages }: { packages: any[] }) {
                           href={`/honeymoon-packages/${pkg.slug}`}
                           className="flex-1 inline-flex items-center justify-center gap-2 h-12 rounded-xl bg-white dark:bg-slate-700 ring-1 ring-slate-200 dark:ring-slate-600 hover:ring-rose-300 text-slate-700 dark:text-slate-200 text-sm font-medium transition-all duration-300"
                         >
-                          View Details <ArrowRight className="size-4" />
+                          View Safari <ArrowRight className="size-4" />
                         </Link>
                         <PdfItinerary
                           data={{

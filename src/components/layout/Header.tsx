@@ -207,7 +207,7 @@ export function Header() {
 
             <Link href="/contact">
               <Button className="hidden sm:inline-flex items-center gap-2 font-medium gradient-primary text-white border-0 shadow-premium hover:shadow-premium hover:scale-105 transition-all duration-300">
-                Book Now
+                Get a Free Quote
               </Button>
             </Link>
 
@@ -363,7 +363,7 @@ function MobileNavContent({ onClose }: { onClose: () => void }) {
           onClick={onClose}
           className="flex items-center justify-center w-full py-3 rounded-xl gradient-primary text-white font-medium shadow-premium hover:shadow-premium hover:scale-[1.02] transition-all duration-300"
         >
-          Book Now
+          Get a Free Quote
         </Link>
       </div>
     </div>

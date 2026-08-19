@@ -35,7 +35,7 @@ export default function TanzaniaTourInteractive({ tourName, isCTA }: Props) {
         className="bg-gradient-to-r from-amber-500 to-orange-600 hover:from-amber-400 hover:to-orange-500 text-white px-6"
       >
         <Plane className="size-4 mr-2" />
-        Book This Tour
+        Get a Free Quote
       </Button>
       <BookingModal open={open} onOpenChange={setOpen} initialPackage={tourName} />
     </>

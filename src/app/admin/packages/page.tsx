@@ -31,15 +31,16 @@ export default function PackagesPage() {
   const [packages, setPackages] = useState<TourPackage[]>([])
   const [loading, setLoading] = useState(true)
 
-  async function load() {
-    setLoading(true)
-    try {
-      const { data } = await getSupabase().from("tour_packages").select("*").order("name")
-      if (data) setPackages(data)
-    } catch {} finally { setLoading(false) }
-  }
-
-  useEffect(() => { load() }, [])
+  useEffect(() => {
+    let cancelled = false
+    ;(async () => {
+      try {
+        const { data } = await getSupabase().from("tour_packages").select("*").order("name")
+        if (data && !cancelled) setPackages(data)
+      } catch {} finally { if (!cancelled) setLoading(false) }
+    })()
+    return () => { cancelled = true }
+  }, [])
 
   async function handleDelete(id: number) {
     if (!confirm("Are you sure you want to delete this package?")) return

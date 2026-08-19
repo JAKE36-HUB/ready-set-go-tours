@@ -1,4 +1,4 @@
-"use client"
+﻿"use client"
 
 import { useRef } from "react"
 import Image from "next/image"
@@ -16,7 +16,7 @@ export function FinalCTA() {
     <section className="relative py-32 overflow-hidden bg-slate-950">
       <div className="absolute inset-0">
         <Image
-          src="https://i.pinimg.com/736x/ce/f6/d6/cef6d689ef0cdfd6df6180dee63f669c.jpg"
+          src="/images/local/pin_cef6d689ef0cdfd6df6180dee63f669c.jpg"
           alt="African sunset silhouette"
           fill
           sizes="100vw"

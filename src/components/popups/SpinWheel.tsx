@@ -22,7 +22,7 @@ interface Props {
 export function SpinWheel({ promoCode, onWin }: Props) {
   const [spinning, setSpinning] = useState(false)
   const [result, setResult] = useState<string | null>(null)
-  const rotationRef = useRef(0)
+  const [rotation, setRotation] = useState(0)
   const spinsRef = useRef(0)
 
   function spin() {
@@ -32,7 +32,7 @@ export function SpinWheel({ promoCode, onWin }: Props) {
     spinsRef.current += 1
     const target = 360 * (4 + spinsRef.current % 3) + Math.floor(Math.random() * 360)
     const prizeIndex = Math.floor(Math.random() * PRIZES.length)
-    rotationRef.current += target
+    setRotation((r) => r + target)
     setTimeout(() => {
       const prize = PRIZES[prizeIndex].label
       setResult(prize)
@@ -50,7 +50,7 @@ export function SpinWheel({ promoCode, onWin }: Props) {
       <div className="relative" style={{ width: size, height: size }}>
         <motion.div
           className="absolute inset-0"
-          animate={{ rotate: rotationRef.current }}
+          animate={{ rotate: rotation }}
           transition={{ duration: 4.2, ease: [0.17, 0.67, 0.2, 1] }}
         >
           <svg width={size} height={size} viewBox={`0 0 ${size} ${size}`} className="drop-shadow-lg">

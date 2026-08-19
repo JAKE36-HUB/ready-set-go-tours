@@ -53,8 +53,6 @@ export default function PopupsPage() {
   const [error, setError] = useState("")
 
   async function load() {
-    setLoading(true)
-    setError("")
     try {
       const [res, statRes] = await Promise.all([fetch("/api/admin/popups"), fetch("/api/admin/popups/analytics")])
       const json = await res.json()
@@ -64,7 +62,9 @@ export default function PopupsPage() {
     } catch { setError("Network error") } finally { setLoading(false) }
   }
 
-  useEffect(() => { load() }, [])
+  useEffect(() => {
+    ;(async () => { await load() })()
+  }, [])
 
   async function handleDuplicate(popup: Popup) {
     const res = await fetch(`/api/admin/popups/${popup.id}`)

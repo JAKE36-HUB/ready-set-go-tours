@@ -13,12 +13,8 @@ export default function NotificationCenter() {
   const router = useRouter()
   const { notifications, unreadCount, refresh, markAllRead } = useRealtime()
   const [open, setOpen] = useState(false)
-  const [soundOn, setSound] = useState(true)
+  const [soundOn, setSound] = useState(() => soundEnabled())
   const ref = useRef<HTMLDivElement>(null)
-
-  useEffect(() => {
-    setSound(soundEnabled())
-  }, [])
 
   useEffect(() => {
     function onClick(e: MouseEvent) {

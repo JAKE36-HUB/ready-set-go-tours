@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { AnimatePresence, motion } from "framer-motion"
 import {
   X, Phone, MessageCircle, Mail, Archive, Trash2, CalendarClock, Plus,
@@ -17,7 +17,7 @@ interface Props {
   onDeleted: (leadId: number) => void
 }
 
-function Section({ icon: Icon, title, children }: { icon: any; title: string; children: React.ReactNode }) {
+function Section({ icon: Icon, title, children }: { icon: React.ElementType; title: string; children: React.ReactNode }) {
   return (
     <div className="rounded-xl border border-slate-200 dark:border-slate-800 p-3.5">
       <h4 className="flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-wide text-slate-400 mb-2.5">
@@ -45,6 +45,12 @@ export default function LeadDetailPanel({ lead, onClose, onChanged, onDeleted }:
   const [reminderDate, setReminderDate] = useState("")
   const [reminderSaving, setReminderSaving] = useState(false)
   const [busy, setBusy] = useState("")
+  const [now, setNow] = useState(() => Date.now())
+
+  useEffect(() => {
+    const iv = setInterval(() => setNow(Date.now()), 60000)
+    return () => clearInterval(iv)
+  }, [])
 
   if (!lead) return null
 
@@ -256,7 +262,7 @@ export default function LeadDetailPanel({ lead, onClose, onChanged, onDeleted }:
                     <p className={cn("text-xs", r.done && "line-through text-slate-400")}>{r.title}</p>
                     <p className="text-[10px] text-slate-400 flex items-center gap-1">
                       <Clock className="w-2.5 h-2.5" /> {formatDateTime(r.due_at)}
-                      {new Date(r.due_at).getTime() < Date.now() && !r.done && <span className="text-rose-500 font-semibold">overdue</span>}
+                      {new Date(r.due_at).getTime() < now && !r.done && <span className="text-rose-500 font-semibold">overdue</span>}
                     </p>
                   </div>
                 </div>

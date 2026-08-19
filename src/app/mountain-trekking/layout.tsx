@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { BreadcrumbJsonLd } from "@/components/JsonLd";
 
 export const metadata: Metadata = {
-  title: "Mountain Trekking & Climbing | Mount Kenya & Kilimanjaro | Ready Set Go Tours",
+  title: "Mountain Trekking & Climbing | Mount Kenya & Kilimanjaro",
   description:
     "Conquer Africa's legendary peaks with expert guides. Mount Kenya trekking packages, Kilimanjaro climbs, and high-altitude adventures. Guided summit expeditions with full support.",
   keywords: [

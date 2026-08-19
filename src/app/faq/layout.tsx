@@ -3,7 +3,7 @@ import { FAQ_ITEMS } from "@/lib/constants";
 import { BreadcrumbJsonLd } from "@/components/JsonLd";
 
 export const metadata: Metadata = {
-  title: "FAQ | Safari Travel Guide | Ready Set Go Tours & Travel",
+  title: "FAQ | Safari Travel Guide",
   description:
     "Frequently asked questions about East African safaris. Find answers about visas, vaccinations, packing, best time to visit, accommodation, and more from Kenya's trusted tour operator.",
   keywords: [

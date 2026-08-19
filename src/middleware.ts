@@ -96,8 +96,29 @@ export async function middleware(request: NextRequest) {
     return NextResponse.redirect(url)
   }
 
-  // MFA enforcement — if the user has 2FA enrolled, require an aal2 session
+  // MFA enforcement — every admin must have 2FA set up AND an aal2 session
   if (user) {
+    const { data: factors } = await supabase.auth.mfa.listFactors()
+    const hasVerifiedFactor = factors?.all?.some((f) => f.status === "verified")
+
+    // No authenticator enrolled → require setup before anything else
+    if (!hasVerifiedFactor) {
+      if (path.startsWith("/api/admin")) {
+        return NextResponse.json(
+          { error: "Two-factor authentication must be set up first" },
+          { status: 403 }
+        )
+      }
+      // Dedicated setup page — never redirect it onto itself
+      if (path === "/admin/enroll-mfa") {
+        return supabaseResponse
+      }
+      const url = request.nextUrl.clone()
+      url.pathname = "/admin/enroll-mfa"
+      return NextResponse.redirect(url)
+    }
+
+    // Enrolled but session is not aal2 yet → verify with a code
     const { data: aal } = await supabase.auth.mfa.getAuthenticatorAssuranceLevel()
     if (aal?.nextLevel === "aal2" && aal.currentLevel !== "aal2") {
       if (path.startsWith("/api/admin")) {

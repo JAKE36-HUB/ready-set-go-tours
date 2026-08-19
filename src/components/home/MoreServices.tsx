@@ -1,4 +1,4 @@
-"use client"
+﻿"use client"
 
 import { useRef } from "react"
 import Image from "next/image"
@@ -11,11 +11,11 @@ import { cn } from "@/lib/utils"
 
 const HOME_SERVICES = [
   {
-    image: "https://i.pinimg.com/736x/28/31/b4/2831b4de089bea29cccc93985a7bd032.jpg",
+    image: "/images/local/pin_2831b4de089bea29cccc93985a7bd032.jpg",
     icon: Hotel as LucideIcon,
     title: "Hotel Bookings",
     slug: "hotel-bookings",
-    description: "We secure exclusive rates at 200+ hand-picked properties across East Africa — from luxury safari camps to beachfront resorts and city hotels.",
+    description: "We secure exclusive rates at 200+ hand-picked properties across East Africa â€” from luxury safari camps to beachfront resorts and city hotels.",
     features: ["Best rate guarantee", "200+ vetted properties", "Luxury camps & lodges", "Beach & city hotels", "Honeymoon packages", "Free booking service"],
     priceFrom: "From $80 / night",
     badge: "Most Popular",
@@ -24,11 +24,11 @@ const HOME_SERVICES = [
     color: "sky",
   },
   {
-    image: "https://i.pinimg.com/736x/72/1a/8a/721a8a7ea0c339e50b674b2db40e125a.jpg",
+    image: "/images/local/pin_721a8a7ea0c339e50b674b2db40e125a.jpg",
     icon: Globe as LucideIcon,
     title: "Air Ticketing",
     slug: "air-ticketing",
-    description: "International flights, domestic connections, and bush flights to remote safari airstrips — all at preferred airline rates with 24/7 support.",
+    description: "International flights, domestic connections, and bush flights to remote safari airstrips â€” all at preferred airline rates with 24/7 support.",
     features: ["International flights", "Bush & domestic flights", "Preferred airline rates", "Group fare negotiation", "Flexible ticket options", "Meet-and-assist service"],
     priceFrom: "From $299",
     badge: "Best Value",
@@ -37,7 +37,7 @@ const HOME_SERVICES = [
     color: "emerald",
   },
   {
-    image: "https://images.unsplash.com/photo-1544161515-4ab6ce6db874?w=600&q=80",
+    image: "/images/local/unsplash_1544161515-4ab6ce6db874.jpg",
     icon: Sparkles as LucideIcon,
     title: "Massage & Wellness",
     slug: "massage-wellness",
@@ -82,7 +82,7 @@ export function MoreServices({ onReserve }: { onReserve?: (name: string) => void
             </span>
           </h2>
           <p className="text-lg text-slate-500 dark:text-slate-400 max-w-xl mx-auto">
-            From flights and accommodation to relaxation — we handle every detail so you just enjoy the journey.
+            From flights and accommodation to relaxation â€” we handle every detail so you just enjoy the journey.
           </p>
         </motion.div>
 
@@ -161,7 +161,7 @@ export function MoreServices({ onReserve }: { onReserve?: (name: string) => void
                       onClick={() => onReserve?.(service.title)}
                       className={cn("flex-1 h-10 rounded-xl text-white text-sm font-semibold shadow-md hover:shadow-lg transition-all duration-300 bg-gradient-to-r", c.from, c.to)}
                     >
-                      Book Now
+                      Get a Free Quote
                     </button>
                     <Link
                       href={`/services/${service.slug}`}

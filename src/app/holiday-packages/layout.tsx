@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { BreadcrumbJsonLd } from "@/components/JsonLd";
 
 export const metadata: Metadata = {
-  title: "Holiday Packages & Safari Deals | Ready Set Go Tours & Travel",
+  title: "Holiday Packages & Safari Deals",
   description:
     "Browse our curated collection of safari, beach, mountain, and cultural holiday packages across Kenya and Tanzania. Luxury and budget options available.",
   keywords: [

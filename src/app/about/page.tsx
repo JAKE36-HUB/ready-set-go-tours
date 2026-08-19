@@ -8,8 +8,8 @@ import { STATISTICS, COMPANY } from "@/lib/constants";
 import AnimatedSection from "@/components/AnimatedSection";
 
 export const metadata: Metadata = {
-  title: `About Us | ${COMPANY.name}`,
-  description: `Learn about ${COMPANY.name}, Kenya's premier luxury tour operator with over 15 years of experience crafting bespoke safari and travel experiences across East Africa.`,
+  title: "About Us",
+  description: `Learn about ${COMPANY.name}, Kenya's premier luxury tour operator with 3+ years of experience crafting bespoke safari and travel experiences across East Africa.`,
   keywords: ["about Ready Set Go Tours", "Kenya tour operator", "safari company Nairobi", "East Africa travel experts"],
   openGraph: {
     title: `About Us | ${COMPANY.name}`,
@@ -224,7 +224,7 @@ export default function AboutPage() {
               className="inline-flex items-center gap-2 h-12 px-8 rounded-xl bg-gradient-to-r from-sky-500 to-blue-600 hover:from-sky-400 hover:to-blue-500 text-white font-semibold shadow-lg shadow-sky-500/25 transition-all duration-200"
             >
               <HeadphonesIcon className="size-4" />
-              Talk to an Expert
+              Get a Free Quote
             </Link>
           </AnimatedSection>
         </div>

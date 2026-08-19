@@ -36,11 +36,28 @@ const typeColors: Record<string, string> = {
   honeymoon: "bg-rose-500/10 text-rose-600 border-rose-500/20",
 };
 
+export interface PackageCard {
+  id: number;
+  name: string;
+  slug: string;
+  image: string;
+  description: string;
+  price: number;
+  duration: string;
+  type: string;
+  accommodation: string;
+  meals: string;
+  transport: string;
+  activities: string[];
+  highlights: string[];
+  priceKES: number | null;
+}
+
 export default function PackagesBrowser({
   packages,
   initialType,
 }: {
-  packages: any[];
+  packages: PackageCard[];
   initialType?: string;
 }) {
   const [activeFilter, setActiveFilter] = useState(
@@ -258,7 +275,7 @@ export default function PackagesBrowser({
                     </div>
 
                     <div className="flex flex-wrap gap-1.5 mb-5">
-                      {pkg.activities.slice(0, 4).map((act: any) => (
+                      {pkg.activities.slice(0, 4).map((act: string) => (
                         <span
                           key={act}
                           className={`inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] ${
@@ -283,7 +300,7 @@ export default function PackagesBrowser({
                         href={`/holiday-packages/${pkg.slug}`}
                         className="flex-1 inline-flex items-center justify-center h-11 rounded-xl bg-muted hover:bg-muted/80 text-foreground text-sm font-medium transition-all"
                       >
-                        View Details
+                        View Safari
                       </Link>
                       <Button
                         onClick={() => setBookingTour(pkg.name)}
@@ -291,7 +308,7 @@ export default function PackagesBrowser({
                         size="sm"
                         className="flex-1"
                       >
-                        {pkg.type === "luxury" ? "Inquire Now" : "Book Now"}
+                        Get a Free Quote
                       </Button>
                     </div>
                   </div>
@@ -338,13 +355,13 @@ export default function PackagesBrowser({
                 </thead>
                 <tbody>
                   {[
-                    { label: "Price", getValue: (p: any) => `$${p.price.toLocaleString()}` },
-                    { label: "Duration", getValue: (p: any) => p.duration },
-                    { label: "Type", getValue: (p: any) => p.type },
-                    { label: "Accommodation", getValue: (p: any) => p.accommodation },
-                    { label: "Meals", getValue: (p: any) => p.meals },
-                    { label: "Transport", getValue: (p: any) => p.transport },
-                    { label: "Activities", getValue: (p: any) => p.activities.join(", ") },
+                    { label: "Price", getValue: (p: PackageCard) => `$${p.price.toLocaleString()}` },
+                    { label: "Duration", getValue: (p: PackageCard) => p.duration },
+                    { label: "Type", getValue: (p: PackageCard) => p.type },
+                    { label: "Accommodation", getValue: (p: PackageCard) => p.accommodation },
+                    { label: "Meals", getValue: (p: PackageCard) => p.meals },
+                    { label: "Transport", getValue: (p: PackageCard) => p.transport },
+                    { label: "Activities", getValue: (p: PackageCard) => p.activities.join(", ") },
                   ].map((row) => (
                     <tr key={row.label} className="border-b last:border-0">
                       <td className="p-4 text-muted-foreground font-medium">{row.label}</td>
@@ -367,7 +384,7 @@ export default function PackagesBrowser({
                           }}
                           className="bg-sky-500 hover:bg-sky-600 text-white"
                         >
-                          Book Now
+                          Get a Free Quote
                         </Button>
                       </td>
                     ))}

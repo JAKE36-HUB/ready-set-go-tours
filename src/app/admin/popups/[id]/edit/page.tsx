@@ -35,7 +35,7 @@ export default function EditPopupPage() {
         ])
         const json = await res.json()
         const list = await listRes.json()
-        setAllPopups((list.data || []).map((p: any) => ({ id: p.id, title: p.title })))
+        setAllPopups((list.data || []).map((p: { id: number; title: string }) => ({ id: p.id, title: p.title })))
         if (json.data) {
           const d = json.data
           setConfig(configFromRecord(d))

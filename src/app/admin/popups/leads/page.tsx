@@ -37,7 +37,6 @@ export default function PopupLeadsPage() {
   const [popupNames, setPopupNames] = useState<{ id: number; title: string }[]>([])
 
   async function load() {
-    setLoading(true)
     try {
       const [leadRes, popRes] = await Promise.all([
         fetch("/api/admin/popups/leads"),
@@ -46,11 +45,13 @@ export default function PopupLeadsPage() {
       const j = await leadRes.json()
       const pj = await popRes.json()
       setLeads(j.data || [])
-      setPopupNames((pj.data || []).map((p: any) => ({ id: p.id, title: p.title })))
+      setPopupNames((pj.data || []).map((p: { id: number; title: string }) => ({ id: p.id, title: p.title })))
     } catch {} finally { setLoading(false) }
   }
 
-  useEffect(() => { load() }, [])
+  useEffect(() => {
+    ;(async () => { await load() })()
+  }, [])
 
   async function handleDelete(id: number) {
     if (!confirm("Delete this lead?")) return

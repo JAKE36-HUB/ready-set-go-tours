@@ -16,7 +16,7 @@ export async function GET(req: NextRequest) {
 
   const stream = new ReadableStream<Uint8Array>({
     start(controller) {
-      const send = (event: { table: string; payload: any }) => {
+      const send = (event: { table: string; payload: Record<string, unknown> }) => {
         try {
           controller.enqueue(encoder.encode(`data: ${JSON.stringify(event)}\n\n`))
         } catch {

@@ -7,7 +7,7 @@ import { motion, useInView } from "framer-motion"
 import { Star, Clock, MapPin, Calendar, ArrowRight } from "lucide-react"
 
 import { Button } from "@/components/ui/button"
-import { DESTINATIONS } from "@/lib/constants"
+import { DESTINATIONS, SITE_STATS } from "@/lib/constants"
 import { cn } from "@/lib/utils"
 
 export function FeaturedDestinations() {
@@ -44,7 +44,7 @@ export function FeaturedDestinations() {
                 <span key={i} className="w-5 h-5 rounded-full bg-gradient-to-br from-amber-300 to-amber-500 ring-2 ring-white dark:ring-slate-950" />
               ))}
             </span>
-            <span><span className="font-semibold text-amber-500">2,400+</span> happy travelers</span>
+            <span><span className="font-semibold text-amber-500">{SITE_STATS.happyTravelers}</span> happy travelers</span>
           </div>
         </motion.div>
 

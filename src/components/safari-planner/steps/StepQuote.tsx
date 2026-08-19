@@ -148,7 +148,7 @@ export function StepQuote({
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 h-11 px-5 rounded-xl bg-white/10 hover:bg-white/20 text-white text-sm font-medium transition-all"
           >
-            <ExternalLink className="w-4 h-4" /> Chat on WhatsApp
+            <ExternalLink className="w-4 h-4" /> WhatsApp Us
           </a>
           <button
             type="button"

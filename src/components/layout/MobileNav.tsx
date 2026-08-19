@@ -241,7 +241,7 @@ export function MobileNav({ isOpen, onClose }: MobileNavProps) {
                 onClick={onClose}
                 className="flex items-center justify-center w-full py-3.5 rounded-xl bg-gradient-to-r from-sky-500 to-cyan-400 text-white font-medium shadow-lg hover:shadow-xl hover:scale-[1.02] transition-all duration-300"
               >
-                Book Your Adventure
+                Get a Free Quote
               </Link>
             </motion.div>
           </motion.div>

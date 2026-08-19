@@ -23,7 +23,7 @@ export async function POST(req: NextRequest) {
 
     if (!popup_id) return badRequest("Missing popup_id")
 
-    const s = (v: any) => sanitizeString(v, MAX_FIELD)
+    const s = (v: unknown) => sanitizeString(v, MAX_FIELD)
 
     if (email) {
       if (!rateLimit(`popup-lead-email:${s(email).toLowerCase()}`, 3, 10 * 60 * 1000)) {
@@ -86,8 +86,8 @@ export async function POST(req: NextRequest) {
     })
 
     return NextResponse.json({ ok: true })
-  } catch (e: any) {
+  } catch (e) {
     console.error("POST /api/popup/lead failed:", e)
-    return NextResponse.json({ error: e?.message || "Internal error" }, { status: 500 })
+    return NextResponse.json({ error: e instanceof Error ? e.message : "Internal error" }, { status: 500 })
   }
 }

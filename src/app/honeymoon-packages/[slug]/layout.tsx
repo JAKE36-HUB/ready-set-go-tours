@@ -9,7 +9,12 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
       .select("name, description")
       .eq("slug", slug)
       .single()
-    if (data) return { title: data.name, description: data.description?.slice(0, 160) }
+    if (data)
+      return {
+        title: data.name,
+        description: data.description?.slice(0, 160),
+        alternates: { canonical: `/honeymoon-packages/${slug}` },
+      }
   } catch {}
   return {}
 }

@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useState } from "react";
 import Image from "next/image";
@@ -36,7 +36,7 @@ export default function MountainTrekkingPage() {
       {/* Hero */}
       <section className="relative h-[70vh] min-h-[520px] flex items-center justify-center overflow-hidden">
         <Image
-          src="https://i.pinimg.com/736x/61/e8/92/61e8923ec26b470919fa45a28c07e44c.jpg"
+          src="/images/local/pin_61e8923ec26b470919fa45a28c07e44c.jpg"
           alt="Hikers trekking on a mountain trail"
           fill
           priority
@@ -162,13 +162,13 @@ export default function MountainTrekkingPage() {
                           href={`/holiday-packages/${pkg.slug}`}
                           className="flex-1 inline-flex items-center justify-center gap-2 h-11 rounded-xl bg-slate-100 dark:bg-slate-700 hover:bg-slate-200 dark:hover:bg-slate-600 text-slate-700 dark:text-slate-200 text-sm font-medium transition-all duration-300"
                         >
-                          View Details <ArrowRight className="size-4" />
+                          View Safari <ArrowRight className="size-4" />
                         </Link>
                         <Button
                           onClick={() => setBookingTour(pkg.name)}
                           className="flex-1 h-11 text-sm font-semibold bg-gradient-to-r from-violet-500 to-slate-600 hover:from-violet-600 hover:to-slate-700 text-white border-0 shadow-md hover:shadow-lg transition-all duration-300"
                         >
-                          Book Now
+                          Get a Free Quote
                         </Button>
                       </div>
                     </div>

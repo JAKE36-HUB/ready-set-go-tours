@@ -46,8 +46,8 @@ export function AdaptiveImage({
 
   useEffect(() => {
     let active = true
-    if (!dims) setMeasured(null)
-    setBlurUrl("")
+    if (!dims) queueMicrotask(() => setMeasured(null))
+    queueMicrotask(() => setBlurUrl(""))
     const img = new GlobalImage()
     img.onload = () => {
       if (!active) return
@@ -142,11 +142,11 @@ export function useImageDims(src: string | null | undefined): ImageDims | null {
 
   useEffect(() => {
     if (!src) {
-      setInfo(null)
+      queueMicrotask(() => setInfo(null))
       return
     }
     let active = true
-    setInfo(null)
+    queueMicrotask(() => setInfo(null))
     const img = new GlobalImage()
     img.onload = () => {
       if (!active) return

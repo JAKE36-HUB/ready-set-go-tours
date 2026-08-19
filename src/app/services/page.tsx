@@ -1,4 +1,4 @@
-"use client"
+﻿"use client"
 
 import Image from "next/image"
 import Link from "next/link"
@@ -14,7 +14,7 @@ export default function ServicesPage() {
       {/* Hero */}
       <section className="relative py-32 px-6 overflow-hidden">
         <Image
-          src="https://i.pinimg.com/736x/5e/d9/e7/5ed9e7896df91ef4ad2acdc3d37b0b21.jpg"
+          src="/images/local/pin_5ed9e7896df91ef4ad2acdc3d37b0b21.jpg"
           alt="Services hero"
           fill
           priority
@@ -36,7 +36,7 @@ export default function ServicesPage() {
               </span>
             </h1>
             <p className="text-lg sm:text-xl text-white/70 max-w-2xl mx-auto leading-relaxed">
-              From flights and accommodation to wellness and relaxation — we handle every detail
+              From flights and accommodation to wellness and relaxation â€” we handle every detail
               of your East African journey.
             </p>
           </AnimatedSection>
@@ -54,7 +54,7 @@ export default function ServicesPage() {
               </h2>
               <p className="text-muted-foreground max-w-2xl mx-auto">
                 Whether you need a room for the night, a flight across the continent, or deep
-                relaxation after a week on safari — our team has you covered.
+                relaxation after a week on safari â€” our team has you covered.
               </p>
             </div>
           </AnimatedSection>
@@ -132,7 +132,7 @@ export default function ServicesPage() {
               Need Help Planning?
             </h2>
             <p className="text-sky-200/80 text-lg max-w-2xl mx-auto mb-8">
-              Whatever you need — a hotel booking, a flight, or a spa day — our team is ready to help.
+              Whatever you need â€” a hotel booking, a flight, or a spa day â€” our team is ready to help.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link
@@ -140,7 +140,7 @@ export default function ServicesPage() {
                 target="_blank"
                 className="inline-flex items-center justify-center gap-2 h-12 px-8 rounded-xl bg-gradient-to-r from-emerald-500 to-emerald-600 hover:from-emerald-400 hover:to-emerald-500 text-white font-semibold shadow-lg shadow-emerald-500/25 transition-all"
               >
-                Chat on WhatsApp
+                WhatsApp Us
               </Link>
               <Link
                 href="/contact"

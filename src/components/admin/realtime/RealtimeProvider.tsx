@@ -87,7 +87,7 @@ export function RealtimeProvider({ children }: { children: React.ReactNode }) {
 
   useEffect(() => {
     soundOn.current = localStorage.getItem("rsgt_sound_enabled") !== "false"
-    refresh()
+    ;(async () => { await refresh() })()
 
     let es: EventSource | null = null
     try {

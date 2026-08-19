@@ -5,7 +5,7 @@ import { unauthorized } from "@/lib/security"
 
 export const dynamic = "force-dynamic"
 
-const esc = (v: string | null | undefined) => `"${String(v ?? "").replace(/"/g, '""')}"`
+const esc = (v: unknown) => `"${String(v ?? "").replace(/"/g, '""')}"`
 
 export async function GET(req: NextRequest) {
   const user = await requireUser(req)
@@ -27,7 +27,7 @@ export async function GET(req: NextRequest) {
     "Created At", "Updated At", "Archived",
   ]
 
-  const rows = (data || []).map((l: any) => [
+  const rows = (data || []).map((l: Record<string, unknown>) => [
     l.id, l.name, l.phone, l.email, l.country, l.destination, l.travel_date, l.budget,
     l.adults, l.children, l.message, l.source, l.page, l.status, l.assigned_to,
     l.utm_source, l.utm_medium, l.utm_campaign, l.browser, l.device, l.ip, l.ip_country,

@@ -1,21 +1,21 @@
-import Image from "next/image";
+﻿import Image from "next/image";
 import Link from "next/link";
 import { Heart, Phone, Star, Quote, Shield, Gift } from "lucide-react";
 import { COMPANY } from "@/lib/constants";
 import { getSupabase } from "@/lib/supabase";
 import AnimatedSection from "@/components/AnimatedSection";
-import HoneymoonGrid from "@/components/HoneymoonGrid";
+import HoneymoonGrid, { type HoneymoonCard } from "@/components/HoneymoonGrid";
 
 export const revalidate = 3600;
 
 export default async function HoneymoonPage() {
-  let packages: any[] = [];
+  let packages: HoneymoonCard[] = [];
   try {
     const { data } = await getSupabase()
       .from("honeymoon_packages")
       .select("*")
       .order("name");
-    if (data) packages = data.map((p: any) => ({ ...p, priceKES: p.price_kes }));
+    if (data) packages = data.map((p: Record<string, unknown>) => ({ ...p, priceKES: p.price_kes }) as HoneymoonCard);
   } catch {}
 
   return (
@@ -23,7 +23,7 @@ export default async function HoneymoonPage() {
       {/* Hero */}
       <section className="relative h-[55vh] min-h-[420px] flex items-center justify-center overflow-hidden">
         <Image
-          src="https://i.pinimg.com/736x/18/e8/8f/18e88ff822350751cb10a878ba3edc71.jpg"
+          src="/images/local/pin_18e88ff822350751cb10a878ba3edc71.jpg"
           alt="Couple on dock overlooking overwater bungalows"
           fill
           priority
@@ -44,7 +44,7 @@ export default async function HoneymoonPage() {
             </h1>
             <p className="text-lg text-white/60 max-w-xl mx-auto">
               Handcrafted romantic escapes across East Africa. From private safari adventures to
-              secluded beachfront villas — your dream honeymoon begins here.
+              secluded beachfront villas â€” your dream honeymoon begins here.
             </p>
           </AnimatedSection>
         </div>
@@ -71,7 +71,7 @@ export default async function HoneymoonPage() {
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
             {[
               { icon: Heart, title: "Romance Curated", desc: "Every package is designed by experts who understand the art of romance." },
-              { icon: Shield, title: "Private & Exclusive", desc: "Private vehicles, private tables, private moments — just the two of you." },
+              { icon: Shield, title: "Private & Exclusive", desc: "Private vehicles, private tables, private moments â€” just the two of you." },
               { icon: Gift, title: "Surprise Touches", desc: "Champagne on arrival, rose petal turndowns, and other thoughtful extras." },
               { icon: Star, title: "Flexible Planning", desc: "Customize every detail from accommodation to activities. Your honeymoon, your way." },
             ].map((item) => (
@@ -96,7 +96,7 @@ export default async function HoneymoonPage() {
             <div className="relative p-10 rounded-3xl bg-gradient-to-br from-rose-50 to-pink-50 dark:from-rose-950/20 dark:to-pink-950/20 ring-1 ring-rose-100 dark:ring-rose-900/30 text-center">
               <Quote className="size-10 text-rose-300/50 mx-auto mb-6" />
               <blockquote className="text-xl sm:text-2xl text-slate-700 dark:text-slate-200 font-medium italic leading-relaxed mb-6">
-                &ldquo;Our honeymoon in Kenya was absolutely perfect. Every detail was thought of —
+                &ldquo;Our honeymoon in Kenya was absolutely perfect. Every detail was thought of â€”
                 from the champagne sundowner in the Mara to the private dinner on the beach in Diani.
                 We will treasure these memories forever.&rdquo;
               </blockquote>
@@ -128,7 +128,7 @@ export default async function HoneymoonPage() {
                   className="inline-flex items-center justify-center gap-2 h-12 px-6 rounded-xl bg-rose-500 hover:bg-rose-600 text-white text-sm font-medium transition-colors shadow-lg shadow-rose-500/25"
                 >
                   <Heart className="size-4" />
-                  Plan My Honeymoon
+                  Get a Free Quote
                 </Link>
                 <a
                   href={`tel:${COMPANY.phone}`}

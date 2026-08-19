@@ -1,6 +1,6 @@
 "use client"
 
-import { useCallback, useEffect, useMemo, useState } from "react"
+import { useCallback, useMemo, useState } from "react"
 import { useSearchParams, useRouter } from "next/navigation"
 import { useQuery } from "@tanstack/react-query"
 import { motion } from "framer-motion"
@@ -8,7 +8,7 @@ import {
   Search, FileSpreadsheet, FileText, FileType2, Filter, RefreshCw,
   ArrowUpDown,
 } from "lucide-react"
-import type { Lead, LeadDetail, LeadFilters } from "@/lib/leads/types"
+import type { Lead, LeadDetail, LeadFilters, LeadEvent, Reminder } from "@/lib/leads/types"
 import {
   LEAD_STATUSES, LEAD_SOURCES, RANGE_PRESETS, formatDateTime, timeAgo, initials,
 } from "@/lib/leads/types"
@@ -45,7 +45,6 @@ export default function LeadsPage() {
     range: "", q: "", country: "", destination: "", status: "", budget: "", source: "", archived: false,
   })
   const [selectedId, setSelectedId] = useState<number | null>(searchParams.get("lead") ? Number(searchParams.get("lead")) : null)
-  const [budgetBands, setBudgetBands] = useState<string[]>([])
 
   const params = useMemo(() => {
     const p = new URLSearchParams()
@@ -74,9 +73,8 @@ export default function LeadsPage() {
     return list
   }, [data, filters.budget])
 
-  useEffect(() => {
+  const budgetBands = useMemo(() => {
     const bands = new Set<string>()
-    for (const b of budgetBands) bands.add(b)
     ;(data?.leads || []).forEach((l) => {
       const num = l.budget?.match(/\d[\d,.]*/g)
       if (num) {
@@ -90,7 +88,7 @@ export default function LeadsPage() {
         bands.add("Flexible")
       }
     })
-    setBudgetBands([...bands].sort())
+    return [...bands].sort()
   }, [data])
 
   const { data: detailData } = useQuery({
@@ -99,7 +97,7 @@ export default function LeadsPage() {
       if (!selectedId) return null
       const res = await fetch(`/api/admin/leads/${selectedId}`, { cache: "no-store" })
       if (!res.ok) throw new Error("Failed to load lead")
-      return (await res.json()) as { lead: LeadDetail; events: any[]; reminders: any[] }
+      return (await res.json()) as { lead: LeadDetail; events: LeadEvent[]; reminders: Reminder[] }
     },
     enabled: !!selectedId,
   })

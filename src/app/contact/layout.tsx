@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { BreadcrumbJsonLd } from "@/components/JsonLd";
 
 export const metadata: Metadata = {
-  title: "Contact Us | Ready Set Go Tours & Travel",
+  title: "Contact Us",
   description:
     "Get in touch with Ready Set Go Tours to plan your dream East African safari. Contact our Nairobi-based travel experts for personalized safari, beach, and trekking itineraries.",
   keywords: [
@@ -13,7 +13,7 @@ export const metadata: Metadata = {
     "tour operator Kenya email",
     "safari inquiry",
   ],
-  openGraph: {
+openGraph: {
     title: "Contact Us | Ready Set Go Tours & Travel",
     description:
       "Ready to plan your dream safari? Contact our travel experts for a personalized itinerary.",

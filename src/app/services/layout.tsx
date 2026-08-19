@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { BreadcrumbJsonLd } from "@/components/JsonLd";
 
 export const metadata: Metadata = {
-  title: "Travel Services | Ready Set Go Tours & Travel",
+  title: "Travel Services",
   description:
     "Explore our full range of travel services including hotel bookings, air ticketing, visa assistance, airport transfers, group travel, and guided tours across Kenya and Tanzania.",
   keywords: [
@@ -15,7 +15,7 @@ export const metadata: Metadata = {
     "safari booking services",
     "Tanzania travel services",
   ],
-  openGraph: {
+openGraph: {
     title: "Travel Services | Ready Set Go Tours & Travel",
     description:
       "Explore our full range of travel services including hotel bookings, air ticketing, visa assistance, airport transfers, group travel, and guided tours across Kenya and Tanzania.",

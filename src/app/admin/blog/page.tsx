@@ -33,15 +33,16 @@ export default function BlogPage() {
   const [posts, setPosts] = useState<BlogPost[]>([])
   const [loading, setLoading] = useState(true)
 
-  async function load() {
-    setLoading(true)
-    try {
-      const { data } = await getSupabase().from("blog_posts").select("*").order("created_at", { ascending: false })
-      if (data) setPosts(data)
-    } catch {} finally { setLoading(false) }
-  }
-
-  useEffect(() => { load() }, [])
+  useEffect(() => {
+    let cancelled = false
+    ;(async () => {
+      try {
+        const { data } = await getSupabase().from("blog_posts").select("*").order("created_at", { ascending: false })
+        if (data && !cancelled) setPosts(data)
+      } catch {} finally { if (!cancelled) setLoading(false) }
+    })()
+    return () => { cancelled = true }
+  }, [])
 
   async function handleDelete(id: number) {
     if (!confirm("Are you sure you want to delete this post?")) return

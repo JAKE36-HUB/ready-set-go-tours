@@ -21,15 +21,16 @@ export default function HoneymoonPage() {
   const [packages, setPackages] = useState<Honeymoon[]>([])
   const [loading, setLoading] = useState(true)
 
-  async function load() {
-    setLoading(true)
-    try {
-      const { data } = await getSupabase().from("honeymoon_packages").select("*").order("name")
-      if (data) setPackages(data)
-    } catch {} finally { setLoading(false) }
-  }
-
-  useEffect(() => { load() }, [])
+  useEffect(() => {
+    let cancelled = false
+    ;(async () => {
+      try {
+        const { data } = await getSupabase().from("honeymoon_packages").select("*").order("name")
+        if (data && !cancelled) setPackages(data)
+      } catch {} finally { if (!cancelled) setLoading(false) }
+    })()
+    return () => { cancelled = true }
+  }, [])
 
   async function handleDelete(id: number) {
     if (!confirm("Are you sure?")) return

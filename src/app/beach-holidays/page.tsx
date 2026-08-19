@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useState } from "react";
 import Image from "next/image";
@@ -26,7 +26,7 @@ export default function BeachHolidaysPage() {
       {/* Hero */}
       <section className="relative h-[70vh] min-h-[520px] flex items-center justify-center overflow-hidden">
         <Image
-          src="https://i.pinimg.com/736x/ec/f9/c4/ecf9c45a7a976f4151b88235e8396c06.jpg"
+          src="/images/local/pin_ecf9c45a7a976f4151b88235e8396c06.jpg"
           alt="Turquoise waters of a tropical beach"
           fill
           priority
@@ -156,7 +156,7 @@ export default function BeachHolidaysPage() {
                       className="w-full bg-gradient-to-r from-cyan-500 to-sky-600 hover:from-cyan-400 hover:to-sky-500 text-white"
                     >
                       <Waves className="size-4 mr-2" />
-                      Book Now
+                      Get a Free Quote
                     </Button>
                   </div>
                 </div>

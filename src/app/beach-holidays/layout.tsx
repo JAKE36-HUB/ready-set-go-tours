@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { BreadcrumbJsonLd } from "@/components/JsonLd";
 
 export const metadata: Metadata = {
-  title: "Beach Holidays & Coastal Getaways | Ready Set Go Tours & Travel",
+  title: "Beach Holidays & Coastal Getaways",
   description:
     "Escape to pristine beaches along the Kenyan and Tanzanian coast. Diani Beach, Zanzibar, Watamu, and Lamu luxury beach holiday packages.",
   keywords: [

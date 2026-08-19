@@ -187,7 +187,7 @@ export const TRUST_BADGES = [
   "🏆 Award-Winning Safaris",
   "🔒 Secure Booking",
   "💵 Best Price Guarantee",
-  "🌍 5,000+ Happy Travellers",
+  "🌍 200+ Happy Travellers",
   "🦁 Licensed Safari Experts",
   "🤝 24/7 Guest Support",
 ] as const

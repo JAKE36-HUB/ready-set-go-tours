@@ -2,7 +2,7 @@
 
 import { useCallback, useEffect, useRef, useState } from "react"
 import { AnimatePresence } from "framer-motion"
-import type { PopupCTA } from "@/lib/popups/types"
+import type { PopupCTA, PopupConfig } from "@/lib/popups/types"
 import { ActivePopup, PopupShell } from "./PopupShell"
 import { Confetti } from "./Confetti"
 import {
@@ -21,7 +21,7 @@ interface ApiPopup {
   type: string
   name: string
   priority: number
-  config: any
+  config: PopupConfig
 }
 
 function sendEvent(body: Record<string, unknown>) {
@@ -102,7 +102,7 @@ export function PopupEngine() {
     const p = popups[0]
     if (!canShow(p.config.frequency, p.id)) {
       shownIdsRef.current.add(p.id)
-      setPopups((prev) => prev.filter((x) => x.id !== p.id))
+      queueMicrotask(() => setPopups((prev) => prev.filter((x) => x.id !== p.id)))
       return
     }
 

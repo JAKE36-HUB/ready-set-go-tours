@@ -109,7 +109,7 @@ function TrustRow({ config }: { config: PopupConfig }) {
 function UrgencyRow({ config }: { config: PopupConfig }) {
   const cv = config.conversion
   const [seats, setSeats] = useState(cv.remainingSeats ?? 0)
-  const [viewers, setViewers] = useState(0)
+  const [viewers, setViewers] = useState(() => (cv.peopleViewing ? 8 + Math.floor(Math.random() * 17) : 0))
 
   useEffect(() => {
     if (cv.remainingSeats) {
@@ -122,7 +122,6 @@ function UrgencyRow({ config }: { config: PopupConfig }) {
 
   useEffect(() => {
     if (cv.peopleViewing) {
-      setViewers(8 + Math.floor(Math.random() * 17))
       const iv = setInterval(() => {
         setViewers((v) => Math.max(3, v - 1 + Math.floor(Math.random() * 3)))
       }, 9000)
@@ -237,7 +236,7 @@ export function PopupShell({ popup, onClose, onCTA, onLeadSuccess }: Props) {
   const cfg = popup.config
   const c = cfg.content
   const type = popup.type
-  const countdownEnd = useRef<number | null>(parseCountdown(c.countdownEndsAt)).current
+  const [countdownEnd] = useState<number | null>(() => parseCountdown(c.countdownEndsAt))
   const [step, setStep] = useState(0)
   const [winPrize, setWinPrize] = useState<string | null>(null)
   const closeRef = useRef<HTMLButtonElement>(null)

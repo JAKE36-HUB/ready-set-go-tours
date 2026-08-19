@@ -96,14 +96,14 @@ export function TourPackages({ onReserve }: { onReserve?: (name: string) => void
                       href={`/holiday-packages/${pkg.slug}`}
                       className="flex-1 inline-flex items-center justify-center gap-2 h-11 rounded-xl bg-slate-100 dark:bg-slate-700 hover:bg-slate-200 dark:hover:bg-slate-600 text-slate-700 dark:text-slate-200 text-sm font-medium transition-all duration-300"
                     >
-                      View Details <ArrowRight className="size-4" />
+                      View Safari <ArrowRight className="size-4" />
                     </Link>
                     <button
                       type="button"
                       onClick={() => onReserve?.(pkg.name)}
                       className="flex-1 inline-flex items-center justify-center h-11 rounded-xl bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 text-white text-sm font-semibold shadow-md hover:shadow-lg transition-all duration-300"
                     >
-                      Reserve Now
+                      Get a Free Quote
                     </button>
                   </div>
                 </div>

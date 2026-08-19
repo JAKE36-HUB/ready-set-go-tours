@@ -16,7 +16,24 @@ const DEAL_ICONS: Record<string, React.ElementType> = {
   special: Star,
 };
 
-export default function DealsBrowser({ deals }: { deals: any[] }) {
+export interface DealCard {
+  id: number;
+  slug: string;
+  title: string;
+  description: string;
+  image: string;
+  type: string;
+  discount: string;
+  validUntil: string;
+  code: string;
+  featured: boolean;
+  dealPrice: number;
+  originalPrice: number;
+  priceKES: number | null;
+  highlights: string[];
+}
+
+export default function DealsBrowser({ deals }: { deals: DealCard[] }) {
   const [filter, setFilter] = useState<string>("all");
 
   const featuredDeals = deals.filter((d) => d.featured);
@@ -87,7 +104,7 @@ export default function DealsBrowser({ deals }: { deals: any[] }) {
                         Use code: <span className="font-mono font-bold text-foreground">{deal.code}</span>
                       </div>
                       <ul className="space-y-1.5 mb-6">
-                        {deal.highlights.slice(0, 3).map((h: any) => (
+                        {deal.highlights.slice(0, 3).map((h: string) => (
                           <li key={h} className="flex items-start gap-2 text-sm text-muted-foreground">
                             <ChevronRight className="size-4 text-emerald-500 shrink-0 mt-0.5" />
                             {h}
@@ -95,7 +112,7 @@ export default function DealsBrowser({ deals }: { deals: any[] }) {
                         ))}
                       </ul>
                       <div className="inline-flex items-center justify-center gap-2 w-full h-11 rounded-lg bg-emerald-500 text-white text-sm font-medium">
-                        View Details <ChevronRight className="size-4" />
+                        View Safari <ChevronRight className="size-4" />
                       </div>
                     </div>
                   </Link>
@@ -200,7 +217,7 @@ export default function DealsBrowser({ deals }: { deals: any[] }) {
                       </div>
                       <p className="text-sm text-muted-foreground line-clamp-2 mb-4">{deal.description}</p>
                       <div className="inline-flex items-center justify-center gap-2 w-full h-10 rounded-lg bg-sky-500 text-white text-sm font-medium">
-                        View Details
+                        View Safari
                       </div>
                     </div>
                   </Link>

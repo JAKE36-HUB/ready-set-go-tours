@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useState } from "react";
 import Image from "next/image";
@@ -13,7 +13,7 @@ import { Label } from "@/components/ui/label";
 import AnimatedSection from "@/components/AnimatedSection";
 import { contactFormSchema, type ContactFormData } from "@/lib/schemas";
 import { trackLeadConversion } from "@/lib/analytics";
-import { COMPANY } from "@/lib/constants";
+import { COMPANY, SITE_STATS } from "@/lib/constants";
 import {
   MapPin, Phone, Mail, MessageCircle, Clock, Send, CheckCircle, Loader2,
   ArrowRight, ChevronRight, Star, Shield, Users, Globe, Building2,
@@ -22,7 +22,7 @@ import emailjs from "@emailjs/browser";
 
 const CONTACT_INFO = [
   { icon: MapPin, label: "Visit Us", value: COMPANY.address, desc: "Our Nairobi headquarters", color: "text-sky-500", bg: "bg-sky-500/10", gradient: "from-sky-500/20 to-blue-600/10" },
-  { icon: Phone, label: "Call Us", value: COMPANY.phone, desc: "Mon–Sat 8AM–6PM EAT", color: "text-emerald-500", bg: "bg-emerald-500/10", gradient: "from-emerald-500/20 to-teal-600/10" },
+  { icon: Phone, label: "Call Us", value: COMPANY.phone, desc: "Monâ€“Sat 8AMâ€“6PM EAT", color: "text-emerald-500", bg: "bg-emerald-500/10", gradient: "from-emerald-500/20 to-teal-600/10" },
   { icon: Mail, label: "Email Us", value: COMPANY.email, desc: "We reply within 24hrs", color: "text-amber-500", bg: "bg-amber-500/10", gradient: "from-amber-500/20 to-orange-600/10" },
   { icon: Mail, label: "Bookings", value: COMPANY.bookingsEmail, desc: "For safari & travel bookings", color: "text-orange-500", bg: "bg-orange-500/10", gradient: "from-orange-500/20 to-rose-600/10" },
   { icon: MessageCircle, label: "WhatsApp", value: COMPANY.whatsapp, desc: "Fastest response", color: "text-green-500", bg: "bg-green-500/10", gradient: "from-green-500/20 to-emerald-600/10" },
@@ -47,10 +47,10 @@ const PACKAGES = [
 ];
 
 const TRUST_STATS = [
-  { icon: Users, value: "15,000+", label: "Happy Travelers" },
-  { icon: Star, value: "2,000+", label: "5-Star Reviews" },
-  { icon: Globe, value: "50+", label: "Countries Served" },
-  { icon: Shield, value: "100%", label: "Satisfaction Rate" },
+  { icon: Users, value: SITE_STATS.happyTravelers, label: "Happy Travelers" },
+  { icon: Star, value: SITE_STATS.fiveStarReviews, label: "5-Star Reviews" },
+  { icon: Globe, value: SITE_STATS.destinations, label: "Destinations" },
+  { icon: Shield, value: SITE_STATS.satisfactionRate, label: "Satisfaction Rate" },
 ];
 
 type FormStatus = "idle" | "submitting" | "success" | "error";
@@ -201,7 +201,7 @@ export default function ContactPage() {
       {/* Hero */}
       <section className="relative h-[50vh] min-h-[420px] flex items-center justify-center overflow-hidden">
         <Image
-          src="https://i.pinimg.com/736x/48/c9/f7/48c9f7d212a4a2933b84ec65c19e4628.jpg"
+          src="/images/local/pin_48c9f7d212a4a2933b84ec65c19e4628.jpg"
           alt="African savannah landscape"
           fill
           priority
@@ -224,7 +224,7 @@ export default function ContactPage() {
             </h1>
             <p className="text-lg sm:text-xl text-white/60 max-w-2xl mx-auto leading-relaxed">
               Tell us your dream adventure and our Nairobi-based team will craft the perfect
-              East African experience — from the Mara to Zanzibar.
+              East African experience â€” from the Mara to Zanzibar.
             </p>
           </AnimatedSection>
         </div>
@@ -319,7 +319,7 @@ export default function ContactPage() {
                 className="inline-flex items-center gap-2 h-14 px-8 rounded-xl bg-white text-green-700 font-bold text-base hover:bg-green-50 transition-all shadow-xl hover:shadow-2xl shrink-0"
               >
                 <MessageCircle className="size-5" />
-                WhatsApp Now
+                WhatsApp Us
               </a>
             </div>
           </motion.div>
@@ -360,7 +360,7 @@ export default function ContactPage() {
                   <div>
                     <p className="text-sm font-semibold text-foreground">{COMPANY.shortName}</p>
                     <p className="text-xs text-muted-foreground mt-0.5">
-                      {COMPANY.address} — {COMPANY.hours}
+                      {COMPANY.address} â€” {COMPANY.hours}
                     </p>
                   </div>
                 </div>
@@ -625,7 +625,7 @@ export default function ContactPage() {
               Ready for the Adventure of a Lifetime?
             </h2>
             <p className="text-sky-200/70 text-lg max-w-2xl mx-auto mb-8">
-              Whether you&apos;re dreaming of the Great Migration, Kilimanjaro, or Zanzibar&apos;s beaches —
+              Whether you&apos;re dreaming of the Great Migration, Kilimanjaro, or Zanzibar&apos;s beaches â€”
               we&apos;re here to make it happen.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">

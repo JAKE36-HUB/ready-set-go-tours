@@ -15,7 +15,7 @@ function getSessionId(): string {
 
 export default function VisitorTracker() {
   const pathname = usePathname()
-  const startTime = useRef(Date.now())
+  const startTime = useRef(0)
   const sessionId = useRef("")
   const isAdmin = useRef(false)
 
@@ -24,6 +24,7 @@ export default function VisitorTracker() {
     if (!sessionId.current) return
 
     isAdmin.current = pathname.startsWith("/admin")
+    startTime.current = Date.now()
 
     const track = async () => {
       const duration = Math.floor((Date.now() - startTime.current) / 1000)

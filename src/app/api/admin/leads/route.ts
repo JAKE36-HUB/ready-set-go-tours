@@ -86,7 +86,7 @@ export async function POST(req: NextRequest) {
       page: "manual",
     })
     return NextResponse.json({ ok: true })
-  } catch (e: any) {
-    return NextResponse.json({ error: e.message || "Insert failed" }, { status: 500 })
+  } catch (e) {
+    return NextResponse.json({ error: e instanceof Error ? e.message : "Insert failed" }, { status: 500 })
   }
 }

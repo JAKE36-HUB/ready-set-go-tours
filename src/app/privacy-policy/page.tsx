@@ -4,7 +4,7 @@ import { Shield } from "lucide-react";
 import { BreadcrumbJsonLd } from "@/components/JsonLd";
 
 export const metadata: Metadata = {
-  title: `Privacy Policy | ${COMPANY.name}`,
+  title: "Privacy Policy",
   description:
     "Learn how Ready Set Go Tours & Travel collects, uses, and protects your personal information. Our privacy policy outlines your rights and our practices.",
   openGraph: {

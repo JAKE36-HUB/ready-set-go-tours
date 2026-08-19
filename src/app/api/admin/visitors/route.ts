@@ -25,10 +25,17 @@ export async function GET(request: NextRequest) {
   const today = new Date()
   today.setHours(0, 0, 0, 0)
 
-  const todayRecords = (all || []).filter((v: any) => new Date(v.entered_at) >= today)
-  const todaySessions = new Set(todayRecords.map((v: any) => v.session_id))
-  const totalDuration = (all || []).reduce((sum: number, v: any) => sum + (v.duration_seconds || 0), 0)
-  const totalSessions = new Set((all || []).map((v: any) => v.session_id))
+  interface VisitorRow {
+    session_id: string
+    entered_at: string
+    duration_seconds: number | null
+    page: string
+  }
+
+  const todayRecords = (all || []).filter((v: VisitorRow) => new Date(v.entered_at) >= today)
+  const todaySessions = new Set(todayRecords.map((v: VisitorRow) => v.session_id))
+  const totalDuration = (all || []).reduce((sum: number, v: VisitorRow) => sum + (v.duration_seconds || 0), 0)
+  const totalSessions = new Set((all || []).map((v: VisitorRow) => v.session_id))
 
   const pageCounts: Record<string, number> = {}
   for (const v of all || []) {

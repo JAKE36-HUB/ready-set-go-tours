@@ -809,7 +809,7 @@ export function PopupForm({
           </div>
           <div className="rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-5">
             <h3 className="text-sm font-semibold text-slate-900 dark:text-white mb-1">Start / End Dates</h3>
-            <p className="text-xs text-slate-400 mb-3">Status becomes "scheduled" automatically once dates are set.</p>
+            <p className="text-xs text-slate-400 mb-3">Status becomes &quot;scheduled&quot; automatically once dates are set.</p>
             <div className="grid md:grid-cols-2 gap-4">
               <Field label="Start">
                 <input type="datetime-local" className={inputCls}

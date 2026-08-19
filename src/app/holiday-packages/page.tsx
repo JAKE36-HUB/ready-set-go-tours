@@ -1,7 +1,7 @@
-import Image from "next/image";
+﻿import Image from "next/image";
 import AnimatedSection from "@/components/AnimatedSection";
 import { getSupabase } from "@/lib/supabase";
-import PackagesBrowser from "@/components/PackagesBrowser";
+import PackagesBrowser, { type PackageCard } from "@/components/PackagesBrowser";
 
 export const revalidate = 3600;
 
@@ -12,13 +12,13 @@ export default async function HolidayPackagesPage({
 }) {
   const { type } = await searchParams;
 
-  let packages: any[] = [];
+  let packages: PackageCard[] = [];
   try {
     const { data } = await getSupabase()
       .from("tour_packages")
       .select("*")
       .order("name");
-    if (data) packages = data.map((p: any) => ({ ...p, priceKES: p.price_kes }));
+    if (data) packages = data.map((p: Record<string, unknown>) => ({ ...p, priceKES: p.price_kes }) as PackageCard);
   } catch {}
 
   return (
@@ -26,7 +26,7 @@ export default async function HolidayPackagesPage({
       {/* Hero */}
       <section className="relative h-[50vh] min-h-[400px] flex items-center justify-center overflow-hidden">
         <Image
-          src="https://i.pinimg.com/736x/6c/17/81/6c1781159da9a07da57937cc49282cf9.jpg"
+          src="/images/local/pin_6c1781159da9a07da57937cc49282cf9.jpg"
           alt="Safari experience"
           fill
           priority

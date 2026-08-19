@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+﻿import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { Calendar, User, Tag, Clock, ArrowRight } from "lucide-react";
@@ -7,7 +7,7 @@ import AnimatedSection from "@/components/AnimatedSection";
 import { BreadcrumbJsonLd } from "@/components/JsonLd";
 
 export const metadata: Metadata = {
-  title: `Travel Guide & Blog | ${COMPANY.name}`,
+  title: "Travel Guide & Blog",
   description:
     "Expert travel tips, destination guides, and safari advice for Kenya and Tanzania. Plan your perfect East African adventure with insider knowledge.",
   keywords: [
@@ -51,7 +51,7 @@ export default function TravelGuidePage() {
       {/* Hero */}
       <section className="relative h-[50vh] min-h-[400px] flex items-center justify-center overflow-hidden">
         <Image
-          src="https://i.pinimg.com/736x/5e/d9/e7/5ed9e7896df91ef4ad2acdc3d37b0b21.jpg"
+          src="/images/local/pin_5ed9e7896df91ef4ad2acdc3d37b0b21.jpg"
           alt="Safari vehicle in the African wilderness"
           fill
           priority

@@ -35,7 +35,7 @@ export default function KenyaTourInteractive({ tourName, isCTA }: Props) {
         className="bg-gradient-to-r from-sky-500 to-blue-600 hover:from-sky-400 hover:to-blue-500 text-white px-6"
       >
         <Plane className="size-4 mr-2" />
-        Book This Tour
+        Get a Free Quote
       </Button>
       <BookingModal open={open} onOpenChange={setOpen} initialPackage={tourName} />
     </>

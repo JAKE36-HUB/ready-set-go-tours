@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useState, useCallback, useEffect, useRef } from "react";
 import Image from "next/image";
@@ -9,9 +9,9 @@ import { TESTIMONIALS, STATISTICS } from "@/lib/constants";
 import { Star, Play, ChevronLeft, ChevronRight, Quote, MapPin } from "lucide-react";
 
 const VIDEO_TESTIMONIALS = [
-  { id: 1, name: "Mark & Jennifer Adams", location: "Chicago, USA", thumbnail: "https://i.pinimg.com/736x/5e/d9/e7/5ed9e7896df91ef4ad2acdc3d37b0b21.jpg", duration: "3:45" },
-  { id: 2, name: "Sophie Laurent", location: "Paris, France", thumbnail: "https://i.pinimg.com/736x/5e/d9/e7/5ed9e7896df91ef4ad2acdc3d37b0b21.jpg", duration: "4:12" },
-  { id: 3, name: "The Nakamura Family", location: "Tokyo, Japan", thumbnail: "https://i.pinimg.com/736x/ec/f9/c4/ecf9c45a7a976f4151b88235e8396c06.jpg", duration: "5:20" },
+  { id: 1, name: "Mark & Jennifer Adams", location: "Chicago, USA", thumbnail: "/images/local/pin_5ed9e7896df91ef4ad2acdc3d37b0b21.jpg", duration: "3:45" },
+  { id: 2, name: "Sophie Laurent", location: "Paris, France", thumbnail: "/images/local/pin_5ed9e7896df91ef4ad2acdc3d37b0b21.jpg", duration: "4:12" },
+  { id: 3, name: "The Nakamura Family", location: "Tokyo, Japan", thumbnail: "/images/local/pin_ecf9c45a7a976f4151b88235e8396c06.jpg", duration: "5:20" },
 ];
 
 function StarRating({ rating }: { rating: number }) {
@@ -55,7 +55,7 @@ export default function TestimonialsPage() {
       {/* Hero */}
       <section className="relative h-[50vh] min-h-[400px] flex items-center justify-center overflow-hidden">
         <Image
-          src="https://i.pinimg.com/736x/5e/d9/e7/5ed9e7896df91ef4ad2acdc3d37b0b21.jpg"
+          src="/images/local/pin_5ed9e7896df91ef4ad2acdc3d37b0b21.jpg"
           alt="Safari experience in Africa"
           fill
           priority

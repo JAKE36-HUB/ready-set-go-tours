@@ -9,8 +9,24 @@ import {
 } from "lucide-react"
 import BookingButton from "@/components/BookingButton";
 import AnimatedSection from "@/components/AnimatedSection";
+import { PaymentPolicy } from "@/components/PaymentPolicy";
 
 export const revalidate = 3600;
+
+interface HoneymoonRow {
+  name: string;
+  description: string;
+  image: string;
+  price: number;
+  priceKES: number | null;
+  duration: string;
+  accommodation: string;
+  meals: string;
+  transport: string;
+  highlights: string[];
+  activities: string[];
+  included: string[];
+}
 
 export default async function HoneymoonDetailPage({
   params,
@@ -19,14 +35,14 @@ export default async function HoneymoonDetailPage({
 }) {
   const { slug } = await params;
 
-  let pkg: any = null;
+  let pkg: HoneymoonRow | null = null;
   try {
     const { data } = await getSupabase()
       .from("honeymoon_packages")
       .select("*")
       .eq("slug", slug)
       .single();
-    if (data) pkg = { ...data, priceKES: (data as any).price_kes };
+    if (data) pkg = { ...data, priceKES: data.price_kes };
   } catch {}
   if (!pkg) notFound();
 
@@ -99,7 +115,7 @@ export default async function HoneymoonDetailPage({
               packageName={pkg.name}
               className="h-10 px-5 bg-gradient-to-r from-rose-500 to-pink-600 hover:from-rose-600 hover:to-pink-700 text-white text-sm font-semibold shadow-lg"
             >
-              Book Now
+              Get a Free Quote
             </BookingButton>
             <a
               href={`https://wa.me/${COMPANY.whatsapp}?text=Hi!%20I'm%20interested%20in%20${encodeURIComponent(pkg.name)}`}
@@ -108,7 +124,7 @@ export default async function HoneymoonDetailPage({
               className="inline-flex items-center gap-2 h-10 px-4 rounded-lg bg-white/10 hover:bg-white/20 text-foreground text-sm font-medium transition-all ring-1 ring-foreground/10"
             >
               <MessageCircle className="size-4" />
-              WhatsApp
+              WhatsApp Us
             </a>
           </div>
         </div>
@@ -126,7 +142,7 @@ export default async function HoneymoonDetailPage({
               <AnimatedSection>
                 <h2 className="text-2xl font-bold text-foreground mb-4">Highlights</h2>
                 <div className="grid sm:grid-cols-2 gap-3">
-                  {pkg.highlights.map((h: any) => (
+                  {pkg.highlights.map((h: string) => (
                     <div key={h} className="flex items-start gap-3 p-4 rounded-xl bg-card ring-1 ring-foreground/5">
                       <Star className="size-5 text-rose-500 shrink-0 mt-0.5 fill-rose-500/20" />
                       <span className="text-sm text-foreground">{h}</span>
@@ -138,7 +154,7 @@ export default async function HoneymoonDetailPage({
               <AnimatedSection>
                 <h2 className="text-2xl font-bold text-foreground mb-4">Activities</h2>
                 <div className="flex flex-wrap gap-2">
-                  {pkg.activities.map((a: any) => (
+                  {pkg.activities.map((a: string) => (
                     <span key={a} className="inline-flex items-center gap-1.5 text-sm bg-card ring-1 ring-foreground/10 text-foreground px-4 py-2 rounded-full">
                       <Sparkles className="size-4 text-rose-500 shrink-0" />
                       {a}
@@ -189,7 +205,7 @@ export default async function HoneymoonDetailPage({
                 <div className="rounded-2xl bg-card ring-1 ring-foreground/10 p-6">
                   <h3 className="font-semibold text-foreground mb-4">What&apos;s Included</h3>
                   <ul className="space-y-3">
-                    {pkg.included.map((item: any) => (
+                    {pkg.included.map((item: string) => (
                       <li key={item} className="flex items-start gap-3 text-sm text-muted-foreground">
                         <Check className="size-4 text-emerald-500 shrink-0 mt-0.5" />
                         {item}
@@ -198,6 +214,8 @@ export default async function HoneymoonDetailPage({
                   </ul>
                 </div>
               </AnimatedSection>
+
+              <PaymentPolicy />
 
               <AnimatedSection>
                 <div className="rounded-2xl bg-gradient-to-br from-rose-50 to-pink-50 dark:from-rose-950/30 dark:to-pink-950/30 ring-1 ring-rose-100 dark:ring-rose-900/50 p-6 text-center">
@@ -211,7 +229,7 @@ export default async function HoneymoonDetailPage({
                       packageName={pkg.name}
                       className="w-full h-11 bg-gradient-to-r from-rose-500 to-pink-600 hover:from-rose-600 hover:to-pink-700 text-white font-semibold shadow-lg"
                     >
-                      Book Now
+                      Get a Free Quote
                     </BookingButton>
                     <a
                       href={`https://wa.me/${COMPANY.whatsapp}?text=Hi!%20I'm%20interested%20in%20${encodeURIComponent(pkg.name)}`}
@@ -220,7 +238,7 @@ export default async function HoneymoonDetailPage({
                       className="flex items-center justify-center gap-2 w-full h-11 rounded-lg bg-card ring-1 ring-foreground/10 hover:ring-rose-500/30 text-foreground text-sm font-medium transition-all"
                     >
                       <MessageCircle className="size-4" />
-                      Chat on WhatsApp
+                      WhatsApp Us
                     </a>
                   </div>
                 </div>

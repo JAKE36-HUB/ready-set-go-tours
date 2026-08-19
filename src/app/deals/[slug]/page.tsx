@@ -6,6 +6,7 @@ import { getSupabase } from "@/lib/supabase";
 import { TourPackageJsonLd, BreadcrumbJsonLd } from "@/components/JsonLd";
 import { Tag, Clock, Users, Gift, Percent, Star, Shield, Check, ArrowLeft, Calendar, Hotel, Utensils, Phone } from "lucide-react";
 import AnimatedSection from "@/components/AnimatedSection";
+import { PaymentPolicy } from "@/components/PaymentPolicy";
 
 export const revalidate = 3600;
 
@@ -18,6 +19,27 @@ const DEAL_ICONS: Record<string, React.ElementType> = {
   special: Star,
 };
 
+interface DealRow {
+  id: number;
+  slug: string;
+  title: string;
+  description: string;
+  type: string;
+  image: string | null;
+  discount: string | null;
+  duration: string;
+  accommodation: string;
+  meals: string;
+  code: string;
+  highlights: string[];
+  itinerary: { day: string; description: string }[];
+  included: string[];
+  originalPrice: number;
+  dealPrice: number;
+  priceKES: number | null;
+  validUntil: string | null;
+}
+
 export default async function DealDetailPage({
   params,
 }: {
@@ -25,15 +47,15 @@ export default async function DealDetailPage({
 }) {
   const { slug } = await params;
 
-  let deal: any = null;
-  let related: any[] = [];
+  let deal: DealRow | null = null;
+  let related: DealRow[] = [];
   try {
     const { data } = await getSupabase()
       .from("deals")
       .select("*")
       .eq("slug", slug)
       .single();
-    if (data) deal = { ...data, originalPrice: (data as any).original_price, dealPrice: (data as any).deal_price, priceKES: (data as any).price_kes, validUntil: (data as any).valid_until };
+    if (data) deal = { ...data, originalPrice: data.original_price, dealPrice: data.deal_price, priceKES: data.price_kes, validUntil: data.valid_until };
 
     const { data: relatedData } = await getSupabase()
       .from("deals")
@@ -41,7 +63,7 @@ export default async function DealDetailPage({
       .eq("featured", true)
       .neq("slug", slug)
       .limit(3);
-    if (relatedData) related = relatedData.map((d: any) => ({ ...d, originalPrice: d.original_price, dealPrice: d.deal_price, priceKES: d.price_kes, validUntil: d.valid_until }));
+    if (relatedData) related = relatedData.map((d: Record<string, unknown>) => ({ ...d, originalPrice: d.original_price, dealPrice: d.deal_price, priceKES: d.price_kes, validUntil: d.valid_until }) as DealRow);
   } catch {}
   if (!deal) notFound();
 
@@ -57,7 +79,7 @@ export default async function DealDetailPage({
       <TourPackageJsonLd
         name={deal.title}
         description={deal.description.slice(0, 160)}
-        image={deal.image}
+        image={deal.image ?? ""}
         price={deal.dealPrice}
         duration={deal.duration}
         url={`/deals/${slug}`}
@@ -66,7 +88,7 @@ export default async function DealDetailPage({
       {/* Hero */}
       <section className="relative h-[55vh] min-h-[420px] flex items-end justify-center overflow-hidden">
         <Image
-          src={deal.image}
+          src={deal.image ?? ""}
           alt={deal.title}
           fill
           priority
@@ -126,13 +148,13 @@ export default async function DealDetailPage({
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 h-10 px-5 rounded-lg bg-emerald-500 hover:bg-emerald-600 text-white text-sm font-medium transition-colors"
             >
-              Book This Deal
+              WhatsApp Us
             </a>
             <Link
               href="/contact"
               className="inline-flex items-center gap-2 h-10 px-5 rounded-lg bg-card ring-1 ring-foreground/10 hover:ring-emerald-500/30 text-foreground text-sm font-medium transition-all"
             >
-              Enquire
+              Get a Free Quote
             </Link>
           </div>
         </div>
@@ -154,7 +176,7 @@ export default async function DealDetailPage({
               <AnimatedSection>
                 <h2 className="text-2xl font-bold text-foreground mb-4">Highlights</h2>
                 <div className="grid sm:grid-cols-2 gap-3">
-                  {deal.highlights.map((h: any) => (
+                  {deal.highlights.map((h: string) => (
                     <div key={h} className="flex items-start gap-3 p-4 rounded-xl bg-card ring-1 ring-foreground/5">
                       <Star className="size-5 text-emerald-500 shrink-0 mt-0.5 fill-emerald-500/20" />
                       <span className="text-sm text-foreground">{h}</span>
@@ -167,7 +189,7 @@ export default async function DealDetailPage({
               <AnimatedSection>
                 <h2 className="text-2xl font-bold text-foreground mb-4">Your Itinerary</h2>
                 <div className="space-y-0">
-                  {deal.itinerary.map((item: any, idx: number) => (
+                  {deal.itinerary.map((item: { day: string; description: string }, idx: number) => (
                     <div key={idx} className="relative flex gap-6 pb-8 last:pb-0">
                       {/* Timeline line */}
                       {idx < deal.itinerary.length - 1 && (
@@ -232,7 +254,7 @@ export default async function DealDetailPage({
                 <div className="rounded-2xl bg-card ring-1 ring-foreground/10 p-6">
                   <h3 className="font-semibold text-foreground mb-4">What&apos;s Included</h3>
                   <ul className="space-y-3">
-                    {deal.included.map((item: any) => (
+                    {deal.included.map((item: string) => (
                       <li key={item} className="flex items-start gap-3 text-sm text-muted-foreground">
                         <Check className="size-4 text-emerald-500 shrink-0 mt-0.5" />
                         {item}
@@ -241,6 +263,8 @@ export default async function DealDetailPage({
                   </ul>
                 </div>
               </AnimatedSection>
+
+              <PaymentPolicy />
 
               {/* CTA */}
               <AnimatedSection>
@@ -256,7 +280,7 @@ export default async function DealDetailPage({
                       rel="noopener noreferrer"
                       className="flex items-center justify-center gap-2 w-full h-11 rounded-lg bg-emerald-500 hover:bg-emerald-600 text-white text-sm font-medium transition-colors"
                     >
-                      Book via WhatsApp
+                      WhatsApp Us
                     </a>
                     <a
                       href={`tel:${COMPANY.phone}`}
@@ -286,12 +310,12 @@ export default async function DealDetailPage({
             </h2>
           </AnimatedSection>
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {related.map((related: any) => (
+            {related.map((related: DealRow) => (
                 <AnimatedSection key={related.id}>
                   <Link href={`/deals/${related.slug}`} className="group block rounded-xl overflow-hidden bg-card ring-1 ring-foreground/10 hover:ring-emerald-500/30 transition-all duration-500">
                     <div className="relative h-44 overflow-hidden">
                       <Image
-                        src={related.image}
+                        src={related.image ?? ""}
                         alt={related.title}
                         fill
                         className="object-cover group-hover:scale-105 transition-transform duration-700"

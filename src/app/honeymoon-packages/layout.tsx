@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { BreadcrumbJsonLd } from "@/components/JsonLd";
 
 export const metadata: Metadata = {
-  title: "Honeymoon Packages | Romantic Safaris & Beach Escapes | Ready Set Go Tours",
+  title: "Honeymoon Packages | Romantic Safaris & Beach Escapes",
   description: "Discover our handcrafted honeymoon packages across Kenya and Tanzania. Private game drives, candlelit bush dinners, luxury beach villas, and unforgettable romantic experiences.",
   keywords: ["honeymoon packages Kenya", "romantic safari", "honeymoon Tanzania", "luxury honeymoon Africa", "beach honeymoon Zanzibar", "romantic getaway East Africa"],
   openGraph: {

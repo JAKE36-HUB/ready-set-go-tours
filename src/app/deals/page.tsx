@@ -1,26 +1,26 @@
-import Image from "next/image";
+﻿import Image from "next/image";
 import AnimatedSection from "@/components/AnimatedSection";
 import { COMPANY } from "@/lib/constants";
 import { getSupabase } from "@/lib/supabase";
 import { Tag, Shield, Users, Gift, Star } from "lucide-react";
-import DealsBrowser from "@/components/DealsBrowser";
+import DealsBrowser, { type DealCard } from "@/components/DealsBrowser";
 
 export const revalidate = 3600;
 
 export default async function DealsPage() {
-  let deals: any[] = [];
+  let deals: DealCard[] = [];
   try {
     const { data } = await getSupabase()
       .from("deals")
       .select("*")
       .order("created_at", { ascending: false });
-    if (data) deals = data.map((d: any) => ({
+    if (data) deals = data.map((d: Record<string, unknown>) => ({
       ...d,
       originalPrice: d.original_price,
       dealPrice: d.deal_price,
       priceKES: d.price_kes,
       validUntil: d.valid_until,
-    }));
+    }) as DealCard);
   } catch {}
 
   return (
@@ -28,7 +28,7 @@ export default async function DealsPage() {
       {/* Hero */}
       <section className="relative h-[50vh] min-h-[400px] flex items-center justify-center overflow-hidden">
         <Image
-          src="https://i.pinimg.com/1200x/6d/3c/9d/6d3c9d0dfb8a372c96d1b1a4697e158f.jpg"
+          src="/images/local/pin_6d3c9d0dfb8a372c96d1b1a4697e158f.jpg"
           alt="African savanna landscape"
           fill
           priority
@@ -109,7 +109,7 @@ export default async function DealsPage() {
                 href="/contact"
                 className="inline-flex items-center justify-center gap-2 h-11 px-6 rounded-lg bg-emerald-500 hover:bg-emerald-600 text-white text-sm font-medium transition-colors"
               >
-                Book Now
+                Get a Free Quote
               </a>
               <a
                 href="tel:+254712345678"

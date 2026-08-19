@@ -35,15 +35,16 @@ export default function DealsPage() {
   const [deals, setDeals] = useState<Deal[]>([])
   const [loading, setLoading] = useState(true)
 
-  async function load() {
-    setLoading(true)
-    try {
-      const { data } = await getSupabase().from("deals").select("*").order("title")
-      if (data) setDeals(data)
-    } catch {} finally { setLoading(false) }
-  }
-
-  useEffect(() => { load() }, [])
+  useEffect(() => {
+    let cancelled = false
+    ;(async () => {
+      try {
+        const { data } = await getSupabase().from("deals").select("*").order("title")
+        if (data && !cancelled) setDeals(data)
+      } catch {} finally { if (!cancelled) setLoading(false) }
+    })()
+    return () => { cancelled = true }
+  }, [])
 
   async function handleDelete(id: number) {
     if (!confirm("Are you sure you want to delete this deal?")) return

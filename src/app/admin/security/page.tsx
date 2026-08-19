@@ -48,7 +48,12 @@ export default function SecurityPage() {
   }
 
   useEffect(() => {
-    refresh().finally(() => setLoading(false))
+    let cancelled = false
+    ;(async () => {
+      await refresh()
+      if (!cancelled) setLoading(false)
+    })()
+    return () => { cancelled = true }
   }, [])
 
   async function startEnroll() {

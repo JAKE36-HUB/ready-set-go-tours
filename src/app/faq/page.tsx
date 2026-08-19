@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useState } from "react";
 import Image from "next/image";
@@ -40,7 +40,7 @@ export default function FAQPage() {
       {/* Hero */}
       <section className="relative h-[45vh] min-h-[380px] flex items-center justify-center overflow-hidden">
         <Image
-          src="https://i.pinimg.com/736x/1f/12/be/1f12bebda0ecf1699fa537f21112db28.jpg"
+          src="/images/local/pin_1f12bebda0ecf1699fa537f21112db28.jpg"
           alt="Wildlife in the African savanna"
           fill
           priority

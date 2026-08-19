@@ -43,7 +43,6 @@ export default function PopupAnalyticsPage() {
   const [view, setView] = useState<"table" | "ab">("table")
 
   async function load() {
-    setLoading(true)
     try {
       const res = await fetch("/api/admin/popups/analytics")
       const j = await res.json()
@@ -55,7 +54,9 @@ export default function PopupAnalyticsPage() {
     } catch {} finally { setLoading(false) }
   }
 
-  useEffect(() => { load() }, [])
+  useEffect(() => {
+    ;(async () => { await load() })()
+  }, [])
 
   function fmtDuration(ms: number) {
     if (!ms) return "—"

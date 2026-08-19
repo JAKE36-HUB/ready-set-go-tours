@@ -27,7 +27,7 @@ export function StickyMobileCTA() {
         </Link>
         <Link href="/contact" className="flex-[2]">
           <Button className="w-full h-11 text-sm font-semibold bg-gradient-to-r from-emerald-500 to-emerald-600 text-white hover:from-emerald-600 hover:to-emerald-700 border-0 shadow-lg shadow-emerald-500/25">
-            Plan Your Safari
+            Get a Free Quote
           </Button>
         </Link>
       </div>

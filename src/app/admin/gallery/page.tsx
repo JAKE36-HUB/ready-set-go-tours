@@ -32,15 +32,16 @@ export default function GalleryPage() {
   const [loading, setLoading] = useState(true)
   const [deleting, setDeleting] = useState<number | null>(null)
 
-  async function load() {
-    setLoading(true)
-    try {
-      const { data } = await getSupabase().from("gallery").select("*").order("created_at", { ascending: false })
-      if (data) setImages(data)
-    } catch {} finally { setLoading(false) }
-  }
-
-  useEffect(() => { load() }, [])
+  useEffect(() => {
+    let cancelled = false
+    ;(async () => {
+      try {
+        const { data } = await getSupabase().from("gallery").select("*").order("created_at", { ascending: false })
+        if (data && !cancelled) setImages(data)
+      } catch {} finally { if (!cancelled) setLoading(false) }
+    })()
+    return () => { cancelled = true }
+  }, [])
 
   async function handleDelete(id: number) {
     if (!confirm("Delete this image?")) return

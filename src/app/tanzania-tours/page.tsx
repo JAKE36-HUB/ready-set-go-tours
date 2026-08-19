@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+﻿import type { Metadata } from "next";
 import Image from "next/image";
 import { MapPin, Calendar, Star, Compass, Hotel } from "lucide-react";
 import { TANZANIA_DESTINATIONS_INFO, COMPANY } from "@/lib/constants";
@@ -7,7 +7,7 @@ import TanzaniaTourInteractive from "./Interactive";
 import { BreadcrumbJsonLd } from "@/components/JsonLd";
 
 export const metadata: Metadata = {
-  title: `Tanzania Tours & Safaris | ${COMPANY.name}`,
+  title: "Tanzania Tours & Safaris",
   description:
     "Explore Tanzania's legendary Serengeti, Ngorongoro Crater, and Mount Kilimanjaro with Ready Set Go Tours & Travel. Luxury safaris and bespoke adventures from Arusha.",
   keywords: [
@@ -49,7 +49,7 @@ export default function TanzaniaToursPage() {
       {/* Hero */}
       <section className="relative h-[70vh] min-h-[520px] flex items-center justify-center overflow-hidden">
         <Image
-          src="https://i.pinimg.com/736x/11/d5/16/11d516e76812eb0d549cbc1ff0709d0b.jpg"
+          src="/images/local/pin_11d516e76812eb0d549cbc1ff0709d0b.jpg"
           alt="Cheetah walking across Tanzania plains at sunset"
           fill
           priority
@@ -71,7 +71,7 @@ export default function TanzaniaToursPage() {
             </h1>
             <p className="text-lg sm:text-xl text-amber-100/80 max-w-2xl mx-auto leading-relaxed">
               Stand on the rim of the Ngorongoro Crater, watch wildebeest cross the Mara River,
-              and summit Africa&apos;s highest peak — Tanzania is the stuff of legends.
+              and summit Africa&apos;s highest peak â€” Tanzania is the stuff of legends.
             </p>
           </AnimatedSection>
         </div>
