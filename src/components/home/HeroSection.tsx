@@ -4,7 +4,6 @@ import { useState, useEffect } from "react"
 import Image from "next/image"
 import Link from "next/link"
 import { motion } from "framer-motion"
-import { Percent } from "lucide-react"
 
 import { Button } from "@/components/ui/button"
 
@@ -29,7 +28,8 @@ export function HeroSection() {
     return () => clearInterval(interval)
   }, [mounted])
 
-  const titleWords = ["Where", "the", "Wilderness", "Speaks"]
+  const titleWords = ["Kenya", "&", "Tanzania", "Safaris,", "Planned", "Around", "You"]
+  const highlightWords = new Set(["Planned", "Around", "You"])
 
   return (
     <section className="relative h-screen min-h-[600px] flex items-center overflow-hidden bg-black">
@@ -109,7 +109,7 @@ export function HeroSection() {
                   animate={mounted ? { opacity: 1, y: 0 } : {}}
                   transition={{ duration: 0.6, delay: 0.2 + i * 0.12 }}
                   className={`inline-block mr-[0.15em] ${
-                    word === "Wilderness"
+                    highlightWords.has(word)
                       ? "bg-gradient-to-r from-emerald-300 via-emerald-200 to-teal-200 bg-clip-text text-transparent"
                       : "text-white"
                   }`}
@@ -125,7 +125,7 @@ export function HeroSection() {
               transition={{ duration: 0.6, delay: 0.7 }}
               className="text-base sm:text-lg text-white/50 max-w-xl mb-10 leading-relaxed font-light tracking-wide"
             >
-              Curated safaris across Kenya and Tanzania. Every detail, every moment — crafted around you.
+              3+ years of local expertise. 200+ happy travelers. 2,000+ 5-star reviews. Private and group safaris from $650.
             </motion.p>
 
             <motion.div
@@ -134,20 +134,28 @@ export function HeroSection() {
               transition={{ duration: 0.6, delay: 0.85 }}
               className="flex flex-wrap gap-4 justify-center lg:justify-start"
             >
-              <Link href="/deals">
+              <Link href="/contact">
                 <Button className="group relative h-14 px-8 text-base font-semibold bg-white text-slate-900 hover:bg-emerald-50 border-0 shadow-2xl shadow-white/10 hover:shadow-emerald-500/20 transition-all duration-300 overflow-hidden">
                   <span className="relative z-10 flex items-center gap-2">
-                    View Limited Deals
-                    <Percent className="w-4 h-4" />
+                    Get a Free Quote
                   </span>
                 </Button>
               </Link>
-              <Link href="/contact">
+              <Link href="/deals">
                 <Button variant="outline" className="h-14 px-8 text-base font-medium bg-transparent border-white/20 text-white/80 hover:bg-white/5 hover:text-white hover:border-white/40 transition-all duration-300">
-                  Get a Free Quote
+                  View Limited Deals
                 </Button>
               </Link>
             </motion.div>
+
+            <motion.p
+              initial={{ opacity: 0, y: 10 }}
+              animate={mounted ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.6, delay: 1.0 }}
+              className="mt-6 text-xs sm:text-sm text-white/40 tracking-wide font-light"
+            >
+              Free consultation &middot; Reply within 24 hours
+            </motion.p>
           </div>
         </div>
       </div>
