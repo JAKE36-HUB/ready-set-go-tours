@@ -2,18 +2,11 @@ import type { Metadata } from "next";
 import { BreadcrumbJsonLd } from "@/components/JsonLd";
 
 export const metadata: Metadata = {
-  title: "Holiday Packages & Safari Deals",
+  title: "Safari & Holiday Packages | Kenya & Tanzania Tours",
   description:
-    "Browse our curated collection of safari, beach, mountain, and cultural holiday packages across Kenya and Tanzania. Luxury and budget options available.",
-  keywords: [
-    "safari packages",
-    "holiday packages Kenya",
-    "Tanzania safari deals",
-    "luxury safari packages",
-    "budget safari Africa",
-  ],
+    "Browse group, safari, mountain, and luxury holiday packages across Kenya and Tanzania — Masai Mara, Amboseli, Serengeti, Kilimanjaro. Get a free quote today.",
   openGraph: {
-    title: "Holiday Packages | Ready Set Go Tours & Travel",
+    title: "Safari & Holiday Packages | Ready Set Go Tours & Travel",
     description: "Curated safari and holiday packages for every budget and style.",
     type: "website",
     images: [
@@ -24,6 +17,12 @@ export const metadata: Metadata = {
         alt: "Holiday Packages - Ready Set Go Tours",
       },
     ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Safari & Holiday Packages | Ready Set Go Tours & Travel",
+    description: "Curated safari and holiday packages for every budget and style.",
+    images: ["/og-image.jpg"],
   },
   alternates: {
     canonical: "/holiday-packages",

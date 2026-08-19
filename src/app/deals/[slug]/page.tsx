@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -9,6 +10,55 @@ import AnimatedSection from "@/components/AnimatedSection";
 import { PaymentPolicy } from "@/components/PaymentPolicy";
 
 export const revalidate = 3600;
+
+interface Props {
+  params: Promise<{ slug: string }>;
+}
+
+function buildDescription(text: string): string {
+  const cleaned = text.replace(/\s+/g, " ").trim();
+  const cta = "Get a free quote today.";
+  const maxMain = 135;
+  const main = cleaned.slice(0, maxMain - 1).trimEnd() + "…";
+  return `${main} ${cta}`;
+}
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { slug } = await params;
+  let row: { title: string; description: string; image: string | null; dealPrice: number } | null = null;
+  try {
+    const { data } = await getSupabase()
+      .from("deals")
+      .select("title, description, image, deal_price")
+      .eq("slug", slug)
+      .single();
+    if (data) row = { ...data, dealPrice: data.deal_price };
+  } catch {}
+  if (!row) return {};
+
+  const base = /safari/i.test(row.title) ? row.title : `${row.title} Safari`;
+  const title = `${base} from $${row.dealPrice} | ${COMPANY.name}`;
+  const description = buildDescription(row.description);
+  const image = row.image ?? "/og-image.jpg";
+
+  return {
+    title,
+    description,
+    alternates: { canonical: `/deals/${slug}` },
+    openGraph: {
+      title,
+      description,
+      type: "website",
+      images: [{ url: image, width: 1200, height: 630, alt: row.title }],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+      images: [image],
+    },
+  };
+}
 
 const DEAL_ICONS: Record<string, React.ElementType> = {
   "early-bird": Clock,

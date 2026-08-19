@@ -3,7 +3,7 @@ import { BreadcrumbJsonLd } from "@/components/JsonLd";
 
 export const metadata: Metadata = {
   title: "Gallery",
-  description: "Browse stunning photos from our safaris, beaches, and cultural experiences across Kenya and Tanzania.",
+  description: "Browse stunning photos from our safaris, beaches, and cultural experiences across Kenya and Tanzania. See the adventure that awaits you with Ready Set Go Tours.",
 openGraph: {
     title: "Gallery | Ready Set Go Tours & Travel",
     description: "Stunning images from East African safaris and travels.",

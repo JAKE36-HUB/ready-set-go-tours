@@ -7,6 +7,7 @@ import { motion, useInView } from "framer-motion"
 import { ArrowRight, MessageCircle, Shield, CheckCircle2 } from "lucide-react"
 
 import { Button } from "@/components/ui/button"
+import { COMPANY } from "@/lib/constants"
 
 export function FinalCTA() {
   const ref = useRef<HTMLDivElement>(null)
@@ -55,15 +56,18 @@ export function FinalCTA() {
           <div className="flex flex-wrap justify-center gap-4">
             <Link href="/holiday-packages">
               <Button className="h-14 px-8 text-base font-semibold bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 text-white border-0 shadow-lg shadow-amber-500/25 hover:shadow-xl hover:shadow-amber-500/30 transition-all duration-300 hover:scale-105">
-                Explore Tours <ArrowRight className="w-5 h-5 ml-2" />
+                View Safari <ArrowRight className="w-5 h-5 ml-2" />
               </Button>
             </Link>
-            <Link href="/contact">
-              <Button variant="outline" className="h-14 px-8 text-base font-semibold bg-white/10 backdrop-blur-sm border-white/20 text-white hover:bg-white/20 hover:text-white hover:border-white/30 transition-all duration-300">
-                <MessageCircle className="w-5 h-5 mr-2" />
-                Chat with an Expert
-              </Button>
-            </Link>
+            <a
+              href={`https://wa.me/${COMPANY.whatsapp.replace(/\D/g, "")}?text=${encodeURIComponent("Hi! I'd like to plan a safari with Ready Set Go Tours.")}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center justify-center h-14 px-8 text-base font-semibold rounded-xl bg-white/10 backdrop-blur-sm border border-white/20 text-white hover:bg-white/20 hover:text-white hover:border-white/30 transition-all duration-300"
+            >
+              <MessageCircle className="w-5 h-5 mr-2" />
+              WhatsApp Us
+            </a>
           </div>
           <div className="mt-10 flex flex-wrap justify-center gap-6 text-sm text-white/50">
             <span className="flex items-center gap-2"><span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />Free consultation</span>

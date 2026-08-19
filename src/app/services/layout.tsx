@@ -4,21 +4,11 @@ import { BreadcrumbJsonLd } from "@/components/JsonLd";
 export const metadata: Metadata = {
   title: "Travel Services",
   description:
-    "Explore our full range of travel services including hotel bookings, air ticketing, visa assistance, airport transfers, group travel, and guided tours across Kenya and Tanzania.",
-  keywords: [
-    "Kenya travel services",
-    "hotel booking Kenya",
-    "air ticketing Kenya",
-    "visa assistance Kenya",
-    "airport transfer Nairobi",
-    "group travel Kenya",
-    "safari booking services",
-    "Tanzania travel services",
-  ],
-openGraph: {
+    "Explore our travel services: hotel bookings, air ticketing, visa assistance, airport transfers, group travel, and guided tours across Kenya and Tanzania.",
+  openGraph: {
     title: "Travel Services | Ready Set Go Tours & Travel",
     description:
-      "Explore our full range of travel services including hotel bookings, air ticketing, visa assistance, airport transfers, group travel, and guided tours across Kenya and Tanzania.",
+      "Explore our full range of travel services: hotel bookings, air ticketing, visa assistance, airport transfers, group travel, and guided tours across Kenya and Tanzania.",
     type: "website",
     images: [
       {

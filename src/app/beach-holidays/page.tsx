@@ -227,7 +227,7 @@ export default function BeachHolidaysPage() {
               onClick={() => setBookingTour("Beach Holiday Package")}
               className="bg-gradient-to-r from-cyan-400 to-sky-500 hover:from-cyan-300 hover:to-sky-400 text-white px-8 h-11 shadow-lg shadow-cyan-500/25"
             >
-              Start Planning
+              Get a Free Quote
             </Button>
           </AnimatedSection>
         </div>

@@ -10,13 +10,6 @@ export const metadata: Metadata = {
   title: "Travel Guide & Blog",
   description:
     "Expert travel tips, destination guides, and safari advice for Kenya and Tanzania. Plan your perfect East African adventure with insider knowledge.",
-  keywords: [
-    "Kenya safari tips",
-    "Tanzania travel guide",
-    "safari packing list",
-    "Masai Mara guide",
-    "Kilimanjaro climbing tips",
-  ],
   openGraph: {
     title: `Travel Guide | ${COMPANY.name}`,
     description: "Expert safari tips and destination guides for East Africa.",

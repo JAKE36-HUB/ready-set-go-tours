@@ -23,7 +23,6 @@ const WP_REDIRECTS: Record<string, string> = {
   "/destinations/combined-kenya-tanzania-safaris": "/holiday-packages",
   "/home": "/",
   "/index.html": "/",
-  "/terms-and-conditions": "/privacy-policy",
   "/trip-listing": "/holiday-packages",
   "/trip-search-result": "/holiday-packages",
   "/trip-types": "/holiday-packages",

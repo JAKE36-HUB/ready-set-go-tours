@@ -3,8 +3,7 @@ import { BreadcrumbJsonLd } from "@/components/JsonLd";
 
 export const metadata: Metadata = {
   title: "Honeymoon Packages | Romantic Safaris & Beach Escapes",
-  description: "Discover our handcrafted honeymoon packages across Kenya and Tanzania. Private game drives, candlelit bush dinners, luxury beach villas, and unforgettable romantic experiences.",
-  keywords: ["honeymoon packages Kenya", "romantic safari", "honeymoon Tanzania", "luxury honeymoon Africa", "beach honeymoon Zanzibar", "romantic getaway East Africa"],
+  description: "Discover handcrafted honeymoon packages across Kenya and Tanzania. Private game drives, candlelit bush dinners, luxury beach villas, and romantic escapes.",
   openGraph: {
     title: "Honeymoon Packages | Ready Set Go Tours & Travel",
     description: "Handcrafted romantic escapes across East Africa. Private safaris, beachfront villas, and unforgettable moments for your dream honeymoon.",
@@ -17,6 +16,12 @@ export const metadata: Metadata = {
         alt: "Honeymoon Packages - Ready Set Go Tours",
       },
     ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Honeymoon Packages | Ready Set Go Tours & Travel",
+    description: "Handcrafted romantic escapes across East Africa. Private safaris, beachfront villas, and unforgettable moments for your dream honeymoon.",
+    images: ["/og-image.jpg"],
   },
   alternates: {
     canonical: "/honeymoon-packages",

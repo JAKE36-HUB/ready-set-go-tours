@@ -18,7 +18,7 @@ export const COMPANY = {
   bookingsEmail: "bookings@readysetgosafaris.com",
   whatsapp: "+254797867411",
   address: "Nairobi, Kenya",
-  hours: "Monâ€“Sat: 8:00 AM â€“ 6:00 PM (EAT)",
+  hours: "Mon–Sat: 8:00 AM – 6:00 PM (EAT)",
   social: {
     facebook: "https://facebook.com/readysetgotours",
     instagram: "https://instagram.com/readysetgotours",
@@ -325,7 +325,7 @@ export const TOUR_PACKAGES: TourPackage[] = [
     meals: "Full board (breakfast, lunch & dinner)",
     transport: "Custom safari tour 4x4 Land Cruiser",
     activities: ["Game drives", "Scenic game drive through the wilderness", "Photography", "Guided nature walks"],
-    description: "Daily group joining safari in the Maasai Mara â€” the most affordable way to experience Kenya's premier wildlife reserve. Enjoy scenic game drives through the wilderness, spot the Big Five, and camp under the stars. High season (July to December).",
+    description: "Daily group joining safari in the Maasai Mara — the most affordable way to experience Kenya's premier wildlife reserve. Enjoy scenic game drives through the wilderness, spot the Big Five, and camp under the stars. High season (July to December).",
     highlights: ["Daily group joining safari", "Scenic game drives", "Big Five spotting", "Maasai Mara wilderness", "Budget-friendly"],
     included: [
       "Transport in a custom safari tour 4x4 Land Cruiser",
@@ -358,7 +358,7 @@ export const TOUR_PACKAGES: TourPackage[] = [
     meals: "Full board (breakfast, lunch & dinner)",
     transport: "Custom safari tour 4x4 Land Cruiser",
     activities: ["Game drives", "Scenic game drive through the wilderness", "Lake Nakuru flamingos", "Photography"],
-    description: "Extend your safari to include both the Maasai Mara and Lake Nakuru. Witness the Great Migration in the Mara and thousands of flamingos at Lake Nakuru â€” all on a budget-friendly daily group joining safari. High season (July to December).",
+    description: "Extend your safari to include both the Maasai Mara and Lake Nakuru. Witness the Great Migration in the Mara and thousands of flamingos at Lake Nakuru — all on a budget-friendly daily group joining safari. High season (July to December).",
     highlights: ["Maasai Mara game drives", "Lake Nakuru flamingo viewing", "Daily group joining", "Scenic wilderness drives", "Budget-friendly"],
     included: [
       "Transport in a custom safari tour 4x4 Land Cruiser",
@@ -391,7 +391,7 @@ export const TOUR_PACKAGES: TourPackage[] = [
     meals: "Full board (breakfast, lunch & dinner)",
     transport: "Custom safari tour 4x4 Land Cruiser",
     activities: ["Game drives", "Scenic game drive through the wilderness", "Lake Nakuru flamingos", "Naivasha boat ride", "Photography"],
-    description: "A 5-day group safari covering three iconic Kenyan destinations: Maasai Mara, Lake Nakuru, and Lake Naivasha. Enjoy scenic game drives, boat rides, and incredible wildlife â€” all at an unbeatable group rate. High season (July to December).",
+    description: "A 5-day group safari covering three iconic Kenyan destinations: Maasai Mara, Lake Nakuru, and Lake Naivasha. Enjoy scenic game drives, boat rides, and incredible wildlife — all at an unbeatable group rate. High season (July to December).",
     highlights: ["Maasai Mara game drives", "Lake Nakuru flamingos", "Naivasha boat safari", "Scenic wilderness drives", "Budget-friendly"],
     included: [
       "Transport in a custom safari tour 4x4 Land Cruiser",
@@ -424,7 +424,7 @@ export const TOUR_PACKAGES: TourPackage[] = [
     meals: "Full board (breakfast, lunch & dinner)",
     transport: "Custom safari tour 4x4 Land Cruiser",
     activities: ["Game drives", "Scenic game drive through the wilderness", "Lake Nakuru flamingos", "Amboseli elephant herds", "Photography"],
-    description: "Experience Kenya's greatest safari circuit on a budget-friendly group tour. From the Maasai Mara to Lake Nakuru and Amboseli beneath Mount Kilimanjaro â€” this 6-day journey delivers incredible wildlife and scenery. High season (July to December).",
+    description: "Experience Kenya's greatest safari circuit on a budget-friendly group tour. From the Maasai Mara to Lake Nakuru and Amboseli beneath Mount Kilimanjaro — this 6-day journey delivers incredible wildlife and scenery. High season (July to December).",
     highlights: ["Maasai Mara wilderness", "Lake Nakuru flamingos", "Amboseli & Kilimanjaro views", "Scenic game drives", "Budget-friendly"],
     included: [
       "Transport in a custom safari tour 4x4 Land Cruiser",
@@ -457,7 +457,7 @@ export const TOUR_PACKAGES: TourPackage[] = [
     meals: "Full board (breakfast, lunch & dinner)",
     transport: "Custom safari tour 4x4 Land Cruiser",
     activities: ["Game drives", "Scenic game drive through the wilderness", "Lake Nakuru flamingos", "Naivasha boat ride", "Amboseli elephant herds", "Photography"],
-    description: "The ultimate 7-day group safari covering Kenya's four most iconic destinations. Traverse the Maasai Mara, Lake Nakuru, Lake Naivasha, and Amboseli â€” with scenic game drives, boat safaris, and breathtaking landscapes throughout. High season (July to December).",
+    description: "The ultimate 7-day group safari covering Kenya's four most iconic destinations. Traverse the Maasai Mara, Lake Nakuru, Lake Naivasha, and Amboseli — with scenic game drives, boat safaris, and breathtaking landscapes throughout. High season (July to December).",
     highlights: ["Maasai Mara game drives", "Lake Nakuru flamingos", "Naivasha boat safari", "Amboseli & Kilimanjaro", "Scenic wilderness drives"],
     included: [
       "Transport in a custom safari tour 4x4 Land Cruiser",
@@ -589,7 +589,7 @@ export const TOUR_PACKAGES: TourPackage[] = [
     meals: "Full board (breakfast, lunch & dinner)",
     transport: "Custom safari tour 4x4 Land Cruiser",
     activities: ["Game drives", "Great Migration viewing", "Ngorongoro Crater tour", "Lake Naivasha boat ride", "Balloon safari", "Cultural visits"],
-    description: "The ultimate cross-border East African safari combining Kenya and Tanzania's greatest parks and reserves. From the Masai Mara to the Serengeti, from Amboseli's elephants beneath Kilimanjaro to the Ngorongoro Crater â€” this is the definitive East African adventure.",
+    description: "The ultimate cross-border East African safari combining Kenya and Tanzania's greatest parks and reserves. From the Masai Mara to the Serengeti, from Amboseli's elephants beneath Kilimanjaro to the Ngorongoro Crater — this is the definitive East African adventure.",
     highlights: ["Masai Mara & Serengeti migration", "Ngorongoro Crater", "Amboseli & Kilimanjaro", "Lake Naivasha hippos", "Cross-border safari experience"],
     included: [
       "Transport in a custom safari tour 4x4 Land Cruiser",
@@ -659,7 +659,7 @@ export const TOUR_PACKAGES: TourPackage[] = [
     meals: "Full board (breakfast, lunch & dinner)",
     transport: "Custom safari tour 4x4 Land Cruiser",
     activities: ["Cycling safari", "Hiking through gorges", "Lake Naivasha boat ride", "Crescent Island walking safari", "Birdwatching", "Photography"],
-    description: "Discover the dramatic beauty of Hells Gate National Park in style â€” cycle among zebras and giraffes against towering cliffs and volcanic gorges, then retreat to the tranquil shores of Lake Naivasha for a luxury lakeside stay. Hike Fischer's Tower, explore geothermal steam plumes, and enjoy a sunset boat ride spotting hippos. Price: $320 USD per person sharing.",
+    description: "Discover the dramatic beauty of Hells Gate National Park in style — cycle among zebras and giraffes against towering cliffs and volcanic gorges, then retreat to the tranquil shores of Lake Naivasha for a luxury lakeside stay. Hike Fischer's Tower, explore geothermal steam plumes, and enjoy a sunset boat ride spotting hippos. Price: $320 USD per person sharing.",
     highlights: ["Cycling through wildlife", "Fischer's Tower hike", "Gorge walking", "Lake Naivasha luxury boat safari", "Crescent Island walking safari"],
     included: [
       "Transport in a custom safari tour 4x4 Land Cruiser",
@@ -692,7 +692,7 @@ export const TOUR_PACKAGES: TourPackage[] = [
     meals: "Full board (breakfast, lunch & dinner)",
     transport: "Private shuttle from Nairobi",
     activities: ["Mountain trekking", "Summit Point Lenana", "Wildlife viewing", "Birdwatching", "Photography"],
-    description: "Conquer Africa's second-highest mountain on this 3-day Mount Kenya trekking adventure via the scenic Sirimon Route. Traverse lush forests, alpine meadows, and dramatic valleys, ending with a sunrise summit at Point Lenana (4,985m) â€” an unforgettable moment above the clouds.",
+    description: "Conquer Africa's second-highest mountain on this 3-day Mount Kenya trekking adventure via the scenic Sirimon Route. Traverse lush forests, alpine meadows, and dramatic valleys, ending with a sunrise summit at Point Lenana (4,985m) — an unforgettable moment above the clouds.",
     highlights: ["Sunrise summit at Point Lenana (4,985m)", "Sirimon Route", "Mackinder Valley views", "Giant lobelia and groundsel", "Equator crossing"],
     included: [
       "Expert mountain guides throughout the trek",
@@ -709,7 +709,7 @@ export const TOUR_PACKAGES: TourPackage[] = [
   },
   {
     id: 8,
-    name: "4 Days Mount Kenya Trek: Lake Rutundu â€“ Lake Alice â€“ Lake Ellis",
+    name: "4 Days Mount Kenya Trek: Lake Rutundu – Lake Alice – Lake Ellis",
     slug: "mount-kenya-lakes-trek-4-days",
     type: "mountain",
     image: "/images/local/pin_babb5cc8d6dcd417d9d13bd97ea3af74.jpg",
@@ -738,7 +738,7 @@ export const TOUR_PACKAGES: TourPackage[] = [
   },
   {
     id: 9,
-    name: "5 Days Mount Kenya Trek â€“ Sirimon Up, Chogoria Down",
+    name: "5 Days Mount Kenya Trek – Sirimon Up, Chogoria Down",
     slug: "mount-kenka-sirimon-chogoria-5-days",
     type: "mountain",
     image: "/images/local/pin_54b52beffeaf61266a2c770869472c2d.jpg",
@@ -748,7 +748,7 @@ export const TOUR_PACKAGES: TourPackage[] = [
     meals: "Full board (breakfast, lunch & dinner)",
     transport: "Private shuttle from Nairobi",
     activities: ["Mountain trekking", "Summit Point Lenana", "Gorges Valley descent", "Wildlife viewing", "Photography"],
-    description: "Combine two of Mount Kenya's most scenic routes â€” Sirimon and Chogoria â€” for a diverse and breathtaking climbing experience. Ascend via the drier western side and descend through lush bamboo forests, waterfalls, and stunning valleys. Summit Point Lenana (4,985m) at sunrise.",
+    description: "Combine two of Mount Kenya's most scenic routes — Sirimon and Chogoria — for a diverse and breathtaking climbing experience. Ascend via the drier western side and descend through lush bamboo forests, waterfalls, and stunning valleys. Summit Point Lenana (4,985m) at sunrise.",
     highlights: ["Sirimon & Chogoria routes combined", "Summit Point Lenana sunrise", "Gorges Valley views", "Lake Michaelson", "Mount Kenya Bandas"],
     included: [
       "Airport transfers for arrival and departure",
@@ -797,7 +797,7 @@ export const TOUR_PACKAGES: TourPackage[] = [
   },
   {
     id: 12,
-    name: "Tanzania Luxury Safari â€“ Serengeti & Ngorongoro",
+    name: "Tanzania Luxury Safari – Serengeti & Ngorongoro",
     slug: "tanzania-luxury-serengeti-ngorongoro",
     type: "luxury",
     image: "/images/local/pin_bce36f5f91a9170667cbbaeaa9b8ea52.jpg",
@@ -807,7 +807,7 @@ export const TOUR_PACKAGES: TourPackage[] = [
     meals: "Full board (breakfast, lunch & dinner)",
     transport: "Custom safari tour 4x4 Land Cruiser",
     activities: ["Serengeti game drives", "Ngorongoro Crater descent", "Big Five", "Photography", "Sundowners"],
-    description: "Discover Tanzania's finest wildlife destinations in luxury. Explore the endless plains of the Serengeti, descend into the Ngorongoro Crater â€” the world's largest intact caldera â€” and stay at premium lodges with world-class service.",
+    description: "Discover Tanzania's finest wildlife destinations in luxury. Explore the endless plains of the Serengeti, descend into the Ngorongoro Crater — the world's largest intact caldera — and stay at premium lodges with world-class service.",
     highlights: ["Serengeti Great Migration", "Ngorongoro Crater floor", "Big Five sightings", "Premium luxury lodges", "Tanzania visa included"],
     included: [
       "Transport in a custom safari tour 4x4 Land Cruiser",
@@ -830,7 +830,7 @@ export const TOUR_PACKAGES: TourPackage[] = [
   },
   {
     id: 11,
-    name: "6 Days Machame Route â€“ Mount Kilimanjaro Trekking Adventure",
+    name: "6 Days Machame Route – Mount Kilimanjaro Trekking Adventure",
     slug: "kilimanjaro-machame-6-days",
     type: "mountain",
     image: "/images/local/pin_1f12bebda0ecf1699fa537f21112db28.jpg",
@@ -840,7 +840,7 @@ export const TOUR_PACKAGES: TourPackage[] = [
     meals: "Full board (breakfast, lunch & dinner)",
     transport: "Private shuttle from Arusha to Machame Gate",
     activities: ["Mountain trekking", "Rainforest hiking", "Summit Uhuru Peak", "Glacier views", "Wildlife spotting"],
-    description: "The 6 Days Machame Route â€” known as the Whiskey Route â€” is one of the most scenic and popular ways to climb Mount Kilimanjaro. Traverse lush rainforest, alpine desert, and icy glaciers on your way to Uhuru Peak (5,895m), the highest point in Africa.",
+    description: "The 6 Days Machame Route — known as the Whiskey Route — is one of the most scenic and popular ways to climb Mount Kilimanjaro. Traverse lush rainforest, alpine desert, and icy glaciers on your way to Uhuru Peak (5,895m), the highest point in Africa.",
     highlights: ["Summit Uhuru Peak (5,895m)", "Machame scenic trail", "Shira Plateau views", "Lava Tower acclimatization", "Barranco Wall scramble"],
     included: [
       "Round-trip transport from Arusha to Kilimanjaro",
@@ -862,7 +862,7 @@ export const TOUR_PACKAGES: TourPackage[] = [
   },
   {
     id: 12,
-    name: "7 Days Mount Kilimanjaro Trek â€“ Machame Route",
+    name: "7 Days Mount Kilimanjaro Trek – Machame Route",
     slug: "kilimanjaro-machame-7-days",
     type: "mountain",
     image: "/images/local/pin_327cc44ea4209390b2177bb8e670c476.jpg",
@@ -1189,7 +1189,7 @@ export const PAYMENT_POLICY = {
   depositNote: "confirms your booking",
   balanceDue: "30 days before departure",
   freeCancellation: "free cancellation up to 30 days before departure",
-  partialRefund: "50% refund 15â€“29 days before departure",
+  partialRefund: "50% refund 15–29 days before departure",
   noRefund: "no refund under 15 days before departure",
 } as const;
 
@@ -1328,7 +1328,7 @@ interface GalleryCategory {
 export const GALLERY: GalleryCategory = {
   categories: ["All", "Safari", "Beach", "Luxury", "Wildlife", "Landscape", "Mountain", "Group"],
   images: [
-    { id: 1, src: "/images/local/pin_48c9f7d212a4a2933b84ec65c19e4628.jpg", alt: "Daily group joining safari in the Maasai Mara â€” affordable wildlife experience", category: "Safari", width: 800, height: 600 },
+    { id: 1, src: "/images/local/pin_48c9f7d212a4a2933b84ec65c19e4628.jpg", alt: "Daily group joining safari in the Maasai Mara — affordable wildlife experience", category: "Safari", width: 800, height: 600 },
     { id: 2, src: "/images/local/pin_1f12bebda0ecf1699fa537f21112db28.jpg", alt: "Ultimate Kenya safari covering Masai Mara, Lake Nakuru, Lake Naivasha, and Amboseli", category: "Safari", width: 800, height: 600 },
     { id: 3, src: "/images/local/pin_fdefa997b495bcc9246ad44e644be087.jpg", alt: "Group safari to Maasai Mara and Lake Nakuru with Great Migration views", category: "Group", width: 800, height: 600 },
     { id: 4, src: "/images/local/pin_1156825aa06be3206b2a1454ada4af1b.jpg", alt: "Tanzania Northern Circuit through Tarangire, Lake Manyara, Serengeti, and Ngorongoro", category: "Wildlife", width: 800, height: 600 },
@@ -1340,7 +1340,7 @@ export const GALLERY: GalleryCategory = {
     { id: 10, src: "/images/local/pin_12e40e23d242acb64f74c7aebec11fc2.jpg", alt: "Mount Kenya trekking adventure via Sirimon Route to Point Lenana summit", category: "Mountain", width: 800, height: 600 },
     { id: 11, src: "/images/local/pin_54b52beffeaf61266a2c770869472c2d.jpg", alt: "Mount Kenya Sirimon Up and Chogoria Down trek combining two scenic routes", category: "Mountain", width: 800, height: 600 },
     { id: 12, src: "/images/local/pin_babb5cc8d6dcd417d9d13bd97ea3af74.jpg", alt: "Mount Kenya alpine lakes trek visiting Lakes Rutundu, Alice, and Ellis", category: "Landscape", width: 800, height: 600 },
-    { id: 13, src: "/images/local/pin_cef6d689ef0cdfd6df6180dee63f669c.jpg", alt: "Kilimanjaro Lemosho Route â€” the most scenic climb to Uhuru Peak", category: "Mountain", width: 800, height: 600 },
+    { id: 13, src: "/images/local/pin_cef6d689ef0cdfd6df6180dee63f669c.jpg", alt: "Kilimanjaro Lemosho Route — the most scenic climb to Uhuru Peak", category: "Mountain", width: 800, height: 600 },
     { id: 14, src: "/images/local/pin_e4d57f9f504d405977711abd9469c591.jpg", alt: "Romantic safari and beach escape with private game drives in Masai Mara", category: "Luxury", width: 800, height: 600 },
     { id: 15, src: "/images/local/pin_ecf9c45a7a976f4151b88235e8396c06.jpg", alt: "Zanzibar honeymoon with turquoise waters, spice tours, and beach villas", category: "Beach", width: 800, height: 600 },
     { id: 16, src: "/images/local/pin_fbfecc1741f23134a323bbc5bf57c414.jpg", alt: "Diani Beach honeymoon with dolphin spotting and Kisite Marine Park snorkeling", category: "Beach", width: 800, height: 600 },
@@ -2217,7 +2217,7 @@ export const DEALS: Deal[] = [
     id: 1,
     title: "3 Days Great Wildebeest Migration Season",
     slug: "great-wildebeest-migration",
-    description: "Witness one of nature's greatest spectacles â€” the Great Wildebeest Migration. Stay at Mara Ntulele Camp perfectly positioned for prime river crossing viewing. Non-resident: $650 USD per person. Resident: 27,000 KES per person.",
+    description: "Witness one of nature's greatest spectacles — the Great Wildebeest Migration. Stay at Mara Ntulele Camp perfectly positioned for prime river crossing viewing. Non-resident: $650 USD per person. Resident: 27,000 KES per person.",
     discount: "Group Safari",
     code: "MIGRATION",
     image: "/images/local/pin_48c9f7d212a4a2933b84ec65c19e4628.jpg",
@@ -2363,7 +2363,7 @@ export const DEALS: Deal[] = [
     id: 5,
     title: "Amboseli Tsavo Gateway Safari",
     slug: "amboseli-tsavo-gateway",
-    description: "Explore three of Kenya's most iconic parks â€” Amboseli, Tsavo East, and Tsavo West. Elephant herds beneath Kilimanjaro, the legendary red elephants of Tsavo, and the stunning Mzima Springs. Non-resident: $2,400 USD per person. Resident: 282,768 KES per person.",
+    description: "Explore three of Kenya's most iconic parks — Amboseli, Tsavo East, and Tsavo West. Elephant herds beneath Kilimanjaro, the legendary red elephants of Tsavo, and the stunning Mzima Springs. Non-resident: $2,400 USD per person. Resident: 282,768 KES per person.",
     discount: "Gateway Special",
     code: "TSAVO",
     image: "/images/local/pin_1f12bebda0ecf1699fa537f21112db28.jpg",
@@ -2425,7 +2425,7 @@ export const HONEYMOON_PACKAGES: HoneymoonPackage[] = [
     meals: "Gourmet full board & candlelit dinners",
     transport: "Private 4x4 + domestic flight",
     activities: ["Private game drives", "Sundowner bush dinner", "Couples spa", "Hot air balloon", "Dhow sunset cruise", "Snorkeling"],
-    description: "The ultimate romantic journey â€” begin with private game drives in the Masai Mara, then unwind on Zanzibar's pristine beaches. Candlelit bush dinners under the stars and a private villa with plunge pool make this the perfect honeymoon.",
+    description: "The ultimate romantic journey — begin with private game drives in the Masai Mara, then unwind on Zanzibar's pristine beaches. Candlelit bush dinners under the stars and a private villa with plunge pool make this the perfect honeymoon.",
     highlights: ["Private safari vehicle & guide", "Champagne sundowner on the Mara", "Luxury beachfront villa", "Couples massage", "Floating breakfast"],
     included: ["All domestic flights", "Gourmet meals & drinks", "Park fees", "Airport transfers", "24/7 private concierge"],
   },
@@ -2516,7 +2516,7 @@ export const SERVICES: Service[] = [
     tagline: "The Best Places to Stay, at the Best Rates",
     image: "/images/local/pin_2831b4de089bea29cccc93985a7bd032.jpg",
     description:
-      "From luxury safari lodges in the Masai Mara to beachfront resorts in Zanzibar and city hotels in Nairobi â€” we secure exclusive rates at hand-picked properties across East Africa. Whether you're after a romantic boutique hideaway or a family-friendly all-inclusive resort, our accommodation experts match you with the perfect stay.",
+      "From luxury safari lodges in the Masai Mara to beachfront resorts in Zanzibar and city hotels in Nairobi — we secure exclusive rates at hand-picked properties across East Africa. Whether you're after a romantic boutique hideaway or a family-friendly all-inclusive resort, our accommodation experts match you with the perfect stay.",
     features: [
       "Exclusive partner rates not available on booking platforms",
       "Hand-picked portfolio of 200+ vetted properties",
@@ -2527,18 +2527,18 @@ export const SERVICES: Service[] = [
     ],
     benefits: [
       { icon: "Hotel", title: "Curated Selection", desc: "Every property is personally vetted for quality, location, and service standards." },
-      { icon: "Shield", title: "Best Rate Guarantee", desc: "We match or beat any publicly available rate â€” plus unlock exclusive perks." },
+      { icon: "Shield", title: "Best Rate Guarantee", desc: "We match or beat any publicly available rate — plus unlock exclusive perks." },
       { icon: "HeadphonesIcon", title: "Dedicated Support", desc: "Your booking is managed end-to-end by our accommodation team, 24/7." },
     ],
     whyUs: [
       "We have established relationships with lodge and hotel owners across Kenya and Tanzania, giving us access to rates and availability you won't find on public booking sites.",
-      "Our team personally inspects every property on our list â€” we don't recommend anywhere we wouldn't stay ourselves.",
+      "Our team personally inspects every property on our list — we don't recommend anywhere we wouldn't stay ourselves.",
       "We handle the entire process: from shortlisting and booking to check-in support and post-stay follow-up.",
       "For multi-destination trips, we coordinate check-in/check-out logistics, transfer connections, and special requests seamlessly.",
     ],
     faqs: [
       { q: "Can you book hotels that aren't on your list?", a: "Absolutely. If there's a specific property you have in mind, we'll reach out to secure the best available rate and handle the booking for you." },
-      { q: "Do you charge a booking fee?", a: "No. Our accommodation booking service is free to you â€” we earn commission directly from the properties." },
+      { q: "Do you charge a booking fee?", a: "No. Our accommodation booking service is free to you — we earn commission directly from the properties." },
       { q: "Can you help with group bookings?", a: "Yes. We regularly book blocks of rooms for family reunions, wedding parties, and corporate retreats at discounted group rates." },
     ],
   },
@@ -2549,10 +2549,10 @@ export const SERVICES: Service[] = [
     tagline: "Seamless Flights, Domestic & International",
     image: "/images/local/pin_721a8a7ea0c339e50b674b2db40e125a.jpg",
     description:
-      "We handle all your flight arrangements â€” from international arrivals into Nairobi or Kilimanjaro to domestic bush flights connecting you to safari airstrips. Our ticketing team works with all major airlines to find the best routes, fares, and schedules for your itinerary.",
+      "We handle all your flight arrangements — from international arrivals into Nairobi or Kilimanjaro to domestic bush flights connecting you to safari airstrips. Our ticketing team works with all major airlines to find the best routes, fares, and schedules for your itinerary.",
     features: [
       "International flights with all major carriers",
-      "Domestic connections: Nairobiâ€“Mombasa, Nairobiâ€“Zanzibar, and more",
+      "Domestic connections: Nairobi–Mombasa, Nairobi–Zanzibar, and more",
       "Bush flights to remote safari airstrips (Masai Mara, Serengeti, Amboseli)",
       "Group fare negotiation for families & corporate travel",
       "Flexible ticket options with change and cancellation coverage",
@@ -2564,13 +2564,13 @@ export const SERVICES: Service[] = [
       { icon: "Shield", title: "Stress-Free Changes", desc: "If your plans shift, we handle rebooking and changes so you don't have to wait on hold." },
     ],
     whyUs: [
-      "Our ticketing team has years of experience navigating airline fare classes, routing rules, and stopover optimization â€” saving you both money and travel time.",
+      "Our ticketing team has years of experience navigating airline fare classes, routing rules, and stopover optimization — saving you both money and travel time.",
       "We monitor your booking for schedule changes and proactively re-accommodate you if needed, so you're never caught off guard.",
       "For multi-stop East African itineraries, we coordinate international arrivals with domestic connections to ensure seamless same-day transfers.",
       "We offer honest advice: we'll tell you when to book now and when to wait, based on fare trends and airline sales.",
     ],
     faqs: [
-      { q: "Do you only book flights for safari clients?", a: "Not at all. We provide air ticketing as a standalone service â€” whether you're visiting for business, a family visit, or just need help finding the best fare to East Africa." },
+      { q: "Do you only book flights for safari clients?", a: "Not at all. We provide air ticketing as a standalone service — whether you're visiting for business, a family visit, or just need help finding the best fare to East Africa." },
       { q: "Can you book one-way or multi-city flights?", a: "Yes. We handle one-way, round-trip, multi-city, and open-jaw itineraries. Whatever your route, we can ticket it." },
       { q: "What happens if my flight is cancelled?", a: "We monitor your booking and will proactively rebook you on the next available option. Our support line is available 24/7 for travel disruptions." },
     ],
@@ -2582,7 +2582,7 @@ export const SERVICES: Service[] = [
     tagline: "Relax, Recharge, and Restore",
     image: "/images/local/unsplash_1544161515-4ab6ce6db874.jpg",
     description:
-      "After days of game drives and adventure, treat yourself to deep relaxation. We partner with East Africa's finest spas to offer professional massage therapy, wellness treatments, and holistic retreat experiences â€” whether in a luxury lodge spa, a beachfront wellness center, or the privacy of your own room.",
+      "After days of game drives and adventure, treat yourself to deep relaxation. We partner with East Africa's finest spas to offer professional massage therapy, wellness treatments, and holistic retreat experiences — whether in a luxury lodge spa, a beachfront wellness center, or the privacy of your own room.",
     features: [
       "Professional in-room massage at select lodges & hotels",
       "Full-service spa days: facials, body wraps, and hydrotherapy",
@@ -2592,18 +2592,18 @@ export const SERVICES: Service[] = [
       "Holistic therapies: reflexology, aromatherapy, hot stone massage",
     ],
     benefits: [
-      { icon: "Heart", title: "Curated Wellness Experiences", desc: "We match you with the right treatment based on your needs â€” deep tissue, relaxation, or recovery." },
+      { icon: "Heart", title: "Curated Wellness Experiences", desc: "We match you with the right treatment based on your needs — deep tissue, relaxation, or recovery." },
       { icon: "Sparkles", title: "Premium Partners", desc: "We work with award-winning spas and certified therapists across Kenya and Tanzania." },
       { icon: "Hotel", title: "In-Room Convenience", desc: "Many treatments can be arranged in the comfort and privacy of your own lodge or hotel room." },
     ],
     whyUs: [
-      "Recovery is an essential part of any safari experience. Long game drives, early mornings, and bumpy roads take a toll â€” a professional massage revitalizes you for the next day's adventure.",
+      "Recovery is an essential part of any safari experience. Long game drives, early mornings, and bumpy roads take a toll — a professional massage revitalizes you for the next day's adventure.",
       "We book wellness services in advance so you don't miss out on limited spa slots at popular lodges and resorts.",
-      "Our spa partners use natural African ingredients â€” shea butter, baobab oil, coffee scrubs â€” for treatments that are authentically East African.",
+      "Our spa partners use natural African ingredients — shea butter, baobab oil, coffee scrubs — for treatments that are authentically East African.",
       "We customize packages: pre-safari jet lag relief, post-trek recovery, honeymoon romance, or full-day wellness retreats.",
     ],
     faqs: [
-      { q: "Can I book a massage without staying at a partner lodge?", a: "Yes. We can arrange spa day visits at select resort spas even if you're not a guest â€” subject to availability." },
+      { q: "Can I book a massage without staying at a partner lodge?", a: "Yes. We can arrange spa day visits at select resort spas even if you're not a guest — subject to availability." },
       { q: "Are therapists certified?", a: "Absolutely. All our partner therapists are internationally certified and trained in a range of modalities from Swedish massage to deep tissue and traditional African techniques." },
       { q: "What if I have specific health conditions?", a: "Please let us know in advance. We'll ensure your therapist is informed and treatments are adapted to your needs and medical history." },
     ],

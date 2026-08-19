@@ -19,9 +19,21 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const post = BLOG_POSTS.find((p) => p.slug === slug);
   if (!post) return {};
 
+  const excerpt = post.excerpt.replace(/\s+/g, " ").trim();
+  let description: string;
+  if (excerpt.length >= 160) {
+    description = excerpt.slice(0, 157).trimEnd() + "…";
+  } else if (excerpt.length >= 140) {
+    description = excerpt;
+  } else if (excerpt.length >= 120) {
+    description = `${excerpt} Plan your safari.`;
+  } else {
+    description = `${excerpt} Plan with ${COMPANY.name}.`;
+  }
+
   return {
     title: post.title,
-    description: post.excerpt,
+    description,
     openGraph: {
       title: post.title,
       description: post.excerpt,

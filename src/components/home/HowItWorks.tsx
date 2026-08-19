@@ -88,7 +88,7 @@ export function HowItWorks() {
         >
           <Link href="/contact">
             <Button className="h-14 px-10 text-base font-semibold bg-emerald-500 hover:bg-emerald-600 text-white shadow-xl shadow-emerald-500/25 hover:shadow-emerald-500/40 transition-all duration-300">
-              Start Planning — Free <ArrowRight className="w-4 h-4 ml-2" />
+              Get a Free Quote <ArrowRight className="w-4 h-4 ml-2" />
             </Button>
           </Link>
           <p className="text-xs text-slate-400 dark:text-slate-500 mt-3">No commitment required. Get a custom quote in 24 hours.</p>

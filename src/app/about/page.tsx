@@ -9,8 +9,7 @@ import AnimatedSection from "@/components/AnimatedSection";
 
 export const metadata: Metadata = {
   title: "About Us",
-  description: `Learn about ${COMPANY.name}, Kenya's premier luxury tour operator with 3+ years of experience crafting bespoke safari and travel experiences across East Africa.`,
-  keywords: ["about Ready Set Go Tours", "Kenya tour operator", "safari company Nairobi", "East Africa travel experts"],
+  description: `Learn about ${COMPANY.name} — Kenya's premier luxury tour operator crafting bespoke safaris and travel experiences across East Africa.`,
   openGraph: {
     title: `About Us | ${COMPANY.name}`,
     description: COMPANY.description,

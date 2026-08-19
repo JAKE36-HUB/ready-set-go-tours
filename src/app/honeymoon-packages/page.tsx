@@ -44,7 +44,7 @@ export default async function HoneymoonPage() {
             </h1>
             <p className="text-lg text-white/60 max-w-xl mx-auto">
               Handcrafted romantic escapes across East Africa. From private safari adventures to
-              secluded beachfront villas â€” your dream honeymoon begins here.
+              secluded beachfront villas — your dream honeymoon begins here.
             </p>
           </AnimatedSection>
         </div>
@@ -71,7 +71,7 @@ export default async function HoneymoonPage() {
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
             {[
               { icon: Heart, title: "Romance Curated", desc: "Every package is designed by experts who understand the art of romance." },
-              { icon: Shield, title: "Private & Exclusive", desc: "Private vehicles, private tables, private moments â€” just the two of you." },
+              { icon: Shield, title: "Private & Exclusive", desc: "Private vehicles, private tables, private moments — just the two of you." },
               { icon: Gift, title: "Surprise Touches", desc: "Champagne on arrival, rose petal turndowns, and other thoughtful extras." },
               { icon: Star, title: "Flexible Planning", desc: "Customize every detail from accommodation to activities. Your honeymoon, your way." },
             ].map((item) => (
@@ -96,7 +96,7 @@ export default async function HoneymoonPage() {
             <div className="relative p-10 rounded-3xl bg-gradient-to-br from-rose-50 to-pink-50 dark:from-rose-950/20 dark:to-pink-950/20 ring-1 ring-rose-100 dark:ring-rose-900/30 text-center">
               <Quote className="size-10 text-rose-300/50 mx-auto mb-6" />
               <blockquote className="text-xl sm:text-2xl text-slate-700 dark:text-slate-200 font-medium italic leading-relaxed mb-6">
-                &ldquo;Our honeymoon in Kenya was absolutely perfect. Every detail was thought of â€”
+                &ldquo;Our honeymoon in Kenya was absolutely perfect. Every detail was thought of —
                 from the champagne sundowner in the Mara to the private dinner on the beach in Diani.
                 We will treasure these memories forever.&rdquo;
               </blockquote>

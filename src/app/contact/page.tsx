@@ -22,7 +22,7 @@ import emailjs from "@emailjs/browser";
 
 const CONTACT_INFO = [
   { icon: MapPin, label: "Visit Us", value: COMPANY.address, desc: "Our Nairobi headquarters", color: "text-sky-500", bg: "bg-sky-500/10", gradient: "from-sky-500/20 to-blue-600/10" },
-  { icon: Phone, label: "Call Us", value: COMPANY.phone, desc: "Monâ€“Sat 8AMâ€“6PM EAT", color: "text-emerald-500", bg: "bg-emerald-500/10", gradient: "from-emerald-500/20 to-teal-600/10" },
+  { icon: Phone, label: "Call Us", value: COMPANY.phone, desc: "Mon–Sat 8AM–6PM EAT", color: "text-emerald-500", bg: "bg-emerald-500/10", gradient: "from-emerald-500/20 to-teal-600/10" },
   { icon: Mail, label: "Email Us", value: COMPANY.email, desc: "We reply within 24hrs", color: "text-amber-500", bg: "bg-amber-500/10", gradient: "from-amber-500/20 to-orange-600/10" },
   { icon: Mail, label: "Bookings", value: COMPANY.bookingsEmail, desc: "For safari & travel bookings", color: "text-orange-500", bg: "bg-orange-500/10", gradient: "from-orange-500/20 to-rose-600/10" },
   { icon: MessageCircle, label: "WhatsApp", value: COMPANY.whatsapp, desc: "Fastest response", color: "text-green-500", bg: "bg-green-500/10", gradient: "from-green-500/20 to-emerald-600/10" },
@@ -224,7 +224,7 @@ export default function ContactPage() {
             </h1>
             <p className="text-lg sm:text-xl text-white/60 max-w-2xl mx-auto leading-relaxed">
               Tell us your dream adventure and our Nairobi-based team will craft the perfect
-              East African experience â€” from the Mara to Zanzibar.
+              East African experience — from the Mara to Zanzibar.
             </p>
           </AnimatedSection>
         </div>
@@ -267,7 +267,7 @@ export default function ContactPage() {
               Prefer to reach us directly? Here&apos;s every way to get in touch with our team.
             </p>
           </AnimatedSection>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-4">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {CONTACT_INFO.map((info, i) => (
               <AnimatedSection key={info.label} delay={i * 0.05}>
                 <motion.div
@@ -280,7 +280,7 @@ export default function ContactPage() {
                       <info.icon className={`size-7 ${info.color}`} />
                     </div>
                     <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-1">{info.label}</p>
-                    <p className="text-sm font-bold text-foreground mb-1">{info.value}</p>
+                    <p className="text-sm font-bold text-foreground mb-1 break-all leading-snug">{info.value}</p>
                     <p className="text-xs text-muted-foreground">{info.desc}</p>
                   </div>
                 </motion.div>
@@ -360,7 +360,7 @@ export default function ContactPage() {
                   <div>
                     <p className="text-sm font-semibold text-foreground">{COMPANY.shortName}</p>
                     <p className="text-xs text-muted-foreground mt-0.5">
-                      {COMPANY.address} â€” {COMPANY.hours}
+                      {COMPANY.address} — {COMPANY.hours}
                     </p>
                   </div>
                 </div>
@@ -625,29 +625,29 @@ export default function ContactPage() {
               Ready for the Adventure of a Lifetime?
             </h2>
             <p className="text-sky-200/70 text-lg max-w-2xl mx-auto mb-8">
-              Whether you&apos;re dreaming of the Great Migration, Kilimanjaro, or Zanzibar&apos;s beaches â€”
+              Whether you&apos;re dreaming of the Great Migration, Kilimanjaro, or Zanzibar&apos;s beaches —
               we&apos;re here to make it happen.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <div className="flex flex-col sm:flex-row flex-wrap gap-4 justify-center">
               <a
                 href={`tel:${COMPANY.phone}`}
-                className="inline-flex items-center justify-center gap-2 h-12 px-6 rounded-xl bg-white/10 hover:bg-white/20 text-white text-sm font-medium transition-all ring-1 ring-white/20"
+                className="inline-flex items-center justify-center gap-2 min-h-12 px-5 py-2 rounded-xl bg-white/10 hover:bg-white/20 text-white text-sm font-medium transition-all ring-1 ring-white/20 text-center break-all"
               >
-                <Phone className="size-4" />
+                <Phone className="size-4 shrink-0" />
                 {COMPANY.phone}
               </a>
               <a
                 href={`mailto:${COMPANY.email}`}
-                className="inline-flex items-center justify-center gap-2 h-12 px-6 rounded-xl bg-gradient-to-r from-sky-500 to-blue-600 hover:from-sky-400 hover:to-blue-500 text-white text-sm font-semibold shadow-xl shadow-sky-500/25 transition-all"
+                className="inline-flex items-center justify-center gap-2 min-h-12 px-5 py-2 rounded-xl bg-gradient-to-r from-sky-500 to-blue-600 hover:from-sky-400 hover:to-blue-500 text-white text-sm font-semibold shadow-xl shadow-sky-500/25 transition-all text-center break-all"
               >
-                <Mail className="size-4" />
+                <Mail className="size-4 shrink-0" />
                 {COMPANY.email}
               </a>
               <a
                 href={`mailto:${COMPANY.bookingsEmail}`}
-                className="inline-flex items-center justify-center gap-2 h-12 px-6 rounded-xl bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-400 hover:to-amber-400 text-white text-sm font-semibold shadow-xl shadow-orange-500/25 transition-all"
+                className="inline-flex items-center justify-center gap-2 min-h-12 px-5 py-2 rounded-xl bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-400 hover:to-amber-400 text-white text-sm font-semibold shadow-xl shadow-orange-500/25 transition-all text-center break-all"
               >
-                <Mail className="size-4" />
+                <Mail className="size-4 shrink-0" />
                 {COMPANY.bookingsEmail}
               </a>
             </div>

@@ -4,15 +4,7 @@ import { BreadcrumbJsonLd } from "@/components/JsonLd";
 export const metadata: Metadata = {
   title: "Beach Holidays & Coastal Getaways",
   description:
-    "Escape to pristine beaches along the Kenyan and Tanzanian coast. Diani Beach, Zanzibar, Watamu, and Lamu luxury beach holiday packages.",
-  keywords: [
-    "beach holidays Kenya",
-    "Diani Beach resort",
-    "Zanzibar beach holiday",
-    "Watamu marine park",
-    "Indian Ocean beaches",
-    "luxury beach Africa",
-  ],
+    "Escape to pristine beaches along the Kenyan and Tanzanian coast. Diani Beach, Zanzibar, Watamu, and Lamu luxury beach holiday packages with expert planning.",
   openGraph: {
     title: "Beach Holidays | Ready Set Go Tours & Travel",
     description:

@@ -4,17 +4,7 @@ import { BreadcrumbJsonLd } from "@/components/JsonLd";
 export const metadata: Metadata = {
   title: "Mountain Trekking & Climbing | Mount Kenya & Kilimanjaro",
   description:
-    "Conquer Africa's legendary peaks with expert guides. Mount Kenya trekking packages, Kilimanjaro climbs, and high-altitude adventures. Guided summit expeditions with full support.",
-  keywords: [
-    "Mount Kenya trek",
-    "Mount Kenya climbing",
-    "Kilimanjaro climb",
-    "Africa mountain trekking",
-    "Kenya hiking tours",
-    "Nanyuki mountain trek",
-    "guided summit expedition",
-    "high altitude trek Kenya",
-  ],
+    "Conquer Africa's legendary peaks with expert guides. Mount Kenya trekking, Kilimanjaro climbs, and high-altitude summit expeditions with full support.",
   openGraph: {
     title: "Mountain Trekking | Ready Set Go Tours & Travel",
     description:

@@ -15,7 +15,7 @@ const HOME_SERVICES = [
     icon: Hotel as LucideIcon,
     title: "Hotel Bookings",
     slug: "hotel-bookings",
-    description: "We secure exclusive rates at 200+ hand-picked properties across East Africa â€” from luxury safari camps to beachfront resorts and city hotels.",
+    description: "We secure exclusive rates at 200+ hand-picked properties across East Africa — from luxury safari camps to beachfront resorts and city hotels.",
     features: ["Best rate guarantee", "200+ vetted properties", "Luxury camps & lodges", "Beach & city hotels", "Honeymoon packages", "Free booking service"],
     priceFrom: "From $80 / night",
     badge: "Most Popular",
@@ -28,7 +28,7 @@ const HOME_SERVICES = [
     icon: Globe as LucideIcon,
     title: "Air Ticketing",
     slug: "air-ticketing",
-    description: "International flights, domestic connections, and bush flights to remote safari airstrips â€” all at preferred airline rates with 24/7 support.",
+    description: "International flights, domestic connections, and bush flights to remote safari airstrips — all at preferred airline rates with 24/7 support.",
     features: ["International flights", "Bush & domestic flights", "Preferred airline rates", "Group fare negotiation", "Flexible ticket options", "Meet-and-assist service"],
     priceFrom: "From $299",
     badge: "Best Value",
@@ -82,7 +82,7 @@ export function MoreServices({ onReserve }: { onReserve?: (name: string) => void
             </span>
           </h2>
           <p className="text-lg text-slate-500 dark:text-slate-400 max-w-xl mx-auto">
-            From flights and accommodation to relaxation â€” we handle every detail so you just enjoy the journey.
+            From flights and accommodation to relaxation — we handle every detail so you just enjoy the journey.
           </p>
         </motion.div>
 

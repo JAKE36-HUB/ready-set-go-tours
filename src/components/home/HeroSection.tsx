@@ -125,7 +125,7 @@ export function HeroSection() {
               transition={{ duration: 0.6, delay: 0.7 }}
               className="text-base sm:text-lg text-white/50 max-w-xl mb-10 leading-relaxed font-light tracking-wide"
             >
-              Curated safaris across Kenya and Tanzania. Every detail, every moment â€” crafted around you.
+              Curated safaris across Kenya and Tanzania. Every detail, every moment — crafted around you.
             </motion.p>
 
             <motion.div

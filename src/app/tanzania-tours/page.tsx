@@ -9,15 +9,7 @@ import { BreadcrumbJsonLd } from "@/components/JsonLd";
 export const metadata: Metadata = {
   title: "Tanzania Tours & Safaris",
   description:
-    "Explore Tanzania's legendary Serengeti, Ngorongoro Crater, and Mount Kilimanjaro with Ready Set Go Tours & Travel. Luxury safaris and bespoke adventures from Arusha.",
-  keywords: [
-    "Tanzania safari tours",
-    "Serengeti safari",
-    "Ngorongoro Crater",
-    "Kilimanjaro climb",
-    "Tanzania luxury safari",
-    "Zanzibar beach",
-  ],
+    "Explore Tanzania's legendary Serengeti, Ngorongoro Crater, and Kilimanjaro with Ready Set Go Tours & Travel. Luxury safaris and bespoke adventures from Arusha.",
   openGraph: {
     title: `Tanzania Tours & Safaris | ${COMPANY.name}`,
     description:
@@ -71,7 +63,7 @@ export default function TanzaniaToursPage() {
             </h1>
             <p className="text-lg sm:text-xl text-amber-100/80 max-w-2xl mx-auto leading-relaxed">
               Stand on the rim of the Ngorongoro Crater, watch wildebeest cross the Mara River,
-              and summit Africa&apos;s highest peak â€” Tanzania is the stuff of legends.
+              and summit Africa&apos;s highest peak — Tanzania is the stuff of legends.
             </p>
           </AnimatedSection>
         </div>

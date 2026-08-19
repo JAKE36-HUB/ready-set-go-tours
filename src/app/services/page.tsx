@@ -36,7 +36,7 @@ export default function ServicesPage() {
               </span>
             </h1>
             <p className="text-lg sm:text-xl text-white/70 max-w-2xl mx-auto leading-relaxed">
-              From flights and accommodation to wellness and relaxation â€” we handle every detail
+              From flights and accommodation to wellness and relaxation — we handle every detail
               of your East African journey.
             </p>
           </AnimatedSection>
@@ -54,7 +54,7 @@ export default function ServicesPage() {
               </h2>
               <p className="text-muted-foreground max-w-2xl mx-auto">
                 Whether you need a room for the night, a flight across the continent, or deep
-                relaxation after a week on safari â€” our team has you covered.
+                relaxation after a week on safari — our team has you covered.
               </p>
             </div>
           </AnimatedSection>
@@ -132,7 +132,7 @@ export default function ServicesPage() {
               Need Help Planning?
             </h2>
             <p className="text-sky-200/80 text-lg max-w-2xl mx-auto mb-8">
-              Whatever you need â€” a hotel booking, a flight, or a spa day â€” our team is ready to help.
+              Whatever you need — a hotel booking, a flight, or a spa day — our team is ready to help.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link

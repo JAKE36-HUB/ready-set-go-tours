@@ -9,16 +9,7 @@ import { BreadcrumbJsonLd } from "@/components/JsonLd";
 export const metadata: Metadata = {
   title: "Kenya Tours & Safaris",
   description:
-    "Discover Kenya's iconic wildlife destinations with Ready Set Go Tours & Travel. Explore Masai Mara, Amboseli, Samburu, and more on luxury guided safaris from Nairobi.",
-  keywords: [
-    "Kenya safari tours",
-    "Masai Mara safari",
-    "Amboseli National Park",
-    "Kenya wildlife",
-    "luxury safari Kenya",
-    "Kenya tour operator",
-    "Ready Set Go Tours",
-  ],
+    "Discover Kenya's iconic wildlife destinations with Ready Set Go Tours & Travel. Masai Mara, Amboseli, Samburu and more on luxury guided safaris from Nairobi.",
   openGraph: {
     title: `Kenya Tours & Safaris | ${COMPANY.name}`,
     description:
@@ -72,7 +63,7 @@ export default function KenyaToursPage() {
             </h1>
             <p className="text-lg sm:text-xl text-sky-100/80 max-w-2xl mx-auto leading-relaxed">
               From the rolling savannahs of the Masai Mara to the elephant herds beneath
-              Kilimanjaro â€” discover why Kenya is Africa&apos;s most celebrated safari
+              Kilimanjaro — discover why Kenya is Africa&apos;s most celebrated safari
               destination.
             </p>
           </AnimatedSection>
