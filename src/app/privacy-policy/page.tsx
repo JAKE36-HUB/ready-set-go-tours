@@ -13,6 +13,12 @@ export const metadata: Metadata = {
       "Learn how Ready Set Go Tours & Travel collects, uses, and protects your personal information.",
     type: "website",
   },
+  twitter: {
+    card: "summary_large_image",
+    title: `Privacy Policy | ${COMPANY.name}`,
+    description: "Learn how Ready Set Go Tours & Travel collects, uses, and protects your personal information.",
+    images: ["/og-image.jpg"],
+  },
   alternates: {
     canonical: "/privacy-policy",
   },

@@ -20,6 +20,12 @@ export const metadata: Metadata = {
       },
     ],
   },
+  twitter: {
+    card: "summary_large_image",
+    title: "FAQ | Ready Set Go Tours & Travel",
+    description: "Everything you need to know about planning your East African safari — from visas and vaccinations to packing and accommodation.",
+    images: ["/og-image.jpg"],
+  },
   alternates: {
     canonical: "/faq",
   },

@@ -19,6 +19,12 @@ export const metadata: Metadata = {
       },
     ],
   },
+  twitter: {
+    card: "summary_large_image",
+    title: "Mountain Trekking | Ready Set Go Tours & Travel",
+    description: "Conquer Africa's highest peaks with expert guides. From Mount Kenya to Kilimanjaro, our treks deliver adventure, endurance, and breathtaking summit views.",
+    images: ["/og-image.jpg"],
+  },
   alternates: {
     canonical: "/mountain-trekking",
   },

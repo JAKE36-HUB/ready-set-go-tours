@@ -40,6 +40,12 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       images: [{ url: post.image }],
       type: "article",
     },
+    twitter: {
+      card: "summary_large_image",
+      title: post.title,
+      description,
+      images: [post.image],
+    },
     alternates: {
       canonical: `/travel-guide/${slug}`,
     },

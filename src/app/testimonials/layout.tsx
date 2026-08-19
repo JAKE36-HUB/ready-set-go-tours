@@ -18,6 +18,12 @@ export const metadata: Metadata = {
       },
     ],
   },
+  twitter: {
+    card: "summary_large_image",
+    title: "Testimonials | Ready Set Go Tours & Travel",
+    description: "Authentic reviews from our satisfied safari travelers.",
+    images: ["/og-image.jpg"],
+  },
   alternates: {
     canonical: "/testimonials",
   },

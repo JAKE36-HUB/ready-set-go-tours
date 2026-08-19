@@ -19,6 +19,12 @@ export const metadata: Metadata = {
       },
     ],
   },
+  twitter: {
+    card: "summary_large_image",
+    title: "Travel Services | Ready Set Go Tours & Travel",
+    description: "Explore our full range of travel services: hotel bookings, air ticketing, visa assistance, airport transfers, group travel, and guided tours across Kenya and Tanzania.",
+    images: ["/og-image.jpg"],
+  },
   alternates: {
     canonical: "/services",
   },

@@ -23,6 +23,12 @@ export const metadata: Metadata = {
       },
     ],
   },
+  twitter: {
+    card: "summary_large_image",
+    title: `About Us | ${COMPANY.name}`,
+    description: COMPANY.description,
+    images: ["/og-image.jpg"],
+  },
   alternates: {
     canonical: "/about",
   },

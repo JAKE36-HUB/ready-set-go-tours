@@ -13,6 +13,13 @@ export const metadata: Metadata = {
       "Booking, payment, and cancellation terms for Ready Set Go Tours & Travel safari packages.",
     type: "website",
   },
+  twitter: {
+    card: "summary_large_image",
+    title: `Terms & Conditions | ${COMPANY.name}`,
+    description:
+      "Booking, payment, and cancellation terms for Ready Set Go Tours & Travel safari packages.",
+    images: ["/og-image.jpg"],
+  },
   alternates: {
     canonical: "/terms-and-conditions",
   },

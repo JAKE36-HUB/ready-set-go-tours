@@ -19,6 +19,12 @@ export const metadata: Metadata = {
       },
     ],
   },
+  twitter: {
+    card: "summary_large_image",
+    title: "Contact Us | Ready Set Go Tours & Travel",
+    description: "Ready to plan your dream safari? Contact our travel experts for a personalized itinerary.",
+    images: ["/og-image.jpg"],
+  },
   alternates: {
     canonical: "/contact",
   },

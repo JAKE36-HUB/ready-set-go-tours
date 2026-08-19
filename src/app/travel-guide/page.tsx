@@ -23,6 +23,12 @@ export const metadata: Metadata = {
       },
     ],
   },
+  twitter: {
+    card: "summary_large_image",
+    title: `Travel Guide | ${COMPANY.name}`,
+    description: "Expert safari tips and destination guides for East Africa.",
+    images: ["/og-image.jpg"],
+  },
   alternates: {
     canonical: "/travel-guide",
   },

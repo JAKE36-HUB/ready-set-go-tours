@@ -24,6 +24,12 @@ export const metadata: Metadata = {
       },
     ],
   },
+  twitter: {
+    card: "summary_large_image",
+    title: `Tanzania Tours & Safaris | ${COMPANY.name}`,
+    description: "Journey through Tanzania's iconic northern circuit. From the Serengeti's endless plains to the summit of Kilimanjaro.",
+    images: ["/og-image.jpg"],
+  },
   alternates: {
     canonical: "/tanzania-tours",
   },

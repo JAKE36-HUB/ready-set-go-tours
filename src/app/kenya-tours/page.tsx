@@ -24,6 +24,12 @@ export const metadata: Metadata = {
       },
     ],
   },
+  twitter: {
+    card: "summary_large_image",
+    title: `Kenya Tours & Safaris | ${COMPANY.name}`,
+    description: "Explore Kenya's world-renowned wildlife reserves. Luxury safaris with expert guides, stunning lodges, and unforgettable encounters.",
+    images: ["/og-image.jpg"],
+  },
   alternates: {
     canonical: "/kenya-tours",
   },

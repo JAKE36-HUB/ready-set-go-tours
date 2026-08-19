@@ -19,6 +19,12 @@ export const metadata: Metadata = {
       },
     ],
   },
+  twitter: {
+    card: "summary_large_image",
+    title: "Beach Holidays | Ready Set Go Tours & Travel",
+    description: "Discover turquoise waters, white-sand beaches, and world-class resorts along the East African coast.",
+    images: ["/og-image.jpg"],
+  },
   alternates: {
     canonical: "/beach-holidays",
   },
