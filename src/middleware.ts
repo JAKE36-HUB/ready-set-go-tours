@@ -95,45 +95,6 @@ export async function middleware(request: NextRequest) {
     return NextResponse.redirect(url)
   }
 
-  // MFA enforcement — every admin must have 2FA set up AND an aal2 session
-  if (user) {
-    const { data: factors } = await supabase.auth.mfa.listFactors()
-    const hasVerifiedFactor = factors?.all?.some((f) => f.status === "verified")
-
-    // No authenticator enrolled → require setup before anything else
-    if (!hasVerifiedFactor) {
-      if (path.startsWith("/api/admin")) {
-        return NextResponse.json(
-          { error: "Two-factor authentication must be set up first" },
-          { status: 403 }
-        )
-      }
-      // Dedicated setup page — never redirect it onto itself
-      if (path === "/admin/enroll-mfa") {
-        return supabaseResponse
-      }
-      const url = request.nextUrl.clone()
-      url.pathname = "/admin/enroll-mfa"
-      return NextResponse.redirect(url)
-    }
-
-    // Enrolled but session is not aal2 yet → verify with a code
-    const { data: aal } = await supabase.auth.mfa.getAuthenticatorAssuranceLevel()
-    if (aal?.nextLevel === "aal2" && aal.currentLevel !== "aal2") {
-      if (path.startsWith("/api/admin")) {
-        return NextResponse.json({ error: "Two-factor authentication required" }, { status: 401 })
-      }
-      // Dedicated code-entry page — the sign-in page is NOT part of this redirect chain,
-      // so stale cached sign-in pages can never bounce us back into a loop.
-      if (path === "/admin/verify-mfa") {
-        return NextResponse.next()
-      }
-      const url = request.nextUrl.clone()
-      url.pathname = "/admin/verify-mfa"
-      return NextResponse.redirect(url)
-    }
-  }
-
   // Protect admin API routes
   if (path.startsWith("/api/admin") && !user) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 })

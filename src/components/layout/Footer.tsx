@@ -1,6 +1,6 @@
 "use client"
 
-import { useRef, useState } from "react"
+import { useState } from "react"
 import Image from "next/image"
 import Link from "next/link"
 import { motion } from "framer-motion"
@@ -41,17 +41,6 @@ const footerColumns = [
 export function Footer() {
   const [email, setEmail] = useState("")
   const [subscribed, setSubscribed] = useState(false)
-  const secretClicks = useRef<number[]>([])
-
-  // Triple-click the copyright line → admin panel (invisible door, no link in the HTML)
-  const handleSecretAccess = () => {
-    const now = Date.now()
-    secretClicks.current = [...secretClicks.current.filter((t) => now - t < 1200), now]
-    if (secretClicks.current.length >= 3) {
-      secretClicks.current = []
-      window.location.href = "/admin"
-    }
-  }
 
   const handleNewsletterSubmit = (e: React.FormEvent) => {
     e.preventDefault()
@@ -228,10 +217,15 @@ export function Footer() {
         </div>
 
         <div className="mt-8 pt-6 border-t border-slate-800 flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-slate-500">
-          <p onClick={handleSecretAccess} className="select-none cursor-default">{COMPANY.copyright}</p>
-          <p className="flex items-center gap-1">
-            Made with <Heart className="w-3.5 h-3.5 text-red-500 fill-red-500" /> by JengaCode
-          </p>
+          <p className="select-none">{COMPANY.copyright}</p>
+          <div className="flex items-center gap-4">
+            <Link href="/admin" className="text-slate-400 hover:text-sky-400 transition-colors">
+              Admin Panel
+            </Link>
+            <p className="flex items-center gap-1">
+              Made with <Heart className="w-3.5 h-3.5 text-red-500 fill-red-500" /> by JengaCode
+            </p>
+          </div>
         </div>
       </div>
     </footer>
