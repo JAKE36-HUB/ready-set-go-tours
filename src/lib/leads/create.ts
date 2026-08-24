@@ -52,6 +52,16 @@ function summarize(input: Record<string, unknown>): { title: string; body: strin
   return { title: name, body: parts.join(" · ") }
 }
 
+export async function identifyVisitor(sb: import("@supabase/supabase-js").SupabaseClient, sessionId: unknown, email: string): Promise<void> {
+  const sid = sanitizeString(sessionId, 100)
+  if (!sid || !email) return
+  try {
+    await sb.from("visitors").update({ email }).eq("session_id", sid)
+  } catch {
+    // identification is best-effort; never fail the lead submission
+  }
+}
+
 export async function createLead(sb: import("@supabase/supabase-js").SupabaseClient, input: LeadInput): Promise<number> {
   const s = (v: unknown) => sanitizeString(v, MAX_FIELD)
   const source = s(input.source) || "contact_form"

@@ -13,6 +13,7 @@ import { Label } from "@/components/ui/label";
 import AnimatedSection from "@/components/AnimatedSection";
 import { contactFormSchema, type ContactFormData } from "@/lib/schemas";
 import { trackLeadConversion } from "@/lib/analytics";
+import { getClientSessionId } from "@/lib/session";
 import { COMPANY, SITE_STATS } from "@/lib/constants";
 import {
   MapPin, Phone, Mail, MessageCircle, Clock, Send, CheckCircle, Loader2,
@@ -130,6 +131,7 @@ export default function ContactPage() {
         children: data.children || "0",
         message: data.specialRequests || "",
         page: "/contact",
+        session_id: getClientSessionId(),
       };
 
       let crmOk = false;

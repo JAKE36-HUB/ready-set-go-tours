@@ -8,6 +8,7 @@ import {
 } from "lucide-react"
 import { COMPANY } from "@/lib/constants"
 import PdfItinerary from "@/components/PdfItinerary"
+import { getClientSessionId } from "@/lib/session"
 import type { PlannerData } from "../types"
 import { getMatchingPackage } from "../utils"
 
@@ -84,6 +85,7 @@ export function StepQuote({
             children: String(data.children),
             message: `${data.activities.join(", ")}${accommodation ? `\nAccommodation: ${accommodation}` : ""}\n${data.notes || ""}`.trim(),
             page: "safari-planner",
+            session_id: getClientSessionId(),
           }),
         })
         crmOk = res.ok

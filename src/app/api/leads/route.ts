@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server"
 import { getSupabaseAdmin } from "@/lib/supabase-admin"
 import { rateLimit, verifyOrigin, tooManyRequests, badRequest, sanitizeString } from "@/lib/security"
-import { createLead } from "@/lib/leads/create"
+import { createLead, identifyVisitor } from "@/lib/leads/create"
 import { browserLabel, deviceLabel } from "@/lib/leads/types"
 
 export const dynamic = "force-dynamic"
@@ -81,6 +81,10 @@ export async function POST(req: NextRequest) {
       ip,
       ip_country: s(req.headers.get("x-vercel-ip-country")),
     })
+
+    if (email) {
+      await identifyVisitor(sb, body.session_id, email)
+    }
 
     return NextResponse.json({ ok: true })
   } catch (e) {

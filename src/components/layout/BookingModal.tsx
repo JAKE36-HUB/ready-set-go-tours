@@ -38,6 +38,7 @@ import {
 } from "@/components/ui/dialog"
 import { bookingFormSchema, type BookingFormData } from "@/lib/schemas"
 import { trackLeadConversion } from "@/lib/analytics"
+import { getClientSessionId } from "@/lib/session"
 import { DESTINATIONS, TOUR_PACKAGES } from "@/lib/constants"
 
 interface BookingModalProps {
@@ -127,6 +128,7 @@ export function BookingModal({ open, onOpenChange, initialPackage }: BookingModa
         children: data.children || "0",
         message: data.specialRequests || "",
         page: typeof window !== "undefined" ? window.location.pathname : "",
+        session_id: getClientSessionId(),
       }
 
       let crmOk = false

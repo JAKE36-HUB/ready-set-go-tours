@@ -10,6 +10,7 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { COMPANY, NAV_ITEMS, SOCIAL_LINKS, CONTACT_INFO } from "@/lib/constants"
 import { cn } from "@/lib/utils"
+import { getClientSessionId } from "@/lib/session"
 
 const footerColumns = [
   {
@@ -55,6 +56,7 @@ export function Footer() {
           source: "newsletter",
           email,
           page: typeof window !== "undefined" ? window.location.pathname : "",
+          session_id: getClientSessionId(),
         }),
       }).catch(() => {})
     }

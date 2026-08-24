@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server"
 import { getSupabaseAdmin } from "@/lib/supabase-admin"
 import { rateLimit, verifyOrigin, tooManyRequests, badRequest, sanitizeString } from "@/lib/security"
-import { createLead } from "@/lib/leads/create"
+import { createLead, identifyVisitor } from "@/lib/leads/create"
 
 export const dynamic = "force-dynamic"
 
@@ -84,6 +84,10 @@ export async function POST(req: NextRequest) {
       utm_campaign,
       popup_lead_id: popupLead?.id,
     })
+
+    if (s(email)) {
+      await identifyVisitor(sb, body.session_id, s(email).toLowerCase())
+    }
 
     return NextResponse.json({ ok: true })
   } catch (e) {

@@ -15,6 +15,7 @@ interface Visitor {
   ip: string
   country: string
   city: string
+  email?: string | null
   entered_at: string
   last_active_at: string
   duration_seconds: number
@@ -73,7 +74,7 @@ export default function AdminVisitors() {
   const filtered = visitors.filter((v) => {
     if (!search) return true
     const q = search.toLowerCase()
-    return v.page.toLowerCase().includes(q) || v.ip.includes(q) || v.country.toLowerCase().includes(q) || v.session_id.toLowerCase().includes(q)
+    return v.page.toLowerCase().includes(q) || v.ip.includes(q) || v.country.toLowerCase().includes(q) || v.session_id.toLowerCase().includes(q) || (v.email || "").toLowerCase().includes(q)
   })
 
   function toggleSort(field: "entered_at" | "duration_seconds") {
@@ -196,6 +197,7 @@ export default function AdminVisitors() {
                   <tr className="border-b border-slate-100 dark:border-slate-800">
                     <th className="text-left font-medium text-slate-500 pb-2 pr-2">Page</th>
                     <th className="text-left font-medium text-slate-500 pb-2 pr-2">IP / Location</th>
+                    <th className="text-left font-medium text-slate-500 pb-2 pr-2">Email</th>
                     <th className="text-left font-medium text-slate-500 pb-2 pr-2 hidden md:table-cell">Referrer</th>
                     <th className="text-right font-medium text-slate-500 pb-2 pr-2 cursor-pointer select-none" onClick={() => toggleSort("duration_seconds")}>
                       <span className="flex items-center gap-1 justify-end"><Clock className="w-3 h-3" />Duration <ArrowUpDown className="w-2.5 h-2.5" /></span>
@@ -220,6 +222,13 @@ export default function AdminVisitors() {
                               <span className="text-slate-400 ml-1">({[v.city, v.country].filter(Boolean).join(", ")})</span>
                             )}
                           </div>
+                        </td>
+                        <td className="py-2.5 pr-2">
+                          {v.email ? (
+                            <a href={`mailto:${v.email}`} className="text-purple-600 dark:text-purple-400 hover:underline truncate block max-w-[160px]">{v.email}</a>
+                          ) : (
+                            <span className="text-slate-300 dark:text-slate-600">unknown</span>
+                          )}
                         </td>
                         <td className="py-2.5 pr-2 hidden md:table-cell">
                           <span className="text-slate-400 truncate block max-w-[150px]">{v.referrer ? new URL(v.referrer).hostname : "—"}</span>
