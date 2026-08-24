@@ -5,7 +5,7 @@ import Image from "next/image"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { motion, AnimatePresence } from "framer-motion"
-import { X, ChevronDown, Phone, Mail, MapPin, Clock, Sun, Moon } from "lucide-react"
+import { X, ChevronDown, Phone, Mail, MapPin, Clock, Sun, Moon, ShieldCheck } from "lucide-react"
 import { useTheme } from "next-themes"
 
 import { Button } from "@/components/ui/button"
@@ -180,6 +180,14 @@ export function MobileNav({ isOpen, onClose }: MobileNavProps) {
                       <div className="w-4 h-4" />
                     )}
                   </button>
+                  <Link
+                    href="/admin"
+                    onClick={onClose}
+                    className="mt-2 flex w-full items-center justify-center gap-2 px-4 py-3 rounded-xl text-sm font-semibold bg-slate-900 dark:bg-slate-800 text-white hover:bg-slate-700 transition-colors"
+                  >
+                    <ShieldCheck className="w-4 h-4" />
+                    Admin Panel
+                  </Link>
                 </motion.div>
               </motion.nav>
 
