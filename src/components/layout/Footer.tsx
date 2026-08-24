@@ -4,7 +4,7 @@ import { useState } from "react"
 import Image from "next/image"
 import Link from "next/link"
 import { motion } from "framer-motion"
-import { Phone, Mail, MapPin, Clock, ArrowRight, Heart, ChevronRight } from "lucide-react"
+import { Phone, Mail, MapPin, Clock, ArrowRight, Heart, ChevronRight, ShieldCheck } from "lucide-react"
 
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
@@ -221,7 +221,11 @@ export function Footer() {
         <div className="mt-8 pt-6 border-t border-slate-800 flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-slate-500">
           <p className="select-none">{COMPANY.copyright}</p>
           <div className="flex items-center gap-4">
-            <Link href="/admin" className="text-slate-400 hover:text-sky-400 transition-colors">
+            <Link
+              href="/admin"
+              className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full border border-slate-600 bg-slate-800/60 text-slate-200 hover:bg-slate-700 hover:text-white hover:border-sky-500 transition-colors font-medium"
+            >
+              <ShieldCheck className="w-4 h-4" />
               Admin Panel
             </Link>
             <p className="flex items-center gap-1">
