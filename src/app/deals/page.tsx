@@ -5,7 +5,7 @@ import { getSupabase } from "@/lib/supabase";
 import { Tag, Shield, Users, Gift, Star } from "lucide-react";
 import DealsBrowser, { type DealCard } from "@/components/DealsBrowser";
 
-export const revalidate = 3600;
+export const revalidate = 60;
 
 export default async function DealsPage() {
   let deals: DealCard[] = [];

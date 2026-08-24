@@ -9,7 +9,7 @@ import { Tag, Clock, Users, Gift, Percent, Star, Shield, Check, ArrowLeft, Calen
 import AnimatedSection from "@/components/AnimatedSection";
 import { PaymentPolicy } from "@/components/PaymentPolicy";
 
-export const revalidate = 3600;
+export const revalidate = 60;
 
 interface Props {
   params: Promise<{ slug: string }>;
