@@ -21,7 +21,7 @@ export const COMPANY = {
   hours: "Mon–Sat: 8:00 AM – 6:00 PM (EAT)",
   social: {
     facebook: "https://facebook.com/readysetgotours",
-    instagram: "https://instagram.com/readysetgotours",
+    instagram: "https://www.instagram.com/readyset_go_tours_and_travel/",
     twitter: "https://twitter.com/readysetgotours",
     youtube: "https://youtube.com/@readysetgotours",
     tiktok: "https://tiktok.com/@readysetgotours",
