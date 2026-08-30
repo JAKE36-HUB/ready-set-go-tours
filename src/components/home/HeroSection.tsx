@@ -26,7 +26,7 @@ export function HeroSection() {
           muted
           loop
           playsInline
-          preload="none"
+          preload="metadata"
         />
       </div>
 
