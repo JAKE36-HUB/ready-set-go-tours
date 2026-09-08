@@ -42,6 +42,7 @@ export async function GET(request: NextRequest) {
       visitor_name: s.visitor_name,
       visitor_email: s.visitor_email,
       page: s.page,
+      label: s.label,
       ai_active: s.ai_active,
       last_message_at: s.last_message_at,
       created_at: s.created_at,

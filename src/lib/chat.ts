@@ -14,6 +14,7 @@ export interface ChatSessionRow {
   visitor_name: string
   visitor_email: string
   page: string
+  label: string
   ai_active: boolean
   last_message_at: string
   created_at: string
@@ -47,6 +48,26 @@ export async function getChatSession(sb: SupabaseClient, sessionId: string): Pro
   const { data, error } = await sb.from("chat_sessions").select("*").eq("session_id", sessionId).maybeSingle()
   if (error) throw error
   return (data as ChatSessionRow) || null
+}
+
+export async function renameChatSession(sb: SupabaseClient, sessionId: string, label: string) {
+  if (!sessionId) return null
+  const clean = sanitizeString(label, 120)
+  const { data, error } = await sb
+    .from("chat_sessions")
+    .update({ label: clean, updated_at: new Date().toISOString() })
+    .eq("session_id", sessionId)
+    .select()
+    .single()
+  if (error) throw error
+  return data as ChatSessionRow
+}
+
+export async function deleteChatSession(sb: SupabaseClient, sessionId: string) {
+  if (!sessionId) return
+  // chat_messages reference chat_sessions ON DELETE CASCADE, so they go with it
+  const { error } = await sb.from("chat_sessions").delete().eq("session_id", sessionId)
+  if (error) throw error
 }
 
 export async function touchChatSession(sb: SupabaseClient, sessionId: string) {

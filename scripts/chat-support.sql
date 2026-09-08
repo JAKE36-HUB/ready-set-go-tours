@@ -18,6 +18,11 @@ CREATE TABLE IF NOT EXISTS chat_sessions (
 
 CREATE INDEX IF NOT EXISTS chat_sessions_last_idx ON chat_sessions (last_message_at DESC);
 
+-- 1b) Optional admin-assigned label so conversations are easy to identify.
+--     A label overrides the visitor name when shown in the admin Live Chat list.
+ALTER TABLE chat_sessions ADD COLUMN IF NOT EXISTS label TEXT DEFAULT '';
+CREATE INDEX IF NOT EXISTS chat_sessions_label_idx ON chat_sessions (label);
+
 -- 2) Chat messages — user (visitor), assistant (AI), owner (you)
 CREATE TABLE IF NOT EXISTS chat_messages (
   id BIGSERIAL PRIMARY KEY,

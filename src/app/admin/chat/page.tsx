@@ -17,6 +17,10 @@ import {
   Check,
   Inbox,
   Sparkles,
+  Pencil,
+  Tag,
+  Trash2,
+  X,
 } from "lucide-react"
 import { cn } from "@/lib/utils"
 
@@ -25,6 +29,7 @@ interface ChatSessionSummary {
   visitor_name: string
   visitor_email: string
   page: string
+  label: string
   ai_active: boolean
   last_message_at: string
   created_at: string
@@ -64,6 +69,10 @@ function gradientFor(id: string) {
   let h = 0
   for (let i = 0; i < id.length; i++) h = (h * 31 + id.charCodeAt(i)) >>> 0
   return AVATAR_GRADIENTS[h % AVATAR_GRADIENTS.length]
+}
+
+function displayName(s: { label: string; visitor_name: string }) {
+  return s.label.trim() || s.visitor_name || "Website visitor"
 }
 
 function initials(name: string, email: string) {
@@ -125,6 +134,10 @@ export default function AdminChat() {
   const [loadingMessages, setLoadingMessages] = useState(false)
   const [sending, setSending] = useState(false)
   const [error, setError] = useState<string | null>(null)
+  const [editingId, setEditingId] = useState<string | null>(null)
+  const [editLabel, setEditLabel] = useState("")
+  const [busyId, setBusyId] = useState<string | null>(null)
+  const renameRef = useRef<HTMLInputElement>(null)
   const scrollRef = useRef<HTMLDivElement>(null)
   const seenUnreadRef = useRef<Map<string, number>>(new Map())
 
@@ -200,6 +213,51 @@ export default function AdminChat() {
     setCopied(false)
   }
 
+  const startRename = (s: ChatSessionSummary) => {
+    setEditingId(s.session_id)
+    setEditLabel(s.label || "")
+    window.setTimeout(() => {
+      renameRef.current?.focus()
+      renameRef.current?.select()
+    }, 0)
+  }
+
+  const saveRename = async () => {
+    if (!editingId) return
+    const target = editingId
+    setBusyId(target)
+    try {
+      const res = await fetch(`/api/admin/chat/sessions/${encodeURIComponent(target)}`, {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ label: editLabel.trim() }),
+      })
+      if (res.ok) await loadSessions(true)
+    } catch {
+    } finally {
+      setEditingId(null)
+      setEditLabel("")
+      setBusyId(null)
+    }
+  }
+
+  const handleDelete = async (s: ChatSessionSummary) => {
+    const name = displayName(s)
+    const ok = window.confirm(`Delete the conversation with ${name}?\n\nThis permanently removes all messages in this chat. The CRM lead (if any) is kept.`)
+    if (!ok) return
+    setBusyId(s.session_id)
+    try {
+      const res = await fetch(`/api/admin/chat/sessions/${encodeURIComponent(s.session_id)}`, { method: "DELETE" })
+      if (res.ok) {
+        if (selectedId === s.session_id) setSelectedId(null)
+        loadSessions(true)
+      }
+    } catch {
+    } finally {
+      setBusyId(null)
+    }
+  }
+
   const handleSend = async () => {
     const content = draft.trim()
     if (!content || !selectedId || sending) return
@@ -257,7 +315,7 @@ export default function AdminChat() {
       if (filter === "manual" && s.ai_active) return false
       if (search.trim()) {
         const q = search.toLowerCase()
-        const hay = `${s.visitor_name} ${s.visitor_email} ${s.page}`.toLowerCase()
+        const hay = `${s.label} ${s.visitor_name} ${s.visitor_email} ${s.page}`.toLowerCase()
         if (!hay.includes(q)) return false
       }
       return true
@@ -373,64 +431,151 @@ export default function AdminChat() {
               </div>
             ) : (
               filteredSessions.map((s) => {
-                const avatar = initials(s.visitor_name || "", s.visitor_email || "")
+                const name = displayName(s)
+                const avatar = initials(name, s.visitor_email || "")
                 const isActive = selectedId === s.session_id
+                const isEditing = editingId === s.session_id
+                const isBusy = busyId === s.session_id
                 return (
-                  <button
+                  <div
                     key={s.session_id}
+                    role="button"
+                    tabIndex={0}
                     onClick={() => handleSelect(s.session_id)}
+                    onKeyDown={(e) => {
+                      if (e.key === "Enter" || e.key === " ") {
+                        e.preventDefault()
+                        handleSelect(s.session_id)
+                      }
+                    }}
                     className={cn(
-                      "w-full text-left px-4 py-3.5 border-b border-slate-100 dark:border-slate-800/60 transition-colors",
+                      "w-full text-left px-4 py-3.5 border-b border-slate-100 dark:border-slate-800/60 transition-colors group relative",
                       isActive
                         ? "bg-sky-50 dark:bg-sky-500/10 border-l-2 border-l-sky-500"
                         : "hover:bg-slate-50 dark:hover:bg-slate-800/50"
                     )}
                   >
-                    <div className="flex items-start gap-3">
-                      <span className={cn("shrink-0 w-10 h-10 rounded-full bg-gradient-to-br text-white text-xs font-bold flex items-center justify-center shadow-md", gradientFor(s.session_id))}>
-                        {avatar}
+                    {isBusy && (
+                      <span className="absolute right-3 top-3 z-10 flex w-6 h-6 items-center justify-center rounded-full bg-white/90 dark:bg-slate-800/90 shadow-md">
+                        <Loader2 className="w-3.5 h-3.5 animate-spin text-sky-500" />
                       </span>
+                    )}
+                    <div className="flex items-start gap-3">
+                      {isEditing ? (
+                        <span className={cn("shrink-0 w-10 h-10 rounded-full bg-gradient-to-br text-white text-xs font-bold flex items-center justify-center shadow-md", gradientFor(s.session_id))}>
+                          <Tag className="w-4 h-4" />
+                        </span>
+                      ) : (
+                        <span className={cn("shrink-0 w-10 h-10 rounded-full bg-gradient-to-br text-white text-xs font-bold flex items-center justify-center shadow-md", gradientFor(s.session_id))}>
+                          {avatar}
+                        </span>
+                      )}
                       <div className="min-w-0 flex-1">
-                        <div className="flex items-center justify-between gap-2">
-                          <div className="flex items-center gap-1.5 min-w-0">
-                            <span className={cn("text-sm font-semibold truncate", isActive ? "text-sky-700 dark:text-sky-300" : "text-slate-800 dark:text-slate-100")}>
-                              {s.visitor_name || "Website visitor"}
-                            </span>
-                            {s.unread > 0 && (
-                              <span className="shrink-0 inline-flex items-center justify-center min-w-[18px] h-[18px] px-1 rounded-full bg-emerald-500 text-white text-[10px] font-bold">
-                                {s.unread}
-                              </span>
-                            )}
+                        {isEditing ? (
+                          <div className="flex items-center gap-1.5" onClick={(e) => e.stopPropagation()}>
+                            <input
+                              ref={renameRef}
+                              value={editLabel}
+                              onChange={(e) => setEditLabel(e.target.value)}
+                              onClick={(e) => e.stopPropagation()}
+                              onKeyDown={(e) => {
+                                e.stopPropagation()
+                                if (e.key === "Enter") saveRename()
+                                if (e.key === "Escape") {
+                                  setEditingId(null)
+                                  setEditLabel("")
+                                }
+                              }}
+                              placeholder="Name this chat..."
+                              className="flex-1 h-8 min-w-0 px-2.5 rounded-lg bg-sky-50 dark:bg-slate-800 ring-2 ring-sky-500/50 text-xs font-semibold text-slate-800 dark:text-white placeholder:text-slate-400 focus:outline-none"
+                            />
+                            <button
+                              onClick={saveRename}
+                              className="shrink-0 w-7 h-7 rounded-lg text-emerald-600 dark:text-emerald-400 hover:bg-emerald-500/10 flex items-center justify-center"
+                              aria-label="Save name"
+                            >
+                              <Check className="w-3.5 h-3.5" />
+                            </button>
+                            <button
+                              onClick={() => {
+                                setEditingId(null)
+                                setEditLabel("")
+                              }}
+                              className="shrink-0 w-7 h-7 rounded-lg text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-700 flex items-center justify-center"
+                              aria-label="Cancel rename"
+                            >
+                              <X className="w-3.5 h-3.5" />
+                            </button>
                           </div>
-                          <span className="shrink-0 text-[10px] text-slate-400">{timeAgo(s.last_message_at)}</span>
-                        </div>
+                        ) : (
+                          <div className="flex items-center justify-between gap-2">
+                            <div className="flex items-center gap-1.5 min-w-0">
+                              <span className={cn("text-sm font-semibold truncate", isActive ? "text-sky-700 dark:text-sky-300" : "text-slate-800 dark:text-slate-100")}>
+                                {name}
+                              </span>
+                              {s.label.trim() && (
+                                <span className="shrink-0 inline-flex items-center gap-1 text-[9px] font-bold uppercase tracking-wider text-violet-600 dark:text-violet-400 bg-violet-500/10 px-1.5 py-0.5 rounded-full ring-1 ring-violet-500/20">
+                                  <Tag className="w-2.5 h-2.5" />
+                                  label
+                                </span>
+                              )}
+                              {s.unread > 0 && (
+                                <span className="shrink-0 inline-flex items-center justify-center min-w-[18px] h-[18px] px-1 rounded-full bg-emerald-500 text-white text-[10px] font-bold">
+                                  {s.unread}
+                                </span>
+                              )}
+                            </div>
+                            <span className="shrink-0 text-[10px] text-slate-400">{timeAgo(s.last_message_at)}</span>
+                          </div>
+                        )}
                         <p className="text-xs text-slate-500 dark:text-slate-400 truncate mt-0.5">
                           {s.last_preview
                             ? `${s.last_preview.role === "owner" ? "You: " : s.last_preview.role === "assistant" ? "AI: " : ""}${s.last_preview.content}`
                             : "No messages yet"}
                         </p>
-                        <div className="flex items-center gap-1.5 mt-1.5">
-                          <span
-                            className={cn(
-                              "inline-flex items-center gap-1 text-[10px] px-1.5 py-0.5 rounded-full font-medium",
-                              s.ai_active
-                                ? "bg-sky-500/10 text-sky-600 dark:text-sky-400"
-                                : "bg-emerald-500/10 text-emerald-600 dark:text-emerald-400"
-                            )}
-                          >
-                            {s.ai_active ? <Sparkles className="w-2.5 h-2.5" /> : <User className="w-2.5 h-2.5" />}
-                            {s.ai_active ? "AI responding" : "Manual"}
-                          </span>
-                          {s.page && (
-                            <span className="inline-flex items-center gap-1 text-[10px] text-slate-400 truncate">
-                              <Globe className="w-2.5 h-2.5 shrink-0" />
-                              {s.page.replace("/", "") || s.page}
+                        <div className="flex items-center justify-between gap-2 mt-1.5">
+                          <div className="flex items-center gap-1.5 min-w-0">
+                            <span
+                              className={cn(
+                                "inline-flex items-center gap-1 text-[10px] px-1.5 py-0.5 rounded-full font-medium",
+                                s.ai_active
+                                  ? "bg-sky-500/10 text-sky-600 dark:text-sky-400"
+                                  : "bg-emerald-500/10 text-emerald-600 dark:text-emerald-400"
+                              )}
+                            >
+                              {s.ai_active ? <Sparkles className="w-2.5 h-2.5" /> : <User className="w-2.5 h-2.5" />}
+                              {s.ai_active ? "AI responding" : "Manual"}
                             </span>
-                          )}
+                            {s.page && (
+                              <span className="inline-flex items-center gap-1 text-[10px] text-slate-400 truncate">
+                                <Globe className="w-2.5 h-2.5 shrink-0" />
+                                {s.page.replace("/", "") || s.page}
+                              </span>
+                            )}
+                          </div>
+                          <div
+                            className="hidden group-hover:flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity"
+                            onClick={(e) => e.stopPropagation()}
+                          >
+                            <button
+                              onClick={() => startRename(s)}
+                              className="w-7 h-7 rounded-lg text-slate-400 hover:text-sky-600 dark:hover:text-sky-400 hover:bg-sky-500/10 flex items-center justify-center"
+                              aria-label="Rename chat"
+                            >
+                              <Pencil className="w-3.5 h-3.5" />
+                            </button>
+                            <button
+                              onClick={() => handleDelete(s)}
+                              className="w-7 h-7 rounded-lg text-slate-400 hover:text-red-600 dark:hover:text-red-400 hover:bg-red-500/10 flex items-center justify-center"
+                              aria-label="Delete chat"
+                            >
+                              <Trash2 className="w-3.5 h-3.5" />
+                            </button>
+                          </div>
                         </div>
                       </div>
                     </div>
-                  </button>
+                  </div>
                 )
               })
             )}
@@ -461,12 +606,54 @@ export default function AdminChat() {
                   <ArrowLeft className="w-4 h-4" />
                 </button>
                 <span className={cn("shrink-0 w-10 h-10 rounded-full bg-gradient-to-br text-white text-xs font-bold flex items-center justify-center shadow-md", gradientFor(selected.session_id))}>
-                  {initials(selected.visitor_name || "", selected.visitor_email || "")}
+                  {initials(displayName(selected), selected.visitor_email || "")}
                 </span>
                 <div className="min-w-0 flex-1">
-                  <p className="text-sm font-semibold text-slate-800 dark:text-slate-100 truncate">
-                    {selected.visitor_name || "Website visitor"}
-                  </p>
+                  {editingId === selected.session_id ? (
+                    <div className="flex items-center gap-1.5">
+                      <input
+                        ref={renameRef}
+                        value={editLabel}
+                        onChange={(e) => setEditLabel(e.target.value)}
+                        onKeyDown={(e) => {
+                          if (e.key === "Enter") saveRename()
+                          if (e.key === "Escape") {
+                            setEditingId(null)
+                            setEditLabel("")
+                          }
+                        }}
+                        placeholder="Name this chat..."
+                        className="flex-1 h-8 min-w-0 px-2.5 rounded-lg bg-sky-50 dark:bg-slate-800 ring-2 ring-sky-500/50 text-sm font-semibold text-slate-800 dark:text-white placeholder:text-slate-400 focus:outline-none"
+                      />
+                      <button
+                        onClick={saveRename}
+                        className="shrink-0 w-7 h-7 rounded-lg text-emerald-600 dark:text-emerald-400 hover:bg-emerald-500/10 flex items-center justify-center"
+                        aria-label="Save name"
+                      >
+                        <Check className="w-4 h-4" />
+                      </button>
+                      <button
+                        onClick={() => {
+                          setEditingId(null)
+                          setEditLabel("")
+                        }}
+                        className="shrink-0 w-7 h-7 rounded-lg text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-700 flex items-center justify-center"
+                        aria-label="Cancel rename"
+                      >
+                        <X className="w-4 h-4" />
+                      </button>
+                    </div>
+                  ) : (
+                    <div className="flex items-center gap-1.5 min-w-0">
+                      <p className="text-sm font-semibold text-slate-800 dark:text-slate-100 truncate">{displayName(selected)}</p>
+                      {selected.label.trim() && (
+                        <span className="shrink-0 inline-flex items-center gap-1 text-[9px] font-bold uppercase tracking-wider text-violet-600 dark:text-violet-400 bg-violet-500/10 px-1.5 py-0.5 rounded-full ring-1 ring-violet-500/20">
+                          <Tag className="w-2.5 h-2.5" />
+                          label
+                        </span>
+                      )}
+                    </div>
+                  )}
                   <div className="flex items-center gap-1.5 text-xs text-slate-400 truncate">
                     {selected.visitor_email ? (
                       <>
@@ -496,7 +683,23 @@ export default function AdminChat() {
                     </span>
                   </div>
                 </div>
-                <span className="shrink-0 flex p-0.5 gap-0.5 rounded-full bg-slate-100 dark:bg-slate-800">
+                <div className="shrink-0 flex items-center gap-1.5">
+                  <button
+                    onClick={() => startRename(selected)}
+                    className="w-9 h-9 rounded-xl text-slate-400 hover:text-sky-600 dark:hover:text-sky-400 hover:bg-sky-500/10 flex items-center justify-center transition-colors"
+                    aria-label="Rename chat"
+                  >
+                    <Pencil className="w-4 h-4" />
+                  </button>
+                  <button
+                    onClick={() => handleDelete(selected)}
+                    className="w-9 h-9 rounded-xl text-slate-400 hover:text-red-600 dark:hover:text-red-400 hover:bg-red-500/10 flex items-center justify-center transition-colors"
+                    aria-label="Delete chat"
+                  >
+                    <Trash2 className="w-4 h-4" />
+                  </button>
+                  <span className="w-px h-6 bg-slate-200 dark:bg-slate-800 mx-0.5" />
+                  <span className="shrink-0 flex p-0.5 gap-0.5 rounded-full bg-slate-100 dark:bg-slate-800">
                   <button
                     onClick={() => !selected.ai_active && toggleAi()}
                     className={cn(
@@ -516,6 +719,7 @@ export default function AdminChat() {
                     Manual
                   </button>
                 </span>
+                </div>
               </div>
 
               {/* Transcript */}
@@ -579,7 +783,7 @@ export default function AdminChat() {
                           </div>
                           {isVisitor && (
                             <span className={cn("shrink-0 w-8 h-8 rounded-full bg-gradient-to-br text-white text-[10px] font-bold flex items-center justify-center shadow-md", gradientFor(m.session_id))}>
-                              {initials(selected.visitor_name || "", selected.visitor_email || "")}
+                              {initials(displayName(selected), selected.visitor_email || "")}
                             </span>
                           )}
                         </div>
