@@ -32,20 +32,20 @@ function ensureSessionId(): string {
   }
 }
 
-function loadIdentity(): { name: string; email: string } {
+function loadIdentity(): { name: string; email: string; phone: string } {
   try {
     const raw = localStorage.getItem(IDENTITY_KEY)
     if (raw) {
       const parsed = JSON.parse(raw)
-      return { name: parsed.name || "", email: parsed.email || "" }
+      return { name: parsed.name || "", email: parsed.email || "", phone: parsed.phone || "" }
     }
   } catch {}
-  return { name: "", email: "" }
+  return { name: "", email: "", phone: "" }
 }
 
-function saveIdentity(name: string, email: string) {
+function saveIdentity(name: string, email: string, phone: string) {
   try {
-    localStorage.setItem(IDENTITY_KEY, JSON.stringify({ name, email }))
+    localStorage.setItem(IDENTITY_KEY, JSON.stringify({ name, email, phone }))
   } catch {}
 }
 
@@ -56,7 +56,10 @@ export function AiChat() {
   const [loading, setLoading] = useState(false)
   const [takenOver, setTakenOver] = useState(false)
   const [hydrated, setHydrated] = useState(false)
-  const [identity, setIdentity] = useState<{ name: string; email: string }>(() => loadIdentity())
+  const [identity, setIdentity] = useState<{ name: string; email: string; phone: string }>(() => loadIdentity())
+  const [needIdentity, setNeedIdentity] = useState(false)
+  const [savingIdentity, setSavingIdentity] = useState(false)
+  const identityPromptedRef = useRef(false)
   const messagesEndRef = useRef<HTMLDivElement>(null)
   const inputRef = useRef<HTMLInputElement>(null)
   const lastIdRef = useRef(0)
@@ -126,7 +129,7 @@ export function AiChat() {
 
     const hasIdentity = identity.name || identity.email
     if (hasIdentity) {
-      saveIdentity(identity.name, identity.email)
+      saveIdentity(identity.name, identity.email, identity.phone)
     }
 
     setLoading(true)
@@ -163,6 +166,13 @@ export function AiChat() {
         setTakenOver(true)
         syncMessages()
       }
+
+      // If the visitor wrote but we still don't know who they are, gently ask once.
+      const hasEmailInText = /\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}\b/i.test(text)
+      if (!identity.name && !identity.email && !hasEmailInText && !identityPromptedRef.current) {
+        identityPromptedRef.current = true
+        setNeedIdentity(true)
+      }
     } catch {
       setMessages((prev) => [...prev, { id: userLocalId + 1, role: "assistant", content: "Sorry, I'm having trouble connecting. Please try again or contact us directly at +254 797 867 411." }])
     } finally {
@@ -174,6 +184,47 @@ export function AiChat() {
     if (e.key === "Enter" && !e.shiftKey) {
       e.preventDefault()
       sendMessage()
+    }
+  }
+
+  const submitIdentity = async () => {
+    if (savingIdentity) return
+    const name = identity.name.trim()
+    const email = identity.email.trim().toLowerCase()
+    const phone = identity.phone.trim()
+    if (!name && !email && !phone) return
+    setSavingIdentity(true)
+    try {
+      const res = await fetch("/api/chat/identity", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          session_id: sessionIdRef.current,
+          name,
+          email,
+          phone,
+          page: window.location.pathname,
+        }),
+      })
+      if (res.ok) {
+        saveIdentity(name, email, phone)
+        setNeedIdentity(false)
+        setMessages((prev) => [
+          ...prev,
+          {
+            id: Date.now() + 1,
+            role: "assistant",
+            content: email
+              ? `Thanks ${name.split(" ")[0] || email.split("@")[0]}! Your details are saved — our team can now follow up with you directly.`
+              : "Got it — thanks for sharing your details!",
+            created_at: "",
+          },
+        ])
+        syncMessages()
+      }
+    } catch {
+    } finally {
+      setSavingIdentity(false)
     }
   }
 
@@ -264,6 +315,53 @@ export function AiChat() {
                   </div>
                 </div>
               ))}
+              {needIdentity && (
+                <div className="flex justify-start">
+                  <div className="max-w-[85%] rounded-2xl rounded-bl-md px-4 py-3 bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300">
+                    <p className="text-sm leading-relaxed mb-2">
+                      Mind sharing your name and email so our team can follow up with tailored options? (Optional, but it helps a lot.)
+                    </p>
+                    <div className="space-y-2">
+                      <input
+                        value={identity.name}
+                        onChange={(e) => setIdentity((p) => ({ ...p, name: e.target.value }))}
+                        placeholder="Your name"
+                        className="w-full h-9 px-3 rounded-lg bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 text-xs text-slate-900 dark:text-white placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-sky-500/30"
+                      />
+                      <input
+                        value={identity.email}
+                        onChange={(e) => setIdentity((p) => ({ ...p, email: e.target.value }))}
+                        placeholder="Email address"
+                        type="email"
+                        className="w-full h-9 px-3 rounded-lg bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 text-xs text-slate-900 dark:text-white placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-sky-500/30"
+                      />
+                      <input
+                        value={identity.phone}
+                        onChange={(e) => setIdentity((p) => ({ ...p, phone: e.target.value }))}
+                        placeholder="Phone / WhatsApp (optional)"
+                        type="tel"
+                        className="w-full h-9 px-3 rounded-lg bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 text-xs text-slate-900 dark:text-white placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-sky-500/30"
+                      />
+                      <div className="flex items-center gap-2 pt-1">
+                        <button
+                          onClick={submitIdentity}
+                          disabled={savingIdentity || (!identity.name.trim() && !identity.email.trim() && !identity.phone.trim())}
+                          className="inline-flex items-center gap-1.5 h-8 px-3 rounded-lg bg-gradient-to-r from-sky-500 to-cyan-400 text-white text-xs font-semibold hover:shadow-md hover:scale-[1.02] transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+                        >
+                          {savingIdentity ? <Loader2 className="w-3.5 h-3.5 animate-spin" /> : <Bot className="w-3.5 h-3.5" />}
+                          Share details
+                        </button>
+                        <button
+                          onClick={() => setNeedIdentity(false)}
+                          className="h-8 px-2 text-xs text-slate-400 hover:text-slate-600 dark:hover:text-slate-300 transition-colors"
+                        >
+                          Not now
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              )}
               {loading && (
                 <div className="flex justify-start">
                   <div className="bg-slate-100 dark:bg-slate-800 rounded-2xl rounded-bl-md px-4 py-3">
