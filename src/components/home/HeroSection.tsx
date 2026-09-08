@@ -10,7 +10,7 @@ import { Button } from "@/components/ui/button"
 const HERO_IMAGES = [
   "/images/local/pin_212b2433f246414a170ec177d76168f2.jpg",
   "/images/local/pin_1156825aa06be3206b2a1454ada4af1b.jpg",
-  "/images/local/pin_9866ec45a7a8400d3fdc9e0642ff1e99.jpg",
+  "/images/local/pin_6d3c9d0dfb8a372c96d1b1a4697e158f.jpg",
 ]
 
 export function HeroSection() {

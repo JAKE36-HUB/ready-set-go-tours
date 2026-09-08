@@ -7,7 +7,7 @@ import { browserLabel, deviceLabel } from "@/lib/leads/types"
 export const dynamic = "force-dynamic"
 
 const MAX_FIELD = 500
-const ALLOWED_SOURCES = ["contact_form", "booking", "newsletter", "whatsapp", "popup_lead", "package_inquiry"]
+const ALLOWED_SOURCES = ["contact_form", "booking", "newsletter", "whatsapp", "popup_lead", "package_inquiry", "exit_intent"]
 
 export async function POST(req: NextRequest) {
   try {

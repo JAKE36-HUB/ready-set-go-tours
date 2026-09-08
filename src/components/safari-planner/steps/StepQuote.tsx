@@ -9,7 +9,7 @@ import {
 import { COMPANY } from "@/lib/constants"
 import PdfItinerary from "@/components/PdfItinerary"
 import { getClientSessionId } from "@/lib/session"
-import type { PlannerData } from "../types"
+import type { PlannerData, UpdatePlannerData } from "../types"
 import { getMatchingPackage } from "../utils"
 
 function destStr(data: PlannerData) {
@@ -25,9 +25,10 @@ function dayCount(data: PlannerData) {
 }
 
 export function StepQuote({
-  data, onBack, onReset,
+  data, update, onBack, onReset,
 }: {
   data: PlannerData
+  update: UpdatePlannerData
   onBack: () => void
   onReset: () => void
 }) {
@@ -35,6 +36,8 @@ export function StepQuote({
   const [submitted, setSubmitted] = useState(false)
   const [error, setError] = useState<string | null>(null)
   const pkg = getMatchingPackage(data)
+
+  const contactValid = data.fullName.length >= 2 && data.email.includes("@") && data.phone.length >= 7
 
   const days = dayCount(data)
   const destinations = destStr(data)
@@ -175,10 +178,68 @@ export function StepQuote({
 
   return (
     <motion.div initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -20 }} transition={{ duration: 0.25 }}>
-      <h3 className="text-xl font-bold text-white mb-1">Your Safari Itinerary</h3>
-      <p className="text-white/40 text-sm mb-6">Review your custom itinerary before sending</p>
+      <h3 className="text-xl font-bold text-white mb-1">Finalize & Send</h3>
+      <p className="text-white/40 text-sm mb-6">Lock in your details and review your custom itinerary</p>
 
       <div className="space-y-4">
+        <div className="bg-white/5 rounded-2xl p-5 ring-1 ring-white/10">
+          <h4 className="text-sm font-semibold text-white mb-4">Your Details</h4>
+          <div className="space-y-4">
+            <div>
+              <label className="text-xs text-white/50 mb-1.5 block">Full Name *</label>
+              <input
+                type="text"
+                value={data.fullName}
+                onChange={(e) => update("fullName", e.target.value)}
+                placeholder="John Smith"
+                className="w-full h-11 px-4 rounded-xl bg-white/5 border border-white/10 text-white placeholder:text-white/30 focus:outline-none focus:border-emerald-400/50 focus:ring-1 focus:ring-emerald-400/30 text-sm"
+              />
+            </div>
+            <div className="grid sm:grid-cols-2 gap-4">
+              <div>
+                <label className="text-xs text-white/50 mb-1.5 block">Email Address *</label>
+                <input
+                  type="email"
+                  value={data.email}
+                  onChange={(e) => update("email", e.target.value)}
+                  placeholder="john@example.com"
+                  className="w-full h-11 px-4 rounded-xl bg-white/5 border border-white/10 text-white placeholder:text-white/30 focus:outline-none focus:border-emerald-400/50 focus:ring-1 focus:ring-emerald-400/30 text-sm"
+                />
+              </div>
+              <div>
+                <label className="text-xs text-white/50 mb-1.5 block">Phone Number *</label>
+                <input
+                  type="tel"
+                  value={data.phone}
+                  onChange={(e) => update("phone", e.target.value)}
+                  placeholder="+1 234 567 890"
+                  className="w-full h-11 px-4 rounded-xl bg-white/5 border border-white/10 text-white placeholder:text-white/30 focus:outline-none focus:border-emerald-400/50 focus:ring-1 focus:ring-emerald-400/30 text-sm"
+                />
+              </div>
+            </div>
+            <div>
+              <label className="text-xs text-white/50 mb-1.5 block">Country of Residence</label>
+              <input
+                type="text"
+                value={data.country}
+                onChange={(e) => update("country", e.target.value)}
+                placeholder="United States"
+                className="w-full h-11 px-4 rounded-xl bg-white/5 border border-white/10 text-white placeholder:text-white/30 focus:outline-none focus:border-emerald-400/50 focus:ring-1 focus:ring-emerald-400/30 text-sm"
+              />
+            </div>
+            <div>
+              <label className="text-xs text-white/50 mb-1.5 block">Special Requests (optional)</label>
+              <textarea
+                value={data.notes}
+                onChange={(e) => update("notes", e.target.value)}
+                placeholder="Any specific requirements, dietary needs, or preferences..."
+                rows={3}
+                className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder:text-white/30 focus:outline-none focus:border-emerald-400/50 focus:ring-1 focus:ring-emerald-400/30 text-sm resize-none"
+              />
+            </div>
+          </div>
+        </div>
+
         <div className="bg-white/5 rounded-2xl p-5 ring-1 ring-white/10">
           <h4 className="text-sm font-semibold text-white mb-4">Trip Summary</h4>
           <div className="space-y-3">
@@ -224,11 +285,11 @@ export function StepQuote({
         <button
           type="button"
           onClick={handleSubmit}
-          disabled={submitting}
+          disabled={submitting || !contactValid}
           className="inline-flex items-center gap-2 h-11 px-6 rounded-xl bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-400 hover:to-teal-500 text-white text-sm font-semibold shadow-lg transition-all disabled:opacity-50"
         >
           {submitting ? <Loader2 className="w-4 h-4 animate-spin" /> : <Send className="w-4 h-4" />}
-          {submitting ? "Sending..." : "Send My Itinerary"}
+          {submitting ? "Sending..." : contactValid ? "Send My Itinerary" : "Fill required fields"}
         </button>
       </div>
     </motion.div>

@@ -49,9 +49,7 @@ export const ACTIVITY_CATEGORIES = [
 
 export const STEPS = [
   { label: "Destinations", sublabel: "Where to go" },
-  { label: "Activities", sublabel: "What to do" },
-  { label: "Accommodation", sublabel: "How to stay" },
+  { label: "Experiences", sublabel: "Activities & stay" },
   { label: "Dates & Group", sublabel: "When & who" },
-  { label: "Your Info", sublabel: "Contact details" },
-  { label: "Quote", sublabel: "Your itinerary" },
+  { label: "Review & Send", sublabel: "Your itinerary" },
 ]

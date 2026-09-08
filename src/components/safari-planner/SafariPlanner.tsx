@@ -7,10 +7,8 @@ import { cn } from "@/lib/utils"
 import { STEPS, type PlannerData, type UpdatePlannerData } from "./types"
 import { getDefaultPlannerData } from "./utils"
 import { StepDestinations } from "./steps/StepDestinations"
-import { StepActivities } from "./steps/StepActivities"
-import { StepAccommodation } from "./steps/StepAccommodation"
+import { StepExperiences } from "./steps/StepExperiences"
 import { StepDatesGroup } from "./steps/StepDatesGroup"
-import { StepContact } from "./steps/StepContact"
 import { StepQuote } from "./steps/StepQuote"
 
 export function SafariPlanner() {
@@ -88,46 +86,31 @@ export function SafariPlanner() {
               />
             )}
             {step === 1 && (
-              <StepActivities
-                key="activities"
-                value={data.activities}
-                onChange={(v) => update("activities", v)}
+              <StepExperiences
+                key="experiences"
+                activities={data.activities}
+                onActivitiesChange={(v) => update("activities", v)}
+                accommodation={data.accommodation}
+                onAccommodationChange={(v) => update("accommodation", v)}
                 onNext={() => setStep(2)}
                 onBack={() => setStep(0)}
               />
             )}
             {step === 2 && (
-              <StepAccommodation
-                key="accommodation"
-                value={data.accommodation}
-                onChange={(v) => update("accommodation", v)}
+              <StepDatesGroup
+                key="dates"
+                data={data}
+                update={update}
                 onNext={() => setStep(3)}
                 onBack={() => setStep(1)}
               />
             )}
             {step === 3 && (
-              <StepDatesGroup
-                key="dates"
-                data={data}
-                update={update}
-                onNext={() => setStep(4)}
-                onBack={() => setStep(2)}
-              />
-            )}
-            {step === 4 && (
-              <StepContact
-                key="contact"
-                data={data}
-                update={update}
-                onNext={() => setStep(5)}
-                onBack={() => setStep(3)}
-              />
-            )}
-            {step === 5 && (
               <StepQuote
                 key="quote"
                 data={data}
-                onBack={() => setStep(4)}
+                update={update}
+                onBack={() => setStep(2)}
                 onReset={reset}
               />
             )}

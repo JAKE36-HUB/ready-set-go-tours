@@ -4,6 +4,7 @@ import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import AnimatedSection from "@/components/AnimatedSection";
+import { DealUrgency } from "@/components/DealUrgency";
 import { USD_TO_KES } from "@/lib/constants";
 import { Tag, Clock, Users, Gift, Percent, Star, Shield, ChevronRight, Sparkles, Zap } from "lucide-react";
 
@@ -89,7 +90,8 @@ export default function DealsBrowser({ deals }: { deals: DealCard[] }) {
                         <Clock className="size-4" />
                         <span>Valid {deal.validUntil}</span>
                       </div>
-                      <div className="flex items-baseline gap-2 mb-1">
+                      <DealUrgency dealId={deal.id} validUntil={deal.validUntil} />
+                      <div className="mt-4 flex items-baseline gap-2 mb-1">
                         <span className="text-3xl font-bold text-foreground">${deal.dealPrice}</span>
                         <span className="text-lg text-muted-foreground line-through">${deal.originalPrice}</span>
                         <span className="text-sm font-semibold text-emerald-500">per person</span>
@@ -201,6 +203,9 @@ export default function DealsBrowser({ deals }: { deals: DealCard[] }) {
                         <span className="text-muted-foreground/40">|</span>
                         <Clock className="size-3.5" />
                         <span>{deal.validUntil}</span>
+                      </div>
+                      <div className="mb-3">
+                        <DealUrgency dealId={deal.id} validUntil={deal.validUntil} compact />
                       </div>
                       <div className="flex items-baseline gap-2 mb-1">
                         <span className="text-2xl font-bold text-foreground">${deal.dealPrice}</span>

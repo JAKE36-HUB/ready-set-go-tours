@@ -9,6 +9,7 @@ import useEmblaCarousel from "embla-carousel-react"
 import Autoplay from "embla-carousel-autoplay"
 
 import { DEALS } from "@/lib/constants"
+import { DealUrgency } from "@/components/DealUrgency"
 
 export function FeaturedDeals() {
   const sectionRef = useRef<HTMLDivElement>(null)
@@ -79,6 +80,9 @@ export function FeaturedDeals() {
                       <div className="flex items-center gap-3 text-xs text-muted-foreground">
                         <span className="flex items-center gap-1"><Clock className="size-3" />{deal.duration}</span>
                         <span className="flex items-center gap-1"><Hotel className="size-3" />{deal.accommodation.split("|")[0].trim()}</span>
+                      </div>
+                      <div className="mt-3">
+                        <DealUrgency dealId={deal.id} validUntil={deal.validUntil} />
                       </div>
                     </div>
                   </Link>

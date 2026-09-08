@@ -8,6 +8,7 @@ const CookieConsent = dynamic(() => import("@/components/layout/CookieConsent").
 const ScrollToTop = dynamic(() => import("@/components/layout/ScrollToTop").then(m => m.ScrollToTop), { ssr: false })
 const VisitorTracker = dynamic(() => import("@/components/admin/VisitorTracker"), { ssr: false })
 const PopupEngine = dynamic(() => import("@/components/popups/PopupEngine").then(m => m.PopupEngine), { ssr: false })
+const ExitIntentModal = dynamic(() => import("@/components/layout/ExitIntentModal").then(m => m.ExitIntentModal), { ssr: false })
 
 export function ClientWidgets() {
   return (
@@ -18,6 +19,7 @@ export function ClientWidgets() {
       <ScrollToTop />
       <CookieConsent />
       <PopupEngine />
+      <ExitIntentModal />
     </>
   )
 }
