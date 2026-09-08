@@ -1,16 +1,32 @@
 ﻿"use client"
 
 import { useState, useEffect } from "react"
+import Image from "next/image"
 import Link from "next/link"
 import { motion } from "framer-motion"
 
 import { Button } from "@/components/ui/button"
 
+const HERO_IMAGES = [
+  "/images/local/pin_212b2433f246414a170ec177d76168f2.jpg",
+  "/images/local/pin_1156825aa06be3206b2a1454ada4af1b.jpg",
+  "/images/local/pin_9866ec45a7a8400d3fdc9e0642ff1e99.jpg",
+]
+
 export function HeroSection() {
   const [mounted, setMounted] = useState(false)
+  const [currentImage, setCurrentImage] = useState(0)
 
   // eslint-disable-next-line react-hooks/set-state-in-effect
   useEffect(() => { setMounted(true) }, [])
+
+  useEffect(() => {
+    if (!mounted) return
+    const interval = setInterval(() => {
+      setCurrentImage((prev) => (prev + 1) % HERO_IMAGES.length)
+    }, 5000)
+    return () => clearInterval(interval)
+  }, [mounted])
 
   const titleWords = ["Kenya", "&", "Tanzania", "Safaris,", "Planned", "Around", "You"]
   const highlightWords = new Set(["Planned", "Around", "You"])
@@ -18,16 +34,23 @@ export function HeroSection() {
   return (
     <section className="relative h-screen min-h-[600px] flex items-center overflow-hidden bg-black">
       <div className="absolute inset-0">
-        <video
-          className="object-cover w-full h-full scale-110 brightness-[1.12] contrast-[1.05]"
-          src="/videos/hero.mp4"
-          poster="/videos/hero-poster.jpg"
-          autoPlay
-          muted
-          loop
-          playsInline
-          preload="none"
-        />
+        {HERO_IMAGES.map((img, i) => (
+          <div
+            key={img}
+            className="absolute inset-0 transition-opacity duration-1000 ease-in-out"
+            style={{ opacity: i === currentImage ? 1 : 0 }}
+          >
+            <Image
+              src={img}
+              alt={`African safari landscape ${i + 1}`}
+              fill
+              sizes="100vw"
+              className="object-cover scale-110 brightness-[1.15] contrast-[1.05]"
+              priority={i === 0}
+              loading={i === 0 ? "eager" : "lazy"}
+            />
+          </div>
+        ))}
       </div>
 
       <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/25 to-black/70" />
@@ -39,6 +62,21 @@ export function HeroSection() {
       </div>
 
       <div className="absolute inset-0 opacity-[0.03]" style={{ backgroundImage: "radial-gradient(circle at 1px 1px, white 1px, transparent 0)", backgroundSize: "50px 50px" }} />
+
+      <div className="absolute bottom-24 left-1/2 -translate-x-1/2 z-20 flex items-center gap-2">
+        {HERO_IMAGES.map((_, i) => (
+          <button
+            key={i}
+            onClick={() => setCurrentImage(i)}
+            className={`transition-all duration-500 rounded-full ${
+              i === currentImage
+                ? "w-8 h-1.5 bg-white/80"
+                : "w-1.5 h-1.5 bg-white/30 hover:bg-white/50"
+            }`}
+            aria-label={`Image ${i + 1}`}
+          />
+        ))}
+      </div>
 
       <div className="relative z-10 w-full">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
