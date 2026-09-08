@@ -23,6 +23,7 @@ export interface LeadInput {
   device?: unknown
   ip?: unknown
   ip_country?: unknown
+  session_id?: unknown
   popup_lead_id?: unknown
 }
 
@@ -87,6 +88,7 @@ export async function createLead(sb: import("@supabase/supabase-js").SupabaseCli
     device: s(input.device),
     ip: s(input.ip),
     ip_country: s(input.ip_country),
+    session_id: s(input.session_id),
   }
 
   let insertPayload: Record<string, unknown> = base

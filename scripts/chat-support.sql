@@ -31,7 +31,12 @@ CREATE TABLE IF NOT EXISTS chat_messages (
 CREATE INDEX IF NOT EXISTS chat_messages_session_idx ON chat_messages (session_id, id);
 CREATE INDEX IF NOT EXISTS chat_messages_unread_idx ON chat_messages (read_at) WHERE read_at IS NULL;
 
--- 3) Column-level protection: anonymous/authenticated keys are denied.
+-- 3b) Chats become CRM leads — track which session a chat-sourced lead came from
+--     so the same conversation never creates a duplicate lead.
+ALTER TABLE leads ADD COLUMN IF NOT EXISTS session_id TEXT DEFAULT '';
+CREATE INDEX IF NOT EXISTS leads_source_session_idx ON leads (session_id, source);
+
+-- 3c) Column-level protection: anonymous/authenticated keys are denied.
 --    Only the service-role key (used by all chat APIs via getSupabaseAdmin) can access.
 ALTER TABLE chat_sessions ENABLE ROW LEVEL SECURITY;
 ALTER TABLE chat_messages ENABLE ROW LEVEL SECURITY;

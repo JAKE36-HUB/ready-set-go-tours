@@ -124,3 +124,73 @@ export async function notifyOwner(sb: SupabaseClient, sessionId: string, visitor
     body: body.slice(0, 180),
   })
 }
+
+const EMAIL_RE = /\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}\b/i
+
+export function detectEmail(value: unknown): string {
+  const text = sanitizeString(value, 2000)
+  const match = text.match(EMAIL_RE)
+  return match ? match[0].toLowerCase() : ""
+}
+
+export interface EnsureChatLeadInput {
+  session_id: string
+  name: string
+  email: string
+  page: string
+  message: string
+}
+
+/**
+ * Creates a CRM lead from a chat session — once per conversation.
+ * Requires a name or email (or one detectable from the visitor's message).
+ * Never throws: a schema mismatch or insert failure must not break the chat.
+ */
+export async function ensureChatLead(sb: SupabaseClient, input: EnsureChatLeadInput, detectFromMessage = true) {
+  try {
+    const email = sanitizeString(input.email, 200).toLowerCase() || (detectFromMessage ? detectEmail(input.message) : "")
+    const name = sanitizeString(input.name, 120) || (email ? email.split("@")[0] : "")
+    if (!email && !name) return
+
+    const { createLead } = await import("@/lib/leads/create")
+
+    let existing: { id: number }[] | null = null
+    try {
+      const query = sb.from("leads").select("id").eq("source", "chat")
+      if (email) query.eq("email", email)
+      if (input.session_id) query.eq("session_id", input.session_id)
+      const { data } = await query.limit(1)
+      existing = data as { id: number }[]
+    } catch {
+      // session_id column may not exist yet — fall back to email-only dedupe
+      if (email) {
+        const { data } = await sb.from("leads").select("id").eq("source", "chat").eq("email", email).limit(1)
+        existing = data as { id: number }[]
+      }
+    }
+
+    if (existing && existing.length > 0) return
+
+    try {
+      await createLead(sb, {
+        name,
+        email,
+        source: "chat",
+        page: sanitizeString(input.page, 300),
+        message: cleanChatContent(input.message).slice(0, 2000),
+        session_id: input.session_id,
+      })
+    } catch {
+      // Retry without session_id for schemas that predate the chat migration
+      await createLead(sb, {
+        name,
+        email,
+        source: "chat",
+        page: sanitizeString(input.page, 300),
+        message: cleanChatContent(input.message).slice(0, 2000),
+      })
+    }
+  } catch {
+    // lead creation is best-effort — never block the chat
+  }
+}

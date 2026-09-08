@@ -15,6 +15,8 @@ export type LeadSource =
   | "whatsapp"
   | "popup_lead"
   | "package_inquiry"
+  | "exit_intent"
+  | "chat"
 
 export interface Lead {
   id: number
@@ -130,6 +132,8 @@ export const LEAD_SOURCES: { value: LeadSource | string; label: string }[] = [
   { value: "whatsapp", label: "WhatsApp Request" },
   { value: "popup_lead", label: "Popup Lead" },
   { value: "package_inquiry", label: "Package Inquiry" },
+  { value: "exit_intent", label: "Exit Intent" },
+  { value: "chat", label: "Live Chat" },
 ]
 
 export const NOTIFICATION_TYPES: Record<string, { label: string; cls: string }> = {

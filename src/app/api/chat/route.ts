@@ -3,6 +3,8 @@ import { rateLimit, badRequest, tooManyRequests, serverError } from "@/lib/secur
 import { getSupabaseAdmin } from "@/lib/supabase-admin"
 import {
   cleanChatContent,
+  detectEmail,
+  ensureChatLead,
   getChatSession,
   insertChatMessage,
   notifyOwner,
@@ -57,16 +59,23 @@ export async function POST(request: Request) {
     const sb = getSupabaseAdmin()
 
     const sessionId = cleanChatContent(session_id) || "anonym-" + Math.random().toString(36).slice(2, 12)
-    await upsertChatSession(sb, { session_id: sessionId, visitor_name, visitor_email, page })
 
     const userMessages = messages.filter((m: { role?: string }) => m?.role === "user")
     const lastUserContent = userMessages.length > 0 ? cleanChatContent(userMessages[userMessages.length - 1]?.content) : ""
     if (!lastUserContent) return badRequest("Empty message")
 
+    // Identity: prefer explicit fields; fall back to an email mentioned in the message
+    const detectedEmail = detectEmail(lastUserContent)
+    const visitorEmail = cleanChatContent(visitor_email).toLowerCase() || detectedEmail
+    const visitorName = cleanChatContent(visitor_name) || (visitorEmail ? visitorEmail.split("@")[0] : "")
+
+    await upsertChatSession(sb, { session_id: sessionId, visitor_name: visitorName, visitor_email: visitorEmail, page })
+
     const userMsg = await insertChatMessage(sb, sessionId, "user", lastUserContent)
     const firstNewId = Number(userMsg?.id) || 0
     await touchChatSession(sb, sessionId)
-    await notifyOwner(sb, sessionId, String(visitor_name || ""), lastUserContent)
+    await notifyOwner(sb, sessionId, visitorName, lastUserContent)
+    await ensureChatLead(sb, { session_id: sessionId, name: visitorName, email: visitorEmail, page: cleanChatContent(page), message: lastUserContent })
 
     const session = await getChatSession(sb, sessionId)
     const aiActive = session?.ai_active !== false
