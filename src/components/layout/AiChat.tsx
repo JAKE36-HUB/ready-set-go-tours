@@ -2,7 +2,7 @@
 
 import { useState, useRef, useEffect, useCallback } from "react"
 import { motion, AnimatePresence } from "framer-motion"
-import { MessageCircle, X, Send, Loader2, Sparkles, Bot } from "lucide-react"
+import { MessageCircle, X, Send, Loader2, HeadphonesIcon } from "lucide-react"
 
 interface ChatMessage {
   id: number
@@ -14,7 +14,7 @@ interface ChatMessage {
 const INITIAL_MESSAGE: ChatMessage = {
   id: 0,
   role: "assistant",
-  content: "Hi! I'm your AI travel assistant for Ready Set Go Tours & Travel. Ask me about safaris, destinations, packages, or anything East Africa!",
+  content: "Welcome to Ready Set Go Tours & Travel! We can help you plan a safari, beach holiday, or honeymoon across Kenya and Tanzania. What would you like to know?",
   created_at: "",
 }
 
@@ -59,6 +59,7 @@ export function AiChat() {
   const [identity, setIdentity] = useState<{ name: string; email: string; phone: string }>(() => loadIdentity())
   const [needIdentity, setNeedIdentity] = useState(false)
   const [savingIdentity, setSavingIdentity] = useState(false)
+  const [teaser, setTeaser] = useState(false)
   const identityPromptedRef = useRef(false)
   const messagesEndRef = useRef<HTMLDivElement>(null)
   const inputRef = useRef<HTMLInputElement>(null)
@@ -116,6 +117,19 @@ export function AiChat() {
   useEffect(() => {
     if (open) inputRef.current?.focus()
   }, [open])
+
+  useEffect(() => {
+    try {
+      if (sessionStorage.getItem("rsgt_chat_teaser")) return
+      sessionStorage.setItem("rsgt_chat_teaser", "1")
+      const show = window.setTimeout(() => setTeaser(true), 6000)
+      const hide = window.setTimeout(() => setTeaser(false), 15000)
+      return () => {
+        window.clearTimeout(show)
+        window.clearTimeout(hide)
+      }
+    } catch {}
+  }, [])
 
   const lastMessage = messages[messages.length - 1]
   const awaitingTeam = takenOver && lastMessage && lastMessage.role !== "owner"
@@ -232,14 +246,66 @@ export function AiChat() {
 
   return (
     <>
-      {/* Floating button */}
-      <button
-        onClick={() => setOpen(true)}
-        className="fixed bottom-24 right-6 z-40 w-14 h-14 rounded-full bg-gradient-to-br from-sky-500 to-cyan-400 text-white flex items-center justify-center shadow-lg shadow-sky-500/30 hover:shadow-sky-500/50 hover:scale-110 transition-all duration-300"
-        aria-label="Open AI chat assistant"
-      >
-        <Sparkles className="w-6 h-6" />
-      </button>
+      {/* Floating launcher — human, inviting, no "AI" cues */}
+      {!open && (
+        <>
+          <AnimatePresence>
+            {teaser && (
+              <motion.div
+                initial={{ opacity: 0, y: 12, scale: 0.95 }}
+                animate={{ opacity: 1, y: 0, scale: 1 }}
+                exit={{ opacity: 0, y: 12, scale: 0.95 }}
+                transition={{ duration: 0.25, ease: "easeOut" }}
+                className="fixed bottom-[10.5rem] right-6 z-40 hidden sm:block w-64 p-4 rounded-2xl bg-white dark:bg-slate-800 shadow-2xl shadow-slate-900/20 ring-1 ring-slate-200 dark:ring-slate-700"
+              >
+                <button
+                  onClick={() => setTeaser(false)}
+                  className="absolute top-2 right-2 w-6 h-6 rounded-full hover:bg-slate-100 dark:hover:bg-slate-700 flex items-center justify-center text-slate-400 transition-colors"
+                  aria-label="Dismiss"
+                >
+                  <X className="w-3.5 h-3.5" />
+                </button>
+                <p className="text-sm font-semibold text-slate-800 dark:text-slate-100">Planning a safari?</p>
+                <p className="text-xs text-slate-500 dark:text-slate-400 mt-1 leading-relaxed">
+                  Ask us anything — a travel specialist usually replies within minutes.
+                </p>
+                <p className="mt-3 flex items-center gap-1.5 text-[10px] font-medium text-emerald-600 dark:text-emerald-400">
+                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+                  We&apos;re online now
+                </p>
+                <button
+                  onClick={() => {
+                    setOpen(true)
+                    setTeaser(false)
+                  }}
+                  className="mt-3 w-full h-9 rounded-xl bg-gradient-to-r from-sky-500 to-cyan-400 text-white text-xs font-semibold hover:shadow-md hover:scale-[1.02] transition-all"
+                >
+                  Chat with us
+                </button>
+              </motion.div>
+            )}
+          </AnimatePresence>
+
+          <button
+            onClick={() => setOpen(true)}
+            className="fixed bottom-24 right-6 z-40 group flex items-center gap-2.5"
+            aria-label="Chat with us"
+          >
+            <span className="hidden sm:inline-flex items-center h-11 pl-4 pr-5 rounded-2xl bg-white dark:bg-slate-800 shadow-xl shadow-slate-900/10 ring-1 ring-slate-200 dark:ring-slate-700 text-sm font-semibold text-slate-700 dark:text-slate-200 group-hover:ring-sky-300 dark:group-hover:ring-sky-700 transition-all">
+              Chat with us
+            </span>
+            <span className="relative inline-flex w-14 h-14 shrink-0">
+              {teaser && (
+                <span className="absolute inset-0 rounded-full bg-sky-400/40 animate-ping" />
+              )}
+              <span className="relative flex w-14 h-14 items-center justify-center rounded-full bg-gradient-to-br from-sky-500 to-cyan-400 text-white shadow-lg shadow-sky-500/30 group-hover:scale-110 group-hover:shadow-sky-500/50 transition-all duration-300">
+                <HeadphonesIcon className="w-6 h-6" />
+              </span>
+              <span className="absolute top-0.5 right-0.5 w-3.5 h-3.5 rounded-full bg-emerald-500 ring-2 ring-white dark:ring-slate-900" />
+            </span>
+          </button>
+        </>
+      )}
 
       {/* Chat panel */}
       <AnimatePresence>
@@ -255,11 +321,11 @@ export function AiChat() {
             <div className="flex items-center justify-between px-4 py-3 bg-gradient-to-r from-sky-500 to-cyan-400 text-white shrink-0">
               <div className="flex items-center gap-2.5">
                 <div className="w-8 h-8 rounded-full bg-white/20 flex items-center justify-center">
-                  <Sparkles className="w-4 h-4" />
+                  <HeadphonesIcon className="w-4 h-4" />
                 </div>
                 <div>
-                  <p className="text-sm font-semibold">Travel Assistant</p>
-                  <p className="text-[10px] text-white/70">AI-powered • Ready Set Go Tours</p>
+                  <p className="text-sm font-semibold">Ready Set Go Tours</p>
+                  <p className="text-[10px] text-white/70">Travel specialists • replies in minutes</p>
                 </div>
               </div>
               <button
@@ -299,7 +365,7 @@ export function AiChat() {
                 <div key={msg.id || msg.content} className={`flex flex-col ${msg.role === "user" ? "items-end" : "items-start"}`}>
                   {msg.role === "owner" && (
                     <span className="inline-flex items-center gap-1 text-[9px] font-semibold uppercase tracking-wider text-emerald-600 dark:text-emerald-400 mb-1">
-                      <Bot className="w-2.5 h-2.5" /> Ready Set Go Team
+                      <HeadphonesIcon className="w-2.5 h-2.5" /> Ready Set Go Team
                     </span>
                   )}
                   <div
@@ -348,7 +414,7 @@ export function AiChat() {
                           disabled={savingIdentity || (!identity.name.trim() && !identity.email.trim() && !identity.phone.trim())}
                           className="inline-flex items-center gap-1.5 h-8 px-3 rounded-lg bg-gradient-to-r from-sky-500 to-cyan-400 text-white text-xs font-semibold hover:shadow-md hover:scale-[1.02] transition-all disabled:opacity-50 disabled:cursor-not-allowed"
                         >
-                          {savingIdentity ? <Loader2 className="w-3.5 h-3.5 animate-spin" /> : <Bot className="w-3.5 h-3.5" />}
+                          {savingIdentity ? <Loader2 className="w-3.5 h-3.5 animate-spin" /> : <HeadphonesIcon className="w-3.5 h-3.5" />}
                           Share details
                         </button>
                         <button
@@ -410,7 +476,7 @@ export function AiChat() {
               </div>
               <p className="mt-2 text-[10px] text-slate-400 flex items-center gap-1">
                 <MessageCircle className="w-3 h-3" />
-                Replies first by our AI — our team can take over anytime.
+                Mon–Sat 8:00–18:00 EAT · or call +254 797 867 411
               </p>
             </div>
           </motion.div>
