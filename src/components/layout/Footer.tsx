@@ -212,8 +212,6 @@ export function Footer() {
 
             <div className="flex flex-col sm:flex-row items-start sm:items-center justify-end gap-4 text-sm text-slate-500">
               <span>Privacy Policy</span>
-              <span className="hidden sm:inline">|</span>
-              <span>Terms & Conditions</span>
             </div>
           </div>
         </div>
