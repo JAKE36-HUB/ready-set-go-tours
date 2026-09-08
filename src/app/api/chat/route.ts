@@ -1,5 +1,15 @@
 import { NextResponse } from "next/server"
 import { rateLimit, badRequest, tooManyRequests, serverError } from "@/lib/security"
+import { getSupabaseAdmin } from "@/lib/supabase-admin"
+import {
+  cleanChatContent,
+  getChatSession,
+  insertChatMessage,
+  notifyOwner,
+  setAiActive,
+  touchChatSession,
+  upsertChatSession,
+} from "@/lib/chat"
 
 const SYSTEM_PROMPT = `You are a helpful travel assistant for Ready Set Go Tours & Travel, a premier luxury tour operator based in Nairobi, Kenya. You specialize in bespoke safaris and travel experiences across Kenya and Tanzania.
 
@@ -28,6 +38,8 @@ TRAVEL STYLES: Group safaris, Luxury safaris, Private guided tours, Beach holida
 
 Keep responses friendly, informative, and concise. If asked about pricing, mention rates start from $650 per person for group safaris and vary based on package. For bookings or custom quotes, encourage contacting via phone or email. Do not make up specific pricing — direct users to contact the team for current rates and availability.`
 
+export const dynamic = "force-dynamic"
+
 export async function POST(request: Request) {
   try {
     const ip = request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() || "unknown"
@@ -35,47 +47,82 @@ export async function POST(request: Request) {
       return tooManyRequests()
     }
 
-    const { messages } = await request.json()
+    const body = await request.json()
+    const { messages, session_id, visitor_name, visitor_email, page } = body
 
     if (!Array.isArray(messages) || messages.length === 0) {
       return badRequest("Invalid messages")
     }
 
+    const sb = getSupabaseAdmin()
+
+    const sessionId = cleanChatContent(session_id) || "anonym-" + Math.random().toString(36).slice(2, 12)
+    await upsertChatSession(sb, { session_id: sessionId, visitor_name, visitor_email, page })
+
+    const userMessages = messages.filter((m: { role?: string }) => m?.role === "user")
+    const lastUserContent = userMessages.length > 0 ? cleanChatContent(userMessages[userMessages.length - 1]?.content) : ""
+    if (!lastUserContent) return badRequest("Empty message")
+
+    const userMsg = await insertChatMessage(sb, sessionId, "user", lastUserContent)
+    const firstNewId = Number(userMsg?.id) || 0
+    await touchChatSession(sb, sessionId)
+    await notifyOwner(sb, sessionId, String(visitor_name || ""), lastUserContent)
+
+    const session = await getChatSession(sb, sessionId)
+    const aiActive = session?.ai_active !== false
+
+    if (!aiActive) {
+      return NextResponse.json({ content: null, takenOver: true, first_new_id: firstNewId })
+    }
+
     const apiKey = process.env.OPENROUTER_API_KEY
     if (!apiKey) {
-      return serverError()
+      await setAiActive(sb, sessionId, false)
+      return NextResponse.json({ content: null, takenOver: true, first_new_id: firstNewId })
     }
 
     const sanitizedMessages = messages.slice(-10).map((m: { role?: string; content?: string }) => ({
       role: m.role === "user" ? "user" : "assistant",
-      content: typeof m.content === "string" ? m.content.slice(0, 2000) : "",
+      content: cleanChatContent(m.content),
     }))
 
-    const response = await fetch("https://openrouter.ai/api/v1/chat/completions", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "Authorization": `Bearer ${apiKey}`,
-        "HTTP-Referer": "https://readysetgosafaris.com",
-        "X-Title": "Ready Set Go Tours & Travel",
-      },
-      body: JSON.stringify({
-        model: "openai/gpt-4o-mini",
-        messages: [
-          { role: "system", content: SYSTEM_PROMPT },
-          ...sanitizedMessages,
-        ],
-        max_tokens: 600,
-        temperature: 0.7,
-      }),
-    })
-
-    if (!response.ok) {
-      return serverError()
+    let reply: string | null = null
+    try {
+      const response = await fetch("https://openrouter.ai/api/v1/chat/completions", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${apiKey}`,
+          "HTTP-Referer": "https://readysetgosafaris.com",
+          "X-Title": "Ready Set Go Tours & Travel",
+        },
+        body: JSON.stringify({
+          model: "openai/gpt-4o-mini",
+          messages: [
+            { role: "system", content: SYSTEM_PROMPT },
+            ...sanitizedMessages,
+          ],
+          max_tokens: 600,
+          temperature: 0.7,
+        }),
+      })
+      if (response.ok) {
+        const data = await response.json()
+        reply = data?.choices?.[0]?.message?.content ?? null
+      }
+    } catch {
+      reply = null
     }
 
-    const data = await response.json()
-    return NextResponse.json({ content: data.choices[0].message.content })
+    if (!reply) {
+      await setAiActive(sb, sessionId, false)
+      return NextResponse.json({ content: null, takenOver: true, first_new_id: firstNewId })
+    }
+
+    const assistantMsg = await insertChatMessage(sb, sessionId, "assistant", reply)
+    await touchChatSession(sb, sessionId)
+
+    return NextResponse.json({ content: reply, first_new_id: firstNewId, last_id: Number(assistantMsg?.id) || 0 })
   } catch {
     return serverError()
   }

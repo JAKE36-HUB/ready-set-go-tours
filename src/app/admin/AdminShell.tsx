@@ -27,6 +27,7 @@ import {
   Inbox,
   KanbanSquare,
   ShieldCheck,
+  MessagesSquare,
 } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query"
@@ -38,6 +39,7 @@ const NAV_ITEMS = [
   { href: "/admin", label: "Dashboard", icon: LayoutDashboard },
   { href: "/admin/leads", label: "Lead Inbox", icon: Inbox },
   { href: "/admin/leads/pipeline", label: "Lead Pipeline", icon: KanbanSquare },
+  { href: "/admin/chat", label: "Live Chat", icon: MessagesSquare },
   { href: "/admin/packages", label: "Tour Packages", icon: Package },
   { href: "/admin/deals", label: "Deals", icon: Tag },
   { href: "/admin/honeymoon-packages", label: "Honeymoon", icon: Heart },
