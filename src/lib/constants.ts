@@ -2510,6 +2510,41 @@ export interface Service {
 
 export const SERVICES: Service[] = [
   {
+    id: "safaris-guided-tours",
+    slug: "safaris-guided-tours",
+    title: "Safaris & Guided Tours",
+    tagline: "Luxury Safaris & Expert-Guided Adventures",
+    image: "/images/local/pin_48c9f7d212a4a2933b84ec65c19e4628.jpg",
+    description:
+      "The heart of what we do. From the Great Migration in the Masai Mara to the elephant herds of Amboseli, the crater floor of Ngorongoro, and the snow-capped peak of Kilimanjaro — we design and lead safaris that show you East Africa at its most extraordinary. Every trip is guided by certified local experts, driving our own fleet of 4×4 safari vehicles, and tailored to how you love to travel.",
+    features: [
+      "Private & group safaris to the Masai Mara, Amboseli, Tsavo & Samburu",
+      "Tanzania Northern Circuit: Serengeti, Ngorongoro, Tarangire & Kilimanjaro",
+      "Great Migration & wildebeest river-crossing packages",
+      "Bespoke itineraries for couples, families & solo travelers",
+      "Day trips: Nairobi, Hell's Gate, Lake Naivasha & more",
+      "Hot-air balloon safaris, bush dinners & Maasai cultural visits",
+      "Dedicated 4×4 Land Cruisers with pop-up roofs",
+      "Photography-savvy guides who know exactly where the wildlife will be",
+    ],
+    benefits: [
+      { icon: "Compass", title: "Expert Local Guides", desc: "Certified driver-guides with deep knowledge of every park, trail, and wildlife hotspot." },
+      { icon: "Star", title: "Bespoke Itineraries", desc: "Every safari is built around your interests, pace, and budget — never a one-size-fits-all route." },
+      { icon: "HeadphonesIcon", title: "24/7 On-Trip Support", desc: "Our operations team is a phone call away throughout your entire journey." },
+    ],
+    whyUs: [
+      "We own and maintain our own safari fleet — modern, comfortable 4×4 Land Cruisers — so your experience never depends on third-party suppliers.",
+      "Our guides are certified and local. They grew up in these landscapes, track wildlife by footprint, and know the best viewing spots on any given day.",
+      "We believe the perfect safari is the one you can't stop talking about. That's why we spend time understanding exactly what you want before we book anything.",
+      "From the moment you land to the moment you leave, a single dedicated team handles your transfers, parks, permits, lodges, and guides — seamless and stress-free.",
+    ],
+    faqs: [
+      { q: "Can you customise a safari itinerary for me?", a: "Absolutely — customisation is our speciality. Tell us your dates, group size, interests, and budget, and we'll craft a private itinerary around you, down to the exact lodges, game drives, and experiences." },
+      { q: "What type of vehicles do you use on safari?", a: "We use modern 4×4 Land Cruisers with pop-up roofs for unobstructed game viewing, charging ports, and comfortable seating. All vehicles are maintained in-house and carry safety and communication equipment." },
+      { q: "Are your safari guides certified?", a: "Yes. All our guides are Kenya Professional Safari Guides Association (KPSGA)-trained or equivalent, with years of field experience plus first-aid and 4×4 recovery training." },
+    ],
+  },
+  {
     id: "hotel-bookings",
     slug: "hotel-bookings",
     title: "Hotel Bookings",

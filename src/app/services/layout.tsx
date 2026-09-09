@@ -4,11 +4,11 @@ import { BreadcrumbJsonLd } from "@/components/JsonLd";
 export const metadata: Metadata = {
   title: "Travel Services",
   description:
-    "Explore our travel services: hotel bookings, air ticketing, visa assistance, airport transfers, group travel, and guided tours across Kenya and Tanzania.",
+    "Explore our travel services: safaris & guided tours, hotel bookings, air ticketing, visa assistance, airport transfers, group travel, and guided tours across Kenya and Tanzania.",
   openGraph: {
     title: "Travel Services | Ready Set Go Tours & Travel",
     description:
-      "Explore our full range of travel services: hotel bookings, air ticketing, visa assistance, airport transfers, group travel, and guided tours across Kenya and Tanzania.",
+      "Explore our full range of travel services: safaris & guided tours, hotel bookings, air ticketing, visa assistance, airport transfers, group travel, and guided tours across Kenya and Tanzania.",
     type: "website",
     images: [
       {
@@ -22,7 +22,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "Travel Services | Ready Set Go Tours & Travel",
-    description: "Explore our full range of travel services: hotel bookings, air ticketing, visa assistance, airport transfers, group travel, and guided tours across Kenya and Tanzania.",
+    description: "Explore our full range of travel services: safaris & guided tours, hotel bookings, air ticketing, visa assistance, airport transfers, group travel, and guided tours across Kenya and Tanzania.",
     images: ["/opengraph-image.png"],
   },
   alternates: {

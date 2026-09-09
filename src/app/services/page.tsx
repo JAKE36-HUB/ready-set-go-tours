@@ -6,7 +6,7 @@ import { ArrowRight, Hotel, Plane, Heart, Compass, Sparkles, Shield, HeadphonesI
 import { SERVICES, COMPANY } from "@/lib/constants"
 import AnimatedSection from "@/components/AnimatedSection"
 
-const iconMap: Record<string, typeof Hotel> = { Hotel, Plane, Heart, Shield, HeadphonesIcon, Award, Sparkles }
+const iconMap: Record<string, typeof Hotel> = { Compass, Hotel, Plane, Heart, Shield, HeadphonesIcon, Award, Sparkles }
 
 export default function ServicesPage() {
   return (

@@ -18,6 +18,14 @@ const iconMap: Record<string, typeof Hotel> = {
 }
 
 const serviceConfig: Record<string, { accent: string; accentBg: string; accentText: string; gradient: string; gradient2: string; icon: typeof Hotel }> = {
+  "safaris-guided-tours": {
+    accent: "amber",
+    accentBg: "bg-amber-50 dark:bg-amber-950/30",
+    accentText: "text-amber-600 dark:text-amber-400",
+    gradient: "from-amber-500 to-orange-600",
+    gradient2: "from-amber-900 via-orange-900 to-slate-900",
+    icon: Compass,
+  },
   "hotel-bookings": {
     accent: "sky",
     accentBg: "bg-sky-50 dark:bg-sky-950/30",
@@ -45,6 +53,11 @@ const serviceConfig: Record<string, { accent: string; accentBg: string; accentTe
 }
 
 const HOW_IT_WORKS: Record<string, { step: string; title: string; desc: string }[]> = {
+  "safaris-guided-tours": [
+    { step: "01", title: "Share Your Dream", desc: "Tell us your dates, group size, interests, and budget. We'll start shaping the perfect safari around you." },
+    { step: "02", title: "We Design It Together", desc: "Review a bespoke itinerary with hand-picked parks, lodges, and experiences — refined until it's exactly right." },
+    { step: "03", title: "Travel & Explore", desc: "We handle every detail — guides, vehicles, parks, and permits — so you simply sit back and watch Africa unfold." },
+  ],
   "hotel-bookings": [
     { step: "01", title: "Tell Us Your Needs", desc: "Share your destination, dates, group size, and preferences. We'll curate a shortlist of the best-matching properties." },
     { step: "02", title: "Compare & Choose", desc: "Review our hand-picked options with exclusive rates and perks not available on public booking sites." },
@@ -63,6 +76,12 @@ const HOW_IT_WORKS: Record<string, { step: string; title: string; desc: string }
 }
 
 const TRUST_STATS: Record<string, { value: string; label: string }[]> = {
+  "safaris-guided-tours": [
+    { value: "100+", label: "Safari Packages" },
+    { value: "2,500+", label: "Travelers Guided" },
+    { value: "4.9", label: "Safari Rating" },
+    { value: "15+", label: "Years Experience" },
+  ],
   "hotel-bookings": [
     { value: "200+", label: "Vetted Properties" },
     { value: "4,200+", label: "Bookings Completed" },
