@@ -10,7 +10,7 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        url: "/og-image.jpg",
+        url: "/opengraph-image.png",
         width: 1200,
         height: 630,
         alt: "Honeymoon Packages - Ready Set Go Tours",
@@ -21,7 +21,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Honeymoon Packages | Ready Set Go Tours & Travel",
     description: "Handcrafted romantic escapes across East Africa. Private safaris, beachfront villas, and unforgettable moments for your dream honeymoon.",
-    images: ["/og-image.jpg"],
+    images: ["/opengraph-image.png"],
   },
   alternates: {
     canonical: "/honeymoon-packages",

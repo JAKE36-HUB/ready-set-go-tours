@@ -12,7 +12,7 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        url: "/og-image.jpg",
+        url: "/opengraph-image.png",
         width: 1200,
         height: 630,
         alt: "Ready Set Go Tours & Travel Services",
@@ -23,7 +23,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Travel Services | Ready Set Go Tours & Travel",
     description: "Explore our full range of travel services: hotel bookings, air ticketing, visa assistance, airport transfers, group travel, and guided tours across Kenya and Tanzania.",
-    images: ["/og-image.jpg"],
+    images: ["/opengraph-image.png"],
   },
   alternates: {
     canonical: "/services",

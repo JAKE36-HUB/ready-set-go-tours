@@ -16,7 +16,7 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        url: "/og-image.jpg",
+        url: "/opengraph-image.png",
         width: 1200,
         height: 630,
         alt: "About Ready Set Go Tours & Travel",
@@ -27,7 +27,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: `About Us | ${COMPANY.name}`,
     description: COMPANY.description,
-    images: ["/og-image.jpg"],
+    images: ["/opengraph-image.png"],
   },
   alternates: {
     canonical: "/about",

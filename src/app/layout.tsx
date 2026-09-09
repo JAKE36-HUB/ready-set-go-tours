@@ -8,6 +8,7 @@ import { Footer } from "@/components/layout/Footer";
 import { Analytics } from "@vercel/analytics/react";
 import Script from "next/script";
 import { ClientWidgets } from "@/components/ClientWidgets";
+import { COMPANY } from "@/lib/constants";
 
 export const viewport: Viewport = {
   width: "device-width",
@@ -19,7 +20,12 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
-  verification: { google: "Tu2nq2Pl9nDmApYtFt6GsuYhhzyzhlSWzFM3nNq3Lm0" },
+  verification: {
+    google: "Tu2nq2Pl9nDmApYtFt6GsuYhhzyzhlSWzFM3nNq3Lm0",
+    ...(process.env.NEXT_PUBLIC_BING_VERIFICATION
+      ? { other: { "msvalidate.01": process.env.NEXT_PUBLIC_BING_VERIFICATION } }
+      : {}),
+  },
   title: {
     default: "Ready Set Go Tours & Travel | Luxury Kenya & Tanzania Safaris",
     template: "%s | Ready Set Go Tours & Travel",
@@ -39,7 +45,7 @@ export const metadata: Metadata = {
       "Premier luxury tour operator in Nairobi, Kenya. Explore extraordinary Kenya and Tanzania tours, safaris, beach holidays, and travel packages.",
     images: [
       {
-        url: "/og-image.jpg",
+        url: "/opengraph-image.png",
         width: 1200,
         height: 630,
         alt: "Ready Set Go Tours & Travel",
@@ -51,7 +57,7 @@ export const metadata: Metadata = {
     title: "Ready Set Go Tours & Travel | Luxury Kenya & Tanzania Safaris",
     description:
       "Premier luxury tour operator in Nairobi, Kenya. Explore extraordinary Kenya and Tanzania tours, safaris, beach holidays, and travel packages.",
-    images: ["/og-image.jpg"],
+    images: ["/opengraph-image.png"],
   },
   robots: {
     index: true,
@@ -91,15 +97,14 @@ export default function RootLayout({
             __html: JSON.stringify({
               "@context": "https://schema.org",
               "@type": "TravelAgency",
-              name: "Ready Set Go Tours & Travel",
-              description:
-                "Premier luxury tour operator based in Nairobi, Kenya, specializing in bespoke safaris and travel experiences across Kenya and Tanzania.",
+              name: COMPANY.name,
+              description: COMPANY.description,
               url: "https://www.readysetgosafaris.com",
-              telephone: "+254797867411",
-              email: "jaketish2@gmail.com",
+              telephone: COMPANY.phone,
+              email: COMPANY.email,
               address: {
                 "@type": "PostalAddress",
-                streetAddress: "Nairobi",
+                streetAddress: COMPANY.address,
                 addressRegion: "Nairobi",
                 addressCountry: "KE",
               },
@@ -109,10 +114,7 @@ export default function RootLayout({
                 bestRating: "5",
                 ratingCount: "127",
               },
-              sameAs: [
-                "https://facebook.com/readysetgotours",
-                "https://instagram.com/readysetgosafaris",
-              ],
+              sameAs: Object.values(COMPANY.social),
             }),
           }}
         />
@@ -130,6 +132,30 @@ export default function RootLayout({
             gtag('config', 'AW-18369134468');
           `}
         </Script>
+        {process.env.NEXT_PUBLIC_GA4_ID && (
+          <>
+            <Script
+              id="ga4"
+              strategy="afterInteractive"
+              src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GA4_ID}`}
+            />
+            <Script id="ga4-init" strategy="afterInteractive">
+              {`
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){dataLayer.push(arguments);}
+                gtag('js', new Date());
+                gtag('config', '${process.env.NEXT_PUBLIC_GA4_ID}');
+              `}
+            </Script>
+          </>
+        )}
+        {process.env.NEXT_PUBLIC_CLARITY_ID && (
+          <Script id="microsoft-clarity" strategy="afterInteractive">
+            {`
+              (function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);})(window,document,"clarity","script","${process.env.NEXT_PUBLIC_CLARITY_ID}");
+            `}
+          </Script>
+        )}
         <SupabaseProvider>
         <ThemeProvider>
           <Header />

@@ -12,7 +12,7 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        url: "/og-image.jpg",
+        url: "/opengraph-image.png",
         width: 1200,
         height: 630,
         alt: "Contact Ready Set Go Tours",
@@ -23,7 +23,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Contact Us | Ready Set Go Tours & Travel",
     description: "Ready to plan your dream safari? Contact our travel experts for a personalized itinerary.",
-    images: ["/og-image.jpg"],
+    images: ["/opengraph-image.png"],
   },
   alternates: {
     canonical: "/contact",

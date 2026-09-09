@@ -11,7 +11,7 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        url: "/og-image.jpg",
+        url: "/opengraph-image.png",
         width: 1200,
         height: 630,
         alt: "Testimonials - Ready Set Go Tours",
@@ -22,7 +22,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Testimonials | Ready Set Go Tours & Travel",
     description: "Authentic reviews from our satisfied safari travelers.",
-    images: ["/og-image.jpg"],
+    images: ["/opengraph-image.png"],
   },
   alternates: {
     canonical: "/testimonials",

@@ -10,7 +10,7 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        url: "/og-image.jpg",
+        url: "/opengraph-image.png",
         width: 1200,
         height: 630,
         alt: "Safari Deals & Special Offers - Ready Set Go Tours",
@@ -21,7 +21,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Best Safari Deals & Special Offers | Ready Set Go Tours",
     description: "Exclusive early bird, group, and last-minute deals on East African safaris. Save up to 25% on luxury tented camps, Mount Kenya treks, and beach holidays.",
-    images: ["/og-image.jpg"],
+    images: ["/opengraph-image.png"],
   },
   alternates: {
     canonical: "/deals",

@@ -17,7 +17,7 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        url: "/og-image.jpg",
+        url: "/opengraph-image.png",
         width: 1200,
         height: 630,
         alt: "Tanzania Tours & Safaris - Ready Set Go Tours",
@@ -28,7 +28,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: `Tanzania Tours & Safaris | ${COMPANY.name}`,
     description: "Journey through Tanzania's iconic northern circuit. From the Serengeti's endless plains to the summit of Kilimanjaro.",
-    images: ["/og-image.jpg"],
+    images: ["/opengraph-image.png"],
   },
   alternates: {
     canonical: "/tanzania-tours",
