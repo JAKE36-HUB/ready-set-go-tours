@@ -1,5 +1,6 @@
 import type { SupabaseClient } from "@supabase/supabase-js"
 import { sanitizeString } from "@/lib/security"
+import { sendWhatsAppChatAlert } from "@/lib/whatsapp"
 
 export type ChatRole = "user" | "assistant" | "owner"
 
@@ -144,6 +145,21 @@ export async function notifyOwner(sb: SupabaseClient, sessionId: string, visitor
     title: `Chat: ${title}`,
     body: body.slice(0, 180),
   })
+  try {
+    // WhatsApp alert — throttled so a rapid AI conversation doesn't ping repeatedly.
+    // Only fires when a visitor resumes (or starts) a chat after 2+ minutes of silence.
+    const since = new Date(Date.now() - 120_000).toISOString()
+    const { count, error } = await sb
+      .from("chat_messages")
+      .select("id", { count: "exact", head: true })
+      .eq("session_id", sessionId)
+      .gt("created_at", since)
+    if (error) throw error
+    if (count && count > 1) return
+    await sendWhatsAppChatAlert(title, body, session?.page || "")
+  } catch {
+    // WhatsApp must never break the chat flow
+  }
 }
 
 const EMAIL_RE = /\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}\b/i
