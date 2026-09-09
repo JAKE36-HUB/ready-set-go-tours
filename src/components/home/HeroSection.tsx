@@ -13,26 +13,46 @@ const HERO_IMAGES = [
   "/images/local/pin_9866ec45a7a8400d3fdc9e0642ff1e99.jpg",
 ]
 
+const SLIDE_DURATION = 7000
+
 export function HeroSection() {
   const [mounted, setMounted] = useState(false)
   const [currentImage, setCurrentImage] = useState(0)
+  const [paused, setPaused] = useState(false)
+  const [progress, setProgress] = useState(0)
 
   // eslint-disable-next-line react-hooks/set-state-in-effect
   useEffect(() => { setMounted(true) }, [])
 
   useEffect(() => {
-    if (!mounted) return
-    const interval = setInterval(() => {
+    if (!mounted || paused) return
+    const timer = setTimeout(() => {
       setCurrentImage((prev) => (prev + 1) % HERO_IMAGES.length)
-    }, 5000)
+    }, SLIDE_DURATION)
+    return () => clearTimeout(timer)
+  }, [mounted, paused, currentImage])
+
+  useEffect(() => {
+    if (!mounted || paused) return
+    setProgress(0)
+    const start = Date.now()
+    const interval = setInterval(() => {
+      const pct = Math.min(100, ((Date.now() - start) / SLIDE_DURATION) * 100)
+      setProgress(pct)
+      if (pct >= 100) clearInterval(interval)
+    }, 50)
     return () => clearInterval(interval)
-  }, [mounted])
+  }, [mounted, paused, currentImage])
 
   const titleWords = ["Kenya", "&", "Tanzania", "Safaris,", "Planned", "Around", "You"]
   const highlightWords = new Set(["Planned", "Around", "You"])
 
   return (
-    <section className="relative h-screen min-h-[600px] flex items-center overflow-hidden bg-black">
+    <section
+      className="relative h-screen min-h-[600px] flex items-center overflow-hidden bg-black"
+      onMouseEnter={() => setPaused(true)}
+      onMouseLeave={() => setPaused(false)}
+    >
       <div className="absolute inset-0">
         {HERO_IMAGES.map((img, i) => (
           <div
@@ -47,6 +67,7 @@ export function HeroSection() {
               sizes="100vw"
               className="object-cover scale-110 brightness-[1.15] contrast-[1.05]"
               priority={i === 0}
+              fetchPriority={i === 0 ? "high" : "low"}
               loading={i === 0 ? "eager" : "lazy"}
             />
           </div>
@@ -63,18 +84,25 @@ export function HeroSection() {
 
       <div className="absolute inset-0 opacity-[0.03]" style={{ backgroundImage: "radial-gradient(circle at 1px 1px, white 1px, transparent 0)", backgroundSize: "50px 50px" }} />
 
-      <div className="absolute bottom-24 left-1/2 -translate-x-1/2 z-20 flex items-center gap-2">
-        {HERO_IMAGES.map((_, i) => (
+      <div className="absolute bottom-28 left-1/2 -translate-x-1/2 z-20 flex items-center gap-2.5">
+        {HERO_IMAGES.map((img, i) => (
           <button
-            key={i}
+            key={img}
             onClick={() => setCurrentImage(i)}
-            className={`transition-all duration-500 rounded-full ${
-              i === currentImage
-                ? "w-8 h-1.5 bg-white/80"
-                : "w-1.5 h-1.5 bg-white/30 hover:bg-white/50"
-            }`}
             aria-label={`Image ${i + 1}`}
-          />
+            className={`h-1 rounded-full overflow-hidden transition-all duration-300 ${
+              i === currentImage
+                ? "w-16 bg-white/25 cursor-default"
+                : "w-7 bg-white/30 hover:bg-white/50"
+            }`}
+          >
+            {i === currentImage && (
+              <div
+                className="h-full bg-white/90 rounded-full"
+                style={{ width: `${progress}%` }}
+              />
+            )}
+          </button>
         ))}
       </div>
 
@@ -159,38 +187,6 @@ export function HeroSection() {
           </div>
         </div>
       </div>
-
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={mounted ? { opacity: 1 } : {}}
-        transition={{ duration: 0.6, delay: 1.2 }}
-        className="absolute bottom-0 left-0 right-0 z-10"
-      >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between border-t border-white/10 py-5">
-            <div className="flex items-center gap-6 text-xs text-white/30">
-              <span className="flex items-center gap-1.5">
-                <span className="w-1 h-1 rounded-full bg-emerald-400" />
-                Private Guides
-              </span>
-              <span className="flex items-center gap-1.5">
-                <span className="w-1 h-1 rounded-full bg-emerald-400" />
-                Custom Itineraries
-              </span>
-              <span className="hidden sm:flex items-center gap-1.5">
-                <span className="w-1 h-1 rounded-full bg-emerald-400" />
-                24/7 Support
-              </span>
-            </div>
-            <div className="hidden sm:flex items-center gap-2 text-xs text-white/20">
-              <span>Scroll to explore</span>
-              <div className="w-4 h-6 rounded-full border border-white/20 flex items-start justify-center pt-1">
-                <div className="w-0.5 h-1.5 rounded-full bg-white/40 animate-bounce" />
-              </div>
-            </div>
-          </div>
-        </div>
-      </motion.div>
     </section>
   )
 }
