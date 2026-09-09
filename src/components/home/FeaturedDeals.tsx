@@ -4,7 +4,7 @@ import { useState, useRef, useEffect } from "react"
 import Image from "next/image"
 import Link from "next/link"
 import { motion, useInView } from "framer-motion"
-import { Percent, Clock, Hotel, ChevronRight } from "lucide-react"
+import { Percent, Clock, Hotel, ChevronLeft, ChevronRight } from "lucide-react"
 import useEmblaCarousel from "embla-carousel-react"
 import Autoplay from "embla-carousel-autoplay"
 
@@ -71,8 +71,11 @@ export function FeaturedDeals() {
                   <Link href={`/deals/${deal.slug}`}>
                     <div className="relative h-44 sm:h-48 overflow-hidden">
                       <Image src={deal.image} alt={deal.title} fill className="object-cover transition-transform duration-500 group-hover:scale-105" sizes="(max-width: 640px) 70vw, (max-width: 1024px) 45vw, 34vw" />
-                      <div className="absolute top-3 left-3">
+                      <div className="absolute top-3 left-3 flex items-center gap-2">
                         <span className="bg-emerald-500 text-white text-xs font-bold px-2.5 py-1 rounded-full">{deal.discount}</span>
+                        {deal.featured && (
+                          <span className="bg-amber-500 text-white text-xs font-bold px-2.5 py-1 rounded-full">Top Pick</span>
+                        )}
                       </div>
                     </div>
                     <div className="p-4">
@@ -80,6 +83,11 @@ export function FeaturedDeals() {
                       <div className="flex items-center gap-3 text-xs text-muted-foreground">
                         <span className="flex items-center gap-1"><Clock className="size-3" />{deal.duration}</span>
                         <span className="flex items-center gap-1"><Hotel className="size-3" />{deal.accommodation.split("|")[0].trim()}</span>
+                      </div>
+                      <div className="mt-3 flex items-baseline gap-2">
+                        <span className="text-xs text-muted-foreground line-through">${deal.originalPrice}</span>
+                        <span className="text-xl font-bold text-emerald-500 dark:text-emerald-400">${deal.dealPrice}</span>
+                        <span className="text-[11px] text-muted-foreground">/person</span>
                       </div>
                       <div className="mt-3">
                         <DealUrgency dealId={deal.id} validUntil={deal.validUntil} />
@@ -92,16 +100,34 @@ export function FeaturedDeals() {
           </div>
         </div>
 
-        <div className="flex items-center justify-center gap-2 mt-8">
-          {scrollSnaps.map((_, i) => (
-            <button
-              key={i}
-              type="button"
-              onClick={() => emblaApi?.scrollTo(i)}
-              className={`h-2 rounded-full transition-all duration-300 ${i === selectedIndex ? "w-8 bg-emerald-500" : "w-2 bg-white/20 hover:bg-white/40"}`}
-              aria-label={`Show deal ${i + 1}`}
-            />
-          ))}
+        <div className="flex items-center justify-center gap-4 mt-8">
+          <button
+            type="button"
+            onClick={() => emblaApi?.scrollPrev()}
+            className="hidden sm:inline-flex h-9 w-9 items-center justify-center rounded-full bg-white/10 text-white/60 hover:bg-white/20 hover:text-white ring-1 ring-white/20 transition-all duration-300"
+            aria-label="Previous deals"
+          >
+            <ChevronLeft className="size-4" />
+          </button>
+          <div className="flex items-center justify-center gap-2">
+            {scrollSnaps.map((_, i) => (
+              <button
+                key={i}
+                type="button"
+                onClick={() => emblaApi?.scrollTo(i)}
+                className={`h-2 rounded-full transition-all duration-300 ${i === selectedIndex ? "w-8 bg-emerald-500" : "w-2 bg-white/20 hover:bg-white/40"}`}
+                aria-label={`Show deal ${i + 1}`}
+              />
+            ))}
+          </div>
+          <button
+            type="button"
+            onClick={() => emblaApi?.scrollNext()}
+            className="hidden sm:inline-flex h-9 w-9 items-center justify-center rounded-full bg-white/10 text-white/60 hover:bg-white/20 hover:text-white ring-1 ring-white/20 transition-all duration-300"
+            aria-label="Next deals"
+          >
+            <ChevronRight className="size-4" />
+          </button>
         </div>
 
         <motion.div

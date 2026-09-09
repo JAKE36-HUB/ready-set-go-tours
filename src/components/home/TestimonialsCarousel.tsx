@@ -1,6 +1,6 @@
 "use client"
 
-import { useRef } from "react"
+import { useEffect, useRef, useState } from "react"
 import Image from "next/image"
 import { motion, useInView } from "framer-motion"
 import { Quote, Star } from "lucide-react"
@@ -13,7 +13,20 @@ import { cn } from "@/lib/utils"
 export function TestimonialsCarousel() {
   const ref = useRef<HTMLDivElement>(null)
   const isInView = useInView(ref, { once: true, margin: "-100px" })
-  const [emblaRef] = useEmblaCarousel({ loop: true, align: "start" }, [Autoplay({ delay: 4000, stopOnInteraction: false, stopOnMouseEnter: true })])
+  const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true, align: "start" }, [Autoplay({ delay: 4000, stopOnInteraction: false, stopOnMouseEnter: true })])
+
+  const [selectedIndex, setSelectedIndex] = useState(0)
+  const [scrollSnaps, setScrollSnaps] = useState<number[]>([])
+
+  useEffect(() => {
+    if (!emblaApi) return
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setScrollSnaps(emblaApi.scrollSnapList())
+    const onSelect = () => setSelectedIndex(emblaApi.selectedScrollSnap())
+    emblaApi.on("select", onSelect)
+    onSelect()
+    return () => { emblaApi.off("select", onSelect) }
+  }, [emblaApi])
 
   return (
     <section className="relative py-28 bg-slate-50 dark:bg-slate-900 overflow-hidden">
@@ -33,6 +46,16 @@ export function TestimonialsCarousel() {
           <p className="text-lg text-slate-500 dark:text-slate-400 max-w-xl mx-auto">
             Real stories from real travelers who embarked on the journey of a lifetime.
           </p>
+          <div className="inline-flex items-center gap-2 mt-5 px-4 py-1.5 rounded-full bg-amber-500/10 ring-1 ring-amber-500/20">
+            <div className="flex items-center gap-0.5">
+              {Array.from({ length: 5 }).map((_, i) => (
+                <Star key={i} className="size-3.5 text-amber-400 fill-amber-400" />
+              ))}
+            </div>
+            <span className="text-xs font-semibold text-amber-700 dark:text-amber-300">
+              4.9/5 from 2,000+ travelers
+            </span>
+          </div>
         </motion.div>
 
         <div className="relative">
@@ -64,6 +87,18 @@ export function TestimonialsCarousel() {
               ))}
             </div>
           </div>
+        </div>
+
+        <div className="flex items-center justify-center gap-2 mt-8">
+          {scrollSnaps.map((_, i) => (
+            <button
+              key={i}
+              type="button"
+              onClick={() => emblaApi?.scrollTo(i)}
+              className={`h-2 rounded-full transition-all duration-300 ${i === selectedIndex ? "w-8 bg-amber-500" : "w-2 bg-slate-300 dark:bg-slate-700 hover:bg-slate-400 dark:hover:bg-slate-600"}`}
+              aria-label={`Show testimonial ${i + 1}`}
+            />
+          ))}
         </div>
       </div>
     </section>
