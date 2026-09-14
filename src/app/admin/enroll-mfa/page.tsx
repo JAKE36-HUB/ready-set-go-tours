@@ -4,6 +4,7 @@ import { useEffect, useState } from "react"
 import { useRouter } from "next/navigation"
 import { createBrowserClient } from "@supabase/ssr"
 import { Loader2, ShieldCheck, KeyRound, QrCode, Copy, Check, Trash2, LogOut } from "lucide-react"
+import { generateAuthenticatorQr } from "@/lib/totp-qr"
 
 export default function EnrollMfaPage() {
   const router = useRouter()
@@ -58,7 +59,9 @@ export default function EnrollMfaPage() {
     setStarting(true)
     setError("")
     try {
-      const { data, error: err } = await client().auth.mfa.enroll({
+      const supabase = client()
+      const { data: { user } } = await supabase.auth.getUser()
+      const { data, error: err } = await supabase.auth.mfa.enroll({
         factorType: "totp",
         friendlyName: "Google Authenticator",
       })
@@ -67,8 +70,8 @@ export default function EnrollMfaPage() {
         return
       }
       setFactorId(data.id)
-      setQrCode(data.totp.qr_code)
       setSecret(data.totp.secret)
+      setQrCode(await generateAuthenticatorQr(data.totp.secret, user?.email))
     } catch {
       setError("Could not start setup - is 2FA enabled in the Supabase dashboard?")
     } finally {

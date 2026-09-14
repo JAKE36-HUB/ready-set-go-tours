@@ -5,6 +5,7 @@ import { createBrowserClient } from "@supabase/ssr"
 import type { Factor } from "@supabase/supabase-js"
 import { ShieldCheck, ShieldAlert, QrCode, Loader2, KeyRound, Trash2, Copy, Check } from "lucide-react"
 import { toast } from "sonner"
+import { generateAuthenticatorQr } from "@/lib/totp-qr"
 
 export default function SecurityPage() {
   const [loading, setLoading] = useState(true)
@@ -79,8 +80,9 @@ export default function SecurityPage() {
         return
       }
       setPendingFactorId(data.id)
-      setQrCode(data.totp.qr_code)
       setSecret(data.totp.secret)
+      const { data: { user } } = await supabase.auth.getUser()
+      setQrCode(await generateAuthenticatorQr(data.totp.secret, user?.email))
     } catch {
       toast.error("Could not start setup — is 2FA enabled in the Supabase dashboard?")
     } finally {
