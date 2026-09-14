@@ -20,6 +20,8 @@ export default function SecurityPage() {
   const [verifying, setVerifying] = useState(false)
   const [copied, setCopied] = useState(false)
   const [removing, setRemoving] = useState(false)
+  const [showDisableForm, setShowDisableForm] = useState(false)
+  const [disableCode, setDisableCode] = useState("")
 
   async function refresh() {
     const supabase = createBrowserClient(
@@ -114,22 +116,37 @@ export default function SecurityPage() {
     }
   }
 
-  async function remove2FA() {
+  async function handleDisable(e: React.FormEvent) {
+    e.preventDefault()
     if (!factor) return
-    if (!confirm("Disable two-factor authentication on this account?")) return
     setRemoving(true)
     try {
       const supabase = createBrowserClient(
         process.env.NEXT_PUBLIC_SUPABASE_URL!,
         process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
       )
+      // Supabase requires the session to be verified (AAL2) before unenrolling.
+      // Confirm with a fresh code from the authenticator app first.
+      const { error: verifyError } = await supabase.auth.mfa.challengeAndVerify({
+        factorId: factor.id,
+        code: disableCode.trim(),
+      })
+      if (verifyError) {
+        toast.error(verifyError.message || "Invalid code — try again.")
+        setDisableCode("")
+        return
+      }
       const { error } = await supabase.auth.mfa.unenroll({ factorId: factor.id })
       if (error) {
         toast.error(error.message || "Could not disable 2FA")
         return
       }
       toast.success("Two-factor authentication disabled")
+      setShowDisableForm(false)
+      setDisableCode("")
       await refresh()
+    } catch {
+      toast.error("Network error — please try again.")
     } finally {
       setRemoving(false)
     }
@@ -211,14 +228,54 @@ export default function SecurityPage() {
               App: <span className="font-mono">{factor.friendly_name ?? "Authenticator"}</span> — added on this account
             </div>
           )}
-          <button
-            onClick={remove2FA}
-            disabled={removing}
-            className="inline-flex items-center gap-2 h-10 px-4 rounded-lg bg-red-50 dark:bg-red-950/40 border border-red-200 dark:border-red-800 text-red-600 dark:text-red-400 text-sm font-medium hover:bg-red-100 dark:hover:bg-red-950/60 disabled:opacity-50 transition-colors"
-          >
-            {removing ? <Loader2 className="size-4 animate-spin" /> : <Trash2 className="size-4" />}
-            Disable 2FA
-          </button>
+          {!showDisableForm ? (
+            <button
+              onClick={() => setShowDisableForm(true)}
+              className="inline-flex items-center gap-2 h-10 px-4 rounded-lg bg-red-50 dark:bg-red-950/40 border border-red-200 dark:border-red-800 text-red-600 dark:text-red-400 text-sm font-medium hover:bg-red-100 dark:hover:bg-red-950/60 transition-colors"
+            >
+              <Trash2 className="size-4" />
+              Disable 2FA
+            </button>
+          ) : (
+            <form onSubmit={handleDisable} className="space-y-3">
+              <p className="text-xs text-red-600/80 dark:text-red-400/80 leading-relaxed">
+                Enter a current 6-digit code from your authenticator app to confirm and disable two-factor
+                authentication.
+              </p>
+              <input
+                type="text"
+                inputMode="numeric"
+                autoComplete="one-time-code"
+                autoFocus
+                value={disableCode}
+                onChange={(e) => setDisableCode(e.target.value.replace(/\D/g, "").slice(0, 6))}
+                placeholder="000000"
+                required
+                className="w-full max-w-[220px] h-12 px-4 text-center text-2xl tracking-[0.5em] font-mono rounded-lg border border-red-200 dark:border-red-800 bg-white dark:bg-slate-800 text-slate-900 dark:text-white placeholder:text-slate-300 dark:placeholder:text-slate-600 focus:border-red-500 focus:ring-2 focus:ring-red-500/30 outline-none transition-all"
+              />
+              <div className="flex items-center gap-3">
+                <button
+                  type="submit"
+                  disabled={removing || disableCode.length !== 6}
+                  className="inline-flex items-center gap-2 h-10 px-4 rounded-lg bg-red-600 hover:bg-red-700 text-white text-sm font-semibold disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                >
+                  {removing && <Loader2 className="size-4 animate-spin" />}
+                  {removing ? "Disabling..." : "Confirm disable"}
+                </button>
+                <button
+                  type="button"
+                  onClick={() => {
+                    setShowDisableForm(false)
+                    setDisableCode("")
+                  }}
+                  disabled={removing}
+                  className="text-xs text-slate-400 hover:text-slate-600 dark:hover:text-slate-300 transition-colors"
+                >
+                  Cancel
+                </button>
+              </div>
+            </form>
+          )}
         </div>
       ) : qrCode ? (
         <form onSubmit={verifyEnroll} className="rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-5 space-y-5">
