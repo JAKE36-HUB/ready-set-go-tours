@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation"
 import { createBrowserClient } from "@supabase/ssr"
 import { Loader2, ShieldCheck, KeyRound, QrCode, Copy, Check, Trash2, LogOut } from "lucide-react"
 import { generateAuthenticatorQr } from "@/lib/totp-qr"
+import { cancelPendingFactor } from "@/lib/mfa-helpers"
 
 export default function EnrollMfaPage() {
   const router = useRouter()
@@ -60,6 +61,8 @@ export default function EnrollMfaPage() {
     setError("")
     try {
       const supabase = client()
+      // An unfinished (pending) factor blocks new enrollment — clear it so a fresh QR can be scanned.
+      await cancelPendingFactor(supabase)
       const { data: { user } } = await supabase.auth.getUser()
       const { data, error: err } = await supabase.auth.mfa.enroll({
         factorType: "totp",
@@ -72,8 +75,12 @@ export default function EnrollMfaPage() {
       setFactorId(data.id)
       setSecret(data.totp.secret)
       setQrCode(await generateAuthenticatorQr(data.totp.secret, user?.email))
-    } catch {
-      setError("Could not start setup - is 2FA enabled in the Supabase dashboard?")
+    } catch (err) {
+      setError(
+        err instanceof Error && err.message
+          ? err.message
+          : "Could not start setup - is 2FA enabled in the Supabase dashboard?"
+      )
     } finally {
       setStarting(false)
     }

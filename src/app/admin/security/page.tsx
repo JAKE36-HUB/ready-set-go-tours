@@ -6,6 +6,7 @@ import type { Factor } from "@supabase/supabase-js"
 import { ShieldCheck, ShieldAlert, QrCode, Loader2, KeyRound, Trash2, Copy, Check } from "lucide-react"
 import { toast } from "sonner"
 import { generateAuthenticatorQr } from "@/lib/totp-qr"
+import { cancelPendingFactor } from "@/lib/mfa-helpers"
 
 export default function SecurityPage() {
   const [loading, setLoading] = useState(true)
@@ -66,25 +67,37 @@ export default function SecurityPage() {
         process.env.NEXT_PUBLIC_SUPABASE_URL!,
         process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
       )
+      const { data: factors, error: listErr } = await supabase.auth.mfa.listFactors()
+      if (listErr) throw listErr
+
+      const verified = factors?.totp.find((f) => f.status === "verified")
+      if (verified) {
+        await refresh()
+        toast.info("Two-factor authentication is already enabled on this account.")
+        return
+      }
+
+      // An unfinished (pending) factor blocks new enrollment — clear it so a fresh QR can be scanned.
+      await cancelPendingFactor(supabase)
+
       const { data, error } = await supabase.auth.mfa.enroll({
         factorType: "totp",
         friendlyName: "Google Authenticator",
       })
       if (error) {
-        if (error.message?.toLowerCase().includes("already")) {
-          await refresh()
-          setEnrolling(false)
-          return
-        }
         toast.error(error.message || "Could not start setup")
         return
       }
+      const { data: { user } } = await supabase.auth.getUser()
       setPendingFactorId(data.id)
       setSecret(data.totp.secret)
-      const { data: { user } } = await supabase.auth.getUser()
       setQrCode(await generateAuthenticatorQr(data.totp.secret, user?.email))
-    } catch {
-      toast.error("Could not start setup — is 2FA enabled in the Supabase dashboard?")
+    } catch (err) {
+      toast.error(
+        err instanceof Error && err.message
+          ? err.message
+          : "Could not start setup — is 2FA enabled in the Supabase dashboard?"
+      )
     } finally {
       setEnrolling(false)
     }
