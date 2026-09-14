@@ -34,6 +34,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query"
 import { Toaster } from "@/components/ui/sonner"
 import { RealtimeProvider } from "@/components/admin/realtime/RealtimeProvider"
 import NotificationCenter from "@/components/admin/realtime/NotificationCenter"
+import { SessionGuard } from "@/components/admin/SessionGuard"
 
 const NAV_ITEMS = [
   { href: "/admin", label: "Dashboard", icon: LayoutDashboard },
@@ -109,6 +110,7 @@ export default function AdminShell({ children }: { children: React.ReactNode }) 
   return (
     <QueryClientProvider client={queryClient}>
       <RealtimeProvider>
+        <SessionGuard />
         {pathname === "/admin/denied" ? (
           <div className="h-screen supports-[height:100dvh]:h-dvh overflow-hidden bg-slate-50 dark:bg-slate-950">
             <main className="h-full overflow-y-auto">{children}</main>

@@ -16,7 +16,7 @@ export async function GET(request: NextRequest) {
 
   const { data: all, error } = await sb
     .from("visitors")
-    .select("*")
+    .select("id, session_id, page, referrer, user_agent, ip, country, city, entered_at, last_active_at, duration_seconds")
     .order(sortField, { ascending: sortDir === "asc" })
     .limit(Math.min(limit, 500))
 
