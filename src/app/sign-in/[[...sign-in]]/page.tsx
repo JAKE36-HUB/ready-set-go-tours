@@ -3,7 +3,20 @@
 import { useEffect, useRef, useState } from "react"
 import { useRouter } from "next/navigation"
 import { createBrowserClient } from "@supabase/ssr"
-import { Eye, EyeOff, Loader2, ShieldCheck, KeyRound, ChevronLeft } from "lucide-react"
+import {
+  Eye,
+  EyeOff,
+  Loader2,
+  ShieldCheck,
+  KeyRound,
+  ChevronLeft,
+  Mail,
+  Lock,
+  Sparkles,
+  QrCode,
+} from "lucide-react"
+
+const BRAND = "Ready Set Go Tours"
 
 export default function SignInPage() {
   const router = useRouter()
@@ -135,138 +148,184 @@ export default function SignInPage() {
   }
 
   return (
-    <div className="h-screen supports-[height:100dvh]:h-dvh flex items-center justify-center bg-gradient-to-br from-slate-50 to-sky-50 dark:from-slate-950 dark:to-slate-900 px-4">
-      <div className="w-full max-w-sm space-y-8">
-        <div className="text-center">
-          <div className="mx-auto w-12 h-12 rounded-xl bg-gradient-to-br from-sky-500 to-cyan-400 flex items-center justify-center mb-4 shadow-lg shadow-sky-500/20">
-            <span className="text-white font-bold text-lg">RS</span>
-          </div>
-          <h1 className="text-lg font-semibold text-slate-900 dark:text-white">
-            {mfaRequired ? "Two-Factor Authentication" : "Admin Sign In"}
-          </h1>
-          <p className="text-sm text-slate-500 dark:text-slate-400 mt-1">Ready Set Go Tours & Travel</p>
-          <p className="text-[11px] text-slate-400 dark:text-slate-500 mt-2 flex items-center justify-center gap-1">
-            {mfaRequired ? (
-              <>
-                <KeyRound className="w-3 h-3" />
-                Enter the 6-digit code from your authenticator app
-              </>
-            ) : (
-              <>
-                <ShieldCheck className="w-3 h-3" />
-                Authorized admin emails only
-              </>
-            )}
-          </p>
-        </div>
+    <div className="relative min-h-dvh flex items-center justify-center overflow-hidden bg-gradient-to-br from-sky-50 via-white to-emerald-50 dark:from-slate-950 dark:via-slate-950 dark:to-slate-900 px-4 py-10">
+      {/* Decorative background */}
+      <div className="pointer-events-none absolute -top-32 -left-24 h-[28rem] w-[28rem] rounded-full bg-sky-400/20 dark:bg-sky-500/10 blur-3xl" />
+      <div className="pointer-events-none absolute -bottom-40 -right-20 h-[30rem] w-[30rem] rounded-full bg-emerald-400/20 dark:bg-emerald-500/10 blur-3xl" />
+      <div className="pointer-events-none absolute top-1/3 right-[8%] h-72 w-72 rounded-full bg-amber-300/20 dark:bg-amber-500/10 blur-3xl" />
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_0%,white_80%)] dark:bg-[radial-gradient(circle_at_center,transparent_0%,#020617_80%)] opacity-60" />
 
-        {!mfaRequired ? (
-          <form onSubmit={handleSubmit} className="space-y-5">
-            {error && (
-              <div className="p-3 rounded-lg bg-red-50 dark:bg-red-950/30 border border-red-200 dark:border-red-800">
-                <p className="text-sm text-red-600 dark:text-red-400">{error}</p>
-              </div>
-            )}
-
-            <div>
-              <label htmlFor="email" className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1.5">
-                Email
-              </label>
-              <input
-                id="email"
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                placeholder="admin@example.com"
-                autoComplete="username"
-                required
-                className="w-full h-11 px-4 rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white placeholder:text-slate-400 focus:border-sky-500 focus:ring-2 focus:ring-sky-500/30 outline-none transition-all"
-              />
+      <div className="relative w-full max-w-md">
+        <div className="rounded-2xl border border-white/60 dark:border-slate-800 bg-white/80 dark:bg-slate-900/80 backdrop-blur-2xl shadow-2xl shadow-sky-900/10 dark:shadow-black/40">
+          {/* Header */}
+          <div className="pt-10 px-8 text-center space-y-4">
+            <div className="mx-auto w-14 h-14 rounded-2xl bg-gradient-to-br from-sky-500 to-cyan-400 flex items-center justify-center shadow-lg shadow-sky-500/30">
+              {mfaRequired ? (
+                <QrCode className="w-7 h-7 text-white" />
+              ) : (
+                <span className="text-white font-bold text-xl">RS</span>
+              )}
             </div>
+            <div className="space-y-1.5">
+              <h1 className="text-xl font-bold tracking-tight text-slate-900 dark:text-white">
+                {mfaRequired ? "Two-Factor Authentication" : "Welcome back"}
+              </h1>
+              <p className="text-sm text-slate-500 dark:text-slate-400">
+                {mfaRequired
+                  ? "Enter the 6-digit code from your authenticator app"
+                  : "Sign in to the admin panel"}
+              </p>
+            </div>
+            <div className="inline-flex items-center gap-1.5 rounded-full bg-sky-500/10 dark:bg-sky-500/15 border border-sky-200/60 dark:border-sky-500/20 px-3 py-1 text-[11px] font-medium text-sky-700 dark:text-sky-300">
+              <Sparkles className="size-3" />
+              {BRAND}
+            </div>
+          </div>
 
-            <div>
-              <label htmlFor="password" className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1.5">
-                Password
-              </label>
-              <div className="relative">
-                <input
-                  id="password"
-                  type={showPassword ? "text" : "password"}
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  placeholder="••••••••"
-                  autoComplete="current-password"
-                  required
-                  className="w-full h-11 px-4 pr-11 rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white placeholder:text-slate-400 focus:border-sky-500 focus:ring-2 focus:ring-sky-500/30 outline-none transition-all"
-                />
+          {/* Divider */}
+          <div className="mx-8 my-6 border-t border-slate-200/70 dark:border-slate-800" />
+
+          {/* Body */}
+          <div className="px-8 pb-10">
+            {!mfaRequired ? (
+              <form onSubmit={handleSubmit} className="space-y-5">
+                {error && (
+                  <div className="p-3 rounded-xl bg-red-50 dark:bg-red-950/30 border border-red-200 dark:border-red-800">
+                    <p className="text-sm text-red-600 dark:text-red-400">{error}</p>
+                  </div>
+                )}
+
+                <div>
+                  <label htmlFor="email" className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1.5">
+                    Email
+                  </label>
+                  <div className="relative">
+                    <Mail className="absolute left-3.5 top-1/2 -translate-y-1/2 size-4 text-slate-400" />
+                    <input
+                      id="email"
+                      type="email"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      placeholder="admin@example.com"
+                      autoComplete="username"
+                      required
+                      className="w-full h-12 pl-10 pr-4 rounded-xl border border-slate-200 dark:border-slate-700 bg-white/70 dark:bg-slate-950/50 text-slate-900 dark:text-white placeholder:text-slate-400 focus:border-sky-500 focus:ring-2 focus:ring-sky-500/30 outline-none transition-all"
+                    />
+                  </div>
+                </div>
+
+                <div>
+                  <label htmlFor="password" className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1.5">
+                    Password
+                  </label>
+                  <div className="relative">
+                    <Lock className="absolute left-3.5 top-1/2 -translate-y-1/2 size-4 text-slate-400" />
+                    <input
+                      id="password"
+                      type={showPassword ? "text" : "password"}
+                      value={password}
+                      onChange={(e) => setPassword(e.target.value)}
+                      placeholder="••••••••"
+                      autoComplete="current-password"
+                      required
+                      className="w-full h-12 pl-10 pr-11 rounded-xl border border-slate-200 dark:border-slate-700 bg-white/70 dark:bg-slate-950/50 text-slate-900 dark:text-white placeholder:text-slate-400 focus:border-sky-500 focus:ring-2 focus:ring-sky-500/30 outline-none transition-all"
+                    />
+                    <button
+                      type="button"
+                      onClick={() => setShowPassword(!showPassword)}
+                      className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 dark:hover:text-slate-300"
+                      tabIndex={-1}
+                      aria-label={showPassword ? "Hide password" : "Show password"}
+                    >
+                      {showPassword ? <EyeOff className="size-4" /> : <Eye className="size-4" />}
+                    </button>
+                  </div>
+                </div>
+
+                <button
+                  type="submit"
+                  disabled={loading}
+                  className="w-full h-12 rounded-xl bg-gradient-to-r from-sky-500 to-cyan-400 hover:from-sky-600 hover:to-cyan-500 text-white text-sm font-semibold shadow-md shadow-sky-500/25 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 transition-all"
+                >
+                  {loading && <Loader2 className="size-4 animate-spin" />}
+                  {loading ? "Signing in..." : "Sign In"}
+                </button>
+              </form>
+            ) : (
+              <form onSubmit={handleMfaSubmit} className="space-y-5">
+                {error && (
+                  <div className="p-3 rounded-xl bg-red-50 dark:bg-red-950/30 border border-red-200 dark:border-red-800">
+                    <p className="text-sm text-red-600 dark:text-red-400">{error}</p>
+                  </div>
+                )}
+
+                <div>
+                  <label htmlFor="mfa-code" className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1.5">
+                    Authenticator code
+                  </label>
+                  <input
+                    id="mfa-code"
+                    ref={codeRef}
+                    type="text"
+                    inputMode="numeric"
+                    autoComplete="one-time-code"
+                    value={code}
+                    onChange={(e) => setCode(e.target.value.replace(/\D/g, "").slice(0, 6))}
+                    placeholder="000000"
+                    required
+                    className="w-full h-12 px-4 text-center text-2xl tracking-[0.5em] font-mono rounded-xl border border-sky-200 dark:border-slate-700 bg-white/70 dark:bg-slate-950/50 text-slate-900 dark:text-white placeholder:text-slate-300 dark:placeholder:text-slate-600 focus:border-sky-500 focus:ring-2 focus:ring-sky-500/30 outline-none transition-all"
+                  />
+                  <p className="mt-2 text-xs text-slate-400 dark:text-slate-500">
+                    Open your authenticator app and enter the current 6-digit code for{" "}
+                    <span className="font-medium text-slate-500 dark:text-slate-400">{BRAND}</span>.
+                  </p>
+                </div>
+
+                <button
+                  type="submit"
+                  disabled={mfaLoading || code.length !== 6}
+                  className="w-full h-12 rounded-xl bg-gradient-to-r from-sky-500 to-cyan-400 hover:from-sky-600 hover:to-cyan-500 text-white text-sm font-semibold shadow-md shadow-sky-500/25 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 transition-all"
+                >
+                  {mfaLoading && <Loader2 className="size-4 animate-spin" />}
+                  {mfaLoading ? "Verifying..." : "Verify & Continue"}
+                </button>
+
                 <button
                   type="button"
-                  onClick={() => setShowPassword(!showPassword)}
-                  className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600"
-                  tabIndex={-1}
+                  onClick={() => {
+                    setMfaRequired(false)
+                    setError("")
+                  }}
+                  className="w-full flex items-center justify-center gap-1 text-xs text-slate-400 hover:text-slate-600 dark:hover:text-slate-300 transition-colors"
                 >
-                  {showPassword ? <EyeOff className="size-4" /> : <Eye className="size-4" />}
+                  <ChevronLeft className="size-3" />
+                  Back to sign in
                 </button>
-              </div>
-            </div>
-
-            <button
-              type="submit"
-              disabled={loading}
-              className="w-full h-11 rounded-lg bg-gradient-to-r from-sky-500 to-cyan-400 hover:from-sky-600 hover:to-cyan-500 text-white text-sm font-semibold shadow-md shadow-sky-500/20 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 transition-all"
-            >
-              {loading && <Loader2 className="size-4 animate-spin" />}
-              {loading ? "Signing in..." : "Sign In"}
-            </button>
-          </form>
-        ) : (
-          <form onSubmit={handleMfaSubmit} className="space-y-5">
-            {error && (
-              <div className="p-3 rounded-lg bg-red-50 dark:bg-red-950/30 border border-red-200 dark:border-red-800">
-                <p className="text-sm text-red-600 dark:text-red-400">{error}</p>
-              </div>
+              </form>
             )}
 
-            <div>
-              <label htmlFor="mfa-code" className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1.5">
-                Authenticator code
-              </label>
-              <input
-                id="mfa-code"
-                ref={codeRef}
-                type="text"
-                inputMode="numeric"
-                autoComplete="one-time-code"
-                value={code}
-                onChange={(e) => setCode(e.target.value.replace(/\D/g, "").slice(0, 6))}
-                placeholder="000000"
-                required
-                className="w-full h-11 px-4 text-center text-2xl tracking-[0.5em] font-mono rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white placeholder:text-slate-300 dark:placeholder:text-slate-600 focus:border-sky-500 focus:ring-2 focus:ring-sky-500/30 outline-none transition-all"
-              />
-            </div>
+            {!mfaRequired && (
+              <div className="mt-8 grid grid-cols-3 gap-2">
+                <div className="rounded-xl bg-slate-50 dark:bg-slate-950/40 border border-slate-100 dark:border-slate-800 px-2 py-3 text-center">
+                  <ShieldCheck className="mx-auto size-4 text-sky-500 mb-1" />
+                  <p className="text-[10px] font-medium text-slate-500 dark:text-slate-400">Password protected</p>
+                </div>
+                <div className="rounded-xl bg-slate-50 dark:bg-slate-950/40 border border-slate-100 dark:border-slate-800 px-2 py-3 text-center">
+                  <KeyRound className="mx-auto size-4 text-emerald-500 mb-1" />
+                  <p className="text-[10px] font-medium text-slate-500 dark:text-slate-400">2FA ready</p>
+                </div>
+                <div className="rounded-xl bg-slate-50 dark:bg-slate-950/40 border border-slate-100 dark:border-slate-800 px-2 py-3 text-center">
+                  <Lock className="mx-auto size-4 text-amber-500 mb-1" />
+                  <p className="text-[10px] font-medium text-slate-500 dark:text-slate-400">Secure access</p>
+                </div>
+              </div>
+            )}
+          </div>
+        </div>
 
-            <button
-              type="submit"
-              disabled={mfaLoading || code.length !== 6}
-              className="w-full h-11 rounded-lg bg-gradient-to-r from-sky-500 to-cyan-400 hover:from-sky-600 hover:to-cyan-500 text-white text-sm font-semibold shadow-md shadow-sky-500/20 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 transition-all"
-            >
-              {mfaLoading && <Loader2 className="size-4 animate-spin" />}
-              {mfaLoading ? "Verifying..." : "Verify & Continue"}
-            </button>
-
-            <button
-              type="button"
-              onClick={() => {
-                setMfaRequired(false)
-                setError("")
-              }}
-              className="w-full flex items-center justify-center gap-1 text-xs text-slate-400 hover:text-slate-600 dark:hover:text-slate-300 transition-colors"
-            >
-              <ChevronLeft className="size-3" />
-              Back to sign in
-            </button>
-          </form>
-        )}
+        <p className="mt-6 text-center text-xs text-slate-400 dark:text-slate-600">
+          Protected access for authorized team members only
+        </p>
       </div>
     </div>
   )
