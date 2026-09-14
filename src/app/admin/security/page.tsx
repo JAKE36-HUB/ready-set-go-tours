@@ -6,7 +6,7 @@ import type { Factor } from "@supabase/supabase-js"
 import { ShieldCheck, ShieldAlert, QrCode, Loader2, KeyRound, Trash2, Copy, Check } from "lucide-react"
 import { toast } from "sonner"
 import { generateAuthenticatorQr } from "@/lib/totp-qr"
-import { cancelPendingFactor } from "@/lib/mfa-helpers"
+import { resetAllFactors } from "@/lib/mfa-helpers"
 
 export default function SecurityPage() {
   const [loading, setLoading] = useState(true)
@@ -60,46 +60,61 @@ export default function SecurityPage() {
     return () => { cancelled = true }
   }, [])
 
-  async function startEnroll() {
-    setEnrolling(true)
+async function enrollFresh(supabase: ReturnType<typeof createBrowserClient>) {
+  // Remove ALL existing factors (verified + pending) so a fresh authenticator can be enrolled.
+  await resetAllFactors(supabase)
+
+  const { data, error } = await supabase.auth.mfa.enroll({
+    factorType: "totp",
+    friendlyName: "Google Authenticator",
+  })
+  if (error) throw new Error(error.message || "Could not start setup")
+
+  const { data: { user } } = await supabase.auth.getUser()
+  setEnrolled(false)
+  setFactor(null)
+  setPendingFactorId(data.id)
+  setSecret(data.totp.secret)
+  setQrCode(await generateAuthenticatorQr(data.totp.secret, user?.email))
+}
+
+async function startEnroll() {
+  setEnrolling(true)
+  try {
+    const supabase = createBrowserClient(
+      process.env.NEXT_PUBLIC_SUPABASE_URL!,
+      process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
+    )
+    await enrollFresh(supabase)
+  } catch (err) {
+    toast.error(
+      err instanceof Error && err.message
+        ? err.message
+        : "Could not start setup — is 2FA enabled in the Supabase dashboard?"
+    )
+} finally {
+      setEnrolling(false)
+    }
+  }
+
+  async function replaceAuth() {
+    if (!confirm("Remove the current authenticator from this account and enroll a new one? You'll need to scan the new QR code.")) return
+    setRemoving(true)
     try {
       const supabase = createBrowserClient(
         process.env.NEXT_PUBLIC_SUPABASE_URL!,
         process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
       )
-      const { data: factors, error: listErr } = await supabase.auth.mfa.listFactors()
-      if (listErr) throw listErr
-
-      const verified = factors?.totp.find((f) => f.status === "verified")
-      if (verified) {
-        await refresh()
-        toast.info("Two-factor authentication is already enabled on this account.")
-        return
-      }
-
-      // An unfinished (pending) factor blocks new enrollment — clear it so a fresh QR can be scanned.
-      await cancelPendingFactor(supabase)
-
-      const { data, error } = await supabase.auth.mfa.enroll({
-        factorType: "totp",
-        friendlyName: "Google Authenticator",
-      })
-      if (error) {
-        toast.error(error.message || "Could not start setup")
-        return
-      }
-      const { data: { user } } = await supabase.auth.getUser()
-      setPendingFactorId(data.id)
-      setSecret(data.totp.secret)
-      setQrCode(await generateAuthenticatorQr(data.totp.secret, user?.email))
+      await enrollFresh(supabase)
+      toast.info("Old authenticator removed — scan the new QR code below.")
     } catch (err) {
       toast.error(
         err instanceof Error && err.message
           ? err.message
-          : "Could not start setup — is 2FA enabled in the Supabase dashboard?"
+          : "Could not reset authenticators"
       )
     } finally {
-      setEnrolling(false)
+      setRemoving(false)
     }
   }
 
@@ -244,13 +259,24 @@ export default function SecurityPage() {
             </div>
           )}
           {!showDisableForm ? (
-            <button
-              onClick={() => setShowDisableForm(true)}
-              className="inline-flex items-center gap-2 h-10 px-4 rounded-lg bg-red-50 dark:bg-red-950/40 border border-red-200 dark:border-red-800 text-red-600 dark:text-red-400 text-sm font-medium hover:bg-red-100 dark:hover:bg-red-950/60 transition-colors"
-            >
-              <Trash2 className="size-4" />
-              Disable 2FA
-            </button>
+            <div className="space-y-2">
+              <button
+                onClick={() => setShowDisableForm(true)}
+                disabled={removing}
+                className="inline-flex items-center gap-2 h-10 px-4 rounded-lg bg-red-50 dark:bg-red-950/40 border border-red-200 dark:border-red-800 text-red-600 dark:text-red-400 text-sm font-medium hover:bg-red-100 dark:hover:bg-red-950/60 disabled:opacity-50 transition-colors"
+              >
+                <Trash2 className="size-4" />
+                Disable 2FA
+              </button>
+              <button
+                onClick={replaceAuth}
+                disabled={removing}
+                className="block inline-flex items-center gap-2 h-10 px-4 rounded-lg border border-slate-200 dark:border-slate-700 text-slate-500 dark:text-slate-400 text-sm font-medium hover:bg-red-100 dark:hover:bg-red-950/40 hover:text-red-500 dark:hover:text-red-400 transition-colors"
+              >
+                {removing ? <Loader2 className="size-4 animate-spin" /> : <KeyRound className="size-4" />}
+                Reset & use a new authenticator
+              </button>
+            </div>
           ) : (
             <form onSubmit={handleDisable} className="space-y-3">
               <p className="text-xs text-red-600/80 dark:text-red-400/80 leading-relaxed">

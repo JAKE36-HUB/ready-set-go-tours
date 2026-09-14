@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation"
 import { createBrowserClient } from "@supabase/ssr"
 import { Loader2, ShieldCheck, KeyRound, QrCode, Copy, Check, Trash2, LogOut } from "lucide-react"
 import { generateAuthenticatorQr } from "@/lib/totp-qr"
-import { cancelPendingFactor } from "@/lib/mfa-helpers"
+import { resetAllFactors } from "@/lib/mfa-helpers"
 
 export default function EnrollMfaPage() {
   const router = useRouter()
@@ -61,8 +61,8 @@ export default function EnrollMfaPage() {
     setError("")
     try {
       const supabase = client()
-      // An unfinished (pending) factor blocks new enrollment — clear it so a fresh QR can be scanned.
-      await cancelPendingFactor(supabase)
+      // Remove ALL existing factors so a fresh authenticator can be enrolled.
+      await resetAllFactors(supabase)
       const { data: { user } } = await supabase.auth.getUser()
       const { data, error: err } = await supabase.auth.mfa.enroll({
         factorType: "totp",
