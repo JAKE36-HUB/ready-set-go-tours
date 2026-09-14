@@ -95,6 +95,18 @@ export async function middleware(request: NextRequest) {
     return NextResponse.redirect(url)
   }
 
+  // If the account has a verified authenticator, require the 6-digit code step
+  // before letting the session into the admin panel.
+  const mfaPages = ["/admin/verify-mfa", "/admin/enroll-mfa", "/admin/denied"]
+  if (path.startsWith("/admin") && user && !mfaPages.includes(barePath)) {
+    const { data: aals } = await supabase.auth.mfa.getAuthenticatorAssuranceLevel()
+    if (aals?.nextLevel === "aal2" && aals.currentLevel !== "aal2") {
+      const url = request.nextUrl.clone()
+      url.pathname = "/admin/verify-mfa"
+      return NextResponse.redirect(url)
+    }
+  }
+
   // Protect admin API routes
   if (path.startsWith("/api/admin") && !user) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 })

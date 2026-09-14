@@ -72,5 +72,12 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: "Invalid email or password." }, { status: 401 })
   }
 
+  // Ask for an authenticator code if the account has 2FA set up.
+  const { data: factors } = await supabase.auth.mfa.listFactors()
+  const verified = factors?.totp.find((f) => f.status === "verified")
+  if (verified) {
+    return NextResponse.json({ ok: true, mfaRequired: true })
+  }
+
   return NextResponse.json({ ok: true })
 }
