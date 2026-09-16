@@ -1,5 +1,5 @@
 const CONVERSION_LABEL =
-  process.env.NEXT_PUBLIC_GTAG_CONVERSION_LABEL || "";
+  process.env.NEXT_PUBLIC_GTAG_CONVERSION_LABEL || "AW-18369134468/UtA5CN6SoeEcEIT_irdE";
 
 export function trackLeadConversion() {
   try {

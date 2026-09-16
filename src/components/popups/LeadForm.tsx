@@ -3,6 +3,7 @@
 import { useState } from "react"
 import { motion } from "framer-motion"
 import type { PopupConfig } from "@/lib/popups/types"
+import { trackLeadConversion } from "@/lib/analytics"
 
 const FIELD_LABELS: Record<string, string> = {
   name: "Full Name",
@@ -72,6 +73,7 @@ export function LeadForm({ popupId, config, variant, popupName, onSuccess }: Pro
       })
       if (!res.ok) throw new Error("Failed")
       setStatus("done")
+      trackLeadConversion()
       onSuccess()
     } catch {
       setStatus("idle")
