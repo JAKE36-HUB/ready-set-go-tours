@@ -13,58 +13,76 @@ function getSessionId(): string {
   return id
 }
 
+interface TrackPayload {
+  session_id: string
+  page: string
+  referrer: string
+  user_agent: string
+  duration: number
+}
+
+function buildPayload(pathname: string, sessionId: string, startTime: number): TrackPayload {
+  return {
+    session_id: sessionId,
+    page: pathname,
+    referrer: document.referrer || "",
+    user_agent: navigator.userAgent,
+    duration: Math.floor((Date.now() - startTime) / 1000),
+  }
+}
+
 export default function VisitorTracker() {
   const pathname = usePathname()
   const startTime = useRef(0)
   const sessionId = useRef("")
-  const isAdmin = useRef(false)
 
   useEffect(() => {
     sessionId.current = getSessionId()
     if (!sessionId.current) return
 
-    isAdmin.current = pathname.startsWith("/admin")
     startTime.current = Date.now()
 
-    const track = async () => {
-      const duration = Math.floor((Date.now() - startTime.current) / 1000)
+    const send = async (payload: TrackPayload, beacon = false) => {
       try {
-        await fetch("/api/track", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            session_id: sessionId.current,
-            page: pathname,
-            referrer: document.referrer || "",
-            user_agent: navigator.userAgent,
-            duration,
-          }),
-        })
+        const body = JSON.stringify(payload)
+        if (beacon) {
+          navigator.sendBeacon("/api/track", body)
+        } else {
+          await fetch("/api/track", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body,
+            keepalive: true,
+          })
+        }
       } catch {}
     }
 
-    track()
+    const track = (beacon = false) =>
+      send(buildPayload(pathname, sessionId.current, startTime.current), beacon)
 
-    const heartbeat = setInterval(track, 30000)
+    // Create the visit row immediately (0s), then capture short sessions too.
+    track(false)
+    const early = setTimeout(() => track(false), 5_000)
+    const heartbeat = setInterval(() => track(false), 15_000)
 
-    const handleUnload = () => {
-      const duration = Math.floor((Date.now() - startTime.current) / 1000)
-      navigator.sendBeacon(
-        "/api/track",
-        JSON.stringify({
-          session_id: sessionId.current,
-          page: pathname,
-          referrer: document.referrer || "",
-          user_agent: navigator.userAgent,
-          duration,
-        })
-      )
+    const flush = () => track(true)
+
+    // pagehide is more reliable than beforeunload (mobile, bfcache, navigation).
+    window.addEventListener("pagehide", flush)
+    window.addEventListener("beforeunload", flush)
+    // When the tab/app is hidden (backgrounded phone tab), finalize the visit.
+    const onVisibility = () => {
+      if (document.visibilityState === "hidden") flush()
     }
-    window.addEventListener("beforeunload", handleUnload)
+    document.addEventListener("visibilitychange", onVisibility)
 
     return () => {
+      clearTimeout(early)
       clearInterval(heartbeat)
-      window.removeEventListener("beforeunload", handleUnload)
+      window.removeEventListener("pagehide", flush)
+      window.removeEventListener("beforeunload", flush)
+      document.removeEventListener("visibilitychange", onVisibility)
     }
   }, [pathname])
 
