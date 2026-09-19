@@ -23,6 +23,7 @@ import {
   X,
 } from "lucide-react"
 import { cn } from "@/lib/utils"
+import { playChime } from "@/lib/sounds"
 
 interface ChatSessionSummary {
   session_id: string
@@ -140,6 +141,15 @@ export default function AdminChat() {
   const renameRef = useRef<HTMLInputElement>(null)
   const scrollRef = useRef<HTMLDivElement>(null)
   const seenUnreadRef = useRef<Map<string, number>>(new Map())
+  const baseTitleRef = useRef("Live Chat")
+  const stickToBottomRef = useRef(true)
+
+  const handleTranscriptScroll = () => {
+    const el = scrollRef.current
+    if (!el) return
+    // Only auto-follow the newest message while the admin is near the bottom.
+    stickToBottomRef.current = el.scrollHeight - el.scrollTop - el.clientHeight < 80
+  }
 
   const selected = sessions.find((s) => s.session_id === selectedId) || null
 
@@ -151,16 +161,22 @@ export default function AdminChat() {
       const data = await res.json()
       if (Array.isArray(data.sessions)) {
         setSessions(data.sessions)
-        for (const s of data.sessions as ChatSessionSummary[]) {
+        const sessions = data.sessions as ChatSessionSummary[]
+        const totalUnread = sessions.reduce((acc, s) => acc + s.unread, 0)
+        document.title = totalUnread > 0 ? `(${totalUnread}) ${baseTitleRef.current}` : baseTitleRef.current
+        for (const s of sessions) {
           const prev = seenUnreadRef.current.get(s.session_id) || 0
-          if (s.unread > 0 && s.session_id !== selectedId && s.unread > prev) {
+          const isNewUnread = s.unread > 0 && s.unread > prev
+          if (isNewUnread) {
             try {
-              if ("Notification" in window && Notification.permission === "granted" && document.visibilityState === "visible") {
+              if ("Notification" in window && Notification.permission === "granted") {
                 new Notification(`New chat from ${s.visitor_name || "a website visitor"}`, {
                   body: (s.last_preview?.content || "").slice(0, 90),
+                  tag: `chat-${s.session_id}`,
                 })
               }
             } catch {}
+            playChime()
           }
           seenUnreadRef.current.set(s.session_id, s.unread)
         }
@@ -169,7 +185,7 @@ export default function AdminChat() {
     } finally {
       if (!silent) setLoadingSessions(false)
     }
-  }, [selectedId])
+  }, [])
 
   const loadMessages = useCallback(async (sessionId: string) => {
     setLoadingMessages(true)
@@ -188,10 +204,14 @@ export default function AdminChat() {
   }, [])
 
   useEffect(() => {
+    baseTitleRef.current = document.title
     requestNotificationPermission()
     loadSessions()
     const s = setInterval(() => loadSessions(true), 8000)
-    return () => clearInterval(s)
+    return () => {
+      clearInterval(s)
+      document.title = baseTitleRef.current
+    }
   }, [loadSessions])
 
   useEffect(() => {
@@ -205,10 +225,13 @@ export default function AdminChat() {
   }, [selectedId, loadMessages])
 
   useEffect(() => {
-    scrollRef.current?.scrollTo({ top: scrollRef.current.scrollHeight, behavior: "smooth" })
+    if (stickToBottomRef.current) {
+      scrollRef.current?.scrollTo({ top: scrollRef.current.scrollHeight, behavior: "smooth" })
+    }
   }, [messages, selectedId])
 
   const handleSelect = (id: string) => {
+    stickToBottomRef.current = true
     setSelectedId(id)
     setCopied(false)
   }
@@ -723,7 +746,7 @@ export default function AdminChat() {
               </div>
 
               {/* Transcript */}
-              <div ref={scrollRef} className="flex-1 overflow-y-auto px-4 py-4 [scrollbar-width:thin] bg-gradient-to-b from-slate-50/80 via-white to-white dark:from-slate-950/50 dark:via-slate-900 dark:to-slate-950">
+              <div ref={scrollRef} onScroll={handleTranscriptScroll} className="flex-1 overflow-y-auto px-4 py-4 [scrollbar-width:thin] bg-gradient-to-b from-slate-50/80 via-white to-white dark:from-slate-950/50 dark:via-slate-900 dark:to-slate-950">
                 {loadingMessages && messages.length === 0 ? (
                   <div className="flex items-center justify-center py-12 text-slate-400">
                     <Loader2 className="w-5 h-5 animate-spin" />

@@ -68,6 +68,25 @@ export default function AdminShell({ children }: { children: React.ReactNode }) 
   const router = useRouter()
   const { user, isLoading } = useSupabase()
   const [sidebarOpen, setSidebarOpen] = useState(false)
+  const [chatUnread, setChatUnread] = useState(0)
+
+  useEffect(() => {
+    let active = true
+    const poll = async () => {
+      try {
+        const res = await fetch("/api/admin/chat/unread", { cache: "no-store" })
+        if (!res.ok) return
+        const data = await res.json()
+        if (active && typeof data.total === "number") setChatUnread(data.total)
+      } catch {}
+    }
+    poll()
+    const t = setInterval(poll, 20000)
+    return () => {
+      active = false
+      clearInterval(t)
+    }
+  }, [])
 
   async function handleSignOut() {
     const supabase = createBrowserClient(
@@ -171,6 +190,11 @@ export default function AdminShell({ children }: { children: React.ReactNode }) 
               >
                 <Icon className="w-4 h-4 shrink-0" />
                 <span>{item.label}</span>
+                {item.href === "/admin/chat" && chatUnread > 0 && !isActive && (
+                  <span className="ml-auto inline-flex items-center justify-center min-w-[18px] h-[18px] px-1 rounded-full bg-emerald-500 text-white text-[10px] font-bold">
+                    {chatUnread > 9 ? "9+" : chatUnread}
+                  </span>
+                )}
                 {isActive && <ChevronRight className="w-3.5 h-3.5 ml-auto shrink-0 text-sky-400" />}
               </Link>
             )

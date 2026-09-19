@@ -12,6 +12,7 @@ import {
   touchChatSession,
   upsertChatSession,
 } from "@/lib/chat"
+import { notifyChatEmail } from "@/lib/email"
 
 const SYSTEM_PROMPT = `You are a helpful travel assistant for Ready Set Go Tours & Travel, a premier luxury tour operator based in Nairobi, Kenya. You specialize in bespoke safaris and travel experiences across Kenya and Tanzania.
 
@@ -77,6 +78,7 @@ export async function POST(request: Request) {
     const firstNewId = Number(userMsg?.id) || 0
     await touchChatSession(sb, sessionId)
     await notifyOwner(sb, sessionId, visitorName, lastUserContent)
+    await notifyChatEmail({ name: visitorName, email: visitorEmail, message: lastUserContent, page: cleanChatContent(page) })
     await ensureChatLead(sb, { session_id: sessionId, name: visitorName, email: visitorEmail, page: cleanChatContent(page), message: lastUserContent })
 
     const session = await getChatSession(sb, sessionId)

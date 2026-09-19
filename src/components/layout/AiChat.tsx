@@ -3,6 +3,7 @@
 import { useState, useRef, useEffect, useCallback } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { MessageCircle, X, Send, Loader2, HeadphonesIcon, Phone } from "lucide-react"
+import { trackLeadConversion } from "@/lib/analytics"
 
 interface ChatMessage {
   id: number
@@ -72,9 +73,12 @@ export function AiChat() {
   const [teaser, setTeaser] = useState(false)
   const identityPromptedRef = useRef(false)
   const messagesEndRef = useRef<HTMLDivElement>(null)
+  const chatScrollRef = useRef<HTMLDivElement>(null)
+  const stickToBottomRef = useRef(true)
   const inputRef = useRef<HTMLInputElement>(null)
   const lastIdRef = useRef(0)
   const sessionIdRef = useRef<string>("")
+  const conversionTrackedRef = useRef(false)
 
   const messagesForApi = useCallback((): { role: string; content: string }[] => {
     return messages.map((m) => ({ role: m.role, content: m.content }))
@@ -121,8 +125,17 @@ export function AiChat() {
   }, [open, hydrated, messages.length, syncMessages])
 
   useEffect(() => {
-    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" })
+    if (stickToBottomRef.current) {
+      messagesEndRef.current?.scrollIntoView({ behavior: "smooth" })
+    }
   }, [messages, loading, needIdentity])
+
+  const handleChatScroll = () => {
+    const el = chatScrollRef.current
+    if (!el) return
+    // Only auto-follow the newest message while the user is near the bottom.
+    stickToBottomRef.current = el.scrollHeight - el.scrollTop - el.clientHeight < 80
+  }
 
   useEffect(() => {
     if (open) inputRef.current?.focus()
@@ -173,6 +186,10 @@ export function AiChat() {
       if (!res.ok) {
         setMessages((prev) => [...prev, { id: userLocalId + 1, role: "assistant", content: "Sorry, I'm having trouble connecting. Please try again or contact us directly at +254 797 867 411." }])
         return
+      }
+      if (!conversionTrackedRef.current) {
+        conversionTrackedRef.current = true
+        trackLeadConversion()
       }
       // Server owns the transcript now — drop the optimistic bubble and pull the persisted rows.
       setMessages((prev) => prev.filter((m) => m.id !== userLocalId))
@@ -388,7 +405,7 @@ export function AiChat() {
             )}
 
             {/* Messages */}
-            <div className="flex-1 overflow-y-auto px-4 py-4 bg-gradient-to-b from-sky-50/70 via-white to-white dark:from-slate-900 dark:via-slate-900 dark:to-slate-950 [scrollbar-width:thin] overscroll-contain">
+            <div ref={chatScrollRef} onScroll={handleChatScroll} className="flex-1 overflow-y-auto px-4 py-4 bg-gradient-to-b from-sky-50/70 via-white to-white dark:from-slate-900 dark:via-slate-900 dark:to-slate-950 [scrollbar-width:thin] overscroll-contain">
               {messages.length <= 1 && !needIdentity && (
                 <div className="flex flex-wrap gap-1.5 mb-3">
                   {QUICK_REPLIES.map((q) => (

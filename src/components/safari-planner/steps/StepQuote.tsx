@@ -9,6 +9,7 @@ import {
 import { COMPANY } from "@/lib/constants"
 import PdfItinerary from "@/components/PdfItinerary"
 import { getClientSessionId } from "@/lib/session"
+import { trackLeadConversion } from "@/lib/analytics"
 import type { PlannerData, UpdatePlannerData } from "../types"
 import { getMatchingPackage } from "../utils"
 
@@ -127,6 +128,7 @@ export function StepQuote({
         throw new Error("Submission failed")
       }
       setSubmitted(true)
+      trackLeadConversion()
     } catch {
       setError("Failed to send. Please try again or contact us directly.")
     } finally {
