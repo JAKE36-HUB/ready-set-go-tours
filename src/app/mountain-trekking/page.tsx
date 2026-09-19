@@ -5,8 +5,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { BookingModal } from "@/components/layout/BookingModal";
 import AnimatedSection from "@/components/AnimatedSection";
+import { openBookingModal } from "@/lib/booking-store";
 import { TOUR_PACKAGES, USD_TO_KES } from "@/lib/constants";
 import { Clock, Hotel, Check, ArrowRight, Mountain, Compass, ArrowUpDown } from "lucide-react";
 
@@ -19,7 +19,6 @@ const SORT_OPTIONS = [
 
 export default function MountainTrekkingPage() {
   const [sortBy, setSortBy] = useState<string>("price-asc");
-  const [bookingTour, setBookingTour] = useState<string | null>(null);
 
   const packages = [...TOUR_PACKAGES.filter((p) => p.type === "mountain")].sort((a, b) => {
     switch (sortBy) {
@@ -165,7 +164,7 @@ export default function MountainTrekkingPage() {
                           View Safari <ArrowRight className="size-4" />
                         </Link>
                         <Button
-                          onClick={() => setBookingTour(pkg.name)}
+                          onClick={() => openBookingModal(pkg.name)}
                           className="flex-1 h-11 text-sm font-semibold bg-gradient-to-r from-violet-500 to-slate-600 hover:from-violet-600 hover:to-slate-700 text-white border-0 shadow-md hover:shadow-lg transition-all duration-300"
                         >
                           Get a Free Quote
@@ -179,11 +178,6 @@ export default function MountainTrekkingPage() {
           )}
         </div>
       </section>
-
-      <BookingModal
-        open={bookingTour !== null}
-        onOpenChange={(o) => { if (!o) setBookingTour(null); }}
-      />
     </main>
   );
 }

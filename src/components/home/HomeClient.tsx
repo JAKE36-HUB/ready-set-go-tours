@@ -1,25 +1,18 @@
 "use client"
 
-import { useState } from "react"
-
 import { TourPackages } from "./TourPackages"
 import { MoreServices } from "./MoreServices"
-import { BookingModal } from "@/components/layout/BookingModal"
+import { openBookingModal } from "@/lib/booking-store"
 
 export function HomeClient() {
-  const [bookingOpen, setBookingOpen] = useState(false)
-  const [bookingPackage, setBookingPackage] = useState<string | undefined>()
-
   const handleReserve = (name: string) => {
-    setBookingPackage(name)
-    setBookingOpen(true)
+    openBookingModal(name)
   }
 
   return (
     <>
       <TourPackages onReserve={handleReserve} />
       <MoreServices onReserve={handleReserve} />
-      <BookingModal open={bookingOpen} onOpenChange={setBookingOpen} initialPackage={bookingPackage} />
     </>
   )
 }

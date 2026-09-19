@@ -5,8 +5,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { BookingModal } from "@/components/layout/BookingModal";
 import AnimatedSection from "@/components/AnimatedSection";
+import { openBookingModal } from "@/lib/booking-store";
 import { PACKAGE_FILTERS } from "@/lib/constants";
 import {
   Clock,
@@ -66,7 +66,6 @@ export default function PackagesBrowser({
   const [sortBy, setSortBy] = useState<string>("price-asc");
   const [compareIds, setCompareIds] = useState<number[]>([]);
   const [showCompare, setShowCompare] = useState(false);
-  const [bookingTour, setBookingTour] = useState<string | null>(null);
 
   const filtered = useMemo(() => {
     let pkgs = [...packages];
@@ -303,7 +302,7 @@ export default function PackagesBrowser({
                         View Safari
                       </Link>
                       <Button
-                        onClick={() => setBookingTour(pkg.name)}
+                        onClick={() => openBookingModal(pkg.name)}
                         variant="default"
                         size="sm"
                         className="flex-1"
@@ -380,7 +379,7 @@ export default function PackagesBrowser({
                           size="sm"
                           onClick={() => {
                             setShowCompare(false);
-                            setBookingTour(p.name);
+                            openBookingModal(p.name);
                           }}
                           className="bg-sky-500 hover:bg-sky-600 text-white"
                         >
@@ -395,11 +394,6 @@ export default function PackagesBrowser({
           </div>
         </div>
       )}
-
-      <BookingModal
-        open={bookingTour !== null}
-        onOpenChange={(o) => { if (!o) setBookingTour(null); }}
-      />
     </>
   );
 }

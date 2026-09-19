@@ -1,11 +1,10 @@
 ﻿"use client";
 
-import { useState } from "react";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { BookingModal } from "@/components/layout/BookingModal";
 import AnimatedSection from "@/components/AnimatedSection";
+import { openBookingModal } from "@/lib/booking-store";
 import { BEACH_DESTINATIONS, USD_TO_KES } from "@/lib/constants";
 import { MapPin, Star, Waves, Palmtree, Anchor, Compass, Clock, Hotel } from "lucide-react";
 
@@ -19,8 +18,6 @@ const RESORTS = [
 ];
 
 export default function BeachHolidaysPage() {
-  const [bookingTour, setBookingTour] = useState<string | null>(null);
-
   return (
     <main className="min-h-screen">
       {/* Hero */}
@@ -152,7 +149,7 @@ export default function BeachHolidaysPage() {
                     </div>
 
                     <Button
-                      onClick={() => setBookingTour(beach.name)}
+                      onClick={() => openBookingModal(beach.name)}
                       className="w-full bg-gradient-to-r from-cyan-500 to-sky-600 hover:from-cyan-400 hover:to-sky-500 text-white"
                     >
                       <Waves className="size-4 mr-2" />
@@ -224,7 +221,7 @@ export default function BeachHolidaysPage() {
               experience. We handle all transfers and logistics.
             </p>
             <Button
-              onClick={() => setBookingTour("Beach Holiday Package")}
+              onClick={() => openBookingModal("Beach Holiday Package")}
               className="bg-gradient-to-r from-cyan-400 to-sky-500 hover:from-cyan-300 hover:to-sky-400 text-white px-8 h-11 shadow-lg shadow-cyan-500/25"
             >
               Get a Free Quote
@@ -232,11 +229,6 @@ export default function BeachHolidaysPage() {
           </AnimatedSection>
         </div>
       </section>
-
-      <BookingModal
-        open={bookingTour !== null}
-        onOpenChange={(o) => { if (!o) setBookingTour(null); }}
-      />
     </main>
   );
 }

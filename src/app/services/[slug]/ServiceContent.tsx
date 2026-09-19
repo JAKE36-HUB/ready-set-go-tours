@@ -1,6 +1,5 @@
 "use client"
 
-import { useState } from "react"
 import Image from "next/image"
 import Link from "next/link"
 import { motion } from "framer-motion"
@@ -10,7 +9,7 @@ import {
 import type { Service } from "@/lib/constants"
 import { COMPANY, TESTIMONIALS } from "@/lib/constants"
 import AnimatedSection from "@/components/AnimatedSection"
-import { BookingModal } from "@/components/layout/BookingModal"
+import { openBookingModal } from "@/lib/booking-store"
 import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from "@/components/ui/accordion"
 
 const iconMap: Record<string, typeof Hotel> = {
@@ -112,7 +111,6 @@ export default function ServiceContent({ service }: Props) {
   const steps = HOW_IT_WORKS[service.slug] || []
   const trustStats = TRUST_STATS[service.slug] || []
   const serviceTestimonials = TESTIMONIALS.filter((t) => t.rating >= 4.9).slice(0, 2)
-  const [bookingOpen, setBookingOpen] = useState(false)
 
   return (
     <main className="min-h-screen">
@@ -384,7 +382,7 @@ export default function ServiceContent({ service }: Props) {
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <button
                 type="button"
-                onClick={() => setBookingOpen(true)}
+                onClick={() => openBookingModal(service.title)}
                 className="inline-flex items-center justify-center gap-2 h-12 px-8 rounded-xl bg-gradient-to-r from-emerald-500 to-emerald-600 hover:from-emerald-400 hover:to-emerald-500 text-white font-semibold shadow-lg shadow-emerald-500/25 transition-all"
               >
                 Get a Free Quote
@@ -402,12 +400,6 @@ export default function ServiceContent({ service }: Props) {
           </AnimatedSection>
         </div>
       </section>
-
-      <BookingModal
-        open={bookingOpen}
-        onOpenChange={setBookingOpen}
-        initialPackage={service.title}
-      />
     </main>
   )
 }
