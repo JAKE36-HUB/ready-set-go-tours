@@ -5,7 +5,6 @@ import {
   cleanChatContent,
   detectEmail,
   ensureChatLead,
-  getChatSession,
   insertChatMessage,
   notifyOwner,
   setAiActive,
@@ -13,35 +12,6 @@ import {
   upsertChatSession,
 } from "@/lib/chat"
 import { notifyChatEmail } from "@/lib/email"
-
-const SYSTEM_PROMPT = `You are a helpful travel assistant for Ready Set Go Tours & Travel, a premier luxury tour operator based in Nairobi, Kenya. You specialize in bespoke safaris and travel experiences across Kenya and Tanzania.
-
-COMPANY INFO:
-- Name: Ready Set Go Tours & Travel
-- Phone: +254 797 867 411
-- Email: readysetgotoursandtravel43@gmail.com
-- Location: Nairobi, Kenya
-- Hours: Mon-Sat 8:00 AM - 6:00 PM (EAT)
-
-SERVICES OFFERED:
-- Safari tour packages (group and private)
-- Honeymoon packages
-- Beach holidays (Diani, Zanzibar)
-- Mountain trekking (Kilimanjaro, Mount Kenya)
-- Hotel bookings at 200+ properties
-- Air ticketing (international, domestic, bush flights)
-- Massage & wellness services
-- Custom itinerary planning
-
-DESTINATIONS:
-- Kenya: Masai Mara, Amboseli, Samburu, Lake Nakuru, Tsavo, Laikipia, Nairobi, Mount Kenya
-- Tanzania: Serengeti, Ngorongoro Crater, Kilimanjaro, Tarangire, Lake Manyara, Selous, Zanzibar
-
-TRAVEL STYLES: Group safaris, Luxury safaris, Private guided tours, Beach holidays, Honeymoons, Family safaris, Photography safaris, Cultural experiences, Mountain trekking
-
-Keep responses friendly, informative, and concise. If asked about pricing, mention rates start from $650 per person for group safaris and vary based on package. For bookings or custom quotes, encourage contacting via phone or email. Do not make up specific pricing — direct users to contact the team for current rates and availability.
-
-CONTACT CAPTURE: If the visitor seems interested in a quote, itinerary, or booking, politely ask for their name and email (and optionally phone/WhatsApp) just once, naturally — e.g. "If you'd like, share your name and email and our team can follow up with options." Never pressure or demand details, and don't ask more than twice in a conversation.`
 
 export const dynamic = "force-dynamic"
 
@@ -81,61 +51,10 @@ export async function POST(request: Request) {
     await notifyChatEmail({ name: visitorName, email: visitorEmail, message: lastUserContent, page: cleanChatContent(page) })
     await ensureChatLead(sb, { session_id: sessionId, name: visitorName, email: visitorEmail, page: cleanChatContent(page), message: lastUserContent })
 
-    const session = await getChatSession(sb, sessionId)
-    const aiActive = session?.ai_active !== false
+    // AI auto-replies are disabled — staff responds manually.
+    await setAiActive(sb, sessionId, false)
 
-    if (!aiActive) {
-      return NextResponse.json({ content: null, takenOver: true, first_new_id: firstNewId })
-    }
-
-    const apiKey = process.env.OPENROUTER_API_KEY
-    if (!apiKey) {
-      await setAiActive(sb, sessionId, false)
-      return NextResponse.json({ content: null, takenOver: true, first_new_id: firstNewId })
-    }
-
-    const sanitizedMessages = messages.slice(-10).map((m: { role?: string; content?: string }) => ({
-      role: m.role === "user" ? "user" : "assistant",
-      content: cleanChatContent(m.content),
-    }))
-
-    let reply: string | null = null
-    try {
-      const response = await fetch("https://openrouter.ai/api/v1/chat/completions", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "Authorization": `Bearer ${apiKey}`,
-          "HTTP-Referer": "https://readysetgosafaris.com",
-          "X-Title": "Ready Set Go Tours & Travel",
-        },
-        body: JSON.stringify({
-          model: "openai/gpt-4o-mini",
-          messages: [
-            { role: "system", content: SYSTEM_PROMPT },
-            ...sanitizedMessages,
-          ],
-          max_tokens: 600,
-          temperature: 0.7,
-        }),
-      })
-      if (response.ok) {
-        const data = await response.json()
-        reply = data?.choices?.[0]?.message?.content ?? null
-      }
-    } catch {
-      reply = null
-    }
-
-    if (!reply) {
-      await setAiActive(sb, sessionId, false)
-      return NextResponse.json({ content: null, takenOver: true, first_new_id: firstNewId })
-    }
-
-    const assistantMsg = await insertChatMessage(sb, sessionId, "assistant", reply)
-    await touchChatSession(sb, sessionId)
-
-    return NextResponse.json({ content: reply, first_new_id: firstNewId, last_id: Number(assistantMsg?.id) || 0 })
+    return NextResponse.json({ content: null, takenOver: true, first_new_id: firstNewId })
   } catch {
     return serverError()
   }

@@ -15,7 +15,7 @@ interface ChatMessage {
 const INITIAL_MESSAGE: ChatMessage = {
   id: 0,
   role: "assistant",
-  content: "Welcome to Ready Set Go Tours & Travel! We can help you plan a safari, beach holiday, or honeymoon across Kenya and Tanzania. What would you like to know?",
+  content: "Welcome to Ready Set Go Tours & Travel! A member of our team will be with you shortly.",
   created_at: "",
 }
 
