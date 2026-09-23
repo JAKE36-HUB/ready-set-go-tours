@@ -37,7 +37,7 @@ import {
   DialogDescription,
 } from "@/components/ui/dialog"
 import { bookingFormSchema, type BookingFormData } from "@/lib/schemas"
-import { trackLeadConversion } from "@/lib/analytics"
+import { trackConversion } from "@/lib/conversions"
 import { getClientSessionId } from "@/lib/session"
 import { DESTINATIONS, TOUR_PACKAGES } from "@/lib/constants"
 
@@ -174,7 +174,7 @@ export function BookingModal({ open, onOpenChange, initialPackage }: BookingModa
         throw new Error("Submission failed")
       }
       setStatus("success")
-      trackLeadConversion()
+      trackConversion({ type: "booking", label: data.package || "Booking enquiry", details: data.destination || "" })
     } catch (err: unknown) {
       setStatus("error")
       console.error("EmailJS error:", err)

@@ -28,6 +28,7 @@ import {
   KanbanSquare,
   ShieldCheck,
   MessagesSquare,
+  Target,
 } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query"
@@ -48,6 +49,7 @@ const NAV_ITEMS = [
   { href: "/admin/gallery", label: "Gallery", icon: Images },
   { href: "/admin/blog", label: "Blog Posts", icon: FileText },
   { href: "/admin/visitors", label: "Visitors", icon: Activity },
+  { href: "/admin/conversions", label: "Conversions", icon: Target },
   { href: "/admin/popups", label: "Popups", icon: Megaphone },
   { href: "/admin/popups/analytics", label: "Popup Analytics", icon: BarChart3 },
   { href: "/admin/popups/leads", label: "Popup Leads", icon: Users },

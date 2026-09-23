@@ -3,7 +3,7 @@
 import { useState, useRef, useEffect, useCallback } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { MessageCircle, X, Send, Loader2, HeadphonesIcon, Phone } from "lucide-react"
-import { trackLeadConversion } from "@/lib/analytics"
+import { trackConversion } from "@/lib/conversions"
 
 interface ChatMessage {
   id: number
@@ -189,7 +189,7 @@ export function AiChat() {
       }
       if (!conversionTrackedRef.current) {
         conversionTrackedRef.current = true
-        trackLeadConversion()
+        trackConversion({ type: "chat", label: "Live chat inquiry", details: text.slice(0, 200) })
       }
       // Server owns the transcript now — drop the optimistic bubble and pull the persisted rows.
       setMessages((prev) => prev.filter((m) => m.id !== userLocalId))

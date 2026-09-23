@@ -2,7 +2,7 @@
 
 import { MessageCircle } from "lucide-react"
 import { COMPANY } from "@/lib/constants"
-import { trackLeadConversion } from "@/lib/analytics"
+import { trackConversion } from "@/lib/conversions"
 
 const TRACKED_KEY = "rsgt_wa_clicked"
 
@@ -13,7 +13,7 @@ export function WhatsAppButton() {
     try {
       if (!localStorage.getItem(TRACKED_KEY)) {
         localStorage.setItem(TRACKED_KEY, "1")
-        trackLeadConversion()
+        trackConversion({ type: "whatsapp", label: "WhatsApp chat request" })
         fetch("/api/leads", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -25,7 +25,7 @@ export function WhatsAppButton() {
         }).catch(() => {})
       }
     } catch {
-      trackLeadConversion()
+      trackConversion({ type: "whatsapp", label: "WhatsApp chat request" })
     }
   }
 

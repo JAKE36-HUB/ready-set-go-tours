@@ -12,7 +12,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import AnimatedSection from "@/components/AnimatedSection";
 import { contactFormSchema, type ContactFormData } from "@/lib/schemas";
-import { trackLeadConversion } from "@/lib/analytics";
+import { trackConversion } from "@/lib/conversions";
 import { getClientSessionId } from "@/lib/session";
 import { COMPANY, SITE_STATS } from "@/lib/constants";
 import {
@@ -179,7 +179,7 @@ export default function ContactPage() {
 
       setStatus("success");
       reset();
-      trackLeadConversion();
+      trackConversion({ type: "contact", label: "Contact form", details: data.destination || data.package || "" });
     } catch (err: unknown) {
       setStatus("error");
       console.error("EmailJS error:", err);
