@@ -10,7 +10,7 @@ export async function POST(req: NextRequest) {
     }
 
     const body = await req.json()
-    const { session_id, page, referrer, user_agent, duration } = body
+    const { session_id, page, referrer, user_agent, duration, is_google_ads, gclid } = body
 
     if (!session_id || !page) {
       return badRequest("Missing required fields")
@@ -21,6 +21,8 @@ export async function POST(req: NextRequest) {
     const cleanReferrer = sanitizeString(referrer, 500)
     const cleanUserAgent = sanitizeString(user_agent, 500)
     const cleanDuration = typeof duration === "number" ? Math.min(duration, 86400) : 0
+    const cleanGoogleAds = is_google_ads === true
+    const cleanGclid = sanitizeString(gclid, 200)
 
     const country = req.headers.get("x-vercel-ip-country") || ""
     const city = req.headers.get("x-vercel-ip-city") || ""
@@ -53,6 +55,8 @@ export async function POST(req: NextRequest) {
           ip,
           country,
           city,
+          is_google_ads: cleanGoogleAds,
+          gclid: cleanGclid,
           entered_at: new Date().toISOString(),
           last_active_at: new Date().toISOString(),
           duration_seconds: cleanDuration,

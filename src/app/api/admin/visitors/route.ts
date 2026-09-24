@@ -16,7 +16,7 @@ export async function GET(request: NextRequest) {
 
   const { data: all, error } = await sb
     .from("visitors")
-    .select("id, session_id, page, referrer, user_agent, ip, country, city, entered_at, last_active_at, duration_seconds")
+    .select("id, session_id, page, referrer, user_agent, ip, country, city, is_google_ads, gclid, entered_at, last_active_at, duration_seconds")
     .order(sortField, { ascending: sortDir === "asc" })
     .limit(Math.min(limit, 500))
 
@@ -30,10 +30,17 @@ export async function GET(request: NextRequest) {
     entered_at: string
     duration_seconds: number | null
     page: string
+    is_google_ads?: boolean
   }
 
   const todayRecords = (all || []).filter((v: VisitorRow) => new Date(v.entered_at) >= today)
   const todaySessions = new Set(todayRecords.map((v: VisitorRow) => v.session_id))
+  const todayGoogleAdsSessions = new Set(
+    todayRecords.filter((v: VisitorRow) => v.is_google_ads).map((v: VisitorRow) => v.session_id)
+  )
+  const googleAdsSessions = new Set(
+    (all || []).filter((v: VisitorRow) => v.is_google_ads).map((v: VisitorRow) => v.session_id)
+  )
   const totalDuration = (all || []).reduce((sum: number, v: VisitorRow) => sum + (v.duration_seconds || 0), 0)
   const totalSessions = new Set((all || []).map((v: VisitorRow) => v.session_id))
 
@@ -51,6 +58,8 @@ export async function GET(request: NextRequest) {
     stats: {
       todayVisitors: todaySessions.size,
       todayViews: todayRecords.length,
+      todayGoogleAds: todayGoogleAdsSessions.size,
+      totalGoogleAds: googleAdsSessions.size,
       avgDuration: totalSessions.size > 0 ? Math.round(totalDuration / totalSessions.size) : 0,
       totalVisitors: totalSessions.size,
       topPages,
