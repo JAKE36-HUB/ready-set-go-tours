@@ -36,6 +36,15 @@ function formatDuration(seconds: number) {
   return `${min}m ${sec}s`
 }
 
+function referrerLabel(referrer: string) {
+  if (!referrer) return "Direct"
+  try {
+    return new URL(referrer).hostname
+  } catch {
+    return referrer
+  }
+}
+
 function timeAgo(date: string) {
   const sec = Math.floor((Date.now() - new Date(date).getTime()) / 1000)
   if (sec < 60) return "just now"
@@ -197,7 +206,7 @@ export default function AdminVisitors() {
                   <tr className="border-b border-slate-100 dark:border-slate-800">
                     <th className="text-left font-medium text-slate-500 pb-2 pr-2">Page</th>
                     <th className="text-left font-medium text-slate-500 pb-2 pr-2">IP / Location</th>
-                    <th className="text-left font-medium text-slate-500 pb-2 pr-2 hidden md:table-cell">Referrer</th>
+                    <th className="text-left font-medium text-slate-500 pb-2 pr-2">Referrer</th>
                     <th className="text-right font-medium text-slate-500 pb-2 pr-2 cursor-pointer select-none" onClick={() => toggleSort("duration_seconds")}>
                       <span className="flex items-center gap-1 justify-end"><Clock className="w-3 h-3" />Duration <ArrowUpDown className="w-2.5 h-2.5" /></span>
                     </th>
@@ -222,8 +231,8 @@ export default function AdminVisitors() {
                             )}
                           </div>
                         </td>
-                        <td className="py-2.5 pr-2 hidden md:table-cell">
-                          <span className="text-slate-400 truncate block max-w-[150px]">{v.referrer ? new URL(v.referrer).hostname : "—"}</span>
+                        <td className="py-2.5 pr-2">
+                          <span className="text-slate-400 truncate block max-w-[160px]">{referrerLabel(v.referrer)}</span>
                         </td>
                         <td className="py-2.5 pr-2 text-right">
                           <span className="text-slate-600 dark:text-slate-400 tabular-nums">{formatDuration(v.duration_seconds)}</span>
