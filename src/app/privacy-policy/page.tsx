@@ -34,8 +34,8 @@ export default function PrivacyPolicyPage() {
       <main className="min-h-screen pt-28 pb-20 px-6">
       <div className="max-w-3xl mx-auto">
         <div className="flex items-center gap-3 mb-8">
-          <div className="w-10 h-10 rounded-xl bg-burgundy-50 dark:bg-burgundy-900/30 flex items-center justify-center">
-            <Shield className="w-5 h-5 text-burgundy-500" />
+          <div className="w-10 h-10 rounded-xl bg-sky-50 dark:bg-sky-900/30 flex items-center justify-center">
+            <Shield className="w-5 h-5 text-sky-500" />
           </div>
           <h1 className="text-3xl font-bold text-foreground">Privacy Policy</h1>
         </div>

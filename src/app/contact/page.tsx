@@ -22,12 +22,12 @@ import {
 import emailjs from "@emailjs/browser";
 
 const CONTACT_INFO = [
-  { icon: MapPin, label: "Visit Us", value: COMPANY.address, desc: "Our Nairobi headquarters", color: "text-burgundy-500", bg: "bg-burgundy-500/10", gradient: "from-burgundy-500/20 to-burgundy-600/10" },
-  { icon: Phone, label: "Call Us", value: COMPANY.phone, desc: "Mon–Sat 8AM–6PM EAT", color: "text-burgundy-500", bg: "bg-burgundy-500/10", gradient: "from-burgundy-500/20 to-burgundy-600/10" },
-  { icon: Mail, label: "Email Us", value: COMPANY.email, desc: "We reply within 24hrs", color: "text-burgundy-500", bg: "bg-burgundy-500/10", gradient: "from-burgundy-500/20 to-burgundy-600/10" },
-  { icon: Mail, label: "Bookings", value: COMPANY.bookingsEmail, desc: "For safari & travel bookings", color: "text-burgundy-500", bg: "bg-burgundy-500/10", gradient: "from-burgundy-500/20 to-rose-600/10" },
-  { icon: MessageCircle, label: "WhatsApp", value: COMPANY.whatsapp, desc: "Fastest response", color: "text-burgundy-500", bg: "bg-burgundy-500/10", gradient: "from-burgundy-500/20 to-burgundy-600/10" },
-  { icon: Clock, label: "Office Hours", value: COMPANY.hours, desc: "East Africa Time (EAT)", color: "text-burgundy-500", bg: "bg-burgundy-500/10", gradient: "from-burgundy-500/20 to-burgundy-600/10" },
+  { icon: MapPin, label: "Visit Us", value: COMPANY.address, desc: "Our Nairobi headquarters", color: "text-sky-500", bg: "bg-sky-500/10", gradient: "from-sky-500/20 to-blue-600/10" },
+  { icon: Phone, label: "Call Us", value: COMPANY.phone, desc: "Mon–Sat 8AM–6PM EAT", color: "text-emerald-500", bg: "bg-emerald-500/10", gradient: "from-emerald-500/20 to-teal-600/10" },
+  { icon: Mail, label: "Email Us", value: COMPANY.email, desc: "We reply within 24hrs", color: "text-amber-500", bg: "bg-amber-500/10", gradient: "from-amber-500/20 to-orange-600/10" },
+  { icon: Mail, label: "Bookings", value: COMPANY.bookingsEmail, desc: "For safari & travel bookings", color: "text-orange-500", bg: "bg-orange-500/10", gradient: "from-orange-500/20 to-rose-600/10" },
+  { icon: MessageCircle, label: "WhatsApp", value: COMPANY.whatsapp, desc: "Fastest response", color: "text-green-500", bg: "bg-green-500/10", gradient: "from-green-500/20 to-emerald-600/10" },
+  { icon: Clock, label: "Office Hours", value: COMPANY.hours, desc: "East Africa Time (EAT)", color: "text-violet-500", bg: "bg-violet-500/10", gradient: "from-violet-500/20 to-purple-600/10" },
 ];
 
 const DESTINATIONS = [
@@ -211,16 +211,16 @@ export default function ContactPage() {
           sizes="100vw"
         />
         <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/50 to-black/80" />
-        <div className="absolute inset-0 bg-gradient-to-r from-burgundy-900/30 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-r from-sky-900/30 to-transparent" />
         <div className="relative z-10 text-center px-6 max-w-4xl mx-auto">
           <AnimatedSection direction="none">
             <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-md rounded-full px-5 py-2 mb-6 border border-white/20">
-              <MessageCircle className="size-4 text-burgundy-400" />
+              <MessageCircle className="size-4 text-sky-400" />
               <span className="text-sm font-semibold text-white/90">We&apos;re Here to Help</span>
             </div>
             <h1 className="text-4xl sm:text-5xl lg:text-7xl font-bold text-white mb-4 tracking-tight">
               Let&apos;s Plan Your{" "}
-              <span className="bg-gradient-to-r from-burgundy-300 via-burgundy-300 to-burgundy-200 bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-sky-300 via-blue-300 to-cyan-200 bg-clip-text text-transparent">
                 Safari
               </span>
             </h1>
@@ -234,7 +234,7 @@ export default function ContactPage() {
       </section>
 
       {/* Trust Strip */}
-      <section className="py-12 px-6 border-b border-burgundy-100 dark:border-burgundy-950">
+      <section className="py-12 px-6 border-b border-sky-100 dark:border-sky-950">
         <div className="max-w-6xl mx-auto">
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
             {TRUST_STATS.map((stat) => (
@@ -243,10 +243,10 @@ export default function ContactPage() {
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                className="flex items-center gap-4 p-4 rounded-xl bg-gradient-to-br from-burgundy-50 to-burgundy-50 dark:from-burgundy-950/30 dark:to-burgundy-950/30"
+                className="flex items-center gap-4 p-4 rounded-xl bg-gradient-to-br from-sky-50 to-blue-50 dark:from-sky-950/30 dark:to-blue-950/30"
               >
-                <div className="size-12 rounded-full bg-burgundy-500/10 flex items-center justify-center shrink-0">
-                  <stat.icon className="size-5 text-burgundy-600 dark:text-burgundy-400" />
+                <div className="size-12 rounded-full bg-sky-500/10 flex items-center justify-center shrink-0">
+                  <stat.icon className="size-5 text-sky-600 dark:text-sky-400" />
                 </div>
                 <div>
                   <p className="text-xl font-bold text-foreground">{stat.value}</p>
@@ -274,7 +274,7 @@ export default function ContactPage() {
               <AnimatedSection key={info.label} delay={i * 0.05}>
                 <motion.div
                   whileHover={{ y: -4, scale: 1.02 }}
-                  className="relative group p-6 rounded-2xl bg-gradient-to-br from-card to-card/50 ring-1 ring-foreground/5 hover:ring-2 hover:ring-burgundy-500/20 transition-all duration-300 h-full overflow-hidden"
+                  className="relative group p-6 rounded-2xl bg-gradient-to-br from-card to-card/50 ring-1 ring-foreground/5 hover:ring-2 hover:ring-sky-500/20 transition-all duration-300 h-full overflow-hidden"
                 >
                   <div className={`absolute inset-0 bg-gradient-to-br ${info.gradient} opacity-0 group-hover:opacity-100 transition-opacity duration-500`} />
                   <div className="relative z-10 flex flex-col items-center text-center">
@@ -299,18 +299,18 @@ export default function ContactPage() {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-burgundy-600 via-burgundy-700 to-burgundy-800 p-8 sm:p-12"
+            className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-green-600 via-green-700 to-emerald-800 p-8 sm:p-12"
           >
             <div className="absolute top-0 right-0 w-64 h-64 bg-white/5 rounded-full -translate-y-1/2 translate-x-1/2" />
             <div className="absolute bottom-0 left-0 w-48 h-48 bg-white/5 rounded-full translate-y-1/2 -translate-x-1/2" />
             <div className="relative z-10 flex flex-col sm:flex-row items-center justify-between gap-6">
               <div className="text-center sm:text-left">
                 <div className="inline-flex items-center gap-2 bg-white/15 rounded-full px-4 py-1.5 mb-4">
-                  <MessageCircle className="size-4 text-burgundy-300" />
-                  <span className="text-xs font-semibold text-burgundy-200 uppercase tracking-wider">Fastest Response</span>
+                  <MessageCircle className="size-4 text-green-300" />
+                  <span className="text-xs font-semibold text-green-200 uppercase tracking-wider">Fastest Response</span>
                 </div>
                 <h3 className="text-2xl sm:text-3xl font-bold text-white mb-2">Chat With Us on WhatsApp</h3>
-                <p className="text-burgundy-200/80 max-w-md">
+                <p className="text-green-200/80 max-w-md">
                   Get an instant response from our team. Tap the button below to start a conversation right now.
                 </p>
               </div>
@@ -318,7 +318,7 @@ export default function ContactPage() {
                 href={whatsappLink()}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 h-14 px-8 rounded-xl bg-white text-burgundy-700 font-bold text-base hover:bg-burgundy-50 transition-all shadow-xl hover:shadow-2xl shrink-0"
+                className="inline-flex items-center gap-2 h-14 px-8 rounded-xl bg-white text-green-700 font-bold text-base hover:bg-green-50 transition-all shadow-xl hover:shadow-2xl shrink-0"
               >
                 <MessageCircle className="size-5" />
                 WhatsApp Us
@@ -344,7 +344,7 @@ export default function ContactPage() {
             {/* Map */}
             <AnimatedSection direction="left" className="lg:col-span-2">
               <div className="sticky top-24 rounded-2xl overflow-hidden ring-1 ring-foreground/10 h-[500px]">
-                <div className="absolute inset-0 bg-gradient-to-b from-burgundy-900/10 to-transparent z-10 pointer-events-none" />
+                <div className="absolute inset-0 bg-gradient-to-b from-sky-900/10 to-transparent z-10 pointer-events-none" />
                 <iframe
                   src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3191.687!2d36.6839!3d-1.3131!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMcKwMTgnNDcuMiJTIDM2wrA0MCcwMi4wIkU!5e0!3m2!1sen!2ske!4v1"
                   width="100%"
@@ -356,9 +356,9 @@ export default function ContactPage() {
                   title="Ready Set Go Tours office location"
                 />
               </div>
-              <div className="mt-4 p-4 rounded-xl bg-burgundy-50 dark:bg-burgundy-950/30 ring-1 ring-burgundy-100 dark:ring-burgundy-900">
+              <div className="mt-4 p-4 rounded-xl bg-sky-50 dark:bg-sky-950/30 ring-1 ring-sky-100 dark:ring-sky-900">
                 <div className="flex items-start gap-3">
-                  <Building2 className="size-5 text-burgundy-600 dark:text-burgundy-400 mt-0.5 shrink-0" />
+                  <Building2 className="size-5 text-sky-600 dark:text-sky-400 mt-0.5 shrink-0" />
                   <div>
                     <p className="text-sm font-semibold text-foreground">{COMPANY.shortName}</p>
                     <p className="text-xs text-muted-foreground mt-0.5">
@@ -373,7 +373,7 @@ export default function ContactPage() {
             <AnimatedSection direction="right" className="lg:col-span-3">
               <div className="rounded-2xl bg-card ring-1 ring-foreground/10 overflow-hidden">
                 {/* Step Progress */}
-                <div className="bg-gradient-to-r from-burgundy-900 via-burgundy-900 to-slate-900 px-8 py-6">
+                <div className="bg-gradient-to-r from-sky-900 via-blue-900 to-slate-900 px-8 py-6">
                   <h2 className="text-2xl font-bold text-white mb-4">Plan Your Safari</h2>
                   <div className="flex items-center gap-1">
                     {steps.map((s, i) => {
@@ -383,15 +383,15 @@ export default function ContactPage() {
                       return (
                         <div key={s} className="flex items-center gap-1 flex-1">
                           <div className={`flex items-center justify-center size-8 rounded-full text-xs font-bold transition-all duration-300 ${
-                            isCompleted ? "bg-burgundy-500 text-white" :
-                            isCurrent ? "bg-burgundy-500 text-white ring-2 ring-burgundy-300" :
+                            isCompleted ? "bg-emerald-500 text-white" :
+                            isCurrent ? "bg-sky-500 text-white ring-2 ring-sky-300" :
                             "bg-white/10 text-white/50"
                           }`}>
                             {isCompleted ? <CheckCircle className="size-4" /> : <Icon className="size-3.5" />}
                           </div>
                           {i < steps.length - 1 && (
                             <div className={`h-0.5 flex-1 transition-all duration-300 ${
-                              isCompleted ? "bg-burgundy-500" : "bg-white/10"
+                              isCompleted ? "bg-emerald-500" : "bg-white/10"
                             }`} />
                           )}
                         </div>
@@ -401,7 +401,7 @@ export default function ContactPage() {
                   <div className="flex justify-between mt-1.5">
                     {stepLabels.map((l, i) => (
                       <span key={l} className={`text-[10px] font-medium uppercase tracking-wider ${
-                        steps.indexOf(step) >= i ? "text-burgundy-200" : "text-white/30"
+                        steps.indexOf(step) >= i ? "text-sky-200" : "text-white/30"
                       }`}>{l}</span>
                     ))}
                   </div>
@@ -414,7 +414,7 @@ export default function ContactPage() {
                       animate={{ scale: 1 }}
                       transition={{ type: "spring", stiffness: 200, damping: 15 }}
                     >
-                      <CheckCircle className="size-20 text-burgundy-500" />
+                      <CheckCircle className="size-20 text-emerald-500" />
                     </motion.div>
                     <h3 className="text-2xl font-bold text-foreground mt-2">Message Sent Successfully!</h3>
                     <p className="text-muted-foreground max-w-sm">
@@ -425,7 +425,7 @@ export default function ContactPage() {
                         Send Another Message
                       </Button>
                       <Link href="/holiday-packages">
-                        <Button className="bg-gradient-to-r from-burgundy-500 to-burgundy-600 text-white">
+                        <Button className="bg-gradient-to-r from-sky-500 to-blue-600 text-white">
                           Browse Packages <ArrowRight className="size-4 ml-1" />
                         </Button>
                       </Link>
@@ -445,7 +445,7 @@ export default function ContactPage() {
                           {step === "personal" && (
                             <div className="space-y-5">
                               <div>
-                                <h3 className="text-sm font-semibold uppercase tracking-wider text-burgundy-500 mb-4 flex items-center gap-2">
+                                <h3 className="text-sm font-semibold uppercase tracking-wider text-sky-500 mb-4 flex items-center gap-2">
                                   <Mail className="size-4" /> Personal Information
                                 </h3>
                                 <div className="grid sm:grid-cols-2 gap-4">
@@ -477,14 +477,14 @@ export default function ContactPage() {
                           {step === "trip" && (
                             <div className="space-y-5">
                               <div>
-                                <h3 className="text-sm font-semibold uppercase tracking-wider text-burgundy-500 mb-4 flex items-center gap-2">
+                                <h3 className="text-sm font-semibold uppercase tracking-wider text-orange-500 mb-4 flex items-center gap-2">
                                   <MapPin className="size-4" /> Trip Details
                                 </h3>
                                 <div className="grid sm:grid-cols-2 gap-4">
                                   <div className="space-y-1.5">
                                     <Label htmlFor="destination" className="text-xs">Destination *</Label>
                                     <select id="destination" {...register("destination")}
-                                      className="flex h-9 w-full rounded-lg border border-input bg-transparent px-2.5 py-1 text-sm outline-none focus:border-burgundy-500 focus:ring-3 focus:ring-burgundy-500/20">
+                                      className="flex h-9 w-full rounded-lg border border-input bg-transparent px-2.5 py-1 text-sm outline-none focus:border-sky-500 focus:ring-3 focus:ring-sky-500/20">
                                       <option value="">Select destination</option>
                                       {DESTINATIONS.map((d) => (<option key={d} value={d}>{d}</option>))}
                                     </select>
@@ -493,7 +493,7 @@ export default function ContactPage() {
                                   <div className="space-y-1.5">
                                     <Label htmlFor="package" className="text-xs">Package (optional)</Label>
                                     <select id="package" {...register("package")}
-                                      className="flex h-9 w-full rounded-lg border border-input bg-transparent px-2.5 py-1 text-sm outline-none focus:border-burgundy-500 focus:ring-3 focus:ring-burgundy-500/20">
+                                      className="flex h-9 w-full rounded-lg border border-input bg-transparent px-2.5 py-1 text-sm outline-none focus:border-sky-500 focus:ring-3 focus:ring-sky-500/20">
                                       <option value="">Select package</option>
                                       {PACKAGES.map((p) => (<option key={p} value={p}>{p}</option>))}
                                     </select>
@@ -511,7 +511,7 @@ export default function ContactPage() {
                                   <div className="space-y-1.5">
                                     <Label htmlFor="budget" className="text-xs">Budget Range *</Label>
                                     <select id="budget" {...register("budget")}
-                                      className="flex h-9 w-full rounded-lg border border-input bg-transparent px-2.5 py-1 text-sm outline-none focus:border-burgundy-500 focus:ring-3 focus:ring-burgundy-500/20">
+                                      className="flex h-9 w-full rounded-lg border border-input bg-transparent px-2.5 py-1 text-sm outline-none focus:border-sky-500 focus:ring-3 focus:ring-sky-500/20">
                                       <option value="">Select budget</option>
                                       {BUDGET_RANGES.map((b) => (<option key={b} value={b}>{b}</option>))}
                                     </select>
@@ -525,7 +525,7 @@ export default function ContactPage() {
                           {step === "party" && (
                             <div className="space-y-5">
                               <div>
-                                <h3 className="text-sm font-semibold uppercase tracking-wider text-burgundy-500 mb-4 flex items-center gap-2">
+                                <h3 className="text-sm font-semibold uppercase tracking-wider text-amber-500 mb-4 flex items-center gap-2">
                                   <Users className="size-4" /> Travel Party
                                 </h3>
                                 <div className="grid sm:grid-cols-2 gap-4">
@@ -553,7 +553,7 @@ export default function ContactPage() {
                           {step === "review" && (
                             <div className="space-y-5">
                               <div>
-                                <h3 className="text-sm font-semibold uppercase tracking-wider text-burgundy-500 mb-4 flex items-center gap-2">
+                                <h3 className="text-sm font-semibold uppercase tracking-wider text-emerald-500 mb-4 flex items-center gap-2">
                                   <CheckCircle className="size-4" /> Review Your Request
                                 </h3>
                                 <div className="rounded-xl bg-slate-50 dark:bg-slate-800/50 p-5 space-y-3">
@@ -593,12 +593,12 @@ export default function ContactPage() {
                         )}
                       </div>
                       {step !== "review" ? (
-                        <Button type="button" onClick={nextStep} className="h-10 px-6 text-sm bg-gradient-to-r from-burgundy-500 to-burgundy-600 text-white hover:from-burgundy-400 hover:to-burgundy-500 shadow-lg shadow-burgundy-500/25">
+                        <Button type="button" onClick={nextStep} className="h-10 px-6 text-sm bg-gradient-to-r from-sky-500 to-blue-600 text-white hover:from-sky-400 hover:to-blue-500 shadow-lg shadow-sky-500/25">
                           Continue <ChevronRight className="size-4 ml-1" />
                         </Button>
                       ) : (
                         <Button type="submit" disabled={status === "submitting"}
-                          className="h-10 px-8 text-sm bg-gradient-to-r from-burgundy-500 to-burgundy-600 text-white hover:from-burgundy-400 hover:to-burgundy-500 shadow-lg shadow-burgundy-500/25 font-semibold">
+                          className="h-10 px-8 text-sm bg-gradient-to-r from-emerald-500 to-teal-600 text-white hover:from-emerald-400 hover:to-teal-500 shadow-lg shadow-emerald-500/25 font-semibold">
                           {status === "submitting" ? (
                             <><Loader2 className="size-4 mr-2 animate-spin" /> Sending...</>
                           ) : (
@@ -619,14 +619,14 @@ export default function ContactPage() {
       </section>
 
       {/* Bottom CTA */}
-      <section className="py-20 px-6 bg-gradient-to-br from-slate-900 via-burgundy-950 to-slate-900 relative overflow-hidden">
+      <section className="py-20 px-6 bg-gradient-to-br from-slate-900 via-sky-950 to-slate-900 relative overflow-hidden">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,rgba(14,165,233,0.08),transparent_60%)]" />
         <div className="max-w-4xl mx-auto text-center relative z-10">
           <AnimatedSection>
             <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">
               Ready for the Adventure of a Lifetime?
             </h2>
-            <p className="text-burgundy-200/70 text-lg max-w-2xl mx-auto mb-8">
+            <p className="text-sky-200/70 text-lg max-w-2xl mx-auto mb-8">
               Whether you&apos;re dreaming of the Great Migration, Kilimanjaro, or Zanzibar&apos;s beaches —
               we&apos;re here to make it happen.
             </p>
@@ -640,14 +640,14 @@ export default function ContactPage() {
               </a>
               <a
                 href={`mailto:${COMPANY.email}`}
-                className="inline-flex items-center justify-center gap-2 min-h-12 px-5 py-2 rounded-xl bg-gradient-to-r from-burgundy-500 to-burgundy-600 hover:from-burgundy-400 hover:to-burgundy-500 text-white text-sm font-semibold shadow-xl shadow-burgundy-500/25 transition-all text-center break-all"
+                className="inline-flex items-center justify-center gap-2 min-h-12 px-5 py-2 rounded-xl bg-gradient-to-r from-sky-500 to-blue-600 hover:from-sky-400 hover:to-blue-500 text-white text-sm font-semibold shadow-xl shadow-sky-500/25 transition-all text-center break-all"
               >
                 <Mail className="size-4 shrink-0" />
                 {COMPANY.email}
               </a>
               <a
                 href={`mailto:${COMPANY.bookingsEmail}`}
-                className="inline-flex items-center justify-center gap-2 min-h-12 px-5 py-2 rounded-xl bg-gradient-to-r from-burgundy-500 to-burgundy-500 hover:from-burgundy-400 hover:to-burgundy-400 text-white text-sm font-semibold shadow-xl shadow-burgundy-500/25 transition-all text-center break-all"
+                className="inline-flex items-center justify-center gap-2 min-h-12 px-5 py-2 rounded-xl bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-400 hover:to-amber-400 text-white text-sm font-semibold shadow-xl shadow-orange-500/25 transition-all text-center break-all"
               >
                 <Mail className="size-4 shrink-0" />
                 {COMPANY.bookingsEmail}

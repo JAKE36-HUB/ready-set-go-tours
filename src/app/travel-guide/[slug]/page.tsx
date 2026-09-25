@@ -101,7 +101,7 @@ export default async function BlogPostPage({ params }: Props) {
         />
         <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black/70" />
         <div className="relative z-10 text-center px-6 max-w-3xl mx-auto">
-          <span className="inline-block px-3 py-1 rounded-full bg-burgundy-500 text-white text-xs font-semibold mb-4">
+          <span className="inline-block px-3 py-1 rounded-full bg-sky-500 text-white text-xs font-semibold mb-4">
             {post.category}
           </span>
           <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-4 leading-tight">
@@ -127,11 +127,11 @@ export default async function BlogPostPage({ params }: Props) {
       {/* Breadcrumb */}
       <div className="max-w-3xl mx-auto px-6 pt-6">
         <nav className="flex items-center gap-2 text-sm text-muted-foreground">
-          <Link href="/" className="hover:text-burgundy-500 transition-colors">
+          <Link href="/" className="hover:text-sky-500 transition-colors">
             Home
           </Link>
           <ChevronRight className="size-3" />
-          <Link href="/travel-guide" className="hover:text-burgundy-500 transition-colors">
+          <Link href="/travel-guide" className="hover:text-sky-500 transition-colors">
             Travel Guide
           </Link>
           <ChevronRight className="size-3" />
@@ -155,7 +155,7 @@ export default async function BlogPostPage({ params }: Props) {
           {[post.category, "Kenya", "Safari", "Travel Tips"].map((tag) => (
             <span
               key={tag}
-              className="px-3 py-1.5 rounded-full bg-muted text-xs text-muted-foreground hover:bg-burgundy-50 hover:text-burgundy-600 transition-colors cursor-pointer"
+              className="px-3 py-1.5 rounded-full bg-muted text-xs text-muted-foreground hover:bg-sky-50 hover:text-sky-600 transition-colors cursor-pointer"
             >
               {tag}
             </span>
@@ -164,7 +164,7 @@ export default async function BlogPostPage({ params }: Props) {
 
         {/* Author Card */}
         <div className="mt-10 p-6 rounded-2xl bg-card ring-1 ring-foreground/10 flex items-center gap-4">
-          <div className="w-14 h-14 rounded-full bg-gradient-to-br from-burgundy-400 to-burgundy-600 flex items-center justify-center text-white font-bold text-lg shrink-0">
+          <div className="w-14 h-14 rounded-full bg-gradient-to-br from-sky-400 to-blue-600 flex items-center justify-center text-white font-bold text-lg shrink-0">
             {post.author.split(" ").map((n) => n[0]).join("")}
           </div>
           <div>
@@ -179,7 +179,7 @@ export default async function BlogPostPage({ params }: Props) {
         <div className="mt-10">
           <Link
             href="/travel-guide"
-            className="inline-flex items-center gap-2 text-burgundy-500 hover:text-burgundy-400 font-medium transition-colors"
+            className="inline-flex items-center gap-2 text-sky-500 hover:text-sky-400 font-medium transition-colors"
           >
             <ArrowLeft className="size-4" />
             Back to Travel Guide
@@ -207,13 +207,13 @@ export default async function BlogPostPage({ params }: Props) {
                         sizes="(max-width: 640px) 100vw, 33vw"
                       />
                       <div className="absolute top-3 left-3">
-                        <span className="px-2.5 py-1 rounded-full bg-burgundy-500 text-white text-[10px] font-semibold">
+                        <span className="px-2.5 py-1 rounded-full bg-sky-500 text-white text-[10px] font-semibold">
                           {r.category}
                         </span>
                       </div>
                     </div>
                     <div className="flex flex-col flex-1 p-5">
-                      <h3 className="text-sm font-bold text-foreground mb-2 line-clamp-2 group-hover:text-burgundy-600 transition-colors">
+                      <h3 className="text-sm font-bold text-foreground mb-2 line-clamp-2 group-hover:text-sky-600 transition-colors">
                         {r.title}
                       </h3>
                       <p className="text-xs text-muted-foreground line-clamp-2 flex-1">

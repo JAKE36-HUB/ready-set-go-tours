@@ -139,14 +139,14 @@ export function StepQuote({
   if (submitted) {
     return (
       <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} className="text-center py-8">
-        <div className="w-20 h-20 rounded-full bg-burgundy-500/20 flex items-center justify-center mx-auto mb-6">
-          <CheckCircle2 className="w-10 h-10 text-burgundy-400" />
+        <div className="w-20 h-20 rounded-full bg-emerald-500/20 flex items-center justify-center mx-auto mb-6">
+          <CheckCircle2 className="w-10 h-10 text-emerald-400" />
         </div>
         <h3 className="text-2xl font-bold text-white mb-2">Your Itinerary is Ready!</h3>
         <p className="text-white/60 max-w-md mx-auto mb-2">
           Thank you, <span className="text-white font-semibold">{data.fullName}</span>! Your custom safari plan has been sent to our team. We&apos;ll review and respond within 24 hours.
         </p>
-        <p className="text-white/40 text-sm mb-6">A confirmation has been sent to <span className="text-burgundy-400">{data.email}</span></p>
+        <p className="text-white/40 text-sm mb-6">A confirmation has been sent to <span className="text-emerald-400">{data.email}</span></p>
         <div className="flex flex-wrap justify-center gap-3">
           <PdfItinerary data={itineraryData} buttonLabel="Download PDF Itinerary" />
           <a
@@ -194,7 +194,7 @@ export function StepQuote({
                 value={data.fullName}
                 onChange={(e) => update("fullName", e.target.value)}
                 placeholder="John Smith"
-                className="w-full h-11 px-4 rounded-xl bg-white/5 border border-white/10 text-white placeholder:text-white/30 focus:outline-none focus:border-burgundy-400/50 focus:ring-1 focus:ring-burgundy-400/30 text-sm"
+                className="w-full h-11 px-4 rounded-xl bg-white/5 border border-white/10 text-white placeholder:text-white/30 focus:outline-none focus:border-emerald-400/50 focus:ring-1 focus:ring-emerald-400/30 text-sm"
               />
             </div>
             <div className="grid sm:grid-cols-2 gap-4">
@@ -205,7 +205,7 @@ export function StepQuote({
                   value={data.email}
                   onChange={(e) => update("email", e.target.value)}
                   placeholder="john@example.com"
-                  className="w-full h-11 px-4 rounded-xl bg-white/5 border border-white/10 text-white placeholder:text-white/30 focus:outline-none focus:border-burgundy-400/50 focus:ring-1 focus:ring-burgundy-400/30 text-sm"
+                  className="w-full h-11 px-4 rounded-xl bg-white/5 border border-white/10 text-white placeholder:text-white/30 focus:outline-none focus:border-emerald-400/50 focus:ring-1 focus:ring-emerald-400/30 text-sm"
                 />
               </div>
               <div>
@@ -215,7 +215,7 @@ export function StepQuote({
                   value={data.phone}
                   onChange={(e) => update("phone", e.target.value)}
                   placeholder="+1 234 567 890"
-                  className="w-full h-11 px-4 rounded-xl bg-white/5 border border-white/10 text-white placeholder:text-white/30 focus:outline-none focus:border-burgundy-400/50 focus:ring-1 focus:ring-burgundy-400/30 text-sm"
+                  className="w-full h-11 px-4 rounded-xl bg-white/5 border border-white/10 text-white placeholder:text-white/30 focus:outline-none focus:border-emerald-400/50 focus:ring-1 focus:ring-emerald-400/30 text-sm"
                 />
               </div>
             </div>
@@ -226,7 +226,7 @@ export function StepQuote({
                 value={data.country}
                 onChange={(e) => update("country", e.target.value)}
                 placeholder="United States"
-                className="w-full h-11 px-4 rounded-xl bg-white/5 border border-white/10 text-white placeholder:text-white/30 focus:outline-none focus:border-burgundy-400/50 focus:ring-1 focus:ring-burgundy-400/30 text-sm"
+                className="w-full h-11 px-4 rounded-xl bg-white/5 border border-white/10 text-white placeholder:text-white/30 focus:outline-none focus:border-emerald-400/50 focus:ring-1 focus:ring-emerald-400/30 text-sm"
               />
             </div>
             <div>
@@ -236,7 +236,7 @@ export function StepQuote({
                 onChange={(e) => update("notes", e.target.value)}
                 placeholder="Any specific requirements, dietary needs, or preferences..."
                 rows={3}
-                className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder:text-white/30 focus:outline-none focus:border-burgundy-400/50 focus:ring-1 focus:ring-burgundy-400/30 text-sm resize-none"
+                className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder:text-white/30 focus:outline-none focus:border-emerald-400/50 focus:ring-1 focus:ring-emerald-400/30 text-sm resize-none"
               />
             </div>
           </div>
@@ -247,7 +247,7 @@ export function StepQuote({
           <div className="space-y-3">
             {lines.map((line) => (
               <div key={line.label} className="flex items-center gap-3 text-sm">
-                <line.icon className="w-4 h-4 text-burgundy-400 shrink-0" />
+                <line.icon className="w-4 h-4 text-emerald-400 shrink-0" />
                 <span className="text-white/50 min-w-[100px]">{line.label}</span>
                 <span className="text-white font-medium">{line.value}</span>
               </div>
@@ -288,7 +288,7 @@ export function StepQuote({
           type="button"
           onClick={handleSubmit}
           disabled={submitting || !contactValid}
-          className="inline-flex items-center gap-2 h-11 px-6 rounded-xl bg-gradient-to-r from-burgundy-500 to-burgundy-600 hover:from-burgundy-400 hover:to-burgundy-500 text-white text-sm font-semibold shadow-lg transition-all disabled:opacity-50"
+          className="inline-flex items-center gap-2 h-11 px-6 rounded-xl bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-400 hover:to-teal-500 text-white text-sm font-semibold shadow-lg transition-all disabled:opacity-50"
         >
           {submitting ? <Loader2 className="w-4 h-4 animate-spin" /> : <Send className="w-4 h-4" />}
           {submitting ? "Sending..." : contactValid ? "Send My Itinerary" : "Fill required fields"}

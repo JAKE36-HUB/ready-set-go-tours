@@ -15,7 +15,7 @@ export default async function OpengraphImage() {
           display: "flex",
           flexDirection: "column",
           justifyContent: "space-between",
-          background: "linear-gradient(130deg, #2E0A0C 0%, #5C1C1B 52%, #471415 100%)",
+          background: "linear-gradient(130deg, #04170d 0%, #0b4f34 52%, #0a2c4e 100%)",
           color: "#ffffff",
           padding: "64px 72px",
           position: "relative",
@@ -56,7 +56,7 @@ export default async function OpengraphImage() {
             width: "900px",
             height: "520px",
             borderRadius: "50%",
-            background: "#3B1012",
+            background: "#06301f",
           }}
         />
         <div
@@ -67,7 +67,7 @@ export default async function OpengraphImage() {
             width: "1000px",
             height: "560px",
             borderRadius: "50%",
-            background: "#2E0A0C",
+            background: "#052315",
           }}
         />
         <div
@@ -77,7 +77,7 @@ export default async function OpengraphImage() {
             left: "0px",
             width: "100%",
             height: "120px",
-            background: "linear-gradient(180deg, rgba(46,10,12,0) 0%, #2E0A0C 100%)",
+            background: "linear-gradient(180deg, rgba(4,35,22,0) 0%, #04170d 100%)",
           }}
         />
 
@@ -91,7 +91,7 @@ export default async function OpengraphImage() {
               width: "64px",
               height: "64px",
               borderRadius: "20px",
-              background: "linear-gradient(135deg, #93302C, #AE423E)",
+              background: "linear-gradient(135deg, #0ea5e9, #10b981)",
               fontSize: "26px",
               fontWeight: 900,
             }}
@@ -102,7 +102,7 @@ export default async function OpengraphImage() {
             <div style={{ fontSize: "30px", fontWeight: 900, letterSpacing: "-0.5px" }}>
               Ready Set Go Tours &amp; Travel
             </div>
-            <div style={{ fontSize: "18px", color: "#EBB8B1", marginTop: "2px" }}>
+            <div style={{ fontSize: "18px", color: "#a7f3d0", marginTop: "2px" }}>
               Nairobi, Kenya · East Africa
             </div>
           </div>
@@ -120,7 +120,7 @@ export default async function OpengraphImage() {
           >
             Luxury Kenya &amp; Tanzania Safaris
           </div>
-          <div style={{ fontSize: "24px", color: "#EDE0DC", marginTop: "18px", lineHeight: 1.4 }}>
+          <div style={{ fontSize: "24px", color: "#e2e8f0", marginTop: "18px", lineHeight: 1.4 }}>
             Bespoke private &amp; group safaris · Beach holidays · Mountaineering
           </div>
         </div>
@@ -155,9 +155,9 @@ export default async function OpengraphImage() {
               </div>
             ))}
           </div>
-          <div style={{ display: "flex", flexDirection: "column", alignItems: "flex-end", fontSize: "18px", color: "#EBB8B1", fontWeight: 700 }}>
+          <div style={{ display: "flex", flexDirection: "column", alignItems: "flex-end", fontSize: "18px", color: "#d1fae5", fontWeight: 700 }}>
             <div>readysetgosafaris.com</div>
-            <div style={{ color: "#DC8E85", fontWeight: 400 }}>Private &amp; group safaris from $650/person</div>
+            <div style={{ color: "#9bdcbf", fontWeight: 400 }}>Private &amp; group safaris from $650/person</div>
           </div>
         </div>
       </div>

@@ -31,7 +31,7 @@ export function StepAccommodation({
           onChange={(e) => { setInput(e.target.value); onChange(e.target.value) }}
           placeholder="Describe your ideal accommodation — e.g. 'A luxury tented camp in the Mara with river views' or 'Budget-friendly lodge near the park gate'..."
           rows={4}
-          className="w-full px-4 py-3 rounded-2xl bg-white/5 border border-white/10 text-white text-sm placeholder-white/30 focus:outline-none focus:ring-2 focus:ring-burgundy-400/30 focus:border-burgundy-400/50 transition-all resize-none"
+          className="w-full px-4 py-3 rounded-2xl bg-white/5 border border-white/10 text-white text-sm placeholder-white/30 focus:outline-none focus:ring-2 focus:ring-emerald-400/30 focus:border-emerald-400/50 transition-all resize-none"
           aria-label="Describe your ideal accommodation"
         />
       </div>
@@ -49,7 +49,7 @@ export function StepAccommodation({
               className={cn(
                 "relative p-4 rounded-2xl border text-left transition-all duration-200",
                 input.toLowerCase().includes(tier.label.toLowerCase())
-                  ? "bg-burgundy-500/15 border-burgundy-400/50 ring-1 ring-burgundy-400/30"
+                  ? "bg-emerald-500/15 border-emerald-400/50 ring-1 ring-emerald-400/30"
                   : "bg-white/5 border-white/10 hover:bg-white/10 hover:border-white/20"
               )}
             >
@@ -64,7 +64,7 @@ export function StepAccommodation({
                 <span className="text-[10px] text-white/30">Price index</span>
                 <div className="flex gap-0.5">
                   {[1, 2, 3, 4].map((dot) => (
-                    <div key={dot} className={cn("w-2 h-2 rounded-full", dot <= ACCOMMODATION_TIERS.indexOf(tier) + 1 ? "bg-burgundy-400" : "bg-white/10")} />
+                    <div key={dot} className={cn("w-2 h-2 rounded-full", dot <= ACCOMMODATION_TIERS.indexOf(tier) + 1 ? "bg-emerald-400" : "bg-white/10")} />
                   ))}
                 </div>
               </div>
@@ -80,7 +80,7 @@ export function StepAccommodation({
           type="button"
           onClick={onNext}
           disabled={!input.trim()}
-          className="h-10 px-6 rounded-xl bg-burgundy-500 hover:bg-burgundy-400 disabled:bg-white/10 disabled:text-white/30 text-white text-sm font-semibold shadow-lg shadow-burgundy-500/25 transition-all"
+          className="h-10 px-6 rounded-xl bg-emerald-500 hover:bg-emerald-400 disabled:bg-white/10 disabled:text-white/30 text-white text-sm font-semibold shadow-lg shadow-emerald-500/25 transition-all"
         >
           Next Step
         </button>

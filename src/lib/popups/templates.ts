@@ -47,7 +47,7 @@ export const POPUP_TEMPLATES: PopupTemplate[] = [
       ctas: [
         {
           id: "c1", label: "Book Safari", url: "/contact", newTab: false,
-          bgColor: "#93302C", textColor: "#ffffff", hoverAnimation: "pulse" as const, icon: "🎯", type: "url",
+          bgColor: "#f59e0b", textColor: "#ffffff", hoverAnimation: "pulse" as const, icon: "🎯", type: "url",
         },
         {
           id: "c2", label: "Chat on WhatsApp", url: wa("Hi! I'm interested in the Great Migration safari"), newTab: true,
@@ -99,7 +99,7 @@ export const POPUP_TEMPLATES: PopupTemplate[] = [
       ctas: [
         {
           id: "c1", label: "View Packages", url: "/beach-holidays", newTab: false,
-          bgColor: "#93302C", textColor: "#ffffff", hoverAnimation: "grow" as const, icon: "🗓️", type: "url",
+          bgColor: "#0ea5e9", textColor: "#ffffff", hoverAnimation: "grow" as const, icon: "🗓️", type: "url",
         },
         {
           id: "c2", label: "WhatsApp Us", url: wa("Hi! I'd like more info on the Diani Beach holiday"), newTab: true,
@@ -151,7 +151,7 @@ export const POPUP_TEMPLATES: PopupTemplate[] = [
       ctas: [
         {
           id: "c1", label: "Book Safari", url: "/kenya-tours", newTab: false,
-          bgColor: "#93302C", textColor: "#ffffff", hoverAnimation: "grow" as const, icon: "🎯", type: "url",
+          bgColor: "#f59e0b", textColor: "#ffffff", hoverAnimation: "grow" as const, icon: "🎯", type: "url",
         },
         {
           id: "c2", label: "Chat on WhatsApp", url: wa("Hi! I'm interested in the Maasai Mara safari"), newTab: true,

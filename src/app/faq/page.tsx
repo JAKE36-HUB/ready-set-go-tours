@@ -50,10 +50,10 @@ export default function FAQPage() {
         <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black/70" />
         <div className="relative z-10 text-center px-6 max-w-4xl mx-auto">
           <AnimatedSection direction="none">
-            <HelpCircle className="size-12 text-burgundy-400 mx-auto mb-4" />
+            <HelpCircle className="size-12 text-sky-400 mx-auto mb-4" />
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white mb-4">
               Frequently Asked{" "}
-              <span className="bg-gradient-to-r from-burgundy-400 to-burgundy-300 bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-sky-400 to-blue-300 bg-clip-text text-transparent">
                 Questions
               </span>
             </h1>
@@ -75,7 +75,7 @@ export default function FAQPage() {
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
                 placeholder="Search questions..."
-                className="w-full h-12 pl-12 pr-4 rounded-xl border border-input bg-card text-foreground placeholder:text-muted-foreground focus:border-burgundy-500 focus:ring-3 focus:ring-burgundy-500/20 outline-none transition-all text-sm"
+                className="w-full h-12 pl-12 pr-4 rounded-xl border border-input bg-card text-foreground placeholder:text-muted-foreground focus:border-sky-500 focus:ring-3 focus:ring-sky-500/20 outline-none transition-all text-sm"
                 aria-label="Search frequently asked questions"
               />
             </div>
@@ -90,7 +90,7 @@ export default function FAQPage() {
                   onClick={() => { setActiveCategory(cat); setSearch(""); }}
                   className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${
                     activeCategory === cat && !search
-                      ? "bg-burgundy-500 text-white shadow-lg shadow-burgundy-500/25"
+                      ? "bg-sky-500 text-white shadow-lg shadow-sky-500/25"
                       : "bg-muted text-muted-foreground hover:bg-muted/80"
                   }`}
                 >
@@ -106,7 +106,7 @@ export default function FAQPage() {
               <Accordion className="ring-1 ring-foreground/10 rounded-2xl bg-card p-2">
                 {items.map((item) => (
                   <AccordionItem key={item.id} value={`faq-${item.id}`} className="border-b border-border/50 last:border-0">
-                    <AccordionTrigger className="px-4 py-4 text-left text-foreground hover:no-underline hover:text-burgundy-600">
+                    <AccordionTrigger className="px-4 py-4 text-left text-foreground hover:no-underline hover:text-sky-600">
                       {item.question}
                     </AccordionTrigger>
                     <AccordionContent className="px-4 pb-4">
@@ -129,7 +129,7 @@ export default function FAQPage() {
 
           {/* Contact CTA */}
           <AnimatedSection>
-            <div className="mt-16 text-center p-10 rounded-2xl bg-gradient-to-br from-burgundy-50 to-burgundy-50 dark:from-burgundy-950/30 dark:to-burgundy-950/30 ring-1 ring-burgundy-100 dark:ring-burgundy-900/50">
+            <div className="mt-16 text-center p-10 rounded-2xl bg-gradient-to-br from-sky-50 to-blue-50 dark:from-sky-950/30 dark:to-blue-950/30 ring-1 ring-sky-100 dark:ring-sky-900/50">
               <h2 className="text-2xl font-bold text-foreground mb-3">
                 Still Have Questions?
               </h2>
@@ -139,7 +139,7 @@ export default function FAQPage() {
               </p>
               <a
                 href="/contact"
-                className="inline-flex items-center justify-center gap-2 h-11 px-6 rounded-lg bg-burgundy-500 hover:bg-burgundy-600 text-white text-sm font-medium transition-colors"
+                className="inline-flex items-center justify-center gap-2 h-11 px-6 rounded-lg bg-sky-500 hover:bg-sky-600 text-white text-sm font-medium transition-colors"
               >
                 Contact Us
               </a>

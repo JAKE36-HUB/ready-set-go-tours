@@ -196,7 +196,7 @@ export function PlanMySafari() {
             {/* Progress header */}
             <div className="mb-10">
               <div className="flex items-center justify-between mb-3">
-                <p className="text-xs font-semibold uppercase tracking-[0.2em] text-primary dark:text-burgundy-400">
+                <p className="text-xs font-semibold uppercase tracking-[0.2em] text-primary dark:text-amber-400">
                   Plan My Safari
                 </p>
                 <p className="text-xs text-muted-foreground">
@@ -221,7 +221,7 @@ export function PlanMySafari() {
                       i < step
                         ? "bg-primary text-primary-foreground border-primary"
                         : i === step
-                          ? "border-primary text-primary dark:text-burgundy-400"
+                          ? "border-primary text-primary dark:text-amber-400"
                           : "border-border text-muted-foreground"
                     )}
                     aria-label={`Step ${i + 1}: ${s.title}`}
@@ -260,7 +260,7 @@ export function PlanMySafari() {
                             className={cn(
                               "h-11 rounded-xl text-sm font-medium border transition-all",
                               form.whenMonth === m
-                                ? "border-primary bg-primary/10 text-primary dark:text-burgundy-400"
+                                ? "border-primary bg-primary/10 text-primary dark:text-amber-400"
                                 : "border-border bg-card text-foreground hover:border-primary/40"
                             )}
                           >
@@ -309,8 +309,8 @@ export function PlanMySafari() {
                               : "border-border bg-card hover:border-primary/40"
                           )}
                         >
-                          <opt.icon className={cn("w-6 h-6", active ? "text-primary dark:text-burgundy-400" : "text-muted-foreground")} />
-                          <span className={cn("text-sm font-medium", active ? "text-primary dark:text-burgundy-400" : "text-foreground")}>
+                          <opt.icon className={cn("w-6 h-6", active ? "text-primary dark:text-amber-400" : "text-muted-foreground")} />
+                          <span className={cn("text-sm font-medium", active ? "text-primary dark:text-amber-400" : "text-foreground")}>
                             {opt.label}
                           </span>
                         </button>
@@ -335,8 +335,8 @@ export function PlanMySafari() {
                               : "border-border bg-card hover:border-primary/40"
                           )}
                         >
-                          <opt.icon className={cn("w-5 h-5 shrink-0", active ? "text-primary dark:text-burgundy-400" : "text-muted-foreground")} />
-                          <span className={cn("text-sm font-medium", active ? "text-primary dark:text-burgundy-400" : "text-foreground")}>
+                          <opt.icon className={cn("w-5 h-5 shrink-0", active ? "text-primary dark:text-amber-400" : "text-muted-foreground")} />
+                          <span className={cn("text-sm font-medium", active ? "text-primary dark:text-amber-400" : "text-foreground")}>
                             {opt.label}
                           </span>
                         </button>
@@ -361,8 +361,8 @@ export function PlanMySafari() {
                               : "border-border bg-card hover:border-primary/40"
                           )}
                         >
-                          <opt.icon className={cn("w-5 h-5 shrink-0", active ? "text-primary dark:text-burgundy-400" : "text-muted-foreground")} />
-                          <span className={cn("text-sm font-medium leading-tight", active ? "text-primary dark:text-burgundy-400" : "text-foreground")}>
+                          <opt.icon className={cn("w-5 h-5 shrink-0", active ? "text-primary dark:text-amber-400" : "text-muted-foreground")} />
+                          <span className={cn("text-sm font-medium leading-tight", active ? "text-primary dark:text-amber-400" : "text-foreground")}>
                             {opt.label}
                           </span>
                         </button>
@@ -512,7 +512,7 @@ export function PlanMySafari() {
             className="text-center py-10"
           >
             <div className="mx-auto w-20 h-20 rounded-full bg-primary/10 flex items-center justify-center mb-6">
-              <CheckCircle2 className="w-10 h-10 text-primary dark:text-burgundy-400" />
+              <CheckCircle2 className="w-10 h-10 text-primary dark:text-amber-400" />
             </div>
             <h1 className="font-display text-3xl sm:text-4xl font-medium text-foreground mb-3 leading-tight">
               Your safari plan is on the way!

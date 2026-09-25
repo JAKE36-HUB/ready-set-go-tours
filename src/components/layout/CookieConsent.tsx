@@ -45,7 +45,7 @@ export function CookieConsent() {
           </button>
 
           <div className="flex flex-col sm:flex-row items-start gap-4 pr-8">
-            <div className="flex items-center justify-center w-10 h-10 rounded-xl bg-burgundy-50 dark:bg-burgundy-900/30 text-burgundy-600 dark:text-burgundy-400 shrink-0">
+            <div className="flex items-center justify-center w-10 h-10 rounded-xl bg-sky-50 dark:bg-sky-900/30 text-sky-600 dark:text-sky-400 shrink-0">
               <Cookie className="w-5 h-5" />
             </div>
             <div className="flex-1 min-w-0">
@@ -58,7 +58,7 @@ export function CookieConsent() {
                 cookies. See our{" "}
                 <Link
                   href="/privacy-policy"
-                  className="text-burgundy-600 dark:text-burgundy-400 hover:underline font-medium"
+                  className="text-sky-600 dark:text-sky-400 hover:underline font-medium"
                 >
                   Privacy Policy
                 </Link>{" "}
@@ -75,7 +75,7 @@ export function CookieConsent() {
               </Button>
               <Button
                 onClick={accept}
-                className="text-sm h-9 px-5 bg-gradient-to-r from-burgundy-500 to-burgundy-400 text-white border-0 hover:shadow-lg transition-all"
+                className="text-sm h-9 px-5 bg-gradient-to-r from-sky-500 to-cyan-400 text-white border-0 hover:shadow-lg transition-all"
               >
                 Accept All
               </Button>

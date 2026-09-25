@@ -20,7 +20,7 @@ function StarRating({ rating }: { rating: number }) {
       {Array.from({ length: 5 }, (_, i) => (
         <Star
           key={i}
-          className={`size-4 ${i < rating ? "text-burgundy-400 fill-burgundy-400" : "text-gray-300"}`}
+          className={`size-4 ${i < rating ? "text-amber-400 fill-amber-400" : "text-gray-300"}`}
         />
       ))}
     </div>
@@ -67,7 +67,7 @@ export default function TestimonialsPage() {
           <AnimatedSection direction="none">
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white mb-4">
               Traveler{" "}
-              <span className="bg-gradient-to-r from-burgundy-400 to-burgundy-300 bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-amber-400 to-yellow-300 bg-clip-text text-transparent">
                 Reviews
               </span>
             </h1>
@@ -85,12 +85,12 @@ export default function TestimonialsPage() {
           <AnimatedSection>
             <div className="relative">
               <div className="overflow-hidden rounded-2xl bg-card ring-1 ring-foreground/10 p-8 sm:p-12 min-h-[280px] flex flex-col justify-center">
-                <Quote className="size-10 text-burgundy-500/20 mb-4" />
+                <Quote className="size-10 text-sky-500/20 mb-4" />
                 <p className="text-lg sm:text-xl text-foreground leading-relaxed mb-6 italic">
                   &ldquo;{featured[currentSlide]?.text}&rdquo;
                 </p>
                 <div className="flex items-center gap-4">
-                  <div className="relative w-12 h-12 rounded-full overflow-hidden ring-2 ring-burgundy-500/20">
+                  <div className="relative w-12 h-12 rounded-full overflow-hidden ring-2 ring-sky-500/20">
                     <Image
                       src={featured[currentSlide]?.image || ""}
                       alt={featured[currentSlide]?.name || ""}
@@ -120,7 +120,7 @@ export default function TestimonialsPage() {
                       key={i}
                       onClick={() => { setCurrentSlide(i); resetAutoplay(); }}
                       className={`w-2.5 h-2.5 rounded-full transition-all ${
-                        i === currentSlide ? "bg-burgundy-500 w-8" : "bg-muted hover:bg-muted/80"
+                        i === currentSlide ? "bg-sky-500 w-8" : "bg-muted hover:bg-muted/80"
                       }`}
                       aria-label={`Go to testimonial ${i + 1}`}
                     />
@@ -257,7 +257,7 @@ export default function TestimonialsPage() {
               </div>
               <p className="text-3xl font-bold text-foreground mb-1">4.9 / 5.0</p>
               <p className="text-muted-foreground text-sm mb-6">Based on 850+ Google Reviews</p>
-              <Button variant="outline" className="border-burgundy-200 text-burgundy-600 hover:bg-burgundy-50">
+              <Button variant="outline" className="border-sky-200 text-sky-600 hover:bg-sky-50">
                 View on Google
               </Button>
             </div>
@@ -266,13 +266,13 @@ export default function TestimonialsPage() {
       </section>
 
       {/* Statistics */}
-      <section className="py-16 px-6 bg-gradient-to-br from-burgundy-900 via-burgundy-900 to-slate-900">
+      <section className="py-16 px-6 bg-gradient-to-br from-sky-900 via-blue-900 to-slate-900">
         <div className="max-w-6xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-6">
           {STATISTICS.slice(0, 4).map((stat, i) => (
             <AnimatedSection key={stat.label} delay={i * 0.05}>
               <div className="text-center">
                 <div className="text-3xl sm:text-4xl font-bold text-white mb-1">{stat.value}</div>
-                <div className="text-sm text-burgundy-200/70">{stat.label}</div>
+                <div className="text-sm text-sky-200/70">{stat.label}</div>
               </div>
             </AnimatedSection>
           ))}

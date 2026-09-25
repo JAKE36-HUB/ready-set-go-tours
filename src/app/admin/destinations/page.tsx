@@ -20,9 +20,9 @@ interface Destination {
 }
 
 const REGION_COLORS: Record<string, string> = {
-  kenya: "bg-burgundy-100 text-burgundy-700 dark:bg-burgundy-900/30 dark:text-burgundy-400",
-  tanzania: "bg-burgundy-100 text-burgundy-700 dark:bg-burgundy-900/30 dark:text-burgundy-400",
-  uganda: "bg-burgundy-100 text-burgundy-700 dark:bg-burgundy-900/30 dark:text-burgundy-400",
+  kenya: "bg-amber-100 text-amber-700 dark:bg-amber-900/30 dark:text-amber-400",
+  tanzania: "bg-emerald-100 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-400",
+  uganda: "bg-orange-100 text-orange-700 dark:bg-orange-900/30 dark:text-orange-400",
 }
 
 export default function DestinationsPage() {
@@ -52,7 +52,7 @@ export default function DestinationsPage() {
       <motion.div initial={{ opacity: 0, y: 15 }} animate={{ opacity: 1, y: 0 }}
         className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-burgundy-500 to-burgundy-400 flex items-center justify-center shadow-lg shadow-burgundy-500/20">
+          <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-emerald-500 to-teal-400 flex items-center justify-center shadow-lg shadow-emerald-500/20">
             <MapPin className="w-5 h-5 text-white" />
           </div>
           <div>
@@ -61,7 +61,7 @@ export default function DestinationsPage() {
           </div>
         </div>
         <Button onClick={() => router.push("/admin/destinations/new")}
-          className="bg-gradient-to-r from-burgundy-500 to-burgundy-400 text-white border-0 hover:shadow-lg hover:shadow-burgundy-500/25 transition-all h-9">
+          className="bg-gradient-to-r from-emerald-500 to-teal-400 text-white border-0 hover:shadow-lg hover:shadow-emerald-500/25 transition-all h-9">
           <Plus className="w-4 h-4 mr-1.5" />
           Add Destination
         </Button>
@@ -85,13 +85,13 @@ export default function DestinationsPage() {
       ) : destinations.length === 0 ? (
         <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }}
           className="text-center py-16 px-4 rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900">
-          <div className="w-16 h-16 rounded-2xl bg-burgundy-50 dark:bg-burgundy-500/10 flex items-center justify-center mx-auto mb-4">
-            <MapPin className="w-8 h-8 text-burgundy-400" />
+          <div className="w-16 h-16 rounded-2xl bg-emerald-50 dark:bg-emerald-500/10 flex items-center justify-center mx-auto mb-4">
+            <MapPin className="w-8 h-8 text-emerald-400" />
           </div>
           <p className="text-sm font-medium text-slate-900 dark:text-white">No destinations yet</p>
           <p className="text-xs text-slate-500 dark:text-slate-400 mt-1 mb-4">Add travel destinations for your visitors</p>
           <Button onClick={() => router.push("/admin/destinations/new")}
-            className="bg-gradient-to-r from-burgundy-500 to-burgundy-400 text-white border-0">
+            className="bg-gradient-to-r from-emerald-500 to-teal-400 text-white border-0">
             <Plus className="w-4 h-4 mr-1.5" /> Add Destination
           </Button>
         </motion.div>
@@ -133,7 +133,7 @@ export default function DestinationsPage() {
                     <td className="px-5 py-3.5 text-sm text-slate-500 hidden md:table-cell">
                       {dest.rating > 0 ? (
                         <span className="flex items-center gap-1">
-                          <span className="text-burgundy-400">{"★".repeat(Math.round(dest.rating))}</span>
+                          <span className="text-amber-400">{"★".repeat(Math.round(dest.rating))}</span>
                           <span className="text-xs text-slate-400">({dest.rating})</span>
                         </span>
                       ) : "—"}
@@ -144,11 +144,11 @@ export default function DestinationsPage() {
                     <td className="px-5 py-3.5 text-right">
                       <div className="flex items-center justify-end gap-0.5 opacity-70 group-hover:opacity-100 transition-opacity">
                         <Button variant="ghost" size="icon" onClick={() => window.open(`/${dest.region}-tours`, "_blank")}
-                          className="hover:bg-burgundy-50 dark:hover:bg-burgundy-500/10 hover:text-burgundy-600" aria-label="View on site">
+                          className="hover:bg-sky-50 dark:hover:bg-sky-500/10 hover:text-sky-600" aria-label="View on site">
                           <ExternalLink className="w-3.5 h-3.5" />
                         </Button>
                         <Button variant="ghost" size="icon" onClick={() => router.push(`/admin/destinations/${dest.id}/edit`)}
-                          className="hover:bg-burgundy-50 dark:hover:bg-burgundy-500/10 hover:text-burgundy-600" aria-label="Edit">
+                          className="hover:bg-amber-50 dark:hover:bg-amber-500/10 hover:text-amber-600" aria-label="Edit">
                           <Edit className="w-3.5 h-3.5" />
                         </Button>
                         <Button variant="ghost" size="icon" onClick={() => handleDelete(dest.id)}

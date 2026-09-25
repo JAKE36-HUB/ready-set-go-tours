@@ -46,7 +46,7 @@ export function CustomSafari() {
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.7, delay: 0.15 }}
           >
-            <span className="text-xs font-semibold uppercase tracking-[0.2em] text-primary dark:text-burgundy-400">Custom Safaris</span>
+            <span className="text-xs font-semibold uppercase tracking-[0.2em] text-primary dark:text-amber-400">Custom Safaris</span>
             <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-medium text-foreground mt-4 mb-5 leading-tight">
               Can&apos;t find exactly what you&apos;re looking for?
             </h2>
@@ -56,7 +56,7 @@ export function CustomSafari() {
             <ul className="space-y-3 mb-8">
               {REASONS.map((reason) => (
                 <li key={reason} className="flex items-start gap-3 text-sm text-foreground">
-                  <span className="mt-0.5 flex items-center justify-center w-5 h-5 rounded-full bg-primary/15 text-primary dark:text-burgundy-400 shrink-0">
+                  <span className="mt-0.5 flex items-center justify-center w-5 h-5 rounded-full bg-primary/15 text-primary dark:text-amber-400 shrink-0">
                     <Check className="w-3 h-3" />
                   </span>
                   {reason}
@@ -72,7 +72,7 @@ export function CustomSafari() {
               <Button
                 variant="outline"
                 onClick={() => window.open(whatsappUrl, "_blank", "noopener,noreferrer")}
-                className="h-13 px-8 text-base font-medium border-border hover:border-primary/40 hover:text-primary dark:hover:text-burgundy-400 transition-all"
+                className="h-13 px-8 text-base font-medium border-border hover:border-primary/40 hover:text-primary dark:hover:text-amber-400 transition-all"
               >
                 <MessageCircle className="w-4 h-4 mr-2" />
                 WhatsApp Us

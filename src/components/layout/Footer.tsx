@@ -67,8 +67,8 @@ export function Footer() {
   return (
     <footer className="relative bg-stone-950 dark:bg-black text-stone-300 overflow-hidden">
       <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-0 left-1/4 w-96 h-96 bg-burgundy-500/5 rounded-full blur-3xl" />
-        <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-burgundy-500/5 rounded-full blur-3xl" />
+        <div className="absolute top-0 left-1/4 w-96 h-96 bg-amber-500/5 rounded-full blur-3xl" />
+        <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-orange-500/5 rounded-full blur-3xl" />
       </div>
 
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-20 pb-8">
@@ -111,7 +111,7 @@ export function Footer() {
                   href={social.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center justify-center w-10 h-10 rounded-full bg-stone-800 text-stone-400 hover:bg-burgundy-600 hover:text-white hover:scale-110 transition-all duration-200"
+                  className="flex items-center justify-center w-10 h-10 rounded-full bg-stone-800 text-stone-400 hover:bg-amber-600 hover:text-white hover:scale-110 transition-all duration-200"
                   aria-label={social.name}
                 >
                   <SocialIcon name={social.icon} />
@@ -130,9 +130,9 @@ export function Footer() {
                   <li key={link.href}>
                     <Link
                       href={link.href}
-                      className="group flex items-center gap-1.5 text-sm text-stone-400 hover:text-burgundy-400 transition-colors duration-200"
+                      className="group flex items-center gap-1.5 text-sm text-stone-400 hover:text-amber-400 transition-colors duration-200"
                     >
-                      <ChevronRight className="w-3 h-3 text-burgundy-500/0 group-hover:text-burgundy-500 transition-all duration-200 -ml-0 group-hover:ml-0" />
+                      <ChevronRight className="w-3 h-3 text-amber-500/0 group-hover:text-amber-500 transition-all duration-200 -ml-0 group-hover:ml-0" />
                       {link.label}
                     </Link>
                   </li>
@@ -149,30 +149,30 @@ export function Footer() {
               <li>
                 <a
                   href={`tel:${CONTACT_INFO.phone}`}
-                  className="flex items-start gap-3 text-sm text-stone-400 hover:text-burgundy-400 transition-colors duration-200"
+                  className="flex items-start gap-3 text-sm text-stone-400 hover:text-amber-400 transition-colors duration-200"
                 >
-                  <Phone className="w-4 h-4 mt-0.5 text-burgundy-500 shrink-0" />
+                  <Phone className="w-4 h-4 mt-0.5 text-amber-500 shrink-0" />
                   {CONTACT_INFO.phone}
                 </a>
               </li>
               <li>
                 <a
                   href={`mailto:${CONTACT_INFO.bookingsEmail}`}
-                  className="flex items-start gap-3 text-sm text-stone-400 hover:text-burgundy-400 transition-colors duration-200"
+                  className="flex items-start gap-3 text-sm text-stone-400 hover:text-amber-400 transition-colors duration-200"
                 >
-                  <Mail className="w-4 h-4 mt-0.5 text-burgundy-500 shrink-0" />
+                  <Mail className="w-4 h-4 mt-0.5 text-amber-500 shrink-0" />
                   {CONTACT_INFO.bookingsEmail}
                 </a>
               </li>
               <li>
                 <div className="flex items-start gap-3 text-sm text-stone-400">
-                  <MapPin className="w-4 h-4 mt-0.5 text-burgundy-500 shrink-0" />
+                  <MapPin className="w-4 h-4 mt-0.5 text-orange-500 shrink-0" />
                   {CONTACT_INFO.address}
                 </div>
               </li>
               <li>
                 <div className="flex items-start gap-3 text-sm text-stone-400">
-                  <Clock className="w-4 h-4 mt-0.5 text-burgundy-500 shrink-0" />
+                  <Clock className="w-4 h-4 mt-0.5 text-amber-500 shrink-0" />
                   {CONTACT_INFO.hours}
                 </div>
               </li>
@@ -197,7 +197,7 @@ export function Footer() {
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder="Enter your email"
                     required
-                    className="h-10 bg-stone-800 border-stone-700 text-stone-300 placeholder:text-stone-500 focus:border-burgundy-500"
+                    className="h-10 bg-stone-800 border-stone-700 text-stone-300 placeholder:text-stone-500 focus:border-amber-500"
                     aria-label="Email address for newsletter"
                   />
                 </div>
@@ -213,7 +213,7 @@ export function Footer() {
                 <motion.p
                   initial={{ opacity: 0, y: 5 }}
                   animate={{ opacity: 1, y: 0 }}
-                  className="text-sm text-burgundy-400 mt-2"
+                  className="text-sm text-emerald-400 mt-2"
                 >
                   Thank you for subscribing!
                 </motion.p>
@@ -221,7 +221,7 @@ export function Footer() {
             </div>
 
             <div className="flex flex-col sm:flex-row items-start sm:items-center justify-end gap-4 text-sm text-stone-500">
-              <Link href="/privacy-policy" className="hover:text-burgundy-400 transition-colors">
+              <Link href="/privacy-policy" className="hover:text-amber-400 transition-colors">
                 Privacy Policy
               </Link>
             </div>
@@ -233,7 +233,7 @@ export function Footer() {
           <div className="flex items-center gap-4">
             <Link
               href="/admin"
-              className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full border border-stone-600 bg-stone-800/60 text-stone-200 hover:bg-stone-700 hover:text-white hover:border-burgundy-500 transition-colors font-medium"
+              className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full border border-stone-600 bg-stone-800/60 text-stone-200 hover:bg-stone-700 hover:text-white hover:border-amber-500 transition-colors font-medium"
             >
               <ShieldCheck className="w-4 h-4" />
               Admin Panel

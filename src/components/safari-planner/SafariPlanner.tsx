@@ -26,10 +26,10 @@ export function SafariPlanner() {
 
   return (
     <section className="relative py-28 overflow-hidden">
-      <div className="absolute inset-0 bg-gradient-to-br from-slate-900 via-slate-800 to-burgundy-950" />
+      <div className="absolute inset-0 bg-gradient-to-br from-slate-900 via-slate-800 to-emerald-950" />
       <div className="absolute inset-0 opacity-[0.03]" style={{ backgroundImage: "radial-gradient(circle at 1px 1px, white 1px, transparent 0)", backgroundSize: "40px 40px" }} />
-      <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-burgundy-500/10 rounded-full blur-[160px]" />
-      <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-burgundy-500/10 rounded-full blur-[120px]" />
+      <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-emerald-500/10 rounded-full blur-[160px]" />
+      <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-teal-500/10 rounded-full blur-[120px]" />
 
       <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
@@ -38,13 +38,13 @@ export function SafariPlanner() {
           transition={{ duration: 0.6 }}
           className="text-center mb-10"
         >
-          <span className="inline-flex items-center gap-2 bg-burgundy-500/15 text-burgundy-300 text-xs font-semibold uppercase tracking-[0.2em] px-4 py-1.5 rounded-full ring-1 ring-burgundy-500/20 mb-5">
+          <span className="inline-flex items-center gap-2 bg-emerald-500/15 text-emerald-300 text-xs font-semibold uppercase tracking-[0.2em] px-4 py-1.5 rounded-full ring-1 ring-emerald-500/20 mb-5">
             <Compass className="size-3.5" />
             Build Your Safari
           </span>
           <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white tracking-tight">
             Create Your{" "}
-            <span className="bg-gradient-to-r from-burgundy-400 via-burgundy-300 to-burgundy-300 bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-emerald-400 via-emerald-300 to-teal-300 bg-clip-text text-transparent">
               Dream Itinerary
             </span>
           </h2>
@@ -61,16 +61,16 @@ export function SafariPlanner() {
                 <div className="flex flex-col items-center">
                   <div className={cn(
                     "w-9 h-9 rounded-full flex items-center justify-center text-xs font-bold transition-all duration-300",
-                    i < step ? "bg-burgundy-500 text-white" : i === step ? "bg-white/15 text-white ring-2 ring-burgundy-400" : "bg-white/5 text-white/30"
+                    i < step ? "bg-emerald-500 text-white" : i === step ? "bg-white/15 text-white ring-2 ring-emerald-400" : "bg-white/5 text-white/30"
                   )}>
                     {i < step ? <Check className="w-4 h-4" /> : i + 1}
                   </div>
-                  <span className={cn("text-[10px] mt-1 hidden sm:block whitespace-nowrap transition-colors", i === step ? "text-burgundy-300" : "text-white/30")}>
+                  <span className={cn("text-[10px] mt-1 hidden sm:block whitespace-nowrap transition-colors", i === step ? "text-emerald-300" : "text-white/30")}>
                     {s.label}
                   </span>
                 </div>
                 {i < STEPS.length - 1 && (
-                  <div className={cn("w-6 sm:w-12 h-px mx-1 sm:mx-2 transition-colors", i < step ? "bg-burgundy-500/50" : "bg-white/10")} />
+                  <div className={cn("w-6 sm:w-12 h-px mx-1 sm:mx-2 transition-colors", i < step ? "bg-emerald-500/50" : "bg-white/10")} />
                 )}
               </div>
             ))}

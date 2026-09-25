@@ -24,7 +24,7 @@ export function WhyChooseUs() {
           transition={{ duration: 0.7 }}
           className="text-center mb-14 max-w-2xl mx-auto"
         >
-          <span className="text-xs font-semibold uppercase tracking-[0.2em] text-primary dark:text-burgundy-400">Why Ready Set Go</span>
+          <span className="text-xs font-semibold uppercase tracking-[0.2em] text-primary dark:text-amber-400">Why Ready Set Go</span>
           <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-medium text-foreground mt-4 mb-4 leading-tight">
             Why plan your safari with Ready Set Go?
           </h2>
@@ -44,7 +44,7 @@ export function WhyChooseUs() {
                 transition={{ duration: 0.5, delay: idx * 0.08 }}
                 className="group relative bg-card rounded-3xl p-7 border border-border hover:shadow-xl hover:border-primary/30 hover:-translate-y-1 transition-all duration-300"
               >
-                <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-burgundy-500 to-burgundy-600 flex items-center justify-center mb-5 shadow-lg shadow-burgundy-500/20 group-hover:scale-110 group-hover:shadow-burgundy-500/30 transition-all duration-300">
+                <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-amber-500 to-orange-600 flex items-center justify-center mb-5 shadow-lg shadow-amber-500/20 group-hover:scale-110 group-hover:shadow-amber-500/30 transition-all duration-300">
                   <IconComponent className="w-6 h-6 text-white" />
                 </div>
                 <h3 className="font-display text-lg font-medium text-foreground mb-2">{item.title}</h3>

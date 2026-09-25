@@ -14,7 +14,7 @@ export default function TanzaniaTourInteractive({ tourName, isCTA }: Props) {
     return (
       <Button
         onClick={() => openBookingModal(tourName)}
-        className="bg-gradient-to-r from-burgundy-500 to-burgundy-600 hover:from-burgundy-400 hover:to-burgundy-500 text-white px-8 h-11 shadow-lg shadow-burgundy-500/25"
+        className="bg-gradient-to-r from-amber-500 to-orange-600 hover:from-amber-400 hover:to-orange-500 text-white px-8 h-11 shadow-lg shadow-amber-500/25"
       >
         <Plane className="size-4 mr-2" />
         Get a Free Quote
@@ -25,7 +25,7 @@ export default function TanzaniaTourInteractive({ tourName, isCTA }: Props) {
   return (
     <Button
       onClick={() => openBookingModal(tourName)}
-      className="bg-gradient-to-r from-burgundy-500 to-burgundy-600 hover:from-burgundy-400 hover:to-burgundy-500 text-white px-6"
+      className="bg-gradient-to-r from-amber-500 to-orange-600 hover:from-amber-400 hover:to-orange-500 text-white px-6"
     >
       <Plane className="size-4 mr-2" />
       Get a Free Quote

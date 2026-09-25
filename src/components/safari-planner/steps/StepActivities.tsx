@@ -43,14 +43,14 @@ export function StepActivities({
             onChange={(e) => setInput(e.target.value)}
             onKeyDown={(e) => { if (e.key === "Enter") addActivity() }}
             placeholder="e.g. Hot air balloon safari, Maasai village visit..."
-            className="flex-1 h-11 px-4 rounded-xl bg-white/5 border border-white/10 text-white text-sm placeholder-white/30 focus:outline-none focus:ring-2 focus:ring-burgundy-400/30 focus:border-burgundy-400/50 transition-all"
+            className="flex-1 h-11 px-4 rounded-xl bg-white/5 border border-white/10 text-white text-sm placeholder-white/30 focus:outline-none focus:ring-2 focus:ring-emerald-400/30 focus:border-emerald-400/50 transition-all"
             aria-label="Add an activity"
           />
           <button
             type="button"
             onClick={addActivity}
             disabled={!input.trim()}
-            className="h-11 px-4 rounded-xl bg-burgundy-500 hover:bg-burgundy-400 disabled:bg-white/10 disabled:text-white/30 text-white text-sm font-semibold transition-all flex items-center gap-1.5"
+            className="h-11 px-4 rounded-xl bg-emerald-500 hover:bg-emerald-400 disabled:bg-white/10 disabled:text-white/30 text-white text-sm font-semibold transition-all flex items-center gap-1.5"
           >
             <Plus className="w-4 h-4" /> Add
           </button>
@@ -62,7 +62,7 @@ export function StepActivities({
           <h4 className="text-xs font-semibold text-white/50 uppercase tracking-wider mb-3">Your Activities ({value.length})</h4>
           <div className="flex flex-wrap gap-2">
             {value.map((a) => (
-              <span key={a} className="inline-flex items-center gap-1.5 text-xs bg-burgundy-500/20 text-burgundy-300 px-3 py-1.5 rounded-full ring-1 ring-burgundy-500/30">
+              <span key={a} className="inline-flex items-center gap-1.5 text-xs bg-emerald-500/20 text-emerald-300 px-3 py-1.5 rounded-full ring-1 ring-emerald-500/30">
                 {a}
                 <button type="button" onClick={() => removeActivity(a)} className="hover:text-white transition-colors" aria-label={`Remove ${a}`}>
                   <X className="w-3 h-3" />
@@ -75,7 +75,7 @@ export function StepActivities({
 
       <div className="mb-6">
         <h4 className="text-xs font-semibold text-white/50 uppercase tracking-wider mb-3 flex items-center gap-2">
-          <Lightbulb className="w-3.5 h-3.5 text-burgundy-400" />
+          <Lightbulb className="w-3.5 h-3.5 text-amber-400" />
           Suggestions
         </h4>
         <div className="flex flex-wrap gap-2">
@@ -88,13 +88,13 @@ export function StepActivities({
                 onClick={() => suggest(act.value)}
                 className={`inline-flex items-center gap-1.5 text-xs px-3 py-1.5 rounded-full transition-all ${
                   added
-                    ? "bg-burgundy-500/20 text-burgundy-300 ring-1 ring-burgundy-500/30"
+                    ? "bg-emerald-500/20 text-emerald-300 ring-1 ring-emerald-500/30"
                     : "bg-white/5 text-white/50 hover:bg-white/10 hover:text-white/70 ring-1 ring-white/10"
                 }`}
               >
                 <span>{act.icon}</span>
                 {act.value}
-                {added && <span className="text-[10px] text-burgundy-400 ml-0.5">✓</span>}
+                {added && <span className="text-[10px] text-emerald-400 ml-0.5">✓</span>}
               </button>
             )
           })}
@@ -109,7 +109,7 @@ export function StepActivities({
           type="button"
           onClick={onNext}
           disabled={value.length === 0}
-          className="h-10 px-6 rounded-xl bg-burgundy-500 hover:bg-burgundy-400 disabled:bg-white/10 disabled:text-white/30 text-white text-sm font-semibold shadow-lg shadow-burgundy-500/25 transition-all"
+          className="h-10 px-6 rounded-xl bg-emerald-500 hover:bg-emerald-400 disabled:bg-white/10 disabled:text-white/30 text-white text-sm font-semibold shadow-lg shadow-emerald-500/25 transition-all"
         >
           {value.length > 0 ? `Next (${value.length})` : "Add at least one activity"}
         </button>

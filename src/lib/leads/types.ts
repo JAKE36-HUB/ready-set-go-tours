@@ -118,8 +118,8 @@ export const LEAD_STATUSES: { value: LeadStatus; label: string; cls: string; dot
   { value: "new", label: "New Lead", cls: "bg-sky-100 text-sky-700 dark:bg-sky-950 dark:text-sky-400", dot: "bg-sky-500" },
   { value: "contacted", label: "Contacted", cls: "bg-indigo-100 text-indigo-700 dark:bg-indigo-950 dark:text-indigo-400", dot: "bg-indigo-500" },
   { value: "quote_sent", label: "Quote Sent", cls: "bg-violet-100 text-violet-700 dark:bg-violet-950 dark:text-violet-400", dot: "bg-violet-500" },
-  { value: "negotiating", label: "Negotiating", cls: "bg-burgundy-100 text-burgundy-700 dark:bg-burgundy-950 dark:text-burgundy-400", dot: "bg-burgundy-500" },
-  { value: "payment_pending", label: "Payment Pending", cls: "bg-burgundy-100 text-burgundy-700 dark:bg-burgundy-950 dark:text-burgundy-400", dot: "bg-burgundy-500" },
+  { value: "negotiating", label: "Negotiating", cls: "bg-amber-100 text-amber-700 dark:bg-amber-950 dark:text-amber-400", dot: "bg-amber-500" },
+  { value: "payment_pending", label: "Payment Pending", cls: "bg-orange-100 text-orange-700 dark:bg-orange-950 dark:text-orange-400", dot: "bg-orange-500" },
   { value: "booked", label: "Booked", cls: "bg-emerald-100 text-emerald-700 dark:bg-emerald-950 dark:text-emerald-400", dot: "bg-emerald-500" },
   { value: "completed", label: "Completed", cls: "bg-green-100 text-green-700 dark:bg-green-950 dark:text-green-400", dot: "bg-green-500" },
   { value: "lost", label: "Lost", cls: "bg-rose-100 text-rose-700 dark:bg-rose-950 dark:text-rose-400", dot: "bg-rose-500" },
@@ -138,9 +138,9 @@ export const LEAD_SOURCES: { value: LeadSource | string; label: string }[] = [
 
 export const NOTIFICATION_TYPES: Record<string, { label: string; cls: string }> = {
   new_lead: { label: "New Lead", cls: "bg-emerald-100 text-emerald-700 dark:bg-emerald-950 dark:text-emerald-400" },
-  new_booking: { label: "New Booking", cls: "bg-burgundy-100 text-burgundy-700 dark:bg-burgundy-950 dark:text-burgundy-400" },
+  new_booking: { label: "New Booking", cls: "bg-fuchsia-100 text-fuchsia-700 dark:bg-fuchsia-950 dark:text-fuchsia-400" },
   contact_form: { label: "Contact Form", cls: "bg-sky-100 text-sky-700 dark:bg-sky-950 dark:text-sky-400" },
-  newsletter: { label: "Newsletter Signup", cls: "bg-burgundy-100 text-burgundy-700 dark:bg-burgundy-950 dark:text-burgundy-400" },
+  newsletter: { label: "Newsletter Signup", cls: "bg-amber-100 text-amber-700 dark:bg-amber-950 dark:text-amber-400" },
   whatsapp_request: { label: "WhatsApp Request", cls: "bg-green-100 text-green-700 dark:bg-green-950 dark:text-green-400" },
   popup_lead: { label: "Popup Lead", cls: "bg-violet-100 text-violet-700 dark:bg-violet-950 dark:text-violet-400" },
   package_inquiry: { label: "Package Inquiry", cls: "bg-indigo-100 text-indigo-700 dark:bg-indigo-950 dark:text-indigo-400" },

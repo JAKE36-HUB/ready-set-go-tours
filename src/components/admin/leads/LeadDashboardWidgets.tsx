@@ -22,13 +22,13 @@ export function LeadStatsWidgets() {
   })
 
   const cards = [
-    { label: "New Leads Today", value: data?.new_today ?? "—", icon: Users, cls: "from-burgundy-500 to-burgundy-600", key: "new" },
-    { label: "Unread Leads", value: data?.unread ?? "—", icon: MailOpen, cls: "from-burgundy-500 to-burgundy-600", key: "unread" },
-    { label: "Bookings Today", value: data?.bookings_today ?? "—", icon: Plane, cls: "from-burgundy-500 to-burgundy-600", key: "booked" },
-    { label: "Revenue (month)", value: data ? formatMoney(data.revenue) : "—", icon: Wallet, cls: "from-burgundy-500 to-burgundy-600", key: "revenue" },
-    { label: "WhatsApp Clicks", value: data?.whatsapp_clicks ?? "—", icon: MessageCircle, cls: "from-burgundy-500 to-burgundy-600", key: "wa" },
-    { label: "Conversion Rate", value: data ? `${data.conversion_rate}%` : "—", icon: TrendingUp, cls: "from-burgundy-500 to-burgundy-600", key: "conv" },
-    { label: "Avg Response Time", value: data && data.avg_response_time > 0 ? `${data.avg_response_time}h` : "—", icon: Timer, cls: "from-burgundy-500 to-burgundy-600", key: "resp" },
+    { label: "New Leads Today", value: data?.new_today ?? "—", icon: Users, cls: "from-sky-500 to-blue-600", key: "new" },
+    { label: "Unread Leads", value: data?.unread ?? "—", icon: MailOpen, cls: "from-amber-500 to-orange-600", key: "unread" },
+    { label: "Bookings Today", value: data?.bookings_today ?? "—", icon: Plane, cls: "from-emerald-500 to-green-600", key: "booked" },
+    { label: "Revenue (month)", value: data ? formatMoney(data.revenue) : "—", icon: Wallet, cls: "from-violet-500 to-purple-600", key: "revenue" },
+    { label: "WhatsApp Clicks", value: data?.whatsapp_clicks ?? "—", icon: MessageCircle, cls: "from-green-500 to-teal-600", key: "wa" },
+    { label: "Conversion Rate", value: data ? `${data.conversion_rate}%` : "—", icon: TrendingUp, cls: "from-fuchsia-500 to-pink-600", key: "conv" },
+    { label: "Avg Response Time", value: data && data.avg_response_time > 0 ? `${data.avg_response_time}h` : "—", icon: Timer, cls: "from-indigo-500 to-blue-600", key: "resp" },
   ]
 
   return (
@@ -92,7 +92,7 @@ export function LeadRemindersPanel() {
     <div className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-5">
       <div className="flex items-center justify-between mb-4">
         <h3 className="flex items-center gap-2 font-bold text-sm">
-          <BellRing className="w-4 h-4 text-burgundy-500" />
+          <BellRing className="w-4 h-4 text-amber-500" />
           Follow-up Reminders
           {overdue.length > 0 && (
             <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-rose-100 dark:bg-rose-950 text-rose-600 dark:text-rose-400">

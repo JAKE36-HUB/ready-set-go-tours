@@ -25,13 +25,13 @@ export function BlogPreview() {
           className="flex flex-col lg:flex-row lg:items-end lg:justify-between mb-14 gap-6"
         >
           <div>
-            <span className="text-sm font-semibold text-burgundy-600 dark:text-burgundy-400 uppercase tracking-[0.2em]">Journal</span>
+            <span className="text-sm font-semibold text-amber-600 dark:text-amber-400 uppercase tracking-[0.2em]">Journal</span>
             <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-slate-900 dark:text-white mt-3 tracking-tight">
               Travel Guide
             </h2>
           </div>
           <Link href="/travel-guide">
-            <Button variant="outline" className="h-12 px-8 text-sm font-semibold border-slate-300 dark:border-slate-600 hover:border-burgundy-400 dark:hover:border-burgundy-500 transition-all">
+            <Button variant="outline" className="h-12 px-8 text-sm font-semibold border-slate-300 dark:border-slate-600 hover:border-amber-400 dark:hover:border-amber-500 transition-all">
               Read Our Guides <ArrowRight className="w-4 h-4 ml-2" />
             </Button>
           </Link>
@@ -50,7 +50,7 @@ export function BlogPreview() {
                   <div className="relative h-52 overflow-hidden">
                     <Image src={post.image} alt={post.title} fill sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" className="object-cover transition-transform duration-700 group-hover:scale-105" />
                     <div className="absolute top-3 left-3">
-                      <span className="bg-gradient-to-r from-burgundy-500 to-burgundy-500 text-white text-xs font-semibold px-3 py-1 rounded-full">{post.category}</span>
+                      <span className="bg-gradient-to-r from-amber-500 to-orange-500 text-white text-xs font-semibold px-3 py-1 rounded-full">{post.category}</span>
                     </div>
                   </div>
                   <div className="p-6">
@@ -58,9 +58,9 @@ export function BlogPreview() {
                       <span className="flex items-center gap-1.5"><Users className="w-3.5 h-3.5" />{post.author}</span>
                       <span className="flex items-center gap-1.5"><Calendar className="w-3.5 h-3.5" />{post.date}</span>
                     </div>
-                    <h3 className="text-base font-bold text-slate-900 dark:text-white mb-2 group-hover:text-burgundy-600 dark:group-hover:text-burgundy-400 transition-colors line-clamp-2">{post.title}</h3>
+                    <h3 className="text-base font-bold text-slate-900 dark:text-white mb-2 group-hover:text-amber-600 dark:group-hover:text-amber-400 transition-colors line-clamp-2">{post.title}</h3>
                     <p className="text-sm text-slate-500 dark:text-slate-400 line-clamp-2">{post.excerpt}</p>
-                    <div className="mt-4 text-sm font-semibold text-burgundy-600 dark:text-burgundy-400 inline-flex items-center gap-2 group-hover:gap-3 transition-all">
+                    <div className="mt-4 text-sm font-semibold text-amber-600 dark:text-amber-400 inline-flex items-center gap-2 group-hover:gap-3 transition-all">
                       Read Guide <span className="transition-transform duration-300 group-hover:translate-x-1">→</span>
                     </div>
                   </div>

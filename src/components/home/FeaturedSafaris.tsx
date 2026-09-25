@@ -45,7 +45,7 @@ export function FeaturedSafaris() {
           transition={{ duration: 0.7 }}
           className="text-center mb-14 max-w-2xl mx-auto"
         >
-          <span className="text-xs font-semibold uppercase tracking-[0.2em] text-primary dark:text-burgundy-400">Find Your Safari</span>
+          <span className="text-xs font-semibold uppercase tracking-[0.2em] text-primary dark:text-amber-400">Find Your Safari</span>
           <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-medium text-foreground mt-4 mb-4 leading-tight">
             Safaris worth planning a trip around
           </h2>
@@ -87,8 +87,8 @@ export function FeaturedSafaris() {
                   {pkg.name}
                 </h3>
                 <div className="flex items-center gap-4 text-xs text-muted-foreground mb-5">
-                  <span className="flex items-center gap-1.5"><Clock className="w-3.5 h-3.5 text-primary dark:text-burgundy-400 shrink-0" />{pkg.duration}</span>
-                  <span className="flex items-center gap-1.5 truncate"><Bed className="w-3.5 h-3.5 text-primary dark:text-burgundy-400 shrink-0" />{pkg.accommodation}</span>
+                  <span className="flex items-center gap-1.5"><Clock className="w-3.5 h-3.5 text-primary dark:text-amber-400 shrink-0" />{pkg.duration}</span>
+                  <span className="flex items-center gap-1.5 truncate"><Bed className="w-3.5 h-3.5 text-primary dark:text-amber-400 shrink-0" />{pkg.accommodation}</span>
                 </div>
                 <div className="flex items-center gap-3">
                   <Link
@@ -116,7 +116,7 @@ export function FeaturedSafaris() {
           className="text-center mt-12"
         >
           <Link href="/holiday-packages">
-            <Button variant="outline" className="h-12 px-8 text-sm font-semibold border-border hover:border-primary hover:text-primary dark:hover:text-burgundy-400 transition-all">
+            <Button variant="outline" className="h-12 px-8 text-sm font-semibold border-border hover:border-primary hover:text-primary dark:hover:text-amber-400 transition-all">
               Explore All Safaris <ArrowRight className="w-4 h-4 ml-2" />
             </Button>
           </Link>

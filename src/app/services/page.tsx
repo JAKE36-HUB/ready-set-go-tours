@@ -21,7 +21,7 @@ export default function ServicesPage() {
           className="object-cover"
           sizes="100vw"
         />
-        <div className="absolute inset-0 bg-gradient-to-br from-burgundy-900/80 via-burgundy-900/80 to-slate-900/90" />
+        <div className="absolute inset-0 bg-gradient-to-br from-sky-900/80 via-blue-900/80 to-slate-900/90" />
         <div className="absolute inset-0 opacity-[0.04]" style={{ backgroundImage: "radial-gradient(circle at 1px 1px, white 1px, transparent 0)", backgroundSize: "40px 40px" }} />
         <div className="relative z-10 max-w-4xl mx-auto text-center">
           <AnimatedSection direction="none">
@@ -31,7 +31,7 @@ export default function ServicesPage() {
             </span>
             <h1 className="text-4xl sm:text-5xl lg:text-7xl font-bold text-white mb-6 leading-tight">
               Our{" "}
-              <span className="bg-gradient-to-r from-burgundy-300 to-burgundy-200 bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-sky-300 to-blue-200 bg-clip-text text-transparent">
                 Services
               </span>
             </h1>
@@ -50,7 +50,7 @@ export default function ServicesPage() {
             <div className="text-center mb-14">
               <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground mb-4">
                 Everything You Need,{" "}
-                <span className="text-burgundy-500">One Call Away</span>
+                <span className="text-sky-500">One Call Away</span>
               </h2>
               <p className="text-muted-foreground max-w-2xl mx-auto">
                 Whether you need a room for the night, a flight across the continent, or deep
@@ -89,8 +89,8 @@ export default function ServicesPage() {
                         {service.benefits.map((b) => {
                           const BIcon = iconMap[b.icon] || Compass
                           return (
-                            <div key={b.title} className="p-3 rounded-xl bg-burgundy-50 dark:bg-burgundy-950/30 border border-burgundy-100 dark:border-burgundy-900/50">
-                              <BIcon className="size-5 text-burgundy-500 mb-1.5" />
+                            <div key={b.title} className="p-3 rounded-xl bg-sky-50 dark:bg-sky-950/30 border border-sky-100 dark:border-sky-900/50">
+                              <BIcon className="size-5 text-sky-500 mb-1.5" />
                               <p className="text-xs font-semibold text-foreground mb-0.5">{b.title}</p>
                               <p className="text-xs text-muted-foreground">{b.desc}</p>
                             </div>
@@ -102,7 +102,7 @@ export default function ServicesPage() {
                       <ul className="space-y-1.5">
                         {service.features.slice(0, 4).map((f) => (
                           <li key={f} className="flex items-start gap-2 text-sm text-muted-foreground">
-                            <Star className="size-3.5 text-burgundy-500 mt-0.5 shrink-0" />
+                            <Star className="size-3.5 text-sky-500 mt-0.5 shrink-0" />
                             {f}
                           </li>
                         ))}
@@ -110,7 +110,7 @@ export default function ServicesPage() {
 
                       <Link
                         href={`/services/${service.slug}`}
-                        className="inline-flex items-center gap-2 h-11 px-5 rounded-xl bg-gradient-to-r from-burgundy-500 to-burgundy-600 hover:from-burgundy-400 hover:to-burgundy-500 text-white text-sm font-semibold shadow-lg shadow-burgundy-500/25 transition-all duration-200"
+                        className="inline-flex items-center gap-2 h-11 px-5 rounded-xl bg-gradient-to-r from-sky-500 to-blue-600 hover:from-sky-400 hover:to-blue-500 text-white text-sm font-semibold shadow-lg shadow-sky-500/25 transition-all duration-200"
                       >
                         Learn More <ArrowRight className="size-4" />
                       </Link>
@@ -124,21 +124,21 @@ export default function ServicesPage() {
       </section>
 
       {/* CTA */}
-      <section className="py-20 px-6 bg-gradient-to-br from-burgundy-900 via-burgundy-900 to-slate-900 relative overflow-hidden">
+      <section className="py-20 px-6 bg-gradient-to-br from-sky-900 via-blue-900 to-slate-900 relative overflow-hidden">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_right,rgba(251,146,60,0.12),transparent_60%)]" />
         <div className="max-w-4xl mx-auto text-center relative z-10">
           <AnimatedSection>
             <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">
               Need Help Planning?
             </h2>
-            <p className="text-burgundy-200/80 text-lg max-w-2xl mx-auto mb-8">
+            <p className="text-sky-200/80 text-lg max-w-2xl mx-auto mb-8">
               Whatever you need — a hotel booking, a flight, or a spa day — our team is ready to help.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link
                 href={whatsappLink()}
                 target="_blank"
-                className="inline-flex items-center justify-center gap-2 h-12 px-8 rounded-xl bg-gradient-to-r from-burgundy-500 to-burgundy-600 hover:from-burgundy-400 hover:to-burgundy-500 text-white font-semibold shadow-lg shadow-burgundy-500/25 transition-all"
+                className="inline-flex items-center justify-center gap-2 h-12 px-8 rounded-xl bg-gradient-to-r from-emerald-500 to-emerald-600 hover:from-emerald-400 hover:to-emerald-500 text-white font-semibold shadow-lg shadow-emerald-500/25 transition-all"
               >
                 WhatsApp Us
               </Link>

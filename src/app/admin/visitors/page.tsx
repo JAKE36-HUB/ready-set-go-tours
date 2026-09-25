@@ -96,12 +96,12 @@ export default function AdminVisitors() {
       <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
         className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 p-6">
         <div className="absolute inset-0">
-          <div className="absolute top-[-30%] right-[-10%] w-[50%] h-[50%] bg-burgundy-500/10 rounded-full blur-3xl" />
-          <div className="absolute bottom-[-20%] left-[-10%] w-[40%] h-[40%] bg-burgundy-500/8 rounded-full blur-3xl" />
+          <div className="absolute top-[-30%] right-[-10%] w-[50%] h-[50%] bg-purple-500/10 rounded-full blur-3xl" />
+          <div className="absolute bottom-[-20%] left-[-10%] w-[40%] h-[40%] bg-violet-500/8 rounded-full blur-3xl" />
         </div>
         <div className="relative z-10">
           <div className="flex items-center gap-4 mb-2">
-            <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-burgundy-500 to-burgundy-400 flex items-center justify-center shadow-lg shadow-burgundy-500/30">
+            <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-purple-500 to-violet-400 flex items-center justify-center shadow-lg shadow-purple-500/30">
               <Activity className="w-6 h-6 text-white" />
             </div>
             <div>
@@ -151,7 +151,7 @@ export default function AdminVisitors() {
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3 }}
           className="lg:col-span-1 rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-5">
           <h3 className="text-sm font-semibold text-slate-900 dark:text-white mb-3 flex items-center gap-2">
-            <Globe className="w-4 h-4 text-burgundy-500" />Top Pages
+            <Globe className="w-4 h-4 text-purple-500" />Top Pages
           </h3>
           <div className="space-y-2">
             {stats.topPages.map((p) => (
@@ -171,7 +171,7 @@ export default function AdminVisitors() {
           <div className="flex items-center justify-between mb-4">
             <div>
               <h3 className="text-sm font-semibold text-slate-900 dark:text-white flex items-center gap-2">
-                <Activity className="w-4 h-4 text-burgundy-500" />Recent Visits
+                <Activity className="w-4 h-4 text-purple-500" />Recent Visits
               </h3>
               <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">Last 200 page views</p>
             </div>

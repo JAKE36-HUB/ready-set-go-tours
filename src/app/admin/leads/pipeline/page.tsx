@@ -9,7 +9,7 @@ import { LEAD_STATUSES, initials, timeAgo } from "@/lib/leads/types"
 import { cn } from "@/lib/utils"
 
 const inputCls =
-  "w-full rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-burgundy-500/40"
+  "w-full rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-amber-500/40"
 
 export default function PipelinePage() {
   const qc = useQueryClient()
@@ -66,7 +66,7 @@ export default function PipelinePage() {
       className="rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 p-3 shadow-sm cursor-grab active:cursor-grabbing hover:shadow-md transition-shadow"
     >
       <div className="flex items-start gap-2">
-        <span className="w-7 h-7 rounded-full bg-gradient-to-br from-burgundy-400 to-burgundy-500 text-white text-[10px] font-bold flex items-center justify-center shrink-0">
+        <span className="w-7 h-7 rounded-full bg-gradient-to-br from-amber-400 to-orange-500 text-white text-[10px] font-bold flex items-center justify-center shrink-0">
           {initials(lead.name || "?")}
         </span>
         <div className="flex-1 min-w-0">
@@ -79,7 +79,7 @@ export default function PipelinePage() {
         <span className="text-[10px] text-slate-400">
           {lead.country ? `${lead.country} · ` : ""}{timeAgo(lead.created_at)}
         </span>
-        {lead.budget && <span className="text-[10px] font-semibold text-burgundy-600 dark:text-burgundy-400">{lead.budget}</span>}
+        {lead.budget && <span className="text-[10px] font-semibold text-amber-600 dark:text-amber-400">{lead.budget}</span>}
       </div>
       {lead.assigned_to && (
         <span className="mt-2 inline-block rounded-md bg-slate-100 dark:bg-slate-800 px-1.5 py-0.5 text-[9px] font-medium text-slate-500 truncate max-w-full">
@@ -130,7 +130,7 @@ export default function PipelinePage() {
                 onDrop={() => dropOnColumn(col.value)}
                 className={cn(
                   "flex-1 overflow-y-auto min-h-[80px] space-y-2 rounded-xl p-1 transition-colors",
-                  draggingId !== null && "ring-2 ring-burgundy-400/50 ring-dashed ring-offset-1 ring-offset-transparent"
+                  draggingId !== null && "ring-2 ring-amber-400/50 ring-dashed ring-offset-1 ring-offset-transparent"
                 )}
               >
                 <Reorder.Group values={col.leads} onReorder={() => {}} axis="y" className="space-y-2">

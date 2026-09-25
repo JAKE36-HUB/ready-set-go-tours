@@ -75,7 +75,7 @@ export default function VerifyMfaPage() {
   if (checking) {
     return (
       <div className="min-h-[60vh] flex flex-col items-center justify-center gap-4">
-        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-burgundy-500" />
+        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-sky-500" />
         <p className="text-sm text-slate-500">Checking your session...</p>
       </div>
     )
@@ -85,7 +85,7 @@ export default function VerifyMfaPage() {
     <div className="min-h-[70vh] flex items-center justify-center px-4">
       <div className="w-full max-w-sm space-y-6">
         <div className="text-center space-y-3">
-          <div className="mx-auto w-14 h-14 rounded-2xl bg-gradient-to-br from-burgundy-500 to-burgundy-400 flex items-center justify-center shadow-lg shadow-burgundy-500/20">
+          <div className="mx-auto w-14 h-14 rounded-2xl bg-gradient-to-br from-sky-500 to-cyan-400 flex items-center justify-center shadow-lg shadow-sky-500/20">
             <ShieldCheck className="w-7 h-7 text-white" />
           </div>
           <div>
@@ -128,12 +128,12 @@ export default function VerifyMfaPage() {
               onChange={(e) => setCode(e.target.value.replace(/\D/g, "").slice(0, 6))}
               placeholder="000000"
               required
-              className="w-full h-11 px-4 text-center text-2xl tracking-[0.5em] font-mono rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white placeholder:text-slate-300 dark:placeholder:text-slate-600 focus:border-burgundy-500 focus:ring-2 focus:ring-burgundy-500/30 outline-none transition-all"
+              className="w-full h-11 px-4 text-center text-2xl tracking-[0.5em] font-mono rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white placeholder:text-slate-300 dark:placeholder:text-slate-600 focus:border-sky-500 focus:ring-2 focus:ring-sky-500/30 outline-none transition-all"
             />
             <button
               type="submit"
               disabled={verifying || code.length !== 6}
-              className="w-full inline-flex items-center justify-center gap-2 h-11 rounded-lg bg-gradient-to-r from-burgundy-500 to-burgundy-400 hover:from-burgundy-600 hover:to-burgundy-500 text-white text-sm font-semibold shadow-md shadow-burgundy-500/20 disabled:opacity-50 disabled:cursor-not-allowed transition-all"
+              className="w-full inline-flex items-center justify-center gap-2 h-11 rounded-lg bg-gradient-to-r from-sky-500 to-cyan-400 hover:from-sky-600 hover:to-cyan-500 text-white text-sm font-semibold shadow-md shadow-sky-500/20 disabled:opacity-50 disabled:cursor-not-allowed transition-all"
             >
               {verifying ? <Loader2 className="size-4 animate-spin" /> : <KeyRound className="size-4" />}
               {verifying ? "Verifying..." : "Verify & Continue"}

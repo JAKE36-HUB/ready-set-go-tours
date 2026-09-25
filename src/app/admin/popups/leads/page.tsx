@@ -75,7 +75,7 @@ export default function PopupLeadsPage() {
             <ArrowLeft className="w-4 h-4 text-slate-600 dark:text-slate-400" />
           </button>
           <div className="flex items-center gap-2">
-            <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-burgundy-500 to-burgundy-400 flex items-center justify-center">
+            <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-emerald-500 to-teal-400 flex items-center justify-center">
               <Users className="w-4 h-4 text-white" />
             </div>
             <div>
@@ -101,7 +101,7 @@ export default function PopupLeadsPage() {
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             placeholder="Search name, email, phone..."
-            className="w-full h-9 pl-8 pr-3 rounded-lg border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 text-xs outline-none focus:ring-2 focus:ring-burgundy-500/40 text-slate-900 dark:text-white"
+            className="w-full h-9 pl-8 pr-3 rounded-lg border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 text-xs outline-none focus:ring-2 focus:ring-emerald-500/40 text-slate-900 dark:text-white"
           />
         </div>
         <select
@@ -161,7 +161,7 @@ export default function PopupLeadsPage() {
                     <td className="px-3 py-3 hidden lg:table-cell">
                       <span className="text-slate-500 dark:text-slate-400">{lead.popup_name || "—"}</span>
                       {lead.variant === "B" && (
-                        <span className="ml-1.5 text-[10px] font-bold px-1.5 py-0.5 rounded bg-burgundy-100 text-burgundy-700 dark:bg-burgundy-950 dark:text-burgundy-400">B</span>
+                        <span className="ml-1.5 text-[10px] font-bold px-1.5 py-0.5 rounded bg-violet-100 text-violet-700 dark:bg-violet-950 dark:text-violet-400">B</span>
                       )}
                     </td>
                     <td className="px-3 py-3">

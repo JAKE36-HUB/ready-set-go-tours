@@ -30,7 +30,7 @@ export default function BeachHolidaysPage() {
           className="object-cover"
           sizes="100vw"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-burgundy-900/40 via-transparent to-burgundy-900/60" />
+        <div className="absolute inset-0 bg-gradient-to-b from-sky-900/40 via-transparent to-sky-900/60" />
         <div className="relative z-10 text-center px-6 max-w-4xl mx-auto">
           <AnimatedSection direction="none">
             <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-white text-sm font-medium mb-6">
@@ -39,7 +39,7 @@ export default function BeachHolidaysPage() {
             </span>
             <h1 className="text-4xl sm:text-5xl lg:text-7xl font-bold text-white mb-6 leading-tight">
               Beach{" "}
-              <span className="bg-gradient-to-r from-burgundy-300 to-burgundy-200 bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-cyan-300 to-sky-200 bg-clip-text text-transparent">
                 Holidays
               </span>
             </h1>
@@ -57,7 +57,7 @@ export default function BeachHolidaysPage() {
           <AnimatedSection>
             <h2 className="text-3xl sm:text-4xl font-bold text-foreground mb-6">
               Your Dream{" "}
-              <span className="text-burgundy-500">Coastal Escape</span>
+              <span className="text-sky-500">Coastal Escape</span>
             </h2>
             <p className="text-lg text-muted-foreground leading-relaxed">
               From the legendary Diani Beach to the spice-scented shores of Zanzibar, the East
@@ -94,7 +94,7 @@ export default function BeachHolidaysPage() {
                     <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
                     <div className="absolute top-3 right-3">
                       <div className="flex items-center gap-1 px-2 py-1 rounded-full bg-white/20 backdrop-blur-md text-white text-xs font-medium">
-                        <Star className="size-3 text-burgundy-400 fill-burgundy-400" />
+                        <Star className="size-3 text-amber-400 fill-amber-400" />
                         {beach.rating}
                       </div>
                     </div>
@@ -115,11 +115,11 @@ export default function BeachHolidaysPage() {
 
                     <div className="space-y-1.5 mb-3 text-xs text-muted-foreground">
                       <div className="flex items-center gap-1.5">
-                        <Hotel className="size-3.5 text-burgundy-500" />
+                        <Hotel className="size-3.5 text-sky-500" />
                         <span>{beach.accommodation}</span>
                       </div>
                       <div className="flex items-center gap-1.5">
-                        <Clock className="size-3.5 text-burgundy-500" />
+                        <Clock className="size-3.5 text-sky-500" />
                         <span>{beach.duration}</span>
                       </div>
                     </div>
@@ -128,7 +128,7 @@ export default function BeachHolidaysPage() {
                       {beach.highlights.slice(0, 3).map((h) => (
                         <span
                           key={h}
-                          className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-burgundy-50 dark:bg-burgundy-950/30 text-[10px] text-burgundy-600 dark:text-burgundy-400"
+                          className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-sky-50 dark:bg-sky-950/30 text-[10px] text-sky-600 dark:text-sky-400"
                         >
                           <Compass className="size-2.5" />
                           {h}
@@ -150,7 +150,7 @@ export default function BeachHolidaysPage() {
 
                     <Button
                       onClick={() => openBookingModal(beach.name)}
-                      className="w-full bg-gradient-to-r from-burgundy-500 to-burgundy-600 hover:from-burgundy-400 hover:to-burgundy-500 text-white"
+                      className="w-full bg-gradient-to-r from-cyan-500 to-sky-600 hover:from-cyan-400 hover:to-sky-500 text-white"
                     >
                       <Waves className="size-4 mr-2" />
                       Get a Free Quote
@@ -164,12 +164,12 @@ export default function BeachHolidaysPage() {
       </section>
 
       {/* Resort Suggestions */}
-      <section className="py-20 px-6 bg-gradient-to-b from-burgundy-50/50 to-transparent dark:from-burgundy-950/20">
+      <section className="py-20 px-6 bg-gradient-to-b from-sky-50/50 to-transparent dark:from-sky-950/20">
         <div className="max-w-7xl mx-auto">
           <AnimatedSection>
             <div className="text-center mb-12">
               <h2 className="text-3xl sm:text-4xl font-bold text-foreground mb-4">
-                Recommended <span className="text-burgundy-500">Resorts & Stays</span>
+                Recommended <span className="text-sky-500">Resorts & Stays</span>
               </h2>
               <p className="text-muted-foreground max-w-xl mx-auto">
                 Handpicked accommodations for the ultimate beach experience.
@@ -181,8 +181,8 @@ export default function BeachHolidaysPage() {
             {RESORTS.map((resort, i) => (
               <AnimatedSection key={resort.name} delay={i * 0.05}>
                 <div className="flex items-start gap-4 p-5 bg-card rounded-2xl ring-1 ring-foreground/10 hover:shadow-lg transition-shadow">
-                  <div className="w-12 h-12 rounded-xl bg-burgundy-100 dark:bg-burgundy-900/30 flex items-center justify-center shrink-0">
-                    <Palmtree className="size-6 text-burgundy-500" />
+                  <div className="w-12 h-12 rounded-xl bg-sky-100 dark:bg-sky-900/30 flex items-center justify-center shrink-0">
+                    <Palmtree className="size-6 text-sky-500" />
                   </div>
                   <div>
                     <h3 className="font-bold text-foreground">{resort.name}</h3>
@@ -194,8 +194,8 @@ export default function BeachHolidaysPage() {
                       <Badge variant="secondary" className="text-[10px]">
                         {resort.type}
                       </Badge>
-                      <span className="flex items-center gap-0.5 text-xs text-burgundy-500">
-                        <Star className="size-3 fill-burgundy-500" />
+                      <span className="flex items-center gap-0.5 text-xs text-amber-500">
+                        <Star className="size-3 fill-amber-500" />
                         {resort.rating}
                       </span>
                     </div>
@@ -208,21 +208,21 @@ export default function BeachHolidaysPage() {
       </section>
 
       {/* CTA */}
-      <section className="py-20 px-6 bg-gradient-to-br from-burgundy-900 via-burgundy-900 to-burgundy-900 relative overflow-hidden">
+      <section className="py-20 px-6 bg-gradient-to-br from-cyan-900 via-sky-900 to-blue-900 relative overflow-hidden">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,rgba(56,189,248,0.15),transparent_60%)]" />
         <div className="max-w-4xl mx-auto text-center relative z-10">
           <AnimatedSection>
-            <Anchor className="size-10 text-burgundy-300 mx-auto mb-4" />
+            <Anchor className="size-10 text-cyan-300 mx-auto mb-4" />
             <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">
               Plan Your Beach Escape
             </h2>
-            <p className="text-burgundy-200/80 text-lg max-w-2xl mx-auto mb-8">
+            <p className="text-cyan-200/80 text-lg max-w-2xl mx-auto mb-8">
               Combine a wildlife safari with a beach holiday for the ultimate East African
               experience. We handle all transfers and logistics.
             </p>
             <Button
               onClick={() => openBookingModal("Beach Holiday Package")}
-              className="bg-gradient-to-r from-burgundy-400 to-burgundy-500 hover:from-burgundy-300 hover:to-burgundy-400 text-white px-8 h-11 shadow-lg shadow-burgundy-500/25"
+              className="bg-gradient-to-r from-cyan-400 to-sky-500 hover:from-cyan-300 hover:to-sky-400 text-white px-8 h-11 shadow-lg shadow-cyan-500/25"
             >
               Get a Free Quote
             </Button>

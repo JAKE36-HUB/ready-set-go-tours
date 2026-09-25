@@ -17,8 +17,8 @@ function spotsLeft(id: number): number {
 function seasonNote() {
   const m = new Date().getMonth() + 1
   if (m >= 6 && m <= 10) return { label: "Peak migration season", cls: "bg-rose-500/15 text-rose-500", dot: "bg-rose-500" }
-  if (m === 12 || m <= 3) return { label: "Calving season", cls: "bg-burgundy-500/15 text-burgundy-600", dot: "bg-burgundy-500" }
-  return { label: "Green season savings", cls: "bg-burgundy-500/15 text-burgundy-600", dot: "bg-burgundy-500" }
+  if (m === 12 || m <= 3) return { label: "Calving season", cls: "bg-emerald-500/15 text-emerald-600", dot: "bg-emerald-500" }
+  return { label: "Green season savings", cls: "bg-sky-500/15 text-sky-600", dot: "bg-sky-500" }
 }
 
 export function DealUrgency({
@@ -41,7 +41,7 @@ export function DealUrgency({
         ? { label: "Ends today!", cls: "bg-rose-500/15 text-rose-500", pulse: true }
         : days <= 7
           ? { label: "Ends this week", cls: "bg-rose-500/15 text-rose-500", pulse: false }
-          : { label: `Ends in ${days} days`, cls: "bg-burgundy-500/15 text-burgundy-600", pulse: false }
+          : { label: `Ends in ${days} days`, cls: "bg-amber-500/15 text-amber-600", pulse: false }
 
   const size = compact ? "text-[10px] px-2 py-1" : "text-xs px-2.5 py-1"
 

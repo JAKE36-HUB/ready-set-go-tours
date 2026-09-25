@@ -180,10 +180,10 @@ export function SmartImageInfo({ src }: { src: string | null | undefined }) {
 
   const badge =
     info.orientation === "portrait"
-      ? { label: "Portrait", cls: "bg-burgundy-100 text-burgundy-700 dark:bg-burgundy-950 dark:text-burgundy-400" }
+      ? { label: "Portrait", cls: "bg-violet-100 text-violet-700 dark:bg-violet-950 dark:text-violet-400" }
       : info.orientation === "landscape"
-        ? { label: "Landscape", cls: "bg-burgundy-100 text-burgundy-700 dark:bg-burgundy-950 dark:text-burgundy-400" }
-        : { label: "Square", cls: "bg-burgundy-100 text-burgundy-700 dark:bg-burgundy-950 dark:text-burgundy-400" }
+        ? { label: "Landscape", cls: "bg-sky-100 text-sky-700 dark:bg-sky-950 dark:text-sky-400" }
+        : { label: "Square", cls: "bg-emerald-100 text-emerald-700 dark:bg-emerald-950 dark:text-emerald-400" }
 
   return (
     <div className="flex flex-wrap items-center gap-1.5 text-[10px] text-slate-500 dark:text-slate-400">

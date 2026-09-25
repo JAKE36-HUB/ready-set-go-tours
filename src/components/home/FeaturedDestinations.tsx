@@ -17,7 +17,7 @@ export function FeaturedDestinations() {
 
   return (
     <section ref={ref} className="relative py-24 sm:py-28 bg-background dark:bg-stone-950 overflow-hidden">
-      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-burgundy-300/50 to-transparent" />
+      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-amber-300/50 to-transparent" />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 40 }}
@@ -26,7 +26,7 @@ export function FeaturedDestinations() {
           className="flex flex-col lg:flex-row lg:items-end lg:justify-between mb-14 gap-6"
         >
           <div>
-            <span className="text-xs font-semibold uppercase tracking-[0.2em] text-primary dark:text-burgundy-400">Destinations</span>
+            <span className="text-xs font-semibold uppercase tracking-[0.2em] text-primary dark:text-amber-400">Destinations</span>
             <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-medium text-foreground mt-4 leading-tight">
               Kenya & Tanzania, park by park
             </h2>
@@ -64,13 +64,13 @@ export function FeaturedDestinations() {
                 </div>
 
                 <div className="p-6 sm:p-7">
-                  <h3 className="font-display text-xl font-medium text-foreground mb-2 group-hover:text-primary dark:group-hover:text-burgundy-400 transition-colors">
+                  <h3 className="font-display text-xl font-medium text-foreground mb-2 group-hover:text-primary dark:group-hover:text-amber-400 transition-colors">
                     {dest.name}
                   </h3>
                   <p className="text-sm text-muted-foreground line-clamp-2 mb-4 leading-relaxed">{dest.description}</p>
                   <div className="flex items-center gap-4 text-xs text-muted-foreground mb-5">
-                    <span className="flex items-center gap-1.5"><Clock className="w-3.5 h-3.5 text-primary dark:text-burgundy-400" />{dest.duration}</span>
-                    <span className="flex items-center gap-1.5"><Calendar className="w-3.5 h-3.5 text-primary dark:text-burgundy-400" />{dest.bestTime}</span>
+                    <span className="flex items-center gap-1.5"><Clock className="w-3.5 h-3.5 text-primary dark:text-amber-400" />{dest.duration}</span>
+                    <span className="flex items-center gap-1.5"><Calendar className="w-3.5 h-3.5 text-primary dark:text-amber-400" />{dest.bestTime}</span>
                   </div>
                   <Link
                     href={isKenya ? "/kenya-tours" : "/tanzania-tours"}
@@ -91,7 +91,7 @@ export function FeaturedDestinations() {
           className="text-center mt-12"
         >
           <Link href="/kenya-tours">
-            <Button variant="outline" className="h-12 px-8 text-sm font-semibold border-border hover:border-primary hover:text-primary dark:hover:text-burgundy-400 transition-all">
+            <Button variant="outline" className="h-12 px-8 text-sm font-semibold border-border hover:border-primary hover:text-primary dark:hover:text-amber-400 transition-all">
               Explore All Destinations <ArrowRight className="w-4 h-4 ml-2" />
             </Button>
           </Link>

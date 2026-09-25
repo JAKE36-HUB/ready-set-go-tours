@@ -143,12 +143,12 @@ export default function ImageUpload({ currentImage, onUpload, compress = false }
           ) : (
             <button type="button" onClick={() => inputRef.current?.click()} disabled={uploading}
               className={cn(
-                "w-full h-40 rounded-xl border-2 border-dashed border-slate-200 dark:border-slate-700 hover:border-burgundy-400 dark:hover:border-burgundy-500 transition-colors flex flex-col items-center justify-center gap-2 bg-slate-50 dark:bg-slate-800/50",
+                "w-full h-40 rounded-xl border-2 border-dashed border-slate-200 dark:border-slate-700 hover:border-fuchsia-400 dark:hover:border-fuchsia-500 transition-colors flex flex-col items-center justify-center gap-2 bg-slate-50 dark:bg-slate-800/50",
                 uploading && "opacity-50 cursor-not-allowed"
               )}>
               {uploading ? (
                 <>
-                  <Loader2 className="w-8 h-8 text-burgundy-500 animate-spin" />
+                  <Loader2 className="w-8 h-8 text-fuchsia-500 animate-spin" />
                   <span className="text-xs text-slate-500">
                     {phase === "optimize" ? "Optimizing image…" : "Uploading…"}
                   </span>

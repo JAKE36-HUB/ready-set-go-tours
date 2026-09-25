@@ -55,19 +55,19 @@ export default function TanzaniaToursPage() {
           sizes="100vw"
         />
         <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black/70" />
-        <div className="absolute inset-0 bg-gradient-to-r from-burgundy-900/20 to-burgundy-900/20" />
+        <div className="absolute inset-0 bg-gradient-to-r from-amber-900/20 to-emerald-900/20" />
         <div className="relative z-10 text-center px-6 max-w-4xl mx-auto">
           <AnimatedSection direction="none">
-            <span className="inline-block px-4 py-1.5 rounded-full bg-burgundy-500/20 border border-burgundy-400/30 text-burgundy-300 text-sm font-medium mb-6 backdrop-blur-sm">
+            <span className="inline-block px-4 py-1.5 rounded-full bg-amber-500/20 border border-amber-400/30 text-amber-300 text-sm font-medium mb-6 backdrop-blur-sm">
               The Ultimate East African Safari
             </span>
             <h1 className="text-4xl sm:text-5xl lg:text-7xl font-bold text-white mb-6 leading-tight">
               Discover{" "}
-              <span className="bg-gradient-to-r from-burgundy-400 to-burgundy-300 bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-amber-400 to-yellow-300 bg-clip-text text-transparent">
                 Tanzania
               </span>
             </h1>
-            <p className="text-lg sm:text-xl text-burgundy-100/80 max-w-2xl mx-auto leading-relaxed">
+            <p className="text-lg sm:text-xl text-amber-100/80 max-w-2xl mx-auto leading-relaxed">
               Stand on the rim of the Ngorongoro Crater, watch wildebeest cross the Mara River,
               and summit Africa&apos;s highest peak — Tanzania is the stuff of legends.
             </p>
@@ -81,7 +81,7 @@ export default function TanzaniaToursPage() {
           <AnimatedSection>
             <h2 className="text-3xl sm:text-4xl font-bold text-foreground mb-6">
               Tanzania: Where{" "}
-              <span className="text-burgundy-500">Wilderness Awaits</span>
+              <span className="text-amber-500">Wilderness Awaits</span>
             </h2>
             <p className="text-lg text-muted-foreground leading-relaxed">
               Tanzania is home to some of Africa&apos;s most iconic landscapes and wildlife
@@ -145,10 +145,10 @@ export default function TanzaniaToursPage() {
                       {dest.description}
                     </p>
 
-                    <div className="flex items-start gap-3 p-4 rounded-xl bg-burgundy-50 dark:bg-burgundy-950/30 border border-burgundy-100 dark:border-burgundy-900/50">
-                      <Calendar className="size-5 text-burgundy-500 mt-0.5 shrink-0" />
+                    <div className="flex items-start gap-3 p-4 rounded-xl bg-amber-50 dark:bg-amber-950/30 border border-amber-100 dark:border-amber-900/50">
+                      <Calendar className="size-5 text-amber-500 mt-0.5 shrink-0" />
                       <div>
-                        <p className="text-xs font-semibold uppercase tracking-wider text-burgundy-600 dark:text-burgundy-400">
+                        <p className="text-xs font-semibold uppercase tracking-wider text-amber-600 dark:text-amber-400">
                           Best Time to Visit
                         </p>
                         <p className="text-sm text-foreground mt-0.5">{dest.bestTime}</p>
@@ -162,7 +162,7 @@ export default function TanzaniaToursPage() {
                       <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                         {dest.highlights.map((h) => (
                           <li key={h} className="flex items-start gap-2 text-sm text-muted-foreground">
-                            <Star className="size-3.5 text-burgundy-500 mt-1 shrink-0" />
+                            <Star className="size-3.5 text-amber-500 mt-1 shrink-0" />
                             {h}
                           </li>
                         ))}
@@ -176,7 +176,7 @@ export default function TanzaniaToursPage() {
                       <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                         {dest.activities.map((a) => (
                           <li key={a} className="flex items-start gap-2 text-sm text-muted-foreground">
-                            <Compass className="size-3.5 text-burgundy-500 mt-1 shrink-0" />
+                            <Compass className="size-3.5 text-orange-500 mt-1 shrink-0" />
                             {a}
                           </li>
                         ))}
@@ -210,14 +210,14 @@ export default function TanzaniaToursPage() {
       </section>
 
       {/* CTA */}
-      <section className="py-20 px-6 bg-gradient-to-br from-burgundy-900 via-burgundy-900 to-slate-900 relative overflow-hidden">
+      <section className="py-20 px-6 bg-gradient-to-br from-amber-900 via-orange-900 to-slate-900 relative overflow-hidden">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_left,rgba(251,191,36,0.1),transparent_60%)]" />
         <div className="max-w-4xl mx-auto text-center relative z-10">
           <AnimatedSection>
             <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">
               Begin Your Tanzania Journey
             </h2>
-            <p className="text-burgundy-200/80 text-lg max-w-2xl mx-auto mb-8">
+            <p className="text-amber-200/80 text-lg max-w-2xl mx-auto mb-8">
               From the Serengeti to Zanzibar, let us craft your perfect Tanzanian adventure.
               Bespoke itineraries designed around your dreams.
             </p>

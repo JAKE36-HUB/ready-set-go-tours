@@ -52,9 +52,9 @@ const HOME_SERVICES = [
 ]
 
 const serviceColorMap: Record<string, { from: string; to: string; text: string; ring: string; bg: string; grad: string }> = {
-  sky: { from: "from-burgundy-500", to: "to-burgundy-600", text: "text-burgundy-600 dark:text-burgundy-400", ring: "hover:border-burgundy-300 dark:hover:border-burgundy-700", bg: "bg-burgundy-50 dark:bg-burgundy-950/30", grad: "from-burgundy-500/10 to-burgundy-600/5" },
-  emerald: { from: "from-burgundy-500", to: "to-burgundy-600", text: "text-burgundy-600 dark:text-burgundy-400", ring: "hover:border-burgundy-300 dark:hover:border-burgundy-700", bg: "bg-burgundy-50 dark:bg-burgundy-950/30", grad: "from-burgundy-500/10 to-burgundy-600/5" },
-  violet: { from: "from-burgundy-500", to: "to-burgundy-600", text: "text-burgundy-600 dark:text-burgundy-400", ring: "hover:border-burgundy-300 dark:hover:border-burgundy-700", bg: "bg-burgundy-50 dark:bg-burgundy-950/30", grad: "from-burgundy-500/10 to-burgundy-600/5" },
+  sky: { from: "from-sky-500", to: "to-blue-600", text: "text-sky-600 dark:text-sky-400", ring: "hover:border-sky-300 dark:hover:border-sky-700", bg: "bg-sky-50 dark:bg-sky-950/30", grad: "from-sky-500/10 to-blue-600/5" },
+  emerald: { from: "from-emerald-500", to: "to-teal-600", text: "text-emerald-600 dark:text-emerald-400", ring: "hover:border-emerald-300 dark:hover:border-emerald-700", bg: "bg-emerald-50 dark:bg-emerald-950/30", grad: "from-emerald-500/10 to-teal-600/5" },
+  violet: { from: "from-violet-500", to: "to-purple-600", text: "text-violet-600 dark:text-violet-400", ring: "hover:border-violet-300 dark:hover:border-violet-700", bg: "bg-violet-50 dark:bg-violet-950/30", grad: "from-violet-500/10 to-purple-600/5" },
 }
 
 export function MoreServices({ onReserve }: { onReserve?: (name: string) => void }) {
@@ -63,7 +63,7 @@ export function MoreServices({ onReserve }: { onReserve?: (name: string) => void
 
   return (
     <section ref={ref} className="relative py-28 bg-slate-50 dark:bg-slate-900 overflow-hidden">
-      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-burgundy-200/50 to-transparent" />
+      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-amber-200/50 to-transparent" />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 40 }}
@@ -71,13 +71,13 @@ export function MoreServices({ onReserve }: { onReserve?: (name: string) => void
           transition={{ duration: 0.7 }}
           className="text-center mb-14"
         >
-          <span className="inline-flex items-center gap-2 bg-burgundy-500/15 text-burgundy-600 dark:text-burgundy-400 text-xs font-semibold uppercase tracking-[0.2em] px-4 py-1.5 rounded-full ring-1 ring-burgundy-500/20 mb-5">
+          <span className="inline-flex items-center gap-2 bg-amber-500/15 text-amber-600 dark:text-amber-400 text-xs font-semibold uppercase tracking-[0.2em] px-4 py-1.5 rounded-full ring-1 ring-amber-500/20 mb-5">
             <Compass className="size-3.5" />
             Additional Services
           </span>
           <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-slate-900 dark:text-white mt-3 mb-4 tracking-tight">
             Everything You Need,{" "}
-            <span className="bg-gradient-to-r from-burgundy-500 to-burgundy-400 bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-amber-500 to-orange-400 bg-clip-text text-transparent">
               One Call Away
             </span>
           </h2>
@@ -107,10 +107,10 @@ export function MoreServices({ onReserve }: { onReserve?: (name: string) => void
                   />
 
                   <div className="absolute top-0 right-0 z-20">
-                    <div className={cn("bg-gradient-to-r text-white text-[10px] font-bold px-3.5 py-1.5 rounded-bl-xl shadow-lg", service.badge === "Most Popular" ? "from-burgundy-500 to-burgundy-500" : service.badge === "Best Value" ? "from-burgundy-500 to-burgundy-500" : "from-burgundy-500 to-burgundy-500")}>
+                    <div className={cn("bg-gradient-to-r text-white text-[10px] font-bold px-3.5 py-1.5 rounded-bl-xl shadow-lg", service.badge === "Most Popular" ? "from-amber-500 to-orange-500" : service.badge === "Best Value" ? "from-emerald-500 to-teal-500" : "from-violet-500 to-purple-500")}>
                       {service.badge}
                     </div>
-                    <div className={cn("absolute -bottom-1 right-0 w-0 h-0 border-l-[6px] border-l-transparent border-t-[6px]", service.badge === "Most Popular" ? "border-t-burgundy-700" : service.badge === "Best Value" ? "border-t-burgundy-700" : "border-t-burgundy-700")} />
+                    <div className={cn("absolute -bottom-1 right-0 w-0 h-0 border-l-[6px] border-l-transparent border-t-[6px]", service.badge === "Most Popular" ? "border-t-amber-700" : service.badge === "Best Value" ? "border-t-emerald-700" : "border-t-violet-700")} />
                   </div>
 
                   <div className="absolute bottom-3 left-4">
@@ -123,7 +123,7 @@ export function MoreServices({ onReserve }: { onReserve?: (name: string) => void
                 <div className="flex items-center justify-between px-6 pt-4 pb-2">
                   <div className="flex items-center gap-1">
                     {Array.from({ length: 5 }).map((_, i) => (
-                      <Star key={i} className={cn("w-3 h-3", i < Math.round(service.rating) ? "text-burgundy-400 fill-burgundy-400" : "text-slate-200 dark:text-slate-700")} />
+                      <Star key={i} className={cn("w-3 h-3", i < Math.round(service.rating) ? "text-amber-400 fill-amber-400" : "text-slate-200 dark:text-slate-700")} />
                     ))}
                     <span className="text-xs text-slate-400 ml-1">{service.rating}</span>
                   </div>
@@ -149,7 +149,7 @@ export function MoreServices({ onReserve }: { onReserve?: (name: string) => void
                       </li>
                     ))}
                     {service.features.length > 4 && (
-                      <li className="text-xs text-burgundy-600 dark:text-burgundy-400 ml-5.5">+{service.features.length - 4} more</li>
+                      <li className="text-xs text-amber-600 dark:text-amber-400 ml-5.5">+{service.features.length - 4} more</li>
                     )}
                   </ul>
                 </div>

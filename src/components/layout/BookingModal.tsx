@@ -237,7 +237,7 @@ export function BookingModal({ open, onOpenChange, initialPackage }: BookingModa
             animate={{ scale: 1 }}
             transition={{ delay: 0.2, type: "spring", stiffness: 200, damping: 15 }}
           >
-            <CheckCircle className="w-20 h-20 text-burgundy-500 mb-6" />
+            <CheckCircle className="w-20 h-20 text-emerald-500 mb-6" />
           </motion.div>
           <motion.h3
             initial={{ opacity: 0, y: 10 }}
@@ -265,7 +265,7 @@ export function BookingModal({ open, onOpenChange, initialPackage }: BookingModa
               onClick={() => {
                 onOpenChange(false)
               }}
-              className="bg-gradient-to-r from-burgundy-600 to-burgundy-700 hover:from-burgundy-500 hover:to-burgundy-600 text-white px-8"
+              className="bg-gradient-to-r from-sky-600 to-blue-700 hover:from-sky-500 hover:to-blue-600 text-white px-8"
             >
               Close
             </Button>
@@ -298,7 +298,7 @@ export function BookingModal({ open, onOpenChange, initialPackage }: BookingModa
             </Button>
             <Button
               onClick={() => handleSubmit(onSubmit)()}
-              className="bg-gradient-to-r from-burgundy-600 to-burgundy-700 hover:from-burgundy-500 hover:to-burgundy-600 text-white"
+              className="bg-gradient-to-r from-sky-600 to-blue-700 hover:from-sky-500 hover:to-blue-600 text-white"
             >
               <Send className="w-4 h-4 mr-2" />
               Retry
@@ -314,9 +314,9 @@ export function BookingModal({ open, onOpenChange, initialPackage }: BookingModa
           {/* Personal Information */}
           <div>
             {sectionHeader(
-              <Users className="w-4 h-4 text-burgundy-600" />,
+              <Users className="w-4 h-4 text-sky-600" />,
               "Personal Information",
-              "border-burgundy-200 text-burgundy-800 dark:border-burgundy-800 dark:text-burgundy-300",
+              "border-sky-200 text-sky-800 dark:border-sky-800 dark:text-sky-300",
             )}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               {renderField("fullName", "Full Name", "John Doe")}
@@ -329,9 +329,9 @@ export function BookingModal({ open, onOpenChange, initialPackage }: BookingModa
           {/* Trip Details */}
           <div>
             {sectionHeader(
-              <MapPin className="w-4 h-4 text-burgundy-500" />,
+              <MapPin className="w-4 h-4 text-orange-500" />,
               "Trip Details",
-              "border-burgundy-200 text-burgundy-700 dark:border-burgundy-800 dark:text-burgundy-300",
+              "border-orange-200 text-orange-700 dark:border-orange-800 dark:text-orange-300",
             )}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               {/* Destination */}
@@ -449,9 +449,9 @@ export function BookingModal({ open, onOpenChange, initialPackage }: BookingModa
           {/* Travel Party & Budget */}
           <div>
             {sectionHeader(
-              <DollarSign className="w-4 h-4 text-burgundy-500" />,
+              <DollarSign className="w-4 h-4 text-amber-500" />,
               "Travel Party & Budget",
-              "border-burgundy-200 text-burgundy-700 dark:border-burgundy-800 dark:text-burgundy-300",
+              "border-amber-200 text-amber-700 dark:border-amber-800 dark:text-amber-300",
             )}
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
               {/* Adults */}
@@ -562,7 +562,7 @@ export function BookingModal({ open, onOpenChange, initialPackage }: BookingModa
           <Button
             type="submit"
             disabled={status === "submitting"}
-            className="w-full h-12 bg-gradient-to-r from-burgundy-600 to-burgundy-700 hover:from-burgundy-500 hover:to-burgundy-600 text-white font-semibold text-base shadow-lg shadow-burgundy-200 dark:shadow-burgundy-900/30 transition-all duration-300 disabled:opacity-60"
+            className="w-full h-12 bg-gradient-to-r from-sky-600 to-blue-700 hover:from-sky-500 hover:to-blue-600 text-white font-semibold text-base shadow-lg shadow-sky-200 dark:shadow-sky-900/30 transition-all duration-300 disabled:opacity-60"
           >
             {status === "submitting" ? (
               <span className="flex items-center justify-center gap-2">
@@ -599,14 +599,14 @@ export function BookingModal({ open, onOpenChange, initialPackage }: BookingModa
             transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
           >
             {/* Header */}
-            <div className="relative bg-gradient-to-r from-burgundy-900 via-burgundy-900 to-slate-900 px-6 py-5">
+            <div className="relative bg-gradient-to-r from-sky-900 via-blue-900 to-slate-900 px-6 py-5">
               <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,rgba(251,146,60,0.15),transparent_50%)]" />
               <div className="relative z-10">
                 <DialogHeader>
                   <DialogTitle className="text-xl font-bold text-white">
                     Book Your Dream Safari
                   </DialogTitle>
-                  <DialogDescription className="text-burgundy-200/80 text-sm">
+                  <DialogDescription className="text-sky-200/80 text-sm">
                     Fill in your details and our luxury travel consultants will curate the perfect
                     East African experience for you.
                   </DialogDescription>

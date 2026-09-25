@@ -50,7 +50,7 @@ export function StepDestinations({
         className={cn(
           "relative text-left p-4 rounded-2xl border transition-all duration-200 w-full",
           selected
-            ? "bg-burgundy-500/15 border-burgundy-400/50 ring-1 ring-burgundy-400/30"
+            ? "bg-emerald-500/15 border-emerald-400/50 ring-1 ring-emerald-400/30"
             : "bg-white/5 border-white/10 hover:bg-white/10 hover:border-white/20"
         )}
       >
@@ -64,7 +64,7 @@ export function StepDestinations({
               <span className="flex items-center gap-1"><Clock className="w-3 h-3" />{dest.bestTime}</span>
             </div>
           </div>
-          <span className="text-xs font-bold text-burgundy-400 whitespace-nowrap">${dest.startingPrice}</span>
+          <span className="text-xs font-bold text-emerald-400 whitespace-nowrap">${dest.startingPrice}</span>
         </div>
       </button>
     )
@@ -80,7 +80,7 @@ export function StepDestinations({
       {/* Custom destination input */}
       <div className="mb-6">
         <h4 className="text-xs font-semibold text-white/50 uppercase tracking-wider mb-3 flex items-center gap-2">
-          <Search className="w-3.5 h-3.5 text-burgundy-400" />
+          <Search className="w-3.5 h-3.5 text-emerald-400" />
           Add a Custom Destination
         </h4>
         <div className="flex items-center gap-2">
@@ -90,14 +90,14 @@ export function StepDestinations({
             onChange={(e) => setCustomInput(e.target.value)}
             onKeyDown={(e) => { if (e.key === "Enter") addCustom() }}
             placeholder="e.g. Lake Natron, Amboseli, Zanzibar..."
-            className="flex-1 h-11 px-4 rounded-xl bg-white/5 border border-white/10 text-white text-sm placeholder-white/30 focus:outline-none focus:ring-2 focus:ring-burgundy-400/30 focus:border-burgundy-400/50 transition-all"
+            className="flex-1 h-11 px-4 rounded-xl bg-white/5 border border-white/10 text-white text-sm placeholder-white/30 focus:outline-none focus:ring-2 focus:ring-emerald-400/30 focus:border-emerald-400/50 transition-all"
             aria-label="Add a custom destination"
           />
           <button
             type="button"
             onClick={addCustom}
             disabled={!customInput.trim()}
-            className="h-11 px-4 rounded-xl bg-burgundy-500 hover:bg-burgundy-400 disabled:bg-white/10 disabled:text-white/30 text-white text-sm font-semibold transition-all flex items-center gap-1.5"
+            className="h-11 px-4 rounded-xl bg-emerald-500 hover:bg-emerald-400 disabled:bg-white/10 disabled:text-white/30 text-white text-sm font-semibold transition-all flex items-center gap-1.5"
           >
             <Plus className="w-4 h-4" /> Add
           </button>
@@ -112,7 +112,7 @@ export function StepDestinations({
             {customDests.map((d) => (
               <span
                 key={d.id}
-                className="inline-flex items-center gap-1.5 text-xs bg-burgundy-500/20 text-burgundy-300 px-3 py-1.5 rounded-full ring-1 ring-burgundy-500/30"
+                className="inline-flex items-center gap-1.5 text-xs bg-emerald-500/20 text-emerald-300 px-3 py-1.5 rounded-full ring-1 ring-emerald-500/30"
               >
                 {d.name}
                 <button type="button" onClick={() => removeCustom(d.id)} className="hover:text-white transition-colors" aria-label={`Remove ${d.name}`}>
@@ -126,7 +126,7 @@ export function StepDestinations({
 
       <div className="mb-6">
         <h4 className="text-xs font-semibold text-white/50 uppercase tracking-wider mb-3 flex items-center gap-2">
-          <span className="w-1.5 h-1.5 rounded-full bg-burgundy-400" />
+          <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
           Kenya — Popular Destinations
         </h4>
         <div className="grid sm:grid-cols-2 gap-3">
@@ -136,7 +136,7 @@ export function StepDestinations({
 
       <div className="mb-6">
         <h4 className="text-xs font-semibold text-white/50 uppercase tracking-wider mb-3 flex items-center gap-2">
-          <span className="w-1.5 h-1.5 rounded-full bg-burgundy-400" />
+          <span className="w-1.5 h-1.5 rounded-full bg-amber-400" />
           Tanzania — Popular Destinations
         </h4>
         <div className="grid sm:grid-cols-2 gap-3">
@@ -150,7 +150,7 @@ export function StepDestinations({
           <button
             type="button"
             onClick={onNext}
-            className="h-10 px-6 rounded-xl bg-burgundy-500 hover:bg-burgundy-400 text-white text-sm font-semibold shadow-lg shadow-burgundy-500/25 transition-all"
+            className="h-10 px-6 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-white text-sm font-semibold shadow-lg shadow-emerald-500/25 transition-all"
           >
             Next Step
           </button>

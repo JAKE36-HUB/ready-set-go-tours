@@ -106,7 +106,7 @@ export function MobileNav({ isOpen, onClose }: MobileNavProps) {
                           className={cn(
                             "flex w-full items-center justify-between px-4 py-3.5 rounded-xl text-sm font-medium transition-all duration-150",
                             isActive
-                              ? "bg-burgundy-50 text-burgundy-700 dark:bg-burgundy-900/30 dark:text-burgundy-400"
+                              ? "bg-sky-50 text-sky-700 dark:bg-sky-900/30 dark:text-sky-400"
                               : "text-slate-700 hover:bg-slate-50 dark:text-slate-300 dark:hover:bg-slate-800"
                           )}
                         >
@@ -127,7 +127,7 @@ export function MobileNav({ isOpen, onClose }: MobileNavProps) {
                               transition={{ duration: 0.2 }}
                               className="overflow-hidden"
                             >
-                              <div className="ml-4 mt-1 space-y-1 border-l-2 border-burgundy-100 dark:border-burgundy-900 pl-3">
+                              <div className="ml-4 mt-1 space-y-1 border-l-2 border-sky-100 dark:border-sky-900 pl-3">
                                 {item.children!.map((child) => (
                                   <Link
                                     key={child.href}
@@ -136,7 +136,7 @@ export function MobileNav({ isOpen, onClose }: MobileNavProps) {
                                     className={cn(
                                       "block px-4 py-3 rounded-xl text-sm transition-all duration-150",
                                       pathname === child.href
-                                        ? "bg-burgundy-50 text-burgundy-700 font-medium dark:bg-burgundy-900/30 dark:text-burgundy-400"
+                                        ? "bg-sky-50 text-sky-700 font-medium dark:bg-sky-900/30 dark:text-sky-400"
                                         : "text-slate-600 hover:bg-slate-50 dark:text-slate-400 dark:hover:bg-slate-800"
                                     )}
                                   >
@@ -155,7 +155,7 @@ export function MobileNav({ isOpen, onClose }: MobileNavProps) {
                         className={cn(
                           "flex items-center px-4 py-3.5 rounded-xl text-sm font-medium transition-all duration-150",
                           isActive
-                            ? "bg-burgundy-50 text-burgundy-700 dark:bg-burgundy-900/30 dark:text-burgundy-400"
+                            ? "bg-sky-50 text-sky-700 dark:bg-sky-900/30 dark:text-sky-400"
                             : "text-slate-700 hover:bg-slate-50 dark:text-slate-300 dark:hover:bg-slate-800"
                         )}
                       >
@@ -172,9 +172,9 @@ export function MobileNav({ isOpen, onClose }: MobileNavProps) {
                   >
                     {mounted ? (
                       theme === "dark" ? (
-                        <><Sun className="w-4 h-4 text-burgundy-500" /> Light Mode</>
+                        <><Sun className="w-4 h-4 text-amber-500" /> Light Mode</>
                       ) : (
-                        <><Moon className="w-4 h-4 text-burgundy-500" /> Dark Mode</>
+                        <><Moon className="w-4 h-4 text-sky-500" /> Dark Mode</>
                       )
                     ) : (
                       <div className="w-4 h-4" />
@@ -202,29 +202,29 @@ export function MobileNav({ isOpen, onClose }: MobileNavProps) {
                   href={`tel:${CONTACT_INFO.phone}`}
                   className="flex items-center gap-3 px-4 py-3 rounded-xl text-sm text-slate-700 hover:bg-slate-50 dark:text-slate-300 dark:hover:bg-slate-800 transition-colors"
                 >
-                  <Phone className="w-4 h-4 text-burgundy-500" />
+                  <Phone className="w-4 h-4 text-emerald-500" />
                   {CONTACT_INFO.phone}
                 </a>
                 <a
                   href={`mailto:${CONTACT_INFO.email}`}
                   className="flex items-center gap-3 px-4 py-3 rounded-xl text-sm text-slate-700 hover:bg-slate-50 dark:text-slate-300 dark:hover:bg-slate-800 transition-colors"
                 >
-                  <Mail className="w-4 h-4 text-burgundy-500" />
+                  <Mail className="w-4 h-4 text-sky-500" />
                   {CONTACT_INFO.email}
                 </a>
                 <a
                   href={`mailto:${CONTACT_INFO.bookingsEmail}`}
                   className="flex items-center gap-3 px-4 py-3 rounded-xl text-sm text-slate-700 hover:bg-slate-50 dark:text-slate-300 dark:hover:bg-slate-800 transition-colors"
                 >
-                  <Mail className="w-4 h-4 text-burgundy-500" />
+                  <Mail className="w-4 h-4 text-sky-500" />
                   {CONTACT_INFO.bookingsEmail}
                 </a>
                 <div className="flex items-center gap-3 px-4 py-3 rounded-xl text-sm text-slate-700 dark:text-slate-300">
-                  <MapPin className="w-4 h-4 text-burgundy-500" />
+                  <MapPin className="w-4 h-4 text-orange-500" />
                   {CONTACT_INFO.address}
                 </div>
                 <div className="flex items-center gap-3 px-4 py-3 rounded-xl text-sm text-slate-700 dark:text-slate-300">
-                  <Clock className="w-4 h-4 text-burgundy-500" />
+                  <Clock className="w-4 h-4 text-amber-500" />
                   {CONTACT_INFO.hours}
                 </div>
               </div>
@@ -236,7 +236,7 @@ export function MobileNav({ isOpen, onClose }: MobileNavProps) {
                     href={social.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center justify-center w-10 h-10 rounded-full bg-slate-100 text-slate-600 hover:bg-burgundy-100 hover:text-burgundy-600 dark:bg-slate-800 dark:text-slate-400 dark:hover:bg-burgundy-900/50 dark:hover:text-burgundy-400 transition-all duration-200"
+                    className="flex items-center justify-center w-10 h-10 rounded-full bg-slate-100 text-slate-600 hover:bg-sky-100 hover:text-sky-600 dark:bg-slate-800 dark:text-slate-400 dark:hover:bg-sky-900/50 dark:hover:text-sky-400 transition-all duration-200"
                     aria-label={social.name}
                   >
                     <SocialIcon name={social.icon} />
@@ -247,7 +247,7 @@ export function MobileNav({ isOpen, onClose }: MobileNavProps) {
               <Link
                 href="/contact"
                 onClick={onClose}
-                className="flex items-center justify-center w-full py-3.5 rounded-xl bg-gradient-to-r from-burgundy-500 to-burgundy-400 text-white font-medium shadow-lg hover:shadow-xl hover:scale-[1.02] transition-all duration-300"
+                className="flex items-center justify-center w-full py-3.5 rounded-xl bg-gradient-to-r from-sky-500 to-cyan-400 text-white font-medium shadow-lg hover:shadow-xl hover:scale-[1.02] transition-all duration-300"
               >
                 Get a Free Quote
               </Link>
