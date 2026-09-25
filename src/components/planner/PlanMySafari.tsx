@@ -13,7 +13,7 @@ import {
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
-import { COMPANY, PLAN_SAFARI_ROUTE } from "@/lib/constants"
+import { COMPANY, PLAN_SAFARI_ROUTE, whatsappLink } from "@/lib/constants"
 import { getClientSessionId } from "@/lib/session"
 import { trackConversion } from "@/lib/conversions"
 import { cn } from "@/lib/utils"
@@ -144,7 +144,7 @@ export function PlanMySafari() {
   }, [form])
 
   const whatsappUrl = useMemo(() => {
-    const base = `https://wa.me/${COMPANY.whatsapp.replace(/\D/g, "")}?text=${encodeURIComponent(summaryMessage)}`
+    const base = whatsappLink(summaryMessage)
     return base
   }, [summaryMessage])
 

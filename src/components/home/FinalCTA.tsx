@@ -7,13 +7,13 @@ import { motion, useInView } from "framer-motion"
 import { ArrowRight, MessageCircle } from "lucide-react"
 
 import { Button } from "@/components/ui/button"
-import { COMPANY, PLAN_SAFARI_ROUTE } from "@/lib/constants"
+import { PLAN_SAFARI_ROUTE, whatsappLink } from "@/lib/constants"
 
 export function FinalCTA() {
   const ref = useRef<HTMLDivElement>(null)
   const isInView = useInView(ref, { once: true, margin: "-100px" })
 
-  const whatsappUrl = `https://wa.me/${COMPANY.whatsapp.replace(/\D/g, "")}?text=${encodeURIComponent("Hi! I'd like to plan a safari with Ready Set Go Safaris.")}`
+  const whatsappUrl = whatsappLink()
 
   return (
     <section ref={ref} className="relative py-28 sm:py-32 overflow-hidden bg-stone-950">

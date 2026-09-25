@@ -7,7 +7,7 @@ import { motion } from "framer-motion"
 import { MessageCircle } from "lucide-react"
 
 import { Button } from "@/components/ui/button"
-import { COMPANY, PLAN_SAFARI_ROUTE } from "@/lib/constants"
+import { COMPANY, PLAN_SAFARI_ROUTE, whatsappLink } from "@/lib/constants"
 
 const HERO_IMAGES = [
   "/images/local/pin_212b2433f246414a170ec177d76168f2.jpg",
@@ -47,7 +47,7 @@ export function HeroSection() {
     return () => clearInterval(interval)
   }, [mounted, paused, currentImage])
 
-  const whatsappUrl = `https://wa.me/${COMPANY.whatsapp.replace(/\D/g, "")}?text=${encodeURIComponent("Hi! I'd like to plan a safari with Ready Set Go Safaris.")}`
+  const whatsappUrl = whatsappLink()
 
   return (
     <section

@@ -6,7 +6,7 @@ import {
   CheckCircle2, Send, Loader2, ExternalLink,
   MapPin, Sun, Users, Home, Car, UserCheck,
 } from "lucide-react"
-import { COMPANY } from "@/lib/constants"
+import { COMPANY, whatsappLink } from "@/lib/constants"
 import PdfItinerary from "@/components/PdfItinerary"
 import { getClientSessionId } from "@/lib/session"
 import { trackConversion } from "@/lib/conversions"
@@ -150,7 +150,7 @@ export function StepQuote({
         <div className="flex flex-wrap justify-center gap-3">
           <PdfItinerary data={itineraryData} buttonLabel="Download PDF Itinerary" />
           <a
-            href={`https://wa.me/${COMPANY.whatsapp}?text=Hi!%20I%20just%20submitted%20my%20safari%20planner%20request.`}
+            href={whatsappLink("Hi! I just submitted my safari planner request with Ready Set Go Safaris.")}
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 h-11 px-5 rounded-xl bg-white/10 hover:bg-white/20 text-white text-sm font-medium transition-all"

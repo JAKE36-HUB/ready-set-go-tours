@@ -3,7 +3,7 @@
 import Image from "next/image"
 import Link from "next/link"
 import { ArrowRight, Hotel, Plane, Heart, Compass, Sparkles, Shield, HeadphonesIcon, Award, Star } from "lucide-react"
-import { SERVICES, COMPANY } from "@/lib/constants"
+import { SERVICES, whatsappLink } from "@/lib/constants"
 import AnimatedSection from "@/components/AnimatedSection"
 
 const iconMap: Record<string, typeof Hotel> = { Compass, Hotel, Plane, Heart, Shield, HeadphonesIcon, Award, Sparkles }
@@ -136,7 +136,7 @@ export default function ServicesPage() {
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link
-                href={`https://wa.me/${COMPANY.whatsapp}`}
+                href={whatsappLink()}
                 target="_blank"
                 className="inline-flex items-center justify-center gap-2 h-12 px-8 rounded-xl bg-gradient-to-r from-emerald-500 to-emerald-600 hover:from-emerald-400 hover:to-emerald-500 text-white font-semibold shadow-lg shadow-emerald-500/25 transition-all"
               >

@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { COMPANY, USD_TO_KES, PLAN_SAFARI_ROUTE } from "@/lib/constants";
+import { COMPANY, USD_TO_KES, PLAN_SAFARI_ROUTE, whatsappPackageLink } from "@/lib/constants";
 import { getSupabase } from "@/lib/supabase";
 import { TourPackageJsonLd, BreadcrumbJsonLd } from "@/components/JsonLd";
 import { Tag, Clock, Users, Gift, Percent, Star, Shield, Check, ArrowLeft, Calendar, Hotel, Utensils, MessageCircle, ArrowRight } from "lucide-react";
@@ -193,7 +193,7 @@ export default async function DealDetailPage({
           </div>
           <div className="flex items-center gap-3">
             <a
-              href={`https://wa.me/${COMPANY.whatsapp.replace(/\D/g, "")}?text=${encodeURIComponent(`Hi! I'd like to know more about the ${deal.title} deal with Ready Set Go Safaris.`)}`}
+              href={whatsappPackageLink(deal.title)}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 h-11 px-5 rounded-xl bg-card border border-border hover:border-primary/40 hover:bg-primary/5 text-foreground text-sm font-medium transition-all"
@@ -332,7 +332,7 @@ export default async function DealDetailPage({
                       Plan My Safari <ArrowRight className="size-4" />
                     </Link>
                     <a
-                      href={`https://wa.me/${COMPANY.whatsapp.replace(/\D/g, "")}?text=${encodeURIComponent(`Hi! I'd like to know more about the ${deal.title} deal with Ready Set Go Safaris.`)}`}
+                      href={whatsappPackageLink(deal.title)}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="flex items-center justify-center gap-2 w-full h-12 rounded-xl bg-white/10 hover:bg-white/20 text-white text-sm font-medium ring-1 ring-white/25 transition-all"

@@ -10,7 +10,7 @@ import { useTheme } from "next-themes"
 
 import { Button } from "@/components/ui/button"
 import { Sheet, SheetContent, SheetClose } from "@/components/ui/sheet"
-import { NAV_ITEMS, COMPANY, PLAN_SAFARI_ROUTE } from "@/lib/constants"
+import { NAV_ITEMS, COMPANY, PLAN_SAFARI_ROUTE, whatsappLink } from "@/lib/constants"
 import { cn } from "@/lib/utils"
 
 export function Header() {
@@ -49,7 +49,7 @@ export function Header() {
     return () => window.removeEventListener("keydown", handleKeyDown)
   }, [])
 
-  const whatsappUrl = `https://wa.me/${COMPANY.whatsapp.replace(/\D/g, "")}?text=${encodeURIComponent("Hi! I'd like to plan a safari with Ready Set Go Safaris.")}`
+  const whatsappUrl = whatsappLink()
 
   return (
     <>
@@ -234,7 +234,7 @@ function MobileNavContent({ onClose }: { onClose: () => void }) {
     )
   }
 
-  const whatsappUrl = `https://wa.me/${COMPANY.whatsapp.replace(/\D/g, "")}?text=${encodeURIComponent("Hi! I'd like to plan a safari with Ready Set Go Safaris.")}`
+  const whatsappUrl = whatsappLink()
 
   return (
     <div className="flex flex-col h-full bg-background dark:bg-stone-950">

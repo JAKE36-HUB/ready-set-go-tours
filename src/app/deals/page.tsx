@@ -1,7 +1,7 @@
 ﻿import Image from "next/image";
 import Link from "next/link";
 import AnimatedSection from "@/components/AnimatedSection";
-import { COMPANY, PLAN_SAFARI_ROUTE } from "@/lib/constants";
+import { PLAN_SAFARI_ROUTE, whatsappLink } from "@/lib/constants";
 import { getSupabase } from "@/lib/supabase";
 import { Shield, Users, Gift, Star, MessageCircle, ArrowRight } from "lucide-react";
 import DealsBrowser, { type DealCard } from "@/components/DealsBrowser";
@@ -109,7 +109,7 @@ export default async function DealsPage() {
                 Plan My Safari <ArrowRight className="size-4" />
               </Link>
               <a
-                href={`https://wa.me/${COMPANY.whatsapp.replace(/\D/g, "")}?text=${encodeURIComponent("Hi! I'd like to know more about the current Ready Set Go Safaris deals.")}`}
+                href={whatsappLink()}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center justify-center gap-2 h-12 px-6 rounded-xl bg-white/10 hover:bg-white/20 text-white text-sm font-medium ring-1 ring-white/25 transition-all"

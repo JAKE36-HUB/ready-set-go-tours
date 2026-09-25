@@ -14,7 +14,7 @@ import AnimatedSection from "@/components/AnimatedSection";
 import { contactFormSchema, type ContactFormData } from "@/lib/schemas";
 import { trackConversion } from "@/lib/conversions";
 import { getClientSessionId } from "@/lib/session";
-import { COMPANY, SITE_STATS } from "@/lib/constants";
+import { COMPANY, SITE_STATS, whatsappLink } from "@/lib/constants";
 import {
   MapPin, Phone, Mail, MessageCircle, Clock, Send, CheckCircle, Loader2,
   ArrowRight, ChevronRight, Star, Shield, Users, Globe, Building2,
@@ -315,7 +315,7 @@ export default function ContactPage() {
                 </p>
               </div>
               <a
-                href={`https://wa.me/${COMPANY.whatsapp.replace(/\D/g, "")}?text=Hi%20Ready%20Set%20Go%20Tours!%20I%27d%20love%20to%20plan%20a%20safari.`}
+                href={whatsappLink()}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 h-14 px-8 rounded-xl bg-white text-green-700 font-bold text-base hover:bg-green-50 transition-all shadow-xl hover:shadow-2xl shrink-0"

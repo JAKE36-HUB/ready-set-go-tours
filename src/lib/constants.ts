@@ -34,6 +34,21 @@ export const USD_TO_KES = 130;
 
 export const PLAN_SAFARI_ROUTE = "/plan-my-safari";
 
+const WHATSAPP_DIGITS = COMPANY.whatsapp.replace(/\D/g, "");
+
+export const WHATSAPP_DEFAULT_MESSAGE =
+  "Hello Ready Set Go Safaris, I'd like to speak to a safari expert about planning my trip.";
+
+export function whatsappLink(message?: string): string {
+  return `https://wa.me/${WHATSAPP_DIGITS}?text=${encodeURIComponent(message ?? WHATSAPP_DEFAULT_MESSAGE)}`;
+}
+
+export function whatsappPackageLink(packageName: string): string {
+  return whatsappLink(
+    `Hello Ready Set Go Safaris, I'm interested in the ${packageName}. I'd like to know more about availability and pricing.`
+  );
+}
+
 export const CONTACT_INFO = {
   phone: COMPANY.phone,
   email: COMPANY.email,

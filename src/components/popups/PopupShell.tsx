@@ -12,6 +12,7 @@ import { LeadForm } from "./LeadForm"
 import { AdaptiveImage, useImageDims } from "./AdaptiveImage"
 import { computeSmartLayout, useViewport } from "@/lib/popups/adaptive"
 import { parseCountdown } from "@/lib/popups/engine"
+import { whatsappLink } from "@/lib/constants"
 
 export interface ActivePopup {
   id: number
@@ -534,7 +535,7 @@ export function PopupShell({ popup, onClose, onCTA, onLeadSuccess }: Props) {
         <ContentSection config={cfg} />
         <UrgencyRow config={cfg} />
         <button
-          onClick={() => onCTA(cfg.ctas[0] || { id: "wa", label: "Chat on WhatsApp", url: "https://wa.me", newTab: true, bgColor: "#25d366", textColor: "#fff", hoverAnimation: "pulse", icon: "ðŸ’¬", type: "whatsapp" }, 0)}
+          onClick={() => onCTA(cfg.ctas[0] || { id: "wa", label: "Chat on WhatsApp", url: whatsappLink(), newTab: true, bgColor: "#25d366", textColor: "#fff", hoverAnimation: "pulse", icon: "ðŸ’¬", type: "whatsapp" }, 0)}
           className="mx-auto inline-flex items-center gap-2 rounded-full bg-[#25d366] px-8 py-3 text-base font-bold text-white shadow-xl hover:scale-105 active:scale-95 transition animate-pulse"
         >
           ðŸ’¬ Chat on WhatsApp

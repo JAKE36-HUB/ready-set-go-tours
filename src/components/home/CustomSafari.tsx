@@ -7,7 +7,7 @@ import { motion, useInView } from "framer-motion"
 import { MessageCircle, ArrowRight, Check } from "lucide-react"
 
 import { Button } from "@/components/ui/button"
-import { COMPANY, PLAN_SAFARI_ROUTE } from "@/lib/constants"
+import { PLAN_SAFARI_ROUTE, whatsappLink } from "@/lib/constants"
 
 const REASONS = [
   "A specific park you have your heart set on",
@@ -20,7 +20,7 @@ export function CustomSafari() {
   const ref = useRef<HTMLDivElement>(null)
   const isInView = useInView(ref, { once: true, margin: "-100px" })
 
-  const whatsappUrl = `https://wa.me/${COMPANY.whatsapp.replace(/\D/g, "")}?text=${encodeURIComponent("Hi! I'd like to plan a custom safari with Ready Set Go Safaris.")}`
+  const whatsappUrl = whatsappLink()
 
   return (
     <section ref={ref} className="relative py-24 sm:py-28 bg-muted/70 dark:bg-stone-900 overflow-hidden">

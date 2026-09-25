@@ -7,7 +7,7 @@ import {
   ArrowRight, Check, Star, Hotel, Plane, Heart, Shield, HeadphonesIcon, Award, Sparkles, Compass, Phone,
 } from "lucide-react"
 import type { Service } from "@/lib/constants"
-import { COMPANY, TESTIMONIALS } from "@/lib/constants"
+import { COMPANY, TESTIMONIALS, whatsappPackageLink } from "@/lib/constants"
 import AnimatedSection from "@/components/AnimatedSection"
 import { openBookingModal } from "@/lib/booking-store"
 import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from "@/components/ui/accordion"
@@ -388,7 +388,7 @@ export default function ServiceContent({ service }: Props) {
                 Get a Free Quote
               </button>
               <a
-                href={`https://wa.me/${COMPANY.whatsapp}?text=Hi!%20I'm%20interested%20in%20${encodeURIComponent(service.title)}`}
+                href={whatsappPackageLink(service.title)}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center justify-center gap-2 h-12 px-8 rounded-xl border border-white/20 text-white hover:bg-white/10 transition-colors"

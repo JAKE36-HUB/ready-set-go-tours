@@ -8,7 +8,7 @@ import { Phone, Mail, MapPin, Clock, ArrowRight, Heart, ChevronRight, ShieldChec
 
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
-import { COMPANY, NAV_ITEMS, SOCIAL_LINKS, CONTACT_INFO, PLAN_SAFARI_ROUTE } from "@/lib/constants"
+import { COMPANY, NAV_ITEMS, SOCIAL_LINKS, CONTACT_INFO, PLAN_SAFARI_ROUTE, whatsappLink } from "@/lib/constants"
 import { getClientSessionId } from "@/lib/session"
 
 const footerColumns = [
@@ -62,7 +62,7 @@ export function Footer() {
     }
   }
 
-  const whatsappUrl = `https://wa.me/${COMPANY.whatsapp.replace(/\D/g, "")}?text=${encodeURIComponent("Hi! I'd like to plan a safari with Ready Set Go Safaris.")}`
+  const whatsappUrl = whatsappLink()
 
   return (
     <footer className="relative bg-stone-950 dark:bg-black text-stone-300 overflow-hidden">

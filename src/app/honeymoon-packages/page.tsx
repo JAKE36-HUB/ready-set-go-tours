@@ -1,7 +1,7 @@
 ﻿import Image from "next/image";
 import Link from "next/link";
 import { Heart, Quote, Star, Shield, Gift, MessageCircle, ArrowRight } from "lucide-react";
-import { COMPANY, PLAN_SAFARI_ROUTE } from "@/lib/constants";
+import { PLAN_SAFARI_ROUTE, whatsappLink } from "@/lib/constants";
 import { getSupabase } from "@/lib/supabase";
 import AnimatedSection from "@/components/AnimatedSection";
 import HoneymoonGrid, { type HoneymoonCard } from "@/components/HoneymoonGrid";
@@ -126,7 +126,7 @@ export default async function HoneymoonPage() {
                   Design Our Honeymoon <ArrowRight className="size-4" />
                 </Link>
                 <a
-                  href={`https://wa.me/${COMPANY.whatsapp.replace(/\D/g, "")}?text=${encodeURIComponent("Hi! We'd like to plan our honeymoon with Ready Set Go Safaris.")}`}
+                  href={whatsappLink()}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center justify-center gap-2 h-12 px-6 rounded-xl bg-white/10 hover:bg-white/20 text-white text-sm font-medium transition-all ring-1 ring-white/20"

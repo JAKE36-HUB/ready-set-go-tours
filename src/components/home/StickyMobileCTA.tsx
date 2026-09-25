@@ -5,7 +5,7 @@ import Link from "next/link"
 import { MessageCircle } from "lucide-react"
 
 import { Button } from "@/components/ui/button"
-import { COMPANY, PLAN_SAFARI_ROUTE } from "@/lib/constants"
+import { PLAN_SAFARI_ROUTE, whatsappLink } from "@/lib/constants"
 
 export function StickyMobileCTA() {
   const [show, setShow] = useState(false)
@@ -16,7 +16,7 @@ export function StickyMobileCTA() {
     return () => window.removeEventListener("scroll", onScroll)
   }, [])
 
-  const whatsappUrl = `https://wa.me/${COMPANY.whatsapp.replace(/\D/g, "")}?text=${encodeURIComponent("Hi! I'd like to plan a safari with Ready Set Go Safaris.")}`
+  const whatsappUrl = whatsappLink()
 
   return (
     <div

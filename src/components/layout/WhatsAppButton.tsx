@@ -1,13 +1,13 @@
 "use client"
 
 import { MessageCircle } from "lucide-react"
-import { COMPANY } from "@/lib/constants"
+import { whatsappLink } from "@/lib/constants"
 import { trackConversion } from "@/lib/conversions"
 
 const TRACKED_KEY = "rsgt_wa_clicked"
 
 export function WhatsAppButton() {
-  const whatsappUrl = `https://wa.me/${COMPANY.whatsapp}?text=Hello%21%20I%27d%20like%20to%20inquire%20about%20your%20travel%20services.`
+  const whatsappUrl = whatsappLink()
 
   function handleClick() {
     try {
