@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react"
 import { motion, AnimatePresence } from "framer-motion"
-import { Users, Eye, Clock, Globe, ArrowUpDown, Search, RefreshCw, Activity, Megaphone } from "lucide-react"
+import { Users, Eye, Clock, Globe, ArrowUpDown, Search, RefreshCw, Activity } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 
@@ -15,8 +15,6 @@ interface Visitor {
   ip: string
   country: string
   city: string
-  is_google_ads: boolean
-  gclid: string
   email?: string | null
   entered_at: string
   last_active_at: string
@@ -26,8 +24,6 @@ interface Visitor {
 interface Stats {
   todayVisitors: number
   todayViews: number
-  todayGoogleAds: number
-  totalGoogleAds: number
   avgDuration: number
   totalVisitors: number
   topPages: { page: string; count: number }[]
@@ -62,7 +58,7 @@ function timeAgo(date: string) {
 
 export default function AdminVisitors() {
   const [visitors, setVisitors] = useState<Visitor[]>([])
-  const [stats, setStats] = useState<Stats>({ todayVisitors: 0, todayViews: 0, todayGoogleAds: 0, totalGoogleAds: 0, avgDuration: 0, totalVisitors: 0, topPages: [] })
+  const [stats, setStats] = useState<Stats>({ todayVisitors: 0, todayViews: 0, avgDuration: 0, totalVisitors: 0, topPages: [] })
   const [loading, setLoading] = useState(true)
   const [search, setSearch] = useState("")
   const [sortField, setSortField] = useState<"entered_at" | "duration_seconds">("entered_at")
@@ -74,7 +70,7 @@ export default function AdminVisitors() {
       if (!res.ok) return
       const json = await res.json()
       setVisitors(json.visitors || [])
-      setStats(json.stats || { todayVisitors: 0, todayViews: 0, todayGoogleAds: 0, totalGoogleAds: 0, avgDuration: 0, totalVisitors: 0, topPages: [] })
+      setStats(json.stats || { todayVisitors: 0, todayViews: 0, avgDuration: 0, totalVisitors: 0, topPages: [] })
     } catch {} finally {
       setLoading(false)
     }
@@ -116,7 +112,7 @@ export default function AdminVisitors() {
         </div>
       </motion.div>
 
-      <div className="grid grid-cols-2 lg:grid-cols-5 gap-3">
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
         <motion.div initial={{ opacity: 0, y: 15 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }}
           className="rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-4">
           <div className="flex items-center gap-2 text-xs text-slate-500 dark:text-slate-400 mb-1">
@@ -148,14 +144,6 @@ export default function AdminVisitors() {
           </div>
           <p className="text-2xl font-bold text-slate-900 dark:text-white tabular-nums">{stats.totalVisitors}</p>
           <p className="text-xs text-slate-400">unique visitors</p>
-        </motion.div>
-        <motion.div initial={{ opacity: 0, y: 15 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3 }}
-          className="rounded-xl border border-sky-500/30 bg-sky-500/[0.04] dark:bg-sky-500/[0.06] p-4">
-          <div className="flex items-center gap-2 text-xs text-sky-600 dark:text-sky-400 mb-1">
-            <Megaphone className="w-3.5 h-3.5" />Google Ads
-          </div>
-          <p className="text-2xl font-bold text-slate-900 dark:text-white tabular-nums">{stats.totalGoogleAds}</p>
-          <p className="text-xs text-slate-400">today: {stats.todayGoogleAds}</p>
         </motion.div>
       </div>
 
@@ -244,14 +232,7 @@ export default function AdminVisitors() {
                           </div>
                         </td>
                         <td className="py-2.5 pr-2">
-                          <div className="flex items-center gap-1.5">
-                            <span className="text-slate-400 truncate block max-w-[130px]">{referrerLabel(v.referrer)}</span>
-                            {v.is_google_ads && (
-                              <span title={v.gclid ? `Google Ads (${v.gclid})` : "Google Ads"} className="shrink-0 px-1.5 py-0.5 rounded bg-sky-500/10 text-sky-600 dark:text-sky-400 border border-sky-500/30 text-[10px] font-medium">
-                                Google Ads
-                              </span>
-                            )}
-                          </div>
+                          <span className="text-slate-400 truncate block max-w-[160px]">{referrerLabel(v.referrer)}</span>
                         </td>
                         <td className="py-2.5 pr-2 text-right">
                           <span className="text-slate-600 dark:text-slate-400 tabular-nums">{formatDuration(v.duration_seconds)}</span>

@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { GeistSans } from "geist/font/sans";
+import { Fraunces } from "next/font/google";
 import "./globals.css";
 import { SupabaseProvider } from "@/lib/supabase-auth";
 import { ThemeProvider } from "@/components/layout/ThemeProvider";
@@ -10,12 +11,18 @@ import Script from "next/script";
 import { ClientWidgets } from "@/components/ClientWidgets";
 import { COMPANY } from "@/lib/constants";
 
+const FrauncesFont = Fraunces({
+  subsets: ["latin"],
+  variable: "--font-display",
+  display: "swap",
+});
+
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
   themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#ffffff" },
-    { media: "(prefers-color-scheme: dark)", color: "#0c0c0c" },
+    { media: "(prefers-color-scheme: light)", color: "#faf8f4" },
+    { media: "(prefers-color-scheme: dark)", color: "#12110e" },
   ],
 };
 
@@ -27,36 +34,36 @@ export const metadata: Metadata = {
       : {}),
   },
   title: {
-    default: "Ready Set Go Tours & Travel | Luxury Kenya & Tanzania Safaris",
-    template: "%s | Ready Set Go Tours & Travel",
+    default: "Ready Set Go Safaris | Private Kenya & Tanzania Safari Specialists",
+    template: "%s | Ready Set Go Safaris",
   },
   description:
-    "Premier luxury tour operator in Nairobi, Kenya. Kenya and Tanzania tours, safaris, beach holidays, and travel packages. Book your East African adventure today.",
-  authors: [{ name: "Ready Set Go Tours & Travel" }],
-  creator: "Ready Set Go Tours & Travel",
-  publisher: "Ready Set Go Tours & Travel",
+    "Private Kenya and Tanzania safaris designed around your dates, budget and travel style. Honeymoons, family safaris, photography adventures and custom itineraries.",
+  authors: [{ name: "Ready Set Go Safaris" }],
+  creator: "Ready Set Go Safaris",
+  publisher: "Ready Set Go Safaris",
   metadataBase: new URL("https://www.readysetgosafaris.com"),
   openGraph: {
     type: "website",
     locale: "en_US",
-    siteName: "Ready Set Go Tours & Travel",
-    title: "Ready Set Go Tours & Travel | Luxury Kenya & Tanzania Safaris",
+    siteName: "Ready Set Go Safaris",
+    title: "Ready Set Go Safaris | Private Kenya & Tanzania Safari Specialists",
     description:
-      "Premier luxury tour operator in Nairobi, Kenya. Explore extraordinary Kenya and Tanzania tours, safaris, beach holidays, and travel packages.",
+      "Private Kenya and Tanzania safaris designed around your dates, budget and travel style. Tell us what you want to experience — we'll design the trip around you.",
     images: [
       {
         url: "/opengraph-image.png",
         width: 1200,
         height: 630,
-        alt: "Ready Set Go Tours & Travel",
+        alt: "Ready Set Go Safaris",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Ready Set Go Tours & Travel | Luxury Kenya & Tanzania Safaris",
+    title: "Ready Set Go Safaris | Private Kenya & Tanzania Safari Specialists",
     description:
-      "Premier luxury tour operator in Nairobi, Kenya. Explore extraordinary Kenya and Tanzania tours, safaris, beach holidays, and travel packages.",
+      "Private Kenya and Tanzania safaris designed around your dates, budget and travel style.",
     images: ["/opengraph-image.png"],
   },
   robots: {
@@ -85,7 +92,7 @@ export default function RootLayout({
       lang="en"
       suppressHydrationWarning
       data-scroll-behavior="smooth"
-      className={`${GeistSans.variable} antialiased`}
+      className={`${GeistSans.variable} ${FrauncesFont.variable} antialiased`}
     >
       <head>
       </head>

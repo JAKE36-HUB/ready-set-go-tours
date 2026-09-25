@@ -111,6 +111,7 @@ export function AiChat() {
     if (open && !hydrated) {
       const sid = ensureSessionId()
       sessionIdRef.current = sid
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setHydrated(true)
       syncMessages()
       return
@@ -161,6 +162,7 @@ export function AiChat() {
     const text = (presetText ?? input).trim()
     if (!text || loading) return
     setInput("")
+    // eslint-disable-next-line react-hooks/purity -- optimistic local id for the outgoing chat message
     const userLocalId = Date.now()
     setMessages((prev) => [...prev, { id: userLocalId, role: "user", content: text, created_at: "" }])
 

@@ -5,12 +5,12 @@ import Image from "next/image"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { motion, AnimatePresence } from "framer-motion"
-import { Compass, Menu, Search, Phone, Moon, Sun, ChevronDown, X } from "lucide-react"
+import { Compass, Menu, Search, Phone, Moon, Sun, ChevronDown, X, MessageCircle } from "lucide-react"
 import { useTheme } from "next-themes"
 
 import { Button } from "@/components/ui/button"
 import { Sheet, SheetContent, SheetClose } from "@/components/ui/sheet"
-import { NAV_ITEMS, COMPANY } from "@/lib/constants"
+import { NAV_ITEMS, COMPANY, PLAN_SAFARI_ROUTE } from "@/lib/constants"
 import { cn } from "@/lib/utils"
 
 export function Header() {
@@ -49,14 +49,16 @@ export function Header() {
     return () => window.removeEventListener("keydown", handleKeyDown)
   }, [])
 
+  const whatsappUrl = `https://wa.me/${COMPANY.whatsapp.replace(/\D/g, "")}?text=${encodeURIComponent("Hi! I'd like to plan a safari with Ready Set Go Safaris.")}`
+
   return (
     <>
       <motion.header
         className={cn(
           "fixed top-0 left-0 right-0 z-50 transition-colors duration-300",
           scrolled
-            ? "bg-white shadow-premium dark:bg-slate-900"
-            : "bg-white/70 backdrop-blur-xl dark:bg-slate-900/70"
+            ? "bg-white shadow-card dark:bg-stone-900"
+            : "bg-background/80 backdrop-blur-xl dark:bg-stone-900/70"
         )}
         initial={{ y: -100 }}
         animate={{ y: 0 }}
@@ -66,7 +68,7 @@ export function Header() {
           <Link href="/" className="flex items-center gap-2.5 group shrink-0">
             <Image
               src="/logo.png"
-              alt="Ready Set Go Tours"
+              alt="Ready Set Go Safaris"
               width={280}
               height={133}
               className="h-20 w-auto object-contain transition-all duration-300"
@@ -95,10 +97,8 @@ export function Header() {
                         className={cn(
                           "flex items-center gap-1 px-3 py-2 rounded-lg text-sm font-medium transition-all duration-200",
                           isActive
-                            ? "text-sky-600 bg-sky-50 dark:text-sky-400 dark:bg-sky-900/30"
-                            : scrolled
-                              ? "text-slate-700 hover:text-sky-600 hover:bg-sky-50 dark:text-slate-300 dark:hover:text-sky-400 dark:hover:bg-slate-800"
-                              : "text-slate-700 hover:text-sky-600 hover:bg-sky-50 dark:text-slate-300 dark:hover:text-sky-400 dark:hover:bg-slate-800"
+                            ? "text-primary bg-primary/10 dark:text-amber-400 dark:bg-amber-900/30"
+                            : "text-stone-700 hover:text-primary hover:bg-primary/10 dark:text-stone-300 dark:hover:text-amber-400 dark:hover:bg-amber-900/20"
                         )}
                       >
                         {item.label}
@@ -116,7 +116,7 @@ export function Header() {
                             animate={{ opacity: 1, y: 0, scale: 1 }}
                             exit={{ opacity: 0, y: 8, scale: 0.96 }}
                             transition={{ duration: 0.2, ease: "easeOut" }}
-                            className="absolute top-full left-0 mt-2 w-56 rounded-xl bg-white dark:bg-slate-900 shadow-card ring-1 ring-slate-900/5 dark:ring-slate-700/50 overflow-hidden"
+                            className="absolute top-full left-0 mt-2 w-56 rounded-xl bg-white dark:bg-stone-900 shadow-card ring-1 ring-stone-900/5 dark:ring-stone-700/50 overflow-hidden"
                           >
                             <div className="p-1.5">
                               {item.children!.map((child) => {
@@ -128,8 +128,8 @@ export function Header() {
                                     className={cn(
                                       "flex items-center px-3 py-2.5 rounded-lg text-sm font-medium transition-all duration-150",
                                       isChildActive
-                                        ? "bg-sky-50 text-sky-700 dark:bg-sky-900/30 dark:text-sky-400"
-                                        : "text-slate-700 hover:bg-slate-50 dark:text-slate-300 dark:hover:bg-slate-800"
+                                        ? "bg-primary/10 text-primary dark:bg-amber-900/30 dark:text-amber-400"
+                                        : "text-stone-700 hover:bg-stone-50 dark:text-stone-300 dark:hover:bg-stone-800"
                                     )}
                                   >
                                     {child.label}
@@ -147,10 +147,8 @@ export function Header() {
                       className={cn(
                         "px-3 py-2 rounded-lg text-sm font-medium transition-all duration-200",
                         isActive
-                          ? "text-sky-600 bg-sky-50 dark:text-sky-400 dark:bg-sky-900/30"
-                          : scrolled
-                            ? "text-slate-700 hover:text-sky-600 hover:bg-sky-50 dark:text-slate-300 dark:hover:text-sky-400 dark:hover:bg-slate-800"
-                            : "text-slate-700 hover:text-sky-600 hover:bg-sky-50 dark:text-slate-300 dark:hover:text-sky-400 dark:hover:bg-slate-800"
+                          ? "text-primary bg-primary/10 dark:text-amber-400 dark:bg-amber-900/30"
+                          : "text-stone-700 hover:text-primary hover:bg-primary/10 dark:text-stone-300 dark:hover:text-amber-400 dark:hover:bg-amber-900/20"
                       )}
                     >
                       {item.label}
@@ -166,12 +164,7 @@ export function Header() {
               variant="ghost"
               size="icon"
               onClick={() => setSearchOpen(true)}
-              className={cn(
-                "hidden sm:inline-flex",
-                scrolled
-                  ? "text-slate-700 hover:text-sky-600 dark:text-slate-300"
-                  : "text-slate-700 hover:text-sky-600 dark:text-slate-300"
-              )}
+              className="hidden sm:inline-flex text-stone-700 hover:text-primary dark:text-stone-300"
               aria-label="Search"
             >
               <Search className="w-4 h-4" />
@@ -181,33 +174,25 @@ export function Header() {
               variant="ghost"
               size="icon"
               onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-              className={cn(
-                "hidden sm:inline-flex",
-                scrolled
-                  ? "text-slate-700 hover:text-sky-600 dark:text-slate-300"
-                  : "text-slate-700 hover:text-sky-600 dark:text-slate-300"
-              )}
+              className="hidden sm:inline-flex text-stone-700 hover:text-primary dark:text-stone-300"
               aria-label="Toggle dark mode"
             >
               {mounted ? (theme === "dark" ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />) : <div className="w-4 h-4" />}
             </Button>
 
             <a
-              href={`tel:${COMPANY.phone}`}
-              className={cn(
-                "hidden md:inline-flex items-center gap-2 px-3 py-2 rounded-lg text-sm font-medium transition-all duration-200",
-                scrolled
-                  ? "text-slate-700 hover:text-sky-600 hover:bg-sky-50 dark:text-slate-300 dark:hover:text-sky-400"
-                  : "text-slate-700 hover:text-sky-600 hover:bg-sky-50 dark:text-slate-300 dark:hover:text-sky-400"
-              )}
+              href={whatsappUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hidden xl:inline-flex items-center gap-2 px-3 py-2 rounded-lg text-sm font-medium text-stone-700 hover:text-primary hover:bg-primary/10 dark:text-stone-300 dark:hover:text-amber-400 dark:hover:bg-amber-900/20 transition-all duration-200"
             >
-              <Phone className="w-3.5 h-3.5 shrink-0" />
-              <span className="hidden lg:inline whitespace-nowrap">{COMPANY.phone}</span>
+              <MessageCircle className="w-3.5 h-3.5 shrink-0" />
+              <span className="whitespace-nowrap">WhatsApp an Expert</span>
             </a>
 
-            <Link href="/contact">
-              <Button className="hidden sm:inline-flex items-center gap-2 font-medium gradient-primary text-white border-0 shadow-premium hover:shadow-premium hover:scale-105 transition-all duration-300">
-                Get a Free Quote
+            <Link href={PLAN_SAFARI_ROUTE}>
+              <Button className="hidden sm:inline-flex items-center gap-2 font-semibold gradient-primary text-white border-0 shadow-premium hover:shadow-premium hover:scale-105 transition-all duration-300">
+                Plan My Safari
               </Button>
             </Link>
 
@@ -215,12 +200,7 @@ export function Header() {
               variant="ghost"
               size="icon"
               onClick={() => setMobileMenuOpen(true)}
-              className={cn(
-                "lg:hidden",
-                scrolled
-                  ? "text-slate-700 dark:text-slate-300"
-                  : "text-slate-700 dark:text-slate-300"
-              )}
+              className="lg:hidden text-stone-700 dark:text-stone-300"
               aria-label="Open menu"
             >
               <Menu className="w-5 h-5" />
@@ -254,14 +234,16 @@ function MobileNavContent({ onClose }: { onClose: () => void }) {
     )
   }
 
+  const whatsappUrl = `https://wa.me/${COMPANY.whatsapp.replace(/\D/g, "")}?text=${encodeURIComponent("Hi! I'd like to plan a safari with Ready Set Go Safaris.")}`
+
   return (
-    <div className="flex flex-col h-full bg-white dark:bg-slate-950">
-      <div className="flex items-center justify-between p-4 border-b border-slate-100 dark:border-slate-800">
+    <div className="flex flex-col h-full bg-background dark:bg-stone-950">
+      <div className="flex items-center justify-between p-4 border-b border-stone-200 dark:border-stone-800">
         <Link href="/" className="flex items-center gap-2.5" onClick={onClose}>
           <div className="flex items-center justify-center w-9 h-9 rounded-xl gradient-primary text-white">
             <Compass className="w-4 h-4" />
           </div>
-          <span className="text-lg font-bold text-slate-900 dark:text-white">
+          <span className="text-lg font-bold text-stone-900 dark:text-white">
             {COMPANY.shortName}
           </span>
         </Link>
@@ -289,8 +271,8 @@ function MobileNavContent({ onClose }: { onClose: () => void }) {
                     className={cn(
                       "flex w-full items-center justify-between px-3 py-3 rounded-lg text-sm font-medium transition-all duration-150",
                       isActive
-                        ? "bg-sky-50 text-sky-700 dark:bg-sky-900/30 dark:text-sky-400"
-                        : "text-slate-700 hover:bg-slate-50 dark:text-slate-300 dark:hover:bg-slate-800"
+                        ? "bg-primary/10 text-primary dark:bg-amber-900/30 dark:text-amber-400"
+                        : "text-stone-700 hover:bg-stone-50 dark:text-stone-300 dark:hover:bg-stone-800"
                     )}
                   >
                     {item.label}
@@ -310,7 +292,7 @@ function MobileNavContent({ onClose }: { onClose: () => void }) {
                         transition={{ duration: 0.2 }}
                         className="overflow-hidden"
                       >
-                        <div className="ml-3 mt-1 space-y-1 border-l-2 border-sky-100 dark:border-sky-900 pl-3">
+                        <div className="ml-3 mt-1 space-y-1 border-l-2 border-amber-200 dark:border-amber-900 pl-3">
                           {item.children!.map((child) => (
                             <Link
                               key={child.href}
@@ -319,8 +301,8 @@ function MobileNavContent({ onClose }: { onClose: () => void }) {
                               className={cn(
                                 "block px-3 py-2.5 rounded-lg text-sm transition-all duration-150",
                                 pathname === child.href
-                                  ? "bg-sky-50 text-sky-700 font-medium dark:bg-sky-900/30 dark:text-sky-400"
-                                  : "text-slate-600 hover:bg-slate-50 dark:text-slate-400 dark:hover:bg-slate-800"
+                                  ? "bg-primary/10 text-primary font-medium dark:bg-amber-900/30 dark:text-amber-400"
+                                  : "text-stone-600 hover:bg-stone-50 dark:text-stone-400 dark:hover:bg-stone-800"
                               )}
                             >
                               {child.label}
@@ -338,8 +320,8 @@ function MobileNavContent({ onClose }: { onClose: () => void }) {
                   className={cn(
                     "flex items-center px-3 py-3 rounded-lg text-sm font-medium transition-all duration-150",
                     isActive
-                      ? "bg-sky-50 text-sky-700 dark:bg-sky-900/30 dark:text-sky-400"
-                      : "text-slate-700 hover:bg-slate-50 dark:text-slate-300 dark:hover:bg-slate-800"
+                      ? "bg-primary/10 text-primary dark:bg-amber-900/30 dark:text-amber-400"
+                      : "text-stone-700 hover:bg-stone-50 dark:text-stone-300 dark:hover:bg-stone-800"
                   )}
                 >
                   {item.label}
@@ -350,21 +332,30 @@ function MobileNavContent({ onClose }: { onClose: () => void }) {
         })}
       </nav>
 
-      <div className="border-t border-slate-100 dark:border-slate-800 p-4 space-y-3">
+      <div className="border-t border-stone-200 dark:border-stone-800 p-4 space-y-3">
         <a
-          href={`tel:${COMPANY.phone}`}
-          className="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm text-slate-700 hover:bg-slate-50 dark:text-slate-300 dark:hover:bg-slate-800 transition-colors"
+          href={whatsappUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="flex items-center justify-center gap-2 w-full py-3 rounded-xl bg-[#25D366] text-white font-medium sm:hover:scale-[1.02] transition-all duration-300"
         >
-          <Phone className="w-4 h-4 text-sky-500 shrink-0" />
-          <span className="whitespace-nowrap">{COMPANY.phone}</span>
+          <MessageCircle className="w-4 h-4 shrink-0" />
+          WhatsApp a Safari Expert
         </a>
         <Link
-          href="/contact"
+          href={PLAN_SAFARI_ROUTE}
           onClick={onClose}
-          className="flex items-center justify-center w-full py-3 rounded-xl gradient-primary text-white font-medium shadow-premium hover:shadow-premium hover:scale-[1.02] transition-all duration-300"
+          className="flex items-center justify-center w-full py-3 rounded-xl gradient-primary text-white font-medium shadow-premium sm:hover:scale-[1.02] transition-all duration-300"
         >
-          Get a Free Quote
+          Plan My Safari
         </Link>
+        <a
+          href={`tel:${COMPANY.phone}`}
+          className="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm text-stone-700 hover:bg-stone-50 dark:text-stone-300 dark:hover:bg-stone-800 transition-colors"
+        >
+          <Phone className="w-4 h-4 text-primary shrink-0" />
+          <span className="whitespace-nowrap">{COMPANY.phone}</span>
+        </a>
       </div>
     </div>
   )
@@ -423,22 +414,22 @@ function HeaderSearchModal({ onClose }: { onClose: () => void }) {
         transition={{ duration: 0.25, ease: "easeOut" }}
         className="w-full max-w-lg mx-4"
       >
-        <div className="bg-white dark:bg-slate-900 rounded-2xl shadow-2xl ring-1 ring-slate-900/10 dark:ring-slate-700/50 overflow-hidden">
+        <div className="bg-white dark:bg-stone-900 rounded-2xl shadow-2xl ring-1 ring-stone-900/10 dark:ring-stone-700/50 overflow-hidden">
           <div className="relative">
-            <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400" />
+            <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-stone-400" />
             <input
               ref={inputRef}
               type="text"
               value={query}
               onChange={(e) => setQuery(e.target.value)}
               placeholder="Search destinations, tours, packages..."
-              className="w-full h-14 pl-12 pr-12 bg-transparent text-base text-slate-900 placeholder:text-slate-400 focus:outline-none dark:text-white dark:placeholder:text-slate-500"
+              className="w-full h-14 pl-12 pr-12 bg-transparent text-base text-stone-900 placeholder:text-stone-400 focus:outline-none dark:text-white dark:placeholder:text-stone-500"
               aria-label="Search destinations, tours, packages"
             />
             {query && (
               <button
                 onClick={() => setQuery("")}
-                className="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 dark:hover:text-slate-300"
+                className="absolute right-4 top-1/2 -translate-y-1/2 text-stone-400 hover:text-stone-600 dark:hover:text-stone-300"
                 aria-label="Clear search"
               >
                 <X className="w-4 h-4" />
@@ -446,25 +437,25 @@ function HeaderSearchModal({ onClose }: { onClose: () => void }) {
             )}
           </div>
           {results.length > 0 && (
-            <div className="border-t border-slate-100 dark:border-slate-800">
+            <div className="border-t border-stone-100 dark:border-stone-800">
               <div className="p-2 space-y-0.5">
                 {results.map((result) => (
                   <Link
                     key={`${result.href}-${result.label}`}
                     href={result.href}
                     onClick={onClose}
-                    className="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm text-slate-700 hover:bg-slate-50 dark:text-slate-300 dark:hover:bg-slate-800 transition-colors"
+                    className="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm text-stone-700 hover:bg-stone-50 dark:text-stone-300 dark:hover:bg-stone-800 transition-colors"
                   >
-                    <Search className="w-3.5 h-3.5 text-slate-400 shrink-0" />
+                    <Search className="w-3.5 h-3.5 text-stone-400 shrink-0" />
                     {result.label}
                   </Link>
                 ))}
               </div>
             </div>
           )}
-          <div className="border-t border-slate-100 dark:border-slate-800 px-4 py-3 flex items-center gap-4 text-xs text-slate-400">
-            <span><kbd className="px-1.5 py-0.5 rounded bg-slate-100 dark:bg-slate-800 font-mono">ESC</kbd> to close</span>
-            <span><kbd className="px-1.5 py-0.5 rounded bg-slate-100 dark:bg-slate-800 font-mono">↑↓</kbd> to navigate</span>
+          <div className="border-t border-stone-100 dark:border-stone-800 px-4 py-3 flex items-center gap-4 text-xs text-stone-400">
+            <span><kbd className="px-1.5 py-0.5 rounded bg-stone-100 dark:bg-stone-800 font-mono">ESC</kbd> to close</span>
+            <span><kbd className="px-1.5 py-0.5 rounded bg-stone-100 dark:bg-stone-800 font-mono">↑↓</kbd> to navigate</span>
           </div>
         </div>
       </motion.div>

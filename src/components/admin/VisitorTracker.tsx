@@ -13,25 +13,12 @@ function getSessionId(): string {
   return id
 }
 
-function detectGoogleAds(): { is_google_ads: boolean; gclid: string } {
-  try {
-    if (typeof window === "undefined") return { is_google_ads: false, gclid: "" }
-    const params = new URLSearchParams(window.location.search)
-    const gclid = params.get("gclid") || params.get("gbraid") || params.get("wbraid") || ""
-    return { is_google_ads: !!gclid, gclid }
-  } catch {
-    return { is_google_ads: false, gclid: "" }
-  }
-}
-
 interface TrackPayload {
   session_id: string
   page: string
   referrer: string
   user_agent: string
   duration: number
-  is_google_ads: boolean
-  gclid: string
 }
 
 function buildPayload(pathname: string, sessionId: string, startTime: number): TrackPayload {
@@ -41,7 +28,6 @@ function buildPayload(pathname: string, sessionId: string, startTime: number): T
     referrer: document.referrer || "",
     user_agent: navigator.userAgent,
     duration: Math.floor((Date.now() - startTime) / 1000),
-    ...detectGoogleAds(),
   }
 }
 

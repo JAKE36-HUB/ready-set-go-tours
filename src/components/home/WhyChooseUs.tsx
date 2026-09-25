@@ -1,56 +1,71 @@
 "use client"
 
 import { useRef } from "react"
+import Link from "next/link"
 import { motion, useInView } from "framer-motion"
-import { Shield, Award, Users, Heart, Package, HeadphonesIcon, Car, MapPin, type LucideIcon } from "lucide-react"
+import { Shield, Car, Users, HeadphonesIcon, Package, MapPin, type LucideIcon } from "lucide-react"
 
-import { WHY_CHOOSE_US } from "@/lib/constants"
+import { Button } from "@/components/ui/button"
+import { WHY_CHOOSE_US, PLAN_SAFARI_ROUTE } from "@/lib/constants"
 
-const whyIconMap: Record<string, LucideIcon> = { Shield, Award, Users, Heart, Package, HeadphonesIcon, Car, MapPin }
+const whyIconMap: Record<string, LucideIcon> = { Shield, Car, Users, HeadphonesIcon, Package, MapPin }
 
 export function WhyChooseUs() {
   const ref = useRef<HTMLDivElement>(null)
   const isInView = useInView(ref, { once: true, margin: "-100px" })
 
   return (
-    <section className="relative py-28 bg-white dark:bg-slate-950">
+    <section id="why-readysetgo" className="relative py-24 sm:py-28 bg-background dark:bg-stone-950 scroll-mt-24">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           ref={ref}
           initial={{ opacity: 0, y: 40 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.7 }}
-          className="text-center mb-14"
+          className="text-center mb-14 max-w-2xl mx-auto"
         >
-          <span className="text-sm font-semibold text-amber-600 dark:text-amber-400 uppercase tracking-[0.2em]">Why Us</span>
-          <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-slate-900 dark:text-white mt-3 mb-4 tracking-tight">
-            Why Choose Us
+          <span className="text-xs font-semibold uppercase tracking-[0.2em] text-primary dark:text-amber-400">Why Ready Set Go</span>
+          <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-medium text-foreground mt-4 mb-4 leading-tight">
+            Why plan your safari with Ready Set Go?
           </h2>
-          <p className="text-lg text-slate-500 dark:text-slate-400 max-w-xl mx-auto">
-            We don&apos;t just plan trips — we craft transformative experiences.
+          <p className="text-base text-muted-foreground leading-relaxed">
+            We keep it simple: you share what you want to experience, and we design the trip around you.
           </p>
         </motion.div>
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6">
           {WHY_CHOOSE_US.map((item, idx) => {
-            const IconComponent = whyIconMap[item.icon]
+            const IconComponent = whyIconMap[item.icon] || Shield
             return (
               <motion.div
                 key={item.id}
                 initial={{ opacity: 0, y: 30 }}
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.5, delay: idx * 0.08 }}
-                className="group relative bg-slate-50 dark:bg-slate-900 rounded-3xl p-8 border border-slate-100 dark:border-slate-800 hover:shadow-xl hover:border-amber-200 dark:hover:border-amber-800 hover:-translate-y-1 transition-all duration-400"
+                className="group relative bg-card rounded-3xl p-7 border border-border hover:shadow-xl hover:border-primary/30 hover:-translate-y-1 transition-all duration-300"
               >
-                <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-amber-400 to-orange-500 flex items-center justify-center mb-5 shadow-lg shadow-amber-500/20 group-hover:shadow-amber-500/30 group-hover:scale-110 transition-all duration-300">
-                  {IconComponent && <IconComponent className="w-7 h-7 text-white" />}
+                <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-amber-500 to-orange-600 flex items-center justify-center mb-5 shadow-lg shadow-amber-500/20 group-hover:scale-110 group-hover:shadow-amber-500/30 transition-all duration-300">
+                  <IconComponent className="w-6 h-6 text-white" />
                 </div>
-                <h3 className="text-lg font-bold text-slate-900 dark:text-white mb-2">{item.title}</h3>
-                <p className="text-sm text-slate-500 dark:text-slate-400 leading-relaxed">{item.description}</p>
+                <h3 className="font-display text-lg font-medium text-foreground mb-2">{item.title}</h3>
+                <p className="text-sm text-muted-foreground leading-relaxed">{item.description}</p>
               </motion.div>
             )
           })}
         </div>
+
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={isInView ? { opacity: 1 } : {}}
+          transition={{ duration: 0.5, delay: 0.5 }}
+          className="text-center mt-12"
+        >
+          <Link href={PLAN_SAFARI_ROUTE}>
+            <Button className="h-12 px-8 text-base font-semibold gradient-primary text-white border-0 shadow-premium hover:shadow-premium hover:scale-105 transition-all duration-300">
+              Plan My Safari
+            </Button>
+          </Link>
+        </motion.div>
       </div>
     </section>
   )

@@ -4,8 +4,10 @@ import { useState, useEffect } from "react"
 import Image from "next/image"
 import Link from "next/link"
 import { motion } from "framer-motion"
+import { MessageCircle } from "lucide-react"
 
 import { Button } from "@/components/ui/button"
+import { COMPANY, PLAN_SAFARI_ROUTE } from "@/lib/constants"
 
 const HERO_IMAGES = [
   "/images/local/pin_212b2433f246414a170ec177d76168f2.jpg",
@@ -34,6 +36,7 @@ export function HeroSection() {
 
   useEffect(() => {
     if (!mounted || paused) return
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setProgress(0)
     const start = Date.now()
     const interval = setInterval(() => {
@@ -44,12 +47,11 @@ export function HeroSection() {
     return () => clearInterval(interval)
   }, [mounted, paused, currentImage])
 
-  const titleWords = ["Kenya", "&", "Tanzania", "Safaris,", "Planned", "Around", "You"]
-  const highlightWords = new Set(["Planned", "Around", "You"])
+  const whatsappUrl = `https://wa.me/${COMPANY.whatsapp.replace(/\D/g, "")}?text=${encodeURIComponent("Hi! I'd like to plan a safari with Ready Set Go Safaris.")}`
 
   return (
     <section
-      className="relative h-screen min-h-[600px] flex items-center overflow-hidden bg-black"
+      className="relative h-screen min-h-[640px] flex items-center overflow-hidden bg-stone-950"
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
     >
@@ -65,7 +67,7 @@ export function HeroSection() {
               alt={`African safari landscape ${i + 1}`}
               fill
               sizes="100vw"
-              className="object-cover scale-110 brightness-[1.15] contrast-[1.05]"
+              className="object-cover scale-110 brightness-[0.9] contrast-[1.05]"
               priority={i === 0}
               fetchPriority={i === 0 ? "high" : "low"}
               loading={i === 0 ? "eager" : "lazy"}
@@ -74,15 +76,13 @@ export function HeroSection() {
         ))}
       </div>
 
-      <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/25 to-black/70" />
-      <div className="absolute inset-0 bg-gradient-to-r from-black/20 via-transparent to-black/20" />
+      <div className="absolute inset-0 hero-overlay" />
+      <div className="absolute inset-0 bg-gradient-to-r from-black/40 via-transparent to-black/20" />
 
-      <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute -top-40 -right-40 w-96 h-96 bg-emerald-500/10 rounded-full blur-[150px]" />
-        <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-teal-500/10 rounded-full blur-[120px]" />
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute -top-40 -right-40 w-96 h-96 bg-amber-500/10 rounded-full blur-[150px]" />
+        <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-orange-500/10 rounded-full blur-[120px]" />
       </div>
-
-      <div className="absolute inset-0 opacity-[0.03]" style={{ backgroundImage: "radial-gradient(circle at 1px 1px, white 1px, transparent 0)", backgroundSize: "50px 50px" }} />
 
       <div className="absolute bottom-28 left-1/2 -translate-x-1/2 z-20 flex items-center gap-2.5">
         {HERO_IMAGES.map((img, i) => (
@@ -98,7 +98,7 @@ export function HeroSection() {
           >
             {i === currentImage && (
               <div
-                className="h-full bg-white/90 rounded-full"
+                className="h-full bg-amber-400/90 rounded-full"
                 style={{ width: `${progress}%` }}
               />
             )}
@@ -113,14 +113,14 @@ export function HeroSection() {
               initial={{ opacity: 0, y: 20 }}
               animate={mounted ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.5, delay: 0.1 }}
-              className="inline-flex items-center gap-2 bg-white/5 backdrop-blur-md rounded-full px-4 py-1.5 mb-6 ring-1 ring-white/10"
+              className="inline-flex items-center gap-2 bg-white/5 backdrop-blur-md rounded-full px-4 py-1.5 mb-6 ring-1 ring-white/15"
             >
               <span className="relative flex size-2">
-                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
-                <span className="relative inline-flex size-2 rounded-full bg-emerald-400" />
+                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-amber-400 opacity-75" />
+                <span className="relative inline-flex size-2 rounded-full bg-amber-400" />
               </span>
-              <span className="text-xs font-medium text-white/60 tracking-wider uppercase">
-                Ready for your next adventure?
+              <span className="text-xs font-medium text-white/70 tracking-[0.2em] uppercase">
+                {COMPANY.tagline}
               </span>
             </motion.div>
 
@@ -128,32 +128,30 @@ export function HeroSection() {
               initial={{ opacity: 0 }}
               animate={mounted ? { opacity: 1 } : {}}
               transition={{ duration: 0.8, delay: 0.2 }}
-              className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold text-white leading-[1.05] mb-6 tracking-tight"
+              className="font-display text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-medium text-white leading-[1.02] mb-4 tracking-tight"
             >
-              {titleWords.map((word, i) => (
-                <motion.span
-                  key={word}
-                  initial={{ opacity: 0, y: 40 }}
-                  animate={mounted ? { opacity: 1, y: 0 } : {}}
-                  transition={{ duration: 0.6, delay: 0.2 + i * 0.12 }}
-                  className={`inline-block mr-[0.15em] ${
-                    highlightWords.has(word)
-                      ? "bg-gradient-to-r from-emerald-300 via-emerald-200 to-teal-200 bg-clip-text text-transparent"
-                      : "text-white"
-                  }`}
-                >
-                  {word}
-                </motion.span>
-              ))}
+              Kenya is{" "}
+              <span className="italic text-transparent bg-clip-text bg-gradient-to-r from-amber-200 via-amber-300 to-orange-200">
+                waiting.
+              </span>
             </motion.h1>
 
             <motion.p
               initial={{ opacity: 0, y: 20 }}
               animate={mounted ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.6, delay: 0.7 }}
-              className="text-base sm:text-lg text-white/50 max-w-xl mb-10 leading-relaxed font-light tracking-wide"
+              transition={{ duration: 0.6, delay: 0.6 }}
+              className="font-display text-xl sm:text-2xl md:text-3xl text-white/90 mb-4 leading-snug"
             >
-              3+ years of local expertise. 200+ happy travelers. 2,000+ 5-star reviews. Private and group safaris from $650.
+              Let&apos;s build your safari.
+            </motion.p>
+
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              animate={mounted ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.6, delay: 0.75 }}
+              className="text-base sm:text-lg text-white/70 max-w-xl mb-8 leading-relaxed font-light tracking-wide"
+            >
+              Tell us what you want to experience. We&apos;ll design the trip around you.
             </motion.p>
 
             <motion.div
@@ -162,28 +160,42 @@ export function HeroSection() {
               transition={{ duration: 0.6, delay: 0.85 }}
               className="flex flex-wrap gap-4 justify-center lg:justify-start"
             >
-              <Link href="/contact">
-                <Button className="group relative h-14 px-8 text-base font-semibold bg-white text-slate-900 hover:bg-emerald-50 border-0 shadow-2xl shadow-white/10 hover:shadow-emerald-500/20 transition-all duration-300 overflow-hidden">
+              <Link href={PLAN_SAFARI_ROUTE}>
+                <Button className="group relative h-14 px-8 text-base font-semibold gradient-primary text-white border-0 shadow-2xl shadow-amber-900/30 hover:scale-105 transition-all duration-300 overflow-hidden">
                   <span className="relative z-10 flex items-center gap-2">
-                    Get a Free Quote
+                    Plan My Safari
                   </span>
                 </Button>
               </Link>
-              <Link href="/deals">
-                <Button variant="outline" className="h-14 px-8 text-base font-medium bg-transparent border-white/20 text-white/80 hover:bg-white/5 hover:text-white hover:border-white/40 transition-all duration-300">
-                  View Limited Deals
-                </Button>
-              </Link>
+              <Button
+                variant="outline"
+                onClick={() => window.open(whatsappUrl, "_blank", "noopener,noreferrer")}
+                className="h-14 px-8 text-base font-medium bg-white/5 border-white/20 text-white/90 hover:bg-white/10 hover:text-white hover:border-white/40 transition-all duration-300"
+              >
+                <MessageCircle className="w-4 h-4" />
+                WhatsApp a Safari Expert
+              </Button>
             </motion.div>
 
-            <motion.p
+            <motion.div
               initial={{ opacity: 0, y: 10 }}
               animate={mounted ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: 1.0 }}
-              className="mt-6 text-xs sm:text-sm text-white/40 tracking-wide font-light"
+              className="mt-8 flex flex-wrap items-center justify-center lg:justify-start gap-x-6 gap-y-2 text-sm text-white/60 tracking-wide"
             >
-              Free consultation &middot; Reply within 24 hours
-            </motion.p>
+              <span className="flex items-center gap-2">
+                <span className="w-1 h-1 rounded-full bg-amber-400" />
+                Private Safaris
+              </span>
+              <span className="flex items-center gap-2">
+                <span className="w-1 h-1 rounded-full bg-amber-400" />
+                Custom Itineraries
+              </span>
+              <span className="flex items-center gap-2">
+                <span className="w-1 h-1 rounded-full bg-amber-400" />
+                Local Safari Experts
+              </span>
+            </motion.div>
           </div>
         </div>
       </div>

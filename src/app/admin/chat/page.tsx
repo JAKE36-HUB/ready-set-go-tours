@@ -206,6 +206,7 @@ export default function AdminChat() {
   useEffect(() => {
     baseTitleRef.current = document.title
     requestNotificationPermission()
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     loadSessions()
     const s = setInterval(() => loadSessions(true), 8000)
     return () => {
@@ -216,6 +217,7 @@ export default function AdminChat() {
 
   useEffect(() => {
     if (!selectedId) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setMessages([])
       return
     }

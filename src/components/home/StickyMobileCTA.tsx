@@ -2,8 +2,10 @@
 
 import { useState, useEffect } from "react"
 import Link from "next/link"
+import { MessageCircle } from "lucide-react"
 
 import { Button } from "@/components/ui/button"
+import { COMPANY, PLAN_SAFARI_ROUTE } from "@/lib/constants"
 
 export function StickyMobileCTA() {
   const [show, setShow] = useState(false)
@@ -14,20 +16,24 @@ export function StickyMobileCTA() {
     return () => window.removeEventListener("scroll", onScroll)
   }, [])
 
+  const whatsappUrl = `https://wa.me/${COMPANY.whatsapp.replace(/\D/g, "")}?text=${encodeURIComponent("Hi! I'd like to plan a safari with Ready Set Go Safaris.")}`
+
   return (
     <div
-      className="fixed bottom-0 left-0 right-0 z-50 bg-white/95 dark:bg-slate-900/95 backdrop-blur-lg border-t border-slate-200 dark:border-slate-800 p-3 md:hidden transition-transform duration-300 ease-out"
+      className="fixed bottom-0 left-0 right-0 z-50 bg-background/95 dark:bg-stone-900/95 backdrop-blur-lg border-t border-border p-3 md:hidden transition-transform duration-300 ease-out"
       style={{ transform: show ? "translateY(0)" : "translateY(100%)" }}
     >
       <div className="flex items-center gap-3 max-w-lg mx-auto">
-        <Link href="/deals" className="flex-1">
-          <Button className="w-full h-11 text-sm font-semibold bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200 hover:bg-slate-200 dark:hover:bg-slate-700 border-0">
-            View Deals
-          </Button>
-        </Link>
-        <Link href="/contact" className="flex-[2]">
-          <Button className="w-full h-11 text-sm font-semibold bg-gradient-to-r from-emerald-500 to-emerald-600 text-white hover:from-emerald-600 hover:to-emerald-700 border-0 shadow-lg shadow-emerald-500/25">
-            Get a Free Quote
+        <Button
+          className="flex-1 h-11 text-sm font-semibold bg-[#25D366] hover:bg-[#1fb857] text-white border-0"
+          onClick={() => window.open(whatsappUrl, "_blank", "noopener,noreferrer")}
+        >
+          <MessageCircle className="w-4 h-4" />
+          WhatsApp
+        </Button>
+        <Link href={PLAN_SAFARI_ROUTE} className="flex-[2]">
+          <Button className="w-full h-11 text-sm font-semibold gradient-primary text-white border-0 shadow-lg shadow-amber-900/20">
+            Plan My Safari
           </Button>
         </Link>
       </div>

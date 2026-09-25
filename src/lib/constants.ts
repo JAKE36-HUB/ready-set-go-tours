@@ -8,11 +8,12 @@
 
 export const COMPANY = {
   name: "Ready Set Go Tours & Travel",
-  shortName: "Ready Set Go Tours",
-  tagline: "Extraordinary African Safaris & Travel Experiences",
+  brandName: "Ready Set Go Safaris",
+  shortName: "Ready Set Go Safaris",
+  tagline: "Your Safari. Your Way.",
   description:
-    "Premier luxury tour operator based in Nairobi, Kenya, specializing in bespoke safaris and travel experiences across Kenya and Tanzania.",
-  copyright: "Â© 2026 Ready Set Go Tours & Travel. All rights reserved.",
+    "Nairobi-based safari specialist crafting private Kenya and Tanzania safaris — from honeymoons and family adventures to photography trips and custom-tailored itineraries.",
+  copyright: "© 2026 Ready Set Go Safaris. All rights reserved.",
   phone: "+254 797 867 411",
   email: "readysetgotoursandtravel43@gmail.com",
   bookingsEmail: "bookings@readysetgosafaris.com",
@@ -30,6 +31,8 @@ export const COMPANY = {
 };
 
 export const USD_TO_KES = 130;
+
+export const PLAN_SAFARI_ROUTE = "/plan-my-safari";
 
 export const CONTACT_INFO = {
   phone: COMPANY.phone,
@@ -61,7 +64,18 @@ interface NavItem {
 }
 
 export const NAV_ITEMS: NavItem[] = [
-  { label: "Home", href: "/" },
+  {
+    label: "Safaris",
+    href: "/holiday-packages",
+    children: [
+      { label: "All Safaris", href: "/holiday-packages" },
+      { label: "Group Safaris", href: "/holiday-packages?type=group" },
+      { label: "Luxury Safaris", href: "/holiday-packages?type=luxury" },
+      { label: "Mountain Treks", href: "/mountain-trekking" },
+      { label: "Deals", href: "/deals" },
+    ],
+  },
+  { label: "Honeymoons", href: "/honeymoon-packages" },
   {
     label: "Destinations",
     href: "/kenya-tours",
@@ -71,31 +85,8 @@ export const NAV_ITEMS: NavItem[] = [
       { label: "Beach Holidays", href: "/beach-holidays" },
     ],
   },
-  {
-    label: "Tours",
-    href: "/holiday-packages",
-    children: [
-      { label: "Beach Holidays", href: "/beach-holidays" },
-      { label: "Mountain Treks", href: "/mountain-trekking" },
-
-      { label: "Honeymoon Packages", href: "/honeymoon-packages" },
-      { label: "Luxury Getaways", href: "/holiday-packages?type=luxury" },
-      { label: "Group Safaris", href: "/holiday-packages?type=group" },
-    ],
-  },
-  {
-    label: "Services",
-    href: "/services",
-    children: [
-      { label: "Hotel Bookings", href: "/services/hotel-bookings" },
-      { label: "Air Ticketing", href: "/services/air-ticketing" },
-      { label: "Massage & Wellness", href: "/services/massage-wellness" },
-    ],
-  },
-  { label: "Gallery", href: "/gallery" },
+  { label: "Why Us", href: "/#why-readysetgo" },
   { label: "About", href: "/about" },
-  { label: "Blog", href: "/travel-guide" },
-  { label: "Deals", href: "/deals" },
   { label: "Contact", href: "/contact" },
 ];
 
@@ -1126,50 +1117,38 @@ export const WHY_CHOOSE_US: WhyChooseUs[] = [
   {
     id: 1,
     icon: "Shield",
-    title: "Safe & Secure Travel",
-    description: "Your safety is our priority. We partner with vetted operators, provide comprehensive travel insurance, and maintain 24/7 support throughout your journey.",
+    title: "Your Trip. Your Way.",
+    description: "Tell us what you want to experience. Every itinerary is designed around your dates, your budget and your travel style — never off the shelf.",
   },
   {
     id: 2,
-    icon: "Award",
-    title: "Award-Winning Service",
-    description: "Recognized as Kenya's Leading Tour Operator 2024, with over 2,000 five-star reviews. Our commitment to excellence is unmatched.",
+    icon: "Car",
+    title: "Private Safari Experience",
+    description: "Your own dedicated 4x4 and private guide on most trips, so you set the pace — game drives when and how you want them.",
   },
   {
     id: 3,
     icon: "Users",
-    title: "Expert Local Guides",
-    description: "Our guides are passionate wildlife experts, naturalists, and cultural ambassadors with years of field experience and deep local knowledge.",
+    title: "Local Safari Experts",
+    description: "A Nairobi-based team who know the parks, the seasons and the lodges first-hand — and will always give you honest advice.",
   },
   {
     id: 4,
-    icon: "Heart",
-    title: "Sustainable Tourism",
-    description: "We are committed to responsible travel. We support conservation projects, employ local communities, and operate with minimal environmental impact.",
+    icon: "HeadphonesIcon",
+    title: "Personal Support",
+    description: "One dedicated planner from your first message to your return flight — reachable on WhatsApp whenever you need us.",
   },
   {
     id: 5,
     icon: "Package",
-    title: "Bespoke Itineraries",
-    description: "Every traveler is unique. We craft personalized itineraries tailored to your interests, budget, and travel style.",
+    title: "Simple, Clear Quotes",
+    description: "Transparent pricing with no hidden costs. You see exactly what's included before you decide to book.",
   },
   {
     id: 6,
-    icon: "HeadphonesIcon",
-    title: "24/7 Concierge Support",
-    description: "From booking to return, our concierge team is available around the clock to assist with any questions or needs.",
-  },
-  {
-    id: 7,
-    icon: "Car",
-    title: "Premium Fleet",
-    description: "Travel in comfort with our modern fleet of 4x4 Land Cruisers, equipped with Wi-Fi, charging ports, and refreshments.",
-  },
-  {
-    id: 8,
     icon: "MapPin",
     title: "Off-the-Beaten-Path",
-    description: "We take you beyond the standard tourist routes to hidden gems and authentic experiences most travelers never see.",
+    description: "We build routes beyond the standard circuit — quieter reserves, better-located lodges and moments the crowds miss.",
   },
 ];
 

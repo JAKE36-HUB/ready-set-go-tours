@@ -29,33 +29,22 @@ export function TestimonialsCarousel() {
   }, [emblaApi])
 
   return (
-    <section className="relative py-28 bg-slate-50 dark:bg-slate-900 overflow-hidden">
-      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-amber-200 to-transparent" />
+    <section ref={ref} className="relative py-24 sm:py-28 bg-muted/70 dark:bg-stone-900 overflow-hidden">
+      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-amber-300/50 to-transparent" />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
-          ref={ref}
           initial={{ opacity: 0, y: 40 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.7 }}
-          className="text-center mb-14"
+          className="text-center mb-14 max-w-2xl mx-auto"
         >
-          <span className="text-sm font-semibold text-amber-600 dark:text-amber-400 uppercase tracking-[0.2em]">Testimonials</span>
-          <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-slate-900 dark:text-white mt-3 mb-4 tracking-tight">
-            Voices of the Wild
+          <span className="text-xs font-semibold uppercase tracking-[0.2em] text-primary dark:text-amber-400">Testimonials</span>
+          <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-medium text-foreground mt-4 mb-4 leading-tight">
+            Real trips. Real travellers.
           </h2>
-          <p className="text-lg text-slate-500 dark:text-slate-400 max-w-xl mx-auto">
-            Real stories from real travelers who embarked on the journey of a lifetime.
+          <p className="text-base text-muted-foreground max-w-xl mx-auto">
+            Stories from travellers who came for the wildlife and left with a whole lot more.
           </p>
-          <div className="inline-flex items-center gap-2 mt-5 px-4 py-1.5 rounded-full bg-amber-500/10 ring-1 ring-amber-500/20">
-            <div className="flex items-center gap-0.5">
-              {Array.from({ length: 5 }).map((_, i) => (
-                <Star key={i} className="size-3.5 text-amber-400 fill-amber-400" />
-              ))}
-            </div>
-            <span className="text-xs font-semibold text-amber-700 dark:text-amber-300">
-              4.9/5 from 2,000+ travelers
-            </span>
-          </div>
         </motion.div>
 
         <div className="relative">
@@ -63,22 +52,22 @@ export function TestimonialsCarousel() {
             <div className="flex gap-6">
               {TESTIMONIALS.map((t) => (
                 <div key={t.id} className="shrink-0 w-full sm:w-[420px] lg:w-[480px]">
-                  <div className="bg-white dark:bg-slate-800 rounded-3xl p-8 border border-slate-100 dark:border-slate-700 h-full flex flex-col">
-                    <Quote className="w-8 h-8 text-amber-300/30 dark:text-amber-600/30 mb-4" />
-                    <blockquote className="text-sm text-slate-600 dark:text-slate-300 leading-relaxed mb-6 flex-1">
+                  <div className="bg-card rounded-3xl p-8 border border-border h-full flex flex-col">
+                    <Quote className="w-8 h-8 text-amber-500/30 dark:text-amber-600/30 mb-4" />
+                    <blockquote className="text-sm text-muted-foreground leading-relaxed mb-6 flex-1">
                       &ldquo;{t.text}&rdquo;
                     </blockquote>
-                    <div className="flex items-center gap-4 pt-4 border-t border-slate-100 dark:border-slate-700">
-                      <div className="relative w-12 h-12 rounded-full overflow-hidden ring-2 ring-amber-200 dark:ring-amber-800 shrink-0">
+                    <div className="flex items-center gap-4 pt-4 border-t border-border">
+                      <div className="relative w-12 h-12 rounded-full overflow-hidden ring-2 ring-amber-400/40 shrink-0">
                         <Image src={t.image} alt={t.name} fill sizes="48px" className="object-cover brightness-[1.1]" />
                       </div>
                       <div>
-                        <h4 className="text-sm font-bold text-slate-900 dark:text-white">{t.name}</h4>
-                        <p className="text-xs text-slate-500 dark:text-slate-400">{t.location}</p>
+                        <h4 className="text-sm font-bold text-foreground">{t.name}</h4>
+                        <p className="text-xs text-muted-foreground">{t.location}</p>
                       </div>
                       <div className="ml-auto flex items-center gap-0.5">
                         {Array.from({ length: 5 }).map((_, i) => (
-                          <Star key={i} className={cn("w-3.5 h-3.5", i < t.rating ? "text-amber-400 fill-amber-400" : "text-slate-200 dark:text-slate-700")} />
+                          <Star key={i} className={cn("w-3.5 h-3.5", i < t.rating ? "text-amber-400 fill-amber-400" : "text-stone-200 dark:text-stone-700")} />
                         ))}
                       </div>
                     </div>
@@ -95,7 +84,7 @@ export function TestimonialsCarousel() {
               key={i}
               type="button"
               onClick={() => emblaApi?.scrollTo(i)}
-              className={`h-2 rounded-full transition-all duration-300 ${i === selectedIndex ? "w-8 bg-amber-500" : "w-2 bg-slate-300 dark:bg-slate-700 hover:bg-slate-400 dark:hover:bg-slate-600"}`}
+              className={`h-2 rounded-full transition-all duration-300 ${i === selectedIndex ? "w-8 bg-primary dark:bg-amber-400" : "w-2 bg-stone-300 dark:bg-stone-700 hover:bg-stone-400 dark:hover:bg-stone-600"}`}
               aria-label={`Show testimonial ${i + 1}`}
             />
           ))}

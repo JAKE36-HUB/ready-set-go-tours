@@ -1,101 +1,91 @@
 import Link from "next/link"
-import { Compass, Sun, Mountain, Heart, ArrowRight, ShieldCheck } from "lucide-react"
+import Image from "next/image"
+import { ArrowRight } from "lucide-react"
 
 const TRIPS = [
   {
-    href: "/deals",
-    icon: Compass,
-    title: "Safari & Wildlife",
-    caption: "Masai Mara · Serengeti · Amboseli",
-    color: "text-emerald-600 dark:text-emerald-400",
-    bg: "bg-emerald-500/10",
-    hover: "hover:ring-emerald-500/40 hover:bg-emerald-500/15",
-  },
-  {
-    href: "/beach-holidays",
-    icon: Sun,
-    title: "Beach Holidays",
-    caption: "Diani · Zanzibar · Mombasa",
-    color: "text-sky-600 dark:text-sky-400",
-    bg: "bg-sky-500/10",
-    hover: "hover:ring-sky-500/40 hover:bg-sky-500/15",
-  },
-  {
-    href: "/mountain-trekking",
-    icon: Mountain,
-    title: "Mountains & Trekking",
-    caption: "Kilimanjaro · Mt Kenya",
-    color: "text-amber-600 dark:text-amber-400",
-    bg: "bg-amber-500/10",
-    hover: "hover:ring-amber-500/40 hover:bg-amber-500/15",
-  },
-  {
     href: "/honeymoon-packages",
-    icon: Heart,
-    title: "Honeymoons",
+    image: "/images/local/pin_fbfecc1741f23134a323bbc5bf57c414.jpg",
+    title: "Honeymoon",
     caption: "Safari & beach escapes",
-    color: "text-rose-600 dark:text-rose-400",
-    bg: "bg-rose-500/10",
-    hover: "hover:ring-rose-500/40 hover:bg-rose-500/15",
+  },
+  {
+    href: "/holiday-packages",
+    image: "/images/local/pin_6d3c9d0dfb8a372c96d1b1a4697e158f.jpg",
+    title: "First Safari",
+    caption: "Our most-loved itineraries",
+  },
+  {
+    href: "/kenya-tours",
+    image: "/images/local/pin_cc764a89a26b9322634b91a51d58248f.jpg",
+    title: "Family",
+    caption: "Safaris for every age",
+  },
+  {
+    href: "/tanzania-tours",
+    image: "/images/local/pin_5ed9e7896df91ef4ad2acdc3d37b0b21.jpg",
+    title: "Photography",
+    caption: "Big skies, endless light",
+  },
+  {
+    href: "/holiday-packages",
+    image: "/images/local/pin_144b48e269001cb629981818a2106848.jpg",
+    title: "Kenya + Tanzania",
+    caption: "Two countries, one trip",
+    wide: true,
   },
 ]
 
 export function TripFinder() {
   return (
-    <section className="relative z-20 -mt-20 px-4 sm:px-6 lg:px-8">
+    <section className="relative z-20 -mt-24 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
-        <div className="rounded-3xl bg-white dark:bg-slate-900 ring-1 ring-slate-200/60 dark:ring-slate-800 shadow-2xl shadow-slate-900/10 p-6 sm:p-8">
-          <div className="flex flex-wrap items-center justify-between gap-3 mb-6">
-            <div className="flex items-center gap-2.5">
-              <span className="w-8 h-8 rounded-full bg-emerald-500/10 flex items-center justify-center">
-                <ShieldCheck className="size-4 text-emerald-600 dark:text-emerald-400" />
-              </span>
-              <h2 className="text-base sm:text-lg font-bold text-slate-900 dark:text-white">
-                Where shall we take you?
+        <div className="rounded-3xl bg-background dark:bg-stone-900 ring-1 ring-border shadow-2xl shadow-stone-950/10 p-6 sm:p-8">
+          <div className="flex flex-wrap items-end justify-between gap-3 mb-6">
+            <div>
+              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-primary dark:text-amber-400 mb-2">
+                Start your journey
+              </p>
+              <h2 className="font-display text-2xl sm:text-3xl font-medium text-foreground">
+                What kind of safari is calling you?
               </h2>
             </div>
-            <div className="hidden sm:flex items-center gap-4 text-xs text-slate-400 dark:text-slate-500 font-medium">
-              <span className="flex items-center gap-1.5">
-                <span className="w-1 h-1 rounded-full bg-emerald-400" />
-                Private Guides
-              </span>
-              <span className="flex items-center gap-1.5">
-                <span className="w-1 h-1 rounded-full bg-emerald-400" />
-                Custom Itineraries
-              </span>
-              <span className="flex items-center gap-1.5">
-                <span className="w-1 h-1 rounded-full bg-emerald-400" />
-                24/7 Support
-              </span>
-            </div>
+            <p className="hidden sm:block text-sm text-muted-foreground max-w-xs leading-relaxed">
+              Every trip starts with a conversation. Pick where your safari begins.
+            </p>
           </div>
 
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
-            {TRIPS.map((trip) => {
-              const Icon = trip.icon
-              return (
-                <Link
-                  key={trip.href}
-                  href={trip.href}
-                  className={`group flex flex-col gap-3 rounded-2xl p-4 sm:p-5 ring-1 ring-slate-100 dark:ring-slate-800 transition-all duration-300 ${trip.bg} ${trip.hover}`}
-                >
-                  <div className="flex items-start justify-between">
-                    <span className={`w-11 h-11 rounded-xl bg-gradient-to-br from-white/90 to-white/60 dark:from-slate-800 dark:to-slate-700 shadow-sm ring-1 ring-slate-900/5 flex items-center justify-center`}>
-                      <Icon className={`size-5 ${trip.color}`} />
-                    </span>
-                    <ArrowRight className={`size-4 ${trip.color} opacity-0 -translate-x-1 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300`} />
-                  </div>
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3 sm:gap-4">
+            {TRIPS.map((trip, i) => (
+              <Link
+                key={trip.title}
+                href={trip.href}
+                className={`group relative rounded-2xl overflow-hidden h-52 sm:h-64 ring-1 ring-black/5 dark:ring-white/10 transition-all duration-300 hover:shadow-xl hover:shadow-stone-950/10 ${
+                  trip.wide ? "col-span-2 md:col-span-1" : ""
+                }`}
+              >
+                <Image
+                  src={trip.image}
+                  alt={trip.title}
+                  fill
+                  sizes="(min-width: 1024px) 20vw, (min-width: 768px) 33vw, 50vw"
+                  className="object-cover transition-transform duration-500 group-hover:scale-105"
+                  loading={i < 3 ? "eager" : "lazy"}
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-stone-950/80 via-stone-950/20 to-transparent" />
+                <div className="absolute inset-x-0 bottom-0 p-4 flex items-end justify-between gap-2">
                   <div>
-                    <h3 className="text-sm font-bold text-slate-900 dark:text-white mb-0.5">
+                    <h3 className="font-display text-lg font-medium text-white leading-tight">
                       {trip.title}
                     </h3>
-                    <p className="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">
-                      {trip.caption}
-                    </p>
+                    <p className="text-xs text-white/70 mt-0.5">{trip.caption}</p>
                   </div>
-                </Link>
-              )
-            })}
+                  <span className="shrink-0 flex items-center justify-center w-8 h-8 rounded-full bg-white/15 backdrop-blur-sm text-white transition-all duration-300 group-hover:bg-primary group-hover:translate-x-0.5">
+                    <ArrowRight className="w-4 h-4" />
+                  </span>
+                </div>
+              </Link>
+            ))}
           </div>
         </div>
       </div>
