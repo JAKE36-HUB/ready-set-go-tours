@@ -91,7 +91,7 @@ export function SpinWheel({ promoCode, onWin }: Props) {
         </motion.div>
         <div
           className="absolute top-1/2 left-1/2 z-10 -translate-x-1/2 -translate-y-1/2 flex items-center justify-center rounded-full w-16 h-16
-            bg-gradient-to-br from-amber-400 to-orange-500 text-white shadow-lg border-4 border-white"
+            bg-gradient-to-br from-burgundy-400 to-burgundy-500 text-white shadow-lg border-4 border-white"
         >
           {spinning ? <span className="animate-spin">🎲</span> : "🎁"}
         </div>
@@ -105,12 +105,12 @@ export function SpinWheel({ promoCode, onWin }: Props) {
 
       {result ? (
         <div className="text-center">
-          <p className="text-sm font-semibold text-emerald-600 dark:text-emerald-400">
+          <p className="text-sm font-semibold text-burgundy-600 dark:text-burgundy-400">
             You won: {result}!
           </p>
           {promoCode && (
             <p className="text-xs mt-1 text-slate-500 dark:text-slate-400">
-              Use code <span className="font-mono font-bold text-amber-600 dark:text-amber-400">{promoCode}</span> at booking
+              Use code <span className="font-mono font-bold text-burgundy-600 dark:text-burgundy-400">{promoCode}</span> at booking
             </p>
           )}
         </div>
@@ -118,8 +118,8 @@ export function SpinWheel({ promoCode, onWin }: Props) {
         <button
           onClick={spin}
           disabled={spinning}
-          className="rounded-full bg-gradient-to-r from-amber-500 to-orange-500 px-8 py-2.5 text-sm font-bold text-white shadow-lg
-            hover:from-amber-400 hover:to-orange-400 active:scale-95 transition disabled:opacity-60"
+          className="rounded-full bg-gradient-to-r from-burgundy-500 to-burgundy-500 px-8 py-2.5 text-sm font-bold text-white shadow-lg
+            hover:from-burgundy-400 hover:to-burgundy-400 active:scale-95 transition disabled:opacity-60"
         >
           {spinning ? "Spinning..." : "Spin the Wheel 🎡"}
         </button>

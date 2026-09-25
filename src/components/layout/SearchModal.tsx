@@ -139,7 +139,7 @@ export function SearchModal({ isOpen, onClose }: SearchModalProps) {
                       className={cn(
                         "flex items-center gap-2 px-3 py-2 rounded-lg text-sm font-medium transition-all",
                         activeCategory === i
-                          ? "bg-sky-50 text-sky-700 dark:bg-sky-900/30 dark:text-sky-400"
+                          ? "bg-burgundy-50 text-burgundy-700 dark:bg-burgundy-900/30 dark:text-burgundy-400"
                           : "bg-slate-50 text-slate-600 hover:bg-slate-100 dark:bg-slate-800 dark:text-slate-400 dark:hover:bg-slate-700"
                       )}
                     >

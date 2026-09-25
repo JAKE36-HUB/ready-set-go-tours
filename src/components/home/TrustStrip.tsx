@@ -41,7 +41,7 @@ export function TrustStrip() {
               transition={{ duration: 0.4, delay: idx * 0.08 }}
               className="text-center"
             >
-              <div className="text-2xl sm:text-3xl font-bold text-amber-500 tabular-nums whitespace-nowrap">
+              <div className="text-2xl sm:text-3xl font-bold text-burgundy-500 tabular-nums whitespace-nowrap">
                 <Counter value={stat.value} isInView={isInView} />
               </div>
               <div className="text-[11px] sm:text-xs text-slate-400 dark:text-slate-500 mt-0.5 font-medium">{stat.label}</div>
@@ -59,7 +59,7 @@ export function TrustStrip() {
               const IconComponent = iconMap[item.icon]
               return (
                 <div key={idx} className="flex items-center gap-1.5 text-[11px] sm:text-xs text-slate-400 dark:text-slate-500">
-                  {IconComponent && <IconComponent className="w-3.5 h-3.5 text-emerald-500 shrink-0" />}
+                  {IconComponent && <IconComponent className="w-3.5 h-3.5 text-burgundy-500 shrink-0" />}
                   <span>{item.label}</span>
                 </div>
               )

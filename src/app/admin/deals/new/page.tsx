@@ -92,10 +92,10 @@ export default function NewDealPage() {
   return (
     <div className="max-w-3xl mx-auto space-y-8">
       <motion.div initial={{ opacity: 0, y: -10 }}
-        className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-amber-600 via-amber-500 to-orange-400 p-6 sm:p-8">
+        className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-burgundy-600 via-burgundy-500 to-burgundy-400 p-6 sm:p-8">
         <div className="absolute inset-0">
           <div className="absolute top-[-30%] right-[-10%] w-[60%] h-[60%] bg-white/10 rounded-full blur-3xl" />
-          <div className="absolute bottom-[-20%] left-[-10%] w-[40%] h-[40%] bg-orange-300/10 rounded-full blur-3xl" />
+          <div className="absolute bottom-[-20%] left-[-10%] w-[40%] h-[40%] bg-burgundy-300/10 rounded-full blur-3xl" />
         </div>
         <div className="relative z-10 flex items-center gap-4">
           <button onClick={() => router.push("/admin/deals")} className="w-9 h-9 rounded-xl bg-white/20 backdrop-blur-sm flex items-center justify-center hover:bg-white/30 transition-colors">
@@ -129,8 +129,8 @@ export default function NewDealPage() {
           className="rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 overflow-hidden hover:shadow-md transition-shadow">
           <div className="px-6 pt-6 pb-1 border-b border-slate-100 dark:border-slate-800">
             <div className="flex items-center gap-2.5 mb-1">
-              <div className="w-7 h-7 rounded-lg bg-amber-100 dark:bg-amber-500/10 flex items-center justify-center">
-                <Info className="w-3.5 h-3.5 text-amber-600 dark:text-amber-400" />
+              <div className="w-7 h-7 rounded-lg bg-burgundy-100 dark:bg-burgundy-500/10 flex items-center justify-center">
+                <Info className="w-3.5 h-3.5 text-burgundy-600 dark:text-burgundy-400" />
               </div>
               <h3 className="text-sm font-semibold text-slate-900 dark:text-white">Basic Information</h3>
             </div>
@@ -170,8 +170,8 @@ export default function NewDealPage() {
           className="rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 overflow-hidden hover:shadow-md transition-shadow">
           <div className="px-6 pt-6 pb-1 border-b border-slate-100 dark:border-slate-800">
             <div className="flex items-center gap-2.5 mb-1">
-              <div className="w-7 h-7 rounded-lg bg-amber-100 dark:bg-amber-500/10 flex items-center justify-center">
-                <Info className="w-3.5 h-3.5 text-amber-600 dark:text-amber-400" />
+              <div className="w-7 h-7 rounded-lg bg-burgundy-100 dark:bg-burgundy-500/10 flex items-center justify-center">
+                <Info className="w-3.5 h-3.5 text-burgundy-600 dark:text-burgundy-400" />
               </div>
               <h3 className="text-sm font-semibold text-slate-900 dark:text-white">Offer Details</h3>
             </div>
@@ -186,9 +186,9 @@ export default function NewDealPage() {
               <div className="space-y-2"><Label>Valid Until</Label><Input value={form.valid_until} onChange={(e) => setForm((p) => ({ ...p, valid_until: e.target.value }))} placeholder="e.g. Dec 31, 2026" /></div>
               <div className="space-y-2"><Label>Image URL</Label><Input value={form.image} onChange={(e) => setForm((p) => ({ ...p, image: e.target.value }))} placeholder="https://..." /></div>
             </div>
-            <div className="flex items-center gap-3 p-3 rounded-lg bg-amber-50/80 dark:bg-amber-500/5 border border-amber-200 dark:border-amber-800 hover:border-amber-300 dark:hover:border-amber-700 transition-colors">
+            <div className="flex items-center gap-3 p-3 rounded-lg bg-burgundy-50/80 dark:bg-burgundy-500/5 border border-burgundy-200 dark:border-burgundy-800 hover:border-burgundy-300 dark:hover:border-burgundy-700 transition-colors">
               <input type="checkbox" id="featured" checked={form.featured} onChange={(e) => setForm((p) => ({ ...p, featured: e.target.checked }))}
-                className="w-4 h-4 rounded border-slate-300 dark:border-slate-600 text-amber-500 focus:ring-amber-500" />
+                className="w-4 h-4 rounded border-slate-300 dark:border-slate-600 text-burgundy-500 focus:ring-burgundy-500" />
               <Label htmlFor="featured" className="text-sm font-medium cursor-pointer">Featured deal <span className="text-xs text-slate-500 dark:text-slate-400 font-normal">(shown prominently on the site)</span></Label>
             </div>
             <div className="space-y-2"><Label>Description</Label><Textarea value={form.description} onChange={(e) => setForm((p) => ({ ...p, description: e.target.value }))} rows={4} /></div>
@@ -203,8 +203,8 @@ export default function NewDealPage() {
           className="rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 overflow-hidden hover:shadow-md transition-shadow">
           <div className="px-6 pt-6 pb-1 border-b border-slate-100 dark:border-slate-800">
             <div className="flex items-center gap-2.5 mb-1">
-              <div className="w-7 h-7 rounded-lg bg-amber-100 dark:bg-amber-500/10 flex items-center justify-center">
-                <List className="w-3.5 h-3.5 text-amber-600 dark:text-amber-400" />
+              <div className="w-7 h-7 rounded-lg bg-burgundy-100 dark:bg-burgundy-500/10 flex items-center justify-center">
+                <List className="w-3.5 h-3.5 text-burgundy-600 dark:text-burgundy-400" />
               </div>
               <h3 className="text-sm font-semibold text-slate-900 dark:text-white">Lists & Itinerary</h3>
             </div>
@@ -217,13 +217,13 @@ export default function NewDealPage() {
               <div className="flex items-center justify-between">
                 <Label>Itinerary</Label>
                 <Button type="button" variant="outline" size="sm" onClick={addItineraryItem}
-                  className="border-amber-200 dark:border-amber-800 text-amber-700 dark:text-amber-400 hover:bg-amber-50 dark:hover:bg-amber-900/20">
+                  className="border-burgundy-200 dark:border-burgundy-800 text-burgundy-700 dark:text-burgundy-400 hover:bg-burgundy-50 dark:hover:bg-burgundy-900/20">
                   <Plus className="w-3.5 h-3.5 mr-1" /> Add Day
                 </Button>
               </div>
               {form.itinerary.map((item, i) => (
                 <motion.div key={i} initial={{ opacity: 0, y: -5 }} animate={{ opacity: 1, y: 0 }}
-                  className="flex gap-2 items-start p-3 rounded-lg bg-amber-50/50 dark:bg-amber-500/5 border border-amber-100 dark:border-amber-900">
+                  className="flex gap-2 items-start p-3 rounded-lg bg-burgundy-50/50 dark:bg-burgundy-500/5 border border-burgundy-100 dark:border-burgundy-900">
                   <div className="flex-1 space-y-2">
                     <Input value={item.day} onChange={(e) => updateItineraryItem(i, "day", e.target.value)} placeholder="Day title" className="text-sm font-medium" />
                     <Textarea value={item.description} onChange={(e) => updateItineraryItem(i, "description", e.target.value)} placeholder="Description for this day..." rows={2} />
@@ -240,7 +240,7 @@ export default function NewDealPage() {
           <Button variant="outline" onClick={() => router.push("/admin/deals")}
             className="border-slate-200 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-800">Cancel</Button>
           <Button type="submit" disabled={saving}
-            className="bg-gradient-to-r from-amber-500 to-orange-400 text-white border-0 hover:shadow-lg hover:shadow-amber-500/25 transition-all min-w-[140px]">
+            className="bg-gradient-to-r from-burgundy-500 to-burgundy-400 text-white border-0 hover:shadow-lg hover:shadow-burgundy-500/25 transition-all min-w-[140px]">
             <Save className="w-4 h-4 mr-1.5" />
             {saving ? "Saving..." : "Save Deal"}
           </Button>

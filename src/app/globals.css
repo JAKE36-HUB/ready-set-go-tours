@@ -4,6 +4,20 @@
 
 @custom-variant dark (&:is(.dark *));
 
+@theme {
+  --color-burgundy-50: #FBF0EE;
+  --color-burgundy-100: #F5DCD8;
+  --color-burgundy-200: #EBB8B1;
+  --color-burgundy-300: #DC8E85;
+  --color-burgundy-400: #C9625C;
+  --color-burgundy-500: #AE423E;
+  --color-burgundy-600: #93302C;
+  --color-burgundy-700: #752522;
+  --color-burgundy-800: #5C1C1B;
+  --color-burgundy-900: #471415;
+  --color-burgundy-950: #2E0A0C;
+}
+
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
@@ -55,32 +69,32 @@
   --card-foreground: #1C1917;
   --popover: #FFFFFF;
   --popover-foreground: #1C1917;
-  --primary: #B45309;
+  --primary: #93302C;
   --primary-foreground: #FFFFFF;
   --secondary: #E9E2D6;
   --secondary-foreground: #292524;
   --muted: #F1ECE4;
   --muted-foreground: #78716C;
-  --accent: #D97706;
+  --accent: #AE423E;
   --accent-foreground: #FFFFFF;
   --destructive: #B91C1C;
   --border: #E5DDD0;
   --input: #E2DACB;
-  --ring: #B45309;
-  --chart-1: #B45309;
-  --chart-2: #D97706;
+  --ring: #93302C;
+  --chart-1: #93302C;
+  --chart-2: #AE423E;
   --chart-3: #A8A29E;
   --chart-4: #57534E;
-  --chart-5: #C2410C;
+  --chart-5: #752522;
   --radius: 0.625rem;
   --sidebar: #FAF7F2;
   --sidebar-foreground: #1C1917;
-  --sidebar-primary: #B45309;
+  --sidebar-primary: #93302C;
   --sidebar-primary-foreground: #FFFFFF;
   --sidebar-accent: #EFE8DB;
   --sidebar-accent-foreground: #1C1917;
   --sidebar-border: #E5DDD0;
-  --sidebar-ring: #B45309;
+  --sidebar-ring: #93302C;
 }
 
 .dark {
@@ -90,31 +104,31 @@
   --card-foreground: #FAF7F2;
   --popover: #292524;
   --popover-foreground: #FAF7F2;
-  --primary: #D97706;
-  --primary-foreground: #F5EFE6;
+  --primary: #AE423E;
+  --primary-foreground: #FBF0EE;
   --secondary: #44403C;
   --secondary-foreground: #FAF7F2;
   --muted: #292524;
   --muted-foreground: #A8A29E;
-  --accent: #F59E0B;
-  --accent-foreground: #1C1917;
+  --accent: #DC8E85;
+  --accent-foreground: #2E0A0C;
   --destructive: #F87171;
   --border: #44403C;
   --input: #44403C;
-  --ring: #D97706;
-  --chart-1: #D97706;
-  --chart-2: #F59E0B;
+  --ring: #C9625C;
+  --chart-1: #AE423E;
+  --chart-2: #DC8E85;
   --chart-3: #A8A29E;
   --chart-4: #78716C;
-  --chart-5: #EA580C;
+  --chart-5: #EBB8B1;
   --sidebar: #1C1917;
   --sidebar-foreground: #FAF7F2;
-  --sidebar-primary: #D97706;
-  --sidebar-primary-foreground: #1C1917;
+  --sidebar-primary: #AE423E;
+  --sidebar-primary-foreground: #FBF0EE;
   --sidebar-accent: #292524;
   --sidebar-accent-foreground: #FAF7F2;
   --sidebar-border: #44403C;
-  --sidebar-ring: #D97706;
+  --sidebar-ring: #C9625C;
 }
 
 @layer base {
@@ -134,10 +148,10 @@
 
 @layer utilities {
   .text-gradient {
-    @apply bg-clip-text text-transparent bg-gradient-to-r from-amber-700 via-amber-600 to-amber-500;
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-burgundy-700 via-burgundy-600 to-burgundy-500;
   }
   .text-gradient-warm {
-    @apply bg-clip-text text-transparent bg-gradient-to-r from-orange-700 via-amber-600 to-yellow-500;
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-burgundy-800 via-burgundy-600 to-burgundy-400;
   }
   .bg-glass {
     @apply bg-white/80 backdrop-blur-xl border border-white/40;
@@ -146,7 +160,7 @@
     @apply bg-stone-900/80 backdrop-blur-xl border border-stone-700/30;
   }
   .shadow-premium {
-    box-shadow: 0 0 40px rgba(180, 83, 9, 0.08), 0 4px 20px rgba(0, 0, 0, 0.06);
+    box-shadow: 0 0 40px rgba(147, 48, 44, 0.08), 0 4px 20px rgba(0, 0, 0, 0.06);
   }
   .shadow-card {
     box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06), 0 1px 4px rgba(0, 0, 0, 0.04);
@@ -155,13 +169,13 @@
     box-shadow: 0 20px 60px rgba(0, 0, 0, 0.12), 0 4px 20px rgba(0, 0, 0, 0.06);
   }
   .gradient-primary {
-    @apply bg-gradient-to-r from-amber-700 via-amber-600 to-amber-500;
+    @apply bg-gradient-to-r from-burgundy-700 via-burgundy-600 to-burgundy-500;
   }
   .gradient-secondary {
-    @apply bg-gradient-to-r from-orange-700 via-amber-600 to-yellow-500;
+    @apply bg-gradient-to-r from-burgundy-800 via-burgundy-600 to-burgundy-400;
   }
   .gradient-hero {
-    background: linear-gradient(135deg, rgba(180, 83, 9, 0.12) 0%, rgba(217, 119, 6, 0.08) 50%, rgba(245, 158, 11, 0.06) 100%);
+    background: linear-gradient(135deg, rgba(147, 48, 44, 0.12) 0%, rgba(174, 66, 62, 0.08) 50%, rgba(220, 142, 133, 0.06) 100%);
   }
   .hero-overlay {
     background: linear-gradient(to bottom, rgba(18, 11, 6, 0.25) 0%, rgba(18, 11, 6, 0.4) 50%, rgba(18, 11, 6, 0.75) 100%);

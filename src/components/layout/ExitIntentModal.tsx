@@ -98,7 +98,7 @@ export function ExitIntentModal() {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 40, scale: 0.96 }}
             transition={{ type: "spring", damping: 26, stiffness: 320 }}
-            className="relative w-full max-w-md rounded-3xl bg-gradient-to-br from-slate-900 via-slate-800 to-emerald-950 p-8 ring-1 ring-white/10 shadow-2xl"
+            className="relative w-full max-w-md rounded-3xl bg-gradient-to-br from-slate-900 via-slate-800 to-burgundy-950 p-8 ring-1 ring-white/10 shadow-2xl"
           >
             <button
               type="button"
@@ -111,18 +111,18 @@ export function ExitIntentModal() {
 
             {done ? (
               <div className="text-center py-4">
-                <div className="w-16 h-16 rounded-full bg-emerald-500/20 flex items-center justify-center mx-auto mb-5">
-                  <CheckCircle2 className="w-8 h-8 text-emerald-400" />
+                <div className="w-16 h-16 rounded-full bg-burgundy-500/20 flex items-center justify-center mx-auto mb-5">
+                  <CheckCircle2 className="w-8 h-8 text-burgundy-400" />
                 </div>
                 <h3 className="text-xl font-bold text-white mb-2">See You Inside!</h3>
                 <p className="text-sm text-white/60">
-                  Your free safari guide is on its way to <span className="text-emerald-400 font-medium">{email}</span>.
+                  Your free safari guide is on its way to <span className="text-burgundy-400 font-medium">{email}</span>.
                 </p>
               </div>
             ) : (
               <>
-                <div className="w-12 h-12 rounded-2xl bg-emerald-500/20 flex items-center justify-center mb-5">
-                  <Gift className="w-6 h-6 text-emerald-400" />
+                <div className="w-12 h-12 rounded-2xl bg-burgundy-500/20 flex items-center justify-center mb-5">
+                  <Gift className="w-6 h-6 text-burgundy-400" />
                 </div>
                 <h3 className="text-2xl font-bold text-white mb-2">Wait — Grab Our Free Safari Guide First!</h3>
                 <p className="text-sm text-white/60 mb-6">
@@ -136,14 +136,14 @@ export function ExitIntentModal() {
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder="Your email address"
-                    className="w-full h-12 px-4 rounded-xl bg-white/5 border border-white/10 text-white placeholder:text-white/30 focus:outline-none focus:border-emerald-400/50 focus:ring-1 focus:ring-emerald-400/30 text-sm"
+                    className="w-full h-12 px-4 rounded-xl bg-white/5 border border-white/10 text-white placeholder:text-white/30 focus:outline-none focus:border-burgundy-400/50 focus:ring-1 focus:ring-burgundy-400/30 text-sm"
                   />
                   <input
                     type="text"
                     value={name}
                     onChange={(e) => setName(e.target.value)}
                     placeholder="Your name (optional)"
-                    className="w-full h-12 px-4 rounded-xl bg-white/5 border border-white/10 text-white placeholder:text-white/30 focus:outline-none focus:border-emerald-400/50 focus:ring-1 focus:ring-emerald-400/30 text-sm"
+                    className="w-full h-12 px-4 rounded-xl bg-white/5 border border-white/10 text-white placeholder:text-white/30 focus:outline-none focus:border-burgundy-400/50 focus:ring-1 focus:ring-burgundy-400/30 text-sm"
                   />
                 </div>
 
@@ -155,7 +155,7 @@ export function ExitIntentModal() {
                   type="button"
                   onClick={handleSubmit}
                   disabled={submitting || !email.includes("@")}
-                  className="inline-flex items-center justify-center gap-2 w-full h-12 rounded-xl bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-400 hover:to-teal-500 text-white text-sm font-semibold shadow-lg shadow-emerald-500/25 transition-all disabled:opacity-50"
+                  className="inline-flex items-center justify-center gap-2 w-full h-12 rounded-xl bg-gradient-to-r from-burgundy-500 to-burgundy-600 hover:from-burgundy-400 hover:to-burgundy-500 text-white text-sm font-semibold shadow-lg shadow-burgundy-500/25 transition-all disabled:opacity-50"
                 >
                   {submitting ? <Loader2 className="w-4 h-4 animate-spin" /> : <Send className="w-4 h-4" />}
                   {submitting ? "Sending..." : "Send Me the Free Guide"}

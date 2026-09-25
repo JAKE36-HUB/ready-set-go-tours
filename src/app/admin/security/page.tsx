@@ -223,7 +223,7 @@ async function startEnroll() {
   if (loading) {
     return (
       <div className="min-h-[50vh] flex items-center justify-center">
-        <Loader2 className="w-6 h-6 text-sky-500 animate-spin" />
+        <Loader2 className="w-6 h-6 text-burgundy-500 animate-spin" />
       </div>
     )
   }
@@ -231,8 +231,8 @@ async function startEnroll() {
   return (
     <div className="max-w-2xl space-y-6">
       <div className="flex items-center gap-3">
-        <div className="w-11 h-11 rounded-xl bg-sky-500/10 flex items-center justify-center">
-          <ShieldCheck className="w-6 h-6 text-sky-400" />
+        <div className="w-11 h-11 rounded-xl bg-burgundy-500/10 flex items-center justify-center">
+          <ShieldCheck className="w-6 h-6 text-burgundy-400" />
         </div>
         <div>
           <h2 className="text-lg font-semibold text-slate-900 dark:text-white">Two-Factor Authentication</h2>
@@ -243,12 +243,12 @@ async function startEnroll() {
       </div>
 
       {enrolled ? (
-        <div className="rounded-xl border border-emerald-200 dark:border-emerald-800/50 bg-emerald-50 dark:bg-emerald-950/30 p-5 space-y-4">
+        <div className="rounded-xl border border-burgundy-200 dark:border-burgundy-800/50 bg-burgundy-50 dark:bg-burgundy-950/30 p-5 space-y-4">
           <div className="flex items-center gap-2">
-            <ShieldCheck className="w-5 h-5 text-emerald-600 dark:text-emerald-400" />
+            <ShieldCheck className="w-5 h-5 text-burgundy-600 dark:text-burgundy-400" />
             <div>
-              <p className="text-sm font-semibold text-emerald-700 dark:text-emerald-300">Enabled</p>
-              <p className="text-xs text-emerald-600/70 dark:text-emerald-400/70">
+              <p className="text-sm font-semibold text-burgundy-700 dark:text-burgundy-300">Enabled</p>
+              <p className="text-xs text-burgundy-600/70 dark:text-burgundy-400/70">
                 {aal2 ? "This session is fully verified (level 2)." : "Authenticator app is connected."}
               </p>
             </div>
@@ -321,7 +321,7 @@ async function startEnroll() {
       ) : qrCode ? (
         <form onSubmit={verifyEnroll} className="rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-5 space-y-5">
           <div className="flex items-center gap-2">
-            <QrCode className="w-5 h-5 text-sky-500" />
+            <QrCode className="w-5 h-5 text-burgundy-500" />
             <p className="text-sm font-semibold text-slate-900 dark:text-white">
               Scan this QR code with your authenticator app
             </p>
@@ -348,7 +348,7 @@ async function startEnroll() {
                     className="shrink-0 w-9 h-9 rounded-lg border border-slate-200 dark:border-slate-700 flex items-center justify-center text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 transition-colors"
                     aria-label="Copy secret"
                   >
-                    {copied ? <Check className="size-4 text-emerald-500" /> : <Copy className="size-4" />}
+                    {copied ? <Check className="size-4 text-burgundy-500" /> : <Copy className="size-4" />}
                   </button>
                 </div>
               </div>
@@ -366,7 +366,7 @@ async function startEnroll() {
                   onChange={(e) => setVerifyCode(e.target.value.replace(/\D/g, "").slice(0, 6))}
                   placeholder="000000"
                   required
-                  className="w-full h-11 px-4 text-center text-2xl tracking-[0.5em] font-mono rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white placeholder:text-slate-300 dark:placeholder:text-slate-600 focus:border-sky-500 focus:ring-2 focus:ring-sky-500/30 outline-none transition-all"
+                  className="w-full h-11 px-4 text-center text-2xl tracking-[0.5em] font-mono rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white placeholder:text-slate-300 dark:placeholder:text-slate-600 focus:border-burgundy-500 focus:ring-2 focus:ring-burgundy-500/30 outline-none transition-all"
                 />
               </div>
             </div>
@@ -376,7 +376,7 @@ async function startEnroll() {
             <button
               type="submit"
               disabled={verifying || verifyCode.length !== 6}
-              className="inline-flex items-center gap-2 h-10 px-5 rounded-lg bg-gradient-to-r from-sky-500 to-cyan-400 hover:from-sky-600 hover:to-cyan-500 text-white text-sm font-semibold shadow-md shadow-sky-500/20 disabled:opacity-50 disabled:cursor-not-allowed transition-all"
+              className="inline-flex items-center gap-2 h-10 px-5 rounded-lg bg-gradient-to-r from-burgundy-500 to-burgundy-400 hover:from-burgundy-600 hover:to-burgundy-500 text-white text-sm font-semibold shadow-md shadow-burgundy-500/20 disabled:opacity-50 disabled:cursor-not-allowed transition-all"
             >
               {verifying && <Loader2 className="size-4 animate-spin" />}
               {verifying ? "Verifying..." : "Enable 2FA"}
@@ -396,12 +396,12 @@ async function startEnroll() {
           </div>
         </form>
       ) : pendingFactorId ? (
-        <div className="rounded-xl border border-amber-200 dark:border-amber-800/50 bg-amber-50 dark:bg-amber-950/30 p-5 space-y-4">
-          <div className="flex items-center gap-2 text-amber-600 dark:text-amber-400">
+        <div className="rounded-xl border border-burgundy-200 dark:border-burgundy-800/50 bg-burgundy-50 dark:bg-burgundy-950/30 p-5 space-y-4">
+          <div className="flex items-center gap-2 text-burgundy-600 dark:text-burgundy-400">
             <ShieldAlert className="w-5 h-5" />
             <p className="text-sm font-semibold">Setup in progress</p>
           </div>
-          <p className="text-xs text-amber-700/80 dark:text-amber-400/80 leading-relaxed">
+          <p className="text-xs text-burgundy-700/80 dark:text-burgundy-400/80 leading-relaxed">
             A 2FA setup was started but not finished. If you already scanned the QR code into your
             authenticator app, enter the 6-digit code below to finish. Otherwise cancel it and start
             over.
@@ -415,13 +415,13 @@ async function startEnroll() {
               onChange={(e) => setVerifyCode(e.target.value.replace(/\D/g, "").slice(0, 6))}
               placeholder="000000"
               required
-              className="w-full h-11 px-4 text-center text-2xl tracking-[0.5em] font-mono rounded-lg border border-amber-200 dark:border-amber-800 bg-white dark:bg-slate-800 text-slate-900 dark:text-white placeholder:text-slate-300 dark:placeholder:text-slate-600 focus:border-amber-500 focus:ring-2 focus:ring-amber-500/30 outline-none transition-all"
+              className="w-full h-11 px-4 text-center text-2xl tracking-[0.5em] font-mono rounded-lg border border-burgundy-200 dark:border-burgundy-800 bg-white dark:bg-slate-800 text-slate-900 dark:text-white placeholder:text-slate-300 dark:placeholder:text-slate-600 focus:border-burgundy-500 focus:ring-2 focus:ring-burgundy-500/30 outline-none transition-all"
             />
             <div className="flex items-center gap-3">
               <button
                 type="submit"
                 disabled={verifying || verifyCode.length !== 6}
-                className="inline-flex items-center gap-2 h-10 px-5 rounded-lg bg-gradient-to-r from-sky-500 to-cyan-400 hover:from-sky-600 hover:to-cyan-500 text-white text-sm font-semibold shadow-md shadow-sky-500/20 disabled:opacity-50 disabled:cursor-not-allowed transition-all"
+                className="inline-flex items-center gap-2 h-10 px-5 rounded-lg bg-gradient-to-r from-burgundy-500 to-burgundy-400 hover:from-burgundy-600 hover:to-burgundy-500 text-white text-sm font-semibold shadow-md shadow-burgundy-500/20 disabled:opacity-50 disabled:cursor-not-allowed transition-all"
               >
                 {verifying && <Loader2 className="size-4 animate-spin" />}
                 {verifying ? "Verifying..." : "Finish setup"}
@@ -430,7 +430,7 @@ async function startEnroll() {
                 type="button"
                 onClick={cancelPending}
                 disabled={removing}
-                className="inline-flex items-center gap-2 h-10 px-4 rounded-lg border border-amber-300 dark:border-amber-700 text-amber-600 dark:text-amber-400 text-xs font-medium hover:bg-amber-100 dark:hover:bg-amber-900/40 disabled:opacity-50 transition-colors"
+                className="inline-flex items-center gap-2 h-10 px-4 rounded-lg border border-burgundy-300 dark:border-burgundy-700 text-burgundy-600 dark:text-burgundy-400 text-xs font-medium hover:bg-burgundy-100 dark:hover:bg-burgundy-900/40 disabled:opacity-50 transition-colors"
               >
                 {removing ? <Loader2 className="size-3.5 animate-spin" /> : <Trash2 className="size-3.5" />}
                 Cancel setup
@@ -440,7 +440,7 @@ async function startEnroll() {
         </div>
       ) : (
         <div className="rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-5 space-y-4">
-          <div className="flex items-center gap-2 text-amber-600 dark:text-amber-400">
+          <div className="flex items-center gap-2 text-burgundy-600 dark:text-burgundy-400">
             <ShieldAlert className="w-5 h-5" />
             <p className="text-sm font-semibold">Not enabled yet</p>
           </div>
@@ -451,7 +451,7 @@ async function startEnroll() {
           <button
             onClick={startEnroll}
             disabled={enrolling}
-            className="inline-flex items-center gap-2 h-10 px-5 rounded-lg bg-gradient-to-r from-sky-500 to-cyan-400 hover:from-sky-600 hover:to-cyan-500 text-white text-sm font-semibold shadow-md shadow-sky-500/20 disabled:opacity-50 disabled:cursor-not-allowed transition-all"
+            className="inline-flex items-center gap-2 h-10 px-5 rounded-lg bg-gradient-to-r from-burgundy-500 to-burgundy-400 hover:from-burgundy-600 hover:to-burgundy-500 text-white text-sm font-semibold shadow-md shadow-burgundy-500/20 disabled:opacity-50 disabled:cursor-not-allowed transition-all"
           >
             {enrolling ? <Loader2 className="size-4 animate-spin" /> : <KeyRound className="size-4" />}
             Set up 2FA

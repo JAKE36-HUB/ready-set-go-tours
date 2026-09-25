@@ -11,11 +11,11 @@ import { TOUR_PACKAGES } from "@/lib/constants"
 import { cn } from "@/lib/utils"
 
 const badgeColors: Record<string, string> = {
-  luxury: "bg-gradient-to-r from-amber-500 to-orange-500 text-white border-0",
-  safari: "bg-emerald-500 text-white border-0",
-  group: "bg-gradient-to-r from-sky-500 to-teal-500 text-white border-0",
-  beach: "bg-sky-500 text-white border-0",
-  cultural: "bg-violet-500 text-white border-0",
+  luxury: "bg-gradient-to-r from-burgundy-500 to-burgundy-500 text-white border-0",
+  safari: "bg-burgundy-500 text-white border-0",
+  group: "bg-gradient-to-r from-burgundy-500 to-burgundy-500 text-white border-0",
+  beach: "bg-burgundy-500 text-white border-0",
+  cultural: "bg-burgundy-500 text-white border-0",
   mountain: "bg-slate-700 text-white border-0",
 }
 
@@ -34,7 +34,7 @@ export function TourPackages({ onReserve }: { onReserve?: (name: string) => void
           transition={{ duration: 0.7 }}
           className="text-center mb-14"
         >
-          <span className="text-sm font-semibold text-amber-600 dark:text-amber-400 uppercase tracking-[0.2em]">
+          <span className="text-sm font-semibold text-burgundy-600 dark:text-burgundy-400 uppercase tracking-[0.2em]">
             Tours
           </span>
           <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-slate-900 dark:text-white mt-3 mb-4 tracking-tight">
@@ -72,22 +72,22 @@ export function TourPackages({ onReserve }: { onReserve?: (name: string) => void
                     <div className="text-[10px] text-slate-400 uppercase tracking-wider mt-1">Resident</div>
                     <div className="text-sm font-semibold text-slate-600 dark:text-slate-400">KES {(pkg.priceKES ?? pkg.price * 130).toLocaleString()}</div>
                   </div>
-                  <h3 className="text-lg font-bold text-slate-900 dark:text-white mb-3 group-hover:text-amber-600 dark:group-hover:text-amber-400 transition-colors">
+                  <h3 className="text-lg font-bold text-slate-900 dark:text-white mb-3 group-hover:text-burgundy-600 dark:group-hover:text-burgundy-400 transition-colors">
                     {pkg.name}
                   </h3>
                   <div className="grid grid-cols-2 gap-2 mb-4">
-                    <div className="flex items-center gap-2 text-xs text-slate-500 dark:text-slate-400"><Clock className="w-3.5 h-3.5 text-amber-500 shrink-0" />{pkg.duration}</div>
-                    <div className="flex items-center gap-2 text-xs text-slate-500 dark:text-slate-400"><Bed className="w-3.5 h-3.5 text-amber-500 shrink-0" /><span className="truncate">{pkg.accommodation}</span></div>
+                    <div className="flex items-center gap-2 text-xs text-slate-500 dark:text-slate-400"><Clock className="w-3.5 h-3.5 text-burgundy-500 shrink-0" />{pkg.duration}</div>
+                    <div className="flex items-center gap-2 text-xs text-slate-500 dark:text-slate-400"><Bed className="w-3.5 h-3.5 text-burgundy-500 shrink-0" /><span className="truncate">{pkg.accommodation}</span></div>
                   </div>
                   <div className="border-t border-slate-100 dark:border-slate-700 pt-4 mb-5">
                     <div className="grid grid-cols-2 gap-x-2 gap-y-1.5">
                       {pkg.activities.slice(0, 4).map((a) => (
                         <span key={a} className="flex items-center gap-1.5 text-xs text-slate-500 dark:text-slate-400">
-                          <Check className="w-3 h-3 text-emerald-500 shrink-0" />{a}
+                          <Check className="w-3 h-3 text-burgundy-500 shrink-0" />{a}
                         </span>
                       ))}
                       {pkg.activities.length > 4 && (
-                        <span className="text-xs text-amber-600 dark:text-amber-400 ml-5">+{pkg.activities.length - 4} more</span>
+                        <span className="text-xs text-burgundy-600 dark:text-burgundy-400 ml-5">+{pkg.activities.length - 4} more</span>
                       )}
                     </div>
                   </div>
@@ -101,7 +101,7 @@ export function TourPackages({ onReserve }: { onReserve?: (name: string) => void
                     <button
                       type="button"
                       onClick={() => onReserve?.(pkg.name)}
-                      className="flex-1 inline-flex items-center justify-center h-11 rounded-xl bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 text-white text-sm font-semibold shadow-md hover:shadow-lg transition-all duration-300"
+                      className="flex-1 inline-flex items-center justify-center h-11 rounded-xl bg-gradient-to-r from-burgundy-500 to-burgundy-500 hover:from-burgundy-600 hover:to-burgundy-600 text-white text-sm font-semibold shadow-md hover:shadow-lg transition-all duration-300"
                     >
                       Get a Free Quote
                     </button>

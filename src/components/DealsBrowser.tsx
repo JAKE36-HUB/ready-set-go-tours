@@ -61,7 +61,7 @@ function DealCardView({ deal }: { deal: DealCard }) {
 
         <div className="mt-4 mb-1 flex items-baseline gap-2">
           <span className="text-3xl font-semibold text-foreground">${deal.dealPrice.toLocaleString()}</span>
-          <span className="text-sm font-medium text-primary dark:text-amber-400">per person</span>
+          <span className="text-sm font-medium text-primary dark:text-burgundy-400">per person</span>
         </div>
         {deal.priceKES && (
           <div className="mb-4 text-xs text-muted-foreground">
@@ -109,7 +109,7 @@ export default function DealsBrowser({ deals }: { deals: DealCard[] }) {
           <div className="max-w-7xl mx-auto">
             <AnimatedSection>
               <div className="text-center mb-14 max-w-2xl mx-auto">
-                <span className="text-xs font-semibold uppercase tracking-[0.2em] text-primary dark:text-amber-400">Top Picks</span>
+                <span className="text-xs font-semibold uppercase tracking-[0.2em] text-primary dark:text-burgundy-400">Top Picks</span>
                 <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-medium text-foreground mt-4 mb-4 leading-tight">
                   Featured offers
                 </h2>
@@ -135,7 +135,7 @@ export default function DealsBrowser({ deals }: { deals: DealCard[] }) {
         <div className="max-w-7xl mx-auto">
           <AnimatedSection>
             <div className="text-center mb-10 max-w-2xl mx-auto">
-              <span className="text-xs font-semibold uppercase tracking-[0.2em] text-primary dark:text-amber-400">Browse All</span>
+              <span className="text-xs font-semibold uppercase tracking-[0.2em] text-primary dark:text-burgundy-400">Browse All</span>
               <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-medium text-foreground mt-4 mb-4 leading-tight">
                 Every deal & offer
               </h2>

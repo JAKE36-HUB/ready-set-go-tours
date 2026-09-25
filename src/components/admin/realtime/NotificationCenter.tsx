@@ -107,7 +107,7 @@ export default function NotificationCenter() {
                       key={n.id}
                       className={cn(
                         "px-4 py-3 border-b border-slate-50 dark:border-slate-800/60 hover:bg-slate-50 dark:hover:bg-slate-800/40 transition-colors",
-                        !n.read && "bg-amber-50/50 dark:bg-amber-950/10"
+                        !n.read && "bg-burgundy-50/50 dark:bg-burgundy-950/10"
                       )}
                     >
                       <div className="flex items-start gap-2.5">
@@ -116,7 +116,7 @@ export default function NotificationCenter() {
                             <span className={cn("text-[10px] font-semibold px-1.5 py-0.5 rounded-full", meta?.cls || "bg-slate-100 text-slate-600")}>
                               {meta?.label || n.type.replaceAll("_", " ")}
                             </span>
-                            {!n.read && <span className="w-1.5 h-1.5 rounded-full bg-amber-500" />}
+                            {!n.read && <span className="w-1.5 h-1.5 rounded-full bg-burgundy-500" />}
                           </div>
                           <p className="text-sm font-semibold mt-1 truncate">{n.title}</p>
                           {n.body && <p className="text-xs text-slate-500 dark:text-slate-400 truncate mt-0.5">{n.body}</p>}
@@ -135,7 +135,7 @@ export default function NotificationCenter() {
                           {!n.read && (
                             <button
                               onClick={() => toggleRead(n.id, true)}
-                              className="p-1.5 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-400 hover:text-emerald-600"
+                              className="p-1.5 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-400 hover:text-burgundy-600"
                               title="Mark as read"
                             >
                               <Check className="w-3.5 h-3.5" />
@@ -144,7 +144,7 @@ export default function NotificationCenter() {
                           {!n.archived && (
                             <button
                               onClick={() => toggleArchived(n.id, true)}
-                              className="p-1.5 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-400 hover:text-sky-600"
+                              className="p-1.5 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-400 hover:text-burgundy-600"
                               title="Archive"
                             >
                               <Archive className="w-3.5 h-3.5" />

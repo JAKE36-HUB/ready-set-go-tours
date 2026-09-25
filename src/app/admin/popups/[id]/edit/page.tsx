@@ -58,7 +58,7 @@ export default function EditPopupPage() {
           <ArrowLeft className="w-4 h-4 text-slate-600 dark:text-slate-400" />
         </button>
         <div className="flex items-center gap-2">
-          <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-fuchsia-500 to-pink-400 flex items-center justify-center">
+          <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-burgundy-500 to-burgundy-400 flex items-center justify-center">
             <Megaphone className="w-4 h-4 text-white" />
           </div>
           <div>

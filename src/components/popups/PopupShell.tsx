@@ -37,7 +37,7 @@ const hoverClass = (h: string) =>
   h === "pulse" ? "animate-pulse" : h === "grow" ? "hover:scale-105" : h === "shake" ? "hover:animate-[wiggle_0.4s_ease-in-out]" : ""
 
 const ctaStyle = (cta: PopupCTA) => ({
-  backgroundColor: cta.bgColor || "#f59e0b",
+  backgroundColor: cta.bgColor || "#93302C",
   color: cta.textColor || "#ffffff",
 })
 
@@ -55,7 +55,7 @@ function ContentSection({ config, light }: { config: PopupConfig; light?: boolea
       {c.badges.length > 0 && (
         <div className="flex flex-wrap gap-1.5 justify-center">
           {c.badges.map((b) => (
-            <span key={b} className={`text-[10px] font-semibold px-2 py-0.5 rounded-full border border-amber-500/25 uppercase tracking-wide ${light ? "bg-white/15 text-amber-200" : "bg-amber-500/15 text-amber-700 dark:text-amber-400"}`}>
+            <span key={b} className={`text-[10px] font-semibold px-2 py-0.5 rounded-full border border-burgundy-500/25 uppercase tracking-wide ${light ? "bg-white/15 text-burgundy-200" : "bg-burgundy-500/15 text-burgundy-700 dark:text-burgundy-400"}`}>
               {b}
             </span>
           ))}
@@ -65,7 +65,7 @@ function ContentSection({ config, light }: { config: PopupConfig; light?: boolea
         <h2 className={`text-2xl font-extrabold leading-tight ${light ? "text-white" : "text-slate-900 dark:text-white"}`}>{title}</h2>
       )}
       {c.subtitle && (
-        <p className={`text-sm font-semibold ${light ? "text-amber-100" : "text-slate-600 dark:text-slate-300"}`}>{c.subtitle}</p>
+        <p className={`text-sm font-semibold ${light ? "text-burgundy-100" : "text-slate-600 dark:text-slate-300"}`}>{c.subtitle}</p>
       )}
       {c.description && (
         <p className={`text-sm leading-relaxed ${light ? "text-slate-200" : "text-slate-500 dark:text-slate-400"}`}>{c.description}</p>
@@ -76,13 +76,13 @@ function ContentSection({ config, light }: { config: PopupConfig; light?: boolea
             <span className={`text-base line-through ${light ? "text-slate-300" : "text-slate-400"}`}>{c.priceBefore}</span>
           )}
           {c.priceNow && (
-            <span className={`text-2xl font-extrabold ${light ? "text-amber-300" : "text-amber-600 dark:text-amber-400"}`}>{c.priceNow}</span>
+            <span className={`text-2xl font-extrabold ${light ? "text-burgundy-300" : "text-burgundy-600 dark:text-burgundy-400"}`}>{c.priceNow}</span>
           )}
         </div>
       )}
       {c.promoCode && (
         <p className={`text-xs ${light ? "text-slate-200" : "text-slate-500 dark:text-slate-400"}`}>
-          Promo code: <span className={`font-mono font-bold ${light ? "text-amber-300" : "text-amber-600 dark:text-amber-400"}`}>{c.promoCode}</span>
+          Promo code: <span className={`font-mono font-bold ${light ? "text-burgundy-300" : "text-burgundy-600 dark:text-burgundy-400"}`}>{c.promoCode}</span>
         </p>
       )}
     </>
@@ -139,7 +139,7 @@ function UrgencyRow({ config }: { config: PopupConfig }) {
           </p>
           <div className="h-1.5 w-full max-w-[220px] mx-auto bg-slate-200 dark:bg-slate-700 rounded-full overflow-hidden">
             <motion.div
-              className="h-full bg-gradient-to-r from-red-500 to-orange-500"
+              className="h-full bg-gradient-to-r from-red-500 to-burgundy-500"
               animate={{ width: `${Math.max(8, (seats / 20) * 100)}%` }}
               transition={{ duration: 1 }}
             />
@@ -337,7 +337,7 @@ export function PopupShell({ popup, onClose, onCTA, onLeadSuccess }: Props) {
               <div className="absolute inset-0 bg-gradient-to-r from-black/85 via-black/70 to-black/40" />
             </>
           )}
-          <div className={`relative ${imageUrl ? "text-white" : "bg-gradient-to-r from-amber-500 to-orange-500 text-white"} px-6 py-4`}>
+          <div className={`relative ${imageUrl ? "text-white" : "bg-gradient-to-r from-burgundy-500 to-burgundy-500 text-white"} px-6 py-4`}>
             <div className="max-w-4xl mx-auto flex flex-col md:flex-row items-center gap-3 text-center md:text-left">
               <div className="flex-1 min-w-0">
                 <ContentSection config={cfg} light />
@@ -400,7 +400,7 @@ export function PopupShell({ popup, onClose, onCTA, onLeadSuccess }: Props) {
           {imageUrl ? (
             <AdaptiveImage src={imageUrl} alt="" maxHeight={170} contain backdrop className="rounded-t-2xl" />
           ) : (
-            <div className="h-2 bg-gradient-to-r from-amber-500 to-orange-500" />
+            <div className="h-2 bg-gradient-to-r from-burgundy-500 to-burgundy-500" />
           )}
           <div className="p-4 flex flex-col gap-2 text-center">
             <ContentSection config={cfg} />
@@ -427,7 +427,7 @@ export function PopupShell({ popup, onClose, onCTA, onLeadSuccess }: Props) {
           {imageUrl ? (
             <AdaptiveImage src={imageUrl} alt="" maxHeight={300} overlay contain backdrop />
           ) : (
-            <div className="w-full h-40 bg-gradient-to-br from-amber-500 to-orange-600" />
+            <div className="w-full h-40 bg-gradient-to-br from-burgundy-500 to-burgundy-600" />
           )}
             <button onClick={onClose} aria-label="Close popup" className="absolute top-3 right-3 rounded-full bg-black/40 hover:bg-black/60 p-1.5 text-white transition">
               <X className="w-4 h-4" />
@@ -504,7 +504,7 @@ export function PopupShell({ popup, onClose, onCTA, onLeadSuccess }: Props) {
             onCTA(cfg.ctas[0], 0)
           }}
         />
-        {winPrize && <p className="text-sm font-semibold text-amber-600 dark:text-amber-400">ðŸŽ‰ You won: {winPrize}</p>}
+        {winPrize && <p className="text-sm font-semibold text-burgundy-600 dark:text-burgundy-400">ðŸŽ‰ You won: {winPrize}</p>}
         <TrustRow config={cfg} />
       </div>,
       { initial: { scale: 0.85, opacity: 0, y: 20 }, animate: { scale: 1, opacity: 1, y: 0 }, exit: { scale: 0.85, opacity: 0, y: 20 } },
@@ -558,7 +558,7 @@ export function PopupShell({ popup, onClose, onCTA, onLeadSuccess }: Props) {
             <ContentSection config={cfg} />
             <UrgencyRow config={cfg} />
             <CTAs config={cfg} onCTA={onCTA} />
-            <button onClick={() => setStep(1)} className="text-xs text-amber-600 dark:text-amber-400 underline underline-offset-2">
+            <button onClick={() => setStep(1)} className="text-xs text-burgundy-600 dark:text-burgundy-400 underline underline-offset-2">
               Get a free personalized quote â†’
             </button>
           </div>

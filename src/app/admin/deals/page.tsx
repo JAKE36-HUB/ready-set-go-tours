@@ -22,12 +22,12 @@ interface Deal {
 }
 
 const TYPE_COLORS: Record<string, string> = {
-  "early-bird": "bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400",
+  "early-bird": "bg-burgundy-100 text-burgundy-700 dark:bg-burgundy-900/30 dark:text-burgundy-400",
   "last-minute": "bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-400",
-  group: "bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-400",
-  seasonal: "bg-amber-100 text-amber-700 dark:bg-amber-900/30 dark:text-amber-400",
-  combo: "bg-purple-100 text-purple-700 dark:bg-purple-900/30 dark:text-purple-400",
-  special: "bg-sky-100 text-sky-700 dark:bg-sky-900/30 dark:text-sky-400",
+  group: "bg-burgundy-100 text-burgundy-700 dark:bg-burgundy-900/30 dark:text-burgundy-400",
+  seasonal: "bg-burgundy-100 text-burgundy-700 dark:bg-burgundy-900/30 dark:text-burgundy-400",
+  combo: "bg-burgundy-100 text-burgundy-700 dark:bg-burgundy-900/30 dark:text-burgundy-400",
+  special: "bg-burgundy-100 text-burgundy-700 dark:bg-burgundy-900/30 dark:text-burgundy-400",
 }
 
 export default function DealsPage() {
@@ -57,7 +57,7 @@ export default function DealsPage() {
       <motion.div initial={{ opacity: 0, y: 15 }} animate={{ opacity: 1, y: 0 }}
         className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-amber-500 to-orange-400 flex items-center justify-center shadow-lg shadow-amber-500/20">
+          <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-burgundy-500 to-burgundy-400 flex items-center justify-center shadow-lg shadow-burgundy-500/20">
             <Tag className="w-5 h-5 text-white" />
           </div>
           <div>
@@ -66,7 +66,7 @@ export default function DealsPage() {
           </div>
         </div>
         <Button onClick={() => router.push("/admin/deals/new")}
-          className="bg-gradient-to-r from-amber-500 to-orange-400 text-white border-0 hover:shadow-lg hover:shadow-amber-500/25 transition-all h-9">
+          className="bg-gradient-to-r from-burgundy-500 to-burgundy-400 text-white border-0 hover:shadow-lg hover:shadow-burgundy-500/25 transition-all h-9">
           <Plus className="w-4 h-4 mr-1.5" />
           Add Deal
         </Button>
@@ -90,13 +90,13 @@ export default function DealsPage() {
       ) : deals.length === 0 ? (
         <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }}
           className="text-center py-16 px-4 rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900">
-          <div className="w-16 h-16 rounded-2xl bg-amber-50 dark:bg-amber-500/10 flex items-center justify-center mx-auto mb-4">
-            <Tag className="w-8 h-8 text-amber-400" />
+          <div className="w-16 h-16 rounded-2xl bg-burgundy-50 dark:bg-burgundy-500/10 flex items-center justify-center mx-auto mb-4">
+            <Tag className="w-8 h-8 text-burgundy-400" />
           </div>
           <p className="text-sm font-medium text-slate-900 dark:text-white">No deals yet</p>
           <p className="text-xs text-slate-500 dark:text-slate-400 mt-1 mb-4">Create your first promotional offer</p>
           <Button onClick={() => router.push("/admin/deals/new")}
-            className="bg-gradient-to-r from-amber-500 to-orange-400 text-white border-0">
+            className="bg-gradient-to-r from-burgundy-500 to-burgundy-400 text-white border-0">
             <Plus className="w-4 h-4 mr-1.5" /> Add Deal
           </Button>
         </motion.div>
@@ -130,7 +130,7 @@ export default function DealsPage() {
                         <div>
                           <span className="text-sm font-medium text-slate-900 dark:text-white">{deal.title}</span>
                           {deal.featured && (
-                            <Badge className="ml-2 bg-amber-100 text-amber-700 dark:bg-amber-900/30 dark:text-amber-400 text-xs">Featured</Badge>
+                            <Badge className="ml-2 bg-burgundy-100 text-burgundy-700 dark:bg-burgundy-900/30 dark:text-burgundy-400 text-xs">Featured</Badge>
                           )}
                         </div>
                       </div>
@@ -152,11 +152,11 @@ export default function DealsPage() {
                     <td className="px-5 py-3.5 text-right">
                       <div className="flex items-center justify-end gap-0.5 opacity-70 group-hover:opacity-100 transition-opacity">
                         <Button variant="ghost" size="icon" onClick={() => window.open(`/deals/${deal.slug}`, "_blank")}
-                          className="hover:bg-sky-50 dark:hover:bg-sky-500/10 hover:text-sky-600" aria-label="View on site">
+                          className="hover:bg-burgundy-50 dark:hover:bg-burgundy-500/10 hover:text-burgundy-600" aria-label="View on site">
                           <ExternalLink className="w-3.5 h-3.5" />
                         </Button>
                         <Button variant="ghost" size="icon" onClick={() => router.push(`/admin/deals/${deal.id}/edit`)}
-                          className="hover:bg-amber-50 dark:hover:bg-amber-500/10 hover:text-amber-600" aria-label="Edit deal">
+                          className="hover:bg-burgundy-50 dark:hover:bg-burgundy-500/10 hover:text-burgundy-600" aria-label="Edit deal">
                           <Edit className="w-3.5 h-3.5" />
                         </Button>
                         <Button variant="ghost" size="icon" onClick={() => handleDelete(deal.id)}

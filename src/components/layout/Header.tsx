@@ -97,8 +97,8 @@ export function Header() {
                         className={cn(
                           "flex items-center gap-1 px-3 py-2 rounded-lg text-sm font-medium transition-all duration-200",
                           isActive
-                            ? "text-primary bg-primary/10 dark:text-amber-400 dark:bg-amber-900/30"
-                            : "text-stone-700 hover:text-primary hover:bg-primary/10 dark:text-stone-300 dark:hover:text-amber-400 dark:hover:bg-amber-900/20"
+                            ? "text-primary bg-primary/10 dark:text-burgundy-400 dark:bg-burgundy-900/30"
+                            : "text-stone-700 hover:text-primary hover:bg-primary/10 dark:text-stone-300 dark:hover:text-burgundy-400 dark:hover:bg-burgundy-900/20"
                         )}
                       >
                         {item.label}
@@ -128,7 +128,7 @@ export function Header() {
                                     className={cn(
                                       "flex items-center px-3 py-2.5 rounded-lg text-sm font-medium transition-all duration-150",
                                       isChildActive
-                                        ? "bg-primary/10 text-primary dark:bg-amber-900/30 dark:text-amber-400"
+                                        ? "bg-primary/10 text-primary dark:bg-burgundy-900/30 dark:text-burgundy-400"
                                         : "text-stone-700 hover:bg-stone-50 dark:text-stone-300 dark:hover:bg-stone-800"
                                     )}
                                   >
@@ -147,8 +147,8 @@ export function Header() {
                       className={cn(
                         "px-3 py-2 rounded-lg text-sm font-medium transition-all duration-200",
                         isActive
-                          ? "text-primary bg-primary/10 dark:text-amber-400 dark:bg-amber-900/30"
-                          : "text-stone-700 hover:text-primary hover:bg-primary/10 dark:text-stone-300 dark:hover:text-amber-400 dark:hover:bg-amber-900/20"
+                          ? "text-primary bg-primary/10 dark:text-burgundy-400 dark:bg-burgundy-900/30"
+                          : "text-stone-700 hover:text-primary hover:bg-primary/10 dark:text-stone-300 dark:hover:text-burgundy-400 dark:hover:bg-burgundy-900/20"
                       )}
                     >
                       {item.label}
@@ -184,7 +184,7 @@ export function Header() {
               href={whatsappUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="hidden xl:inline-flex items-center gap-2 px-3 py-2 rounded-lg text-sm font-medium text-stone-700 hover:text-primary hover:bg-primary/10 dark:text-stone-300 dark:hover:text-amber-400 dark:hover:bg-amber-900/20 transition-all duration-200"
+              className="hidden xl:inline-flex items-center gap-2 px-3 py-2 rounded-lg text-sm font-medium text-stone-700 hover:text-primary hover:bg-primary/10 dark:text-stone-300 dark:hover:text-burgundy-400 dark:hover:bg-burgundy-900/20 transition-all duration-200"
             >
               <MessageCircle className="w-3.5 h-3.5 shrink-0" />
               <span className="whitespace-nowrap">WhatsApp an Expert</span>
@@ -271,7 +271,7 @@ function MobileNavContent({ onClose }: { onClose: () => void }) {
                     className={cn(
                       "flex w-full items-center justify-between px-3 py-3 rounded-lg text-sm font-medium transition-all duration-150",
                       isActive
-                        ? "bg-primary/10 text-primary dark:bg-amber-900/30 dark:text-amber-400"
+                        ? "bg-primary/10 text-primary dark:bg-burgundy-900/30 dark:text-burgundy-400"
                         : "text-stone-700 hover:bg-stone-50 dark:text-stone-300 dark:hover:bg-stone-800"
                     )}
                   >
@@ -292,7 +292,7 @@ function MobileNavContent({ onClose }: { onClose: () => void }) {
                         transition={{ duration: 0.2 }}
                         className="overflow-hidden"
                       >
-                        <div className="ml-3 mt-1 space-y-1 border-l-2 border-amber-200 dark:border-amber-900 pl-3">
+                        <div className="ml-3 mt-1 space-y-1 border-l-2 border-burgundy-200 dark:border-burgundy-900 pl-3">
                           {item.children!.map((child) => (
                             <Link
                               key={child.href}
@@ -301,7 +301,7 @@ function MobileNavContent({ onClose }: { onClose: () => void }) {
                               className={cn(
                                 "block px-3 py-2.5 rounded-lg text-sm transition-all duration-150",
                                 pathname === child.href
-                                  ? "bg-primary/10 text-primary font-medium dark:bg-amber-900/30 dark:text-amber-400"
+                                  ? "bg-primary/10 text-primary font-medium dark:bg-burgundy-900/30 dark:text-burgundy-400"
                                   : "text-stone-600 hover:bg-stone-50 dark:text-stone-400 dark:hover:bg-stone-800"
                               )}
                             >
@@ -320,7 +320,7 @@ function MobileNavContent({ onClose }: { onClose: () => void }) {
                   className={cn(
                     "flex items-center px-3 py-3 rounded-lg text-sm font-medium transition-all duration-150",
                     isActive
-                      ? "bg-primary/10 text-primary dark:bg-amber-900/30 dark:text-amber-400"
+                      ? "bg-primary/10 text-primary dark:bg-burgundy-900/30 dark:text-burgundy-400"
                       : "text-stone-700 hover:bg-stone-50 dark:text-stone-300 dark:hover:bg-stone-800"
                   )}
                 >

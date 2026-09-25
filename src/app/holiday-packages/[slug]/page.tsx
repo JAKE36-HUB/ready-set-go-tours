@@ -179,7 +179,7 @@ export default async function PackageDetailPage({
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 h-11 px-5 rounded-xl bg-card border border-border hover:border-primary/40 hover:bg-primary/5 text-foreground text-sm font-medium transition-all"
             >
-              <MessageCircle className="size-4 text-primary dark:text-amber-400" />
+              <MessageCircle className="size-4 text-primary dark:text-burgundy-400" />
               WhatsApp a Safari Expert
             </a>
             <Link
@@ -208,7 +208,7 @@ export default async function PackageDetailPage({
                 <div className="grid sm:grid-cols-2 gap-3">
                   {pkg.highlights.map((h: string) => (
                     <div key={h} className="flex items-start gap-3 p-4 rounded-xl bg-card ring-1 ring-foreground/5">
-                      <Compass className="size-5 text-primary dark:text-amber-400 shrink-0 mt-0.5" />
+                      <Compass className="size-5 text-primary dark:text-burgundy-400 shrink-0 mt-0.5" />
                       <span className="text-sm text-foreground">{h}</span>
                     </div>
                   ))}
@@ -220,7 +220,7 @@ export default async function PackageDetailPage({
                 <div className="flex flex-wrap gap-2">
                   {pkg.activities.map((a: string) => (
                     <span key={a} className="inline-flex items-center gap-1.5 text-sm bg-card ring-1 ring-foreground/10 text-foreground px-4 py-2 rounded-full">
-                      <Compass className="size-4 text-primary dark:text-amber-400 shrink-0" />
+                      <Compass className="size-4 text-primary dark:text-burgundy-400 shrink-0" />
                       {a}
                     </span>
                   ))}
@@ -235,28 +235,28 @@ export default async function PackageDetailPage({
                   <h3 className="font-semibold text-foreground">Trip Details</h3>
                   <div className="space-y-4">
                     <div className="flex items-start gap-3">
-                      <Clock className="size-5 text-primary dark:text-amber-400 shrink-0 mt-0.5" />
+                      <Clock className="size-5 text-primary dark:text-burgundy-400 shrink-0 mt-0.5" />
                       <div>
                         <p className="text-sm font-medium text-foreground">Duration</p>
                         <p className="text-sm text-muted-foreground">{pkg.duration}</p>
                       </div>
                     </div>
                     <div className="flex items-start gap-3">
-                      <Hotel className="size-5 text-primary dark:text-amber-400 shrink-0 mt-0.5" />
+                      <Hotel className="size-5 text-primary dark:text-burgundy-400 shrink-0 mt-0.5" />
                       <div>
                         <p className="text-sm font-medium text-foreground">Accommodation</p>
                         <p className="text-sm text-muted-foreground">{pkg.accommodation}</p>
                       </div>
                     </div>
                     <div className="flex items-start gap-3">
-                      <Utensils className="size-5 text-primary dark:text-amber-400 shrink-0 mt-0.5" />
+                      <Utensils className="size-5 text-primary dark:text-burgundy-400 shrink-0 mt-0.5" />
                       <div>
                         <p className="text-sm font-medium text-foreground">Meals</p>
                         <p className="text-sm text-muted-foreground">{pkg.meals}</p>
                       </div>
                     </div>
                     <div className="flex items-start gap-3">
-                      <Car className="size-5 text-primary dark:text-amber-400 shrink-0 mt-0.5" />
+                      <Car className="size-5 text-primary dark:text-burgundy-400 shrink-0 mt-0.5" />
                       <div>
                         <p className="text-sm font-medium text-foreground">Transport</p>
                         <p className="text-sm text-muted-foreground">{pkg.transport}</p>
@@ -272,7 +272,7 @@ export default async function PackageDetailPage({
                   <ul className="space-y-3">
                     {pkg.included.map((item: string) => (
                       <li key={item} className="flex items-start gap-3 text-sm text-muted-foreground">
-                        <Check className="size-4 text-primary dark:text-amber-400 shrink-0 mt-0.5" />
+                        <Check className="size-4 text-primary dark:text-burgundy-400 shrink-0 mt-0.5" />
                         {item}
                       </li>
                     ))}

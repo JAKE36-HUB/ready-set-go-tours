@@ -262,7 +262,7 @@ export default function PdfItinerary({ data, buttonLabel = "Download Itinerary",
     <PDFDownloadLink
       document={<ItineraryDocument data={data} />}
       fileName={`${data.name.replace(/\s+/g, "-").toLowerCase()}-itinerary.pdf`}
-      className={`inline-flex items-center justify-center gap-2 h-11 px-5 rounded-xl bg-emerald-500 hover:bg-emerald-600 text-white text-sm font-medium transition-all duration-300 shadow-lg shadow-emerald-500/25 hover:shadow-emerald-500/40 ${className}`}
+      className={`inline-flex items-center justify-center gap-2 h-11 px-5 rounded-xl bg-burgundy-500 hover:bg-burgundy-600 text-white text-sm font-medium transition-all duration-300 shadow-lg shadow-burgundy-500/25 hover:shadow-burgundy-500/40 ${className}`}
     >
       {({ loading }) => (loading ? "Generating PDF..." : buttonLabel)}
     </PDFDownloadLink>

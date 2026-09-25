@@ -18,8 +18,8 @@ export default function FetchRetry({ label, onRetry }: { label: string; onRetry:
   return (
     <main className="min-h-[60vh] flex items-center justify-center px-4">
       <div className="text-center max-w-sm space-y-4">
-        <div className="mx-auto w-14 h-14 rounded-full bg-amber-500/10 flex items-center justify-center">
-          <RefreshCw className="w-7 h-7 text-amber-500 animate-pulse" />
+        <div className="mx-auto w-14 h-14 rounded-full bg-burgundy-500/10 flex items-center justify-center">
+          <RefreshCw className="w-7 h-7 text-burgundy-500 animate-pulse" />
         </div>
         <h1 className="text-xl font-bold text-slate-900 dark:text-white">Could not load this {label}</h1>
         <p className="text-sm text-slate-500 dark:text-slate-400">

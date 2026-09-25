@@ -32,9 +32,9 @@ export function ScrollToTop() {
         size="icon"
         className={cn(
           "w-11 h-11 rounded-full",
-          "bg-gradient-to-br from-sky-500 to-cyan-400",
-          "text-white border-0 shadow-lg shadow-sky-500/25",
-          "hover:shadow-xl hover:shadow-sky-500/30 hover:scale-110",
+          "bg-gradient-to-br from-burgundy-500 to-burgundy-400",
+          "text-white border-0 shadow-lg shadow-burgundy-500/25",
+          "hover:shadow-xl hover:shadow-burgundy-500/30 hover:scale-110",
           "transition-all duration-300"
         )}
         aria-label="Scroll to top"

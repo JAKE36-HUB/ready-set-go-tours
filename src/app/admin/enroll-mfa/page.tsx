@@ -151,7 +151,7 @@ export default function EnrollMfaPage() {
   if (checking) {
     return (
       <div className="min-h-[60vh] flex flex-col items-center justify-center gap-4">
-        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-sky-500" />
+        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-burgundy-500" />
         <p className="text-sm text-slate-500">Checking your session...</p>
       </div>
     )
@@ -161,7 +161,7 @@ export default function EnrollMfaPage() {
     <div className="min-h-[70vh] flex items-center justify-center px-4">
       <div className="w-full max-w-md space-y-6">
         <div className="text-center space-y-3">
-          <div className="mx-auto w-14 h-14 rounded-2xl bg-gradient-to-br from-sky-500 to-cyan-400 flex items-center justify-center shadow-lg shadow-sky-500/20">
+          <div className="mx-auto w-14 h-14 rounded-2xl bg-gradient-to-br from-burgundy-500 to-burgundy-400 flex items-center justify-center shadow-lg shadow-burgundy-500/20">
             <ShieldCheck className="w-7 h-7 text-white" />
           </div>
           <div>
@@ -183,7 +183,7 @@ export default function EnrollMfaPage() {
         {qrCode ? (
           <form onSubmit={handleVerify} className="rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-5 space-y-5">
             <div className="flex items-center gap-2">
-              <QrCode className="w-5 h-5 text-sky-500" />
+              <QrCode className="w-5 h-5 text-burgundy-500" />
               <p className="text-sm font-semibold text-slate-900 dark:text-white">
                 Scan this QR code with your authenticator app
               </p>
@@ -210,7 +210,7 @@ export default function EnrollMfaPage() {
                       className="shrink-0 w-9 h-9 rounded-lg border border-slate-200 dark:border-slate-700 flex items-center justify-center text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 transition-colors"
                       aria-label="Copy secret"
                     >
-                      {copied ? <Check className="size-4 text-emerald-500" /> : <Copy className="size-4" />}
+                      {copied ? <Check className="size-4 text-burgundy-500" /> : <Copy className="size-4" />}
                     </button>
                   </div>
                 </div>
@@ -229,7 +229,7 @@ export default function EnrollMfaPage() {
                     onChange={(e) => setCode(e.target.value.replace(/\D/g, "").slice(0, 6))}
                     placeholder="000000"
                     required
-                    className="w-full h-11 px-4 text-center text-2xl tracking-[0.5em] font-mono rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white placeholder:text-slate-300 dark:placeholder:text-slate-600 focus:border-sky-500 focus:ring-2 focus:ring-sky-500/30 outline-none transition-all"
+                    className="w-full h-11 px-4 text-center text-2xl tracking-[0.5em] font-mono rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white placeholder:text-slate-300 dark:placeholder:text-slate-600 focus:border-burgundy-500 focus:ring-2 focus:ring-burgundy-500/30 outline-none transition-all"
                   />
                 </div>
               </div>
@@ -238,16 +238,16 @@ export default function EnrollMfaPage() {
             <button
               type="submit"
               disabled={verifying || code.length !== 6}
-              className="w-full inline-flex items-center justify-center gap-2 h-11 rounded-lg bg-gradient-to-r from-sky-500 to-cyan-400 hover:from-sky-600 hover:to-cyan-500 text-white text-sm font-semibold shadow-md shadow-sky-500/20 disabled:opacity-50 disabled:cursor-not-allowed transition-all"
+              className="w-full inline-flex items-center justify-center gap-2 h-11 rounded-lg bg-gradient-to-r from-burgundy-500 to-burgundy-400 hover:from-burgundy-600 hover:to-burgundy-500 text-white text-sm font-semibold shadow-md shadow-burgundy-500/20 disabled:opacity-50 disabled:cursor-not-allowed transition-all"
             >
               {verifying ? <Loader2 className="size-4 animate-spin" /> : <KeyRound className="size-4" />}
               {verifying ? "Verifying..." : "Enable 2FA"}
             </button>
           </form>
         ) : factorId ? (
-          <form onSubmit={handleVerify} className="rounded-xl border border-amber-200 dark:border-amber-800/50 bg-amber-50 dark:bg-amber-950/30 p-5 space-y-4">
-            <div className="text-sm font-semibold text-amber-700 dark:text-amber-300">Setup in progress</div>
-            <p className="text-xs text-amber-700/80 dark:text-amber-400/80 leading-relaxed">
+          <form onSubmit={handleVerify} className="rounded-xl border border-burgundy-200 dark:border-burgundy-800/50 bg-burgundy-50 dark:bg-burgundy-950/30 p-5 space-y-4">
+            <div className="text-sm font-semibold text-burgundy-700 dark:text-burgundy-300">Setup in progress</div>
+            <p className="text-xs text-burgundy-700/80 dark:text-burgundy-400/80 leading-relaxed">
               A 2FA setup was started but not finished. If the QR code is already in your authenticator
               app, enter the 6-digit code below to finish. Otherwise cancel and start over.
             </p>
@@ -260,13 +260,13 @@ export default function EnrollMfaPage() {
               onChange={(e) => setCode(e.target.value.replace(/\D/g, "").slice(0, 6))}
               placeholder="000000"
               required
-              className="w-full h-11 px-4 text-center text-2xl tracking-[0.5em] font-mono rounded-lg border border-amber-200 dark:border-amber-800 bg-white dark:bg-slate-800 text-slate-900 dark:text-white placeholder:text-slate-300 dark:placeholder:text-slate-600 focus:border-amber-500 focus:ring-2 focus:ring-amber-500/30 outline-none transition-all"
+              className="w-full h-11 px-4 text-center text-2xl tracking-[0.5em] font-mono rounded-lg border border-burgundy-200 dark:border-burgundy-800 bg-white dark:bg-slate-800 text-slate-900 dark:text-white placeholder:text-slate-300 dark:placeholder:text-slate-600 focus:border-burgundy-500 focus:ring-2 focus:ring-burgundy-500/30 outline-none transition-all"
             />
             <div className="flex items-center gap-3">
               <button
                 type="submit"
                 disabled={verifying || code.length !== 6}
-                className="inline-flex items-center gap-2 h-10 px-5 rounded-lg bg-gradient-to-r from-sky-500 to-cyan-400 hover:from-sky-600 hover:to-cyan-500 text-white text-sm font-semibold shadow-md shadow-sky-500/20 disabled:opacity-50 disabled:cursor-not-allowed transition-all"
+                className="inline-flex items-center gap-2 h-10 px-5 rounded-lg bg-gradient-to-r from-burgundy-500 to-burgundy-400 hover:from-burgundy-600 hover:to-burgundy-500 text-white text-sm font-semibold shadow-md shadow-burgundy-500/20 disabled:opacity-50 disabled:cursor-not-allowed transition-all"
               >
                 {verifying && <Loader2 className="size-4 animate-spin" />}
                 {verifying ? "Verifying..." : "Finish setup"}
@@ -275,7 +275,7 @@ export default function EnrollMfaPage() {
                 type="button"
                 onClick={cancelSetup}
                 disabled={cancelling}
-                className="inline-flex items-center gap-2 h-10 px-4 rounded-lg border border-amber-300 dark:border-amber-700 text-amber-600 dark:text-amber-400 text-xs font-medium hover:bg-amber-100 dark:hover:bg-amber-900/40 disabled:opacity-50 transition-colors"
+                className="inline-flex items-center gap-2 h-10 px-4 rounded-lg border border-burgundy-300 dark:border-burgundy-700 text-burgundy-600 dark:text-burgundy-400 text-xs font-medium hover:bg-burgundy-100 dark:hover:bg-burgundy-900/40 disabled:opacity-50 transition-colors"
               >
                 {cancelling ? <Loader2 className="size-3.5 animate-spin" /> : <Trash2 className="size-3.5" />}
                 Cancel setup
@@ -291,7 +291,7 @@ export default function EnrollMfaPage() {
             <button
               onClick={startSetup}
               disabled={starting}
-              className="w-full inline-flex items-center justify-center gap-2 h-11 rounded-lg bg-gradient-to-r from-sky-500 to-cyan-400 hover:from-sky-600 hover:to-cyan-500 text-white text-sm font-semibold shadow-md shadow-sky-500/20 disabled:opacity-50 disabled:cursor-not-allowed transition-all"
+              className="w-full inline-flex items-center justify-center gap-2 h-11 rounded-lg bg-gradient-to-r from-burgundy-500 to-burgundy-400 hover:from-burgundy-600 hover:to-burgundy-500 text-white text-sm font-semibold shadow-md shadow-burgundy-500/20 disabled:opacity-50 disabled:cursor-not-allowed transition-all"
             >
               {starting ? <Loader2 className="size-4 animate-spin" /> : <KeyRound className="size-4" />}
               {starting ? "Starting..." : "Set up 2FA"}

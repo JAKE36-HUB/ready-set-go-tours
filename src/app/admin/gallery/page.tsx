@@ -9,12 +9,12 @@ import { useRouter } from "next/navigation"
 import { cn } from "@/lib/utils"
 
 const CATEGORY_COLORS: Record<string, string> = {
-  safari: "bg-amber-100 text-amber-700 dark:bg-amber-900/30 dark:text-amber-400",
-  landscape: "bg-emerald-100 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-400",
-  wildlife: "bg-orange-100 text-orange-700 dark:bg-orange-900/30 dark:text-orange-400",
-  beach: "bg-cyan-100 text-cyan-700 dark:bg-cyan-900/30 dark:text-cyan-400",
+  safari: "bg-burgundy-100 text-burgundy-700 dark:bg-burgundy-900/30 dark:text-burgundy-400",
+  landscape: "bg-burgundy-100 text-burgundy-700 dark:bg-burgundy-900/30 dark:text-burgundy-400",
+  wildlife: "bg-burgundy-100 text-burgundy-700 dark:bg-burgundy-900/30 dark:text-burgundy-400",
+  beach: "bg-burgundy-100 text-burgundy-700 dark:bg-burgundy-900/30 dark:text-burgundy-400",
   culture: "bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-400",
-  accommodation: "bg-purple-100 text-purple-700 dark:bg-purple-900/30 dark:text-purple-400",
+  accommodation: "bg-burgundy-100 text-burgundy-700 dark:bg-burgundy-900/30 dark:text-burgundy-400",
 }
 
 interface GalleryImage {
@@ -58,7 +58,7 @@ export default function GalleryPage() {
       <motion.div initial={{ opacity: 0, y: 15 }} animate={{ opacity: 1, y: 0 }}
         className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-purple-500 to-violet-400 flex items-center justify-center shadow-lg shadow-purple-500/20">
+          <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-burgundy-500 to-burgundy-400 flex items-center justify-center shadow-lg shadow-burgundy-500/20">
             <Images className="w-5 h-5 text-white" />
           </div>
           <div>
@@ -67,7 +67,7 @@ export default function GalleryPage() {
           </div>
         </div>
         <Button onClick={() => router.push("/admin/gallery/new")}
-          className="bg-gradient-to-r from-purple-500 to-violet-400 text-white border-0 hover:shadow-lg hover:shadow-purple-500/25 transition-all h-9">
+          className="bg-gradient-to-r from-burgundy-500 to-burgundy-400 text-white border-0 hover:shadow-lg hover:shadow-burgundy-500/25 transition-all h-9">
           <Plus className="w-4 h-4 mr-1.5" />
           Add Image
         </Button>
@@ -82,13 +82,13 @@ export default function GalleryPage() {
       ) : images.length === 0 ? (
         <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }}
           className="text-center py-16 px-4 rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900">
-          <div className="w-16 h-16 rounded-2xl bg-purple-50 dark:bg-purple-500/10 flex items-center justify-center mx-auto mb-4">
-            <Images className="w-8 h-8 text-purple-400" />
+          <div className="w-16 h-16 rounded-2xl bg-burgundy-50 dark:bg-burgundy-500/10 flex items-center justify-center mx-auto mb-4">
+            <Images className="w-8 h-8 text-burgundy-400" />
           </div>
           <p className="text-sm font-medium text-slate-900 dark:text-white">No images yet</p>
           <p className="text-xs text-slate-500 dark:text-slate-400 mt-1 mb-4">Add stunning photos to showcase your tours</p>
           <Button onClick={() => router.push("/admin/gallery/new")}
-            className="bg-gradient-to-r from-purple-500 to-violet-400 text-white border-0">
+            className="bg-gradient-to-r from-burgundy-500 to-burgundy-400 text-white border-0">
             <Plus className="w-4 h-4 mr-1.5" /> Add Image
           </Button>
         </motion.div>

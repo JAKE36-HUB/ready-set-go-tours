@@ -20,10 +20,10 @@ interface TourPackage {
 }
 
 const TYPE_COLORS: Record<string, string> = {
-  safari: "bg-amber-100 text-amber-700 dark:bg-amber-900/30 dark:text-amber-400",
-  luxury: "bg-purple-100 text-purple-700 dark:bg-purple-900/30 dark:text-purple-400",
-  group: "bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-400",
-  mountain: "bg-emerald-100 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-400",
+  safari: "bg-burgundy-100 text-burgundy-700 dark:bg-burgundy-900/30 dark:text-burgundy-400",
+  luxury: "bg-burgundy-100 text-burgundy-700 dark:bg-burgundy-900/30 dark:text-burgundy-400",
+  group: "bg-burgundy-100 text-burgundy-700 dark:bg-burgundy-900/30 dark:text-burgundy-400",
+  mountain: "bg-burgundy-100 text-burgundy-700 dark:bg-burgundy-900/30 dark:text-burgundy-400",
 }
 
 export default function PackagesPage() {
@@ -53,7 +53,7 @@ export default function PackagesPage() {
       <motion.div initial={{ opacity: 0, y: 15 }} animate={{ opacity: 1, y: 0 }}
         className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-sky-500 to-cyan-400 flex items-center justify-center shadow-lg shadow-sky-500/20">
+          <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-burgundy-500 to-burgundy-400 flex items-center justify-center shadow-lg shadow-burgundy-500/20">
             <Package className="w-5 h-5 text-white" />
           </div>
           <div>
@@ -62,7 +62,7 @@ export default function PackagesPage() {
           </div>
         </div>
         <Button onClick={() => router.push("/admin/packages/new")}
-          className="bg-gradient-to-r from-sky-500 to-cyan-400 text-white border-0 hover:shadow-lg hover:shadow-sky-500/25 transition-all h-9">
+          className="bg-gradient-to-r from-burgundy-500 to-burgundy-400 text-white border-0 hover:shadow-lg hover:shadow-burgundy-500/25 transition-all h-9">
           <Plus className="w-4 h-4 mr-1.5" />
           Add Package
         </Button>
@@ -86,13 +86,13 @@ export default function PackagesPage() {
       ) : packages.length === 0 ? (
         <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }}
           className="text-center py-16 px-4 rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900">
-          <div className="w-16 h-16 rounded-2xl bg-sky-50 dark:bg-sky-500/10 flex items-center justify-center mx-auto mb-4">
-            <Package className="w-8 h-8 text-sky-400" />
+          <div className="w-16 h-16 rounded-2xl bg-burgundy-50 dark:bg-burgundy-500/10 flex items-center justify-center mx-auto mb-4">
+            <Package className="w-8 h-8 text-burgundy-400" />
           </div>
           <p className="text-sm font-medium text-slate-900 dark:text-white">No packages yet</p>
           <p className="text-xs text-slate-500 dark:text-slate-400 mt-1 mb-4">Get started by adding your first tour package</p>
           <Button onClick={() => router.push("/admin/packages/new")}
-            className="bg-gradient-to-r from-sky-500 to-cyan-400 text-white border-0">
+            className="bg-gradient-to-r from-burgundy-500 to-burgundy-400 text-white border-0">
             <Plus className="w-4 h-4 mr-1.5" /> Add Package
           </Button>
         </motion.div>
@@ -138,11 +138,11 @@ export default function PackagesPage() {
                     <td className="px-5 py-3.5 text-right">
                       <div className="flex items-center justify-end gap-0.5 opacity-70 group-hover:opacity-100 transition-opacity">
                         <Button variant="ghost" size="icon" onClick={() => window.open(`/holiday-packages/${pkg.slug}`, "_blank")}
-                          className="hover:bg-sky-50 dark:hover:bg-sky-500/10 hover:text-sky-600" aria-label="View on site">
+                          className="hover:bg-burgundy-50 dark:hover:bg-burgundy-500/10 hover:text-burgundy-600" aria-label="View on site">
                           <ExternalLink className="w-3.5 h-3.5" />
                         </Button>
                         <Button variant="ghost" size="icon" onClick={() => router.push(`/admin/packages/${pkg.id}/edit`)}
-                          className="hover:bg-amber-50 dark:hover:bg-amber-500/10 hover:text-amber-600" aria-label="Edit package">
+                          className="hover:bg-burgundy-50 dark:hover:bg-burgundy-500/10 hover:text-burgundy-600" aria-label="Edit package">
                           <Edit className="w-3.5 h-3.5" />
                         </Button>
                         <Button variant="ghost" size="icon" onClick={() => handleDelete(pkg.id)}

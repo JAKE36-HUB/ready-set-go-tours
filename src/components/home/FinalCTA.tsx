@@ -36,7 +36,7 @@ export function FinalCTA() {
           transition={{ duration: 0.8, ease: "easeOut" }}
           className="text-center max-w-3xl mx-auto"
         >
-          <span className="text-xs font-semibold text-amber-300 uppercase tracking-[0.2em]">Ready when you are</span>
+          <span className="text-xs font-semibold text-burgundy-300 uppercase tracking-[0.2em]">Ready when you are</span>
           <h2 className="font-display text-4xl sm:text-5xl lg:text-6xl font-medium text-white mt-4 mb-6 leading-tight">
             Ready to start planning?
           </h2>
@@ -45,7 +45,7 @@ export function FinalCTA() {
           </p>
           <div className="flex flex-wrap justify-center gap-4">
             <Link href={PLAN_SAFARI_ROUTE}>
-              <Button className="h-14 px-10 text-base font-semibold gradient-primary text-white border-0 shadow-2xl shadow-amber-900/30 hover:scale-105 transition-all duration-300">
+              <Button className="h-14 px-10 text-base font-semibold gradient-primary text-white border-0 shadow-2xl shadow-burgundy-900/30 hover:scale-105 transition-all duration-300">
                 Plan My Safari <ArrowRight className="w-5 h-5 ml-2" />
               </Button>
             </Link>
@@ -59,9 +59,9 @@ export function FinalCTA() {
             </Button>
           </div>
           <div className="mt-10 flex flex-wrap justify-center gap-6 text-sm text-white/50">
-            <span className="flex items-center gap-2"><span className="w-1.5 h-1.5 rounded-full bg-amber-400" />Private itineraries</span>
-            <span className="flex items-center gap-2"><span className="w-1.5 h-1.5 rounded-full bg-amber-400" />Honest, local advice</span>
-            <span className="flex items-center gap-2"><span className="w-1.5 h-1.5 rounded-full bg-amber-400" />Reply within 24 hours</span>
+            <span className="flex items-center gap-2"><span className="w-1.5 h-1.5 rounded-full bg-burgundy-400" />Private itineraries</span>
+            <span className="flex items-center gap-2"><span className="w-1.5 h-1.5 rounded-full bg-burgundy-400" />Honest, local advice</span>
+            <span className="flex items-center gap-2"><span className="w-1.5 h-1.5 rounded-full bg-burgundy-400" />Reply within 24 hours</span>
           </div>
         </motion.div>
       </div>

@@ -22,7 +22,7 @@ import { cn } from "@/lib/utils"
 const TABS = ["General", "Content", "CTAs", "Targeting", "Frequency", "Advanced", "Features", "Lead Form", "A/B Test"]
 
 const inputCls =
-  "w-full rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-amber-500/50 text-slate-900 dark:text-white"
+  "w-full rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-burgundy-500/50 text-slate-900 dark:text-white"
 
 function Field({ label, children, className }: { label: string; children: React.ReactNode; className?: string }) {
   return (
@@ -43,7 +43,7 @@ function Toggle({ checked, onChange, label }: { checked: boolean; onChange: (v: 
       <span
         className={cn(
           "relative inline-flex h-5 w-9 shrink-0 items-center rounded-full transition-colors",
-          checked ? "bg-amber-500" : "bg-slate-300 dark:bg-slate-700"
+          checked ? "bg-burgundy-500" : "bg-slate-300 dark:bg-slate-700"
         )}
       >
         <span
@@ -77,8 +77,8 @@ function BadgePicker({
           className={cn(
             "text-[11px] px-2 py-1 rounded-full border transition",
             selected.includes(b)
-              ? "bg-amber-500/15 border-amber-500/40 text-amber-700 dark:text-amber-400"
-              : "border-slate-200 dark:border-slate-700 text-slate-500 dark:text-slate-400 hover:border-amber-400"
+              ? "bg-burgundy-500/15 border-burgundy-500/40 text-burgundy-700 dark:text-burgundy-400"
+              : "border-slate-200 dark:border-slate-700 text-slate-500 dark:text-slate-400 hover:border-burgundy-400"
           )}
         >
           {b}
@@ -138,7 +138,7 @@ export function PopupForm({
           label: "New Button",
           url: "",
           newTab: false,
-          bgColor: "#f59e0b",
+          bgColor: "#93302C",
           textColor: "#ffffff",
           hoverAnimation: "grow",
           icon: "🎯",
@@ -305,8 +305,8 @@ export function PopupForm({
                   className={cn(
                     "rounded-xl border p-3 text-left transition",
                     cfg.type === t.value
-                      ? "border-amber-500 bg-amber-500/10 shadow"
-                      : "border-slate-200 dark:border-slate-700 hover:border-amber-300"
+                      ? "border-burgundy-500 bg-burgundy-500/10 shadow"
+                      : "border-slate-200 dark:border-slate-700 hover:border-burgundy-300"
                   )}
                 >
                   <div className="text-xl mb-1">{t.icon}</div>
@@ -336,8 +336,8 @@ export function PopupForm({
                   className={cn(
                     "rounded-xl border p-3 text-left transition",
                     cfg.template === t.id
-                      ? "border-amber-500 bg-amber-500/10 shadow"
-                      : "border-slate-200 dark:border-slate-700 hover:border-amber-300"
+                      ? "border-burgundy-500 bg-burgundy-500/10 shadow"
+                      : "border-slate-200 dark:border-slate-700 hover:border-burgundy-300"
                   )}
                 >
                   <div className="text-lg mb-0.5">{t.emoji}</div>
@@ -474,7 +474,7 @@ export function PopupForm({
                     <button type="button" key={ic} onClick={() => updateCTA(cta.id, "icon", cta.icon === ic ? null : ic)}
                       className={cn(
                         "w-8 h-8 rounded-lg text-base flex items-center justify-center border transition",
-                        cta.icon === ic ? "border-amber-500 bg-amber-500/15" : "border-slate-200 dark:border-slate-700 hover:border-amber-300"
+                        cta.icon === ic ? "border-burgundy-500 bg-burgundy-500/15" : "border-slate-200 dark:border-slate-700 hover:border-burgundy-300"
                       )}>
                       {ic}
                     </button>
@@ -487,7 +487,7 @@ export function PopupForm({
             </div>
           ))}
           <button type="button" onClick={addCTA}
-            className="w-full rounded-xl border-2 border-dashed border-slate-200 dark:border-slate-700 hover:border-amber-400 py-3 text-xs font-semibold text-slate-400 hover:text-amber-500 transition flex items-center justify-center gap-1.5">
+            className="w-full rounded-xl border-2 border-dashed border-slate-200 dark:border-slate-700 hover:border-burgundy-400 py-3 text-xs font-semibold text-slate-400 hover:text-burgundy-500 transition flex items-center justify-center gap-1.5">
             <Plus className="w-4 h-4" /> Add Another Button
           </button>
         </div>
@@ -751,7 +751,7 @@ export function PopupForm({
                       className={cn(
                         "text-[11px] px-2 py-1 rounded-full border capitalize transition",
                         cfg.leadForm.fields.includes(f)
-                          ? "bg-amber-500/15 border-amber-500/40 text-amber-700 dark:text-amber-400"
+                          ? "bg-burgundy-500/15 border-burgundy-500/40 text-burgundy-700 dark:text-burgundy-400"
                           : "border-slate-200 dark:border-slate-700 text-slate-500 dark:text-slate-400"
                       )}
                     >
@@ -802,7 +802,7 @@ export function PopupForm({
               </Field>
             </div>
             {variantOf && (
-              <p className="text-xs text-amber-600 dark:text-amber-400">
+              <p className="text-xs text-burgundy-600 dark:text-burgundy-400">
                 Tip: the original popup shows to {100 - trafficSplit}% of visitors, this variant to {trafficSplit}%.
               </p>
             )}

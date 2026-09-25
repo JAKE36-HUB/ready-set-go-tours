@@ -27,12 +27,12 @@ interface Stats {
 }
 
 const TYPE_STYLES: Record<string, string> = {
-  whatsapp: "bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border-emerald-500/30",
-  chat: "bg-sky-500/10 text-sky-600 dark:text-sky-400 border-sky-500/30",
-  contact: "bg-violet-500/10 text-violet-600 dark:text-violet-400 border-violet-500/30",
-  booking: "bg-amber-500/10 text-amber-600 dark:text-amber-400 border-amber-500/30",
-  quote: "bg-pink-500/10 text-pink-600 dark:text-pink-400 border-pink-500/30",
-  lead: "bg-purple-500/10 text-purple-600 dark:text-purple-400 border-purple-500/30",
+  whatsapp: "bg-burgundy-500/10 text-burgundy-600 dark:text-burgundy-400 border-burgundy-500/30",
+  chat: "bg-burgundy-500/10 text-burgundy-600 dark:text-burgundy-400 border-burgundy-500/30",
+  contact: "bg-burgundy-500/10 text-burgundy-600 dark:text-burgundy-400 border-burgundy-500/30",
+  booking: "bg-burgundy-500/10 text-burgundy-600 dark:text-burgundy-400 border-burgundy-500/30",
+  quote: "bg-burgundy-500/10 text-burgundy-600 dark:text-burgundy-400 border-burgundy-500/30",
+  lead: "bg-burgundy-500/10 text-burgundy-600 dark:text-burgundy-400 border-burgundy-500/30",
 }
 
 const TYPE_LABELS: Record<string, string> = {
@@ -95,12 +95,12 @@ export default function AdminConversions() {
       <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
         className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 p-6">
         <div className="absolute inset-0">
-          <div className="absolute top-[-30%] right-[-10%] w-[50%] h-[50%] bg-purple-500/10 rounded-full blur-3xl" />
-          <div className="absolute bottom-[-20%] left-[-10%] w-[40%] h-[40%] bg-violet-500/8 rounded-full blur-3xl" />
+          <div className="absolute top-[-30%] right-[-10%] w-[50%] h-[50%] bg-burgundy-500/10 rounded-full blur-3xl" />
+          <div className="absolute bottom-[-20%] left-[-10%] w-[40%] h-[40%] bg-burgundy-500/8 rounded-full blur-3xl" />
         </div>
         <div className="relative z-10">
           <div className="flex items-center gap-4 mb-2">
-            <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-purple-500 to-violet-400 flex items-center justify-center shadow-lg shadow-purple-500/30">
+            <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-burgundy-500 to-burgundy-400 flex items-center justify-center shadow-lg shadow-burgundy-500/30">
               <Target className="w-6 h-6 text-white" />
             </div>
             <div>
@@ -152,7 +152,7 @@ export default function AdminConversions() {
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3 }}
           className="lg:col-span-1 rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-5">
           <h3 className="text-sm font-semibold text-slate-900 dark:text-white mb-3 flex items-center gap-2">
-            <Activity className="w-4 h-4 text-purple-500" />By Source
+            <Activity className="w-4 h-4 text-burgundy-500" />By Source
           </h3>
           <div className="space-y-2">
             {stats.byType.map((t) => (
@@ -166,7 +166,7 @@ export default function AdminConversions() {
             )}
           </div>
           <h3 className="text-sm font-semibold text-slate-900 dark:text-white mt-6 mb-3 flex items-center gap-2">
-            <Globe className="w-4 h-4 text-purple-500" />Top Pages
+            <Globe className="w-4 h-4 text-burgundy-500" />Top Pages
           </h3>
           <div className="space-y-2">
             {stats.topPages.map((p) => (
@@ -186,7 +186,7 @@ export default function AdminConversions() {
           <div className="flex items-center justify-between mb-4 gap-2 flex-wrap">
             <div>
               <h3 className="text-sm font-semibold text-slate-900 dark:text-white flex items-center gap-2">
-                <Target className="w-4 h-4 text-purple-500" />Recent Conversions
+                <Target className="w-4 h-4 text-burgundy-500" />Recent Conversions
               </h3>
               <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">Last 200 events</p>
             </div>
@@ -197,7 +197,7 @@ export default function AdminConversions() {
                   onClick={() => setTypeFilter(typeFilter === t ? "" : t)}
                   className={`text-[11px] px-2 py-1 rounded-md border transition-colors ${
                     typeFilter === t
-                      ? "bg-purple-500/10 text-purple-600 dark:text-purple-400 border-purple-500/40"
+                      ? "bg-burgundy-500/10 text-burgundy-600 dark:text-burgundy-400 border-burgundy-500/40"
                       : "text-slate-500 dark:text-slate-400 border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-800"
                   }`}
                 >

@@ -47,30 +47,30 @@ const sectionIcons: Record<string, React.ElementType> = {
 }
 
 const sectionColors: Record<string, string> = {
-  tour_packages: "from-sky-500 to-cyan-400",
-  deals: "from-amber-500 to-orange-400",
-  honeymoon_packages: "from-rose-500 to-pink-400",
-  destinations: "from-emerald-500 to-teal-400",
-  gallery: "from-purple-500 to-violet-400",
-  blog_posts: "from-blue-500 to-indigo-400",
+  tour_packages: "from-burgundy-500 to-burgundy-400",
+  deals: "from-burgundy-500 to-burgundy-400",
+  honeymoon_packages: "from-rose-500 to-burgundy-400",
+  destinations: "from-burgundy-500 to-burgundy-400",
+  gallery: "from-burgundy-500 to-burgundy-400",
+  blog_posts: "from-burgundy-500 to-burgundy-400",
 }
 
 const sectionLightBg: Record<string, string> = {
-  tour_packages: "bg-sky-50 dark:bg-sky-500/10",
-  deals: "bg-amber-50 dark:bg-amber-500/10",
+  tour_packages: "bg-burgundy-50 dark:bg-burgundy-500/10",
+  deals: "bg-burgundy-50 dark:bg-burgundy-500/10",
   honeymoon_packages: "bg-rose-50 dark:bg-rose-500/10",
-  destinations: "bg-emerald-50 dark:bg-emerald-500/10",
-  gallery: "bg-purple-50 dark:bg-purple-500/10",
-  blog_posts: "bg-blue-50 dark:bg-blue-500/10",
+  destinations: "bg-burgundy-50 dark:bg-burgundy-500/10",
+  gallery: "bg-burgundy-50 dark:bg-burgundy-500/10",
+  blog_posts: "bg-burgundy-50 dark:bg-burgundy-500/10",
 }
 
 const sectionTextColor: Record<string, string> = {
-  tour_packages: "text-sky-600 dark:text-sky-400",
-  deals: "text-amber-600 dark:text-amber-400",
+  tour_packages: "text-burgundy-600 dark:text-burgundy-400",
+  deals: "text-burgundy-600 dark:text-burgundy-400",
   honeymoon_packages: "text-rose-600 dark:text-rose-400",
-  destinations: "text-emerald-600 dark:text-emerald-400",
-  gallery: "text-purple-600 dark:text-purple-400",
-  blog_posts: "text-blue-600 dark:text-blue-400",
+  destinations: "text-burgundy-600 dark:text-burgundy-400",
+  gallery: "text-burgundy-600 dark:text-burgundy-400",
+  blog_posts: "text-burgundy-600 dark:text-burgundy-400",
 }
 
 function DonutChart({ data }: { data: { label: string; value: number; color: string }[] }) {
@@ -114,12 +114,12 @@ function MiniBar({ values, color }: { values: number[]; color: string }) {
 export default function AdminDashboard() {
   const router = useRouter()
   const [stats, setStats] = useState<Stat[]>([
-    { label: "Tour Packages", count: 0, icon: Package, href: "/admin/packages", gradient: "from-sky-500 to-cyan-400", iconBg: "bg-sky-100 dark:bg-sky-500/10", lightBg: "bg-sky-50 dark:bg-sky-500/10" },
-    { label: "Deals", count: 0, icon: Tag, href: "/admin/deals", gradient: "from-amber-500 to-orange-400", iconBg: "bg-amber-100 dark:bg-amber-500/10", lightBg: "bg-amber-50 dark:bg-amber-500/10" },
-    { label: "Honeymoon", count: 0, icon: Heart, href: "/admin/honeymoon-packages", gradient: "from-rose-500 to-pink-400", iconBg: "bg-rose-100 dark:bg-rose-500/10", lightBg: "bg-rose-50 dark:bg-rose-500/10" },
-    { label: "Destinations", count: 0, icon: MapPin, href: "/admin/destinations", gradient: "from-emerald-500 to-teal-400", iconBg: "bg-emerald-100 dark:bg-emerald-500/10", lightBg: "bg-emerald-50 dark:bg-emerald-500/10" },
-    { label: "Gallery", count: 0, icon: Images, href: "/admin/gallery", gradient: "from-purple-500 to-violet-400", iconBg: "bg-purple-100 dark:bg-purple-500/10", lightBg: "bg-purple-50 dark:bg-purple-500/10" },
-    { label: "Blog Posts", count: 0, icon: FileText, href: "/admin/blog", gradient: "from-blue-500 to-indigo-400", iconBg: "bg-blue-100 dark:bg-blue-500/10", lightBg: "bg-blue-50 dark:bg-blue-500/10" },
+    { label: "Tour Packages", count: 0, icon: Package, href: "/admin/packages", gradient: "from-burgundy-500 to-burgundy-400", iconBg: "bg-burgundy-100 dark:bg-burgundy-500/10", lightBg: "bg-burgundy-50 dark:bg-burgundy-500/10" },
+    { label: "Deals", count: 0, icon: Tag, href: "/admin/deals", gradient: "from-burgundy-500 to-burgundy-400", iconBg: "bg-burgundy-100 dark:bg-burgundy-500/10", lightBg: "bg-burgundy-50 dark:bg-burgundy-500/10" },
+    { label: "Honeymoon", count: 0, icon: Heart, href: "/admin/honeymoon-packages", gradient: "from-rose-500 to-burgundy-400", iconBg: "bg-rose-100 dark:bg-rose-500/10", lightBg: "bg-rose-50 dark:bg-rose-500/10" },
+    { label: "Destinations", count: 0, icon: MapPin, href: "/admin/destinations", gradient: "from-burgundy-500 to-burgundy-400", iconBg: "bg-burgundy-100 dark:bg-burgundy-500/10", lightBg: "bg-burgundy-50 dark:bg-burgundy-500/10" },
+    { label: "Gallery", count: 0, icon: Images, href: "/admin/gallery", gradient: "from-burgundy-500 to-burgundy-400", iconBg: "bg-burgundy-100 dark:bg-burgundy-500/10", lightBg: "bg-burgundy-50 dark:bg-burgundy-500/10" },
+    { label: "Blog Posts", count: 0, icon: FileText, href: "/admin/blog", gradient: "from-burgundy-500 to-burgundy-400", iconBg: "bg-burgundy-100 dark:bg-burgundy-500/10", lightBg: "bg-burgundy-50 dark:bg-burgundy-500/10" },
   ])
   const [loading, setLoading] = useState(true)
   const [recent, setRecent] = useState<RecentItem[]>([])
@@ -220,22 +220,22 @@ export default function AdminDashboard() {
   const barValues = useMemo(() => stats.map((s) => s.count), [stats])
   const donutData = useMemo(() => stats.map((s, i) => ({
     label: s.label, value: s.count,
-    color: ["#0ea5e9", "#f59e0b", "#f43f5e", "#10b981", "#a855f7", "#3b82f6"][i],
+    color: ["#C9625C", "#93302C", "#DC8E85", "#EBB8B1", "#5C1C1B", "#AE423E"][i],
   })), [stats])
 
   const quickActions = [
-    { label: "Add Package", icon: Package, href: "/admin/packages/new", gradient: "from-sky-500 to-cyan-400", desc: "Create a new tour package" },
-    { label: "Add Deal", icon: Tag, href: "/admin/deals/new", gradient: "from-amber-500 to-orange-400", desc: "Create a promotional deal" },
-    { label: "Add Honeymoon", icon: Heart, href: "/admin/honeymoon-packages/new", gradient: "from-rose-500 to-pink-400", desc: "Create a honeymoon package" },
-    { label: "Add Image", icon: Images, href: "/admin/gallery/new", gradient: "from-purple-500 to-violet-400", desc: "Upload a gallery image" },
-    { label: "Add Blog Post", icon: FileText, href: "/admin/blog/new", gradient: "from-blue-500 to-indigo-400", desc: "Write a blog post" },
-    { label: "View Site", icon: ExternalLink, href: "/", gradient: "from-emerald-500 to-teal-400", desc: "View live website", external: true },
+    { label: "Add Package", icon: Package, href: "/admin/packages/new", gradient: "from-burgundy-500 to-burgundy-400", desc: "Create a new tour package" },
+    { label: "Add Deal", icon: Tag, href: "/admin/deals/new", gradient: "from-burgundy-500 to-burgundy-400", desc: "Create a promotional deal" },
+    { label: "Add Honeymoon", icon: Heart, href: "/admin/honeymoon-packages/new", gradient: "from-rose-500 to-burgundy-400", desc: "Create a honeymoon package" },
+    { label: "Add Image", icon: Images, href: "/admin/gallery/new", gradient: "from-burgundy-500 to-burgundy-400", desc: "Upload a gallery image" },
+    { label: "Add Blog Post", icon: FileText, href: "/admin/blog/new", gradient: "from-burgundy-500 to-burgundy-400", desc: "Write a blog post" },
+    { label: "View Site", icon: ExternalLink, href: "/", gradient: "from-burgundy-500 to-burgundy-400", desc: "View live website", external: true },
   ]
 
   const tips = [
-    { icon: Target, text: "Update your featured deals to keep content fresh", color: "text-amber-500" },
-    { icon: Eye, text: "High-quality images improve booking conversion", color: "text-purple-500" },
-    { icon: Edit3, text: "Regular blog posts boost SEO rankings", color: "text-blue-500" },
+    { icon: Target, text: "Update your featured deals to keep content fresh", color: "text-burgundy-500" },
+    { icon: Eye, text: "High-quality images improve booking conversion", color: "text-burgundy-500" },
+    { icon: Edit3, text: "Regular blog posts boost SEO rankings", color: "text-burgundy-500" },
   ]
 
   return (
@@ -243,15 +243,15 @@ export default function AdminDashboard() {
       {/* Animated Hero */}
       <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900">
         <div className="absolute inset-0">
-          <div className="absolute top-[-30%] right-[-10%] w-[50%] h-[50%] bg-sky-500/10 rounded-full blur-3xl" />
-          <div className="absolute bottom-[-20%] left-[-10%] w-[40%] h-[40%] bg-cyan-500/8 rounded-full blur-3xl" />
-          <div className="absolute top-[40%] left-[30%] w-[20%] h-[20%] bg-blue-500/5 rounded-full blur-2xl" />
+          <div className="absolute top-[-30%] right-[-10%] w-[50%] h-[50%] bg-burgundy-500/10 rounded-full blur-3xl" />
+          <div className="absolute bottom-[-20%] left-[-10%] w-[40%] h-[40%] bg-burgundy-500/8 rounded-full blur-3xl" />
+          <div className="absolute top-[40%] left-[30%] w-[20%] h-[20%] bg-burgundy-500/5 rounded-full blur-2xl" />
         </div>
         <div className="relative z-10 p-6 sm:p-8">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
             <div className="flex items-center gap-4">
               <motion.div initial={{ scale: 0 }} animate={{ scale: 1 }} transition={{ delay: 0.2, type: "spring" }}
-                className="w-12 h-12 rounded-xl bg-gradient-to-br from-sky-500 to-cyan-400 flex items-center justify-center shadow-lg shadow-sky-500/30">
+                className="w-12 h-12 rounded-xl bg-gradient-to-br from-burgundy-500 to-burgundy-400 flex items-center justify-center shadow-lg shadow-burgundy-500/30">
                 <Sparkles className="w-6 h-6 text-white" />
               </motion.div>
               <div>
@@ -269,7 +269,7 @@ export default function AdminDashboard() {
             <motion.div initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} transition={{ delay: 0.5 }}
               className="flex gap-2">
               <Button onClick={() => router.push("/admin/packages/new")}
-                className="bg-gradient-to-r from-sky-500 to-cyan-400 text-white border-0 hover:shadow-lg hover:shadow-sky-500/25 hover:scale-105 transition-all text-sm h-9 px-4">
+                className="bg-gradient-to-r from-burgundy-500 to-burgundy-400 text-white border-0 hover:shadow-lg hover:shadow-burgundy-500/25 hover:scale-105 transition-all text-sm h-9 px-4">
                 <Plus className="w-3.5 h-3.5 mr-1.5" />New Package
               </Button>
               <Button onClick={() => router.push("/admin/deals/new")}
@@ -300,10 +300,10 @@ export default function AdminDashboard() {
           <div className="lg:col-span-1">
             <div className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-5">
               <h3 className="flex items-center gap-2 font-bold text-sm mb-3">
-                <Users className="w-4 h-4 text-sky-500" />
+                <Users className="w-4 h-4 text-burgundy-500" />
                 Lead Pipeline
               </h3>
-              <button onClick={() => router.push("/admin/leads/pipeline")} className="w-full rounded-xl bg-gradient-to-r from-amber-500 to-orange-500 text-white py-2.5 text-sm font-semibold hover:opacity-90 transition-opacity">
+              <button onClick={() => router.push("/admin/leads/pipeline")} className="w-full rounded-xl bg-gradient-to-r from-burgundy-500 to-burgundy-500 text-white py-2.5 text-sm font-semibold hover:opacity-90 transition-opacity">
                 Open Pipeline Board
               </button>
               <p className="text-[11px] text-slate-400 mt-2">Drag leads between stages: New → Contacted → Quote → Negotiating → Booked</p>
@@ -323,7 +323,7 @@ export default function AdminDashboard() {
             </div>
             <div className="relative z-10">
               <div className={cn("w-8 h-8 rounded-lg flex items-center justify-center mb-3", stat.iconBg)}>
-                <stat.icon className={cn("w-4 h-4", sectionTextColor[stat.label.toLowerCase().replace(" ", "_") as keyof typeof sectionTextColor] || "text-sky-500")} />
+                <stat.icon className={cn("w-4 h-4", sectionTextColor[stat.label.toLowerCase().replace(" ", "_") as keyof typeof sectionTextColor] || "text-burgundy-500")} />
               </div>
               <AnimatePresence mode="wait">
                 <motion.p key={stat.count} initial={{ opacity: 0, y: -5 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: 5 }}
@@ -345,7 +345,7 @@ export default function AdminDashboard() {
           <div className="flex items-center justify-between mb-4">
             <div>
               <h3 className="text-sm font-semibold text-slate-900 dark:text-white flex items-center gap-2">
-                <PieChart className="w-4 h-4 text-sky-500" />Content Distribution
+                <PieChart className="w-4 h-4 text-burgundy-500" />Content Distribution
               </h3>
               <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">Breakdown of all content types</p>
             </div>
@@ -357,7 +357,7 @@ export default function AdminDashboard() {
             <div className="flex-1 space-y-1.5 min-w-0">
               {stats.map((s, i) => (
                 <div key={s.label} className="flex items-center gap-2 text-xs">
-                  <span className={`w-2 h-2 rounded-full shrink-0`} style={{ backgroundColor: ["#0ea5e9", "#f59e0b", "#f43f5e", "#10b981", "#a855f7", "#3b82f6"][i] }} />
+                  <span className={`w-2 h-2 rounded-full shrink-0`} style={{ backgroundColor: ["#C9625C", "#93302C", "#DC8E85", "#EBB8B1", "#5C1C1B", "#AE423E"][i] }} />
                   <span className="text-slate-500 dark:text-slate-400 truncate">{s.label}</span>
                   <span className="ml-auto font-medium text-slate-700 dark:text-slate-300 tabular-nums">{s.count}</span>
                 </div>
@@ -372,14 +372,14 @@ export default function AdminDashboard() {
           <div className="flex items-center justify-between mb-4">
             <div>
               <h3 className="text-sm font-semibold text-slate-900 dark:text-white flex items-center gap-2">
-                <BarChart3 className="w-4 h-4 text-emerald-500" />Content Overview
+                <BarChart3 className="w-4 h-4 text-burgundy-500" />Content Overview
               </h3>
               <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">Items per section</p>
             </div>
           </div>
           <div className="space-y-4">
             {stats.map((s, i) => {
-              const colors = ["bg-sky-500", "bg-amber-500", "bg-rose-500", "bg-emerald-500", "bg-purple-500", "bg-blue-500"]
+              const colors = ["bg-burgundy-500", "bg-burgundy-500", "bg-rose-500", "bg-burgundy-500", "bg-burgundy-500", "bg-burgundy-500"]
               const pct = total > 0 ? (s.count / total) * 100 : 0
               return (
                 <div key={s.label} className="space-y-1">
@@ -402,7 +402,7 @@ export default function AdminDashboard() {
           className="rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-5">
           <div className="mb-4">
             <h3 className="text-sm font-semibold text-slate-900 dark:text-white flex items-center gap-2">
-              <Zap className="w-4 h-4 text-amber-500" />Quick Actions
+              <Zap className="w-4 h-4 text-burgundy-500" />Quick Actions
             </h3>
             <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">Frequently used admin tasks</p>
           </div>
@@ -433,12 +433,12 @@ export default function AdminDashboard() {
           <div className="flex items-center justify-between mb-4">
             <div>
               <h3 className="text-sm font-semibold text-slate-900 dark:text-white flex items-center gap-2">
-                <Clock className="w-4 h-4 text-sky-500" />Recent Activity
+                <Clock className="w-4 h-4 text-burgundy-500" />Recent Activity
               </h3>
               <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">Latest updates across all content</p>
             </div>
             {recent.length > 0 && (
-              <Button variant="ghost" size="sm" className="text-xs text-sky-500 hover:text-sky-600 h-7 px-2"
+              <Button variant="ghost" size="sm" className="text-xs text-burgundy-500 hover:text-burgundy-600 h-7 px-2"
                 onClick={() => router.push("/admin/packages")}>
                 View All <ChevronRight className="w-3 h-3 ml-0.5" />
               </Button>
@@ -466,9 +466,9 @@ export default function AdminDashboard() {
             <div className="space-y-1">
               {recent.map((item, i) => {
                 const Icon = sectionIcons[item.section] || Package
-                const grad = sectionColors[item.section] || "from-sky-500 to-cyan-400"
-                const bg = sectionLightBg[item.section] || "bg-sky-50 dark:bg-sky-500/10"
-                const txt = sectionTextColor[item.section] || "text-sky-600 dark:text-sky-400"
+                const grad = sectionColors[item.section] || "from-burgundy-500 to-burgundy-400"
+                const bg = sectionLightBg[item.section] || "bg-burgundy-50 dark:bg-burgundy-500/10"
+                const txt = sectionTextColor[item.section] || "text-burgundy-600 dark:text-burgundy-400"
                 return (
                   <motion.button key={`${item.section}-${item.id}`} initial={{ opacity: 0, x: -10 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: i * 0.04 }}
                     onClick={() => router.push(`/admin/${item.section.replace("_", "-")}/${item.id}/edit`)}
@@ -498,7 +498,7 @@ export default function AdminDashboard() {
           className="rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-5">
           <div className="mb-4">
             <h3 className="text-sm font-semibold text-slate-900 dark:text-white flex items-center gap-2">
-              <AlertCircle className="w-4 h-4 text-amber-500" />Insights & Tips
+              <AlertCircle className="w-4 h-4 text-burgundy-500" />Insights & Tips
             </h3>
             <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">Quick recommendations</p>
           </div>
@@ -515,9 +515,9 @@ export default function AdminDashboard() {
               )
             })}
           </div>
-          <div className="mt-4 p-3 rounded-xl bg-gradient-to-br from-sky-50 to-cyan-50 dark:from-sky-950/20 dark:to-cyan-950/20 border border-sky-100 dark:border-sky-900/50">
+          <div className="mt-4 p-3 rounded-xl bg-gradient-to-br from-burgundy-50 to-burgundy-50 dark:from-burgundy-950/20 dark:to-burgundy-950/20 border border-burgundy-100 dark:border-burgundy-900/50">
             <div className="flex items-center gap-2 mb-1.5">
-              <CheckCircle2 className="w-3.5 h-3.5 text-emerald-500" />
+              <CheckCircle2 className="w-3.5 h-3.5 text-burgundy-500" />
               <span className="text-xs font-semibold text-slate-800 dark:text-slate-200">All systems operational</span>
             </div>
             <p className="text-xs text-slate-500 dark:text-slate-400">Supabase connected &middot; {total} items synced</p>
@@ -533,7 +533,7 @@ export default function AdminDashboard() {
           <div className="flex items-center justify-between mb-4">
             <div>
               <h3 className="text-sm font-semibold text-slate-900 dark:text-white flex items-center gap-2">
-                <AlertTriangle className="w-4 h-4 text-amber-500" />Deals Expiry Alert
+                <AlertTriangle className="w-4 h-4 text-burgundy-500" />Deals Expiry Alert
               </h3>
               <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">Track deal expiration dates</p>
             </div>
@@ -544,22 +544,22 @@ export default function AdminDashboard() {
               <p className="text-lg font-bold text-red-600 dark:text-red-400 tabular-nums">{dealsExpiry.expired}</p>
               <p className="text-xs text-red-500">Expired</p>
             </div>
-            <div className="flex-1 p-3 rounded-xl bg-amber-50 dark:bg-amber-500/10 border border-amber-100 dark:border-amber-900/50 text-center">
-              <p className="text-lg font-bold text-amber-600 dark:text-amber-400 tabular-nums">{dealsExpiry.expiringSoon}</p>
-              <p className="text-xs text-amber-500">Expiring Soon</p>
+            <div className="flex-1 p-3 rounded-xl bg-burgundy-50 dark:bg-burgundy-500/10 border border-burgundy-100 dark:border-burgundy-900/50 text-center">
+              <p className="text-lg font-bold text-burgundy-600 dark:text-burgundy-400 tabular-nums">{dealsExpiry.expiringSoon}</p>
+              <p className="text-xs text-burgundy-500">Expiring Soon</p>
             </div>
-            <div className="flex-1 p-3 rounded-xl bg-emerald-50 dark:bg-emerald-500/10 border border-emerald-100 dark:border-emerald-900/50 text-center">
-              <p className="text-lg font-bold text-emerald-600 dark:text-emerald-400 tabular-nums">{dealsExpiry.active}</p>
-              <p className="text-xs text-emerald-500">Active</p>
+            <div className="flex-1 p-3 rounded-xl bg-burgundy-50 dark:bg-burgundy-500/10 border border-burgundy-100 dark:border-burgundy-900/50 text-center">
+              <p className="text-lg font-bold text-burgundy-600 dark:text-burgundy-400 tabular-nums">{dealsExpiry.active}</p>
+              <p className="text-xs text-burgundy-500">Active</p>
             </div>
           </div>
           {dealsExpiry.expiringSoon > 0 && (
             <div className="space-y-1">
               <p className="text-xs font-medium text-slate-500 dark:text-slate-400 mb-2">Expiring soon</p>
               {dealsExpiry.list.map((d) => (
-                <div key={d.id} className="flex items-center justify-between p-2 rounded-lg bg-amber-50 dark:bg-amber-500/10 text-xs">
+                <div key={d.id} className="flex items-center justify-between p-2 rounded-lg bg-burgundy-50 dark:bg-burgundy-500/10 text-xs">
                   <span className="font-medium text-slate-700 dark:text-slate-300 truncate">{d.title}</span>
-                  <span className="text-amber-600 dark:text-amber-400 shrink-0 ml-2 tabular-nums">{d.daysLeft}d left</span>
+                  <span className="text-burgundy-600 dark:text-burgundy-400 shrink-0 ml-2 tabular-nums">{d.daysLeft}d left</span>
                 </div>
               ))}
             </div>
@@ -580,23 +580,23 @@ export default function AdminDashboard() {
           <div className="flex items-center justify-between mb-4">
             <div>
               <h3 className="text-sm font-semibold text-slate-900 dark:text-white flex items-center gap-2">
-                <RefreshCw className="w-4 h-4 text-emerald-500" />Content Freshness
+                <RefreshCw className="w-4 h-4 text-burgundy-500" />Content Freshness
               </h3>
               <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">Days since last update</p>
             </div>
           </div>
           <div className="flex items-center gap-2 mb-4">
-            <div className="flex-1 p-3 rounded-xl bg-emerald-50 dark:bg-emerald-500/10 border border-emerald-100 dark:border-emerald-900/50 text-center">
-              <p className="text-lg font-bold text-emerald-600 dark:text-emerald-400 tabular-nums">{freshness.fresh}</p>
-              <p className="text-xs text-emerald-500">Fresh</p>
+            <div className="flex-1 p-3 rounded-xl bg-burgundy-50 dark:bg-burgundy-500/10 border border-burgundy-100 dark:border-burgundy-900/50 text-center">
+              <p className="text-lg font-bold text-burgundy-600 dark:text-burgundy-400 tabular-nums">{freshness.fresh}</p>
+              <p className="text-xs text-burgundy-500">Fresh</p>
             </div>
-            <div className="flex-1 p-3 rounded-xl bg-amber-50 dark:bg-amber-500/10 border border-amber-100 dark:border-amber-900/50 text-center">
-              <p className="text-lg font-bold text-amber-600 dark:text-amber-400 tabular-nums">{freshness.stale30}</p>
-              <p className="text-xs text-amber-500">30+ days</p>
+            <div className="flex-1 p-3 rounded-xl bg-burgundy-50 dark:bg-burgundy-500/10 border border-burgundy-100 dark:border-burgundy-900/50 text-center">
+              <p className="text-lg font-bold text-burgundy-600 dark:text-burgundy-400 tabular-nums">{freshness.stale30}</p>
+              <p className="text-xs text-burgundy-500">30+ days</p>
             </div>
-            <div className="flex-1 p-3 rounded-xl bg-orange-50 dark:bg-orange-500/10 border border-orange-100 dark:border-orange-900/50 text-center">
-              <p className="text-lg font-bold text-orange-600 dark:text-orange-400 tabular-nums">{freshness.stale60}</p>
-              <p className="text-xs text-orange-500">60+ days</p>
+            <div className="flex-1 p-3 rounded-xl bg-burgundy-50 dark:bg-burgundy-500/10 border border-burgundy-100 dark:border-burgundy-900/50 text-center">
+              <p className="text-lg font-bold text-burgundy-600 dark:text-burgundy-400 tabular-nums">{freshness.stale60}</p>
+              <p className="text-xs text-burgundy-500">60+ days</p>
             </div>
             <div className="flex-1 p-3 rounded-xl bg-red-50 dark:bg-red-500/10 border border-red-100 dark:border-red-900/50 text-center">
               <p className="text-lg font-bold text-red-600 dark:text-red-400 tabular-nums">{freshness.stale90}</p>
@@ -606,9 +606,9 @@ export default function AdminDashboard() {
           {/* Mini bar */}
           {(freshness.stale30 + freshness.stale60 + freshness.stale90) > 0 && (
             <div className="h-1.5 rounded-full bg-slate-100 dark:bg-slate-800 overflow-hidden flex">
-              <div className="h-full bg-emerald-500 transition-all duration-500" style={{ width: `${(freshness.fresh / Math.max(freshness.fresh + freshness.stale30 + freshness.stale60 + freshness.stale90, 1)) * 100}%` }} />
-              <div className="h-full bg-amber-500 transition-all duration-500" style={{ width: `${(freshness.stale30 / Math.max(freshness.fresh + freshness.stale30 + freshness.stale60 + freshness.stale90, 1)) * 100}%` }} />
-              <div className="h-full bg-orange-500 transition-all duration-500" style={{ width: `${(freshness.stale60 / Math.max(freshness.fresh + freshness.stale30 + freshness.stale60 + freshness.stale90, 1)) * 100}%` }} />
+              <div className="h-full bg-burgundy-500 transition-all duration-500" style={{ width: `${(freshness.fresh / Math.max(freshness.fresh + freshness.stale30 + freshness.stale60 + freshness.stale90, 1)) * 100}%` }} />
+              <div className="h-full bg-burgundy-500 transition-all duration-500" style={{ width: `${(freshness.stale30 / Math.max(freshness.fresh + freshness.stale30 + freshness.stale60 + freshness.stale90, 1)) * 100}%` }} />
+              <div className="h-full bg-burgundy-500 transition-all duration-500" style={{ width: `${(freshness.stale60 / Math.max(freshness.fresh + freshness.stale30 + freshness.stale60 + freshness.stale90, 1)) * 100}%` }} />
               <div className="h-full bg-red-500 transition-all duration-500" style={{ width: `${(freshness.stale90 / Math.max(freshness.fresh + freshness.stale30 + freshness.stale60 + freshness.stale90, 1)) * 100}%` }} />
             </div>
           )}
@@ -635,23 +635,23 @@ export default function AdminDashboard() {
         <div className="flex items-center justify-between mb-4">
           <div>
             <h3 className="text-sm font-semibold text-slate-900 dark:text-white flex items-center gap-2">
-              <Users className="w-4 h-4 text-purple-500" />Visitor Activity
+              <Users className="w-4 h-4 text-burgundy-500" />Visitor Activity
             </h3>
             <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">Today&apos;s site traffic summary</p>
           </div>
           <button onClick={() => router.push("/admin/visitors")}
-            className="text-xs text-purple-500 hover:text-purple-600 flex items-center gap-1 font-medium">
+            className="text-xs text-burgundy-500 hover:text-burgundy-600 flex items-center gap-1 font-medium">
             Details <ChevronRight className="w-3 h-3" />
           </button>
         </div>
         <div className="flex items-center gap-4">
-          <div className="flex-1 p-4 rounded-xl bg-gradient-to-br from-purple-50 to-violet-50 dark:from-purple-500/5 dark:to-violet-500/5 border border-purple-100 dark:border-purple-900/30 text-center">
-            <p className="text-2xl font-bold text-purple-600 dark:text-purple-400 tabular-nums">{visitorStats.today}</p>
-            <p className="text-xs text-purple-500 mt-0.5">Today&apos;s Visitors</p>
+          <div className="flex-1 p-4 rounded-xl bg-gradient-to-br from-burgundy-50 to-burgundy-50 dark:from-burgundy-500/5 dark:to-burgundy-500/5 border border-burgundy-100 dark:border-burgundy-900/30 text-center">
+            <p className="text-2xl font-bold text-burgundy-600 dark:text-burgundy-400 tabular-nums">{visitorStats.today}</p>
+            <p className="text-xs text-burgundy-500 mt-0.5">Today&apos;s Visitors</p>
           </div>
-          <div className="flex-1 p-4 rounded-xl bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-blue-500/5 dark:to-indigo-500/5 border border-blue-100 dark:border-blue-900/30 text-center">
-            <p className="text-2xl font-bold text-blue-600 dark:text-blue-400 tabular-nums">{visitorStats.views}</p>
-            <p className="text-xs text-blue-500 mt-0.5">Page Views Today</p>
+          <div className="flex-1 p-4 rounded-xl bg-gradient-to-br from-burgundy-50 to-burgundy-50 dark:from-burgundy-500/5 dark:to-burgundy-500/5 border border-burgundy-100 dark:border-burgundy-900/30 text-center">
+            <p className="text-2xl font-bold text-burgundy-600 dark:text-burgundy-400 tabular-nums">{visitorStats.views}</p>
+            <p className="text-xs text-burgundy-500 mt-0.5">Page Views Today</p>
           </div>
           <div className="flex-1 p-4 rounded-xl bg-gradient-to-br from-slate-50 to-slate-100 dark:from-slate-500/5 dark:to-slate-500/10 border border-slate-100 dark:border-slate-900/30 text-center">
             <p className="text-2xl font-bold text-slate-600 dark:text-slate-400 tabular-nums">{visitorStats.total}</p>

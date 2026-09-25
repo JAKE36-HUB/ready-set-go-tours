@@ -30,7 +30,7 @@ export function TestimonialsCarousel() {
 
   return (
     <section ref={ref} className="relative py-24 sm:py-28 bg-muted/70 dark:bg-stone-900 overflow-hidden">
-      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-amber-300/50 to-transparent" />
+      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-burgundy-300/50 to-transparent" />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 40 }}
@@ -38,7 +38,7 @@ export function TestimonialsCarousel() {
           transition={{ duration: 0.7 }}
           className="text-center mb-14 max-w-2xl mx-auto"
         >
-          <span className="text-xs font-semibold uppercase tracking-[0.2em] text-primary dark:text-amber-400">Testimonials</span>
+          <span className="text-xs font-semibold uppercase tracking-[0.2em] text-primary dark:text-burgundy-400">Testimonials</span>
           <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-medium text-foreground mt-4 mb-4 leading-tight">
             Real trips. Real travellers.
           </h2>
@@ -53,12 +53,12 @@ export function TestimonialsCarousel() {
               {TESTIMONIALS.map((t) => (
                 <div key={t.id} className="shrink-0 w-full sm:w-[420px] lg:w-[480px]">
                   <div className="bg-card rounded-3xl p-8 border border-border h-full flex flex-col">
-                    <Quote className="w-8 h-8 text-amber-500/30 dark:text-amber-600/30 mb-4" />
+                    <Quote className="w-8 h-8 text-burgundy-500/30 dark:text-burgundy-600/30 mb-4" />
                     <blockquote className="text-sm text-muted-foreground leading-relaxed mb-6 flex-1">
                       &ldquo;{t.text}&rdquo;
                     </blockquote>
                     <div className="flex items-center gap-4 pt-4 border-t border-border">
-                      <div className="relative w-12 h-12 rounded-full overflow-hidden ring-2 ring-amber-400/40 shrink-0">
+                      <div className="relative w-12 h-12 rounded-full overflow-hidden ring-2 ring-burgundy-400/40 shrink-0">
                         <Image src={t.image} alt={t.name} fill sizes="48px" className="object-cover brightness-[1.1]" />
                       </div>
                       <div>
@@ -67,7 +67,7 @@ export function TestimonialsCarousel() {
                       </div>
                       <div className="ml-auto flex items-center gap-0.5">
                         {Array.from({ length: 5 }).map((_, i) => (
-                          <Star key={i} className={cn("w-3.5 h-3.5", i < t.rating ? "text-amber-400 fill-amber-400" : "text-stone-200 dark:text-stone-700")} />
+                          <Star key={i} className={cn("w-3.5 h-3.5", i < t.rating ? "text-burgundy-400 fill-burgundy-400" : "text-stone-200 dark:text-stone-700")} />
                         ))}
                       </div>
                     </div>
@@ -84,7 +84,7 @@ export function TestimonialsCarousel() {
               key={i}
               type="button"
               onClick={() => emblaApi?.scrollTo(i)}
-              className={`h-2 rounded-full transition-all duration-300 ${i === selectedIndex ? "w-8 bg-primary dark:bg-amber-400" : "w-2 bg-stone-300 dark:bg-stone-700 hover:bg-stone-400 dark:hover:bg-stone-600"}`}
+              className={`h-2 rounded-full transition-all duration-300 ${i === selectedIndex ? "w-8 bg-primary dark:bg-burgundy-400" : "w-2 bg-stone-300 dark:bg-stone-700 hover:bg-stone-400 dark:hover:bg-stone-600"}`}
               aria-label={`Show testimonial ${i + 1}`}
             />
           ))}

@@ -167,19 +167,19 @@ export default function PackagesBrowser({
 
                     <div className="grid grid-cols-2 gap-x-4 gap-y-2.5 mb-6">
                       <div className="flex items-center gap-2 text-xs text-muted-foreground">
-                        <Clock className="size-3.5 text-primary dark:text-amber-400 shrink-0" />
+                        <Clock className="size-3.5 text-primary dark:text-burgundy-400 shrink-0" />
                         {pkg.duration}
                       </div>
                       <div className="flex items-center gap-2 text-xs text-muted-foreground">
-                        <Bed className="size-3.5 text-primary dark:text-amber-400 shrink-0" />
+                        <Bed className="size-3.5 text-primary dark:text-burgundy-400 shrink-0" />
                         <span className="line-clamp-1">{pkg.accommodation}</span>
                       </div>
                       <div className="flex items-center gap-2 text-xs text-muted-foreground">
-                        <Utensils className="size-3.5 text-primary dark:text-amber-400 shrink-0" />
+                        <Utensils className="size-3.5 text-primary dark:text-burgundy-400 shrink-0" />
                         {pkg.meals}
                       </div>
                       <div className="flex items-center gap-2 text-xs text-muted-foreground">
-                        <Car className="size-3.5 text-primary dark:text-amber-400 shrink-0" />
+                        <Car className="size-3.5 text-primary dark:text-burgundy-400 shrink-0" />
                         {pkg.transport}
                       </div>
                     </div>

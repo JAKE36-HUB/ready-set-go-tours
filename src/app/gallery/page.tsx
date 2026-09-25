@@ -25,17 +25,17 @@ export default function GalleryPage() {
     <main className="min-h-screen">
       {/* Hero */}
       <section className="relative h-[45vh] min-h-[350px] flex items-center justify-center overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-sky-900 via-blue-900 to-slate-900" />
+        <div className="absolute inset-0 bg-gradient-to-br from-burgundy-900 via-burgundy-900 to-slate-900" />
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(56,189,248,0.1),transparent_70%)]" />
         <div className="relative z-10 text-center px-6">
           <AnimatedSection direction="none">
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white mb-4">
               Our{" "}
-              <span className="bg-gradient-to-r from-sky-400 to-cyan-300 bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-burgundy-400 to-burgundy-300 bg-clip-text text-transparent">
                 Gallery
               </span>
             </h1>
-            <p className="text-lg text-sky-200/70 max-w-xl mx-auto">
+            <p className="text-lg text-burgundy-200/70 max-w-xl mx-auto">
               A visual journey through the stunning landscapes, wildlife, and cultures of East Africa.
             </p>
           </AnimatedSection>
@@ -51,7 +51,7 @@ export default function GalleryPage() {
               onClick={() => setActiveCategory(cat)}
               className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${
                 activeCategory === cat
-                  ? "bg-sky-500 text-white shadow-lg shadow-sky-500/25"
+                  ? "bg-burgundy-500 text-white shadow-lg shadow-burgundy-500/25"
                   : "bg-muted text-muted-foreground hover:bg-muted/80"
               }`}
             >

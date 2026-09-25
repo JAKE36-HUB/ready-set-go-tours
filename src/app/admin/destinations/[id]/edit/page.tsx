@@ -106,10 +106,10 @@ export default function EditDestinationPage() {
   return (
     <div className="max-w-3xl mx-auto space-y-8">
       <motion.div initial={{ opacity: 0, y: -10 }}
-        className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-emerald-600 via-emerald-500 to-teal-400 p-6 sm:p-8">
+        className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-burgundy-600 via-burgundy-500 to-burgundy-400 p-6 sm:p-8">
         <div className="absolute inset-0">
           <div className="absolute top-[-30%] right-[-10%] w-[60%] h-[60%] bg-white/10 rounded-full blur-3xl" />
-          <div className="absolute bottom-[-20%] left-[-10%] w-[40%] h-[40%] bg-emerald-300/10 rounded-full blur-3xl" />
+          <div className="absolute bottom-[-20%] left-[-10%] w-[40%] h-[40%] bg-burgundy-300/10 rounded-full blur-3xl" />
         </div>
         <div className="relative z-10 flex items-center gap-4">
           <button onClick={() => router.push("/admin/destinations")} className="w-9 h-9 rounded-xl bg-white/20 backdrop-blur-sm flex items-center justify-center hover:bg-white/30 transition-colors">
@@ -146,8 +146,8 @@ export default function EditDestinationPage() {
           className="rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 overflow-hidden hover:shadow-md transition-shadow">
           <div className="px-6 pt-6 pb-1 border-b border-slate-100 dark:border-slate-800">
             <div className="flex items-center gap-2.5 mb-1">
-              <div className="w-7 h-7 rounded-lg bg-emerald-100 dark:bg-emerald-500/10 flex items-center justify-center">
-                <Info className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400" />
+              <div className="w-7 h-7 rounded-lg bg-burgundy-100 dark:bg-burgundy-500/10 flex items-center justify-center">
+                <Info className="w-3.5 h-3.5 text-burgundy-600 dark:text-burgundy-400" />
               </div>
               <h3 className="text-sm font-semibold text-slate-900 dark:text-white">Basic Information</h3>
             </div>
@@ -181,8 +181,8 @@ export default function EditDestinationPage() {
           className="rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 overflow-hidden hover:shadow-md transition-shadow">
           <div className="px-6 pt-6 pb-1 border-b border-slate-100 dark:border-slate-800">
             <div className="flex items-center gap-2.5 mb-1">
-              <div className="w-7 h-7 rounded-lg bg-emerald-100 dark:bg-emerald-500/10 flex items-center justify-center">
-                <Star className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400" />
+              <div className="w-7 h-7 rounded-lg bg-burgundy-100 dark:bg-burgundy-500/10 flex items-center justify-center">
+                <Star className="w-3.5 h-3.5 text-burgundy-600 dark:text-burgundy-400" />
               </div>
               <h3 className="text-sm font-semibold text-slate-900 dark:text-white">Details</h3>
             </div>
@@ -203,7 +203,7 @@ export default function EditDestinationPage() {
           <Button variant="outline" onClick={() => router.push("/admin/destinations")}
             className="border-slate-200 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-800">Cancel</Button>
           <Button type="submit" disabled={saving}
-            className="bg-gradient-to-r from-emerald-500 to-teal-400 text-white border-0 hover:shadow-lg hover:shadow-emerald-500/25 transition-all min-w-[140px]">
+            className="bg-gradient-to-r from-burgundy-500 to-burgundy-400 text-white border-0 hover:shadow-lg hover:shadow-burgundy-500/25 transition-all min-w-[140px]">
             <Save className="w-4 h-4 mr-1.5" />{saving ? "Saving..." : "Save Changes"}
           </Button>
         </motion.div>

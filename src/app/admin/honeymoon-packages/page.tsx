@@ -121,11 +121,11 @@ export default function HoneymoonPage() {
                     <td className="px-5 py-3.5 text-right">
                       <div className="flex items-center justify-end gap-0.5 opacity-70 group-hover:opacity-100 transition-opacity">
                         <Button variant="ghost" size="icon" onClick={() => window.open(`/honeymoon-packages/${pkg.slug}`, "_blank")}
-                          className="hover:bg-sky-50 dark:hover:bg-sky-500/10 hover:text-sky-600" aria-label="View on site">
+                          className="hover:bg-rose-50 dark:hover:bg-rose-500/10 hover:text-rose-600" aria-label="View on site">
                           <ExternalLink className="w-3.5 h-3.5" />
                         </Button>
                         <Button variant="ghost" size="icon" onClick={() => router.push(`/admin/honeymoon-packages/${pkg.id}/edit`)}
-                          className="hover:bg-amber-50 dark:hover:bg-amber-500/10 hover:text-amber-600" aria-label="Edit">
+                          className="hover:bg-rose-50 dark:hover:bg-rose-500/10 hover:text-rose-600" aria-label="Edit">
                           <Edit className="w-3.5 h-3.5" />
                         </Button>
                         <Button variant="ghost" size="icon" onClick={() => handleDelete(pkg.id)}

@@ -229,7 +229,7 @@ export function defaultConfig(): PopupConfig {
         label: "Book Safari",
         url: "/contact",
         newTab: false,
-        bgColor: "#f59e0b",
+        bgColor: "#93302C",
         textColor: "#ffffff",
         hoverAnimation: "grow",
         icon: "🎯",

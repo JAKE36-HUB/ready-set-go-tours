@@ -57,7 +57,7 @@ export default function AboutPage() {
       ]} />
       <main className="min-h-screen">
       {/* Hero */}
-      <section className="relative py-32 px-6 bg-gradient-to-br from-sky-900 via-blue-900 to-slate-900 overflow-hidden">
+      <section className="relative py-32 px-6 bg-gradient-to-br from-burgundy-900 via-burgundy-900 to-slate-900 overflow-hidden">
         <div className="absolute inset-0 opacity-[0.04]" style={{ backgroundImage: "radial-gradient(circle at 1px 1px, white 1px, transparent 0)", backgroundSize: "40px 40px" }} />
         <div className="relative z-10 max-w-4xl mx-auto text-center">
           <AnimatedSection direction="none">
@@ -67,7 +67,7 @@ export default function AboutPage() {
             </span>
             <h1 className="text-4xl sm:text-5xl lg:text-7xl font-bold text-white mb-6 leading-tight">
               We Turn{" "}
-              <span className="bg-gradient-to-r from-sky-300 to-amber-200 bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-burgundy-300 to-burgundy-200 bg-clip-text text-transparent">
                 Wanderlust
               </span>
               <br />into Safari
@@ -85,8 +85,8 @@ export default function AboutPage() {
         <div className="max-w-5xl mx-auto">
           <div className="grid sm:grid-cols-2 gap-8">
             <AnimatedSection direction="left">
-              <div className="h-full p-8 sm:p-10 rounded-2xl bg-gradient-to-br from-sky-50 to-white dark:from-sky-950/20 dark:to-slate-900 ring-1 ring-sky-200 dark:ring-sky-800/30">
-                <Eye className="size-10 text-sky-500 mb-5" />
+              <div className="h-full p-8 sm:p-10 rounded-2xl bg-gradient-to-br from-burgundy-50 to-white dark:from-burgundy-950/20 dark:to-slate-900 ring-1 ring-burgundy-200 dark:ring-burgundy-800/30">
+                <Eye className="size-10 text-burgundy-500 mb-5" />
                 <h2 className="text-2xl sm:text-3xl font-bold text-foreground mb-4">Our Vision</h2>
                 <p className="text-muted-foreground leading-relaxed text-base">
                   To be East Africa&apos;s most trusted and transformative travel company — connecting
@@ -96,8 +96,8 @@ export default function AboutPage() {
               </div>
             </AnimatedSection>
             <AnimatedSection direction="right">
-              <div className="h-full p-8 sm:p-10 rounded-2xl bg-gradient-to-br from-amber-50 to-white dark:from-amber-950/20 dark:to-slate-900 ring-1 ring-amber-200 dark:ring-amber-800/30">
-                <Target className="size-10 text-amber-500 mb-5" />
+              <div className="h-full p-8 sm:p-10 rounded-2xl bg-gradient-to-br from-burgundy-50 to-white dark:from-burgundy-950/20 dark:to-slate-900 ring-1 ring-burgundy-200 dark:ring-burgundy-800/30">
+                <Target className="size-10 text-burgundy-500 mb-5" />
                 <h2 className="text-2xl sm:text-3xl font-bold text-foreground mb-4">Our Mission</h2>
                 <p className="text-muted-foreground leading-relaxed text-base">
                   To craft bespoke safaris that immerse travelers in East Africa&apos;s breathtaking
@@ -115,7 +115,7 @@ export default function AboutPage() {
         <div className="max-w-6xl mx-auto">
           <AnimatedSection>
             <div className="text-center mb-14">
-              <span className="inline-flex items-center gap-2 text-sm font-semibold uppercase tracking-wider text-sky-500 mb-3">
+              <span className="inline-flex items-center gap-2 text-sm font-semibold uppercase tracking-wider text-burgundy-500 mb-3">
                 <Star className="size-4" />
                 What We Stand For
               </span>
@@ -128,8 +128,8 @@ export default function AboutPage() {
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {VALUES.map((v, i) => (
               <AnimatedSection key={v.title} delay={i * 0.08}>
-                <div className="group relative h-full p-7 rounded-2xl bg-card ring-1 ring-foreground/10 hover:ring-sky-500/20 hover:shadow-xl transition-all duration-300">
-                  <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-sky-500 to-sky-600 flex items-center justify-center mb-5 shadow-lg shadow-sky-500/20">
+                <div className="group relative h-full p-7 rounded-2xl bg-card ring-1 ring-foreground/10 hover:ring-burgundy-500/20 hover:shadow-xl transition-all duration-300">
+                  <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-burgundy-500 to-burgundy-600 flex items-center justify-center mb-5 shadow-lg shadow-burgundy-500/20">
                     <v.icon className="size-6 text-white" />
                   </div>
                   <h3 className="text-lg font-bold text-foreground mb-3">{v.title}</h3>
@@ -143,19 +143,19 @@ export default function AboutPage() {
 
       {/* Community & Conservation Impact */}
       <section className="relative py-24 px-6 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-emerald-950 via-emerald-900 to-slate-900" />
+        <div className="absolute inset-0 bg-gradient-to-br from-burgundy-950 via-burgundy-900 to-slate-900" />
         <div className="absolute inset-0 opacity-[0.04]" style={{ backgroundImage: "radial-gradient(circle at 1px 1px, white 1px, transparent 0)", backgroundSize: "40px 40px" }} />
         <div className="relative z-10 max-w-6xl mx-auto">
           <AnimatedSection>
             <div className="text-center mb-14">
-              <span className="inline-flex items-center gap-2 bg-emerald-500/15 text-emerald-300 text-xs font-semibold uppercase tracking-[0.2em] px-4 py-1.5 rounded-full ring-1 ring-emerald-500/20 mb-4">
+              <span className="inline-flex items-center gap-2 bg-burgundy-500/15 text-burgundy-300 text-xs font-semibold uppercase tracking-[0.2em] px-4 py-1.5 rounded-full ring-1 ring-burgundy-500/20 mb-4">
                 <Heart className="size-3.5" />
                 Our Impact
               </span>
               <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white">
                 Travel That Gives Back
               </h2>
-              <p className="text-emerald-200/60 mt-4 max-w-lg mx-auto">
+              <p className="text-burgundy-200/60 mt-4 max-w-lg mx-auto">
                 Every safari with us supports conservation, empowers communities, and protects
                 Africa&apos;s wild places.
               </p>
@@ -166,9 +166,9 @@ export default function AboutPage() {
             {IMPACT_STATS.map((s, i) => (
               <AnimatedSection key={s.label} delay={i * 0.08}>
                 <div className="text-center p-6 rounded-2xl bg-white/5 backdrop-blur-sm border border-white/10 hover:bg-white/10 transition-colors">
-                  <s.icon className="size-8 text-emerald-400 mx-auto mb-3" />
+                  <s.icon className="size-8 text-burgundy-400 mx-auto mb-3" />
                   <div className="text-3xl sm:text-4xl font-bold text-white mb-1">{s.value}</div>
-                  <div className="text-sm text-emerald-200/60">{s.label}</div>
+                  <div className="text-sm text-burgundy-200/60">{s.label}</div>
                 </div>
               </AnimatedSection>
             ))}
@@ -177,13 +177,13 @@ export default function AboutPage() {
           <AnimatedSection>
             <div className="max-w-3xl mx-auto text-center">
               <div className="p-8 sm:p-10 rounded-2xl bg-white/5 backdrop-blur-sm border border-white/10">
-                <span className="text-5xl text-emerald-400/30 block mb-4">&ldquo;</span>
-                <blockquote className="text-lg sm:text-xl text-emerald-100/80 leading-relaxed font-light italic mb-4">
+                <span className="text-5xl text-burgundy-400/30 block mb-4">&ldquo;</span>
+                <blockquote className="text-lg sm:text-xl text-burgundy-100/80 leading-relaxed font-light italic mb-4">
                   Travel is the only thing you buy that makes you richer. But a safari — that stays
                   with you forever. The red dust, the golden light, the silence of the savannah at
                   dawn — it changes something deep inside you.
                 </blockquote>
-                <p className="text-sm text-emerald-300/50 font-medium tracking-wide">
+                <p className="text-sm text-burgundy-300/50 font-medium tracking-wide">
                   &mdash; Ready Set Go Tours & Travel
                 </p>
               </div>
@@ -193,7 +193,7 @@ export default function AboutPage() {
       </section>
 
       {/* Statistics */}
-      <section className="py-20 px-6 bg-gradient-to-br from-sky-900 via-blue-900 to-slate-900">
+      <section className="py-20 px-6 bg-gradient-to-br from-burgundy-900 via-burgundy-900 to-slate-900">
         <div className="max-w-6xl mx-auto">
           <AnimatedSection>
             <h2 className="text-3xl sm:text-4xl font-bold text-white text-center mb-14">
@@ -205,7 +205,7 @@ export default function AboutPage() {
               <AnimatedSection key={stat.label} delay={i * 0.05}>
                 <div className="text-center p-6 rounded-2xl bg-white/5 backdrop-blur-sm border border-white/10">
                   <div className="text-3xl sm:text-4xl font-bold text-white mb-1">{stat.value}</div>
-                  <div className="text-sm text-sky-200/70">{stat.label}</div>
+                  <div className="text-sm text-burgundy-200/70">{stat.label}</div>
                 </div>
               </AnimatedSection>
             ))}
@@ -226,7 +226,7 @@ export default function AboutPage() {
             </p>
             <Link
               href="/contact"
-              className="inline-flex items-center gap-2 h-12 px-8 rounded-xl bg-gradient-to-r from-sky-500 to-blue-600 hover:from-sky-400 hover:to-blue-500 text-white font-semibold shadow-lg shadow-sky-500/25 transition-all duration-200"
+              className="inline-flex items-center gap-2 h-12 px-8 rounded-xl bg-gradient-to-r from-burgundy-500 to-burgundy-600 hover:from-burgundy-400 hover:to-burgundy-500 text-white font-semibold shadow-lg shadow-burgundy-500/25 transition-all duration-200"
             >
               <HeadphonesIcon className="size-4" />
               Get a Free Quote

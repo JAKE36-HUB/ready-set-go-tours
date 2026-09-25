@@ -80,8 +80,8 @@ export function HeroSection() {
       <div className="absolute inset-0 bg-gradient-to-r from-black/40 via-transparent to-black/20" />
 
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute -top-40 -right-40 w-96 h-96 bg-amber-500/10 rounded-full blur-[150px]" />
-        <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-orange-500/10 rounded-full blur-[120px]" />
+        <div className="absolute -top-40 -right-40 w-96 h-96 bg-burgundy-500/10 rounded-full blur-[150px]" />
+        <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-burgundy-500/10 rounded-full blur-[120px]" />
       </div>
 
       <div className="absolute bottom-28 left-1/2 -translate-x-1/2 z-20 flex items-center gap-2.5">
@@ -98,7 +98,7 @@ export function HeroSection() {
           >
             {i === currentImage && (
               <div
-                className="h-full bg-amber-400/90 rounded-full"
+                className="h-full bg-burgundy-400/90 rounded-full"
                 style={{ width: `${progress}%` }}
               />
             )}
@@ -116,8 +116,8 @@ export function HeroSection() {
               className="inline-flex items-center gap-2 bg-white/5 backdrop-blur-md rounded-full px-4 py-1.5 mb-6 ring-1 ring-white/15"
             >
               <span className="relative flex size-2">
-                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-amber-400 opacity-75" />
-                <span className="relative inline-flex size-2 rounded-full bg-amber-400" />
+                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-burgundy-400 opacity-75" />
+                <span className="relative inline-flex size-2 rounded-full bg-burgundy-400" />
               </span>
               <span className="text-xs font-medium text-white/70 tracking-[0.2em] uppercase">
                 {COMPANY.tagline}
@@ -131,7 +131,7 @@ export function HeroSection() {
               className="font-display text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-medium text-white leading-[1.02] mb-4 tracking-tight"
             >
               Kenya is{" "}
-              <span className="italic text-transparent bg-clip-text bg-gradient-to-r from-amber-200 via-amber-300 to-orange-200">
+              <span className="italic text-transparent bg-clip-text bg-gradient-to-r from-burgundy-200 via-burgundy-300 to-burgundy-200">
                 waiting.
               </span>
             </motion.h1>
@@ -161,7 +161,7 @@ export function HeroSection() {
               className="flex flex-wrap gap-4 justify-center lg:justify-start"
             >
               <Link href={PLAN_SAFARI_ROUTE}>
-                <Button className="group relative h-14 px-8 text-base font-semibold gradient-primary text-white border-0 shadow-2xl shadow-amber-900/30 hover:scale-105 transition-all duration-300 overflow-hidden">
+                <Button className="group relative h-14 px-8 text-base font-semibold gradient-primary text-white border-0 shadow-2xl shadow-burgundy-900/30 hover:scale-105 transition-all duration-300 overflow-hidden">
                   <span className="relative z-10 flex items-center gap-2">
                     Plan My Safari
                   </span>
@@ -184,15 +184,15 @@ export function HeroSection() {
               className="mt-8 flex flex-wrap items-center justify-center lg:justify-start gap-x-6 gap-y-2 text-sm text-white/60 tracking-wide"
             >
               <span className="flex items-center gap-2">
-                <span className="w-1 h-1 rounded-full bg-amber-400" />
+                <span className="w-1 h-1 rounded-full bg-burgundy-400" />
                 Private Safaris
               </span>
               <span className="flex items-center gap-2">
-                <span className="w-1 h-1 rounded-full bg-amber-400" />
+                <span className="w-1 h-1 rounded-full bg-burgundy-400" />
                 Custom Itineraries
               </span>
               <span className="flex items-center gap-2">
-                <span className="w-1 h-1 rounded-full bg-amber-400" />
+                <span className="w-1 h-1 rounded-full bg-burgundy-400" />
                 Local Safari Experts
               </span>
             </motion.div>

@@ -50,11 +50,11 @@ interface ChatMessage {
 type Filter = "all" | "unread" | "manual"
 
 const AVATAR_GRADIENTS = [
-  "from-sky-500 to-cyan-400",
-  "from-emerald-500 to-teal-400",
-  "from-fuchsia-500 to-pink-400",
-  "from-amber-500 to-orange-400",
-  "from-violet-500 to-purple-400",
+  "from-burgundy-500 to-burgundy-400",
+  "from-burgundy-500 to-burgundy-400",
+  "from-burgundy-500 to-burgundy-400",
+  "from-burgundy-500 to-burgundy-400",
+  "from-burgundy-500 to-burgundy-400",
   "from-rose-500 to-red-400",
 ]
 
@@ -356,8 +356,8 @@ export default function AdminChat() {
         <div>
           <div className="flex items-center gap-2.5">
             <h2 className="text-xl font-bold text-slate-900 dark:text-white">Live Chat</h2>
-            <span className="inline-flex items-center gap-1.5 text-[10px] font-semibold text-emerald-600 dark:text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded-full ring-1 ring-emerald-500/30">
-              <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+            <span className="inline-flex items-center gap-1.5 text-[10px] font-semibold text-burgundy-600 dark:text-burgundy-400 bg-burgundy-500/10 px-2 py-0.5 rounded-full ring-1 ring-burgundy-500/30">
+              <span className="w-1.5 h-1.5 rounded-full bg-burgundy-500 animate-pulse" />
               Live
             </span>
           </div>
@@ -367,20 +367,20 @@ export default function AdminChat() {
         </div>
         <div className="flex items-center gap-2">
           {unreadTotal > 0 && (
-            <span className="inline-flex items-center gap-1.5 text-xs font-semibold text-emerald-600 dark:text-emerald-400 bg-emerald-500/10 px-3 py-1.5 rounded-full ring-1 ring-emerald-500/30">
-              <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+            <span className="inline-flex items-center gap-1.5 text-xs font-semibold text-burgundy-600 dark:text-burgundy-400 bg-burgundy-500/10 px-3 py-1.5 rounded-full ring-1 ring-burgundy-500/30">
+              <span className="w-1.5 h-1.5 rounded-full bg-burgundy-500 animate-pulse" />
               {unreadTotal} unread
             </span>
           )}
           {manualCount > 0 && (
-            <span className="inline-flex items-center gap-1.5 text-xs font-medium text-sky-600 dark:text-sky-400 bg-sky-500/10 px-3 py-1.5 rounded-full ring-1 ring-sky-500/30">
+            <span className="inline-flex items-center gap-1.5 text-xs font-medium text-burgundy-600 dark:text-burgundy-400 bg-burgundy-500/10 px-3 py-1.5 rounded-full ring-1 ring-burgundy-500/30">
               <Bot className="w-3 h-3" />
               {manualCount} manual
             </span>
           )}
           <button
             onClick={() => loadSessions()}
-            className="inline-flex items-center gap-2 h-9 px-3 rounded-xl bg-white dark:bg-slate-800 ring-1 ring-slate-200 dark:ring-slate-700 text-xs font-medium text-slate-600 dark:text-slate-300 hover:ring-sky-300 dark:hover:ring-sky-700 transition-all"
+            className="inline-flex items-center gap-2 h-9 px-3 rounded-xl bg-white dark:bg-slate-800 ring-1 ring-slate-200 dark:ring-slate-700 text-xs font-medium text-slate-600 dark:text-slate-300 hover:ring-burgundy-300 dark:hover:ring-burgundy-700 transition-all"
           >
             <Repeat className="w-3.5 h-3.5" />
             Refresh
@@ -398,13 +398,13 @@ export default function AdminChat() {
           <div className="px-4 pt-3.5 pb-3 border-b border-slate-200 dark:border-slate-800/80 shrink-0">
             <div className="flex items-center justify-between mb-3">
               <div className="flex items-center gap-2">
-                <MessagesSquare className="w-4 h-4 text-sky-500" />
+                <MessagesSquare className="w-4 h-4 text-burgundy-500" />
                 <span className="text-sm font-semibold text-slate-700 dark:text-slate-200">
                   Conversations {sessions.length > 0 && `(${sessions.length})`}
                 </span>
               </div>
               {search && (
-                <button onClick={() => setSearch("")} className="text-[10px] font-medium text-sky-500 hover:text-sky-600">
+                <button onClick={() => setSearch("")} className="text-[10px] font-medium text-burgundy-500 hover:text-burgundy-600">
                   Clear
                 </button>
               )}
@@ -415,7 +415,7 @@ export default function AdminChat() {
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
                 placeholder="Search name, email or page..."
-                className="w-full h-9 pl-9 pr-3 rounded-xl bg-slate-100 dark:bg-slate-800 text-xs text-slate-900 dark:text-white placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-sky-500/30 border-0 transition-shadow"
+                className="w-full h-9 pl-9 pr-3 rounded-xl bg-slate-100 dark:bg-slate-800 text-xs text-slate-900 dark:text-white placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-burgundy-500/30 border-0 transition-shadow"
               />
             </div>
             <div className="flex gap-1 p-1 rounded-xl bg-slate-100 dark:bg-slate-800/80">
@@ -476,13 +476,13 @@ export default function AdminChat() {
                     className={cn(
                       "w-full text-left px-4 py-3.5 border-b border-slate-100 dark:border-slate-800/60 transition-colors group relative",
                       isActive
-                        ? "bg-sky-50 dark:bg-sky-500/10 border-l-2 border-l-sky-500"
+                        ? "bg-burgundy-50 dark:bg-burgundy-500/10 border-l-2 border-l-burgundy-500"
                         : "hover:bg-slate-50 dark:hover:bg-slate-800/50"
                     )}
                   >
                     {isBusy && (
                       <span className="absolute right-3 top-3 z-10 flex w-6 h-6 items-center justify-center rounded-full bg-white/90 dark:bg-slate-800/90 shadow-md">
-                        <Loader2 className="w-3.5 h-3.5 animate-spin text-sky-500" />
+                        <Loader2 className="w-3.5 h-3.5 animate-spin text-burgundy-500" />
                       </span>
                     )}
                     <div className="flex items-start gap-3">
@@ -512,11 +512,11 @@ export default function AdminChat() {
                                 }
                               }}
                               placeholder="Name this chat..."
-                              className="flex-1 h-8 min-w-0 px-2.5 rounded-lg bg-sky-50 dark:bg-slate-800 ring-2 ring-sky-500/50 text-xs font-semibold text-slate-800 dark:text-white placeholder:text-slate-400 focus:outline-none"
+                              className="flex-1 h-8 min-w-0 px-2.5 rounded-lg bg-burgundy-50 dark:bg-slate-800 ring-2 ring-burgundy-500/50 text-xs font-semibold text-slate-800 dark:text-white placeholder:text-slate-400 focus:outline-none"
                             />
                             <button
                               onClick={saveRename}
-                              className="shrink-0 w-7 h-7 rounded-lg text-emerald-600 dark:text-emerald-400 hover:bg-emerald-500/10 flex items-center justify-center"
+                              className="shrink-0 w-7 h-7 rounded-lg text-burgundy-600 dark:text-burgundy-400 hover:bg-burgundy-500/10 flex items-center justify-center"
                               aria-label="Save name"
                             >
                               <Check className="w-3.5 h-3.5" />
@@ -535,17 +535,17 @@ export default function AdminChat() {
                         ) : (
                           <div className="flex items-center justify-between gap-2">
                             <div className="flex items-center gap-1.5 min-w-0">
-                              <span className={cn("text-sm font-semibold truncate", isActive ? "text-sky-700 dark:text-sky-300" : "text-slate-800 dark:text-slate-100")}>
+                              <span className={cn("text-sm font-semibold truncate", isActive ? "text-burgundy-700 dark:text-burgundy-300" : "text-slate-800 dark:text-slate-100")}>
                                 {name}
                               </span>
                               {s.label.trim() && (
-                                <span className="shrink-0 inline-flex items-center gap-1 text-[9px] font-bold uppercase tracking-wider text-violet-600 dark:text-violet-400 bg-violet-500/10 px-1.5 py-0.5 rounded-full ring-1 ring-violet-500/20">
+                                <span className="shrink-0 inline-flex items-center gap-1 text-[9px] font-bold uppercase tracking-wider text-burgundy-600 dark:text-burgundy-400 bg-burgundy-500/10 px-1.5 py-0.5 rounded-full ring-1 ring-burgundy-500/20">
                                   <Tag className="w-2.5 h-2.5" />
                                   label
                                 </span>
                               )}
                               {s.unread > 0 && (
-                                <span className="shrink-0 inline-flex items-center justify-center min-w-[18px] h-[18px] px-1 rounded-full bg-emerald-500 text-white text-[10px] font-bold">
+                                <span className="shrink-0 inline-flex items-center justify-center min-w-[18px] h-[18px] px-1 rounded-full bg-burgundy-500 text-white text-[10px] font-bold">
                                   {s.unread}
                                 </span>
                               )}
@@ -564,8 +564,8 @@ export default function AdminChat() {
                               className={cn(
                                 "inline-flex items-center gap-1 text-[10px] px-1.5 py-0.5 rounded-full font-medium",
                                 s.ai_active
-                                  ? "bg-sky-500/10 text-sky-600 dark:text-sky-400"
-                                  : "bg-emerald-500/10 text-emerald-600 dark:text-emerald-400"
+                                  ? "bg-burgundy-500/10 text-burgundy-600 dark:text-burgundy-400"
+                                  : "bg-burgundy-500/10 text-burgundy-600 dark:text-burgundy-400"
                               )}
                             >
                               {s.ai_active ? <Sparkles className="w-2.5 h-2.5" /> : <User className="w-2.5 h-2.5" />}
@@ -584,7 +584,7 @@ export default function AdminChat() {
                           >
                             <button
                               onClick={() => startRename(s)}
-                              className="w-7 h-7 rounded-lg text-slate-400 hover:text-sky-600 dark:hover:text-sky-400 hover:bg-sky-500/10 flex items-center justify-center"
+                              className="w-7 h-7 rounded-lg text-slate-400 hover:text-burgundy-600 dark:hover:text-burgundy-400 hover:bg-burgundy-500/10 flex items-center justify-center"
                               aria-label="Rename chat"
                             >
                               <Pencil className="w-3.5 h-3.5" />
@@ -648,11 +648,11 @@ export default function AdminChat() {
                           }
                         }}
                         placeholder="Name this chat..."
-                        className="flex-1 h-8 min-w-0 px-2.5 rounded-lg bg-sky-50 dark:bg-slate-800 ring-2 ring-sky-500/50 text-sm font-semibold text-slate-800 dark:text-white placeholder:text-slate-400 focus:outline-none"
+                        className="flex-1 h-8 min-w-0 px-2.5 rounded-lg bg-burgundy-50 dark:bg-slate-800 ring-2 ring-burgundy-500/50 text-sm font-semibold text-slate-800 dark:text-white placeholder:text-slate-400 focus:outline-none"
                       />
                       <button
                         onClick={saveRename}
-                        className="shrink-0 w-7 h-7 rounded-lg text-emerald-600 dark:text-emerald-400 hover:bg-emerald-500/10 flex items-center justify-center"
+                        className="shrink-0 w-7 h-7 rounded-lg text-burgundy-600 dark:text-burgundy-400 hover:bg-burgundy-500/10 flex items-center justify-center"
                         aria-label="Save name"
                       >
                         <Check className="w-4 h-4" />
@@ -672,7 +672,7 @@ export default function AdminChat() {
                     <div className="flex items-center gap-1.5 min-w-0">
                       <p className="text-sm font-semibold text-slate-800 dark:text-slate-100 truncate">{displayName(selected)}</p>
                       {selected.label.trim() && (
-                        <span className="shrink-0 inline-flex items-center gap-1 text-[9px] font-bold uppercase tracking-wider text-violet-600 dark:text-violet-400 bg-violet-500/10 px-1.5 py-0.5 rounded-full ring-1 ring-violet-500/20">
+                        <span className="shrink-0 inline-flex items-center gap-1 text-[9px] font-bold uppercase tracking-wider text-burgundy-600 dark:text-burgundy-400 bg-burgundy-500/10 px-1.5 py-0.5 rounded-full ring-1 ring-burgundy-500/20">
                           <Tag className="w-2.5 h-2.5" />
                           label
                         </span>
@@ -688,7 +688,7 @@ export default function AdminChat() {
                           className="shrink-0 w-5 h-5 rounded-md hover:bg-slate-100 dark:hover:bg-slate-700 flex items-center justify-center text-slate-400 transition-colors"
                           aria-label="Copy email"
                         >
-                          {copied ? <Check className="w-3 h-3 text-emerald-500" /> : <Copy className="w-3 h-3" />}
+                          {copied ? <Check className="w-3 h-3 text-burgundy-500" /> : <Copy className="w-3 h-3" />}
                         </button>
                       </>
                     ) : (
@@ -711,7 +711,7 @@ export default function AdminChat() {
                 <div className="shrink-0 flex items-center gap-1.5">
                   <button
                     onClick={() => startRename(selected)}
-                    className="w-9 h-9 rounded-xl text-slate-400 hover:text-sky-600 dark:hover:text-sky-400 hover:bg-sky-500/10 flex items-center justify-center transition-colors"
+                    className="w-9 h-9 rounded-xl text-slate-400 hover:text-burgundy-600 dark:hover:text-burgundy-400 hover:bg-burgundy-500/10 flex items-center justify-center transition-colors"
                     aria-label="Rename chat"
                   >
                     <Pencil className="w-4 h-4" />
@@ -729,7 +729,7 @@ export default function AdminChat() {
                     onClick={() => !selected.ai_active && toggleAi()}
                     className={cn(
                       "h-7 px-3 rounded-full text-[11px] font-semibold transition-all",
-                      selected.ai_active ? "bg-sky-500 text-white shadow-sm" : "text-slate-500 dark:text-slate-400 hover:text-slate-700 dark:hover:text-slate-200"
+                      selected.ai_active ? "bg-burgundy-500 text-white shadow-sm" : "text-slate-500 dark:text-slate-400 hover:text-slate-700 dark:hover:text-slate-200"
                     )}
                   >
                     AI responding
@@ -738,7 +738,7 @@ export default function AdminChat() {
                     onClick={() => selected.ai_active && toggleAi()}
                     className={cn(
                       "h-7 px-3 rounded-full text-[11px] font-semibold transition-all",
-                      !selected.ai_active ? "bg-emerald-500 text-white shadow-sm" : "text-slate-500 dark:text-slate-400 hover:text-slate-700 dark:hover:text-slate-200"
+                      !selected.ai_active ? "bg-burgundy-500 text-white shadow-sm" : "text-slate-500 dark:text-slate-400 hover:text-slate-700 dark:hover:text-slate-200"
                     )}
                   >
                     Manual
@@ -776,12 +776,12 @@ export default function AdminChat() {
                         )}
                         <div className={cn("flex items-end gap-2.5 mb-3", isVisitor ? "flex-row-reverse" : "flex-row")}>
                           {isOwner && (
-                            <span className="shrink-0 w-8 h-8 rounded-full bg-gradient-to-br from-emerald-500 to-teal-500 flex items-center justify-center text-white text-[10px] font-bold shadow-md shadow-emerald-500/25">
+                            <span className="shrink-0 w-8 h-8 rounded-full bg-gradient-to-br from-burgundy-500 to-burgundy-500 flex items-center justify-center text-white text-[10px] font-bold shadow-md shadow-burgundy-500/25">
                               YOU
                             </span>
                           )}
                           {m.role === "assistant" && (
-                            <span className="shrink-0 w-8 h-8 rounded-full bg-gradient-to-br from-sky-500 to-cyan-400 flex items-center justify-center text-white shadow-md shadow-sky-500/25">
+                            <span className="shrink-0 w-8 h-8 rounded-full bg-gradient-to-br from-burgundy-500 to-burgundy-400 flex items-center justify-center text-white shadow-md shadow-burgundy-500/25">
                               <Bot className="w-4 h-4" />
                             </span>
                           )}
@@ -797,9 +797,9 @@ export default function AdminChat() {
                               className={cn(
                                 "whitespace-pre-wrap break-words text-sm leading-relaxed px-4 py-2.5 rounded-2xl",
                                 isVisitor
-                                  ? "bg-gradient-to-br from-sky-500 to-cyan-500 text-white shadow-lg shadow-sky-500/25 rounded-br-sm"
+                                  ? "bg-gradient-to-br from-burgundy-500 to-burgundy-500 text-white shadow-lg shadow-burgundy-500/25 rounded-br-sm"
                                   : isOwner
-                                    ? "bg-emerald-50 dark:bg-emerald-950/70 ring-1 ring-emerald-200 dark:ring-emerald-500/30 text-emerald-900 dark:text-emerald-100 rounded-bl-sm"
+                                    ? "bg-burgundy-50 dark:bg-burgundy-950/70 ring-1 ring-burgundy-200 dark:ring-burgundy-500/30 text-burgundy-900 dark:text-burgundy-100 rounded-bl-sm"
                                     : "bg-white dark:bg-slate-800 ring-1 ring-slate-200/80 dark:ring-slate-700/60 text-slate-700 dark:text-slate-200 shadow-sm rounded-bl-sm"
                               )}
                             >
@@ -825,7 +825,7 @@ export default function AdminChat() {
                     <button
                       key={s}
                       onClick={() => setDraft(s)}
-                      className="shrink-0 inline-flex items-center h-8 px-3 rounded-full text-[11px] font-medium text-sky-600 dark:text-sky-300 bg-sky-500/5 ring-1 ring-sky-500/20 hover:ring-sky-500/50 hover:bg-sky-500/10 transition-all"
+                      className="shrink-0 inline-flex items-center h-8 px-3 rounded-full text-[11px] font-medium text-burgundy-600 dark:text-burgundy-300 bg-burgundy-500/5 ring-1 ring-burgundy-500/20 hover:ring-burgundy-500/50 hover:bg-burgundy-500/10 transition-all"
                     >
                       {s}
                     </button>
@@ -843,12 +843,12 @@ export default function AdminChat() {
                     }}
                     rows={2}
                     placeholder="Type your reply... (Enter to send)"
-                    className="flex-1 px-4 py-2.5 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-900 dark:text-white text-sm placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-sky-500/30 border-0 resize-none"
+                    className="flex-1 px-4 py-2.5 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-900 dark:text-white text-sm placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-burgundy-500/30 border-0 resize-none"
                   />
                   <button
                     onClick={handleSend}
                     disabled={sending || !draft.trim()}
-                    className="w-11 h-11 shrink-0 rounded-xl bg-gradient-to-r from-sky-500 to-cyan-500 text-white flex items-center justify-center shadow-lg shadow-sky-500/25 hover:scale-105 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
+                    className="w-11 h-11 shrink-0 rounded-xl bg-gradient-to-r from-burgundy-500 to-burgundy-500 text-white flex items-center justify-center shadow-lg shadow-burgundy-500/25 hover:scale-105 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
                     aria-label="Send reply"
                   >
                     {sending ? <Loader2 className="w-5 h-5 animate-spin" /> : <Send className="w-5 h-5" />}

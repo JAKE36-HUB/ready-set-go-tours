@@ -43,7 +43,7 @@ export function TripFinder() {
         <div className="rounded-3xl bg-background dark:bg-stone-900 ring-1 ring-border shadow-2xl shadow-stone-950/10 p-6 sm:p-8">
           <div className="flex flex-wrap items-end justify-between gap-3 mb-6">
             <div>
-              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-primary dark:text-amber-400 mb-2">
+              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-primary dark:text-burgundy-400 mb-2">
                 Start your journey
               </p>
               <h2 className="font-display text-2xl sm:text-3xl font-medium text-foreground">

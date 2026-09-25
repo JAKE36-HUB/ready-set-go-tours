@@ -28,7 +28,7 @@ export function StepDatesGroup({
             type="date"
             value={data.startDate}
             onChange={(e) => update("startDate", e.target.value)}
-            className="w-full h-11 px-4 rounded-xl bg-white/5 border border-white/10 text-white focus:outline-none focus:border-emerald-400/50 focus:ring-1 focus:ring-emerald-400/30 text-sm [color-scheme:dark]"
+            className="w-full h-11 px-4 rounded-xl bg-white/5 border border-white/10 text-white focus:outline-none focus:border-burgundy-400/50 focus:ring-1 focus:ring-burgundy-400/30 text-sm [color-scheme:dark]"
           />
         </div>
         <div>
@@ -39,7 +39,7 @@ export function StepDatesGroup({
             type="date"
             value={data.endDate}
             onChange={(e) => update("endDate", e.target.value)}
-            className="w-full h-11 px-4 rounded-xl bg-white/5 border border-white/10 text-white focus:outline-none focus:border-emerald-400/50 focus:ring-1 focus:ring-emerald-400/30 text-sm [color-scheme:dark]"
+            className="w-full h-11 px-4 rounded-xl bg-white/5 border border-white/10 text-white focus:outline-none focus:border-burgundy-400/50 focus:ring-1 focus:ring-burgundy-400/30 text-sm [color-scheme:dark]"
           />
         </div>
       </div>
@@ -101,7 +101,7 @@ export function StepDatesGroup({
           type="button"
           onClick={onNext}
           disabled={!valid}
-          className="h-10 px-6 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-white text-sm font-semibold shadow-lg shadow-emerald-500/25 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+          className="h-10 px-6 rounded-xl bg-burgundy-500 hover:bg-burgundy-400 text-white text-sm font-semibold shadow-lg shadow-burgundy-500/25 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
         >
           {valid ? "Next Step" : "Select dates to continue"}
         </button>

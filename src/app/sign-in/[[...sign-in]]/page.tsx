@@ -148,18 +148,18 @@ export default function SignInPage() {
   }
 
   return (
-    <div className="relative min-h-dvh flex items-center justify-center overflow-hidden bg-gradient-to-br from-sky-50 via-white to-emerald-50 dark:from-slate-950 dark:via-slate-950 dark:to-slate-900 px-4 py-10">
+    <div className="relative min-h-dvh flex items-center justify-center overflow-hidden bg-gradient-to-br from-burgundy-50 via-white to-burgundy-50 dark:from-slate-950 dark:via-slate-950 dark:to-slate-900 px-4 py-10">
       {/* Decorative background */}
-      <div className="pointer-events-none absolute -top-32 -left-24 h-[28rem] w-[28rem] rounded-full bg-sky-400/20 dark:bg-sky-500/10 blur-3xl" />
-      <div className="pointer-events-none absolute -bottom-40 -right-20 h-[30rem] w-[30rem] rounded-full bg-emerald-400/20 dark:bg-emerald-500/10 blur-3xl" />
-      <div className="pointer-events-none absolute top-1/3 right-[8%] h-72 w-72 rounded-full bg-amber-300/20 dark:bg-amber-500/10 blur-3xl" />
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_0%,white_80%)] dark:bg-[radial-gradient(circle_at_center,transparent_0%,#020617_80%)] opacity-60" />
+      <div className="pointer-events-none absolute -top-32 -left-24 h-[28rem] w-[28rem] rounded-full bg-burgundy-400/20 dark:bg-burgundy-500/10 blur-3xl" />
+      <div className="pointer-events-none absolute -bottom-40 -right-20 h-[30rem] w-[30rem] rounded-full bg-burgundy-400/20 dark:bg-burgundy-500/10 blur-3xl" />
+      <div className="pointer-events-none absolute top-1/3 right-[8%] h-72 w-72 rounded-full bg-burgundy-300/20 dark:bg-burgundy-500/10 blur-3xl" />
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_0%,white_80%)] dark:bg-[radial-gradient(circle_at_center,transparent_0%,#2E0A0C_80%)] opacity-60" />
 
       <div className="relative w-full max-w-md">
-        <div className="rounded-2xl border border-white/60 dark:border-slate-800 bg-white/80 dark:bg-slate-900/80 backdrop-blur-2xl shadow-2xl shadow-sky-900/10 dark:shadow-black/40">
+        <div className="rounded-2xl border border-white/60 dark:border-slate-800 bg-white/80 dark:bg-slate-900/80 backdrop-blur-2xl shadow-2xl shadow-burgundy-900/10 dark:shadow-black/40">
           {/* Header */}
           <div className="pt-10 px-8 text-center space-y-4">
-            <div className="mx-auto w-14 h-14 rounded-2xl bg-gradient-to-br from-sky-500 to-cyan-400 flex items-center justify-center shadow-lg shadow-sky-500/30">
+            <div className="mx-auto w-14 h-14 rounded-2xl bg-gradient-to-br from-burgundy-500 to-burgundy-400 flex items-center justify-center shadow-lg shadow-burgundy-500/30">
               {mfaRequired ? (
                 <QrCode className="w-7 h-7 text-white" />
               ) : (
@@ -176,7 +176,7 @@ export default function SignInPage() {
                   : "Sign in to the admin panel"}
               </p>
             </div>
-            <div className="inline-flex items-center gap-1.5 rounded-full bg-sky-500/10 dark:bg-sky-500/15 border border-sky-200/60 dark:border-sky-500/20 px-3 py-1 text-[11px] font-medium text-sky-700 dark:text-sky-300">
+            <div className="inline-flex items-center gap-1.5 rounded-full bg-burgundy-500/10 dark:bg-burgundy-500/15 border border-burgundy-200/60 dark:border-burgundy-500/20 px-3 py-1 text-[11px] font-medium text-burgundy-700 dark:text-burgundy-300">
               <Sparkles className="size-3" />
               {BRAND}
             </div>
@@ -209,7 +209,7 @@ export default function SignInPage() {
                       placeholder="admin@example.com"
                       autoComplete="username"
                       required
-                      className="w-full h-12 pl-10 pr-4 rounded-xl border border-slate-200 dark:border-slate-700 bg-white/70 dark:bg-slate-950/50 text-slate-900 dark:text-white placeholder:text-slate-400 focus:border-sky-500 focus:ring-2 focus:ring-sky-500/30 outline-none transition-all"
+                      className="w-full h-12 pl-10 pr-4 rounded-xl border border-slate-200 dark:border-slate-700 bg-white/70 dark:bg-slate-950/50 text-slate-900 dark:text-white placeholder:text-slate-400 focus:border-burgundy-500 focus:ring-2 focus:ring-burgundy-500/30 outline-none transition-all"
                     />
                   </div>
                 </div>
@@ -228,7 +228,7 @@ export default function SignInPage() {
                       placeholder="••••••••"
                       autoComplete="current-password"
                       required
-                      className="w-full h-12 pl-10 pr-11 rounded-xl border border-slate-200 dark:border-slate-700 bg-white/70 dark:bg-slate-950/50 text-slate-900 dark:text-white placeholder:text-slate-400 focus:border-sky-500 focus:ring-2 focus:ring-sky-500/30 outline-none transition-all"
+                      className="w-full h-12 pl-10 pr-11 rounded-xl border border-slate-200 dark:border-slate-700 bg-white/70 dark:bg-slate-950/50 text-slate-900 dark:text-white placeholder:text-slate-400 focus:border-burgundy-500 focus:ring-2 focus:ring-burgundy-500/30 outline-none transition-all"
                     />
                     <button
                       type="button"
@@ -245,7 +245,7 @@ export default function SignInPage() {
                 <button
                   type="submit"
                   disabled={loading}
-                  className="w-full h-12 rounded-xl bg-gradient-to-r from-sky-500 to-cyan-400 hover:from-sky-600 hover:to-cyan-500 text-white text-sm font-semibold shadow-md shadow-sky-500/25 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 transition-all"
+                  className="w-full h-12 rounded-xl bg-gradient-to-r from-burgundy-500 to-burgundy-400 hover:from-burgundy-600 hover:to-burgundy-500 text-white text-sm font-semibold shadow-md shadow-burgundy-500/25 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 transition-all"
                 >
                   {loading && <Loader2 className="size-4 animate-spin" />}
                   {loading ? "Signing in..." : "Sign In"}
@@ -273,7 +273,7 @@ export default function SignInPage() {
                     onChange={(e) => setCode(e.target.value.replace(/\D/g, "").slice(0, 6))}
                     placeholder="000000"
                     required
-                    className="w-full h-12 px-4 text-center text-2xl tracking-[0.5em] font-mono rounded-xl border border-sky-200 dark:border-slate-700 bg-white/70 dark:bg-slate-950/50 text-slate-900 dark:text-white placeholder:text-slate-300 dark:placeholder:text-slate-600 focus:border-sky-500 focus:ring-2 focus:ring-sky-500/30 outline-none transition-all"
+                    className="w-full h-12 px-4 text-center text-2xl tracking-[0.5em] font-mono rounded-xl border border-burgundy-200 dark:border-slate-700 bg-white/70 dark:bg-slate-950/50 text-slate-900 dark:text-white placeholder:text-slate-300 dark:placeholder:text-slate-600 focus:border-burgundy-500 focus:ring-2 focus:ring-burgundy-500/30 outline-none transition-all"
                   />
                   <p className="mt-2 text-xs text-slate-400 dark:text-slate-500">
                     Open your authenticator app and enter the current 6-digit code for{" "}
@@ -284,7 +284,7 @@ export default function SignInPage() {
                 <button
                   type="submit"
                   disabled={mfaLoading || code.length !== 6}
-                  className="w-full h-12 rounded-xl bg-gradient-to-r from-sky-500 to-cyan-400 hover:from-sky-600 hover:to-cyan-500 text-white text-sm font-semibold shadow-md shadow-sky-500/25 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 transition-all"
+                  className="w-full h-12 rounded-xl bg-gradient-to-r from-burgundy-500 to-burgundy-400 hover:from-burgundy-600 hover:to-burgundy-500 text-white text-sm font-semibold shadow-md shadow-burgundy-500/25 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 transition-all"
                 >
                   {mfaLoading && <Loader2 className="size-4 animate-spin" />}
                   {mfaLoading ? "Verifying..." : "Verify & Continue"}
@@ -307,15 +307,15 @@ export default function SignInPage() {
             {!mfaRequired && (
               <div className="mt-8 grid grid-cols-3 gap-2">
                 <div className="rounded-xl bg-slate-50 dark:bg-slate-950/40 border border-slate-100 dark:border-slate-800 px-2 py-3 text-center">
-                  <ShieldCheck className="mx-auto size-4 text-sky-500 mb-1" />
+                  <ShieldCheck className="mx-auto size-4 text-burgundy-500 mb-1" />
                   <p className="text-[10px] font-medium text-slate-500 dark:text-slate-400">Password protected</p>
                 </div>
                 <div className="rounded-xl bg-slate-50 dark:bg-slate-950/40 border border-slate-100 dark:border-slate-800 px-2 py-3 text-center">
-                  <KeyRound className="mx-auto size-4 text-emerald-500 mb-1" />
+                  <KeyRound className="mx-auto size-4 text-burgundy-500 mb-1" />
                   <p className="text-[10px] font-medium text-slate-500 dark:text-slate-400">2FA ready</p>
                 </div>
                 <div className="rounded-xl bg-slate-50 dark:bg-slate-950/40 border border-slate-100 dark:border-slate-800 px-2 py-3 text-center">
-                  <Lock className="mx-auto size-4 text-amber-500 mb-1" />
+                  <Lock className="mx-auto size-4 text-burgundy-500 mb-1" />
                   <p className="text-[10px] font-medium text-slate-500 dark:text-slate-400">Secure access</p>
                 </div>
               </div>

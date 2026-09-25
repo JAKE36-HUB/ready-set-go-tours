@@ -32,7 +32,7 @@ export function StickyMobileCTA() {
           WhatsApp
         </Button>
         <Link href={PLAN_SAFARI_ROUTE} className="flex-[2]">
-          <Button className="w-full h-11 text-sm font-semibold gradient-primary text-white border-0 shadow-lg shadow-amber-900/20">
+          <Button className="w-full h-11 text-sm font-semibold gradient-primary text-white border-0 shadow-lg shadow-burgundy-900/20">
             Plan My Safari
           </Button>
         </Link>

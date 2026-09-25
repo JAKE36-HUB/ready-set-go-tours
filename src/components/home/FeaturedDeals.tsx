@@ -35,9 +35,9 @@ export function FeaturedDeals() {
   }, [emblaApi])
 
   return (
-    <section ref={sectionRef} className="relative py-24 overflow-hidden bg-gradient-to-br from-slate-900 via-slate-800 to-emerald-950">
+    <section ref={sectionRef} className="relative py-24 overflow-hidden bg-gradient-to-br from-slate-900 via-slate-800 to-burgundy-950">
       <div className="absolute inset-0 opacity-[0.04]" style={{ backgroundImage: "radial-gradient(circle at 1px 1px, white 1px, transparent 0)", backgroundSize: "40px 40px" }} />
-      <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-emerald-500/10 rounded-full blur-[160px]" />
+      <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-burgundy-500/10 rounded-full blur-[160px]" />
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
@@ -46,7 +46,7 @@ export function FeaturedDeals() {
           transition={{ duration: 0.6 }}
           className="text-center mb-12"
         >
-          <span className="inline-flex items-center gap-2 bg-emerald-500/15 text-emerald-300 text-xs font-semibold uppercase tracking-[0.2em] px-4 py-1.5 rounded-full ring-1 ring-emerald-500/20 mb-4">
+          <span className="inline-flex items-center gap-2 bg-burgundy-500/15 text-burgundy-300 text-xs font-semibold uppercase tracking-[0.2em] px-4 py-1.5 rounded-full ring-1 ring-burgundy-500/20 mb-4">
             <Percent className="size-3.5" />
             Limited Time Offers
           </span>
@@ -57,7 +57,7 @@ export function FeaturedDeals() {
             <span className="inline-flex items-center gap-1.5 bg-rose-500/15 text-rose-300 text-xs font-semibold px-3 py-1.5 rounded-full ring-1 ring-rose-500/30">
               <span className="w-1.5 h-1.5 rounded-full bg-rose-400 animate-pulse" />Limited Spots
             </span>
-            <span className="inline-flex items-center gap-1.5 bg-amber-500/15 text-amber-300 text-xs font-semibold px-3 py-1.5 rounded-full ring-1 ring-amber-500/30">
+            <span className="inline-flex items-center gap-1.5 bg-burgundy-500/15 text-burgundy-300 text-xs font-semibold px-3 py-1.5 rounded-full ring-1 ring-burgundy-500/30">
               Save Up to 30%
             </span>
           </div>
@@ -72,9 +72,9 @@ export function FeaturedDeals() {
                     <div className="relative h-44 sm:h-48 overflow-hidden">
                       <Image src={deal.image} alt={deal.title} fill className="object-cover transition-transform duration-500 group-hover:scale-105" sizes="(max-width: 640px) 70vw, (max-width: 1024px) 45vw, 34vw" />
                       <div className="absolute top-3 left-3 flex items-center gap-2">
-                        <span className="bg-emerald-500 text-white text-xs font-bold px-2.5 py-1 rounded-full">{deal.discount}</span>
+                        <span className="bg-burgundy-500 text-white text-xs font-bold px-2.5 py-1 rounded-full">{deal.discount}</span>
                         {deal.featured && (
-                          <span className="bg-amber-500 text-white text-xs font-bold px-2.5 py-1 rounded-full">Top Pick</span>
+                          <span className="bg-burgundy-500 text-white text-xs font-bold px-2.5 py-1 rounded-full">Top Pick</span>
                         )}
                       </div>
                     </div>
@@ -86,7 +86,7 @@ export function FeaturedDeals() {
                       </div>
                       <div className="mt-3 flex items-baseline gap-2">
                         <span className="text-xs text-muted-foreground line-through">${deal.originalPrice}</span>
-                        <span className="text-xl font-bold text-emerald-500 dark:text-emerald-400">${deal.dealPrice}</span>
+                        <span className="text-xl font-bold text-burgundy-500 dark:text-burgundy-400">${deal.dealPrice}</span>
                         <span className="text-[11px] text-muted-foreground">/person</span>
                       </div>
                       <div className="mt-3">
@@ -115,7 +115,7 @@ export function FeaturedDeals() {
                 key={i}
                 type="button"
                 onClick={() => emblaApi?.scrollTo(i)}
-                className={`h-2 rounded-full transition-all duration-300 ${i === selectedIndex ? "w-8 bg-emerald-500" : "w-2 bg-white/20 hover:bg-white/40"}`}
+                className={`h-2 rounded-full transition-all duration-300 ${i === selectedIndex ? "w-8 bg-burgundy-500" : "w-2 bg-white/20 hover:bg-white/40"}`}
                 aria-label={`Show deal ${i + 1}`}
               />
             ))}

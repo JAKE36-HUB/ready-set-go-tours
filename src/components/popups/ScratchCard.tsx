@@ -74,11 +74,11 @@ export function ScratchCard({ prize, promoCode, onRevealed }: Props) {
   return (
     <div className="flex flex-col items-center gap-3">
       <div className="relative overflow-hidden rounded-xl" style={{ width: W, height: H }}>
-        <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-amber-50 to-orange-100">
+        <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-burgundy-50 to-burgundy-100">
           <div className="text-center px-4">
             <p className="text-lg font-extrabold text-slate-900">{revealed ? `🎉 ${prize}` : "???"}</p>
             {promoCode && (
-              <p className="text-xs mt-0.5 font-mono font-bold text-amber-700">CODE: {promoCode}</p>
+              <p className="text-xs mt-0.5 font-mono font-bold text-burgundy-700">CODE: {promoCode}</p>
             )}
           </div>
         </div>

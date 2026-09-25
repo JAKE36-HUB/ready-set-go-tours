@@ -104,7 +104,7 @@ export default function PopupsPage() {
       <motion.div initial={{ opacity: 0, y: 15 }} animate={{ opacity: 1, y: 0 }}
         className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-fuchsia-500 to-pink-400 flex items-center justify-center shadow-lg shadow-fuchsia-500/20">
+          <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-burgundy-500 to-burgundy-400 flex items-center justify-center shadow-lg shadow-burgundy-500/20">
             <Megaphone className="w-5 h-5 text-white" />
           </div>
           <div>
@@ -120,7 +120,7 @@ export default function PopupsPage() {
             <BarChart3 className="w-3.5 h-3.5 mr-1.5" />Analytics
           </Button>
           <Button onClick={() => router.push("/admin/popups/new")}
-            className="bg-gradient-to-r from-fuchsia-500 to-pink-400 text-white border-0 hover:shadow-lg hover:shadow-fuchsia-500/25 transition-all h-9">
+            className="bg-gradient-to-r from-burgundy-500 to-burgundy-400 text-white border-0 hover:shadow-lg hover:shadow-burgundy-500/25 transition-all h-9">
             <Plus className="w-4 h-4 mr-1.5" />
             New Campaign
           </Button>
@@ -129,10 +129,10 @@ export default function PopupsPage() {
 
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
         {[
-          { label: "Impressions", value: totalImpressions.toLocaleString(), icon: Eye, color: "text-sky-500" },
-          { label: "Clicks", value: totalClicks.toLocaleString(), icon: MousePointerClick, color: "text-amber-500" },
-          { label: "Conversions", value: totalConversions.toLocaleString(), icon: Trophy, color: "text-emerald-500" },
-          { label: "Est. Revenue", value: `$${totalRevenue.toLocaleString()}`, icon: BarChart3, color: "text-fuchsia-500" },
+          { label: "Impressions", value: totalImpressions.toLocaleString(), icon: Eye, color: "text-burgundy-500" },
+          { label: "Clicks", value: totalClicks.toLocaleString(), icon: MousePointerClick, color: "text-burgundy-500" },
+          { label: "Conversions", value: totalConversions.toLocaleString(), icon: Trophy, color: "text-burgundy-500" },
+          { label: "Est. Revenue", value: `$${totalRevenue.toLocaleString()}`, icon: BarChart3, color: "text-burgundy-500" },
         ].map((s) => (
           <div key={s.label} className="rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-4">
             <div className="flex items-center gap-2 text-xs text-slate-500 dark:text-slate-400 mb-1">
@@ -169,7 +169,7 @@ export default function PopupsPage() {
           <p className="text-sm font-medium text-slate-700 dark:text-slate-300">No campaigns yet</p>
           <p className="text-xs text-slate-400 mt-1 mb-4">Create your first conversion-optimized popup from a tourism template</p>
           <Button onClick={() => router.push("/admin/popups/new")}
-            className="bg-gradient-to-r from-fuchsia-500 to-pink-400 text-white border-0">
+            className="bg-gradient-to-r from-burgundy-500 to-burgundy-400 text-white border-0">
             <Plus className="w-4 h-4 mr-1.5" />Create Campaign
           </Button>
         </motion.div>
@@ -199,14 +199,14 @@ export default function PopupsPage() {
                       className="border-b border-slate-50 dark:border-slate-800/50 hover:bg-slate-50 dark:hover:bg-slate-800/30 transition-colors">
                       <td className="px-4 py-3">
                         <div className="flex items-center gap-3">
-                          <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-fuchsia-500/10 to-pink-500/10 flex items-center justify-center text-base">
+                          <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-burgundy-500/10 to-burgundy-500/10 flex items-center justify-center text-base">
                             {popup.template ? TEMPLATE_EMOJIS[popup.template] || "🎯" : "📢"}
                           </div>
                           <div className="min-w-0">
                             <div className="flex items-center gap-2">
                               <span className="font-medium text-slate-800 dark:text-slate-200 truncate">{popup.title}</span>
                               {popup.variant_of && (
-                                <Badge variant="outline" className="text-[10px] border-violet-300 text-violet-600 dark:border-violet-800 dark:text-violet-400">
+                                <Badge variant="outline" className="text-[10px] border-burgundy-300 text-burgundy-600 dark:border-burgundy-800 dark:text-burgundy-400">
                                   A/B
                                 </Badge>
                               )}
@@ -229,7 +229,7 @@ export default function PopupsPage() {
                         </span>
                       </td>
                       <td className="px-4 py-3 hidden md:table-cell">
-                        <span className={cn("text-xs font-semibold tabular-nums", (s?.ctr ?? 0) >= 5 ? "text-emerald-600 dark:text-emerald-400" : "text-slate-500 dark:text-slate-400")}>
+                        <span className={cn("text-xs font-semibold tabular-nums", (s?.ctr ?? 0) >= 5 ? "text-burgundy-600 dark:text-burgundy-400" : "text-slate-500 dark:text-slate-400")}>
                           {s ? `${s.ctr.toFixed(1)}%` : "—"}
                         </span>
                       </td>
@@ -240,8 +240,8 @@ export default function PopupsPage() {
                         <Badge variant="outline" className={cn(
                           "text-xs",
                           expired || status === "expired" ? "border-red-200 text-red-600 dark:border-red-900 dark:text-red-400" :
-                          status === "active" ? "border-emerald-200 text-emerald-600 dark:border-emerald-900 dark:text-emerald-400" :
-                          status === "scheduled" ? "border-sky-200 text-sky-600 dark:border-sky-900 dark:text-sky-400" :
+                          status === "active" ? "border-burgundy-200 text-burgundy-600 dark:border-burgundy-900 dark:text-burgundy-400" :
+                          status === "scheduled" ? "border-burgundy-200 text-burgundy-600 dark:border-burgundy-900 dark:text-burgundy-400" :
                           "border-slate-200 text-slate-500 dark:border-slate-700 dark:text-slate-400"
                         )}>
                           {expired ? "Expired" : status}

@@ -109,7 +109,7 @@ export function LeadForm({ popupId, config, variant, popupName, onSuccess }: Pro
               onChange={(e) => update(f, e.target.value)}
               rows={2}
               className="w-full rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 px-3 py-2 text-sm
-                outline-none focus:ring-2 focus:ring-amber-500/50 text-slate-900 dark:text-white resize-none"
+                outline-none focus:ring-2 focus:ring-burgundy-500/50 text-slate-900 dark:text-white resize-none"
             />
           ) : (
             <input
@@ -119,7 +119,7 @@ export function LeadForm({ popupId, config, variant, popupName, onSuccess }: Pro
               onChange={(e) => update(f, e.target.value)}
               placeholder={f === "budget" ? "e.g. $1,500 – $2,500" : ""}
               className="w-full rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 px-3 py-2 text-sm
-                outline-none focus:ring-2 focus:ring-amber-500/50 text-slate-900 dark:text-white"
+                outline-none focus:ring-2 focus:ring-burgundy-500/50 text-slate-900 dark:text-white"
             />
           )}
         </div>
@@ -128,8 +128,8 @@ export function LeadForm({ popupId, config, variant, popupName, onSuccess }: Pro
       <button
         type="submit"
         disabled={status === "sending"}
-        className="w-full rounded-lg bg-gradient-to-r from-amber-500 to-orange-500 py-2.5 text-sm font-bold text-white shadow-md
-          hover:from-amber-400 hover:to-orange-400 active:scale-[0.98] transition disabled:opacity-60"
+        className="w-full rounded-lg bg-gradient-to-r from-burgundy-500 to-burgundy-500 py-2.5 text-sm font-bold text-white shadow-md
+          hover:from-burgundy-400 hover:to-burgundy-400 active:scale-[0.98] transition disabled:opacity-60"
       >
         {status === "sending" ? "Sending..." : config.leadForm.submitLabel || "Submit"}
       </button>

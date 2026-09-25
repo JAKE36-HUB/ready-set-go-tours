@@ -21,10 +21,10 @@ interface BlogPost {
 }
 
 const CATEGORY_COLORS: Record<string, string> = {
-  safari: "bg-amber-100 text-amber-700 dark:bg-amber-900/30 dark:text-amber-400",
-  "travel-tips": "bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-400",
-  destination: "bg-emerald-100 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-400",
-  culture: "bg-purple-100 text-purple-700 dark:bg-purple-900/30 dark:text-purple-400",
+  safari: "bg-burgundy-100 text-burgundy-700 dark:bg-burgundy-900/30 dark:text-burgundy-400",
+  "travel-tips": "bg-burgundy-100 text-burgundy-700 dark:bg-burgundy-900/30 dark:text-burgundy-400",
+  destination: "bg-burgundy-100 text-burgundy-700 dark:bg-burgundy-900/30 dark:text-burgundy-400",
+  culture: "bg-burgundy-100 text-burgundy-700 dark:bg-burgundy-900/30 dark:text-burgundy-400",
   news: "bg-rose-100 text-rose-700 dark:bg-rose-900/30 dark:text-rose-400",
 }
 
@@ -55,7 +55,7 @@ export default function BlogPage() {
       <motion.div initial={{ opacity: 0, y: 15 }} animate={{ opacity: 1, y: 0 }}
         className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-500 to-indigo-400 flex items-center justify-center shadow-lg shadow-blue-500/20">
+          <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-burgundy-500 to-burgundy-400 flex items-center justify-center shadow-lg shadow-burgundy-500/20">
             <FileText className="w-5 h-5 text-white" />
           </div>
           <div>
@@ -64,7 +64,7 @@ export default function BlogPage() {
           </div>
         </div>
         <Button onClick={() => router.push("/admin/blog/new")}
-          className="bg-gradient-to-r from-blue-500 to-indigo-400 text-white border-0 hover:shadow-lg hover:shadow-blue-500/25 transition-all h-9">
+          className="bg-gradient-to-r from-burgundy-500 to-burgundy-400 text-white border-0 hover:shadow-lg hover:shadow-burgundy-500/25 transition-all h-9">
           <Plus className="w-4 h-4 mr-1.5" />
           New Post
         </Button>
@@ -89,13 +89,13 @@ export default function BlogPage() {
       ) : posts.length === 0 ? (
         <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }}
           className="text-center py-16 px-4 rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900">
-          <div className="w-16 h-16 rounded-2xl bg-blue-50 dark:bg-blue-500/10 flex items-center justify-center mx-auto mb-4">
-            <FileText className="w-8 h-8 text-blue-400" />
+          <div className="w-16 h-16 rounded-2xl bg-burgundy-50 dark:bg-burgundy-500/10 flex items-center justify-center mx-auto mb-4">
+            <FileText className="w-8 h-8 text-burgundy-400" />
           </div>
           <p className="text-sm font-medium text-slate-900 dark:text-white">No blog posts yet</p>
           <p className="text-xs text-slate-500 dark:text-slate-400 mt-1 mb-4">Write your first article to engage visitors</p>
           <Button onClick={() => router.push("/admin/blog/new")}
-            className="bg-gradient-to-r from-blue-500 to-indigo-400 text-white border-0">
+            className="bg-gradient-to-r from-burgundy-500 to-burgundy-400 text-white border-0">
             <Plus className="w-4 h-4 mr-1.5" /> New Post
           </Button>
         </motion.div>
@@ -124,7 +124,7 @@ export default function BlogPage() {
                         </Badge>
                       )}
                     </div>
-                    <h3 className="text-sm font-semibold text-slate-900 dark:text-white truncate group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">{post.title}</h3>
+                    <h3 className="text-sm font-semibold text-slate-900 dark:text-white truncate group-hover:text-burgundy-600 dark:group-hover:text-burgundy-400 transition-colors">{post.title}</h3>
                     {post.excerpt && <p className="text-xs text-slate-500 dark:text-slate-400 mt-1 line-clamp-2 leading-relaxed">{post.excerpt}</p>}
                   </div>
                   <div className="flex items-center justify-between mt-4 pt-3 border-t border-slate-100 dark:border-slate-800">
@@ -145,11 +145,11 @@ export default function BlogPage() {
                     </div>
                     <div className="flex items-center gap-0.5 opacity-60 group-hover:opacity-100 transition-opacity">
                       <Button variant="ghost" size="icon" onClick={() => window.open(`/travel-guide/${post.slug}`, "_blank")}
-                        className="hover:bg-sky-50 dark:hover:bg-sky-500/10 hover:text-sky-600" aria-label="View">
+                        className="hover:bg-burgundy-50 dark:hover:bg-burgundy-500/10 hover:text-burgundy-600" aria-label="View">
                         <ExternalLink className="w-3.5 h-3.5" />
                       </Button>
                       <Button variant="ghost" size="icon" onClick={() => router.push(`/admin/blog/${post.id}/edit`)}
-                        className="hover:bg-amber-50 dark:hover:bg-amber-500/10 hover:text-amber-600" aria-label="Edit">
+                        className="hover:bg-burgundy-50 dark:hover:bg-burgundy-500/10 hover:text-burgundy-600" aria-label="Edit">
                         <Edit className="w-3.5 h-3.5" />
                       </Button>
                       <Button variant="ghost" size="icon" onClick={() => handleDelete(post.id)}

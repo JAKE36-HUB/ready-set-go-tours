@@ -36,7 +36,7 @@ function inBudgetBand(lead: Lead, band: string): boolean {
 }
 
 const inputCls =
-  "w-full rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-amber-500/40"
+  "w-full rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-burgundy-500/40"
 
 export default function LeadsPage() {
   const searchParams = useSearchParams()
@@ -122,7 +122,7 @@ export default function LeadsPage() {
       <div className="flex flex-wrap items-center justify-between gap-3">
         <div>
           <h2 className="text-xl font-bold">Lead Inbox</h2>
-          <p className="text-sm text-slate-500">{leads.length} leads{unreadCount > 0 && <span className="text-amber-500"> · {unreadCount} new</span>}</p>
+          <p className="text-sm text-slate-500">{leads.length} leads{unreadCount > 0 && <span className="text-burgundy-500"> · {unreadCount} new</span>}</p>
         </div>
         <div className="flex items-center gap-2 flex-wrap">
           <a href="/api/admin/leads/export" download className="flex items-center gap-1.5 rounded-xl border border-slate-200 dark:border-slate-700 px-3 py-2 text-xs font-semibold hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors">
@@ -181,7 +181,7 @@ export default function LeadsPage() {
             </select>
             <button
               onClick={() => setFilters((f) => ({ ...f, archived: !f.archived }))}
-              className={cn("rounded-xl px-3 py-2 text-xs font-semibold border transition-colors", filters.archived ? "border-amber-400 bg-amber-50 dark:bg-amber-950/40 text-amber-600" : "border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-800")}
+              className={cn("rounded-xl px-3 py-2 text-xs font-semibold border transition-colors", filters.archived ? "border-burgundy-400 bg-burgundy-50 dark:bg-burgundy-950/40 text-burgundy-600" : "border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-800")}
             >
               {filters.archived ? "Archived" : "Active"}
             </button>
@@ -224,14 +224,14 @@ export default function LeadsPage() {
                       transition={{ delay: Math.min(i * 0.02, 0.4) }}
                       onClick={() => setSelectedId(lead.id)}
                       className={cn(
-                        "border-b border-slate-50 dark:border-slate-800/60 cursor-pointer transition-colors hover:bg-amber-50/40 dark:hover:bg-slate-800/40",
-                        selectedId === lead.id && "bg-amber-50/70 dark:bg-amber-950/20",
-                        isNew && "bg-sky-50/40 dark:bg-sky-950/10"
+                        "border-b border-slate-50 dark:border-slate-800/60 cursor-pointer transition-colors hover:bg-burgundy-50/40 dark:hover:bg-slate-800/40",
+                        selectedId === lead.id && "bg-burgundy-50/70 dark:bg-burgundy-950/20",
+                        isNew && "bg-burgundy-50/40 dark:bg-burgundy-950/10"
                       )}
                     >
                       <td className="px-4 py-3">
                         <div className="flex items-center gap-2.5">
-                          <span className="w-8 h-8 rounded-full bg-gradient-to-br from-amber-400 to-orange-500 text-white text-xs font-bold flex items-center justify-center shrink-0">
+                          <span className="w-8 h-8 rounded-full bg-gradient-to-br from-burgundy-400 to-burgundy-500 text-white text-xs font-bold flex items-center justify-center shrink-0">
                             {initials(lead.name || "?")}
                           </span>
                           <div className="min-w-0">

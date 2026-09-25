@@ -19,34 +19,34 @@ const iconMap: Record<string, typeof Hotel> = {
 const serviceConfig: Record<string, { accent: string; accentBg: string; accentText: string; gradient: string; gradient2: string; icon: typeof Hotel }> = {
   "safaris-guided-tours": {
     accent: "amber",
-    accentBg: "bg-amber-50 dark:bg-amber-950/30",
-    accentText: "text-amber-600 dark:text-amber-400",
-    gradient: "from-amber-500 to-orange-600",
-    gradient2: "from-amber-900 via-orange-900 to-slate-900",
+    accentBg: "bg-burgundy-50 dark:bg-burgundy-950/30",
+    accentText: "text-burgundy-600 dark:text-burgundy-400",
+    gradient: "from-burgundy-500 to-burgundy-600",
+    gradient2: "from-burgundy-900 via-burgundy-900 to-slate-900",
     icon: Compass,
   },
   "hotel-bookings": {
     accent: "sky",
-    accentBg: "bg-sky-50 dark:bg-sky-950/30",
-    accentText: "text-sky-600 dark:text-sky-400",
-    gradient: "from-sky-500 to-blue-600",
-    gradient2: "from-sky-900 via-blue-900 to-slate-900",
+    accentBg: "bg-burgundy-50 dark:bg-burgundy-950/30",
+    accentText: "text-burgundy-600 dark:text-burgundy-400",
+    gradient: "from-burgundy-500 to-burgundy-600",
+    gradient2: "from-burgundy-900 via-burgundy-900 to-slate-900",
     icon: Hotel,
   },
   "air-ticketing": {
     accent: "emerald",
-    accentBg: "bg-emerald-50 dark:bg-emerald-950/30",
-    accentText: "text-emerald-600 dark:text-emerald-400",
-    gradient: "from-emerald-500 to-teal-600",
-    gradient2: "from-emerald-900 via-teal-900 to-slate-900",
+    accentBg: "bg-burgundy-50 dark:bg-burgundy-950/30",
+    accentText: "text-burgundy-600 dark:text-burgundy-400",
+    gradient: "from-burgundy-500 to-burgundy-600",
+    gradient2: "from-burgundy-900 via-burgundy-900 to-slate-900",
     icon: Plane,
   },
   "massage-wellness": {
     accent: "violet",
-    accentBg: "bg-violet-50 dark:bg-violet-950/30",
-    accentText: "text-violet-600 dark:text-violet-400",
-    gradient: "from-violet-500 to-purple-600",
-    gradient2: "from-violet-900 via-purple-900 to-slate-900",
+    accentBg: "bg-burgundy-50 dark:bg-burgundy-950/30",
+    accentText: "text-burgundy-600 dark:text-burgundy-400",
+    gradient: "from-burgundy-500 to-burgundy-600",
+    gradient2: "from-burgundy-900 via-burgundy-900 to-slate-900",
     icon: Heart,
   },
 }
@@ -293,7 +293,7 @@ export default function ServiceContent({ service }: Props) {
                         <p className="font-semibold text-sm text-foreground">{t.name}</p>
                         <div className="flex items-center gap-1 mt-0.5">
                           {Array.from({ length: 5 }).map((_, i) => (
-                            <Star key={i} className={`size-3 ${i < t.rating ? "text-amber-400 fill-amber-400" : "text-muted"}`} />
+                            <Star key={i} className={`size-3 ${i < t.rating ? "text-burgundy-400 fill-burgundy-400" : "text-muted"}`} />
                           ))}
                         </div>
                       </div>
@@ -383,7 +383,7 @@ export default function ServiceContent({ service }: Props) {
               <button
                 type="button"
                 onClick={() => openBookingModal(service.title)}
-                className="inline-flex items-center justify-center gap-2 h-12 px-8 rounded-xl bg-gradient-to-r from-emerald-500 to-emerald-600 hover:from-emerald-400 hover:to-emerald-500 text-white font-semibold shadow-lg shadow-emerald-500/25 transition-all"
+                className="inline-flex items-center justify-center gap-2 h-12 px-8 rounded-xl bg-gradient-to-r from-burgundy-500 to-burgundy-600 hover:from-burgundy-400 hover:to-burgundy-500 text-white font-semibold shadow-lg shadow-burgundy-500/25 transition-all"
               >
                 Get a Free Quote
               </button>

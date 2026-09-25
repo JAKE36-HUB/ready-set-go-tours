@@ -39,7 +39,7 @@ export default async function DealsPage() {
         <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/50 to-black/80" />
         <div className="relative z-10 text-center px-6 max-w-4xl mx-auto">
           <AnimatedSection direction="none">
-            <span className="text-xs font-semibold uppercase tracking-[0.2em] text-amber-400">Deals & Offers</span>
+            <span className="text-xs font-semibold uppercase tracking-[0.2em] text-burgundy-400">Deals & Offers</span>
             <h1 className="font-display text-4xl sm:text-5xl lg:text-6xl font-medium text-white mt-4 mb-5 leading-tight">
               Great safaris, at a smarter price
             </h1>
@@ -54,12 +54,12 @@ export default async function DealsPage() {
       <DealsBrowser deals={deals} />
 
       {/* Why Book With Us */}
-      <section className="py-20 px-6 bg-gradient-to-b from-transparent to-emerald-950/5">
+      <section className="py-20 px-6 bg-gradient-to-b from-transparent to-burgundy-950/5">
         <div className="max-w-7xl mx-auto">
           <AnimatedSection>
             <h2 className="font-display text-3xl sm:text-4xl font-medium text-center text-foreground mb-4">
               Why book a{" "}
-              <span className="bg-gradient-to-r from-amber-500 to-orange-400 bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-burgundy-500 to-burgundy-400 bg-clip-text text-transparent">
                 deal
               </span>{" "}
               with us
@@ -79,8 +79,8 @@ export default async function DealsPage() {
             ].map((item) => (
               <AnimatedSection key={item.title}>
                 <div className="text-center p-6 rounded-xl bg-card ring-1 ring-foreground/10">
-                  <div className="size-12 rounded-full bg-emerald-100 dark:bg-emerald-950/50 flex items-center justify-center mx-auto mb-4">
-                    <item.icon className="size-6 text-emerald-600" />
+                  <div className="size-12 rounded-full bg-burgundy-100 dark:bg-burgundy-950/50 flex items-center justify-center mx-auto mb-4">
+                    <item.icon className="size-6 text-burgundy-600" />
                   </div>
                   <h3 className="font-semibold text-foreground mb-2">{item.title}</h3>
                   <p className="text-sm text-muted-foreground">{item.desc}</p>

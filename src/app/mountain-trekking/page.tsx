@@ -51,7 +51,7 @@ export default function MountainTrekkingPage() {
             </span>
             <h1 className="text-4xl sm:text-5xl lg:text-7xl font-bold text-white mb-6 leading-tight">
               Mountain{" "}
-              <span className="bg-gradient-to-r from-violet-300 to-slate-200 bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-burgundy-300 to-slate-200 bg-clip-text text-transparent">
                 Trekking
               </span>
             </h1>
@@ -71,7 +71,7 @@ export default function MountainTrekkingPage() {
             <AnimatedSection>
               <h2 className="text-3xl sm:text-4xl font-bold text-slate-900 dark:text-white">
                 Our Trekking{" "}
-                <span className="bg-gradient-to-r from-violet-500 to-slate-500 bg-clip-text text-transparent">
+                <span className="bg-gradient-to-r from-burgundy-500 to-slate-500 bg-clip-text text-transparent">
                   Packages
                 </span>
               </h2>
@@ -85,7 +85,7 @@ export default function MountainTrekkingPage() {
                 <select
                   value={sortBy}
                   onChange={(e) => setSortBy(e.target.value)}
-                  className="text-sm bg-transparent border border-slate-200 dark:border-slate-700 rounded-lg px-3 py-1.5 outline-none focus:border-violet-500 text-slate-700 dark:text-slate-300"
+                  className="text-sm bg-transparent border border-slate-200 dark:border-slate-700 rounded-lg px-3 py-1.5 outline-none focus:border-burgundy-500 text-slate-700 dark:text-slate-300"
                   aria-label="Sort mountain treks"
                 >
                   {SORT_OPTIONS.map((opt) => (
@@ -113,7 +113,7 @@ export default function MountainTrekkingPage() {
                       <Image src={pkg.image} alt={pkg.name} fill className="object-cover transition-transform duration-700 group-hover:scale-110" />
                       <div className="absolute inset-0 bg-gradient-to-t from-slate-900/60 to-transparent" />
                       <div className="absolute top-3 left-3">
-                        <Badge className="bg-violet-500 text-white text-xs font-semibold px-3 py-1 border-0">
+                        <Badge className="bg-burgundy-500 text-white text-xs font-semibold px-3 py-1 border-0">
                           Mountain Trek
                         </Badge>
                       </div>
@@ -128,16 +128,16 @@ export default function MountainTrekkingPage() {
                       </div>
                     </div>
                     <div className="p-6">
-                      <h3 className="text-lg font-bold text-slate-900 dark:text-white mb-3 group-hover:text-violet-600 dark:group-hover:text-violet-400 transition-colors">
+                      <h3 className="text-lg font-bold text-slate-900 dark:text-white mb-3 group-hover:text-burgundy-600 dark:group-hover:text-burgundy-400 transition-colors">
                         {pkg.name}
                       </h3>
                       <div className="grid grid-cols-2 gap-2 mb-4">
                         <div className="flex items-center gap-2 text-xs text-slate-500 dark:text-slate-400">
-                          <Clock className="w-3.5 h-3.5 text-violet-500 shrink-0" />
+                          <Clock className="w-3.5 h-3.5 text-burgundy-500 shrink-0" />
                           {pkg.duration}
                         </div>
                         <div className="flex items-center gap-2 text-xs text-slate-500 dark:text-slate-400">
-                          <Hotel className="w-3.5 h-3.5 text-violet-500 shrink-0" />
+                          <Hotel className="w-3.5 h-3.5 text-burgundy-500 shrink-0" />
                           <span className="truncate">{pkg.accommodation}</span>
                         </div>
                       </div>
@@ -145,12 +145,12 @@ export default function MountainTrekkingPage() {
                         <div className="grid grid-cols-2 gap-x-2 gap-y-1.5">
                           {pkg.activities.slice(0, 4).map((a) => (
                             <span key={a} className="flex items-center gap-1.5 text-xs text-slate-500 dark:text-slate-400">
-                              <Check className="w-3 h-3 text-emerald-500 shrink-0" />
+                              <Check className="w-3 h-3 text-burgundy-500 shrink-0" />
                               {a}
                             </span>
                           ))}
                           {pkg.activities.length > 4 && (
-                            <span className="text-xs text-violet-600 dark:text-violet-400 ml-5">
+                            <span className="text-xs text-burgundy-600 dark:text-burgundy-400 ml-5">
                               +{pkg.activities.length - 4} more
                             </span>
                           )}
@@ -165,7 +165,7 @@ export default function MountainTrekkingPage() {
                         </Link>
                         <Button
                           onClick={() => openBookingModal(pkg.name)}
-                          className="flex-1 h-11 text-sm font-semibold bg-gradient-to-r from-violet-500 to-slate-600 hover:from-violet-600 hover:to-slate-700 text-white border-0 shadow-md hover:shadow-lg transition-all duration-300"
+                          className="flex-1 h-11 text-sm font-semibold bg-gradient-to-r from-burgundy-500 to-slate-600 hover:from-burgundy-600 hover:to-slate-700 text-white border-0 shadow-md hover:shadow-lg transition-all duration-300"
                         >
                           Get a Free Quote
                         </Button>

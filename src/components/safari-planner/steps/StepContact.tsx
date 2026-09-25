@@ -26,7 +26,7 @@ export function StepContact({
             value={data.fullName}
             onChange={(e) => update("fullName", e.target.value)}
             placeholder="John Smith"
-            className="w-full h-11 px-4 rounded-xl bg-white/5 border border-white/10 text-white placeholder:text-white/30 focus:outline-none focus:border-emerald-400/50 focus:ring-1 focus:ring-emerald-400/30 text-sm"
+            className="w-full h-11 px-4 rounded-xl bg-white/5 border border-white/10 text-white placeholder:text-white/30 focus:outline-none focus:border-burgundy-400/50 focus:ring-1 focus:ring-burgundy-400/30 text-sm"
           />
         </div>
         <div className="grid sm:grid-cols-2 gap-4">
@@ -37,7 +37,7 @@ export function StepContact({
               value={data.email}
               onChange={(e) => update("email", e.target.value)}
               placeholder="john@example.com"
-              className="w-full h-11 px-4 rounded-xl bg-white/5 border border-white/10 text-white placeholder:text-white/30 focus:outline-none focus:border-emerald-400/50 focus:ring-1 focus:ring-emerald-400/30 text-sm"
+              className="w-full h-11 px-4 rounded-xl bg-white/5 border border-white/10 text-white placeholder:text-white/30 focus:outline-none focus:border-burgundy-400/50 focus:ring-1 focus:ring-burgundy-400/30 text-sm"
             />
           </div>
           <div>
@@ -47,7 +47,7 @@ export function StepContact({
               value={data.phone}
               onChange={(e) => update("phone", e.target.value)}
               placeholder="+1 234 567 890"
-              className="w-full h-11 px-4 rounded-xl bg-white/5 border border-white/10 text-white placeholder:text-white/30 focus:outline-none focus:border-emerald-400/50 focus:ring-1 focus:ring-emerald-400/30 text-sm"
+              className="w-full h-11 px-4 rounded-xl bg-white/5 border border-white/10 text-white placeholder:text-white/30 focus:outline-none focus:border-burgundy-400/50 focus:ring-1 focus:ring-burgundy-400/30 text-sm"
             />
           </div>
         </div>
@@ -58,7 +58,7 @@ export function StepContact({
             value={data.country}
             onChange={(e) => update("country", e.target.value)}
             placeholder="United States"
-            className="w-full h-11 px-4 rounded-xl bg-white/5 border border-white/10 text-white placeholder:text-white/30 focus:outline-none focus:border-emerald-400/50 focus:ring-1 focus:ring-emerald-400/30 text-sm"
+            className="w-full h-11 px-4 rounded-xl bg-white/5 border border-white/10 text-white placeholder:text-white/30 focus:outline-none focus:border-burgundy-400/50 focus:ring-1 focus:ring-burgundy-400/30 text-sm"
           />
         </div>
         <div>
@@ -68,7 +68,7 @@ export function StepContact({
             onChange={(e) => update("notes", e.target.value)}
             placeholder="Any specific requirements, dietary needs, or preferences..."
             rows={3}
-            className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder:text-white/30 focus:outline-none focus:border-emerald-400/50 focus:ring-1 focus:ring-emerald-400/30 text-sm resize-none"
+            className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder:text-white/30 focus:outline-none focus:border-burgundy-400/50 focus:ring-1 focus:ring-burgundy-400/30 text-sm resize-none"
           />
         </div>
       </div>
@@ -79,7 +79,7 @@ export function StepContact({
           type="button"
           onClick={onNext}
           disabled={!valid}
-          className="h-10 px-6 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-white text-sm font-semibold shadow-lg shadow-emerald-500/25 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+          className="h-10 px-6 rounded-xl bg-burgundy-500 hover:bg-burgundy-400 text-white text-sm font-semibold shadow-lg shadow-burgundy-500/25 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
         >
           {valid ? "Get My Quote" : "Fill required fields"}
         </button>

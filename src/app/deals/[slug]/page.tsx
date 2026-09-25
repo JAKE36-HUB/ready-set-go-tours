@@ -184,7 +184,7 @@ export default async function DealDetailPage({
           <div className="flex items-baseline gap-2">
             <span className="text-2xl font-bold text-foreground">${deal.dealPrice.toLocaleString()}</span>
             <span className="text-sm text-muted-foreground line-through">${deal.originalPrice.toLocaleString()}</span>
-            <span className="text-xs font-medium text-emerald-500">per person</span>
+            <span className="text-xs font-medium text-burgundy-500">per person</span>
           </div>
           <div className="text-[10px] text-muted-foreground uppercase tracking-wider">Non-resident</div>
           <div className="text-xs text-muted-foreground">
@@ -198,7 +198,7 @@ export default async function DealDetailPage({
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 h-11 px-5 rounded-xl bg-card border border-border hover:border-primary/40 hover:bg-primary/5 text-foreground text-sm font-medium transition-all"
             >
-              <MessageCircle className="size-4 text-primary dark:text-amber-400" />
+              <MessageCircle className="size-4 text-primary dark:text-burgundy-400" />
               WhatsApp a Safari Expert
             </a>
             <Link
@@ -229,7 +229,7 @@ export default async function DealDetailPage({
                 <div className="grid sm:grid-cols-2 gap-3">
                   {deal.highlights.map((h: string) => (
                     <div key={h} className="flex items-start gap-3 p-4 rounded-xl bg-card ring-1 ring-foreground/5">
-                      <Star className="size-5 text-primary dark:text-amber-400 shrink-0 mt-0.5 fill-primary/20" />
+                      <Star className="size-5 text-primary dark:text-burgundy-400 shrink-0 mt-0.5 fill-primary/20" />
                       <span className="text-sm text-foreground">{h}</span>
                     </div>
                   ))}
@@ -244,15 +244,15 @@ export default async function DealDetailPage({
                     <div key={idx} className="relative flex gap-6 pb-8 last:pb-0">
                       {/* Timeline line */}
                       {idx < deal.itinerary.length - 1 && (
-                        <div className="absolute left-[19px] top-10 bottom-0 w-0.5 bg-amber-200 dark:bg-amber-900" />
+                        <div className="absolute left-[19px] top-10 bottom-0 w-0.5 bg-burgundy-200 dark:bg-burgundy-900" />
                       )}
                       {/* Timeline dot */}
-                      <div className="relative z-10 flex size-10 shrink-0 items-center justify-center rounded-full bg-amber-100 dark:bg-amber-950 text-amber-600 dark:text-amber-400 text-xs font-bold">
+                      <div className="relative z-10 flex size-10 shrink-0 items-center justify-center rounded-full bg-burgundy-100 dark:bg-burgundy-950 text-burgundy-600 dark:text-burgundy-400 text-xs font-bold">
                         {idx + 1}
                       </div>
                       {/* Content */}
                       <div className="min-w-0 pt-1">
-                        <p className="text-sm font-semibold text-amber-600 dark:text-amber-400 mb-1">{item.day}</p>
+                        <p className="text-sm font-semibold text-burgundy-600 dark:text-burgundy-400 mb-1">{item.day}</p>
                         <p className="text-sm text-muted-foreground leading-relaxed">{item.description}</p>
                       </div>
                     </div>
@@ -269,31 +269,31 @@ export default async function DealDetailPage({
                   <h3 className="font-semibold text-foreground">Deal Details</h3>
                   <div className="space-y-4">
                     <div className="flex items-start gap-3">
-                      <Clock className="size-5 text-primary dark:text-amber-400 shrink-0 mt-0.5" />
+                      <Clock className="size-5 text-primary dark:text-burgundy-400 shrink-0 mt-0.5" />
                       <div>
                         <p className="text-sm font-medium text-foreground">Duration</p>
                         <p className="text-sm text-muted-foreground">{deal.duration}</p>
                       </div>
                     </div>
                     <div className="flex items-start gap-3">
-                      <Hotel className="size-5 text-primary dark:text-amber-400 shrink-0 mt-0.5" />
+                      <Hotel className="size-5 text-primary dark:text-burgundy-400 shrink-0 mt-0.5" />
                       <div>
                         <p className="text-sm font-medium text-foreground">Accommodation</p>
                         <p className="text-sm text-muted-foreground">{deal.accommodation}</p>
                       </div>
                     </div>
                     <div className="flex items-start gap-3">
-                      <Utensils className="size-5 text-primary dark:text-amber-400 shrink-0 mt-0.5" />
+                      <Utensils className="size-5 text-primary dark:text-burgundy-400 shrink-0 mt-0.5" />
                       <div>
                         <p className="text-sm font-medium text-foreground">Meals</p>
                         <p className="text-sm text-muted-foreground">{deal.meals}</p>
                       </div>
                     </div>
                     <div className="flex items-start gap-3">
-                      <Shield className="size-5 text-primary dark:text-amber-400 shrink-0 mt-0.5" />
+                      <Shield className="size-5 text-primary dark:text-burgundy-400 shrink-0 mt-0.5" />
                       <div>
                         <p className="text-sm font-medium text-foreground">Promo Code</p>
-                        <p className="text-sm font-mono font-bold text-amber-600 dark:text-amber-400">{deal.code}</p>
+                        <p className="text-sm font-mono font-bold text-burgundy-600 dark:text-burgundy-400">{deal.code}</p>
                       </div>
                     </div>
                   </div>
@@ -307,7 +307,7 @@ export default async function DealDetailPage({
                   <ul className="space-y-3">
                     {deal.included.map((item: string) => (
                       <li key={item} className="flex items-start gap-3 text-sm text-muted-foreground">
-                        <Check className="size-4 text-primary dark:text-amber-400 shrink-0 mt-0.5" />
+                        <Check className="size-4 text-primary dark:text-burgundy-400 shrink-0 mt-0.5" />
                         {item}
                       </li>
                     ))}
@@ -353,7 +353,7 @@ export default async function DealDetailPage({
         <div className="max-w-7xl mx-auto">
           <AnimatedSection>
             <div className="text-center mb-12">
-              <span className="text-xs font-semibold uppercase tracking-[0.2em] text-primary dark:text-amber-400">More Deals</span>
+              <span className="text-xs font-semibold uppercase tracking-[0.2em] text-primary dark:text-burgundy-400">More Deals</span>
               <h2 className="font-display text-2xl sm:text-3xl font-medium text-foreground mt-3 mb-2">
                 You might also like
               </h2>
