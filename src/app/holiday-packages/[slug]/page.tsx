@@ -2,15 +2,14 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { COMPANY } from "@/lib/constants";
+import { COMPANY, PLAN_SAFARI_ROUTE } from "@/lib/constants";
 import { getSupabase } from "@/lib/supabase";
 import { TourPackageJsonLd, BreadcrumbJsonLd } from "@/components/JsonLd";
 import {
-  Clock, Star, Check, X, ArrowLeft,
-  Hotel, Utensils, Car, Compass, MessageCircle,
+  Clock, Check, X, ArrowLeft,
+  Hotel, Utensils, Car, Compass, MessageCircle, ArrowRight,
 } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
-import BookingButton from "@/components/BookingButton";
 import AnimatedSection from "@/components/AnimatedSection";
 import { PaymentPolicy } from "@/components/PaymentPolicy";
 
@@ -65,10 +64,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 const typeColors: Record<string, string> = {
-  safari: "bg-emerald-500/15 text-emerald-300 border-emerald-500/30",
-  group: "bg-teal-500/15 text-teal-300 border-teal-500/30",
-  luxury: "bg-amber-500/15 text-amber-300 border-amber-500/30",
-  mountain: "bg-violet-500/15 text-violet-300 border-violet-500/30",
+  safari: "bg-white/90 text-stone-900 border-transparent",
+  group: "bg-white/90 text-stone-900 border-transparent",
+  luxury: "bg-white/90 text-stone-900 border-transparent",
+  mountain: "bg-white/90 text-stone-900 border-transparent",
 };
 
 interface PackageRow {
@@ -150,10 +149,8 @@ export default async function PackageDetailPage({
               {pkg.duration}
             </span>
           </div>
-          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-3">{pkg.name}</h1>
-          <div className="flex flex-wrap items-center gap-1 text-sm text-white/50">
-            <span>Scenic game drive through the wilderness</span>
-          </div>
+          <h1 className="font-display text-4xl sm:text-5xl lg:text-6xl font-medium text-white mb-3 leading-tight">{pkg.name}</h1>
+          <p className="text-sm text-white/60">{COMPANY.tagline}</p>
         </div>
       </section>
 
@@ -176,21 +173,21 @@ export default async function PackageDetailPage({
             )}
           </div>
           <div className="flex items-center gap-3">
-            <BookingButton
-              packageName={pkg.name}
-              className="h-10 px-5 bg-gradient-to-r from-emerald-500 to-emerald-600 hover:from-emerald-600 hover:to-emerald-700 text-white text-sm font-semibold shadow-lg"
-            >
-              Get a Free Quote
-            </BookingButton>
             <a
-              href={`https://wa.me/${COMPANY.whatsapp}?text=Hi!%20I'm%20interested%20in%20${encodeURIComponent(pkg.name)}`}
+              href={`https://wa.me/${COMPANY.whatsapp.replace(/\D/g, "")}?text=${encodeURIComponent(`Hi! I'd like to plan ${pkg.name} with Ready Set Go Safaris.`)}`}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 h-10 px-4 rounded-lg bg-white/10 hover:bg-white/20 text-foreground text-sm font-medium transition-all ring-1 ring-foreground/10"
+              className="inline-flex items-center gap-2 h-11 px-5 rounded-xl bg-card border border-border hover:border-primary/40 hover:bg-primary/5 text-foreground text-sm font-medium transition-all"
             >
-              <MessageCircle className="size-4" />
-              WhatsApp Us
+              <MessageCircle className="size-4 text-primary dark:text-amber-400" />
+              WhatsApp a Safari Expert
             </a>
+            <Link
+              href={PLAN_SAFARI_ROUTE}
+              className="inline-flex items-center gap-2 h-11 px-6 rounded-xl gradient-primary text-white text-sm font-semibold shadow-premium hover:shadow-premium transition-all"
+            >
+              Plan This Safari <ArrowRight className="size-4" />
+            </Link>
           </div>
         </div>
       </section>
@@ -202,16 +199,16 @@ export default async function PackageDetailPage({
             {/* Main */}
             <div className="lg:col-span-2 space-y-12">
               <AnimatedSection>
-                <h2 className="text-2xl font-bold text-foreground mb-4">About This Safari</h2>
+                <h2 className="font-display text-2xl font-medium text-foreground mb-4">About This Safari</h2>
                 <p className="text-muted-foreground leading-relaxed text-lg">{pkg.description}</p>
               </AnimatedSection>
 
               <AnimatedSection>
-                <h2 className="text-2xl font-bold text-foreground mb-4">Highlights</h2>
+                <h2 className="font-display text-2xl font-medium text-foreground mb-4">Highlights</h2>
                 <div className="grid sm:grid-cols-2 gap-3">
                   {pkg.highlights.map((h: string) => (
                     <div key={h} className="flex items-start gap-3 p-4 rounded-xl bg-card ring-1 ring-foreground/5">
-                      <Star className="size-5 text-emerald-500 shrink-0 mt-0.5 fill-emerald-500/20" />
+                      <Compass className="size-5 text-primary dark:text-amber-400 shrink-0 mt-0.5" />
                       <span className="text-sm text-foreground">{h}</span>
                     </div>
                   ))}
@@ -219,11 +216,11 @@ export default async function PackageDetailPage({
               </AnimatedSection>
 
               <AnimatedSection>
-                <h2 className="text-2xl font-bold text-foreground mb-4">Activities</h2>
+                <h2 className="font-display text-2xl font-medium text-foreground mb-4">Activities</h2>
                 <div className="flex flex-wrap gap-2">
                   {pkg.activities.map((a: string) => (
                     <span key={a} className="inline-flex items-center gap-1.5 text-sm bg-card ring-1 ring-foreground/10 text-foreground px-4 py-2 rounded-full">
-                      <Compass className="size-4 text-emerald-500 shrink-0" />
+                      <Compass className="size-4 text-primary dark:text-amber-400 shrink-0" />
                       {a}
                     </span>
                   ))}
@@ -238,28 +235,28 @@ export default async function PackageDetailPage({
                   <h3 className="font-semibold text-foreground">Trip Details</h3>
                   <div className="space-y-4">
                     <div className="flex items-start gap-3">
-                      <Clock className="size-5 text-emerald-500 shrink-0 mt-0.5" />
+                      <Clock className="size-5 text-primary dark:text-amber-400 shrink-0 mt-0.5" />
                       <div>
                         <p className="text-sm font-medium text-foreground">Duration</p>
                         <p className="text-sm text-muted-foreground">{pkg.duration}</p>
                       </div>
                     </div>
                     <div className="flex items-start gap-3">
-                      <Hotel className="size-5 text-emerald-500 shrink-0 mt-0.5" />
+                      <Hotel className="size-5 text-primary dark:text-amber-400 shrink-0 mt-0.5" />
                       <div>
                         <p className="text-sm font-medium text-foreground">Accommodation</p>
                         <p className="text-sm text-muted-foreground">{pkg.accommodation}</p>
                       </div>
                     </div>
                     <div className="flex items-start gap-3">
-                      <Utensils className="size-5 text-emerald-500 shrink-0 mt-0.5" />
+                      <Utensils className="size-5 text-primary dark:text-amber-400 shrink-0 mt-0.5" />
                       <div>
                         <p className="text-sm font-medium text-foreground">Meals</p>
                         <p className="text-sm text-muted-foreground">{pkg.meals}</p>
                       </div>
                     </div>
                     <div className="flex items-start gap-3">
-                      <Car className="size-5 text-emerald-500 shrink-0 mt-0.5" />
+                      <Car className="size-5 text-primary dark:text-amber-400 shrink-0 mt-0.5" />
                       <div>
                         <p className="text-sm font-medium text-foreground">Transport</p>
                         <p className="text-sm text-muted-foreground">{pkg.transport}</p>
@@ -275,7 +272,7 @@ export default async function PackageDetailPage({
                   <ul className="space-y-3">
                     {pkg.included.map((item: string) => (
                       <li key={item} className="flex items-start gap-3 text-sm text-muted-foreground">
-                        <Check className="size-4 text-emerald-500 shrink-0 mt-0.5" />
+                        <Check className="size-4 text-primary dark:text-amber-400 shrink-0 mt-0.5" />
                         {item}
                       </li>
                     ))}
@@ -300,26 +297,26 @@ export default async function PackageDetailPage({
               <PaymentPolicy />
 
               <AnimatedSection>
-                <div className="rounded-2xl bg-gradient-to-br from-emerald-50 to-teal-50 dark:from-emerald-950/30 dark:to-teal-950/30 ring-1 ring-emerald-100 dark:ring-emerald-900/50 p-6 text-center">
-                  <h3 className="font-semibold text-foreground mb-2">Ready to Book?</h3>
-                  <p className="text-sm text-muted-foreground mb-4">
-                    Reserve your spot now. Group joining safaris fill up fast!
+                <div className="rounded-3xl p-8 text-center gradient-primary text-white shadow-premium">
+                  <h3 className="font-display text-xl font-medium mb-2">Ready to plan this safari?</h3>
+                  <p className="text-sm text-white/80 mb-6">
+                    Tell us your dates, and we&apos;ll shape this itinerary exactly around you. No templates, no pressure.
                   </p>
                   <div className="space-y-3">
-                    <BookingButton
-                      packageName={pkg.name}
-                      className="w-full h-11 bg-gradient-to-r from-emerald-500 to-emerald-600 hover:from-emerald-600 hover:to-emerald-700 text-white font-semibold shadow-lg"
+                    <Link
+                      href={PLAN_SAFARI_ROUTE}
+                      className="flex items-center justify-center gap-2 w-full h-12 rounded-xl bg-white text-stone-900 font-semibold hover:bg-stone-100 transition-all"
                     >
-                      Get a Free Quote
-                    </BookingButton>
+                      Plan My Safari <ArrowRight className="size-4" />
+                    </Link>
                     <a
-                      href={`https://wa.me/${COMPANY.whatsapp}?text=Hi!%20I'm%20interested%20in%20${encodeURIComponent(pkg.name)}`}
+                      href={`https://wa.me/${COMPANY.whatsapp.replace(/\D/g, "")}?text=${encodeURIComponent(`Hi! I'd like to plan ${pkg.name} with Ready Set Go Safaris.`)}`}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex items-center justify-center gap-2 w-full h-11 rounded-lg bg-card ring-1 ring-foreground/10 hover:ring-emerald-500/30 text-foreground text-sm font-medium transition-all"
+                      className="flex items-center justify-center gap-2 w-full h-12 rounded-xl bg-white/10 hover:bg-white/20 text-white text-sm font-medium ring-1 ring-white/25 transition-all"
                     >
                       <MessageCircle className="size-4" />
-                      WhatsApp Us
+                      WhatsApp a Safari Expert
                     </a>
                   </div>
                 </div>

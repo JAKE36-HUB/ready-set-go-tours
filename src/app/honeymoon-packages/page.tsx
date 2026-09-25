@@ -1,7 +1,7 @@
 ﻿import Image from "next/image";
 import Link from "next/link";
-import { Heart, Phone, Star, Quote, Shield, Gift } from "lucide-react";
-import { COMPANY } from "@/lib/constants";
+import { Heart, Quote, Star, Shield, Gift, MessageCircle, ArrowRight } from "lucide-react";
+import { COMPANY, PLAN_SAFARI_ROUTE } from "@/lib/constants";
 import { getSupabase } from "@/lib/supabase";
 import AnimatedSection from "@/components/AnimatedSection";
 import HoneymoonGrid, { type HoneymoonCard } from "@/components/HoneymoonGrid";
@@ -35,11 +35,11 @@ export default async function HoneymoonPage() {
 
         <div className="relative z-10 text-center px-6 max-w-3xl mx-auto">
           <AnimatedSection>
-            <Heart className="size-10 text-rose-400 mx-auto mb-4" />
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white mb-4">
-              Honeymoon{" "}
-              <span className="bg-gradient-to-r from-rose-300 via-rose-200 to-pink-200 bg-clip-text text-transparent">
-                Packages
+            <span className="text-xs font-semibold uppercase tracking-[0.2em] text-rose-300">Honeymoons</span>
+            <h1 className="font-display text-4xl sm:text-5xl lg:text-6xl font-medium text-white mt-4 mb-5 leading-tight">
+              Travel as a couple.
+              <span className="block bg-gradient-to-r from-rose-300 via-rose-200 to-pink-200 bg-clip-text text-transparent">
+                Not as tourists.
               </span>
             </h1>
             <p className="text-lg text-white/60 max-w-xl mx-auto">
@@ -56,11 +56,12 @@ export default async function HoneymoonPage() {
       <section className="py-20 px-6 bg-gradient-to-b from-transparent to-rose-50/50 dark:to-rose-950/10">
         <div className="max-w-7xl mx-auto">
           <AnimatedSection>
-            <h2 className="text-3xl sm:text-4xl font-bold text-center text-foreground mb-4">
-              Why Choose Us for Your{" "}
+            <h2 className="font-display text-3xl sm:text-4xl font-medium text-center text-foreground mb-4">
+              Why couple up for your{" "}
               <span className="bg-gradient-to-r from-rose-500 to-pink-400 bg-clip-text text-transparent">
                 Honeymoon
-              </span>
+              </span>{" "}
+              with us
             </h2>
             <p className="text-muted-foreground text-center max-w-2xl mx-auto mb-14">
               We believe your honeymoon should be as unique as your love story. Every detail is crafted
@@ -95,16 +96,11 @@ export default async function HoneymoonPage() {
           <AnimatedSection>
             <div className="relative p-10 rounded-3xl bg-gradient-to-br from-rose-50 to-pink-50 dark:from-rose-950/20 dark:to-pink-950/20 ring-1 ring-rose-100 dark:ring-rose-900/30 text-center">
               <Quote className="size-10 text-rose-300/50 mx-auto mb-6" />
-              <blockquote className="text-xl sm:text-2xl text-slate-700 dark:text-slate-200 font-medium italic leading-relaxed mb-6">
+              <blockquote className="font-display text-xl sm:text-2xl text-slate-700 dark:text-slate-200 font-medium italic leading-relaxed mb-6">
                 &ldquo;Our honeymoon in Kenya was absolutely perfect. Every detail was thought of —
                 from the champagne sundowner in the Mara to the private dinner on the beach in Diani.
                 We will treasure these memories forever.&rdquo;
               </blockquote>
-              <div className="flex items-center justify-center gap-1.5 mb-1">
-                {[...Array(5)].map((_, i) => (
-                  <Star key={i} className="size-4 fill-amber-400 text-amber-400" />
-                ))}
-              </div>
               <p className="font-semibold text-foreground">James & Emily Chen</p>
               <p className="text-sm text-muted-foreground">Honeymoon Safari & Beach, 2025</p>
             </div>
@@ -116,26 +112,27 @@ export default async function HoneymoonPage() {
       <section className="pb-20 px-6">
         <div className="max-w-4xl mx-auto">
           <AnimatedSection>
-            <div className="text-center p-10 rounded-2xl bg-gradient-to-br from-slate-900 to-slate-800 ring-1 ring-slate-700 text-white">
+            <div className="text-center p-10 rounded-3xl bg-gradient-to-br from-slate-900 to-stone-900 ring-1 ring-slate-700 text-white">
               <Heart className="size-10 text-rose-400 mx-auto mb-4" />
-              <h2 className="text-2xl font-bold mb-3">Ready to Plan Your Romantic Escape?</h2>
+              <h2 className="font-display text-2xl font-medium mb-3">Ready to Plan Your Romantic Escape?</h2>
               <p className="text-white/60 mb-6 max-w-md mx-auto">
-                Let our honeymoon specialists craft the perfect itinerary for your love story.
+                Tell us your dates and we&apos;ll shape the rest — candlelit dinners, sunrise drives and a beach to melt into.
               </p>
               <div className="flex flex-wrap items-center justify-center gap-4">
                 <Link
-                  href="/contact"
-                  className="inline-flex items-center justify-center gap-2 h-12 px-6 rounded-xl bg-rose-500 hover:bg-rose-600 text-white text-sm font-medium transition-colors shadow-lg shadow-rose-500/25"
+                  href={PLAN_SAFARI_ROUTE}
+                  className="inline-flex items-center justify-center gap-2 h-12 px-6 rounded-xl bg-gradient-to-r from-rose-500 to-orange-500 hover:from-rose-600 hover:to-orange-600 text-white text-sm font-semibold transition-all shadow-lg shadow-rose-900/30"
                 >
-                  <Heart className="size-4" />
-                  Get a Free Quote
+                  Design Our Honeymoon <ArrowRight className="size-4" />
                 </Link>
                 <a
-                  href={`tel:${COMPANY.phone}`}
+                  href={`https://wa.me/${COMPANY.whatsapp.replace(/\D/g, "")}?text=${encodeURIComponent("Hi! We'd like to plan our honeymoon with Ready Set Go Safaris.")}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="inline-flex items-center justify-center gap-2 h-12 px-6 rounded-xl bg-white/10 hover:bg-white/20 text-white text-sm font-medium transition-all ring-1 ring-white/20"
                 >
-                  <Phone className="size-4" />
-                  {COMPANY.phone}
+                  <MessageCircle className="size-4" />
+                  WhatsApp a Safari Expert
                 </a>
               </div>
             </div>

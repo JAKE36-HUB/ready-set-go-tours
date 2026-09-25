@@ -3,22 +3,10 @@
 import { useMemo, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import AnimatedSection from "@/components/AnimatedSection";
-import { openBookingModal } from "@/lib/booking-store";
-import { PACKAGE_FILTERS } from "@/lib/constants";
-import {
-  Clock,
-  Hotel,
-  Utensils,
-  Car,
-  Compass,
-  ArrowUpDown,
-  Eye,
-  Check,
-  X,
-} from "lucide-react";
+import { PACKAGE_FILTERS, PLAN_SAFARI_ROUTE } from "@/lib/constants";
+import { Clock, Bed, Utensils, Car, ArrowUpDown, ArrowRight } from "lucide-react";
 
 const SORT_OPTIONS = [
   { value: "price-asc", label: "Price: Low to High" },
@@ -27,13 +15,13 @@ const SORT_OPTIONS = [
   { value: "name", label: "Name" },
 ] as const;
 
-const typeColors: Record<string, string> = {
-  safari: "bg-emerald-500/10 text-emerald-600 border-emerald-500/20",
-  beach: "bg-sky-500/10 text-sky-600 border-sky-500/20",
-  luxury: "bg-amber-500/10 text-amber-600 border-amber-500/20",
-  mountain: "bg-violet-500/10 text-violet-600 border-violet-500/20",
-  group: "bg-teal-500/10 text-teal-600 border-teal-500/20",
-  honeymoon: "bg-rose-500/10 text-rose-600 border-rose-500/20",
+const typeLabel: Record<string, string> = {
+  safari: "Safari",
+  group: "Group Safari",
+  luxury: "Luxury",
+  mountain: "Trek",
+  beach: "Beach",
+  cultural: "Cultural",
 };
 
 export interface PackageCard {
@@ -64,8 +52,6 @@ export default function PackagesBrowser({
     initialType ? initialType.charAt(0).toUpperCase() + initialType.slice(1) : "All"
   );
   const [sortBy, setSortBy] = useState<string>("price-asc");
-  const [compareIds, setCompareIds] = useState<number[]>([]);
-  const [showCompare, setShowCompare] = useState(false);
 
   const filtered = useMemo(() => {
     let pkgs = [...packages];
@@ -97,14 +83,6 @@ export default function PackagesBrowser({
     return pkgs;
   }, [activeFilter, sortBy, packages]);
 
-  const toggleCompare = (id: number) => {
-    setCompareIds((prev) =>
-      prev.includes(id) ? prev.filter((i) => i !== id) : prev.length < 3 ? [...prev, id] : prev
-    );
-  };
-
-  const compared = packages.filter((p) => compareIds.includes(p.id));
-
   return (
     <>
       {/* Filters & Content */}
@@ -119,10 +97,10 @@ export default function PackagesBrowser({
                   <button
                     key={f}
                     onClick={() => setActiveFilter(f)}
-                    className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${
+                    className={`px-5 py-2.5 rounded-full text-sm font-medium transition-all border ${
                       activeFilter === f
-                        ? "bg-sky-500 text-white shadow-lg shadow-sky-500/25"
-                        : "bg-muted text-muted-foreground hover:bg-muted/80"
+                        ? "gradient-primary text-white border-transparent shadow-premium"
+                        : "bg-card border-border text-muted-foreground hover:border-primary/40 hover:text-foreground"
                     }`}
                   >
                     {f}
@@ -130,35 +108,21 @@ export default function PackagesBrowser({
                 ))}
               </div>
 
-              {/* Sort & Compare */}
-              <div className="flex items-center justify-between">
-                <div className="flex items-center gap-2">
-                  <ArrowUpDown className="size-4 text-muted-foreground" />
-                  <select
-                    value={sortBy}
-                    onChange={(e) => setSortBy(e.target.value)}
-                    className="text-sm bg-transparent border border-input rounded-lg px-3 py-1.5 outline-none focus:border-sky-500"
-                    aria-label="Sort packages"
-                  >
-                    {SORT_OPTIONS.map((opt) => (
-                      <option key={opt.value} value={opt.value}>
-                        {opt.label}
-                      </option>
-                    ))}
-                  </select>
-                </div>
-
-                {compareIds.length > 0 && (
-                  <Button
-                    variant="outline"
-                    size="sm"
-                    onClick={() => setShowCompare(true)}
-                    className="border-sky-200 text-sky-600 hover:bg-sky-50"
-                  >
-                    <Eye className="size-3.5 mr-1.5" />
-                    Compare ({compareIds.length})
-                  </Button>
-                )}
+              {/* Sort */}
+              <div className="flex items-center gap-2">
+                <ArrowUpDown className="size-4 text-muted-foreground" />
+                <select
+                  value={sortBy}
+                  onChange={(e) => setSortBy(e.target.value)}
+                  className="text-sm bg-card border border-border rounded-lg px-3 py-1.5 outline-none focus:border-primary"
+                  aria-label="Sort packages"
+                >
+                  {SORT_OPTIONS.map((opt) => (
+                    <option key={opt.value} value={opt.value}>
+                      {opt.label}
+                    </option>
+                  ))}
+                </select>
               </div>
             </div>
           </AnimatedSection>
@@ -167,148 +131,79 @@ export default function PackagesBrowser({
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {filtered.map((pkg, i) => (
               <AnimatedSection key={pkg.id} delay={i * 0.05}>
-                <div className={`group relative flex flex-col rounded-2xl overflow-hidden transition-all duration-500 h-full ${
-                  pkg.type === "luxury"
-                    ? "bg-white dark:bg-slate-900 ring-1 ring-slate-200 dark:ring-slate-700 shadow-sm hover:shadow-xl hover:-translate-y-1"
-                    : "bg-card ring-1 ring-foreground/10 hover:shadow-xl"
-                }`}>
-                  {/* Luxury ribbon */}
-                  {pkg.type === "luxury" && (
-                    <div className="absolute top-0 left-0 z-20">
-                      <div className="bg-white/90 backdrop-blur-md text-slate-800 text-[10px] font-semibold px-4 py-1.5 rounded-br-xl shadow-sm flex items-center gap-1.5">
-                        <span className="w-1.5 h-1.5 rounded-full bg-slate-800" />
-                        Curated
-                      </div>
-                    </div>
-                  )}
-
-                  {/* Compare checkbox */}
-                  <button
-                    onClick={() => toggleCompare(pkg.id)}
-                    className={`absolute top-3 left-3 z-10 w-7 h-7 rounded-lg flex items-center justify-center transition-all ${
-                      pkg.type === "luxury" ? "top-10" : "top-3"
-                    } ${
-                      compareIds.includes(pkg.id)
-                        ? "bg-sky-500 text-white"
-                        : "bg-white/80 backdrop-blur-sm text-muted-foreground hover:bg-white"
-                    }`}
-                    title="Add to compare"
-                  >
-                    {compareIds.includes(pkg.id) ? (
-                      <Check className="size-3.5" />
-                    ) : (
-                      <Eye className="size-3.5" />
-                    )}
-                  </button>
-
+                <div className="group relative flex flex-col h-full bg-card rounded-3xl overflow-hidden border border-border hover:shadow-2xl hover:-translate-y-1 transition-all duration-500">
                   {/* Image */}
                   <div className="relative aspect-[16/10] overflow-hidden">
                     <Image
                       src={pkg.image}
                       alt={pkg.name}
                       fill
-                      className="object-cover transition-transform duration-500 group-hover:scale-105"
+                      className="object-cover transition-transform duration-700 group-hover:scale-105"
                       sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
-                    <div className="absolute top-3 right-3">
-                      <Badge
-                        variant="secondary"
-                        className={`capitalize border backdrop-blur-sm ${
-                          pkg.type === "luxury"
-                            ? "bg-white/20 text-white border-white/30"
-                            : typeColors[pkg.type] || ""
-                        }`}
-                      >
-                        {pkg.type === "luxury" ? "Luxury" : pkg.type === "group" ? "Group" : pkg.type}
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/55 to-transparent" />
+                    <div className="absolute top-3 left-3">
+                      <Badge className="bg-white/90 backdrop-blur text-stone-900 text-xs font-semibold px-3 py-1 hover:bg-white/90 border-0">
+                        {typeLabel[pkg.type] || "Safari"}
                       </Badge>
                     </div>
-                    <div className="absolute bottom-0 inset-x-0 h-24" />
-                    <div className="absolute bottom-3 left-3">
-                        <div>
-                          <div className="text-[10px] text-white/50 uppercase tracking-wider">Non-resident</div>
-                          <span className="text-2xl font-bold text-white drop-shadow-lg">
-                            ${pkg.price.toLocaleString()}
-                          </span>
-                          <span className="text-white/70 text-xs ml-1">/ person</span>
-                          {pkg.priceKES && (
-                            <>
-                              <div className="text-xs text-white/70 uppercase tracking-wider mt-1 font-semibold">Citizen</div>
-                              <div className="text-white font-bold text-sm">KES {pkg.priceKES.toLocaleString()}</div>
-                            </>
-                          )}
-                        </div>
+                    <div className="absolute bottom-3 right-3 rounded-xl bg-stone-950/70 backdrop-blur px-3 py-2 text-white ring-1 ring-white/15">
+                      <span className="text-[10px] uppercase tracking-wider text-white/60 block">From</span>
+                      <span className="text-lg font-semibold leading-none">
+                        ${pkg.price.toLocaleString()}
+                        <span className="text-xs font-normal text-white/60"> /pp</span>
+                      </span>
                     </div>
                   </div>
 
                   {/* Content */}
                   <div className="flex flex-col flex-1 p-6">
-                    <div className="flex items-start justify-between gap-2 mb-2">
-                      <h3 className={`font-bold ${pkg.type === "luxury" ? "text-xl text-foreground" : "text-lg text-foreground"}`}>
-                        {pkg.name}
-                      </h3>
-                    </div>
-                    <p className={`text-sm mb-4 line-clamp-2 flex-1 ${
-                      pkg.type === "luxury" ? "text-muted-foreground/80" : "text-muted-foreground"
-                    }`}>
+                    <h3 className="font-display text-xl font-medium text-foreground mb-3 leading-snug">
+                      {pkg.name}
+                    </h3>
+                    <p className="text-sm text-muted-foreground line-clamp-2 mb-5 flex-1">
                       {pkg.description}
                     </p>
 
-                    <div className="space-y-2.5 mb-5">
+                    <div className="grid grid-cols-2 gap-x-4 gap-y-2.5 mb-6">
                       <div className="flex items-center gap-2 text-xs text-muted-foreground">
-                        <Clock className="size-3.5 text-sky-500" />
+                        <Clock className="size-3.5 text-primary dark:text-amber-400 shrink-0" />
                         {pkg.duration}
                       </div>
                       <div className="flex items-center gap-2 text-xs text-muted-foreground">
-                        <Hotel className="size-3.5 text-amber-500" />
+                        <Bed className="size-3.5 text-primary dark:text-amber-400 shrink-0" />
                         <span className="line-clamp-1">{pkg.accommodation}</span>
                       </div>
                       <div className="flex items-center gap-2 text-xs text-muted-foreground">
-                        <Utensils className="size-3.5 text-orange-500" />
+                        <Utensils className="size-3.5 text-primary dark:text-amber-400 shrink-0" />
                         {pkg.meals}
                       </div>
                       <div className="flex items-center gap-2 text-xs text-muted-foreground">
-                        <Car className="size-3.5 text-emerald-500" />
+                        <Car className="size-3.5 text-primary dark:text-amber-400 shrink-0" />
                         {pkg.transport}
                       </div>
                     </div>
 
-                    <div className="flex flex-wrap gap-1.5 mb-5">
-                      {pkg.activities.slice(0, 4).map((act: string) => (
-                        <span
-                          key={act}
-                          className={`inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] ${
-                            pkg.type === "luxury"
-                              ? "bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300"
-                              : "bg-muted text-muted-foreground"
-                          }`}
-                        >
-                          <Compass className="size-2.5" />
-                          {act}
-                        </span>
-                      ))}
-                      {pkg.activities.length > 4 && (
-                        <span className="text-[10px] text-muted-foreground/50">
-                          +{pkg.activities.length - 4} more
-                        </span>
-                      )}
-                    </div>
+                    {pkg.priceKES && (
+                      <div className="mb-2 flex items-center gap-1.5 text-xs text-muted-foreground">
+                        <span className="text-[10px] uppercase tracking-wider">Citizen / Resident:</span>
+                        <span className="font-semibold text-foreground">KES {pkg.priceKES.toLocaleString()}</span>
+                      </div>
+                    )}
 
-                    <div className="flex gap-2 pt-2 border-t border-foreground/10">
+                    <div className="flex gap-3 pt-2 border-t border-border">
                       <Link
                         href={`/holiday-packages/${pkg.slug}`}
-                        className="flex-1 inline-flex items-center justify-center h-11 rounded-xl bg-muted hover:bg-muted/80 text-foreground text-sm font-medium transition-all"
+                        className="flex-1 inline-flex items-center justify-center gap-2 h-11 rounded-xl border border-border bg-card hover:border-primary/40 hover:bg-primary/5 text-foreground text-sm font-medium transition-all duration-300"
                       >
-                        View Safari
+                        View Safari <ArrowRight className="size-4" />
                       </Link>
-                      <Button
-                        onClick={() => openBookingModal(pkg.name)}
-                        variant="default"
-                        size="sm"
-                        className="flex-1"
+                      <Link
+                        href={PLAN_SAFARI_ROUTE}
+                        className="flex-1 inline-flex items-center justify-center h-11 rounded-xl gradient-primary text-white text-sm font-semibold shadow-premium hover:shadow-premium transition-all duration-300"
                       >
-                        Get a Free Quote
-                      </Button>
+                        Plan This Safari
+                      </Link>
                     </div>
                   </div>
                 </div>
@@ -325,75 +220,6 @@ export default function PackagesBrowser({
           )}
         </div>
       </section>
-
-      {/* Compare Modal */}
-      {showCompare && compared.length > 0 && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm p-4">
-          <div className="bg-background rounded-2xl ring-1 ring-foreground/10 max-w-4xl w-full max-h-[85vh] overflow-auto">
-            <div className="sticky top-0 bg-background border-b px-6 py-4 flex items-center justify-between z-10">
-              <h3 className="text-lg font-bold">Compare Packages</h3>
-              <button
-                onClick={() => setShowCompare(false)}
-                className="w-8 h-8 rounded-lg hover:bg-muted flex items-center justify-center"
-                aria-label="Close compare"
-              >
-                <X className="size-4" />
-              </button>
-            </div>
-            <div className="overflow-x-auto">
-              <table className="w-full text-sm">
-                <thead>
-                  <tr className="border-b">
-                    <th className="text-left p-4 text-muted-foreground font-medium w-36">Feature</th>
-                    {compared.map((p) => (
-                      <th key={p.id} className="text-left p-4 font-semibold min-w-[180px]">
-                        {p.name}
-                      </th>
-                    ))}
-                  </tr>
-                </thead>
-                <tbody>
-                  {[
-                    { label: "Price", getValue: (p: PackageCard) => `$${p.price.toLocaleString()}` },
-                    { label: "Duration", getValue: (p: PackageCard) => p.duration },
-                    { label: "Type", getValue: (p: PackageCard) => p.type },
-                    { label: "Accommodation", getValue: (p: PackageCard) => p.accommodation },
-                    { label: "Meals", getValue: (p: PackageCard) => p.meals },
-                    { label: "Transport", getValue: (p: PackageCard) => p.transport },
-                    { label: "Activities", getValue: (p: PackageCard) => p.activities.join(", ") },
-                  ].map((row) => (
-                    <tr key={row.label} className="border-b last:border-0">
-                      <td className="p-4 text-muted-foreground font-medium">{row.label}</td>
-                      {compared.map((p) => (
-                        <td key={p.id} className="p-4 text-foreground">
-                          {row.getValue(p)}
-                        </td>
-                      ))}
-                    </tr>
-                  ))}
-                  <tr>
-                    <td className="p-4" />
-                    {compared.map((p) => (
-                      <td key={p.id} className="p-4">
-                        <Button
-                          size="sm"
-                          onClick={() => {
-                            setShowCompare(false);
-                            openBookingModal(p.name);
-                          }}
-                          className="bg-sky-500 hover:bg-sky-600 text-white"
-                        >
-                          Get a Free Quote
-                        </Button>
-                      </td>
-                    ))}
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
-        </div>
-      )}
     </>
   );
 }

@@ -2,13 +2,12 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { COMPANY, USD_TO_KES } from "@/lib/constants";
+import { COMPANY, USD_TO_KES, PLAN_SAFARI_ROUTE } from "@/lib/constants";
 import { getSupabase } from "@/lib/supabase";
 import { TourPackageJsonLd, BreadcrumbJsonLd } from "@/components/JsonLd";
 import {
-  Heart, Star, Clock, MapPin, Check, ArrowLeft, Shield, Gift, Sparkles, MessageCircle,
+  Heart, Clock, MapPin, Check, ArrowLeft, Shield, Gift, Sparkles, MessageCircle, ArrowRight,
 } from "lucide-react"
-import BookingButton from "@/components/BookingButton";
 import AnimatedSection from "@/components/AnimatedSection";
 import { PaymentPolicy } from "@/components/PaymentPolicy";
 
@@ -140,7 +139,7 @@ export default async function HoneymoonDetailPage({
               {pkg.duration}
             </span>
           </div>
-          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-3">{pkg.name}</h1>
+          <h1 className="font-display text-3xl sm:text-4xl lg:text-5xl font-medium text-white mb-3 leading-tight">{pkg.name}</h1>
         </div>
       </section>
 
@@ -160,21 +159,21 @@ export default async function HoneymoonDetailPage({
             </div>
           </div>
           <div className="flex items-center gap-3">
-            <BookingButton
-              packageName={pkg.name}
-              className="h-10 px-5 bg-gradient-to-r from-rose-500 to-pink-600 hover:from-rose-600 hover:to-pink-700 text-white text-sm font-semibold shadow-lg"
-            >
-              Get a Free Quote
-            </BookingButton>
             <a
-              href={`https://wa.me/${COMPANY.whatsapp}?text=Hi!%20I'm%20interested%20in%20${encodeURIComponent(pkg.name)}`}
+              href={`https://wa.me/${COMPANY.whatsapp.replace(/\D/g, "")}?text=${encodeURIComponent(`Hi! We'd like to plan ${pkg.name} with Ready Set Go Safaris.`)}`}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 h-10 px-4 rounded-lg bg-white/10 hover:bg-white/20 text-foreground text-sm font-medium transition-all ring-1 ring-foreground/10"
+              className="inline-flex items-center gap-2 h-11 px-5 rounded-xl bg-card border border-border hover:border-rose-300 dark:hover:border-rose-500/40 hover:bg-rose-50 dark:hover:bg-rose-950/20 text-foreground text-sm font-medium transition-all"
             >
-              <MessageCircle className="size-4" />
-              WhatsApp Us
+              <MessageCircle className="size-4 text-rose-500" />
+              WhatsApp a Safari Expert
             </a>
+            <Link
+              href={PLAN_SAFARI_ROUTE}
+              className="inline-flex items-center gap-2 h-11 px-6 rounded-xl bg-gradient-to-r from-rose-500 to-orange-500 hover:from-rose-600 hover:to-orange-600 text-white text-sm font-semibold shadow-lg shadow-rose-900/20 transition-all"
+            >
+              Design Our Honeymoon <ArrowRight className="size-4" />
+            </Link>
           </div>
         </div>
       </section>
@@ -184,16 +183,16 @@ export default async function HoneymoonDetailPage({
           <div className="grid lg:grid-cols-3 gap-12">
             <div className="lg:col-span-2 space-y-12">
               <AnimatedSection>
-                <h2 className="text-2xl font-bold text-foreground mb-4">About This Package</h2>
+                <h2 className="font-display text-2xl font-medium text-foreground mb-4">About This Package</h2>
                 <p className="text-muted-foreground leading-relaxed text-lg">{pkg.description}</p>
               </AnimatedSection>
 
               <AnimatedSection>
-                <h2 className="text-2xl font-bold text-foreground mb-4">Highlights</h2>
+                <h2 className="font-display text-2xl font-medium text-foreground mb-4">Highlights</h2>
                 <div className="grid sm:grid-cols-2 gap-3">
                   {pkg.highlights.map((h: string) => (
                     <div key={h} className="flex items-start gap-3 p-4 rounded-xl bg-card ring-1 ring-foreground/5">
-                      <Star className="size-5 text-rose-500 shrink-0 mt-0.5 fill-rose-500/20" />
+                      <Heart className="size-5 text-rose-500 shrink-0 mt-0.5 fill-rose-500/20" />
                       <span className="text-sm text-foreground">{h}</span>
                     </div>
                   ))}
@@ -201,7 +200,7 @@ export default async function HoneymoonDetailPage({
               </AnimatedSection>
 
               <AnimatedSection>
-                <h2 className="text-2xl font-bold text-foreground mb-4">Activities</h2>
+                <h2 className="font-display text-2xl font-medium text-foreground mb-4">Activities</h2>
                 <div className="flex flex-wrap gap-2">
                   {pkg.activities.map((a: string) => (
                     <span key={a} className="inline-flex items-center gap-1.5 text-sm bg-card ring-1 ring-foreground/10 text-foreground px-4 py-2 rounded-full">
@@ -256,7 +255,7 @@ export default async function HoneymoonDetailPage({
                   <ul className="space-y-3">
                     {pkg.included.map((item: string) => (
                       <li key={item} className="flex items-start gap-3 text-sm text-muted-foreground">
-                        <Check className="size-4 text-emerald-500 shrink-0 mt-0.5" />
+                        <Check className="size-4 text-rose-500 shrink-0 mt-0.5" />
                         {item}
                       </li>
                     ))}
@@ -267,27 +266,27 @@ export default async function HoneymoonDetailPage({
               <PaymentPolicy />
 
               <AnimatedSection>
-                <div className="rounded-2xl bg-gradient-to-br from-rose-50 to-pink-50 dark:from-rose-950/30 dark:to-pink-950/30 ring-1 ring-rose-100 dark:ring-rose-900/50 p-6 text-center">
-                  <Heart className="size-8 text-rose-400 mx-auto mb-2" />
-                  <h3 className="font-semibold text-foreground mb-2">Plan Your Honeymoon</h3>
-                  <p className="text-sm text-muted-foreground mb-4">
-                    Reserve your romantic escape now.
+                <div className="rounded-3xl p-8 text-center bg-gradient-to-r from-rose-500 to-orange-500 text-white shadow-lg shadow-rose-900/20">
+                  <Heart className="size-8 text-white/90 mx-auto mb-2 fill-white/40" />
+                  <h3 className="font-display text-xl font-medium mb-2">Design your honeymoon</h3>
+                  <p className="text-sm text-white/80 mb-6">
+                    Tell us your dates, and we&apos;ll shape the itinerary around you both.
                   </p>
                   <div className="space-y-3">
-                    <BookingButton
-                      packageName={pkg.name}
-                      className="w-full h-11 bg-gradient-to-r from-rose-500 to-pink-600 hover:from-rose-600 hover:to-pink-700 text-white font-semibold shadow-lg"
+                    <Link
+                      href={PLAN_SAFARI_ROUTE}
+                      className="flex items-center justify-center gap-2 w-full h-12 rounded-xl bg-white text-rose-700 font-semibold hover:bg-rose-50 transition-all"
                     >
-                      Get a Free Quote
-                    </BookingButton>
+                      Plan My Safari <ArrowRight className="size-4" />
+                    </Link>
                     <a
-                      href={`https://wa.me/${COMPANY.whatsapp}?text=Hi!%20I'm%20interested%20in%20${encodeURIComponent(pkg.name)}`}
+                      href={`https://wa.me/${COMPANY.whatsapp.replace(/\D/g, "")}?text=${encodeURIComponent(`Hi! We'd like to plan ${pkg.name} with Ready Set Go Safaris.`)}`}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex items-center justify-center gap-2 w-full h-11 rounded-lg bg-card ring-1 ring-foreground/10 hover:ring-rose-500/30 text-foreground text-sm font-medium transition-all"
+                      className="flex items-center justify-center gap-2 w-full h-12 rounded-xl bg-white/10 hover:bg-white/20 text-white text-sm font-medium ring-1 ring-white/25 transition-all"
                     >
                       <MessageCircle className="size-4" />
-                      WhatsApp Us
+                      WhatsApp a Safari Expert
                     </a>
                   </div>
                 </div>

@@ -1,8 +1,9 @@
 ﻿import Image from "next/image";
+import Link from "next/link";
 import AnimatedSection from "@/components/AnimatedSection";
-import { COMPANY } from "@/lib/constants";
+import { COMPANY, PLAN_SAFARI_ROUTE } from "@/lib/constants";
 import { getSupabase } from "@/lib/supabase";
-import { Tag, Shield, Users, Gift, Star } from "lucide-react";
+import { Shield, Users, Gift, Star, MessageCircle, ArrowRight } from "lucide-react";
 import DealsBrowser, { type DealCard } from "@/components/DealsBrowser";
 
 export const revalidate = 60;
@@ -38,12 +39,9 @@ export default async function DealsPage() {
         <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/50 to-black/80" />
         <div className="relative z-10 text-center px-6 max-w-4xl mx-auto">
           <AnimatedSection direction="none">
-            <Tag className="size-12 text-emerald-400 mx-auto mb-4" />
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white mb-4">
-              Best{" "}
-              <span className="bg-gradient-to-r from-emerald-400 to-teal-300 bg-clip-text text-transparent">
-                Deals
-              </span>
+            <span className="text-xs font-semibold uppercase tracking-[0.2em] text-amber-400">Deals & Offers</span>
+            <h1 className="font-display text-4xl sm:text-5xl lg:text-6xl font-medium text-white mt-4 mb-5 leading-tight">
+              Great safaris, at a smarter price
             </h1>
             <p className="text-lg text-white/70 max-w-2xl mx-auto">
               Exclusive offers on safaris, Mount Kenya adventures, beach holidays, and group packages.
@@ -59,12 +57,12 @@ export default async function DealsPage() {
       <section className="py-20 px-6 bg-gradient-to-b from-transparent to-emerald-950/5">
         <div className="max-w-7xl mx-auto">
           <AnimatedSection>
-            <h2 className="text-3xl sm:text-4xl font-bold text-center text-foreground mb-4">
-              Why Book a{" "}
-              <span className="bg-gradient-to-r from-emerald-500 to-teal-400 bg-clip-text text-transparent">
-                Deal
+            <h2 className="font-display text-3xl sm:text-4xl font-medium text-center text-foreground mb-4">
+              Why book a{" "}
+              <span className="bg-gradient-to-r from-amber-500 to-orange-400 bg-clip-text text-transparent">
+                deal
               </span>{" "}
-              With Us?
+              with us
             </h2>
             <p className="text-muted-foreground text-center max-w-2xl mx-auto mb-14">
               Our deals are carefully curated to give you the best value without compromising on the
@@ -96,26 +94,28 @@ export default async function DealsPage() {
       {/* CTA */}
       <AnimatedSection>
         <div className="max-w-4xl mx-auto px-6 pb-20">
-          <div className="text-center p-10 rounded-2xl bg-gradient-to-br from-emerald-50 to-teal-50 dark:from-emerald-950/30 dark:to-teal-950/30 ring-1 ring-emerald-100 dark:ring-emerald-900/50">
-            <h2 className="text-2xl font-bold text-foreground mb-3">
+          <div className="text-center p-10 rounded-3xl gradient-primary text-white shadow-premium">
+            <h2 className="font-display text-2xl font-medium mb-3">
               Don&apos;t Miss Out on These Deals
             </h2>
-            <p className="text-muted-foreground mb-6 max-w-md mx-auto">
-              These offers are limited and subject to availability. Contact our team to secure your
-              spot at the best price.
+            <p className="text-white/80 mb-6 max-w-md mx-auto">
+              These offers are limited and subject to availability. Tell us which one you like and we&apos;ll hold it for you.
             </p>
             <div className="flex flex-wrap items-center justify-center gap-4">
-              <a
-                href="/contact"
-                className="inline-flex items-center justify-center gap-2 h-11 px-6 rounded-lg bg-emerald-500 hover:bg-emerald-600 text-white text-sm font-medium transition-colors"
+              <Link
+                href={PLAN_SAFARI_ROUTE}
+                className="inline-flex items-center justify-center gap-2 h-12 px-6 rounded-xl bg-white text-stone-900 font-semibold hover:bg-stone-100 transition-all"
               >
-                Get a Free Quote
-              </a>
+                Plan My Safari <ArrowRight className="size-4" />
+              </Link>
               <a
-                href="tel:+254712345678"
-                className="inline-flex items-center justify-center gap-2 h-11 px-6 rounded-lg bg-card ring-1 ring-foreground/10 hover:ring-emerald-500/30 text-foreground text-sm font-medium transition-all"
+                href={`https://wa.me/${COMPANY.whatsapp.replace(/\D/g, "")}?text=${encodeURIComponent("Hi! I'd like to know more about the current Ready Set Go Safaris deals.")}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center gap-2 h-12 px-6 rounded-xl bg-white/10 hover:bg-white/20 text-white text-sm font-medium ring-1 ring-white/25 transition-all"
               >
-                Call {COMPANY.phone}
+                <MessageCircle className="size-4" />
+                WhatsApp a Safari Expert
               </a>
             </div>
           </div>

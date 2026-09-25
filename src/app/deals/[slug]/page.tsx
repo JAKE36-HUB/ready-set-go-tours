@@ -2,10 +2,10 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { COMPANY, USD_TO_KES } from "@/lib/constants";
+import { COMPANY, USD_TO_KES, PLAN_SAFARI_ROUTE } from "@/lib/constants";
 import { getSupabase } from "@/lib/supabase";
 import { TourPackageJsonLd, BreadcrumbJsonLd } from "@/components/JsonLd";
-import { Tag, Clock, Users, Gift, Percent, Star, Shield, Check, ArrowLeft, Calendar, Hotel, Utensils, Phone } from "lucide-react";
+import { Tag, Clock, Users, Gift, Percent, Star, Shield, Check, ArrowLeft, Calendar, Hotel, Utensils, MessageCircle, ArrowRight } from "lucide-react";
 import AnimatedSection from "@/components/AnimatedSection";
 import { PaymentPolicy } from "@/components/PaymentPolicy";
 
@@ -155,7 +155,7 @@ export default async function DealDetailPage({
             Back to Deals
           </Link>
           <div className="flex items-center gap-3 mb-3">
-            <span className="inline-flex items-center gap-1.5 bg-emerald-500 text-white text-xs font-bold px-3 py-1.5 rounded-full">
+            <span className="inline-flex items-center gap-1.5 bg-white/90 backdrop-blur text-stone-900 text-xs font-bold px-3 py-1.5 rounded-full">
               <Percent className="size-3" />
               {deal.discount}
             </span>
@@ -164,7 +164,7 @@ export default async function DealDetailPage({
               <span className="capitalize">{deal.type.replace("-", " ")}</span>
             </span>
           </div>
-          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-2">{deal.title}</h1>
+          <h1 className="font-display text-3xl sm:text-4xl lg:text-5xl font-medium text-white mb-2 leading-tight">{deal.title}</h1>
           <div className="flex flex-wrap items-center gap-4 text-sm text-white/60">
             <span className="flex items-center gap-1.5">
               <Calendar className="size-4" />
@@ -193,18 +193,19 @@ export default async function DealDetailPage({
           </div>
           <div className="flex items-center gap-3">
             <a
-              href={`https://wa.me/${COMPANY.whatsapp}?text=Hi!%20I'm%20interested%20in%20the%20${encodeURIComponent(deal.title)}`}
+              href={`https://wa.me/${COMPANY.whatsapp.replace(/\D/g, "")}?text=${encodeURIComponent(`Hi! I'd like to know more about the ${deal.title} deal with Ready Set Go Safaris.`)}`}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 h-10 px-5 rounded-lg bg-emerald-500 hover:bg-emerald-600 text-white text-sm font-medium transition-colors"
+              className="inline-flex items-center gap-2 h-11 px-5 rounded-xl bg-card border border-border hover:border-primary/40 hover:bg-primary/5 text-foreground text-sm font-medium transition-all"
             >
-              WhatsApp Us
+              <MessageCircle className="size-4 text-primary dark:text-amber-400" />
+              WhatsApp a Safari Expert
             </a>
             <Link
-              href="/contact"
-              className="inline-flex items-center gap-2 h-10 px-5 rounded-lg bg-card ring-1 ring-foreground/10 hover:ring-emerald-500/30 text-foreground text-sm font-medium transition-all"
+              href={PLAN_SAFARI_ROUTE}
+              className="inline-flex items-center gap-2 h-11 px-6 rounded-xl gradient-primary text-white text-sm font-semibold shadow-premium hover:shadow-premium transition-all"
             >
-              Get a Free Quote
+              Plan This Safari <ArrowRight className="size-4" />
             </Link>
           </div>
         </div>
@@ -218,17 +219,17 @@ export default async function DealDetailPage({
             <div className="lg:col-span-2 space-y-12">
               {/* Description */}
               <AnimatedSection>
-                <h2 className="text-2xl font-bold text-foreground mb-4">About This Deal</h2>
+                <h2 className="font-display text-2xl font-medium text-foreground mb-4">About This Deal</h2>
                 <p className="text-muted-foreground leading-relaxed text-lg">{deal.description}</p>
               </AnimatedSection>
 
               {/* Highlights */}
               <AnimatedSection>
-                <h2 className="text-2xl font-bold text-foreground mb-4">Highlights</h2>
+                <h2 className="font-display text-2xl font-medium text-foreground mb-4">Highlights</h2>
                 <div className="grid sm:grid-cols-2 gap-3">
                   {deal.highlights.map((h: string) => (
                     <div key={h} className="flex items-start gap-3 p-4 rounded-xl bg-card ring-1 ring-foreground/5">
-                      <Star className="size-5 text-emerald-500 shrink-0 mt-0.5 fill-emerald-500/20" />
+                      <Star className="size-5 text-primary dark:text-amber-400 shrink-0 mt-0.5 fill-primary/20" />
                       <span className="text-sm text-foreground">{h}</span>
                     </div>
                   ))}
@@ -237,21 +238,21 @@ export default async function DealDetailPage({
 
               {/* Itinerary */}
               <AnimatedSection>
-                <h2 className="text-2xl font-bold text-foreground mb-4">Your Itinerary</h2>
+                <h2 className="font-display text-2xl font-medium text-foreground mb-4">Your Itinerary</h2>
                 <div className="space-y-0">
                   {deal.itinerary.map((item: { day: string; description: string }, idx: number) => (
                     <div key={idx} className="relative flex gap-6 pb-8 last:pb-0">
                       {/* Timeline line */}
                       {idx < deal.itinerary.length - 1 && (
-                        <div className="absolute left-[19px] top-10 bottom-0 w-0.5 bg-emerald-200 dark:bg-emerald-900" />
+                        <div className="absolute left-[19px] top-10 bottom-0 w-0.5 bg-amber-200 dark:bg-amber-900" />
                       )}
                       {/* Timeline dot */}
-                      <div className="relative z-10 flex size-10 shrink-0 items-center justify-center rounded-full bg-emerald-100 dark:bg-emerald-950 text-emerald-600 dark:text-emerald-400 text-xs font-bold">
+                      <div className="relative z-10 flex size-10 shrink-0 items-center justify-center rounded-full bg-amber-100 dark:bg-amber-950 text-amber-600 dark:text-amber-400 text-xs font-bold">
                         {idx + 1}
                       </div>
                       {/* Content */}
                       <div className="min-w-0 pt-1">
-                        <p className="text-sm font-semibold text-emerald-600 dark:text-emerald-400 mb-1">{item.day}</p>
+                        <p className="text-sm font-semibold text-amber-600 dark:text-amber-400 mb-1">{item.day}</p>
                         <p className="text-sm text-muted-foreground leading-relaxed">{item.description}</p>
                       </div>
                     </div>
@@ -268,31 +269,31 @@ export default async function DealDetailPage({
                   <h3 className="font-semibold text-foreground">Deal Details</h3>
                   <div className="space-y-4">
                     <div className="flex items-start gap-3">
-                      <Clock className="size-5 text-emerald-500 shrink-0 mt-0.5" />
+                      <Clock className="size-5 text-primary dark:text-amber-400 shrink-0 mt-0.5" />
                       <div>
                         <p className="text-sm font-medium text-foreground">Duration</p>
                         <p className="text-sm text-muted-foreground">{deal.duration}</p>
                       </div>
                     </div>
                     <div className="flex items-start gap-3">
-                      <Hotel className="size-5 text-emerald-500 shrink-0 mt-0.5" />
+                      <Hotel className="size-5 text-primary dark:text-amber-400 shrink-0 mt-0.5" />
                       <div>
                         <p className="text-sm font-medium text-foreground">Accommodation</p>
                         <p className="text-sm text-muted-foreground">{deal.accommodation}</p>
                       </div>
                     </div>
                     <div className="flex items-start gap-3">
-                      <Utensils className="size-5 text-emerald-500 shrink-0 mt-0.5" />
+                      <Utensils className="size-5 text-primary dark:text-amber-400 shrink-0 mt-0.5" />
                       <div>
                         <p className="text-sm font-medium text-foreground">Meals</p>
                         <p className="text-sm text-muted-foreground">{deal.meals}</p>
                       </div>
                     </div>
                     <div className="flex items-start gap-3">
-                      <Shield className="size-5 text-emerald-500 shrink-0 mt-0.5" />
+                      <Shield className="size-5 text-primary dark:text-amber-400 shrink-0 mt-0.5" />
                       <div>
                         <p className="text-sm font-medium text-foreground">Promo Code</p>
-                        <p className="text-sm font-mono font-bold text-emerald-600 dark:text-emerald-400">{deal.code}</p>
+                        <p className="text-sm font-mono font-bold text-amber-600 dark:text-amber-400">{deal.code}</p>
                       </div>
                     </div>
                   </div>
@@ -306,7 +307,7 @@ export default async function DealDetailPage({
                   <ul className="space-y-3">
                     {deal.included.map((item: string) => (
                       <li key={item} className="flex items-start gap-3 text-sm text-muted-foreground">
-                        <Check className="size-4 text-emerald-500 shrink-0 mt-0.5" />
+                        <Check className="size-4 text-primary dark:text-amber-400 shrink-0 mt-0.5" />
                         {item}
                       </li>
                     ))}
@@ -318,26 +319,26 @@ export default async function DealDetailPage({
 
               {/* CTA */}
               <AnimatedSection>
-                <div className="rounded-2xl bg-gradient-to-br from-emerald-50 to-teal-50 dark:from-emerald-950/30 dark:to-teal-950/30 ring-1 ring-emerald-100 dark:ring-emerald-900/50 p-6 text-center">
-                  <h3 className="font-semibold text-foreground mb-2">Ready to Book?</h3>
-                  <p className="text-sm text-muted-foreground mb-4">
-                    Contact our team to secure this deal. Limited availability.
+                <div className="rounded-3xl p-8 text-center gradient-primary text-white shadow-premium">
+                  <h3 className="font-display text-xl font-medium mb-2">Want in on this deal?</h3>
+                  <p className="text-sm text-white/80 mb-6">
+                    Tell us your dates and we&apos;ll hold your spot at this price.
                   </p>
                   <div className="space-y-3">
+                    <Link
+                      href={PLAN_SAFARI_ROUTE}
+                      className="flex items-center justify-center gap-2 w-full h-12 rounded-xl bg-white text-stone-900 font-semibold hover:bg-stone-100 transition-all"
+                    >
+                      Plan My Safari <ArrowRight className="size-4" />
+                    </Link>
                     <a
-                      href={`https://wa.me/${COMPANY.whatsapp}?text=Hi!%20I'm%20interested%20in%20the%20${encodeURIComponent(deal.title)}`}
+                      href={`https://wa.me/${COMPANY.whatsapp.replace(/\D/g, "")}?text=${encodeURIComponent(`Hi! I'd like to know more about the ${deal.title} deal with Ready Set Go Safaris.`)}`}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex items-center justify-center gap-2 w-full h-11 rounded-lg bg-emerald-500 hover:bg-emerald-600 text-white text-sm font-medium transition-colors"
+                      className="flex items-center justify-center gap-2 w-full h-12 rounded-xl bg-white/10 hover:bg-white/20 text-white text-sm font-medium ring-1 ring-white/25 transition-all"
                     >
-                      WhatsApp Us
-                    </a>
-                    <a
-                      href={`tel:${COMPANY.phone}`}
-                      className="flex items-center justify-center gap-2 w-full h-11 rounded-lg bg-card ring-1 ring-foreground/10 hover:ring-emerald-500/30 text-foreground text-sm font-medium transition-all"
-                    >
-                      <Phone className="size-4" />
-                      {COMPANY.phone}
+                      <MessageCircle className="size-4" />
+                      WhatsApp a Safari Expert
                     </a>
                   </div>
                 </div>
@@ -348,21 +349,20 @@ export default async function DealDetailPage({
       </section>
 
       {/* Related Deals */}
-      <section className="py-20 px-6 bg-gradient-to-b from-transparent to-emerald-950/5">
+      <section className="py-20 px-6">
         <div className="max-w-7xl mx-auto">
           <AnimatedSection>
-            <h2 className="text-2xl font-bold text-foreground mb-8">
-              More{" "}
-              <span className="bg-gradient-to-r from-emerald-500 to-teal-400 bg-clip-text text-transparent">
-                Deals
-              </span>{" "}
-              You Might Like
-            </h2>
+            <div className="text-center mb-12">
+              <span className="text-xs font-semibold uppercase tracking-[0.2em] text-primary dark:text-amber-400">More Deals</span>
+              <h2 className="font-display text-2xl sm:text-3xl font-medium text-foreground mt-3 mb-2">
+                You might also like
+              </h2>
+            </div>
           </AnimatedSection>
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {related.map((related: DealRow) => (
                 <AnimatedSection key={related.id}>
-                  <Link href={`/deals/${related.slug}`} className="group block rounded-xl overflow-hidden bg-card ring-1 ring-foreground/10 hover:ring-emerald-500/30 transition-all duration-500">
+                  <Link href={`/deals/${related.slug}`} className="group block h-full rounded-3xl overflow-hidden bg-card border border-border hover:shadow-2xl hover:-translate-y-1 transition-all duration-500">
                     <div className="relative h-44 overflow-hidden">
                       <Image
                         src={related.image ?? ""}
@@ -372,23 +372,24 @@ export default async function DealDetailPage({
                         sizes="(max-width: 768px) 100vw, 33vw"
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
-                      <div className="absolute top-3 left-3 flex items-center gap-1.5 bg-emerald-500 text-white text-xs font-bold px-2.5 py-1 rounded-full">
+                      <div className="absolute top-3 left-3 flex items-center gap-1.5 bg-white/90 backdrop-blur text-stone-900 text-xs font-semibold px-2.5 py-1 rounded-full">
                         <Percent className="size-3" />
                         {related.discount}
                       </div>
                       <div className="absolute bottom-3 left-3 right-3">
-                        <h3 className="text-lg font-bold text-white">{related.title}</h3>
+                        <h3 className="font-display text-lg font-medium text-white leading-snug">{related.title}</h3>
                       </div>
                     </div>
-                    <div className="p-4">
+                    <div className="p-5">
                       <div className="flex items-baseline gap-2 mb-1">
-                        <span className="text-xl font-bold text-foreground">${related.dealPrice.toLocaleString()}</span>
+                        <span className="text-xl font-semibold text-foreground">${related.dealPrice.toLocaleString()}</span>
                         <span className="text-xs text-muted-foreground line-through">${related.originalPrice.toLocaleString()}</span>
+                        <span className="text-xs text-foreground">per person</span>
                       </div>
                       <div className="text-[10px] text-muted-foreground uppercase tracking-wider">Non-resident</div>
                       <div className="text-[10px] text-muted-foreground mb-2">
-                        <span className="uppercase">Resident: </span>
-                        KES {(related.priceKES ?? related.dealPrice * USD_TO_KES).toLocaleString()}
+                        <span className="uppercase">Citizen / Resident: </span>
+                        <span className="font-semibold text-foreground">KES {(related.priceKES ?? related.dealPrice * USD_TO_KES).toLocaleString()}</span>
                       </div>
                       <p className="text-xs text-muted-foreground line-clamp-2">{related.description}</p>
                     </div>
