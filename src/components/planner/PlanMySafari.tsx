@@ -70,6 +70,7 @@ interface PlannerState {
   email: string
   phone: string
   travellers: string
+  days: string
   message: string
 }
 
@@ -84,6 +85,7 @@ const initial: PlannerState = {
   email: "",
   phone: "",
   travellers: "",
+  days: "",
   message: "",
 }
 
@@ -136,6 +138,7 @@ export function PlanMySafari() {
       lines.push(`Interests: ${form.experiences.map((e) => EXPERIENCE_OPTIONS.find((o) => o.value === e)?.label ?? e).join(", ")}`)
     }
     if (form.travellers) lines.push(`Travellers: ${form.travellers}`)
+    if (form.days) lines.push(`Duration: ${form.days} days`)
     if (form.budget) lines.push(`Budget: ${form.budget} per person`)
     if (form.message) {
       lines.push(`Note: ${form.message}`)
@@ -153,29 +156,70 @@ export function PlanMySafari() {
     setError("")
     setSubmitting(true)
     try {
-      const payload = {
-        source: "planner",
-        name: form.name.trim(),
-        email: form.email.trim(),
-        phone: form.phone.trim(),
-        country: "Kenya / Tanzania",
-        destination: form.type ? "Custom safari package" : "",
-        travel_date: form.flexible ? "flexible" : form.whenMonth,
-        days: form.travellers,
-        budget: form.budget,
-        adults: form.travellers,
-        message: `${form.type ? `Trip type: ${form.type}. ` : ""}${form.experiences.length ? `Interests: ${form.experiences.join(", ")}. ` : ""}${form.who ? `Travel style: ${form.who}. ` : ""}${form.message}`,
-        page: PLAN_SAFARI_ROUTE,
-        session_id: getClientSessionId(),
+      let crmOk = false
+      try {
+        const payload = {
+          source: "planner",
+          name: form.name.trim(),
+          email: form.email.trim(),
+          phone: form.phone.trim(),
+          country: "Kenya / Tanzania",
+          destination: form.type ? "Custom safari package" : "",
+          travel_date: form.flexible ? "flexible" : form.whenMonth,
+          days: form.days,
+          budget: form.budget,
+          adults: form.travellers,
+          message: `${form.type ? `Trip type: ${form.type}. ` : ""}${form.experiences.length ? `Interests: ${form.experiences.join(", ")}. ` : ""}${form.who ? `Travel style: ${form.who}. ` : ""}${form.message}`,
+          page: PLAN_SAFARI_ROUTE,
+          session_id: getClientSessionId(),
+        }
+        const res = await fetch("/api/leads", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload),
+        })
+        crmOk = res.ok
+        if (!res.ok) {
+          const data = await res.json().catch(() => ({}))
+          console.warn("Lead API failed:", data?.error || res.status)
+        }
+      } catch (e) {
+        crmOk = false
+        console.warn("Lead API failed:", e)
       }
-      const res = await fetch("/api/leads", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload),
-      })
-      if (!res.ok) {
-        const data = await res.json().catch(() => ({}))
-        throw new Error(data?.error || "Something went wrong")
+
+      let emailOk = false
+      try {
+        const emailjs = await import("@emailjs/browser")
+        await emailjs.default.send(
+          process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID!,
+          process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID!,
+          {
+            to_email: COMPANY.email,
+            fullName: form.name.trim() || "Not provided",
+            email: form.email.trim() || "Not provided",
+            phone: form.phone.trim() || "Not provided",
+            country: "Kenya / Tanzania",
+            destination: form.type ? (TYPE_OPTIONS.find((o) => o.value === form.type)?.label ?? form.type) : "Custom safari",
+            package: "Plan My Safari",
+            travelDate: form.flexible ? "Flexible dates" : form.whenMonth,
+            days: form.days || "Not specified",
+            adults: form.travellers || "Not specified",
+            children: "",
+            budget: form.budget || "Not specified",
+            specialRequests: `${form.type ? `Trip type: ${form.type}. ` : ""}${form.experiences.length ? `Interests: ${form.experiences.join(", ")}. ` : ""}${form.who ? `Travel style: ${form.who}. ` : ""}${form.message}`.trim() || "None",
+            source: "Plan My Safari",
+            message: summaryMessage,
+          },
+          process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY!
+        )
+        emailOk = true
+      } catch (e) {
+        console.warn("EmailJS failed:", e)
+      }
+
+      if (!crmOk && !emailOk) {
+        throw new Error("We couldn't send your safari plan. Please try again or contact us directly on WhatsApp.")
       }
       trackConversion({ type: "planner", label: "plan_my_safari", details: form.type || "custom" })
       setSubmitted(true)
@@ -448,6 +492,20 @@ export function PlanMySafari() {
                           autoComplete="tel"
                         />
                       </div>
+                    </div>
+                    <div>
+                      <label htmlFor="p-days" className="flex items-center gap-1.5 block text-sm font-medium text-foreground mb-1.5">
+                        <CalendarDays className="w-3.5 h-3.5" /> Number of days
+                      </label>
+                      <Input
+                        id="p-days"
+                        type="number"
+                        min={1}
+                        value={form.days}
+                        onChange={(e) => set("days", e.target.value)}
+                        placeholder="e.g. 7"
+                        className="h-12"
+                      />
                     </div>
                     <div>
                       <label htmlFor="p-message" className="block text-sm font-medium text-foreground mb-1.5">

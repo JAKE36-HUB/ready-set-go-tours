@@ -39,7 +39,7 @@ import {
 import { bookingFormSchema, type BookingFormData } from "@/lib/schemas"
 import { trackConversion } from "@/lib/conversions"
 import { getClientSessionId } from "@/lib/session"
-import { DESTINATIONS, TOUR_PACKAGES } from "@/lib/constants"
+import { COMPANY, DESTINATIONS, TOUR_PACKAGES } from "@/lib/constants"
 
 interface BookingModalProps {
   open: boolean
@@ -149,7 +149,7 @@ export function BookingModal({ open, onOpenChange, initialPackage }: BookingModa
           process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID!,
           process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID!,
           {
-            to_email: "jaketish2@gmail.com",
+            to_email: COMPANY.email,
             fullName: data.fullName,
             email: data.email,
             phone: data.phone,
