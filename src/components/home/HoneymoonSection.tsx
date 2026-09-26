@@ -43,7 +43,7 @@ export function HoneymoonSection() {
               </Button>
             </Link>
             <Link href="/honeymoon-packages">
-              <Button variant="outline" className="h-13 px-8 text-base font-medium border-white/20 text-white/90 hover:bg-white/10 hover:text-white hover:border-white/40 transition-all">
+              <Button variant="outline" className="h-13 px-8 text-base font-medium bg-white/10 border-white/25 text-white hover:bg-white/20 hover:text-white hover:border-white/50 transition-all">
                 Explore All Honeymoons <ArrowRight className="w-4 h-4 ml-2" />
               </Button>
             </Link>

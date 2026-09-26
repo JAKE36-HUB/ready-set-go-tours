@@ -25,6 +25,7 @@ const securityHeaders = [
 ]
 
 const nextConfig: NextConfig = {
+  transpilePackages: ["@react-pdf/renderer"],
   images: {
     remotePatterns: [
       {
