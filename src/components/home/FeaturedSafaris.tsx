@@ -61,7 +61,7 @@ export function FeaturedSafaris() {
               initial={{ opacity: 0, y: 30 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.5, delay: idx * 0.08 }}
-              className="group relative bg-card rounded-3xl overflow-hidden border border-border hover:shadow-2xl hover:-translate-y-2 transition-all duration-500"
+              className="group relative bg-card rounded-3xl overflow-hidden border border-border hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 flex flex-col"
             >
               <div className="relative h-60 overflow-hidden">
                 <Image
@@ -82,15 +82,15 @@ export function FeaturedSafaris() {
                 </div>
               </div>
 
-              <div className="p-6">
+              <div className="p-6 flex flex-col flex-1">
                 <h3 className="font-display text-xl font-medium text-foreground mb-3 leading-snug">
                   {pkg.name}
                 </h3>
-                <div className="flex items-center gap-4 text-xs text-muted-foreground mb-5">
+                <div className="flex items-center gap-x-4 gap-y-1 flex-wrap text-xs text-muted-foreground mb-5">
                   <span className="flex items-center gap-1.5"><Clock className="w-3.5 h-3.5 text-primary dark:text-amber-400 shrink-0" />{pkg.duration}</span>
-                  <span className="flex items-center gap-1.5 truncate"><Bed className="w-3.5 h-3.5 text-primary dark:text-amber-400 shrink-0" />{pkg.accommodation}</span>
+                  <span className="flex items-center gap-1.5 min-w-0"><Bed className="w-3.5 h-3.5 text-primary dark:text-amber-400 shrink-0" /><span className="truncate">{pkg.accommodation}</span></span>
                 </div>
-                <div className="flex items-center gap-3">
+                <div className="flex items-center gap-3 mt-auto">
                   <Link
                     href={`/holiday-packages/${pkg.slug}`}
                     className="flex-1 inline-flex items-center justify-center gap-2 h-11 rounded-xl border border-border bg-card hover:border-primary/40 hover:bg-primary/5 text-foreground text-sm font-medium transition-all duration-300"
