@@ -5,6 +5,14 @@
   Landmark, Globe, Briefcase, Church, Filter, TreeDeciduous, Waves,
   Building2, Sparkles, Megaphone, type LucideIcon
 } from "lucide-react";
+import type { ArticleBlock, ArticleFaq } from "@/lib/articles/types";
+import {
+  LUXURY_KENYA_H1,
+  LUXURY_KENYA_META_DESCRIPTION,
+  LUXURY_KENYA_META_TITLE,
+  luxuryKenyaFaqs,
+  luxuryKenyaSections,
+} from "@/lib/articles/luxury-safari-lodges-kenya";
 
 export const COMPANY = {
   name: "Ready Set Go Tours & Travel",
@@ -1414,6 +1422,11 @@ interface BlogPost {
   author: string;
   date: string;
   category: string;
+  metaTitle?: string;
+  metaDescription?: string;
+  readTime?: string;
+  sections?: ArticleBlock[];
+  faqs?: ArticleFaq[];
 }
 
 export const BLOG_POSTS: BlogPost[] = [
@@ -1495,12 +1508,17 @@ export const BLOG_POSTS: BlogPost[] = [
   {
     id: 6,
     slug: "luxury-safari-lodges-kenya",
-    title: "Top 10 Luxury Safari Lodges in Kenya for an Unforgettable Stay",
-    excerpt: "From private villas in Laikipia to tented camps in the Mara, discover Kenya's most exclusive and luxurious safari accommodations.",
+    title: LUXURY_KENYA_H1,
+    metaTitle: LUXURY_KENYA_META_TITLE,
+    metaDescription: LUXURY_KENYA_META_DESCRIPTION,
+    excerpt:
+      "How to plan a luxury safari in Kenya — where to go, what to look for in a 5-star lodge, what a private 4x4 changes, what it costs and when to travel.",
+    sections: luxuryKenyaSections,
+    faqs: luxuryKenyaFaqs,
+    readTime: "16 min read",
     content: [
-      "Kenya has long been synonymous with luxury safari travel, offering some of the world's most exclusive and elegant wilderness accommodations. From the golden plains of the Masai Mara to the private conservancies of Laikipia, these lodges redefine the safari experience with world-class service, exceptional cuisine, and breathtaking locations.",
-      "Angama Mara, perched on the edge of the Great Rift Valley, offers perhaps the most spectacular setting in all of Africa. Its name means suspended in mid-air in Swahili, perfectly describing the feeling of floating above the Mara Triangle. Each suite features floor-to-ceiling canvas walls that open to uninterrupted views of the savannah below. The lodge's interior is a celebration of East African design, with handmade Maasai blankets and locally sourced materials.",
-      "In Laikipia, Segera Retreat combines conservation with ultra-luxury. This 50,000-acre private ranch offers six unique villas, each with its own private plunge pool and outdoor living area. Guests can participate in conservation activities including rhino tracking and elephant monitoring. The lodge is entirely solar-powered and sources its organic produce from an on-site farm, making it one of Kenya's most sustainable luxury properties.",
+      "Kenya has long been synonymous with luxury safari travel, offering some of the world's most elegant wilderness accommodations. From the golden plains of the Masai Mara to the private conservancies of Laikipia, the difference between a good safari and a memorable one is usually in the planning.",
+      "This guide covers where to go for a luxury Kenya safari, what to look for in a high-end lodge, how private 4x4 vehicles change the day, what a premium safari costs and when to travel.",
     ],
     image: "/images/local/pin_d21f86305bc5df0128814c1a93b7515a.jpg",
     author: "Grace Akinyi",

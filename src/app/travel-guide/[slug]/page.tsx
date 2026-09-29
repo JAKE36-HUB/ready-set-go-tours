@@ -4,7 +4,12 @@ import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { Calendar, User, Tag, Clock, ArrowLeft, ChevronRight } from "lucide-react";
 import { BLOG_POSTS, COMPANY } from "@/lib/constants";
-import { ArticleJsonLd, BreadcrumbJsonLd } from "@/components/JsonLd";
+import {
+  ArticleJsonLd,
+  BreadcrumbJsonLd,
+  FaqJsonLd,
+} from "@/components/JsonLd";
+import { ArticleContent } from "@/components/ArticleContent";
 
 interface Props {
   params: Promise<{ slug: string }>;
@@ -21,7 +26,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   const excerpt = post.excerpt.replace(/\s+/g, " ").trim();
   let description: string;
-  if (excerpt.length >= 160) {
+  if (post.metaDescription) {
+    description = post.metaDescription;
+  } else if (excerpt.length >= 160) {
     description = excerpt.slice(0, 157).trimEnd() + "…";
   } else if (excerpt.length >= 140) {
     description = excerpt;
@@ -31,18 +38,20 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     description = `${excerpt} Plan with ${COMPANY.name}.`;
   }
 
+  const title = post.metaTitle || post.title;
+
   return {
-    title: post.title,
+    title: post.metaTitle ? { absolute: post.metaTitle } : title,
     description,
     openGraph: {
-      title: post.title,
-      description: post.excerpt,
+      title,
+      description,
       images: [{ url: post.image }],
       type: "article",
     },
     twitter: {
       card: "summary_large_image",
-      title: post.title,
+      title,
       description,
       images: [post.image],
     },
@@ -88,6 +97,7 @@ export default async function BlogPostPage({ params }: Props) {
         url={`/travel-guide/${slug}`}
         authorName="Ready Set Go Tours & Travel"
       />
+      {post.faqs && <FaqJsonLd faqs={post.faqs} />}
       <main className="min-h-screen">
       {/* Hero */}
       <section className="relative h-[50vh] min-h-[400px] flex items-center justify-center overflow-hidden">
@@ -118,7 +128,7 @@ export default async function BlogPostPage({ params }: Props) {
             </span>
             <span className="flex items-center gap-1.5">
               <Clock className="size-3.5" />
-              {READING_TIME[post.id] || "8 min read"}
+              {post.readTime || READING_TIME[post.id] || "8 min read"}
             </span>
           </div>
         </div>
@@ -141,13 +151,17 @@ export default async function BlogPostPage({ params }: Props) {
 
       {/* Content */}
       <article className="max-w-3xl mx-auto px-6 py-12">
-        <div className="prose prose-lg dark:prose-invert max-w-none">
-          {post.content.map((paragraph, i) => (
-            <p key={i} className="text-muted-foreground leading-relaxed mb-6 text-[15px] sm:text-base">
-              {paragraph}
-            </p>
-          ))}
-        </div>
+        {post.sections ? (
+          <ArticleContent blocks={post.sections} faqs={post.faqs} />
+        ) : (
+          <div className="prose prose-lg dark:prose-invert max-w-none">
+            {post.content.map((paragraph, i) => (
+              <p key={i} className="text-muted-foreground leading-relaxed mb-6 text-[15px] sm:text-base">
+                {paragraph}
+              </p>
+            ))}
+          </div>
+        )}
 
         {/* Tags */}
         <div className="flex flex-wrap gap-2 mt-10 pt-8 border-t border-foreground/10">
