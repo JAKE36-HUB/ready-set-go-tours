@@ -36,15 +36,25 @@ export function HoneymoonSection() {
             Safari by day. Romance by night. Candlelit bush dinners, sunrise game drives and a beach to melt into — we&apos;ll handle every detail.
           </p>
           <div className="flex flex-wrap justify-center gap-4 mt-8">
-            <Link href={PLAN_SAFARI_ROUTE}>
-              <Button className="h-13 px-8 text-base font-semibold bg-gradient-to-r from-rose-500 to-orange-500 hover:from-rose-600 hover:to-orange-600 text-white border-0 shadow-lg shadow-rose-900/30 hover:scale-105 transition-all duration-300">
-                <Heart className="w-4 h-4 mr-2" />
+            <Link href={PLAN_SAFARI_ROUTE} className="group">
+              <Button className="h-13 px-8 rounded-full text-base font-semibold bg-gradient-to-r from-rose-500 to-orange-500 hover:from-rose-600 hover:to-orange-600 text-white border-0 shadow-lg shadow-rose-900/30 hover:shadow-[0_12px_40px_-8px_rgba(244,63,94,0.6)] hover:-translate-y-0.5 transition-all duration-300">
+                <Heart className="w-4 h-4 mr-2 transition-transform duration-300 group-hover:scale-110" />
                 Design Our Honeymoon
               </Button>
             </Link>
-            <Link href="/honeymoon-packages">
-              <Button variant="outline" className="h-13 px-8 text-base font-medium bg-white/10 border-white/25 text-white hover:bg-white/20 hover:text-white hover:border-white/50 transition-all">
-                Explore All Honeymoons <ArrowRight className="w-4 h-4 ml-2" />
+            <Link href="/honeymoon-packages" className="group">
+              <Button
+                variant="outline"
+                className="relative h-13 px-8 text-base font-semibold overflow-hidden rounded-full
+                  border border-rose-300/30 bg-white/[0.06] text-white
+                  backdrop-blur-sm shadow-[0_8px_30px_-8px_rgba(244,63,94,0.45)]
+                  transition-all duration-300 ease-out
+                  hover:border-rose-300/60 hover:bg-white/[0.12] hover:shadow-[0_12px_40px_-8px_rgba(244,63,94,0.7)] hover:-translate-y-0.5
+                  active:translate-y-0"
+              >
+                <span className="pointer-events-none absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/25 to-transparent transition-transform duration-700 group-hover:translate-x-full" />
+                <span className="relative z-10">Explore All Honeymoons</span>
+                <ArrowRight className="relative z-10 w-4 h-4 ml-2 transition-transform duration-300 group-hover:translate-x-1" />
               </Button>
             </Link>
           </div>
