@@ -5,6 +5,7 @@ const TripFinder = dynamic(() => import("@/components/home/TripFinder").then((m)
 const FeaturedSafaris = dynamic(() => import("@/components/home/FeaturedSafaris").then((m) => m.FeaturedSafaris))
 const CustomSafari = dynamic(() => import("@/components/home/CustomSafari").then((m) => m.CustomSafari))
 const WhyChooseUs = dynamic(() => import("@/components/home/WhyChooseUs").then((m) => m.WhyChooseUs))
+const VerifiedAndLicensed = dynamic(() => import("@/components/home/VerifiedAndLicensed").then((m) => m.VerifiedAndLicensed))
 const HowItWorks = dynamic(() => import("@/components/home/HowItWorks").then((m) => m.HowItWorks))
 const HoneymoonSection = dynamic(() => import("@/components/home/HoneymoonSection").then((m) => m.HoneymoonSection))
 const TestimonialsCarousel = dynamic(() => import("@/components/home/TestimonialsCarousel").then((m) => m.TestimonialsCarousel))
@@ -20,6 +21,7 @@ export default function Home() {
       <FeaturedSafaris />
       <CustomSafari />
       <WhyChooseUs />
+      <VerifiedAndLicensed />
       <HowItWorks />
       <HoneymoonSection />
       <TestimonialsCarousel />
