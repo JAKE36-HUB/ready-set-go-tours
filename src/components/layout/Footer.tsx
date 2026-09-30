@@ -9,6 +9,7 @@ import { Phone, Mail, MapPin, Clock, ArrowRight, Heart, ChevronRight, ShieldChec
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { COMPANY, NAV_ITEMS, SOCIAL_LINKS, CONTACT_INFO, PLAN_SAFARI_ROUTE, whatsappLink } from "@/lib/constants"
+import { FOOTER_GUIDE_LINKS } from "@/lib/footerLinks"
 import { getClientSessionId } from "@/lib/session"
 
 const footerColumns = [
@@ -30,9 +31,7 @@ const footerColumns = [
   {
     title: "Travel Resources",
     links: [
-      { label: "Best Time to Visit Masai Mara", href: "/travel-guide/best-time-to-visit-masai-mara" },
-      { label: "Kilimanjaro Climbing Tips", href: "/travel-guide/kilimanjaro-climbing-tips" },
-      { label: "Zanzibar Travel Guide", href: "/travel-guide/zanzibar-travel-guide" },
+      ...FOOTER_GUIDE_LINKS,
       { label: "All Travel Guides", href: "/travel-guide" },
       { label: "FAQ", href: "/faq" },
     ],
