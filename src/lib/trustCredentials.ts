@@ -61,18 +61,6 @@ export const TRA_LICENCE_NUMBER: string | null = null;
 
 const CREDENTIALS: TrustCredential[] = [
   {
-    id: "getyourguide",
-    name: "GetYourGuide",
-    kind: "profile",
-    url: "https://www.getyourguide.com/nairobi-l267/hell-s-gate-national-park-day-trip-with-guide-t1224599",
-    // Activity listings under "Readyset Go Tours and TravelLimited". GetYourGuide
-    // blocks automated requests, so the live score has not been read; display a
-    // number only once it has been confirmed on the page itself.
-    label: "Our Nairobi activities",
-    accent: "#0F7173",
-    icon: "ticket",
-  },
-  {
     id: "tripadvisor",
     name: "Tripadvisor",
     kind: "profile",
@@ -98,6 +86,18 @@ const CREDENTIALS: TrustCredential[] = [
     label: "Our guide profile",
     accent: "#0E7490",
     icon: "users",
+  },
+  {
+    id: "getyourguide",
+    name: "GetYourGuide",
+    kind: "profile",
+    url: "https://www.getyourguide.com/nairobi-l267/hell-s-gate-national-park-day-trip-with-guide-t1224599",
+    // Activity listings under "Readyset Go Tours and TravelLimited". GetYourGuide
+    // blocks automated requests, so the live score has not been read; display a
+    // number only once it has been confirmed on the page itself.
+    label: "Our Nairobi activities",
+    accent: "#0F7173",
+    icon: "ticket",
   },
   {
     id: "tra",
