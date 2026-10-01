@@ -11,22 +11,28 @@
  * Nothing in this file asserts a rating, review count, award or endorsement
  * that the platform does not itself publish.
  *
- * BRAND MARKS
- * `accent` is a restrained brand-adjacent tint used for the monogram chip and
- * the platform name. It is a colour, not a logo — no third-party mark artwork
- * is reproduced here.
+* BRAND MARKS
+ * `logoSrc` points at the official asset held in /public/trust/. These are the
+ * platforms' own supplied files — do not redraw, recolour or distort them, and
+ * use them only alongside the link to our own listing, per each platform's
+ * brand guidelines.
  *
- * To use each platform's REAL logo, download the official asset from that
- * platform's partner/brand portal and drop it in /public/trust/, then set
- * `logoSrc`. Tripadvisor and Trustpilot both restrict use of their marks to
- * what their brand guidelines permit, so keep the supplied file unmodified and
- * use it only alongside the link to our own listing.
+ * All three files are raster with a solid background and no alpha channel, so
+ * they are always rendered on a light chip. `accent` and `icon` are the
+ * fallback used only where we hold no logo file.
  */
 
 export type CredentialKind = "profile" | "licence";
 
 /** Lucide icon name, resolved to a component in the section. */
 export type CredentialIcon = "star" | "ticket" | "compass" | "users" | "shield";
+
+/** A supplied brand asset and its intrinsic size, so we never upscale it. */
+export interface LogoMeta {
+  src: string;
+  width: number;
+  height: number;
+}
 
 export interface TrustCredential {
   /** Stable key. */
@@ -43,11 +49,11 @@ export interface TrustCredential {
   label: string;
   /** Licence number for `licence` rows. Null until supplied by the business. */
   licenceNumber?: string | null;
-  /** Restrained brand-adjacent tint for the monogram and name. */
+  /** Restrained brand-adjacent tint, used only when no logo file is held. */
   accent: string;
   icon: CredentialIcon;
   /** Official asset under /public/trust/. Omit unless we hold the real file. */
-  logoSrc?: string;
+  logo?: LogoMeta;
 }
 
 /**
@@ -68,6 +74,7 @@ const CREDENTIALS: TrustCredential[] = [
     label: "Our Tripadvisor listing",
     accent: "#00803E",
     icon: "star",
+    logo: { src: "/trust/tripadvisor.png", width: 270, height: 148 },
   },
   {
     id: "safaribookings",
@@ -77,6 +84,7 @@ const CREDENTIALS: TrustCredential[] = [
     label: "Our operator profile",
     accent: "#A16207",
     icon: "compass",
+    logo: { src: "/trust/safaribookings.jpg", width: 225, height: 144 },
   },
   {
     id: "tourhq",
@@ -86,6 +94,7 @@ const CREDENTIALS: TrustCredential[] = [
     label: "Our guide profile",
     accent: "#0E7490",
     icon: "users",
+    logo: { src: "/trust/tourhq.jpg", width: 204, height: 192 },
   },
   {
     id: "getyourguide",
@@ -124,3 +133,12 @@ export const LICENCE_CREDENTIAL: TrustCredential | null =
 export const PROFILE_CREDENTIALS: TrustCredential[] = RENDERABLE_CREDENTIALS.filter(
   (c) => c.kind === "profile"
 );
+
+/**
+ * Credentials where we hold both a destination and an official logo file.
+ * These are safe to render in compact chrome such as the footer.
+ */
+export const LOGO_CREDENTIALS: (TrustCredential & { url: string; logo: LogoMeta })[] =
+  RENDERABLE_CREDENTIALS.filter(
+    (c): c is TrustCredential & { url: string; logo: LogoMeta } => Boolean(c.url) && Boolean(c.logo)
+  );

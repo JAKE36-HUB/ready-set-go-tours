@@ -34,21 +34,24 @@ const ICONS: Record<CredentialIcon, LucideIcon> = {
 /**
  * Brand mark for a credential.
  *
- * Renders the platform's official logo once `logoSrc` points at an asset we
- * hold. Until then it falls back to a tinted monogram in the platform's
- * brand-adjacent colour, which identifies the platform without reproducing
- * anyone's trademark.
+ * When we hold the platform's official file it is shown unmodified on a light
+ * chip — the supplied assets are raster with solid backgrounds and no alpha
+ * channel, so a white chip keeps every one of them legible on the card.
+ * Otherwise falls back to a tinted monogram in the platform's brand colour.
  */
 function CredentialMark({ credential, className }: { credential: TrustCredential; className: string }) {
-  if (credential.logoSrc) {
+  if (credential.logo) {
     return (
-      <Image
-        src={credential.logoSrc}
-        alt={credential.name}
-        width={120}
-        height={34}
-        className="h-8 w-auto max-w-[120px] object-contain opacity-90"
-      />
+      <span className={`inline-flex items-center justify-center bg-white ${className}`}>
+        <Image
+          src={credential.logo.src}
+          alt={credential.name}
+          width={credential.logo.width}
+          height={credential.logo.height}
+          // Cap by intrinsic size so these small files are never upscaled.
+          className="max-h-full w-auto max-w-full object-contain"
+        />
+      </span>
     )
   }
 
@@ -148,13 +151,10 @@ export function VerifiedAndLicensed() {
                   <div className="flex justify-center">
                     <CredentialMark
                       credential={profile}
-                      className="h-12 w-12 border"
+                      className="h-14 w-24 rounded-xl p-1.5"
                     />
                   </div>
-                  <p
-                    className="mt-4 font-display text-lg font-semibold leading-tight tracking-tight"
-                    style={{ color: profile.accent }}
-                  >
+                  <p className="mt-3.5 text-sm font-medium leading-tight text-muted-foreground">
                     {profile.name}
                   </p>
                   <div className="mt-2.5 flex justify-center">

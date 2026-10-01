@@ -10,6 +10,7 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { COMPANY, NAV_ITEMS, SOCIAL_LINKS, CONTACT_INFO, PLAN_SAFARI_ROUTE, whatsappLink } from "@/lib/constants"
 import { FOOTER_GUIDE_LINKS } from "@/lib/footerLinks"
+import { LOGO_CREDENTIALS } from "@/lib/trustCredentials"
 import { getClientSessionId } from "@/lib/session"
 
 const footerColumns = [
@@ -117,6 +118,35 @@ export function Footer() {
                 </a>
               ))}
             </div>
+            {LOGO_CREDENTIALS.length > 0 ? (
+              <div>
+                <p className="text-xs font-semibold uppercase tracking-wider text-stone-500 mb-3">
+                  Find Us On
+                </p>
+                <ul className="flex flex-wrap gap-2">
+                  {LOGO_CREDENTIALS.map((credential) => (
+                    <li key={credential.id}>
+                      <a
+                        href={credential.url}
+                        target="_blank"
+                        rel="noopener noreferrer nofollow"
+                        className="flex items-center justify-center h-10 w-14 rounded-lg bg-white p-1.5 transition-all duration-300 hover:-translate-y-0.5 hover:opacity-90"
+                        aria-label={`${credential.name} (opens in a new tab)`}
+                      >
+                        <Image
+                          src={credential.logo.src}
+                          alt={credential.name}
+                          width={credential.logo.width}
+                          height={credential.logo.height}
+                          className="max-h-full w-auto max-w-full object-contain"
+                          loading="lazy"
+                        />
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ) : null}
           </div>
 
           {footerColumns.map((column) => (
