@@ -34,10 +34,13 @@ const ICONS: Record<CredentialIcon, LucideIcon> = {
 /**
  * Brand mark for a credential.
  *
- * When we hold the platform's official file it is shown unmodified on a light
- * chip — the supplied assets are raster with solid backgrounds and no alpha
- * channel, so a white chip keeps every one of them legible on the card.
- * Otherwise falls back to a tinted monogram in the platform's brand colour.
+ * Where we hold the platform's official file it is shown unmodified inside a
+ * bordered white chip. The frame matters: the supplied artwork has sharp
+ * corners, so an unframed white block reads as a misaligned rectangle rather
+ * than a logo. Logos are sized by height and left to take their natural width,
+ * so a wide wordmark is not forced into a square.
+ *
+ * Falls back to a tinted monogram where no file is held.
  */
 function CredentialMark({ credential, className }: { credential: TrustCredential; className: string }) {
   if (credential.logo) {
@@ -49,7 +52,7 @@ function CredentialMark({ credential, className }: { credential: TrustCredential
           width={credential.logo.width}
           height={credential.logo.height}
           // Cap by intrinsic size so these small files are never upscaled.
-          className="max-h-full w-auto max-w-full object-contain"
+          className="h-7 w-auto max-w-[150px] object-contain"
         />
       </span>
     )
@@ -58,7 +61,7 @@ function CredentialMark({ credential, className }: { credential: TrustCredential
   const Icon = ICONS[credential.icon]
   return (
     <span
-      className={`inline-flex items-center justify-center rounded-xl ${className}`}
+      className={`inline-flex items-center justify-center rounded-xl border ${className}`}
       style={{
         backgroundColor: `color-mix(in oklab, ${credential.accent} 12%, transparent)`,
         borderColor: `color-mix(in oklab, ${credential.accent} 28%, transparent)`,
@@ -151,7 +154,7 @@ export function VerifiedAndLicensed() {
                   <div className="flex justify-center">
                     <CredentialMark
                       credential={profile}
-                      className="h-14 w-24 rounded-xl p-1.5"
+                      className="h-12 rounded-md border border-stone-300 px-3.5 dark:border-stone-700"
                     />
                   </div>
                   <p className="mt-3.5 text-sm font-medium leading-tight text-muted-foreground">

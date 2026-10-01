@@ -97,6 +97,18 @@ const CREDENTIALS: TrustCredential[] = [
     logo: { src: "/trust/tourhq.jpg", width: 204, height: 192 },
   },
   {
+    id: "safarigo",
+    name: "Safarigo",
+    kind: "profile",
+    // Platform front page, not our operator listing. Upgrade to
+    // safarigo.com/operator/<slug> once our operator dashboard URL is known.
+    url: "https://www.safarigo.com/",
+    label: "Find us on Safarigo",
+    accent: "#15803D",
+    icon: "compass",
+    logo: { src: "/trust/safarigo.png", width: 340, height: 72 },
+  },
+  {
     id: "getyourguide",
     name: "GetYourGuide",
     kind: "profile",

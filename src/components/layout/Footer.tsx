@@ -130,7 +130,7 @@ export function Footer() {
                         href={credential.url}
                         target="_blank"
                         rel="noopener noreferrer nofollow"
-                        className="flex items-center justify-center h-10 w-14 rounded-lg bg-white p-1.5 transition-all duration-300 hover:-translate-y-0.5 hover:opacity-90"
+                        className="flex items-center justify-center h-11 rounded-md border border-stone-600 bg-white px-3 shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:shadow-md hover:opacity-90"
                         aria-label={`${credential.name} (opens in a new tab)`}
                       >
                         <Image
@@ -138,7 +138,7 @@ export function Footer() {
                           alt={credential.name}
                           width={credential.logo.width}
                           height={credential.logo.height}
-                          className="max-h-full w-auto max-w-full object-contain"
+                          className="h-6 w-auto max-w-[110px] object-contain"
                           loading="lazy"
                         />
                       </a>
