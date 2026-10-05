@@ -26,7 +26,7 @@ export async function PUT(request: Request, { params }: { params: Promise<{ id: 
 
   const { id } = await params
   const body = await request.json()
-  const sanitized = sanitizeObject(body, ["name", "slug", "image", "price", "price_kes", "duration", "accommodation", "meals", "transport", "activities", "description", "highlights", "included"])
+  const sanitized = sanitizeObject(body, ["name", "slug", "image", "price", "price_kes", "price_basis", "duration", "accommodation", "meals", "transport", "activities", "description", "highlights", "included", "itinerary"])
 
   const sb = getSupabaseAdmin()
   const { data, error } = await sb

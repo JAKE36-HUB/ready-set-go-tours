@@ -41,6 +41,48 @@ function ArrayInput({ label, values, onChange, placeholder }: { label: string; v
   )
 }
 
+interface ItineraryStop {
+  day: string;
+  title: string;
+  description: string;
+}
+
+function ItineraryInput({ label, values, onChange }: { label: string; values: ItineraryStop[]; onChange: (v: ItineraryStop[]) => void }) {
+  const add = () => onChange([...values, { day: `Day ${values.length + 1}`, title: "", description: "" }])
+  const update = (i: number, patch: Partial<ItineraryStop>) =>
+    onChange(values.map((v, j) => (j === i ? { ...v, ...patch } : v)))
+  const remove = (i: number) => onChange(values.filter((_, j) => j !== i))
+
+  return (
+    <div className="space-y-3">
+      <div className="flex items-center justify-between gap-3">
+        <Label>{label}</Label>
+        <Button type="button" variant="outline" size="sm" onClick={add} className="shrink-0">
+          <Plus className="w-3.5 h-3.5" /> Add day
+        </Button>
+      </div>
+      {values.length === 0 ? (
+        <p className="text-xs text-slate-500 dark:text-slate-400">
+          No days yet. Optional — leave empty if this package has no day-by-day breakdown.
+        </p>
+      ) : (
+        values.map((v, i) => (
+          <div key={i} className="rounded-lg border border-slate-200 dark:border-slate-800 p-4 space-y-3">
+            <div className="flex items-center gap-2">
+              <Input value={v.day} onChange={(e) => update(i, { day: e.target.value })} placeholder="Day 1" className="w-24 sm:w-28 shrink-0" />
+              <Input value={v.title} onChange={(e) => update(i, { title: e.target.value })} placeholder="Route or title, e.g. Nairobi to Lake Naivasha" />
+              <Button type="button" variant="ghost" size="icon" onClick={() => remove(i)} className="shrink-0 hover:text-red-500" aria-label={`Remove day ${i + 1}`}>
+                <X className="w-4 h-4" />
+              </Button>
+            </div>
+            <Textarea value={v.description} onChange={(e) => update(i, { description: e.target.value })} rows={2} placeholder="What happens on this day" />
+          </div>
+        ))
+      )}
+    </div>
+  )
+}
+
 function Skeleton() {
   return (
     <div className="space-y-8 max-w-3xl mx-auto">
@@ -56,9 +98,10 @@ export default function EditHoneymoonPage() {
   const [loading, setLoading] = useState(true)
   const [saving, setSaving] = useState(false)
   const [form, setForm] = useState({
-    name: "", slug: "", image: "", price: "", price_kes: "", duration: "",
+    name: "", slug: "", image: "", price: "", price_kes: "", price_basis: "couple", duration: "",
     accommodation: "", meals: "", transport: "", description: "",
     activities: [] as string[], highlights: [] as string[], included: [] as string[],
+    itinerary: [] as ItineraryStop[],
   })
 
   useEffect(() => {
@@ -71,9 +114,11 @@ export default function EditHoneymoonPage() {
           setForm({
             name: p.name || "", slug: p.slug || "", image: p.image || "",
             price: String(p.price ?? ""), price_kes: String(p.price_kes ?? ""),
+            price_basis: p.price_basis === "person" ? "person" : "couple",
             duration: p.duration || "", accommodation: p.accommodation || "",
             meals: p.meals || "", transport: p.transport || "", description: p.description || "",
             activities: p.activities || [], highlights: p.highlights || [], included: p.included || [],
+            itinerary: Array.isArray(p.itinerary) ? p.itinerary : [],
           })
         }
       } catch { alert("Failed to load") }
@@ -168,6 +213,30 @@ export default function EditHoneymoonPage() {
               <div className="space-y-2"><Label>Price (KES)</Label><Input type="number" value={form.price_kes} onChange={(e) => setForm((p) => ({ ...p, price_kes: e.target.value }))} /></div>
               <div className="space-y-2"><Label>Transport</Label><Input value={form.transport} onChange={(e) => setForm((p) => ({ ...p, transport: e.target.value }))} /></div>
             </div>
+            <div className="space-y-2">
+              <Label>Price is per</Label>
+              <div className="flex flex-wrap gap-2">
+                {(["couple", "person"] as const).map((b) => (
+                  <button
+                    key={b}
+                    type="button"
+                    onClick={() => setForm((p) => ({ ...p, price_basis: b }))}
+                    className={`rounded-lg px-4 py-2 text-sm font-medium transition-colors ring-1 ${
+                      form.price_basis === b
+                        ? "bg-rose-500 text-white ring-rose-500"
+                        : "bg-white text-slate-600 ring-slate-200 hover:bg-slate-50 dark:bg-slate-900 dark:text-slate-300 dark:ring-slate-700 dark:hover:bg-slate-800"
+                    }`}
+                  >
+                    {b === "couple" ? "Per couple" : "Per person sharing"}
+                  </button>
+                ))}
+              </div>
+              <p className="text-xs text-slate-500 dark:text-slate-400">
+                {form.price_basis === "person"
+                  ? "Card and page will read “/ person sharing”."
+                  : "Card and page will read “/ couple”."}
+              </p>
+            </div>
           </div>
         </motion.div>
 
@@ -206,6 +275,22 @@ export default function EditHoneymoonPage() {
             <ArrayInput label="Activities" values={form.activities} onChange={(v) => setForm((p) => ({ ...p, activities: v }))} />
             <ArrayInput label="Highlights" values={form.highlights} onChange={(v) => setForm((p) => ({ ...p, highlights: v }))} />
             <ArrayInput label="Included" values={form.included} onChange={(v) => setForm((p) => ({ ...p, included: v }))} />
+          </div>
+        </motion.div>
+
+        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.25 }}
+          className="rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 overflow-hidden hover:shadow-md transition-shadow">
+          <div className="px-6 pt-6 pb-1 border-b border-slate-100 dark:border-slate-800">
+            <div className="flex items-center gap-2.5 mb-1">
+              <div className="w-7 h-7 rounded-lg bg-rose-100 dark:bg-rose-500/10 flex items-center justify-center">
+                <List className="w-3.5 h-3.5 text-rose-600 dark:text-rose-400" />
+              </div>
+              <h3 className="text-sm font-semibold text-slate-900 dark:text-white">Itinerary</h3>
+            </div>
+            <p className="text-xs text-slate-500 dark:text-slate-400 ml-9">Optional day-by-day breakdown shown on the package page</p>
+          </div>
+          <div className="p-6">
+            <ItineraryInput label="Day-by-Day Itinerary" values={form.itinerary} onChange={(v) => setForm((p) => ({ ...p, itinerary: v }))} />
           </div>
         </motion.div>
 

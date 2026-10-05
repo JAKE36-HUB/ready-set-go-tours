@@ -15,7 +15,13 @@ export default async function HoneymoonPage() {
       .from("honeymoon_packages")
       .select("*")
       .order("name");
-    if (data) packages = data.map((p: Record<string, unknown>) => ({ ...p, priceKES: p.price_kes }) as HoneymoonCard);
+    if (data) {
+      packages = data.map((p: Record<string, unknown>) => ({
+        ...p,
+        priceKES: p.price_kes,
+        priceBasis: p.price_basis === "person" ? "person" : "couple",
+      })) as HoneymoonCard[];
+    }
   } catch {}
 
   return (

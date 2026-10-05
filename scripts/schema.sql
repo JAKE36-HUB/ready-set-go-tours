@@ -53,6 +53,7 @@ CREATE TABLE IF NOT EXISTS honeymoon_packages (
   image TEXT DEFAULT '',
   price NUMERIC NOT NULL DEFAULT 0,
   price_kes NUMERIC,
+  price_basis TEXT DEFAULT 'couple',
   duration TEXT NOT NULL DEFAULT '',
   accommodation TEXT DEFAULT '',
   meals TEXT DEFAULT '',
@@ -61,6 +62,7 @@ CREATE TABLE IF NOT EXISTS honeymoon_packages (
   description TEXT DEFAULT '',
   highlights TEXT[] DEFAULT '{}',
   included TEXT[] DEFAULT '{}',
+  itinerary JSONB DEFAULT '[]'::jsonb,
   created_at TIMESTAMPTZ DEFAULT NOW(),
   updated_at TIMESTAMPTZ DEFAULT NOW()
 );

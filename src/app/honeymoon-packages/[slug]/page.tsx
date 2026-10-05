@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { COMPANY, USD_TO_KES, PLAN_SAFARI_ROUTE, whatsappPackageLink } from "@/lib/constants";
+import { COMPANY, USD_TO_KES, PLAN_SAFARI_ROUTE, whatsappPackageLink, honeymoonPriceSuffix, type HoneymoonPriceBasis, type HoneymoonItineraryDay } from "@/lib/constants";
 import { getSupabase } from "@/lib/supabase";
 import { TourPackageJsonLd, BreadcrumbJsonLd } from "@/components/JsonLd";
 import {
@@ -67,6 +67,7 @@ interface HoneymoonRow {
   image: string;
   price: number;
   priceKES: number | null;
+  priceBasis?: HoneymoonPriceBasis;
   duration: string;
   accommodation: string;
   meals: string;
@@ -74,6 +75,7 @@ interface HoneymoonRow {
   highlights: string[];
   activities: string[];
   included: string[];
+  itinerary?: HoneymoonItineraryDay[];
 }
 
 export default async function HoneymoonDetailPage({
@@ -90,7 +92,17 @@ export default async function HoneymoonDetailPage({
       .select("*")
       .eq("slug", slug)
       .single();
-    if (data) pkg = { ...data, priceKES: data.price_kes };
+    if (data) {
+      const row = data as unknown as Record<string, unknown>;
+      const basis = row.price_basis;
+      const itin = row.itinerary;
+      pkg = {
+        ...(row as unknown as HoneymoonRow),
+        priceKES: (row.price_kes as number | null) ?? null,
+        priceBasis: basis === "person" ? "person" : "couple",
+        itinerary: Array.isArray(itin) ? (itin as HoneymoonItineraryDay[]) : undefined,
+      };
+    }
   } catch {}
   if (!pkg) notFound();
 
@@ -150,7 +162,7 @@ export default async function HoneymoonDetailPage({
               <span className="text-[10px] text-muted-foreground uppercase tracking-wider">Non-resident</span>
               <div className="flex items-baseline gap-1">
                 <span className="text-2xl font-bold text-foreground">${pkg.price.toLocaleString()}</span>
-                <span className="text-xs text-muted-foreground">/ couple</span>
+                <span className="text-xs text-muted-foreground">{honeymoonPriceSuffix(pkg.priceBasis)}</span>
               </div>
             </div>
             <div className="pl-3 border-l border-foreground/10">
@@ -186,6 +198,34 @@ export default async function HoneymoonDetailPage({
                 <h2 className="font-display text-2xl font-medium text-foreground mb-4">About This Package</h2>
                 <p className="text-muted-foreground leading-relaxed text-lg">{pkg.description}</p>
               </AnimatedSection>
+
+              {pkg.itinerary && pkg.itinerary.length > 0 && (
+                <AnimatedSection>
+                  <h2 className="font-display text-2xl font-medium text-foreground mb-4">Day-by-Day Itinerary</h2>
+                  <ol className="space-y-3">
+                    {pkg.itinerary.map((step, i) => (
+                      <li
+                        key={`${step.day}-${i}`}
+                        className="flex gap-4 p-4 sm:p-5 rounded-xl bg-card ring-1 ring-foreground/5"
+                      >
+                        <span
+                          aria-hidden
+                          className="shrink-0 inline-flex items-center justify-center size-10 rounded-full bg-rose-500/10 ring-1 ring-rose-500/20 text-rose-600 dark:text-rose-400 text-sm font-bold"
+                        >
+                          {i + 1}
+                        </span>
+                        <div className="min-w-0">
+                          <p className="text-[10px] uppercase tracking-wider font-semibold text-rose-500">
+                            {step.day}
+                          </p>
+                          <h3 className="font-semibold text-foreground mt-0.5">{step.title}</h3>
+                          <p className="text-sm text-muted-foreground mt-1.5 leading-relaxed">{step.description}</p>
+                        </div>
+                      </li>
+                    ))}
+                  </ol>
+                </AnimatedSection>
+              )}
 
               <AnimatedSection>
                 <h2 className="font-display text-2xl font-medium text-foreground mb-4">Highlights</h2>

@@ -2407,6 +2407,18 @@ export const DEALS: Deal[] = [
   },
 ];
 
+export type HoneymoonPriceBasis = "couple" | "person";
+
+export interface HoneymoonItineraryDay {
+  day: string;
+  title: string;
+  description: string;
+}
+
+export function honeymoonPriceSuffix(basis?: HoneymoonPriceBasis): string {
+  return basis === "person" ? "/ person sharing" : "/ couple";
+}
+
 interface HoneymoonPackage {
   id: number;
   name: string;
@@ -2414,6 +2426,7 @@ interface HoneymoonPackage {
   image: string;
   price: number;
   priceKES?: number;
+  priceBasis?: HoneymoonPriceBasis;
   duration: string;
   accommodation: string;
   meals: string;
@@ -2422,6 +2435,7 @@ interface HoneymoonPackage {
   description: string;
   highlights: string[];
   included: string[];
+  itinerary?: HoneymoonItineraryDay[];
 }
 
 export const HONEYMOON_PACKAGES: HoneymoonPackage[] = [
@@ -2504,6 +2518,66 @@ export const HONEYMOON_PACKAGES: HoneymoonPackage[] = [
     description: "Kenya's finest beach destination sets the stage for romantic bliss. White sands, turquoise waters, and exceptional dining at the Ali Barbour Cave Restaurant make this the ideal short honeymoon escape on the Swahili coast.",
     highlights: ["Kisite marine park snorkeling", "Dolphin encounters", "Ali Barbour Cave dinner", "Private beach dinner", "Sunset dhow cruise"],
     included: ["All accommodation", "Breakfast & dinner", "Marine park fees", "Snorkeling gear", "Airport transfers"],
+  },
+  {
+    id: 6,
+    name: "5 Days Enchanting Kenya Honeymoon Ultra-Luxury Safari",
+    slug: "5-days-enchanting-kenya-honeymoon-ultra-luxury-safari",
+    image: "/images/local/pin_1f12bebda0ecf1699fa537f21112db28.jpg",
+    price: 10900,
+    priceBasis: "person",
+    duration: "5 Days / 4 Nights",
+    accommodation: "Loldia House, Lake Naivasha & The Ritz-Carlton, Masai Mara Safari Camp",
+    meals: "Full board as per the selected lodge meal plan",
+    transport: "Private 4x4 safari vehicle with dedicated guide and driver",
+    activities: [
+      "Lake Naivasha boat excursion",
+      "Private Maasai Mara game drives",
+      "Sundowner on the savannah",
+      "Nairobi airport transfers",
+    ],
+    description: "Five unforgettable days of Kenyan romance at the very top end of luxury. Your journey begins in Nairobi and continues to Lake Naivasha, where Loldia House provides a tranquil lakeside base for two nights. You then move on to the Maasai Mara for two nights of private game drives from The Ritz-Carlton, Masai Mara Safari Camp, before returning to Nairobi for your onward departure.",
+    highlights: [
+      "Loldia House on Lake Naivasha",
+      "The Ritz-Carlton, Masai Mara Safari Camp",
+      "Private 4x4 and dedicated guide",
+      "Private game drives in the Maasai Mara",
+      "Private airport transfers",
+    ],
+    included: [
+      "2 nights at Loldia House, Lake Naivasha",
+      "2 nights at The Ritz-Carlton, Masai Mara Safari Camp",
+      "Private 4x4 vehicle and dedicated guide",
+      "Park and conservancy fees",
+      "Meals as per the selected lodge plan",
+    ],
+    itinerary: [
+      {
+        day: "Day 1",
+        title: "Nairobi to Lake Naivasha",
+        description: "Arrival in Nairobi and private transfer to Lake Naivasha. Settle into Loldia House and enjoy the remainder of the day at leisure on the lake.",
+      },
+      {
+        day: "Day 2",
+        title: "Lake Naivasha — Full Day",
+        description: "A full day at Lake Naivasha with your private guide and vehicle, including time on the water and at your own pace in one of Africa's most beautiful rift-valley lakes.",
+      },
+      {
+        day: "Day 3",
+        title: "Lake Naivasha to Maasai Mara",
+        description: "Depart Naivasha after breakfast and travel to the Maasai Mara. Check in to The Ritz-Carlton, Masai Mara Safari Camp and take your first game drives in the reserve.",
+      },
+      {
+        day: "Day 4",
+        title: "Maasai Mara — Full Day",
+        description: "A full day on private game drives in the Maasai Mara with your dedicated guide, at whatever pace suits you, with time in the reserve's open savannah.",
+      },
+      {
+        day: "Day 5",
+        title: "Maasai Mara to Nairobi",
+        description: "A final morning in the Mara followed by your return journey to Nairobi (NBO) for your onward flight.",
+      },
+    ],
   },
 ];
 

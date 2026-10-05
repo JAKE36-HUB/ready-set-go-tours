@@ -22,7 +22,7 @@ export async function POST(request: Request) {
   if (!user) return NextResponse.json({ error: "Unauthorized" }, { status: 401 })
 
   const body = await request.json()
-  const { name, slug, image, price, price_kes, duration, accommodation, meals, transport, activities, description, highlights, included } = body
+  const { name, slug, image, price, price_kes, price_basis, duration, accommodation, meals, transport, activities, description, highlights, included, itinerary } = body
 
   if (!name || !slug) {
     return NextResponse.json({ error: "Name and slug are required" }, { status: 400 })
@@ -37,6 +37,7 @@ export async function POST(request: Request) {
       image: image || "",
       price: price || 0,
       price_kes: price_kes || null,
+      price_basis: price_basis === "person" ? "person" : "couple",
       duration: duration || "",
       accommodation: accommodation || "",
       meals: meals || "",
@@ -45,6 +46,7 @@ export async function POST(request: Request) {
       description: description || "",
       highlights: highlights || [],
       included: included || [],
+      itinerary: itinerary || [],
     })
     .select()
     .single()

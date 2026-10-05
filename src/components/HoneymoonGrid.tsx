@@ -5,7 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import dynamic from "next/dynamic";
-import { USD_TO_KES, PLAN_SAFARI_ROUTE } from "@/lib/constants";
+import { USD_TO_KES, PLAN_SAFARI_ROUTE, honeymoonPriceSuffix, type HoneymoonPriceBasis } from "@/lib/constants";
 import { Heart, MapPin, Clock, ArrowRight, Check, Sparkles } from "lucide-react";
 
 const PdfItinerary = dynamic(() => import("@/components/PdfItinerary"), { ssr: false });
@@ -25,6 +25,7 @@ export interface HoneymoonCard {
   description: string;
   price: number;
   priceKES: number | null;
+  priceBasis?: HoneymoonPriceBasis;
   duration: string;
   accommodation: string;
   meals: string;
@@ -132,7 +133,7 @@ export default function HoneymoonGrid({ packages }: { packages: HoneymoonCard[] 
                           <span className="text-3xl font-semibold text-foreground">
                             ${pkg.price.toLocaleString()}
                           </span>
-                          <span className="text-sm text-muted-foreground">/ couple</span>
+                          <span className="text-sm text-muted-foreground">{honeymoonPriceSuffix(pkg.priceBasis)}</span>
                         </div>
                       </div>
                       <div className="mb-6">
