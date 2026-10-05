@@ -9,6 +9,8 @@
 --   * price_basis = 'person' makes the card read "$10,900 / person sharing"
 --     instead of the default "/ couple".
 --   * itinerary is stored as JSONB so the day-by-day renders on the page.
+--   * image is self-hosted at public/images/kenya-honeymoon-ultra-luxury.jpg
+--     (sourced from a Pinterest pin) rather than hotlinked from Pinterest.
 
 -- 1. Schema additions (existing packages default to 'couple', unchanged).
 ALTER TABLE honeymoon_packages ADD COLUMN IF NOT EXISTS price_basis TEXT DEFAULT 'couple';
@@ -39,7 +41,7 @@ INSERT INTO honeymoon_packages (
 VALUES (
   '5 Days Enchanting Kenya Honeymoon Ultra-Luxury Safari',
   '5-days-enchanting-kenya-honeymoon-ultra-luxury-safari',
-  '/images/local/pin_1f12bebda0ecf1699fa537f21112db28.jpg',
+  '/images/kenya-honeymoon-ultra-luxury.jpg',
   10900,
   NULL,
   'person',

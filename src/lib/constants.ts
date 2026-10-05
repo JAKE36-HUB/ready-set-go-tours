@@ -230,7 +230,7 @@ export const DESTINATIONS: { kenya: Destination[]; tanzania: Destination[] } = {
       id: 9,
       name: "Serengeti National Park",
       slug: "serengeti",
-      image: "/images/local/pin_1f12bebda0ecf1699fa537f21112db28.jpg",
+image: "/images/kenya-honeymoon-ultra-luxury.jpg",
       description: "The iconic Serengeti hosts the Great Migration of over 1.5 million wildebeest and countless zebras across endless plains. Unmatched game viewing year-round.",
       rating: 4.9,
       bestTime: "June - October",
