@@ -2,8 +2,8 @@
 
 import { useEffect, useState } from "react"
 import { useRouter } from "next/navigation"
-import { createBrowserClient } from "@supabase/ssr"
 import { Loader2, KeyRound, ShieldCheck, LogOut } from "lucide-react"
+import { getBrowserClient } from "@/lib/supabase-browser"
 
 export default function VerifyMfaPage() {
   const router = useRouter()
@@ -15,33 +15,49 @@ export default function VerifyMfaPage() {
 
   useEffect(() => {
     let active = true
-    const supabase = createBrowserClient(
-      process.env.NEXT_PUBLIC_SUPABASE_URL!,
-      process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
-    )
-    supabase.auth.getSession().then(async ({ data: { session } }) => {
+
+    // getUser() validates against the server. getSession() only reads the
+    // cookie, so an expired/rotated session looked valid here and then sent
+    // the user round in circles.
+    ;(async () => {
+      const supabase = getBrowserClient()
+
+      const {
+        data: { user },
+        error: userError,
+      } = await supabase.auth.getUser()
       if (!active) return
-      if (!session) {
+
+      if (userError || !user) {
         router.replace("/sign-in")
         return
       }
+
       const { data: aal } = await supabase.auth.mfa.getAuthenticatorAssuranceLevel()
+      if (!active) return
       if (aal?.currentLevel === "aal2") {
         router.replace("/admin")
         return
       }
-      const { data: factors } = await supabase.auth.mfa.listFactors()
-      const verified = factors?.totp.find((f) => f.status === "verified")
+
+      const { data: factors, error: factorError } = await supabase.auth.mfa.listFactors()
       if (!active) return
+
+      const verified = factors?.totp.find((f) => f.status === "verified")
       if (!verified) {
+        // Distinguish "2FA was never finished" from "we could not reach the
+        // server just now" — the former is a dead end, the latter is a retry.
         setError(
-          "No verified authenticator was found on this account. Sign out, then finish your 2FA setup in Admin → Security."
+          factorError
+            ? "Could not reach the server. Check your connection and reload the page."
+            : "No verified authenticator was found on this account. Sign out, then finish your 2FA setup in Admin → Security."
         )
       } else {
         setFactorId(verified.id)
       }
       setChecking(false)
-    })
+    })()
+
     return () => {
       active = false
     }
@@ -103,11 +119,7 @@ export default function VerifyMfaPage() {
             </div>
             <button
               onClick={async () => {
-                const supabase = createBrowserClient(
-                  process.env.NEXT_PUBLIC_SUPABASE_URL!,
-                  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
-                )
-                await supabase.auth.signOut()
+                await getBrowserClient().auth.signOut()
                 window.location.href = "/"
               }}
               className="w-full inline-flex items-center justify-center gap-2 h-11 rounded-lg border border-slate-200 dark:border-slate-700 text-sm font-medium text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"

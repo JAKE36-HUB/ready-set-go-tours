@@ -51,6 +51,20 @@ function wpRedirect(path: string): string | null {
   return WP_REDIRECTS[path] ?? null
 }
 
+/**
+ * Carry the session cookies Supabase refreshed during `getUser()` onto a
+ * redirect response. Without this the rotated refresh token is thrown away,
+ * the browser keeps a stale one, and the next request bounces the user back
+ * to /sign-in even though they are still signed in.
+ */
+function withSessionCookies(
+  response: NextResponse,
+  supabaseResponse: NextResponse
+): NextResponse {
+  supabaseResponse.cookies.getAll().forEach((cookie) => response.cookies.set(cookie))
+  return response
+}
+
 export async function middleware(request: NextRequest) {
   const path = request.nextUrl.pathname
   const barePath = path.length > 1 && path.endsWith("/") ? path.slice(0, -1) : path
@@ -85,14 +99,14 @@ export async function middleware(request: NextRequest) {
   if (path.startsWith("/admin") && !user) {
     const url = request.nextUrl.clone()
     url.pathname = "/sign-in"
-    return NextResponse.redirect(url)
+    return withSessionCookies(NextResponse.redirect(url), supabaseResponse)
   }
 
   // Admin email allowlist — deny anyone not in ADMIN_EMAILS
   if (path.startsWith("/admin") && user && path !== "/admin/denied" && !isAdminEmail(user.email)) {
     const url = request.nextUrl.clone()
     url.pathname = "/admin/denied"
-    return NextResponse.redirect(url)
+    return withSessionCookies(NextResponse.redirect(url), supabaseResponse)
   }
 
   // If the account has a verified authenticator, require the 6-digit code step
@@ -103,7 +117,7 @@ export async function middleware(request: NextRequest) {
     if (aals?.nextLevel === "aal2" && aals.currentLevel !== "aal2") {
       const url = request.nextUrl.clone()
       url.pathname = "/admin/verify-mfa"
-      return NextResponse.redirect(url)
+      return withSessionCookies(NextResponse.redirect(url), supabaseResponse)
     }
   }
 

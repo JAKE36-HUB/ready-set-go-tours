@@ -1,12 +1,12 @@
 "use client"
 
 import { useEffect, useState } from "react"
-import { createBrowserClient } from "@supabase/ssr"
-import type { Factor } from "@supabase/supabase-js"
+import type { Factor, SupabaseClient } from "@supabase/supabase-js"
 import { ShieldCheck, ShieldAlert, QrCode, Loader2, KeyRound, Trash2, Copy, Check } from "lucide-react"
 import { toast } from "sonner"
 import { generateAuthenticatorQr } from "@/lib/totp-qr"
 import { resetAllFactors } from "@/lib/mfa-helpers"
+import { getBrowserClient } from "@/lib/supabase-browser"
 
 export default function SecurityPage() {
   const [loading, setLoading] = useState(true)
@@ -26,10 +26,7 @@ export default function SecurityPage() {
   const [disableCode, setDisableCode] = useState("")
 
   async function refresh() {
-    const supabase = createBrowserClient(
-      process.env.NEXT_PUBLIC_SUPABASE_URL!,
-      process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
-    )
+    const supabase = getBrowserClient()
     const { data: factors } = await supabase.auth.mfa.listFactors()
     const verified = factors?.totp.find((f) => f.status === "verified")
     if (verified) {
@@ -60,7 +57,7 @@ export default function SecurityPage() {
     return () => { cancelled = true }
   }, [])
 
-async function enrollFresh(supabase: ReturnType<typeof createBrowserClient>) {
+async function enrollFresh(supabase: SupabaseClient) {
   // Remove ALL existing factors (verified + pending) so a fresh authenticator can be enrolled.
   await resetAllFactors(supabase)
 
@@ -81,10 +78,7 @@ async function enrollFresh(supabase: ReturnType<typeof createBrowserClient>) {
 async function startEnroll() {
   setEnrolling(true)
   try {
-    const supabase = createBrowserClient(
-      process.env.NEXT_PUBLIC_SUPABASE_URL!,
-      process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
-    )
+    const supabase = getBrowserClient()
     await enrollFresh(supabase)
   } catch (err) {
     toast.error(
@@ -101,10 +95,7 @@ async function startEnroll() {
     if (!confirm("Remove the current authenticator from this account and enroll a new one? You'll need to scan the new QR code.")) return
     setRemoving(true)
     try {
-      const supabase = createBrowserClient(
-        process.env.NEXT_PUBLIC_SUPABASE_URL!,
-        process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
-      )
+      const supabase = getBrowserClient()
       await enrollFresh(supabase)
       toast.info("Old authenticator removed — scan the new QR code below.")
     } catch (err) {
@@ -122,10 +113,7 @@ async function startEnroll() {
     e.preventDefault()
     setVerifying(true)
     try {
-      const supabase = createBrowserClient(
-        process.env.NEXT_PUBLIC_SUPABASE_URL!,
-        process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
-      )
+      const supabase = getBrowserClient()
       const { error } = await supabase.auth.mfa.challengeAndVerify({
         factorId: pendingFactorId,
         code: verifyCode.trim(),
@@ -151,10 +139,7 @@ async function startEnroll() {
     if (!factor) return
     setRemoving(true)
     try {
-      const supabase = createBrowserClient(
-        process.env.NEXT_PUBLIC_SUPABASE_URL!,
-        process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
-      )
+      const supabase = getBrowserClient()
       // Supabase requires the session to be verified (AAL2) before unenrolling.
       // Confirm with a fresh code from the authenticator app first.
       const { error: verifyError } = await supabase.auth.mfa.challengeAndVerify({
@@ -195,10 +180,7 @@ async function startEnroll() {
     if (!confirm("Cancel this unfinished 2FA setup? You can then start fresh.")) return
     setRemoving(true)
     try {
-      const supabase = createBrowserClient(
-        process.env.NEXT_PUBLIC_SUPABASE_URL!,
-        process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
-      )
+      const supabase = getBrowserClient()
       const { data: { user } } = await supabase.auth.getUser()
       const res = await fetch("/api/admin/mfa-factor", {
         method: "DELETE",

@@ -2,10 +2,10 @@
 
 import { useEffect, useState } from "react"
 import { useRouter } from "next/navigation"
-import { createBrowserClient } from "@supabase/ssr"
 import { Loader2, ShieldCheck, KeyRound, QrCode, Copy, Check, Trash2, LogOut } from "lucide-react"
 import { generateAuthenticatorQr } from "@/lib/totp-qr"
 import { resetAllFactors } from "@/lib/mfa-helpers"
+import { getBrowserClient } from "@/lib/supabase-browser"
 
 export default function EnrollMfaPage() {
   const router = useRouter()
@@ -21,10 +21,7 @@ export default function EnrollMfaPage() {
   const [copied, setCopied] = useState(false)
 
   function client() {
-    return createBrowserClient(
-      process.env.NEXT_PUBLIC_SUPABASE_URL!,
-      process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
-    )
+    return getBrowserClient()
   }
 
   useEffect(() => {

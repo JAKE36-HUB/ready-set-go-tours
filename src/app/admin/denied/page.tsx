@@ -1,18 +1,14 @@
 "use client"
 
 import { useRouter } from "next/navigation"
-import { createBrowserClient } from "@supabase/ssr"
 import { ShieldAlert, LogOut } from "lucide-react"
+import { getBrowserClient } from "@/lib/supabase-browser"
 
 export default function AdminDeniedPage() {
   const router = useRouter()
 
   async function signOut() {
-    const supabase = createBrowserClient(
-      process.env.NEXT_PUBLIC_SUPABASE_URL!,
-      process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
-    )
-    await supabase.auth.signOut()
+    await getBrowserClient().auth.signOut()
     router.push("/")
     router.refresh()
   }

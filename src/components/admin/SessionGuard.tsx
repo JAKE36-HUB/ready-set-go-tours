@@ -2,7 +2,7 @@
 
 import { useEffect, useRef } from "react"
 import { toast } from "sonner"
-import { createBrowserClient } from "@supabase/ssr"
+import { getBrowserClient } from "@/lib/supabase-browser"
 import { useSupabase } from "@/lib/supabase-auth"
 
 const LOGIN_AT_KEY = "rsgt_admin_login_at"
@@ -58,11 +58,7 @@ export function SessionGuard() {
         localStorage.removeItem(LAST_ACTIVITY_KEY)
       } catch { /* ignore */ }
       toast.info(reason === "idle" ? "Signed out due to inactivity." : "Session expired. Please sign in again.")
-      const supabase = createBrowserClient(
-        process.env.NEXT_PUBLIC_SUPABASE_URL!,
-        process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
-      )
-      try { await supabase.auth.signOut() } catch { /* ignore */ }
+      try { await getBrowserClient().auth.signOut() } catch { /* ignore */ }
     }
 
     const check = () => {

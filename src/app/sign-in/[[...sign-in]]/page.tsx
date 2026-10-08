@@ -1,8 +1,6 @@
 "use client"
 
 import { useEffect, useRef, useState } from "react"
-import { useRouter } from "next/navigation"
-import { createBrowserClient } from "@supabase/ssr"
 import {
   Eye,
   EyeOff,
@@ -15,11 +13,37 @@ import {
   Sparkles,
   QrCode,
 } from "lucide-react"
+import { getBrowserClient } from "@/lib/supabase-browser"
 
 const BRAND = "Ready Set Go Tours"
 
+// sessionStorage key guarding against /admin -> /sign-in redirect loops.
+const LOOP_KEY = "rsg-signin-redirects"
+const MAX_REDIRECTS = 3
+
+/**
+ * Turn a non-OK login response into something the user can actually act on.
+ * Raw "Forbidden" / bare 429s were previously surfaced verbatim and read as
+ * a broken sign-in rather than a throttle.
+ */
+function describeLoginError(status: number, serverMessage?: string): string {
+  if (serverMessage && !/^(Forbidden|Invalid request)$/.test(serverMessage)) {
+    if (status === 429) return `Too many attempts — ${serverMessage}`
+    return serverMessage
+  }
+  switch (status) {
+    case 403:
+      return "Request blocked. Please reload the page and try again."
+    case 429:
+      return "Too many sign-in attempts. Wait a couple of minutes, then try again."
+    case 401:
+      return "Invalid email or password."
+    default:
+      return "Unable to sign in. Please try again."
+  }
+}
+
 export default function SignInPage() {
-  const router = useRouter()
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
   const [showPassword, setShowPassword] = useState(false)
@@ -33,17 +57,37 @@ export default function SignInPage() {
 
   useEffect(() => {
     let active = true
-    const supabase = createBrowserClient(
-      process.env.NEXT_PUBLIC_SUPABASE_URL!,
-      process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
-    )
-    supabase.auth.getSession().then(async ({ data: { session } }) => {
-      if (!active || !session) return
-      // If a session exists but 2FA is enrolled and not yet verified, resume the code step
-      // instead of redirecting (prevents a redirect loop with the middleware).
+
+    // Validate the stored session instead of trusting getSession(), which
+    // happily returns a cached session that is already expired or whose
+    // refresh token has been rotated away. Redirecting on that stale session
+    // is what caused the /admin -> /sign-in bounce.
+    ;(async () => {
+      const supabase = getBrowserClient()
+      const {
+        data: { user },
+        error,
+      } = await supabase.auth.getUser()
+      if (!active) return
+
+      if (error || !user) {
+        // Nothing valid to resume — drop the session and show the form.
+        try {
+          await supabase.auth.signOut()
+        } catch {}
+        try {
+          sessionStorage.removeItem(LOOP_KEY)
+        } catch {}
+        return
+      }
+
+      // Account has a verified authenticator but this session has not
+      // completed the code step yet — resume it instead of redirecting.
       const { data: aal } = await supabase.auth.mfa.getAuthenticatorAssuranceLevel()
+      if (!active) return
       if (aal?.nextLevel === "aal2" && aal.currentLevel !== "aal2") {
         const { data: factors } = await supabase.auth.mfa.listFactors()
+        if (!active) return
         const verified = factors?.totp.find((f) => f.status === "verified")
         if (verified) {
           setFactorId(verified.id)
@@ -53,17 +97,22 @@ export default function SignInPage() {
         setError("Your 2FA setup needs attention — open Admin → Security to finish it.")
         return
       }
-      // Guard against redirect loops: never bounce back to /admin more than once per 15s
+
+      // Last-resort loop guard. Trips only after several *consecutive*
+      // bounces, and clears itself so the next attempt starts fresh.
       try {
-        const last = Number(sessionStorage.getItem("rsg-loop-guard") || 0)
-        if (Date.now() - last < 15000) {
+        const count = Number(sessionStorage.getItem(LOOP_KEY) || 0)
+        if (count >= MAX_REDIRECTS) {
+          sessionStorage.removeItem(LOOP_KEY)
           setError("Still having trouble? Sign out and sign back in, or clear your browser cache.")
           return
         }
-        sessionStorage.setItem("rsg-loop-guard", String(Date.now()))
+        sessionStorage.setItem(LOOP_KEY, String(count + 1))
       } catch {}
+
       if (active) window.location.href = "/admin"
-    })
+    })()
+
     return () => {
       active = false
     }
@@ -88,28 +137,35 @@ export default function SignInPage() {
       const data = await res.json().catch(() => ({}))
 
       if (!res.ok) {
-        setError(data.error || "Unable to sign in. Please try again.")
+        setError(describeLoginError(res.status, data.error))
         return
       }
 
       if (data.mfaRequired) {
-        const supabase = createBrowserClient(
-          process.env.NEXT_PUBLIC_SUPABASE_URL!,
-          process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
-        )
-        const { data: factors } = await supabase.auth.mfa.listFactors()
-        const verified = factors?.totp.find((f) => f.status === "verified")
-        if (!verified) {
+        // The login route already resolved the factor — use it instead of
+        // asking the browser to list factors again (that second round trip
+        // sometimes raced the new cookie and reported "setup incomplete").
+        let id = typeof data.factorId === "string" ? data.factorId : ""
+
+        if (!id) {
+          const { data: factors } = await getBrowserClient().auth.mfa.listFactors()
+          id = factors?.totp.find((f) => f.status === "verified")?.id || ""
+        }
+
+        if (!id) {
           setError("Your 2FA setup is incomplete — finish it in Admin → Security, then sign in again.")
           setMfaRequired(false)
           return
         }
-        setFactorId(verified.id)
+        setFactorId(id)
         setMfaRequired(true)
         setCode("")
         return
       }
 
+      try {
+        sessionStorage.removeItem(LOOP_KEY)
+      } catch {}
       window.location.href = "/admin"
     } catch {
       setError("Network error — please try again.")
@@ -133,12 +189,15 @@ export default function SignInPage() {
       const data = await res.json().catch(() => ({}))
 
       if (!res.ok) {
-        setError(data.error || "Invalid code. Please try again.")
+        setError(describeLoginError(res.status, data.error))
         setCode("")
         codeRef.current?.focus()
         return
       }
 
+      try {
+        sessionStorage.removeItem(LOOP_KEY)
+      } catch {}
       window.location.href = "/admin"
     } catch {
       setError("Network error — please try again.")

@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server"
 import { cookies } from "next/headers"
 import { createServerClient } from "@supabase/ssr"
-import { rateLimit, verifyOrigin, badRequest } from "@/lib/security"
+import { verifyOrigin, badRequest, isBlocked, recordFailure, retryAfterSeconds } from "@/lib/security"
 
 export const dynamic = "force-dynamic"
 
@@ -65,15 +65,17 @@ export async function POST(req: NextRequest) {
   }
 
   const limitKey = `mfa:${ip}:${user.id}`
-  if (!rateLimit(limitKey, MAX_ATTEMPTS_PER_IP, IP_WINDOW_MS)) {
+  if (isBlocked(limitKey, MAX_ATTEMPTS_PER_IP)) {
     return NextResponse.json(
       { error: "Too many attempts. Please wait 15 minutes, then use a fresh code." },
-      { status: 429 }
+      { status: 429, headers: { "Retry-After": String(retryAfterSeconds(limitKey)) } }
     )
   }
 
   const { error } = await supabase.auth.mfa.challengeAndVerify({ factorId, code })
   if (error) {
+    // Charge only the rejected code, so a valid sign-in is never throttled.
+    recordFailure(limitKey, MAX_ATTEMPTS_PER_IP, IP_WINDOW_MS)
     return NextResponse.json({ error: friendlyError(error.code, "Invalid code. Try again.") }, { status: 401 })
   }
 

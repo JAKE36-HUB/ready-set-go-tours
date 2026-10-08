@@ -4,7 +4,7 @@ import Link from "next/link"
 import { usePathname, useRouter } from "next/navigation"
 import { useEffect, useState } from "react"
 import { useSupabase } from "@/lib/supabase-auth"
-import { createBrowserClient } from "@supabase/ssr"
+import { getBrowserClient } from "@/lib/supabase-browser"
 import {
   LayoutDashboard,
   Package,
@@ -91,11 +91,7 @@ export default function AdminShell({ children }: { children: React.ReactNode }) 
   }, [])
 
   async function handleSignOut() {
-    const supabase = createBrowserClient(
-      process.env.NEXT_PUBLIC_SUPABASE_URL!,
-      process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
-    )
-    await supabase.auth.signOut()
+    await getBrowserClient().auth.signOut()
     router.push("/")
     router.refresh()
   }

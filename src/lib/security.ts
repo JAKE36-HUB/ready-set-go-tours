@@ -1,11 +1,44 @@
 import { NextResponse } from "next/server"
 
-const RATE_LIMIT_STORE = new Map<string, { count: number; resetAt: number }>()
+type Entry = { count: number; resetAt: number }
 
+const RATE_LIMIT_STORE = new Map<string, Entry>()
+
+// Serverless instances are long-lived, so the map would otherwise grow forever.
+const MAX_STORE_ENTRIES = 5_000
+
+function prune(now: number): void {
+  if (RATE_LIMIT_STORE.size <= MAX_STORE_ENTRIES) return
+  for (const [key, entry] of RATE_LIMIT_STORE) {
+    if (now > entry.resetAt) RATE_LIMIT_STORE.delete(key)
+  }
+  // Still oversized (all live): drop the oldest entries so memory stays bounded.
+  while (RATE_LIMIT_STORE.size > MAX_STORE_ENTRIES) {
+    const oldest = RATE_LIMIT_STORE.keys().next()
+    if (oldest.done) break
+    RATE_LIMIT_STORE.delete(oldest.value)
+  }
+}
+
+function read(key: string, now: number): Entry | null {
+  const entry = RATE_LIMIT_STORE.get(key)
+  if (!entry) return null
+  if (now > entry.resetAt) {
+    RATE_LIMIT_STORE.delete(key)
+    return null
+  }
+  return entry
+}
+
+/**
+ * Count this attempt against the key. Returns false when the caller is
+ * currently over the limit and the attempt must not be processed.
+ */
 export function rateLimit(key: string, maxRequests: number, windowMs: number): boolean {
   const now = Date.now()
-  const entry = RATE_LIMIT_STORE.get(key)
-  if (!entry || now > entry.resetAt) {
+  prune(now)
+  const entry = read(key, now)
+  if (!entry) {
     RATE_LIMIT_STORE.set(key, { count: 1, resetAt: now + windowMs })
     return true
   }
@@ -14,30 +47,88 @@ export function rateLimit(key: string, maxRequests: number, windowMs: number): b
   return true
 }
 
+/**
+ * Read-only check: is this key currently blocked? Never consumes budget, so
+ * a caller can check before doing work and only charge the attempt if it fails.
+ */
+export function isBlocked(key: string, maxRequests: number): boolean {
+  const entry = read(key, Date.now())
+  return !!entry && entry.count >= maxRequests
+}
+
+/**
+ * Charge a *failed* attempt. Used so that successful sign-ins and honest
+ * retries never lock the user out of their own account.
+ */
+export function recordFailure(key: string, maxRequests: number, windowMs: number): void {
+  const now = Date.now()
+  prune(now)
+  const entry = read(key, now)
+  if (!entry) {
+    RATE_LIMIT_STORE.set(key, { count: 1, resetAt: now + windowMs })
+    return
+  }
+  if (entry.count >= maxRequests) return
+  entry.count++
+}
+
+/** Clear a key after a successful action (e.g. a good sign-in). */
+export function resetRateLimit(key: string): void {
+  RATE_LIMIT_STORE.delete(key)
+}
+
+/** Seconds until the key stops being blocked (0 when not blocked). */
+export function retryAfterSeconds(key: string): number {
+  const entry = read(key, Date.now())
+  if (!entry) return 0
+  return Math.max(1, Math.ceil((entry.resetAt - Date.now()) / 1000))
+}
+
+function allowedHost(hostname: string, hostHeader: string): boolean {
+  if (hostname === hostHeader) return true
+  if (hostname === "localhost" || hostname.endsWith(".vercel.app")) return true
+
+  const extra = [process.env.SITE_URL, process.env.NEXT_PUBLIC_SITE_URL]
+    .filter(Boolean)
+    .map((u) => {
+      try {
+        return new URL(u as string).hostname.toLowerCase()
+      } catch {
+        return null
+      }
+    })
+    .filter((h): h is string => !!h)
+
+  const allowlisted = new Set([
+    ...extra,
+    "readysetgosafaris.com",
+    "www.readysetgosafaris.com",
+  ])
+
+  return allowlisted.has(hostname)
+}
+
+/**
+ * Same-origin check for state-changing requests.
+ *
+ * Browsers send `Origin` on POSTs; fall back to `Referer` when it is absent
+ * and allow the request through when neither is present (non-browser clients
+ * cannot be cross-site). A present-but-wrong origin is rejected.
+ */
 export function verifyOrigin(request: Request): boolean {
-  const origin = request.headers.get("origin")
-  const referer = request.headers.get("referer")
-  const allowed = process.env.NEXT_PUBLIC_SUPABASE_URL?.replace(".supabase.co", ".vercel.app") || ""
-  const host = request.headers.get("host") || ""
+  const hostHeader = (request.headers.get("host") || "").split(":")[0].toLowerCase()
+  const candidate = request.headers.get("origin") || request.headers.get("referer")
 
-  const candidates = [origin, referer].filter(Boolean)
-  if (candidates.length === 0) return true
+  if (!candidate) return true
 
-  return candidates.some((url) => {
-    if (!url) return false
-    try {
-      const parsed = new URL(url)
-      return (
-        parsed.hostname === host ||
-        parsed.hostname.endsWith(".vercel.app") ||
-        parsed.hostname === "readysetgosafaris.com" ||
-        parsed.hostname === "www.readysetgosafaris.com" ||
-        parsed.hostname === "localhost"
-      )
-    } catch {
-      return false
-    }
-  })
+  let hostname: string
+  try {
+    hostname = new URL(candidate).hostname.toLowerCase()
+  } catch {
+    return false
+  }
+
+  return allowedHost(hostname, hostHeader)
 }
 
 export function sanitizeString(value: unknown, maxLength = 5000): string {
