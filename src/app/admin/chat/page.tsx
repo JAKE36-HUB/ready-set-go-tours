@@ -579,7 +579,7 @@ export default function AdminChat() {
                             )}
                           </div>
                           <div
-                            className="hidden group-hover:flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity"
+                            className="hidden group-hover:flex pointer-coarse:flex items-center gap-1 opacity-0 group-hover:opacity-100 pointer-coarse:opacity-100 transition-opacity"
                             onClick={(e) => e.stopPropagation()}
                           >
                             <button

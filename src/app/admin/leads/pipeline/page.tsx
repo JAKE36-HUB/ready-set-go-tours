@@ -86,6 +86,17 @@ export default function PipelinePage() {
           👤 {lead.assigned_to}
         </span>
       )}
+      <select
+        value={lead.status}
+        onChange={(e) => moveLead(lead.id, e.target.value)}
+        onClick={(e) => e.stopPropagation()}
+        className="hidden pointer-coarse:block mt-2 w-full rounded-md border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 px-1.5 py-1.5 text-[10px] font-medium text-slate-600 dark:text-slate-300"
+        aria-label="Move lead to a stage"
+      >
+        {LEAD_STATUSES.map((s) => (
+          <option key={s.value} value={s.value}>{s.label}</option>
+        ))}
+      </select>
     </motion.div>
   )
 
@@ -94,7 +105,7 @@ export default function PipelinePage() {
       <div className="flex flex-wrap items-center justify-between gap-3">
         <div>
           <h2 className="text-xl font-bold">Lead Pipeline</h2>
-          <p className="text-sm text-slate-500">Drag cards between stages to update the pipeline</p>
+          <p className="text-sm text-slate-500">Drag cards between stages, or use the stage menu on each card for touch</p>
         </div>
         <div className="relative">
           <Filter className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />

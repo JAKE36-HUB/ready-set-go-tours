@@ -110,7 +110,7 @@ export default function GalleryPage() {
                       className="group relative rounded-xl overflow-hidden border border-slate-200 dark:border-slate-800 bg-slate-100 dark:bg-slate-800 aspect-[4/3] shadow-sm hover:shadow-md transition-all duration-300">
                       <img src={img.src} alt={img.alt} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                         onError={(e) => { (e.target as HTMLImageElement).src = "https://placehold.co/400x300?text=No+Image" }} />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-3">
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent opacity-0 group-hover:opacity-100 pointer-coarse:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-3">
                         <div className="flex items-center justify-center gap-2 mb-2">
                           <button onClick={() => window.open(img.src, "_blank")}
                             className="w-8 h-8 rounded-lg bg-white/20 backdrop-blur-sm flex items-center justify-center hover:bg-white/30 transition-colors">
@@ -126,7 +126,7 @@ export default function GalleryPage() {
                           </button>
                         </div>
                       </div>
-                      <div className="absolute bottom-0 left-0 right-0 p-2 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                      <div className="absolute bottom-0 left-0 right-0 p-2 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 pointer-coarse:opacity-100 transition-opacity duration-300">
                         <p className="text-xs text-white truncate">{img.alt || "No description"}</p>
                       </div>
                     </motion.div>
