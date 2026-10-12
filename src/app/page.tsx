@@ -2,6 +2,7 @@ import dynamic from "next/dynamic"
 
 const HeroSection = dynamic(() => import("@/components/home/HeroSection").then((m) => m.HeroSection))
 const TripFinder = dynamic(() => import("@/components/home/TripFinder").then((m) => m.TripFinder))
+const PackageOfTheDay = dynamic(() => import("@/components/home/PackageOfTheDay").then((m) => m.PackageOfTheDay))
 const FeaturedSafaris = dynamic(() => import("@/components/home/FeaturedSafaris").then((m) => m.FeaturedSafaris))
 const CustomSafari = dynamic(() => import("@/components/home/CustomSafari").then((m) => m.CustomSafari))
 const WhyChooseUs = dynamic(() => import("@/components/home/WhyChooseUs").then((m) => m.WhyChooseUs))
@@ -18,6 +19,7 @@ export default function Home() {
     <>
       <HeroSection />
       <TripFinder />
+      <PackageOfTheDay />
       <FeaturedSafaris />
       <CustomSafari />
       <WhyChooseUs />
