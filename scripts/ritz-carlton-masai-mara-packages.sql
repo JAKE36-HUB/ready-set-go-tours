@@ -1,0 +1,173 @@
+-- Adds the two The Ritz-Carlton Masai Mara Flying Packages (from the PDF brief).
+--
+-- Run once in the Supabase SQL editor (Dashboard > SQL Editor > New query).
+-- Safe to re-run: ON CONFLICT (slug) DO UPDATE keeps rows idempotent.
+--
+-- Notes:
+--   * price_kes is NULL on purpose so the site always converts at the
+--     current USD_TO_KES rate (130) instead of freezing a stale one.
+--   * price = headline rate per person sharing during high/peak season.
+--     Seasonal + solo-traveller rates are spelled out in `description`.
+--   * image is temporarily the existing self-hosted luxury lodge photo
+--     (pin_1f12bebda0ecf1699fa537f21112db28.jpg). Replace with real
+--     Ritz-Carlton Masai Mara photos when available.
+--   * type = 'luxury' matches the existing Masai Mara luxury package so the
+--     tour_packages filtering stays consistent.
+
+INSERT INTO tour_packages (
+  name,
+  slug,
+  type,
+  image,
+  price,
+  price_kes,
+  duration,
+  accommodation,
+  meals,
+  transport,
+  activities,
+  description,
+  highlights,
+  included,
+  excluded
+)
+VALUES
+(
+  '3 Days, 2 Nights — The Ritz-Carlton Masai Mara Flying Package',
+  '3-days-ritz-carlton-masai-mara-flying-package',
+  'luxury',
+  '/images/local/pin_1f12bebda0ecf1699fa537f21112db28.jpg',
+  6400,
+  NULL,
+  '3 Days / 2 Nights',
+  'The Ritz-Carlton, Masai Mara — luxury tented suites with personalized butler service',
+  'Full board with personalized butler service; bush meals, champagne breakfast, high tea, sundowners, boma dining and chef''s table',
+  'Return flights to the Masai Mara, airstrip transfers (Keekorok / Serena) and a private luxury open safari land cruiser',
+  ARRAY[
+    $$Exclusive game drives in a private luxury open safari land cruiser$$,
+    $$Champagne breakfast, sunrise smoothies & coffee glide$$,
+    $$Bush meals & sundowners (weather permitting)$$,
+    $$High tea with exotic teas and edible flowers$$,
+    $$Chef's table at the wine cellar & wine pairing$$,
+    $$Wellness hub: open-air pool, gym & spa$$,
+    $$Rhino Sanctuary visit$$,
+    $$Maasai cultural village visit$$,
+    $$Photo studio with Canon professional cameras$$
+  ],
+  $$Experience the Masai Mara in absolute luxury at The Ritz-Carlton, Masai Mara. This all-inclusive flying package covers return flights from Nairobi, airstrip transfers, exclusive private game drives in a luxury open safari land cruiser, full board dining with a personalized butler, premium beverages, champagne breakfast, sundowners, boma dinners and chef's table experiences. Rates are per person in USD. High/peak season (1 June – 15 October 2026 & 20 December 2026 – 5 January 2027): $6,400 per person sharing, $7,900 solo traveller. Low/shoulder season (16 October – 19 December 2026): $4,890 per person sharing, $6,300 solo traveller.$$,
+  ARRAY[
+    $$Stay at The Ritz-Carlton, Masai Mara$$,
+    $$Private luxury open safari land cruiser$$,
+    $$Personalized butler service$$,
+    $$All-inclusive full board with premium beverages$$,
+    $$Return flights & airstrip transfers$$,
+    $$Big Five game drives in the Mara$$
+  ],
+  ARRAY[
+    $$Luxurious accommodation and meals on full board basis with personalized butler service$$,
+    $$Alcoholic and non-alcoholic beverages, including premium wines and spirits$$,
+    $$Bush meals (breakfast/lunch) — weather permitting$$,
+    $$Champagne breakfast, sunrise smoothies and coffee glide$$,
+    $$On-property high tea with assorted exotic teas and edible flowers$$,
+    $$Sundowners — weather permitting$$,
+    $$Boma dining experience$$,
+    $$Child minding (06:00 – 22:00)$$,
+    $$Chef's table experience at the wine cellar$$,
+    $$Wine pairing sessions with the in-house sommelier$$,
+    $$Exclusive game drives in a private luxury open safari land cruiser, incl. refreshments$$,
+    $$A pair of binoculars in the vehicle$$,
+    $$Use of the photo studio, Canon professional cameras and lenses$$,
+    $$Rhino Sanctuary visit (entrance fees payable directly)$$,
+    $$Access to the wellness hub featuring the signature open-air pool, gym and spa$$,
+    $$Visit to the cultural village$$,
+    $$Wi-Fi throughout the lodge$$,
+    $$Flight tickets to and from the Masai Mara$$,
+    $$Return airstrip transfers to and from the Keekorok / Serena airstrip$$,
+    $$Laundry services$$,
+    $$All statutory taxes$$,
+    $$Masai Mara National Reserve entrance fees$$
+  ],
+  ARRAY[
+    $$Spa treatments$$,
+    $$Items of personal nature$$,
+    $$Gratuities$$,
+    $$Lazizi Welfare Foundation fee — USD 15 (contribution to preserving the natural habitat and supporting the local community)$$
+  ]
+),
+(
+  '4 Days, 3 Nights — The Ritz-Carlton Masai Mara Flying Package',
+  '4-days-ritz-carlton-masai-mara-flying-package',
+  'luxury',
+  '/images/local/pin_1f12bebda0ecf1699fa537f21112db28.jpg',
+  9200,
+  NULL,
+  '4 Days / 3 Nights',
+  'The Ritz-Carlton, Masai Mara — luxury tented suites with personalized butler service',
+  'Full board with personalized butler service; bush meals, champagne breakfast, high tea, sundowners, boma dining and chef''s table',
+  'Return flights to the Masai Mara, airstrip transfers (Keekorok / Serena) and a private luxury open safari land cruiser',
+  ARRAY[
+    $$Exclusive game drives in a private luxury open safari land cruiser$$,
+    $$Champagne breakfast, sunrise smoothies & coffee glide$$,
+    $$Bush meals & sundowners (weather permitting)$$,
+    $$High tea with exotic teas and edible flowers$$,
+    $$Chef's table at the wine cellar & wine pairing$$,
+    $$Wellness hub: open-air pool, gym & spa$$,
+    $$Rhino Sanctuary visit$$,
+    $$Maasai cultural village visit$$,
+    $$Photo studio with Canon professional cameras$$
+  ],
+  $$Experience the Masai Mara in absolute luxury at The Ritz-Carlton, Masai Mara. This all-inclusive flying package covers return flights from Nairobi, airstrip transfers, exclusive private game drives in a luxury open safari land cruiser, full board dining with a personalized butler, premium beverages, champagne breakfast, sundowners, boma dinners and chef's table experiences. Rates are per person in USD. High/peak season (1 June – 15 October 2026 & 20 December 2026 – 5 January 2027): $9,200 per person sharing, $10,500 solo traveller. Low/shoulder season (16 October – 19 December 2026): $6,900 per person sharing, $8,600 solo traveller.$$,
+  ARRAY[
+    $$Stay at The Ritz-Carlton, Masai Mara$$,
+    $$Private luxury open safari land cruiser$$,
+    $$Personalized butler service$$,
+    $$All-inclusive full board with premium beverages$$,
+    $$Return flights & airstrip transfers$$,
+    $$Big Five game drives in the Mara$$
+  ],
+  ARRAY[
+    $$Luxurious accommodation and meals on full board basis with personalized butler service$$,
+    $$Alcoholic and non-alcoholic beverages, including premium wines and spirits$$,
+    $$Bush meals (breakfast/lunch) — weather permitting$$,
+    $$Champagne breakfast, sunrise smoothies and coffee glide$$,
+    $$On-property high tea with assorted exotic teas and edible flowers$$,
+    $$Sundowners — weather permitting$$,
+    $$Boma dining experience$$,
+    $$Child minding (06:00 – 22:00)$$,
+    $$Chef's table experience at the wine cellar$$,
+    $$Wine pairing sessions with the in-house sommelier$$,
+    $$Exclusive game drives in a private luxury open safari land cruiser, incl. refreshments$$,
+    $$A pair of binoculars in the vehicle$$,
+    $$Use of the photo studio, Canon professional cameras and lenses$$,
+    $$Rhino Sanctuary visit (entrance fees payable directly)$$,
+    $$Access to the wellness hub featuring the signature open-air pool, gym and spa$$,
+    $$Visit to the cultural village$$,
+    $$Wi-Fi throughout the lodge$$,
+    $$Flight tickets to and from the Masai Mara$$,
+    $$Return airstrip transfers to and from the Keekorok / Serena airstrip$$,
+    $$Laundry services$$,
+    $$All statutory taxes$$,
+    $$Masai Mara National Reserve entrance fees$$
+  ],
+  ARRAY[
+    $$Spa treatments$$,
+    $$Items of personal nature$$,
+    $$Gratuities$$,
+    $$Lazizi Welfare Foundation fee — USD 15 (contribution to preserving the natural habitat and supporting the local community)$$
+  ]
+)
+ON CONFLICT (slug) DO UPDATE SET
+  type = EXCLUDED.type,
+  image = EXCLUDED.image,
+  price = EXCLUDED.price,
+  price_kes = EXCLUDED.price_kes,
+  duration = EXCLUDED.duration,
+  accommodation = EXCLUDED.accommodation,
+  meals = EXCLUDED.meals,
+  transport = EXCLUDED.transport,
+  activities = EXCLUDED.activities,
+  description = EXCLUDED.description,
+  highlights = EXCLUDED.highlights,
+  included = EXCLUDED.included,
+  excluded = EXCLUDED.excluded,
+  updated_at = NOW();
