@@ -1,18 +1,24 @@
 import { readFileSync } from "node:fs"
 
 const sql = readFileSync("scripts/ritz-carlton-masai-mara-packages.sql", "utf8")
+let fail = false
 
-const blocks = [...sql.matchAll(/\$\$([\s\S]*?)\$\$/g)].map((m) => m[1])
-console.log(`dollar-quoted blocks: ${blocks.length} (${blocks.length >= 6 ? "ok, at least one per array + 2 descriptions" : "TOO FEW"})`)
-for (const b of blocks) {
-  if (b.includes("$$")) {
-    console.error("FAIL: nested $$ inside a dollar-quoted block: " + b.slice(0, 40))
-    process.exit(1)
-  }
+if (/\$\$/.test(sql)) {
+  console.error("FAIL: dollar-quote blocks should NOT be used in this script")
+  fail = true
 }
-console.log("PASS: no nested $$")
 
-// must contain no unescaped single quotes outside dollar blocks (rare case)
+const smart = sql.match(/[\u2013\u2014\u2018\u2019\u201c\u201d]/)
+if (smart) {
+  console.error(`FAIL: non-ASCII dash/quote present: ${smart[0]} (${smart[0].codePointAt(0).toString(16)})`)
+  fail = true
+}
+
+if (sql.split("'").length % 2 !== 1) {
+  console.error("FAIL: odd number of single quotes - unbalanced string literal")
+  fail = true
+}
+
 for (const needle of [
   "3-days-ritz-carlton-masai-mara-flying-package",
   "4-days-ritz-carlton-masai-mara-flying-package",
@@ -29,9 +35,21 @@ for (const needle of [
   "Keekorok",
   "Canon professional cameras",
 ]) {
-  console.log(`${sql.includes(needle) ? "ok  " : "MISS"} ${needle}`)
+  if (!sql.includes(needle)) {
+    console.error(`MISS: ${needle}`)
+    fail = true
+  }
 }
 
-// every `meals`/description string kept its apostrophe safe
-const badApostrophe = sql.match(/[$(]'[^']*(\u2019|')/g)
-console.log(badApostrophe && badApostrophe.length ? `WARN unexpected quotes: ${badApostrophe.join(" | ")}` : "PASS: no stray quotes outside $$ block")
+// no occurrence of a single quote that is not escaped (i.e. "abc'd" instead of "abc''d")
+for (const [i, line] of sql.split("\n").entries()) {
+  const clean = line.replace(/'{2}/g, "")
+  const leading = clean.split("'").length - 1
+  if (line.trim() !== "" && !line.includes("--") && leading % 2 === 1 && leading > 0) {
+    console.error(`WARN line ${i + 1}: possible unescaped quote -> ${line.trim().slice(0, 70)}`)
+    fail = true
+  }
+}
+
+console.log(fail ? "FAILURES FOUND" : "PASS: script is ASCII-only, dollar-quote-free and balanced")
+process.exit(fail ? 1 : 0)
