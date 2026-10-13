@@ -12,7 +12,11 @@ import {
 import { Badge } from "@/components/ui/badge";
 import AnimatedSection from "@/components/AnimatedSection";
 import { PaymentPolicy } from "@/components/PaymentPolicy";
-import { ItineraryTimeline, OptionalActivitiesCard, PackageNotesCard } from "@/components/ItineraryTimeline";
+import { OptionalActivitiesCard, PackageNotesCard } from "@/components/ItineraryTimeline";
+import ItineraryAccordion from "@/components/ItineraryAccordion";
+import PackageSectionNav from "@/components/PackageSectionNav";
+import PackageStickyCTA from "@/components/PackageStickyCTA";
+import SimilarPackages, { type SimilarPackage } from "@/components/SimilarPackages";
 import type { ItineraryDay, OptionalActivity } from "@/lib/tour";
 
 export const revalidate = 3600;
@@ -120,6 +124,26 @@ export default async function PackageDetailPage({
 
   const noun = pkg.type === "beach" ? "Beach Holiday" : "Safari";
 
+  const sections = [
+    { id: "overview", label: "Overview" },
+    ...(pkg.highlights.length ? [{ id: "highlights", label: "Highlights" }] : []),
+    ...(pkg.activities.length ? [{ id: "activities", label: "Activities" }] : []),
+    ...(pkg.itinerary.length ? [{ id: "itinerary", label: "Itinerary" }] : []),
+    ...(pkg.included.length ? [{ id: "inclusions", label: "Inclusions" }] : []),
+  ];
+
+  let similar: SimilarPackage[] = [];
+  try {
+    const { data } = await getSupabase()
+      .from("tour_packages")
+      .select("name, slug, image, price, duration, description")
+      .eq("type", pkg.type)
+      .neq("slug", slug)
+      .order("name")
+      .limit(3);
+    if (data) similar = data;
+  } catch {}
+
   return (
     <>
       <BreadcrumbJsonLd items={[
@@ -205,44 +229,51 @@ export default async function PackageDetailPage({
             </Link>
           </div>
         </div>
+        <PackageSectionNav items={sections} />
       </section>
-
-      {/* Content */}
       <section className="py-16 px-6">
         <div className="max-w-7xl mx-auto">
           <div className="grid lg:grid-cols-3 gap-12">
             {/* Main */}
             <div className="lg:col-span-2 space-y-12">
-              <AnimatedSection>
-                <h2 className="font-display text-2xl font-medium text-foreground mb-4">About This {noun}</h2>
-                <p className="text-muted-foreground leading-relaxed text-lg">{pkg.description}</p>
-              </AnimatedSection>
+              <div id="overview" className="scroll-mt-28">
+                <AnimatedSection>
+                  <h2 className="font-display text-2xl font-medium text-foreground mb-4">About This {noun}</h2>
+                  <p className="text-muted-foreground leading-relaxed text-lg">{pkg.description}</p>
+                </AnimatedSection>
+              </div>
 
-              <AnimatedSection>
-                <h2 className="font-display text-2xl font-medium text-foreground mb-4">Highlights</h2>
-                <div className="grid sm:grid-cols-2 gap-3">
-                  {pkg.highlights.map((h: string) => (
-                    <div key={h} className="flex items-start gap-3 p-4 rounded-xl bg-card ring-1 ring-foreground/5">
-                      <Compass className="size-5 text-primary dark:text-amber-400 shrink-0 mt-0.5" />
-                      <span className="text-sm text-foreground">{h}</span>
-                    </div>
-                  ))}
-                </div>
-              </AnimatedSection>
+              <div id="highlights" className="scroll-mt-28">
+                <AnimatedSection>
+                  <h2 className="font-display text-2xl font-medium text-foreground mb-4">Highlights</h2>
+                  <div className="grid sm:grid-cols-2 gap-3">
+                    {pkg.highlights.map((h: string) => (
+                      <div key={h} className="flex items-start gap-3 p-4 rounded-xl bg-card ring-1 ring-foreground/5">
+                        <Compass className="size-5 text-primary dark:text-amber-400 shrink-0 mt-0.5" />
+                        <span className="text-sm text-foreground">{h}</span>
+                      </div>
+                    ))}
+                  </div>
+                </AnimatedSection>
+              </div>
 
-              <AnimatedSection>
-                <h2 className="font-display text-2xl font-medium text-foreground mb-4">Activities</h2>
-                <div className="flex flex-wrap gap-2">
-                  {pkg.activities.map((a: string) => (
-                    <span key={a} className="inline-flex items-center gap-1.5 text-sm bg-card ring-1 ring-foreground/10 text-foreground px-4 py-2 rounded-full">
-                      <Compass className="size-4 text-primary dark:text-amber-400 shrink-0" />
-                      {a}
-                    </span>
-                  ))}
-                </div>
-              </AnimatedSection>
+              <div id="activities" className="scroll-mt-28">
+                <AnimatedSection>
+                  <h2 className="font-display text-2xl font-medium text-foreground mb-4">Activities</h2>
+                  <div className="flex flex-wrap gap-2">
+                    {pkg.activities.map((a: string) => (
+                      <span key={a} className="inline-flex items-center gap-1.5 text-sm bg-card ring-1 ring-foreground/10 text-foreground px-4 py-2 rounded-full">
+                        <Compass className="size-4 text-primary dark:text-amber-400 shrink-0" />
+                        {a}
+                      </span>
+                    ))}
+                  </div>
+                </AnimatedSection>
+              </div>
 
-              <ItineraryTimeline itinerary={pkg.itinerary} />
+              <div id="itinerary" className="scroll-mt-28">
+                <ItineraryAccordion itinerary={pkg.itinerary} />
+              </div>
             </div>
 
             {/* Sidebar */}
@@ -283,19 +314,21 @@ export default async function PackageDetailPage({
                 </div>
               </AnimatedSection>
 
-              <AnimatedSection>
-                <div className="rounded-2xl bg-card ring-1 ring-foreground/10 p-6">
-                  <h3 className="font-semibold text-foreground mb-4">What&apos;s Included</h3>
-                  <ul className="space-y-3">
-                    {pkg.included.map((item: string) => (
-                      <li key={item} className="flex items-start gap-3 text-sm text-muted-foreground">
-                        <Check className="size-4 text-primary dark:text-amber-400 shrink-0 mt-0.5" />
-                        {item}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </AnimatedSection>
+              <div id="inclusions" className="scroll-mt-28">
+                <AnimatedSection>
+                  <div className="rounded-2xl bg-card ring-1 ring-foreground/10 p-6">
+                    <h3 className="font-semibold text-foreground mb-4">What&apos;s Included</h3>
+                    <ul className="space-y-3">
+                      {pkg.included.map((item: string) => (
+                        <li key={item} className="flex items-start gap-3 text-sm text-muted-foreground">
+                          <Check className="size-4 text-primary dark:text-amber-400 shrink-0 mt-0.5" />
+                          {item}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </AnimatedSection>
+              </div>
 
               <AnimatedSection>
                 <div className="rounded-2xl bg-card ring-1 ring-foreground/10 p-6">
@@ -346,7 +379,19 @@ export default async function PackageDetailPage({
           </div>
         </div>
       </section>
+
+      <SimilarPackages
+        packages={similar}
+        title={pkg.type === "beach" ? "Similar Beach Holidays" : "Similar Safaris"}
+      />
     </main>
+
+    <PackageStickyCTA
+      name={pkg.name}
+      price={pkg.price}
+      priceKES={pkg.priceKES}
+      noun={noun}
+    />
     </>
   )
 }
