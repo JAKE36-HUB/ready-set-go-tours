@@ -6,6 +6,7 @@ const WhatsAppButton = dynamic(() => import("@/components/layout/WhatsAppButton"
 const AiChat = dynamic(() => import("@/components/layout/AiChat").then(m => m.AiChat), { ssr: false })
 const CookieConsent = dynamic(() => import("@/components/layout/CookieConsent").then(m => m.CookieConsent), { ssr: false })
 const ScrollToTop = dynamic(() => import("@/components/layout/ScrollToTop").then(m => m.ScrollToTop), { ssr: false })
+const ScrollToTopOnNavigate = dynamic(() => import("@/components/layout/ScrollToTopOnNavigate").then(m => m.ScrollToTopOnNavigate), { ssr: false })
 const VisitorTracker = dynamic(() => import("@/components/admin/VisitorTracker"), { ssr: false })
 const PopupEngine = dynamic(() => import("@/components/popups/PopupEngine").then(m => m.PopupEngine), { ssr: false })
 const ExitIntentModal = dynamic(() => import("@/components/layout/ExitIntentModal").then(m => m.ExitIntentModal), { ssr: false })
@@ -18,6 +19,7 @@ export function ClientWidgets() {
       <AiChat />
       <WhatsAppButton />
       <ScrollToTop />
+      <ScrollToTopOnNavigate />
       <CookieConsent />
       <PopupEngine />
       <ExitIntentModal />
