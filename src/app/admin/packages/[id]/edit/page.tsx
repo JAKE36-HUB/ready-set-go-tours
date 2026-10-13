@@ -3,12 +3,14 @@
 import { useEffect, useState, useCallback } from "react"
 import { motion } from "framer-motion"
 import { useParams, useRouter } from "next/navigation"
-import { ArrowLeft, Plus, X, Save, Package, ImageIcon, Info, List, Sparkles } from "lucide-react"
+import { ArrowLeft, Plus, X, Save, Package, ImageIcon, Info, List, Sparkles, Map } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { Label } from "@/components/ui/label"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
+import { ItineraryDaysEditor, OptionalActivitiesEditor } from "@/components/admin/packageEditors"
+import type { ItineraryDay, OptionalActivity } from "@/lib/tour"
 
 function slugify(text: string) {
   return text.toLowerCase().replace(/[^\w\s-]/g, "").replace(/\s+/g, "-").replace(/-+/g, "-").trim()
@@ -68,6 +70,7 @@ export default function EditPackagePage() {
     name: "", slug: "", type: "safari", image: "", price: "", price_kes: "",
     duration: "", accommodation: "", meals: "", transport: "", description: "",
     activities: [] as string[], highlights: [] as string[], included: [] as string[], excluded: [] as string[],
+    itinerary: [] as ItineraryDay[], optional_activities: [] as OptionalActivity[], notes: "",
   })
 
   useEffect(() => {
@@ -84,6 +87,7 @@ export default function EditPackagePage() {
             transport: p.transport || "", description: p.description || "",
             activities: p.activities || [], highlights: p.highlights || [],
             included: p.included || [], excluded: p.excluded || [],
+            itinerary: p.itinerary || [], optional_activities: p.optional_activities || [], notes: p.notes || "",
           })
         }
       } catch { alert("Failed to load package") }
@@ -260,6 +264,29 @@ export default function EditPackagePage() {
             <ArrayInput label="Highlights" values={form.highlights} onChange={(v) => setForm((p) => ({ ...p, highlights: v }))} />
             <ArrayInput label="Included" values={form.included} onChange={(v) => setForm((p) => ({ ...p, included: v }))} />
             <ArrayInput label="Excluded" values={form.excluded} onChange={(v) => setForm((p) => ({ ...p, excluded: v }))} />
+          </div>
+        </motion.div>
+
+        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.25 }}
+          className="rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 overflow-hidden hover:shadow-md transition-shadow">
+          <div className="px-6 pt-6 pb-1 border-b border-slate-100 dark:border-slate-800">
+            <div className="flex items-center gap-2.5 mb-1">
+              <div className="w-7 h-7 rounded-lg bg-amber-100 dark:bg-amber-500/10 flex items-center justify-center">
+                <Map className="w-3.5 h-3.5 text-amber-600 dark:text-amber-400" />
+              </div>
+              <h3 className="text-sm font-semibold text-slate-900 dark:text-white">Itinerary &amp; Travel Notes</h3>
+            </div>
+            <p className="text-xs text-slate-500 dark:text-slate-400 ml-9">Day-by-day programme, optional activities, and seasonal notes</p>
+          </div>
+          <div className="p-6 space-y-6">
+            <ItineraryDaysEditor value={form.itinerary} onChange={(v) => setForm((p) => ({ ...p, itinerary: v }))} />
+            <div className="border-t border-slate-100 dark:border-slate-800 pt-6">
+              <OptionalActivitiesEditor value={form.optional_activities} onChange={(v) => setForm((p) => ({ ...p, optional_activities: v }))} />
+            </div>
+            <div className="border-t border-slate-100 dark:border-slate-800 pt-6 space-y-2">
+              <Label>Important Travel Information &amp; Seasonal Notes</Label>
+              <Textarea value={form.notes} onChange={(e) => setForm((p) => ({ ...p, notes: e.target.value }))} rows={5} />
+            </div>
           </div>
         </motion.div>
 

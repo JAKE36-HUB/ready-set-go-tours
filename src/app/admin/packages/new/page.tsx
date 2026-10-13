@@ -3,12 +3,14 @@
 import { useState, useCallback } from "react"
 import { motion } from "framer-motion"
 import { useRouter } from "next/navigation"
-import { ArrowLeft, Plus, X, Save, Package, ImageIcon, Info, List } from "lucide-react"
+import { ArrowLeft, Plus, X, Save, Package, ImageIcon, Info, List, Map } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { Label } from "@/components/ui/label"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
+import { ItineraryDaysEditor, OptionalActivitiesEditor } from "@/components/admin/packageEditors"
+import type { ItineraryDay, OptionalActivity } from "@/lib/tour"
 
 function slugify(text: string) {
   return text.toLowerCase().replace(/[^\w\s-]/g, "").replace(/\s+/g, "-").replace(/-+/g, "-").trim()
@@ -53,6 +55,7 @@ export default function NewPackagePage() {
     name: "", slug: "", type: "safari", image: "", price: "", price_kes: "",
     duration: "", accommodation: "", meals: "", transport: "", description: "",
     activities: [] as string[], highlights: [] as string[], included: [] as string[], excluded: [] as string[],
+    itinerary: [] as ItineraryDay[], optional_activities: [] as OptionalActivity[], notes: "",
   })
 
   const handleNameChange = useCallback((name: string) => {
@@ -217,6 +220,30 @@ export default function NewPackagePage() {
             <ArrayInput label="Highlights" values={form.highlights} onChange={(v) => setForm((p) => ({ ...p, highlights: v }))} placeholder="e.g. View the Big Five" />
             <ArrayInput label="Included" values={form.included} onChange={(v) => setForm((p) => ({ ...p, included: v }))} placeholder="e.g. Park fees" />
             <ArrayInput label="Excluded" values={form.excluded} onChange={(v) => setForm((p) => ({ ...p, excluded: v }))} placeholder="e.g. International flights" />
+          </div>
+        </motion.div>
+
+        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.25 }}
+          className="rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 overflow-hidden hover:shadow-md transition-shadow">
+          <div className="px-6 pt-6 pb-1 border-b border-slate-100 dark:border-slate-800">
+            <div className="flex items-center gap-2.5 mb-1">
+              <div className="w-7 h-7 rounded-lg bg-amber-100 dark:bg-amber-500/10 flex items-center justify-center">
+                <Map className="w-3.5 h-3.5 text-amber-600 dark:text-amber-400" />
+              </div>
+              <h3 className="text-sm font-semibold text-slate-900 dark:text-white">Itinerary &amp; Travel Notes</h3>
+            </div>
+            <p className="text-xs text-slate-500 dark:text-slate-400 ml-9">Day-by-day programme, optional activities, and seasonal notes</p>
+          </div>
+          <div className="p-6 space-y-6">
+            <ItineraryDaysEditor value={form.itinerary} onChange={(v) => setForm((p) => ({ ...p, itinerary: v }))} />
+            <div className="border-t border-slate-100 dark:border-slate-800 pt-6">
+              <OptionalActivitiesEditor value={form.optional_activities} onChange={(v) => setForm((p) => ({ ...p, optional_activities: v }))} />
+            </div>
+            <div className="border-t border-slate-100 dark:border-slate-800 pt-6 space-y-2">
+              <Label>Important Travel Information &amp; Seasonal Notes</Label>
+              <Textarea value={form.notes} onChange={(e) => setForm((p) => ({ ...p, notes: e.target.value }))}
+                placeholder="e.g.&#10;Best time to travel&#10;The Great Migration typically crosses the Mara between July and October. Wildlife viewing is excellent year-round.&#10;&#10;Getting there&#10;Flying involves a 45-minute schedule flight from Nairobi; driving takes 4-5 hours." rows={5} />
+            </div>
           </div>
         </motion.div>
 

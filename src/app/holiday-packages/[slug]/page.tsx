@@ -12,6 +12,8 @@ import {
 import { Badge } from "@/components/ui/badge";
 import AnimatedSection from "@/components/AnimatedSection";
 import { PaymentPolicy } from "@/components/PaymentPolicy";
+import { ItineraryTimeline, OptionalActivitiesCard, PackageNotesCard } from "@/components/ItineraryTimeline";
+import type { ItineraryDay, OptionalActivity } from "@/lib/tour";
 
 export const revalidate = 3600;
 
@@ -85,6 +87,9 @@ interface PackageRow {
   activities: string[];
   included: string[];
   excluded: string[];
+  itinerary: ItineraryDay[];
+  optionalActivities: OptionalActivity[];
+  notes: string;
 }
 
 export default async function PackageDetailPage({
@@ -101,7 +106,13 @@ export default async function PackageDetailPage({
       .select("*")
       .eq("slug", slug)
       .single();
-    if (data) pkg = { ...data, priceKES: data.price_kes };
+    if (data) pkg = {
+      ...data,
+      priceKES: data.price_kes,
+      itinerary: data.itinerary || [],
+      optionalActivities: data.optional_activities || [],
+      notes: data.notes || "",
+    };
   } catch {}
   if (!pkg) notFound();
 
@@ -226,6 +237,8 @@ export default async function PackageDetailPage({
                   ))}
                 </div>
               </AnimatedSection>
+
+              <ItineraryTimeline itinerary={pkg.itinerary} />
             </div>
 
             {/* Sidebar */}
@@ -293,6 +306,10 @@ export default async function PackageDetailPage({
                   </ul>
                 </div>
               </AnimatedSection>
+
+              <OptionalActivitiesCard activities={pkg.optionalActivities} />
+
+              <PackageNotesCard notes={pkg.notes} />
 
               <PaymentPolicy />
 
