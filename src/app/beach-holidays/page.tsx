@@ -1,12 +1,13 @@
 ﻿"use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import AnimatedSection from "@/components/AnimatedSection";
 import { openBookingModal } from "@/lib/booking-store";
 import { BEACH_DESTINATIONS, USD_TO_KES } from "@/lib/constants";
-import { MapPin, Star, Waves, Palmtree, Anchor, Compass, Clock, Hotel } from "lucide-react";
+import { MapPin, Star, Waves, Palmtree, Anchor, Compass, Clock, Hotel, ArrowRight } from "lucide-react";
 
 const RESORTS = [
   { name: "Almanara Luxury Resort", location: "Diani Beach", rating: 4.9, type: "Ultra-Luxury" },
@@ -83,7 +84,7 @@ export default function BeachHolidaysPage() {
               <AnimatedSection key={beach.id} delay={i * 0.05}>
                 <div className="group flex flex-col bg-card rounded-2xl ring-1 ring-foreground/10 overflow-hidden hover:shadow-xl transition-all duration-300 h-full">
                   {/* Image */}
-                  <div className="relative aspect-[4/3] overflow-hidden">
+                  <Link href={`/holiday-packages/${beach.slug}`} className="relative aspect-[4/3] overflow-hidden block">
                     <Image
                       src={beach.image}
                       alt={beach.name}
@@ -104,11 +105,15 @@ export default function BeachHolidaysPage() {
                         {beach.location}
                       </div>
                     </div>
-                  </div>
+                  </Link>
 
                   {/* Content */}
                   <div className="flex flex-col flex-1 p-5">
-                    <h3 className="text-lg font-bold text-foreground mb-2">{beach.name}</h3>
+                    <h3 className="text-lg font-bold text-foreground mb-2">
+                      <Link href={`/holiday-packages/${beach.slug}`} className="hover:text-sky-600 transition-colors">
+                        {beach.name}
+                      </Link>
+                    </h3>
                     <p className="text-sm text-muted-foreground mb-3 line-clamp-2 flex-1">
                       {beach.description}
                     </p>
@@ -148,13 +153,23 @@ export default function BeachHolidaysPage() {
                       </div>
                     </div>
 
-                    <Button
-                      onClick={() => openBookingModal(beach.name)}
-                      className="w-full bg-gradient-to-r from-cyan-500 to-sky-600 hover:from-cyan-400 hover:to-sky-500 text-white"
-                    >
-                      <Waves className="size-4 mr-2" />
-                      Get a Free Quote
-                    </Button>
+                    <div className="space-y-2">
+                      <Link
+                        href={`/holiday-packages/${beach.slug}`}
+                        className="flex items-center justify-center gap-2 w-full h-10 rounded-lg bg-gradient-to-r from-cyan-500 to-sky-600 hover:from-cyan-400 hover:to-sky-500 text-white text-sm font-medium transition-all"
+                      >
+                        View Details
+                        <ArrowRight className="size-4" />
+                      </Link>
+                      <Button
+                        variant="outline"
+                        onClick={() => openBookingModal(beach.name)}
+                        className="w-full h-10"
+                      >
+                        <Waves className="size-4 mr-2" />
+                        Get a Free Quote
+                      </Button>
+                    </div>
                   </div>
                 </div>
               </AnimatedSection>

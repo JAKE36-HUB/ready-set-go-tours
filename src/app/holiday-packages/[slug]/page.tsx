@@ -31,18 +31,19 @@ function buildDescription(text: string): string {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
-  let row: { name: string; description: string; image: string; price: number } | null = null;
+  let row: { name: string; description: string; image: string; price: number; type: string } | null = null;
   try {
     const { data } = await getSupabase()
       .from("tour_packages")
-      .select("name, description, image, price")
+      .select("name, description, image, price, type")
       .eq("slug", slug)
       .single();
     if (data) row = data;
   } catch {}
   if (!row) return {};
 
-  const base = /safari/i.test(row.name) ? row.name : `${row.name} Safari`;
+  const suffix = row.type === "beach" ? "Beach Holiday" : "Safari";
+  const base = /safari|beach/i.test(row.name) ? row.name : `${row.name} ${suffix}`;
   const title = `${base} from $${row.price} | ${COMPANY.name}`;
   const description = buildDescription(row.description);
 
@@ -70,6 +71,7 @@ const typeColors: Record<string, string> = {
   group: "bg-white/90 text-stone-900 border-transparent",
   luxury: "bg-white/90 text-stone-900 border-transparent",
   mountain: "bg-white/90 text-stone-900 border-transparent",
+  beach: "bg-white/90 text-stone-900 border-transparent",
 };
 
 interface PackageRow {
@@ -116,6 +118,8 @@ export default async function PackageDetailPage({
   } catch {}
   if (!pkg) notFound();
 
+  const noun = pkg.type === "beach" ? "Beach Holiday" : "Safari";
+
   return (
     <>
       <BreadcrumbJsonLd items={[
@@ -153,7 +157,7 @@ export default async function PackageDetailPage({
           </Link>
           <div className="flex items-center gap-3 mb-3">
             <Badge className={`capitalize text-xs font-semibold px-3 py-1 border ${typeColors[pkg.type] || "bg-white/10 text-white"}`}>
-              {pkg.type === "group" ? "Group Safari" : pkg.type === "luxury" ? "Luxury" : pkg.type === "mountain" ? "Mountain" : "Safari"}
+              {pkg.type === "group" ? "Group Safari" : pkg.type === "luxury" ? "Luxury" : pkg.type === "mountain" ? "Mountain" : pkg.type === "beach" ? "Beach Holiday" : "Safari"}
             </Badge>
             <span className="inline-flex items-center gap-1.5 text-xs text-white/60 bg-white/10 px-3 py-1.5 rounded-full">
               <Clock className="size-3" />
@@ -197,7 +201,7 @@ export default async function PackageDetailPage({
               href={PLAN_SAFARI_ROUTE}
               className="inline-flex items-center gap-2 h-11 px-6 rounded-xl gradient-primary text-white text-sm font-semibold shadow-premium hover:shadow-premium transition-all"
             >
-              Plan This Safari <ArrowRight className="size-4" />
+              Plan This {noun} <ArrowRight className="size-4" />
             </Link>
           </div>
         </div>
@@ -210,7 +214,7 @@ export default async function PackageDetailPage({
             {/* Main */}
             <div className="lg:col-span-2 space-y-12">
               <AnimatedSection>
-                <h2 className="font-display text-2xl font-medium text-foreground mb-4">About This Safari</h2>
+                <h2 className="font-display text-2xl font-medium text-foreground mb-4">About This {noun}</h2>
                 <p className="text-muted-foreground leading-relaxed text-lg">{pkg.description}</p>
               </AnimatedSection>
 
@@ -315,7 +319,7 @@ export default async function PackageDetailPage({
 
               <AnimatedSection>
                 <div className="rounded-3xl p-8 text-center gradient-primary text-white shadow-premium">
-                  <h3 className="font-display text-xl font-medium mb-2">Ready to plan this safari?</h3>
+                  <h3 className="font-display text-xl font-medium mb-2">Ready to plan this {noun.toLowerCase()}?</h3>
                   <p className="text-sm text-white/80 mb-6">
                     Tell us your dates, and we&apos;ll shape this itinerary exactly around you. No templates, no pressure.
                   </p>
@@ -324,7 +328,7 @@ export default async function PackageDetailPage({
                       href={PLAN_SAFARI_ROUTE}
                       className="flex items-center justify-center gap-2 w-full h-12 rounded-xl bg-white text-stone-900 font-semibold hover:bg-stone-100 transition-all"
                     >
-                      Plan My Safari <ArrowRight className="size-4" />
+                      Plan My {noun} <ArrowRight className="size-4" />
                     </Link>
                     <a
                       href={whatsappPackageLink(pkg.name)}

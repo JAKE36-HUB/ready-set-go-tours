@@ -146,6 +146,7 @@ export default function NewPackagePage() {
                     <SelectItem value="group">Group</SelectItem>
                     <SelectItem value="luxury">Luxury</SelectItem>
                     <SelectItem value="mountain">Mountain</SelectItem>
+                    <SelectItem value="beach">Beach</SelectItem>
                   </SelectContent>
                 </Select>
               </div>

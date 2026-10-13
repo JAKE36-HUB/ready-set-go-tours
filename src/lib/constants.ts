@@ -1063,6 +1063,7 @@ export const TOUR_PACKAGES: TourPackage[] = [
 interface BeachDestination {
   id: number;
   name: string;
+  slug: string;
   image: string;
   description: string;
   rating: number;
@@ -1077,6 +1078,7 @@ export const BEACH_DESTINATIONS: BeachDestination[] = [
   {
     id: 1,
     name: "Diani Beach",
+    slug: "diani-beach",
     image: "/images/local/pin_d6386bfb23f6e51f7d020e0e4546def5.jpg",
     description: "Kenya's premier beach destination with 17km of powdery white sand, turquoise waters, and lush tropical vegetation. Rated among Africa's best beaches.",
     rating: 4.9,
@@ -1089,6 +1091,7 @@ export const BEACH_DESTINATIONS: BeachDestination[] = [
   {
     id: 2,
     name: "Zanzibar Island",
+    slug: "zanzibar-island",
     image: "/images/local/pin_ecf9c45a7a976f4151b88235e8396c06.jpg",
     description: "The Spice Island offers crystal-clear waters, historic Stone Town, and pristine beaches like Nungwi and Kendwa. A perfect cultural-beach fusion.",
     rating: 4.8,
@@ -1101,6 +1104,7 @@ export const BEACH_DESTINATIONS: BeachDestination[] = [
   {
     id: 3,
     name: "Watamu Marine Park",
+    slug: "watamu-marine-park",
     image: "/images/local/pin_563fb5f6b888c428e9063ed8bfb86128.jpg",
     description: "A protected marine reserve with pristine coral gardens, sea turtles, and the famous Mida Creek. One of Kenya's best snorkeling destinations.",
     rating: 4.7,
@@ -1113,6 +1117,7 @@ export const BEACH_DESTINATIONS: BeachDestination[] = [
   {
     id: 4,
     name: "Mombasa North Coast",
+    slug: "mombasa-north-coast",
     image: "/images/local/pin_ecf9c45a7a976f4151b88235e8396c06.jpg",
     description: "Vibrant beach resorts along Nyali, Bamburi, and Shanzu beaches. Close to Mombasa's historic Old Town and Fort Jesus with excellent water sports.",
     rating: 4.6,
@@ -1125,6 +1130,7 @@ export const BEACH_DESTINATIONS: BeachDestination[] = [
   {
     id: 5,
     name: "Malindi & Watamu",
+    slug: "malindi-watamu",
     image: "/images/local/pin_563fb5f6b888c428e9063ed8bfb86128.jpg",
     description: "Historic Swahili town with Italian flair, offering beautiful beaches, the Malindi Marine Park, and the stunning Arabuko Sokoke Forest.",
     rating: 4.5,
@@ -1137,6 +1143,7 @@ export const BEACH_DESTINATIONS: BeachDestination[] = [
   {
     id: 6,
     name: "Lamu Archipelago",
+    slug: "lamu-archipelago",
     image: "/images/local/pin_ecf9c45a7a976f4151b88235e8396c06.jpg",
     description: "A UNESCO World Heritage Site, Lamu is Kenya's oldest living town with winding streets, dhows, and car-free tranquility. Shela Beach is world-class.",
     rating: 4.8,
@@ -1149,6 +1156,7 @@ export const BEACH_DESTINATIONS: BeachDestination[] = [
   {
     id: 7,
     name: "Pemba Island",
+    slug: "pemba-island",
     image: "/images/local/pin_ecf9c45a7a976f4151b88235e8396c06.jpg",
     description: "Zanzibar's quieter sister island with lush green hills, clove plantations, and world-class diving at the Pemba Channel. Undiscovered paradise.",
     rating: 4.7,
@@ -1161,6 +1169,7 @@ export const BEACH_DESTINATIONS: BeachDestination[] = [
   {
     id: 8,
     name: "Mafia Island",
+    slug: "mafia-island",
     image: "/images/local/pin_ecf9c45a7a976f4151b88235e8396c06.jpg",
     description: "Tanzania's best-kept secret with the Mafia Island Marine Park, whale sharks, and untouched coral reefs. A diver's paradise.",
     rating: 4.6,
@@ -2310,6 +2319,7 @@ export const PACKAGE_FILTERS: string[] = [
   "Group",
   "Mountain",
   "Luxury",
+  "Beach",
 ];
 
 interface PriceRange {
