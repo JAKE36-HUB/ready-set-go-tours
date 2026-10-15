@@ -216,10 +216,10 @@ export function AiChat() {
           <button
             onClick={() => setOpen(true)}
             className="fixed bottom-24 right-4 sm:right-6 z-40 group flex items-center gap-2.5"
-            aria-label="Chat with us"
+            aria-label="Open live chat"
           >
             <span className="hidden sm:inline-flex items-center h-11 pl-4 pr-5 rounded-2xl bg-[#1C1917] shadow-xl shadow-stone-900/20 ring-1 ring-white/10 text-sm font-semibold text-[#FAF7F2] group-hover:ring-[#D97706]/60 transition-all">
-              Chat with us
+              Live chat
             </span>
             <span className="relative inline-flex w-14 h-14 shrink-0">
               {teaser && (
