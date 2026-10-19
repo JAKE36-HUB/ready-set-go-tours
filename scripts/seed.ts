@@ -81,6 +81,7 @@ async function seed() {
     description: h.description || "",
     highlights: h.highlights || [],
     included: h.included || [],
+    itinerary: h.itinerary || [],
   }))
   const { error: hmErr } = await supabase.from("honeymoon_packages").upsert(honeymoon, { onConflict: "slug" })
   if (hmErr) console.error("  Error:", hmErr.message)
