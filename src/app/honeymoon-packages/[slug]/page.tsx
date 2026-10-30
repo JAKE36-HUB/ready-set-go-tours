@@ -47,6 +47,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     description,
     alternates: { canonical: `/honeymoon-packages/${slug}` },
     openGraph: {
+      url: `https://www.readysetgosafaris.com/honeymoon-packages/${slug}`,
       title,
       description,
       type: "website",

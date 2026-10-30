@@ -1,6 +1,7 @@
 ﻿import Image from "next/image";
 import Link from "next/link";
 import AnimatedSection from "@/components/AnimatedSection";
+import { BreadcrumbJsonLd } from "@/components/JsonLd";
 import { PLAN_SAFARI_ROUTE, whatsappLink } from "@/lib/constants";
 import { getSupabase } from "@/lib/supabase";
 import { Shield, Users, Gift, Star, MessageCircle, ArrowRight } from "lucide-react";
@@ -26,6 +27,12 @@ export default async function DealsPage() {
 
   return (
     <main className="min-h-screen">
+      <BreadcrumbJsonLd
+        items={[
+          { name: "Home", item: "/" },
+          { name: "Deals", item: "/deals" },
+        ]}
+      />
       {/* Hero */}
       <section className="relative h-[50vh] min-h-[400px] flex items-center justify-center overflow-hidden">
         <Image

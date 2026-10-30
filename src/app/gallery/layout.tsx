@@ -5,12 +5,13 @@ export const metadata: Metadata = {
   title: "Gallery",
   description: "Browse stunning photos from our safaris, beaches, and cultural experiences across Kenya and Tanzania. See the adventure that awaits you with Ready Set Go Tours.",
   openGraph: {
+    url: "https://www.readysetgosafaris.com/gallery",
     title: "Gallery | Ready Set Go Tours & Travel",
     description: "Stunning images from East African safaris and travels.",
     type: "website",
     images: [
       {
-        url: "/opengraph-image.png",
+        url: "/opengraph-image",
         width: 1200,
         height: 630,
         alt: "Safari Gallery - Ready Set Go Tours",
@@ -21,7 +22,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Gallery | Ready Set Go Tours & Travel",
     description: "Stunning images from East African safaris and travels.",
-    images: ["/opengraph-image.png"],
+    images: ["/opengraph-image"],
   },
   alternates: {
     canonical: "/gallery",

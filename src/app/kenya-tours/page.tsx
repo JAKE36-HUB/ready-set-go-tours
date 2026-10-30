@@ -11,13 +11,14 @@ export const metadata: Metadata = {
   description:
     "Discover Kenya's iconic wildlife destinations with Ready Set Go Tours & Travel. Masai Mara, Amboseli, Samburu and more on luxury guided safaris from Nairobi.",
   openGraph: {
+    url: "https://www.readysetgosafaris.com/kenya-tours",
     title: `Kenya Tours & Safaris | ${COMPANY.name}`,
     description:
       "Explore Kenya's world-renowned wildlife reserves. Luxury safaris with expert guides, stunning lodges, and unforgettable encounters.",
     type: "website",
     images: [
       {
-        url: "/opengraph-image.png",
+        url: "/opengraph-image",
         width: 1200,
         height: 630,
         alt: "Kenya Tours & Safaris - Ready Set Go Tours",
@@ -28,7 +29,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: `Kenya Tours & Safaris | ${COMPANY.name}`,
     description: "Explore Kenya's world-renowned wildlife reserves. Luxury safaris with expert guides, stunning lodges, and unforgettable encounters.",
-    images: ["/opengraph-image.png"],
+    images: ["/opengraph-image"],
   },
   alternates: {
     canonical: "/kenya-tours",

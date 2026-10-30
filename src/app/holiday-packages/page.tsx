@@ -1,5 +1,6 @@
 ﻿import Image from "next/image";
 import AnimatedSection from "@/components/AnimatedSection";
+import { BreadcrumbJsonLd } from "@/components/JsonLd";
 import { getSupabase } from "@/lib/supabase";
 import PackagesBrowser, { type PackageCard } from "@/components/PackagesBrowser";
 
@@ -23,6 +24,12 @@ export default async function HolidayPackagesPage({
 
   return (
     <main className="min-h-screen">
+      <BreadcrumbJsonLd
+        items={[
+          { name: "Home", item: "/" },
+          { name: "Holiday Packages", item: "/holiday-packages" },
+        ]}
+      />
       {/* Hero */}
       <section className="relative h-[50vh] min-h-[400px] flex items-center justify-center overflow-hidden">
         <Image

@@ -1,6 +1,7 @@
 ﻿import Image from "next/image";
 import Link from "next/link";
 import { Heart, Quote, Star, Shield, Gift, MessageCircle, ArrowRight } from "lucide-react";
+import { BreadcrumbJsonLd } from "@/components/JsonLd";
 import { PLAN_SAFARI_ROUTE, whatsappLink } from "@/lib/constants";
 import { getSupabase } from "@/lib/supabase";
 import AnimatedSection from "@/components/AnimatedSection";
@@ -26,6 +27,13 @@ export default async function HoneymoonPage() {
 
   return (
     <main className="min-h-screen">
+      <BreadcrumbJsonLd
+        items={[
+          { name: "Home", item: "/" },
+          { name: "Tours", item: "/holiday-packages" },
+          { name: "Honeymoon Packages", item: "/honeymoon-packages" },
+        ]}
+      />
       {/* Hero */}
       <section className="relative h-[55vh] min-h-[420px] flex items-center justify-center overflow-hidden">
         <Image

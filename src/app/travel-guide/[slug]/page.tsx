@@ -44,6 +44,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     title: post.metaTitle ? { absolute: post.metaTitle } : title,
     description,
     openGraph: {
+      url: `https://www.readysetgosafaris.com/travel-guide/${slug}`,
       title,
       description,
       images: [{ url: post.image }],

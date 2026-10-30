@@ -11,13 +11,14 @@ export const metadata: Metadata = {
   description:
     "Explore Tanzania's legendary Serengeti, Ngorongoro Crater, and Kilimanjaro with Ready Set Go Tours & Travel. Luxury safaris and bespoke adventures from Arusha.",
   openGraph: {
+    url: "https://www.readysetgosafaris.com/tanzania-tours",
     title: `Tanzania Tours & Safaris | ${COMPANY.name}`,
     description:
       "Journey through Tanzania's iconic northern circuit. From the Serengeti's endless plains to the summit of Kilimanjaro.",
     type: "website",
     images: [
       {
-        url: "/opengraph-image.png",
+        url: "/opengraph-image",
         width: 1200,
         height: 630,
         alt: "Tanzania Tours & Safaris - Ready Set Go Tours",
@@ -28,7 +29,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: `Tanzania Tours & Safaris | ${COMPANY.name}`,
     description: "Journey through Tanzania's iconic northern circuit. From the Serengeti's endless plains to the summit of Kilimanjaro.",
-    images: ["/opengraph-image.png"],
+    images: ["/opengraph-image"],
   },
   alternates: {
     canonical: "/tanzania-tours",

@@ -7,13 +7,14 @@ export const metadata: Metadata = {
   description:
     "Frequently asked questions about East African safaris. Visas, vaccinations, packing, best time to visit, accommodation, and more from Kenya's trusted tour operator.",
   openGraph: {
+    url: "https://www.readysetgosafaris.com/faq",
     title: "FAQ | Ready Set Go Tours & Travel",
     description:
       "Everything you need to know about planning your East African safari — from visas and vaccinations to packing and accommodation.",
     type: "website",
     images: [
       {
-        url: "/opengraph-image.png",
+        url: "/opengraph-image",
         width: 1200,
         height: 630,
         alt: "Safari FAQ - Ready Set Go Tours",
@@ -24,7 +25,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "FAQ | Ready Set Go Tours & Travel",
     description: "Everything you need to know about planning your East African safari — from visas and vaccinations to packing and accommodation.",
-    images: ["/opengraph-image.png"],
+    images: ["/opengraph-image"],
   },
   alternates: {
     canonical: "/faq",

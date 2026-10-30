@@ -44,6 +44,7 @@ export const metadata: Metadata = {
   publisher: "Ready Set Go Safaris",
   metadataBase: new URL("https://www.readysetgosafaris.com"),
   openGraph: {
+    url: "https://www.readysetgosafaris.com/",
     type: "website",
     locale: "en_US",
     siteName: "Ready Set Go Safaris",
@@ -52,7 +53,7 @@ export const metadata: Metadata = {
       "Private Kenya and Tanzania safaris designed around your dates, budget and travel style. Tell us what you want to experience — we'll design the trip around you.",
     images: [
       {
-        url: "/opengraph-image.png",
+        url: "/opengraph-image",
         width: 1200,
         height: 630,
         alt: "Ready Set Go Safaris",
@@ -64,7 +65,7 @@ export const metadata: Metadata = {
     title: "Ready Set Go Safaris | Private Kenya & Tanzania Safari Specialists",
     description:
       "Private Kenya and Tanzania safaris designed around your dates, budget and travel style.",
-    images: ["/opengraph-image.png"],
+    images: ["/opengraph-image"],
   },
   robots: {
     index: true,

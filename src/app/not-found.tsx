@@ -5,6 +5,10 @@ import { Compass } from "lucide-react";
 export const metadata: Metadata = {
   title: "404 - Page Not Found",
   description: "The page you're looking for doesn't exist. Let us guide you back to your adventure.",
+  robots: {
+    index: false,
+    follow: false,
+  },
 };
 
 export default function NotFound() {

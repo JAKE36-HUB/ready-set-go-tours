@@ -6,6 +6,9 @@ export const metadata: Metadata = {
   title: "Plan My Safari",
   description:
     "Tell us when you want to travel, who's coming and what you want to experience. We'll design your private Kenya or Tanzania safari around you.",
+  alternates: {
+    canonical: "/plan-my-safari",
+  },
 }
 
 export default function PlanMySafariPage() {

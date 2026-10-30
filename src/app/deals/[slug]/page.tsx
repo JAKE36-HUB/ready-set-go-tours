@@ -39,13 +39,14 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const base = /safari/i.test(row.title) ? row.title : `${row.title} Safari`;
   const title = `${base} from $${row.dealPrice} | ${COMPANY.name}`;
   const description = buildDescription(row.description);
-  const image = row.image ?? "/opengraph-image.png";
+  const image = row.image ?? "/opengraph-image";
 
   return {
     title,
     description,
     alternates: { canonical: `/deals/${slug}` },
     openGraph: {
+      url: `https://www.readysetgosafaris.com/deals/${slug}`,
       title,
       description,
       type: "website",

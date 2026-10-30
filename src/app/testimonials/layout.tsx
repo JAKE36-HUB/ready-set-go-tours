@@ -6,12 +6,13 @@ export const metadata: Metadata = {
   description:
     "Read authentic reviews from our satisfied travelers. Over 2,000 five-star reviews from guests who experienced our luxury safaris and tours across East Africa.",
   openGraph: {
+    url: "https://www.readysetgosafaris.com/testimonials",
     title: "Testimonials | Ready Set Go Tours & Travel",
     description: "Authentic reviews from our satisfied safari travelers.",
     type: "website",
     images: [
       {
-        url: "/opengraph-image.png",
+        url: "/opengraph-image",
         width: 1200,
         height: 630,
         alt: "Testimonials - Ready Set Go Tours",
@@ -22,7 +23,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Testimonials | Ready Set Go Tours & Travel",
     description: "Authentic reviews from our satisfied safari travelers.",
-    images: ["/opengraph-image.png"],
+    images: ["/opengraph-image"],
   },
   alternates: {
     canonical: "/testimonials",

@@ -5,12 +5,19 @@ import Link from "next/link"
 import { ArrowRight, Hotel, Plane, Heart, Compass, Sparkles, Shield, HeadphonesIcon, Award, Star } from "lucide-react"
 import { SERVICES, whatsappLink } from "@/lib/constants"
 import AnimatedSection from "@/components/AnimatedSection"
+import { BreadcrumbJsonLd } from "@/components/JsonLd"
 
 const iconMap: Record<string, typeof Hotel> = { Compass, Hotel, Plane, Heart, Shield, HeadphonesIcon, Award, Sparkles }
 
 export default function ServicesPage() {
   return (
     <main className="min-h-screen">
+      <BreadcrumbJsonLd
+        items={[
+          { name: "Home", item: "/" },
+          { name: "Services", item: "/services" },
+        ]}
+      />
       {/* Hero */}
       <section className="relative py-32 px-6 overflow-hidden">
         <Image

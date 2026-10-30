@@ -6,13 +6,14 @@ export const metadata: Metadata = {
   description:
     "Get in touch with Ready Set Go Tours to plan your dream East African safari. Our Nairobi-based experts craft personalized safari, beach, and trekking itineraries.",
   openGraph: {
+    url: "https://www.readysetgosafaris.com/contact",
     title: "Contact Us | Ready Set Go Tours & Travel",
     description:
       "Ready to plan your dream safari? Contact our travel experts for a personalized itinerary.",
     type: "website",
     images: [
       {
-        url: "/opengraph-image.png",
+        url: "/opengraph-image",
         width: 1200,
         height: 630,
         alt: "Contact Ready Set Go Tours",
@@ -23,7 +24,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Contact Us | Ready Set Go Tours & Travel",
     description: "Ready to plan your dream safari? Contact our travel experts for a personalized itinerary.",
-    images: ["/opengraph-image.png"],
+    images: ["/opengraph-image"],
   },
   alternates: {
     canonical: "/contact",

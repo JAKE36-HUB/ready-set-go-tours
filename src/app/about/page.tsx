@@ -11,12 +11,13 @@ export const metadata: Metadata = {
   title: "About Us",
   description: `Learn about ${COMPANY.name} — Kenya's premier luxury tour operator crafting bespoke safaris and travel experiences across East Africa.`,
   openGraph: {
+    url: "https://www.readysetgosafaris.com/about",
     title: `About Us | ${COMPANY.name}`,
     description: COMPANY.description,
     type: "website",
     images: [
       {
-        url: "/opengraph-image.png",
+        url: "/opengraph-image",
         width: 1200,
         height: 630,
         alt: "About Ready Set Go Tours & Travel",
@@ -27,7 +28,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: `About Us | ${COMPANY.name}`,
     description: COMPANY.description,
-    images: ["/opengraph-image.png"],
+    images: ["/opengraph-image"],
   },
   alternates: {
     canonical: "/about",

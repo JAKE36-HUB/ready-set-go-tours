@@ -20,6 +20,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     title: `${service.title} | ${COMPANY.name}`,
     description: service.description.slice(0, 160),
     openGraph: {
+      url: `https://www.readysetgosafaris.com/services/${slug}`,
       title: `${service.title} | ${COMPANY.name}`,
       description: service.description.slice(0, 160),
       type: "website",

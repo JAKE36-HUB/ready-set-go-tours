@@ -6,13 +6,14 @@ export const metadata: Metadata = {
   description:
     "Conquer Africa's legendary peaks with expert guides. Mount Kenya trekking, Kilimanjaro climbs, and high-altitude summit expeditions with full support.",
   openGraph: {
+    url: "https://www.readysetgosafaris.com/mountain-trekking",
     title: "Mountain Trekking | Ready Set Go Tours & Travel",
     description:
       "Conquer Africa's highest peaks with expert guides. From Mount Kenya to Kilimanjaro, our treks deliver adventure, endurance, and breathtaking summit views.",
     type: "website",
     images: [
       {
-        url: "/opengraph-image.png",
+        url: "/opengraph-image",
         width: 1200,
         height: 630,
         alt: "Mountain Trekking - Ready Set Go Tours",
@@ -23,7 +24,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Mountain Trekking | Ready Set Go Tours & Travel",
     description: "Conquer Africa's highest peaks with expert guides. From Mount Kenya to Kilimanjaro, our treks deliver adventure, endurance, and breathtaking summit views.",
-    images: ["/opengraph-image.png"],
+    images: ["/opengraph-image"],
   },
   alternates: {
     canonical: "/mountain-trekking",

@@ -6,13 +6,14 @@ export const metadata: Metadata = {
   description:
     "Escape to pristine beaches along the Kenyan and Tanzanian coast. Diani Beach, Zanzibar, Watamu, and Lamu luxury beach holiday packages with expert planning.",
   openGraph: {
+    url: "https://www.readysetgosafaris.com/beach-holidays",
     title: "Beach Holidays | Ready Set Go Tours & Travel",
     description:
       "Discover turquoise waters, white-sand beaches, and world-class resorts along the East African coast.",
     type: "website",
     images: [
       {
-        url: "/opengraph-image.png",
+        url: "/opengraph-image",
         width: 1200,
         height: 630,
         alt: "Beach Holidays & Coastal Getaways - Ready Set Go Tours",
@@ -23,7 +24,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Beach Holidays | Ready Set Go Tours & Travel",
     description: "Discover turquoise waters, white-sand beaches, and world-class resorts along the East African coast.",
-    images: ["/opengraph-image.png"],
+    images: ["/opengraph-image"],
   },
   alternates: {
     canonical: "/beach-holidays",

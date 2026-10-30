@@ -1,17 +1,17 @@
 import type { Metadata } from "next";
-import { BreadcrumbJsonLd } from "@/components/JsonLd";
 
 export const metadata: Metadata = {
   title: "Safari & Holiday Packages | Kenya & Tanzania Tours",
   description:
     "Browse group, safari, mountain, and luxury holiday packages across Kenya and Tanzania — Masai Mara, Amboseli, Serengeti, Kilimanjaro. Get a free quote today.",
   openGraph: {
+    url: "https://www.readysetgosafaris.com/holiday-packages",
     title: "Safari & Holiday Packages | Ready Set Go Tours & Travel",
     description: "Curated safari and holiday packages for every budget and style.",
     type: "website",
     images: [
       {
-        url: "/opengraph-image.png",
+        url: "/opengraph-image",
         width: 1200,
         height: 630,
         alt: "Holiday Packages - Ready Set Go Tours",
@@ -22,7 +22,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Safari & Holiday Packages | Ready Set Go Tours & Travel",
     description: "Curated safari and holiday packages for every budget and style.",
-    images: ["/opengraph-image.png"],
+    images: ["/opengraph-image"],
   },
   alternates: {
     canonical: "/holiday-packages",
@@ -30,13 +30,5 @@ export const metadata: Metadata = {
 };
 
 export default function Layout({ children }: { children: React.ReactNode }) {
-  return (
-    <>
-      <BreadcrumbJsonLd items={[
-        { name: "Home", item: "/" },
-        { name: "Holiday Packages", item: "/holiday-packages" },
-      ]} />
-      {children}
-    </>
-  );
+  return <>{children}</>;
 }

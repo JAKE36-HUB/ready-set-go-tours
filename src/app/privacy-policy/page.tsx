@@ -8,6 +8,7 @@ export const metadata: Metadata = {
   description:
     "Learn how Ready Set Go Tours & Travel collects, uses, and protects your personal information. Our privacy policy outlines your rights and our practices.",
   openGraph: {
+    url: "https://www.readysetgosafaris.com/privacy-policy",
     title: `Privacy Policy | ${COMPANY.name}`,
     description:
       "Learn how Ready Set Go Tours & Travel collects, uses, and protects your personal information.",
@@ -17,7 +18,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: `Privacy Policy | ${COMPANY.name}`,
     description: "Learn how Ready Set Go Tours & Travel collects, uses, and protects your personal information.",
-    images: ["/opengraph-image.png"],
+    images: ["/opengraph-image"],
   },
   alternates: {
     canonical: "/privacy-policy",

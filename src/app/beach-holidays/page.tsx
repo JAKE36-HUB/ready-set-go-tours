@@ -9,6 +9,12 @@ import { openBookingModal } from "@/lib/booking-store";
 import { BEACH_DESTINATIONS, USD_TO_KES } from "@/lib/constants";
 import { MapPin, Star, Waves, Palmtree, Anchor, Compass, Clock, Hotel, ArrowRight } from "lucide-react";
 
+// Beach destinations with a dedicated package page link straight there. The
+// rest point at the filtered package listing so no internal link 404s.
+const BEACH_PACKAGE_SLUGS = new Set(["diani-beach", "zanzibar-island"]);
+const beachHref = (slug: string) =>
+  BEACH_PACKAGE_SLUGS.has(slug) ? `/holiday-packages/${slug}` : "/holiday-packages?type=beach";
+
 const RESORTS = [
   { name: "Almanara Luxury Resort", location: "Diani Beach", rating: 4.9, type: "Ultra-Luxury" },
   { name: "Zuri Zanzibar", location: "Kendwa, Zanzibar", rating: 4.8, type: "Eco-Luxury" },
@@ -84,7 +90,7 @@ export default function BeachHolidaysPage() {
               <AnimatedSection key={beach.id} delay={i * 0.05}>
                 <div className="group flex flex-col bg-card rounded-2xl ring-1 ring-foreground/10 overflow-hidden hover:shadow-xl transition-all duration-300 h-full">
                   {/* Image */}
-                  <Link href={`/holiday-packages/${beach.slug}`} className="relative aspect-[4/3] overflow-hidden block">
+                  <Link href={beachHref(beach.slug)} className="relative aspect-[4/3] overflow-hidden block">
                     <Image
                       src={beach.image}
                       alt={beach.name}
@@ -110,7 +116,7 @@ export default function BeachHolidaysPage() {
                   {/* Content */}
                   <div className="flex flex-col flex-1 p-5">
                     <h3 className="text-lg font-bold text-foreground mb-2">
-                      <Link href={`/holiday-packages/${beach.slug}`} className="hover:text-sky-600 transition-colors">
+                      <Link href={beachHref(beach.slug)} className="hover:text-sky-600 transition-colors">
                         {beach.name}
                       </Link>
                     </h3>
@@ -155,7 +161,7 @@ export default function BeachHolidaysPage() {
 
                     <div className="space-y-2">
                       <Link
-                        href={`/holiday-packages/${beach.slug}`}
+                        href={beachHref(beach.slug)}
                         className="flex items-center justify-center gap-2 w-full h-10 rounded-lg bg-gradient-to-r from-cyan-500 to-sky-600 hover:from-cyan-400 hover:to-sky-500 text-white text-sm font-medium transition-all"
                       >
                         View Details
