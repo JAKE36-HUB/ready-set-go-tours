@@ -71,7 +71,8 @@ export default function AboutPage() {
               <span className="bg-gradient-to-r from-sky-300 to-amber-200 bg-clip-text text-transparent">
                 Wanderlust
               </span>
-              <br />into Safari
+              <br />
+              {" "}into Safari
             </h1>
             <p className="text-lg sm:text-xl text-white/70 max-w-2xl mx-auto leading-relaxed">
               We craft unforgettable East African adventures — one

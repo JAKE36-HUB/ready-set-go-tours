@@ -1,6 +1,7 @@
 import type { Metadata } from "next"
 import { notFound } from "next/navigation"
 import { SERVICES, COMPANY } from "@/lib/constants"
+import { truncateAtWord } from "@/lib/seo"
 import ServiceContent from "./ServiceContent"
 import { ServiceJsonLd, BreadcrumbJsonLd } from "@/components/JsonLd"
 
@@ -16,13 +17,15 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params
   const service = SERVICES.find((s) => s.slug === slug)
   if (!service) return {}
+  const description = truncateAtWord(service.description, 158)
+  const title = `${service.title} | ${COMPANY.shortName}`
   return {
-    title: `${service.title} | ${COMPANY.name}`,
-    description: service.description.slice(0, 160),
+    title: { absolute: title },
+    description,
     openGraph: {
       url: `https://www.readysetgosafaris.com/services/${slug}`,
-      title: `${service.title} | ${COMPANY.name}`,
-      description: service.description.slice(0, 160),
+      title,
+      description,
       type: "website",
       images: service.image
         ? [{ url: service.image, width: 800, height: 600, alt: service.title }]
@@ -48,7 +51,7 @@ export default async function ServicePage({ params }: Props) {
       ]} />
       <ServiceJsonLd
         name={service.title}
-        description={service.description.slice(0, 160)}
+        description={service.description}
         image={service.image}
         url={`/services/${slug}`}
       />

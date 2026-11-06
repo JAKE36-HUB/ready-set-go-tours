@@ -2,8 +2,9 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { COMPANY, USD_TO_KES, PLAN_SAFARI_ROUTE, whatsappPackageLink, honeymoonPriceSuffix, type HoneymoonPriceBasis, type HoneymoonItineraryDay } from "@/lib/constants";
+import { USD_TO_KES, PLAN_SAFARI_ROUTE, whatsappPackageLink, honeymoonPriceSuffix, type HoneymoonPriceBasis, type HoneymoonItineraryDay } from "@/lib/constants";
 import { getSupabase } from "@/lib/supabase";
+import { buildMetaDescription, tourMetaTitle } from "@/lib/seo";
 import { TourPackageJsonLd, BreadcrumbJsonLd } from "@/components/JsonLd";
 import {
   Heart, Clock, MapPin, Check, ArrowLeft, Shield, Gift, Sparkles, MessageCircle, ArrowRight,
@@ -18,11 +19,7 @@ interface Props {
 }
 
 function buildDescription(text: string): string {
-  const cleaned = text.replace(/\s+/g, " ").trim();
-  const cta = "Get a free quote today.";
-  const maxMain = 135;
-  const main = cleaned.slice(0, maxMain - 1).trimEnd() + "…";
-  return `${main} ${cta}`;
+  return buildMetaDescription(text, 158, "Get a free quote today.");
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
@@ -39,11 +36,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   if (!row) return {};
 
   const base = /safari/i.test(row.name) ? row.name : `${row.name} Safari`;
-  const title = `${base} from $${row.price} | ${COMPANY.name}`;
+  const title = tourMetaTitle(slug, base, row.price);
   const description = buildDescription(row.description);
 
   return {
-    title,
+    title: { absolute: title },
     description,
     alternates: { canonical: `/honeymoon-packages/${slug}` },
     openGraph: {
@@ -116,7 +113,7 @@ export default async function HoneymoonDetailPage({
       ]} />
       <TourPackageJsonLd
         name={pkg.name}
-        description={pkg.description.slice(0, 160)}
+        description={pkg.description}
         image={pkg.image}
         price={pkg.price}
         duration={pkg.duration}

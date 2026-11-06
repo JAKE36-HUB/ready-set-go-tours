@@ -102,6 +102,7 @@ export default function FAQPage() {
 
           {/* Accordion */}
           <AnimatedSection>
+            <h2 className="sr-only">Frequently asked questions</h2>
             {items.length > 0 ? (
               <Accordion className="ring-1 ring-foreground/10 rounded-2xl bg-card p-2">
                 {items.map((item) => (

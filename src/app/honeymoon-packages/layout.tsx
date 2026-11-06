@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Honeymoon Packages | Romantic Safaris & Beach Escapes",
+  title: "Romantic Safari & Beach Honeymoons",
   description: "Discover handcrafted honeymoon packages across Kenya and Tanzania. Private game drives, candlelit bush dinners, luxury beach villas, and romantic escapes.",
   openGraph: {
     url: "https://www.readysetgosafaris.com/honeymoon-packages",

@@ -4,7 +4,7 @@ import { BreadcrumbJsonLd } from "@/components/JsonLd";
 export const metadata: Metadata = {
   title: "Contact Us",
   description:
-    "Get in touch with Ready Set Go Tours to plan your dream East African safari. Our Nairobi-based experts craft personalized safari, beach, and trekking itineraries.",
+    "Get in touch with Ready Set Go Tours to plan your dream East African safari. Our Nairobi-based experts craft personalized safari, beach and trekking itineraries.",
   openGraph: {
     url: "https://www.readysetgosafaris.com/contact",
     title: "Contact Us | Ready Set Go Tours & Travel",

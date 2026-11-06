@@ -128,6 +128,7 @@ export default function PackagesBrowser({
           </AnimatedSection>
 
           {/* Packages Grid */}
+          <h2 className="sr-only">Safari and holiday packages</h2>
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {filtered.map((pkg, i) => (
               <AnimatedSection key={pkg.id} delay={i * 0.05}>

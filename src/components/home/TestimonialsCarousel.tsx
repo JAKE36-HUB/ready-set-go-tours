@@ -62,7 +62,7 @@ export function TestimonialsCarousel() {
                         <Image src={t.image} alt={t.name} fill sizes="48px" className="object-cover brightness-[1.1]" />
                       </div>
                       <div>
-                        <h4 className="text-sm font-bold text-foreground">{t.name}</h4>
+                        <h3 className="text-sm font-bold text-foreground">{t.name}</h3>
                         <p className="text-xs text-muted-foreground">{t.location}</p>
                       </div>
                       <div className="ml-auto flex items-center gap-0.5">

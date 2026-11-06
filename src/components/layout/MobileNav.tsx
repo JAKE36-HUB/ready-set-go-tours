@@ -230,7 +230,7 @@ export function MobileNav({ isOpen, onClose }: MobileNavProps) {
               </div>
 
               <div className="flex items-center justify-center gap-3">
-                {SOCIAL_LINKS.map((social) => (
+                {SOCIAL_LINKS.filter((social) => social.name !== "twitter").map((social) => (
                   <a
                     key={social.name}
                     href={social.href}

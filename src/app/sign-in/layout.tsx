@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Sign In | Ready Set Go Tours & Travel",
+  title: "Sign In",
   description: "Sign in to the Ready Set Go Tours & Travel admin panel.",
   robots: {
     index: false,

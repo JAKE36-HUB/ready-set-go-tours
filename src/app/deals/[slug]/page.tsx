@@ -2,8 +2,9 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { COMPANY, USD_TO_KES, PLAN_SAFARI_ROUTE, whatsappPackageLink } from "@/lib/constants";
+import { USD_TO_KES, PLAN_SAFARI_ROUTE, whatsappPackageLink } from "@/lib/constants";
 import { getSupabase } from "@/lib/supabase";
+import { buildMetaDescription, tourMetaTitle } from "@/lib/seo";
 import { TourPackageJsonLd, BreadcrumbJsonLd } from "@/components/JsonLd";
 import { Tag, Clock, Users, Gift, Percent, Star, Shield, Check, ArrowLeft, Calendar, Hotel, Utensils, MessageCircle, ArrowRight } from "lucide-react";
 import AnimatedSection from "@/components/AnimatedSection";
@@ -16,11 +17,7 @@ interface Props {
 }
 
 function buildDescription(text: string): string {
-  const cleaned = text.replace(/\s+/g, " ").trim();
-  const cta = "Get a free quote today.";
-  const maxMain = 135;
-  const main = cleaned.slice(0, maxMain - 1).trimEnd() + "…";
-  return `${main} ${cta}`;
+  return buildMetaDescription(text, 158, "Get a free quote today.");
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
@@ -37,12 +34,12 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   if (!row) return {};
 
   const base = /safari/i.test(row.title) ? row.title : `${row.title} Safari`;
-  const title = `${base} from $${row.dealPrice} | ${COMPANY.name}`;
+  const title = tourMetaTitle(slug, base, row.dealPrice);
   const description = buildDescription(row.description);
   const image = row.image ?? "/opengraph-image";
 
   return {
-    title,
+    title: { absolute: title },
     description,
     alternates: { canonical: `/deals/${slug}` },
     openGraph: {
@@ -129,7 +126,7 @@ export default async function DealDetailPage({
       ]} />
       <TourPackageJsonLd
         name={deal.title}
-        description={deal.description.slice(0, 160)}
+        description={deal.description}
         image={deal.image ?? ""}
         price={deal.dealPrice}
         duration={deal.duration}

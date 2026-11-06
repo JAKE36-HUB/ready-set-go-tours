@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Best Safari Deals & Offers",
-  description: "Discover exclusive deals on Kenya and Tanzania safaris, Mount Kenya adventures, beach holidays, and group packages. Save up to 25% on your dream East African safari.",
+  description: "Discover exclusive deals on Kenya and Tanzania safaris, Mount Kenya treks, beach holidays and group packages. Save up to 25% on your dream safari.",
   openGraph: {
     url: "https://www.readysetgosafaris.com/deals",
     title: "Best Safari Deals & Special Offers | Ready Set Go Tours",

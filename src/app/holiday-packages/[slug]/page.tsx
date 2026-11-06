@@ -4,9 +4,10 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { COMPANY, PLAN_SAFARI_ROUTE, whatsappPackageLink } from "@/lib/constants";
 import { getSupabase } from "@/lib/supabase";
+import { buildMetaDescription, tourMetaTitle } from "@/lib/seo";
 import { TourPackageJsonLd, BreadcrumbJsonLd } from "@/components/JsonLd";
 import {
-  Clock, Check, X, ArrowLeft,
+  Clock, Check, X, ArrowLeft, BadgeDollarSign,
   Hotel, Utensils, Car, Compass, MessageCircle, ArrowRight,
 } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
@@ -26,11 +27,7 @@ interface Props {
 }
 
 function buildDescription(text: string): string {
-  const cleaned = text.replace(/\s+/g, " ").trim();
-  const cta = "Get a free quote today.";
-  const maxMain = 135;
-  const main = cleaned.slice(0, maxMain - 1).trimEnd() + "…";
-  return `${main} ${cta}`;
+  return buildMetaDescription(text, 158, "Get a free quote today.");
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
@@ -48,11 +45,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   const suffix = row.type === "beach" ? "Beach Holiday" : "Safari";
   const base = /safari|beach/i.test(row.name) ? row.name : `${row.name} ${suffix}`;
-  const title = `${base} from $${row.price} | ${COMPANY.name}`;
+  const title = tourMetaTitle(slug, base, row.price);
   const description = buildDescription(row.description);
 
   return {
-    title,
+    title: { absolute: title },
     description,
     alternates: { canonical: `/holiday-packages/${slug}` },
     openGraph: {
@@ -125,6 +122,20 @@ export default async function PackageDetailPage({
 
   const noun = pkg.type === "beach" ? "Beach Holiday" : "Safari";
 
+  // Rates & seasons live in the notes field. Pull them out so they can be shown
+  // in a clearly visible callout instead of being buried in the small print.
+  const noteSections = pkg.notes
+    .split(/\n\s*\n/)
+    .map((s) => s.trim())
+    .filter(Boolean);
+  const ratesSection = noteSections.find((s) =>
+    /^rates?\s*(&|and)?\s*seasons?/i.test(s)
+  );
+  const otherNotes = noteSections.filter((s) => s !== ratesSection).join("\n\n");
+  const ratesLines = ratesSection
+    ? ratesSection.split("\n").map((l) => l.trim()).filter(Boolean).slice(1)
+    : [];
+
   const sections = [
     { id: "overview", label: "Overview" },
     ...(pkg.highlights.length ? [{ id: "highlights", label: "Highlights" }] : []),
@@ -154,7 +165,7 @@ export default async function PackageDetailPage({
       ]} />
       <TourPackageJsonLd
         name={pkg.name}
-        description={pkg.description.slice(0, 160)}
+        description={pkg.description}
         image={pkg.image}
         price={pkg.price}
         duration={pkg.duration}
@@ -241,6 +252,19 @@ export default async function PackageDetailPage({
                 <AnimatedSection>
                   <h2 className="font-display text-2xl font-medium text-foreground mb-4">About This {noun}</h2>
                   <p className="text-muted-foreground leading-relaxed text-lg">{pkg.description}</p>
+                  {ratesLines.length > 0 && (
+                    <div className="mt-6 rounded-2xl border-2 border-primary/30 bg-primary/5 p-6 shadow-sm">
+                      <h3 className="flex items-center gap-2 font-display text-lg font-semibold text-foreground mb-2">
+                        <BadgeDollarSign className="size-5 text-primary dark:text-amber-400 shrink-0" />
+                        Rates &amp; seasons
+                      </h3>
+                      {ratesLines.map((line, i) => (
+                        <p key={i} className="text-sm text-foreground/90 leading-relaxed mb-1 last:mb-0">
+                          {line}
+                        </p>
+                      ))}
+                    </div>
+                  )}
                 </AnimatedSection>
               </div>
 
@@ -347,7 +371,7 @@ export default async function PackageDetailPage({
 
               <OptionalActivitiesCard activities={pkg.optionalActivities} />
 
-              <PackageNotesCard notes={pkg.notes} />
+              <PackageNotesCard notes={otherNotes} />
 
               <PaymentPolicy />
 

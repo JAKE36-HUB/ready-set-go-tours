@@ -34,11 +34,11 @@ export const metadata: Metadata = {
       : {}),
   },
   title: {
-    default: "Ready Set Go Safaris | Private Kenya & Tanzania Safari Specialists",
+    default: "Ready Set Go Safaris | Private Kenya & Tanzania Safaris",
     template: "%s | Ready Set Go Safaris",
   },
   description:
-    "Private Kenya and Tanzania safaris designed around your dates, budget and travel style. Honeymoons, family safaris, photography adventures and custom itineraries.",
+    "Private Kenya and Tanzania safaris designed around your dates, budget and travel style. Honeymoons, family trips and custom itineraries.",
   authors: [{ name: "Ready Set Go Safaris" }],
   creator: "Ready Set Go Safaris",
   publisher: "Ready Set Go Safaris",
@@ -48,7 +48,7 @@ export const metadata: Metadata = {
     type: "website",
     locale: "en_US",
     siteName: "Ready Set Go Safaris",
-    title: "Ready Set Go Safaris | Private Kenya & Tanzania Safari Specialists",
+    title: "Ready Set Go Safaris | Private Kenya & Tanzania Safaris",
     description:
       "Private Kenya and Tanzania safaris designed around your dates, budget and travel style. Tell us what you want to experience — we'll design the trip around you.",
     images: [
@@ -62,7 +62,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Ready Set Go Safaris | Private Kenya & Tanzania Safari Specialists",
+    title: "Ready Set Go Safaris | Private Kenya & Tanzania Safaris",
     description:
       "Private Kenya and Tanzania safaris designed around your dates, budget and travel style.",
     images: ["/opengraph-image"],
@@ -105,24 +105,55 @@ export default function RootLayout({
             __html: JSON.stringify({
               "@context": "https://schema.org",
               "@type": "TravelAgency",
+              "@id": "https://www.readysetgosafaris.com/#organization",
               name: COMPANY.name,
+              alternateName: COMPANY.brandName,
               description: COMPANY.description,
               url: "https://www.readysetgosafaris.com",
               telephone: COMPANY.phone,
               email: COMPANY.email,
+              logo: {
+                "@type": "ImageObject",
+                url: "https://www.readysetgosafaris.com/icon.png",
+                width: 512,
+                height: 512,
+              },
+              image: "https://www.readysetgosafaris.com/opengraph-image",
+              priceRange: "$$$",
               address: {
                 "@type": "PostalAddress",
-                streetAddress: COMPANY.address,
-                addressRegion: "Nairobi",
+                addressLocality: "Nairobi",
+                addressRegion: "Nairobi County",
                 addressCountry: "KE",
               },
-              aggregateRating: {
-                "@type": "AggregateRating",
-                ratingValue: "4.9",
-                bestRating: "5",
-                ratingCount: "127",
+              areaServed: [
+                { "@type": "Country", name: "Kenya" },
+                { "@type": "Country", name: "Tanzania" },
+              ],
+              openingHoursSpecification: {
+                "@type": "OpeningHoursSpecification",
+                dayOfWeek: [
+                  "Monday",
+                  "Tuesday",
+                  "Wednesday",
+                  "Thursday",
+                  "Friday",
+                  "Saturday",
+                ],
+                opens: "08:00",
+                closes: "18:00",
               },
-              sameAs: Object.values(COMPANY.social),
+              contactPoint: {
+                "@type": "ContactPoint",
+                telephone: COMPANY.phone,
+                email: COMPANY.email,
+                contactType: "customer service",
+                availableLanguage: ["English", "Swahili"],
+              },
+              // The X/Twitter account in COMPANY.social no longer exists.
+              sameAs: Object.entries(COMPANY.social)
+                .filter(([network]) => network !== "twitter")
+                .map(([, href]) => href),
             }),
           }}
         />

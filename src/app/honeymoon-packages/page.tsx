@@ -51,7 +51,7 @@ export default async function HoneymoonPage() {
           <AnimatedSection>
             <span className="text-xs font-semibold uppercase tracking-[0.2em] text-rose-300">Honeymoons</span>
             <h1 className="font-display text-4xl sm:text-5xl lg:text-6xl font-medium text-white mt-4 mb-5 leading-tight">
-              Travel as a couple.
+              Travel as a couple.{" "}
               <span className="block bg-gradient-to-r from-rose-300 via-rose-200 to-pink-200 bg-clip-text text-transparent">
                 Not as tourists.
               </span>
@@ -64,6 +64,7 @@ export default async function HoneymoonPage() {
         </div>
       </section>
 
+      <h2 className="sr-only">Honeymoon safari and beach packages</h2>
       <HoneymoonGrid packages={packages} />
 
       {/* Why Honeymoon With Us */}

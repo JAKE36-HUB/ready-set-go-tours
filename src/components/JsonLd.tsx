@@ -1,4 +1,7 @@
+import { absoluteUrl, SITE_URL } from "@/lib/seo";
 
+const ORGANIZATION_ID = `${SITE_URL}/#organization`;
+const LOGO_URL = `${SITE_URL}/icon.png`;
 
 interface BreadcrumbItem {
   name: string;
@@ -14,7 +17,7 @@ export function BreadcrumbJsonLd({ items }: { items: BreadcrumbItem[] }) {
       "@type": "ListItem",
       position: i + 1,
       name: item.name,
-      item: `https://www.readysetgosafaris.com${item.item}`,
+      item: absoluteUrl(item.item),
     })),
   };
   return (
@@ -41,19 +44,25 @@ export function TourPackageJsonLd({
   duration: string;
   url: string;
 }) {
+  const pageUrl = absoluteUrl(url);
   const schema = {
     "@context": "https://schema.org",
     "@type": "Product",
     name,
     description,
-    image,
-    url: `https://www.readysetgosafaris.com${url}`,
+    image: [absoluteUrl(image)],
+    url: pageUrl,
+    brand: {
+      "@type": "Brand",
+      name: "Ready Set Go Safaris",
+    },
     offers: {
       "@type": "Offer",
       price,
       priceCurrency: "USD",
       availability: "https://schema.org/InStock",
-      url: `https://www.readysetgosafaris.com${url}`,
+      url: pageUrl,
+      seller: { "@id": ORGANIZATION_ID },
     },
     additionalProperty: {
       "@type": "PropertyValue",
@@ -76,6 +85,7 @@ export function ArticleJsonLd({
   image,
   url,
   datePublished,
+  dateModified,
   authorName,
 }: {
   title: string;
@@ -83,21 +93,37 @@ export function ArticleJsonLd({
   image: string;
   url: string;
   datePublished?: string;
+  dateModified?: string;
   authorName?: string;
 }) {
+  const pageUrl = absoluteUrl(url);
   const schema: Record<string, unknown> = {
     "@context": "https://schema.org",
     "@type": "Article",
     headline: title,
     description,
-    image,
-    url: `https://www.readysetgosafaris.com${url}`,
+    image: [absoluteUrl(image)],
+    url: pageUrl,
+    mainEntityOfPage: {
+      "@type": "WebPage",
+      "@id": pageUrl,
+    },
     author: {
       "@type": "Person",
       name: authorName || "Ready Set Go Tours & Travel",
     },
+    publisher: {
+      "@type": "Organization",
+      "@id": ORGANIZATION_ID,
+      name: "Ready Set Go Safaris",
+      logo: {
+        "@type": "ImageObject",
+        url: LOGO_URL,
+      },
+    },
   };
   if (datePublished) schema.datePublished = datePublished;
+  if (dateModified || datePublished) schema.dateModified = dateModified || datePublished;
   return (
     <script
       id="article-jsonld"
@@ -146,13 +172,13 @@ export function ServiceJsonLd({
     "@type": "Service",
     name,
     description,
-    image,
-    url: `https://www.readysetgosafaris.com${url}`,
-    provider: {
-      "@type": "TravelAgency",
-      name: "Ready Set Go Tours & Travel",
-      url: "https://www.readysetgosafaris.com",
-    },
+    image: image ? absoluteUrl(image) : undefined,
+    url: absoluteUrl(url),
+    provider: { "@id": ORGANIZATION_ID },
+    areaServed: [
+      { "@type": "Country", name: "Kenya" },
+      { "@type": "Country", name: "Tanzania" },
+    ],
   };
   return (
     <script

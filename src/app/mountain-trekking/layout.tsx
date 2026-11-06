@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { BreadcrumbJsonLd } from "@/components/JsonLd";
 
 export const metadata: Metadata = {
-  title: "Mountain Trekking & Climbing | Mount Kenya & Kilimanjaro",
+  title: "Mount Kenya & Kilimanjaro Trekking",
   description:
     "Conquer Africa's legendary peaks with expert guides. Mount Kenya trekking, Kilimanjaro climbs, and high-altitude summit expeditions with full support.",
   openGraph: {

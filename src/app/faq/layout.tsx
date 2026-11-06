@@ -5,7 +5,7 @@ import { BreadcrumbJsonLd } from "@/components/JsonLd";
 export const metadata: Metadata = {
   title: "FAQ | Safari Travel Guide",
   description:
-    "Frequently asked questions about East African safaris. Visas, vaccinations, packing, best time to visit, accommodation, and more from Kenya's trusted tour operator.",
+    "Frequently asked questions about East African safaris. Visas, vaccinations, packing, best time to visit, accommodation and more from Kenya's trusted tour operator.",
   openGraph: {
     url: "https://www.readysetgosafaris.com/faq",
     title: "FAQ | Ready Set Go Tours & Travel",

@@ -105,7 +105,7 @@ export function Footer() {
               </a>
             </div>
             <div className="flex items-center gap-3">
-              {SOCIAL_LINKS.map((social) => (
+              {SOCIAL_LINKS.filter((social) => social.name !== "twitter").map((social) => (
                 <a
                   key={social.name}
                   href={social.href}
@@ -151,9 +151,9 @@ export function Footer() {
 
           {footerColumns.map((column) => (
             <div key={column.title} className="lg:col-span-2">
-              <h3 className="text-sm font-semibold uppercase tracking-wider text-white mb-5">
+              <h2 className="text-sm font-semibold uppercase tracking-wider text-white mb-5">
                 {column.title}
-              </h3>
+              </h2>
               <ul className="space-y-3">
                 {column.links.map((link) => (
                   <li key={link.href}>
@@ -171,9 +171,9 @@ export function Footer() {
           ))}
 
           <div className="lg:col-span-2">
-            <h3 className="text-sm font-semibold uppercase tracking-wider text-white mb-5">
+            <h2 className="text-sm font-semibold uppercase tracking-wider text-white mb-5">
               Contact Us
-            </h3>
+            </h2>
             <ul className="space-y-4">
               <li>
                 <a
@@ -212,9 +212,9 @@ export function Footer() {
         <div className="mt-16 pt-10 border-t border-stone-800">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
             <div>
-              <h3 className="text-sm font-semibold uppercase tracking-wider text-white mb-3">
+              <h2 className="text-sm font-semibold uppercase tracking-wider text-white mb-3">
                 Newsletter
-              </h3>
+              </h2>
               <p className="text-sm text-stone-400 mb-4">
                 Subscribe for exclusive travel deals, safari tips, and inspiration.
               </p>

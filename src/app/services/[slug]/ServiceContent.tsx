@@ -8,6 +8,7 @@ import {
 } from "lucide-react"
 import type { Service } from "@/lib/constants"
 import { COMPANY, TESTIMONIALS, whatsappPackageLink } from "@/lib/constants"
+import { truncateAtWord } from "@/lib/seo"
 import AnimatedSection from "@/components/AnimatedSection"
 import { openBookingModal } from "@/lib/booking-store"
 import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from "@/components/ui/accordion"
@@ -129,7 +130,7 @@ export default function ServiceContent({ service }: Props) {
               {service.tagline}
             </h1>
             <p className="text-lg sm:text-xl text-white/70 max-w-2xl mx-auto leading-relaxed">
-              {service.description.slice(0, 150)}...
+              {truncateAtWord(service.description, 180)}
             </p>
           </AnimatedSection>
         </div>

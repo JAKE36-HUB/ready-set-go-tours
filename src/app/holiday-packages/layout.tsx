@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Safari & Holiday Packages | Kenya & Tanzania Tours",
+  title: "Kenya & Tanzania Safari Packages",
   description:
     "Browse group, safari, mountain, and luxury holiday packages across Kenya and Tanzania — Masai Mara, Amboseli, Serengeti, Kilimanjaro. Get a free quote today.",
   openGraph: {

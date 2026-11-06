@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { Calendar, User, Tag, Clock, ArrowLeft, ChevronRight } from "lucide-react";
 import { BLOG_POSTS, COMPANY } from "@/lib/constants";
+import { buildMetaDescription, guideMetaTitle } from "@/lib/seo";
 import {
   ArticleJsonLd,
   BreadcrumbJsonLd,
@@ -25,23 +26,18 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   if (!post) return {};
 
   const excerpt = post.excerpt.replace(/\s+/g, " ").trim();
-  let description: string;
-  if (post.metaDescription) {
-    description = post.metaDescription;
-  } else if (excerpt.length >= 160) {
-    description = excerpt.slice(0, 157).trimEnd() + "…";
-  } else if (excerpt.length >= 140) {
-    description = excerpt;
-  } else if (excerpt.length >= 120) {
-    description = `${excerpt} Plan your safari.`;
-  } else {
-    description = `${excerpt} Plan with ${COMPANY.name}.`;
-  }
+  const description =
+    post.metaDescription ??
+    buildMetaDescription(
+      excerpt,
+      158,
+      excerpt.length < 130 ? "Plan your safari with us." : undefined
+    );
 
-  const title = post.metaTitle || post.title;
+  const title = guideMetaTitle(slug, post.title, post.metaTitle);
 
   return {
-    title: post.metaTitle ? { absolute: post.metaTitle } : title,
+    title: { absolute: title },
     description,
     openGraph: {
       url: `https://www.readysetgosafaris.com/travel-guide/${slug}`,
@@ -60,6 +56,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       canonical: `/travel-guide/${slug}`,
     },
   };
+}
+
+function toIsoDate(value: string): string | undefined {
+  const date = new Date(value);
+  return Number.isNaN(date.getTime()) ? undefined : date.toISOString().slice(0, 10);
 }
 
 const READING_TIME: Record<number, string> = {
@@ -96,7 +97,9 @@ export default async function BlogPostPage({ params }: Props) {
         description={post.excerpt}
         image={post.image}
         url={`/travel-guide/${slug}`}
-        authorName="Ready Set Go Tours & Travel"
+        datePublished={toIsoDate(post.date)}
+        dateModified={toIsoDate(post.date)}
+        authorName={post.author}
       />
       {post.faqs && <FaqJsonLd faqs={post.faqs} />}
       <main className="min-h-screen">
