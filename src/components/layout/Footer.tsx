@@ -65,32 +65,32 @@ export function Footer() {
   const whatsappUrl = whatsappLink()
 
   return (
-    <footer className="relative bg-stone-950 dark:bg-black text-stone-300 overflow-hidden">
-      <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-0 left-1/4 w-96 h-96 bg-amber-500/5 rounded-full blur-3xl" />
-        <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-orange-500/5 rounded-full blur-3xl" />
+    <footer className="relative overflow-hidden bg-[#08130E] text-white/70">
+      <div className="pointer-events-none absolute inset-0">
+        <div className="absolute left-1/4 top-0 h-96 w-96 rounded-full bg-primary/20 blur-3xl" />
+        <div className="absolute bottom-0 right-1/4 h-96 w-96 rounded-full bg-accent/10 blur-3xl" />
       </div>
 
-      <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-20 pb-8">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8">
-          <div className="lg:col-span-4 space-y-6">
-            <Link href="/" className="flex items-center gap-2.5 group">
+      <div className="relative mx-auto max-w-7xl px-4 pb-8 pt-20 sm:px-6 lg:px-8">
+        <div className="grid grid-cols-1 gap-12 lg:grid-cols-12 lg:gap-8">
+          <div className="space-y-6 lg:col-span-4">
+            <Link href="/" className="group flex items-center gap-2.5">
               <Image
                 src="/logo.png"
                 alt="Ready Set Go Safaris"
                 width={240}
                 height={114}
-                className="h-20 w-auto object-contain"
+                className="h-16 w-auto object-contain brightness-0 invert"
                 loading="lazy"
               />
             </Link>
-            <p className="text-sm leading-relaxed text-stone-400 max-w-sm">
+            <p className="max-w-sm text-sm leading-relaxed text-white/55">
               {COMPANY.description}
             </p>
-            <div className="flex flex-col sm:flex-row gap-3">
+            <div className="flex flex-col gap-3 sm:flex-row">
               <Link
                 href={PLAN_SAFARI_ROUTE}
-                className="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl gradient-primary text-white text-sm font-semibold shadow-premium hover:shadow-premium hover:scale-[1.03] transition-all duration-300"
+                className="inline-flex items-center justify-center gap-2 rounded-full bg-[#E8D5B5] px-5 py-3 text-sm font-semibold text-[#12251B] transition-all duration-300 hover:bg-[#F1E2C8]"
               >
                 Plan My Safari
               </Link>
@@ -98,9 +98,9 @@ export function Footer() {
                 href={whatsappUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-[#25D366] text-white text-sm font-semibold hover:brightness-110 hover:scale-[1.03] transition-all duration-300"
+                className="inline-flex items-center justify-center gap-2 rounded-full border border-white/10 bg-white/5 px-5 py-3 text-sm font-semibold text-white transition-all duration-300 hover:border-white/25 hover:bg-white/10"
               >
-                <MessageCircle className="w-4 h-4" />
+                <MessageCircle className="h-4 w-4" />
                 WhatsApp an Expert
               </a>
             </div>
@@ -111,7 +111,7 @@ export function Footer() {
                   href={social.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center justify-center w-10 h-10 rounded-full bg-stone-800 text-stone-400 hover:bg-amber-600 hover:text-white hover:scale-110 transition-all duration-200"
+                  className="flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-white/5 text-white/55 transition-all duration-200 hover:border-accent hover:bg-accent hover:text-white"
                   aria-label={social.name}
                 >
                   <SocialIcon name={social.icon} />
@@ -120,7 +120,7 @@ export function Footer() {
             </div>
             {LOGO_CREDENTIALS.length > 0 ? (
               <div>
-                <p className="text-xs font-semibold uppercase tracking-wider text-stone-500 mb-3">
+                <p className="mb-3 text-xs font-semibold uppercase tracking-[0.18em] text-white/35">
                   Find Us On
                 </p>
                 <ul className="flex flex-wrap gap-2">
@@ -130,7 +130,7 @@ export function Footer() {
                         href={credential.url}
                         target="_blank"
                         rel="noopener noreferrer nofollow"
-                        className="flex items-center justify-center h-11 rounded-md border border-stone-600 bg-white px-3 shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:shadow-md hover:opacity-90"
+                        className="flex h-11 items-center justify-center rounded-xl border border-white/10 bg-white px-3 shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:shadow-md hover:opacity-90"
                         aria-label={`${credential.name} (opens in a new tab)`}
                       >
                         <Image
@@ -151,7 +151,7 @@ export function Footer() {
 
           {footerColumns.map((column) => (
             <div key={column.title} className="lg:col-span-2">
-              <h2 className="text-sm font-semibold uppercase tracking-wider text-white mb-5">
+              <h2 className="mb-5 text-xs font-semibold uppercase tracking-[0.18em] text-white">
                 {column.title}
               </h2>
               <ul className="space-y-3">
@@ -159,9 +159,9 @@ export function Footer() {
                   <li key={link.href}>
                     <Link
                       href={link.href}
-                      className="group flex items-center gap-1.5 text-sm text-stone-400 hover:text-amber-400 transition-colors duration-200"
+                      className="group flex items-center gap-1.5 text-sm text-white/55 transition-colors duration-200 hover:text-[#E4C9A3]"
                     >
-                      <ChevronRight className="w-3 h-3 text-amber-500/0 group-hover:text-amber-500 transition-all duration-200 -ml-0 group-hover:ml-0" />
+                      <ChevronRight className="h-3 w-3 -ml-0 text-accent/0 transition-all duration-200 group-hover:ml-0 group-hover:text-accent" />
                       {link.label}
                     </Link>
                   </li>
@@ -171,37 +171,37 @@ export function Footer() {
           ))}
 
           <div className="lg:col-span-2">
-            <h2 className="text-sm font-semibold uppercase tracking-wider text-white mb-5">
+            <h2 className="mb-5 text-xs font-semibold uppercase tracking-[0.18em] text-white">
               Contact Us
             </h2>
             <ul className="space-y-4">
               <li>
                 <a
                   href={`tel:${CONTACT_INFO.phone}`}
-                  className="flex items-start gap-3 text-sm text-stone-400 hover:text-amber-400 transition-colors duration-200"
+                  className="flex items-start gap-3 text-sm text-white/55 transition-colors duration-200 hover:text-[#E4C9A3]"
                 >
-                  <Phone className="w-4 h-4 mt-0.5 text-amber-500 shrink-0" />
+                  <Phone className="mt-0.5 h-4 w-4 shrink-0 text-accent" />
                   {CONTACT_INFO.phone}
                 </a>
               </li>
               <li>
                 <a
                   href={`mailto:${CONTACT_INFO.bookingsEmail}`}
-                  className="flex items-start gap-3 text-sm text-stone-400 hover:text-amber-400 transition-colors duration-200"
+                  className="flex items-start gap-3 text-sm text-white/55 transition-colors duration-200 hover:text-[#E4C9A3]"
                 >
-                  <Mail className="w-4 h-4 mt-0.5 text-amber-500 shrink-0" />
+                  <Mail className="mt-0.5 h-4 w-4 shrink-0 text-accent" />
                   {CONTACT_INFO.bookingsEmail}
                 </a>
               </li>
               <li>
-                <div className="flex items-start gap-3 text-sm text-stone-400">
-                  <MapPin className="w-4 h-4 mt-0.5 text-orange-500 shrink-0" />
+                <div className="flex items-start gap-3 text-sm text-white/55">
+                  <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-accent" />
                   {CONTACT_INFO.address}
                 </div>
               </li>
               <li>
-                <div className="flex items-start gap-3 text-sm text-stone-400">
-                  <Clock className="w-4 h-4 mt-0.5 text-amber-500 shrink-0" />
+                <div className="flex items-start gap-3 text-sm text-white/55">
+                  <Clock className="mt-0.5 h-4 w-4 shrink-0 text-accent" />
                   {CONTACT_INFO.hours}
                 </div>
               </li>
@@ -209,16 +209,16 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="mt-16 pt-10 border-t border-stone-800">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
+        <div className="mt-16 border-t border-white/10 pt-10">
+          <div className="grid grid-cols-1 items-start gap-8 lg:grid-cols-2">
             <div>
-              <h2 className="text-sm font-semibold uppercase tracking-wider text-white mb-3">
+              <h2 className="mb-3 text-xs font-semibold uppercase tracking-[0.18em] text-white">
                 Newsletter
               </h2>
-              <p className="text-sm text-stone-400 mb-4">
+              <p className="mb-4 text-sm text-white/55">
                 Subscribe for exclusive travel deals, safari tips, and inspiration.
               </p>
-              <form onSubmit={handleNewsletterSubmit} className="flex gap-2 max-w-md">
+              <form onSubmit={handleNewsletterSubmit} className="flex max-w-md gap-2">
                 <div className="flex-1">
                   <Input
                     type="email"
@@ -226,49 +226,49 @@ export function Footer() {
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder="Enter your email"
                     required
-                    className="h-10 bg-stone-800 border-stone-700 text-stone-300 placeholder:text-stone-500 focus:border-amber-500"
+                    className="h-11 border-white/10 bg-white/5 text-white placeholder:text-white/35 focus:border-accent"
                     aria-label="Email address for newsletter"
                   />
                 </div>
                 <Button
                   type="submit"
-                  className="h-10 px-4 gradient-primary text-white border-0 hover:shadow-lg hover:scale-105 transition-all duration-300"
+                  className="h-11 bg-[#E8D5B5] px-4 text-[#12251B] hover:bg-[#F1E2C8]"
                   aria-label="Subscribe to newsletter"
                 >
-                  <ArrowRight className="w-4 h-4" />
+                  <ArrowRight className="h-4 w-4" />
                 </Button>
               </form>
               {subscribed && (
                 <motion.p
                   initial={{ opacity: 0, y: 5 }}
                   animate={{ opacity: 1, y: 0 }}
-                  className="text-sm text-emerald-400 mt-2"
+                  className="mt-2 text-sm text-[#86C2A4]"
                 >
                   Thank you for subscribing!
                 </motion.p>
               )}
             </div>
 
-            <div className="flex flex-col sm:flex-row items-start sm:items-center justify-end gap-4 text-sm text-stone-500">
-              <Link href="/privacy-policy" className="hover:text-amber-400 transition-colors">
+            <div className="flex flex-col items-start justify-end gap-4 text-sm text-white/40 sm:flex-row sm:items-center">
+              <Link href="/privacy-policy" className="transition-colors hover:text-[#E4C9A3]">
                 Privacy Policy
               </Link>
             </div>
           </div>
         </div>
 
-        <div className="mt-8 pt-6 border-t border-stone-800 flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-stone-500">
+        <div className="mt-8 flex flex-col items-center justify-between gap-4 border-t border-white/10 pt-6 text-sm text-white/40 sm:flex-row">
           <p className="select-none">{COMPANY.copyright}</p>
           <div className="flex items-center gap-4">
             <Link
               href="/admin"
-              className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full border border-stone-600 bg-stone-800/60 text-stone-200 hover:bg-stone-700 hover:text-white hover:border-amber-500 transition-colors font-medium"
+              className="inline-flex items-center gap-1.5 rounded-full border border-white/10 bg-white/5 px-4 py-2 font-medium text-white/70 transition-colors hover:border-accent hover:text-white"
             >
-              <ShieldCheck className="w-4 h-4" />
+              <ShieldCheck className="h-4 w-4" />
               Admin Panel
             </Link>
             <p className="flex items-center gap-1">
-              Made with <Heart className="w-3.5 h-3.5 text-red-500 fill-red-500" /> by JengaCode
+              Made with <Heart className="h-3.5 w-3.5 fill-accent text-accent" /> by JengaCode
             </p>
           </div>
         </div>

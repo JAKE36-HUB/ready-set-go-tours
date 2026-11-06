@@ -55,20 +55,18 @@ export default function TanzaniaToursPage() {
           className="object-cover"
           sizes="100vw"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black/70" />
-        <div className="absolute inset-0 bg-gradient-to-r from-amber-900/20 to-emerald-900/20" />
-        <div className="relative z-10 text-center px-6 max-w-4xl mx-auto">
+        <div className="absolute inset-0 bg-gradient-to-b from-[#08130E]/65 via-[#08130E]/40 to-[#08130E]/80" />
+        <div className="absolute inset-0 bg-gradient-to-r from-[#08130E]/50 via-transparent to-[#08130E]/50" />
+        <div className="relative z-10 mx-auto max-w-4xl px-6 text-center">
           <AnimatedSection direction="none">
-            <span className="inline-block px-4 py-1.5 rounded-full bg-amber-500/20 border border-amber-400/30 text-amber-300 text-sm font-medium mb-6 backdrop-blur-sm">
+            <span className="mb-6 inline-block text-xs font-semibold uppercase tracking-[0.24em] text-[#E4C9A3]">
               The Ultimate East African Safari
             </span>
-            <h1 className="text-4xl sm:text-5xl lg:text-7xl font-bold text-white mb-6 leading-tight">
+            <h1 className="mb-6 font-display text-4xl font-normal leading-tight text-white sm:text-5xl lg:text-7xl">
               Discover{" "}
-              <span className="bg-gradient-to-r from-amber-400 to-yellow-300 bg-clip-text text-transparent">
-                Tanzania
-              </span>
+              <span className="italic text-[#E4C9A3]">Tanzania</span>
             </h1>
-            <p className="text-lg sm:text-xl text-amber-100/80 max-w-2xl mx-auto leading-relaxed">
+            <p className="mx-auto max-w-2xl text-lg leading-relaxed text-white/65 sm:text-xl">
               Stand on the rim of the Ngorongoro Crater, watch wildebeest cross the Mara River,
               and summit Africa&apos;s highest peak — Tanzania is the stuff of legends.
             </p>
@@ -80,9 +78,8 @@ export default function TanzaniaToursPage() {
       <section className="py-20 px-6">
         <div className="max-w-4xl mx-auto text-center">
           <AnimatedSection>
-            <h2 className="text-3xl sm:text-4xl font-bold text-foreground mb-6">
-              Tanzania: Where{" "}
-              <span className="text-amber-500">Wilderness Awaits</span>
+            <h2 className="mb-6 font-display text-3xl font-normal text-foreground sm:text-4xl">
+              Tanzania: Where <span className="italic text-accent">Wilderness Awaits</span>
             </h2>
             <p className="text-lg text-muted-foreground leading-relaxed">
               Tanzania is home to some of Africa&apos;s most iconic landscapes and wildlife
@@ -100,7 +97,7 @@ export default function TanzaniaToursPage() {
         <div className="max-w-7xl mx-auto">
           <AnimatedSection>
             <div className="text-center mb-16">
-              <h2 className="text-3xl sm:text-4xl font-bold text-foreground mb-4">
+              <h2 className="mb-4 font-display text-3xl font-normal text-foreground sm:text-4xl">
                 Tanzania&apos;s Iconic Destinations
               </h2>
               <p className="text-muted-foreground max-w-2xl mx-auto">
@@ -139,17 +136,17 @@ export default function TanzaniaToursPage() {
 
                   {/* Content */}
                   <div className="w-full lg:w-1/2 space-y-6">
-                    <h3 className="text-2xl sm:text-3xl font-bold text-foreground">
+                    <h3 className="font-display text-2xl font-normal text-foreground sm:text-3xl">
                       {dest.name}
                     </h3>
                     <p className="text-muted-foreground leading-relaxed">
                       {dest.description}
                     </p>
 
-                    <div className="flex items-start gap-3 p-4 rounded-xl bg-amber-50 dark:bg-amber-950/30 border border-amber-100 dark:border-amber-900/50">
-                      <Calendar className="size-5 text-amber-500 mt-0.5 shrink-0" />
+                    <div className="flex items-start gap-3 rounded-xl border border-border bg-secondary/50 p-4">
+                      <Calendar className="mt-0.5 size-5 shrink-0 text-accent" />
                       <div>
-                        <p className="text-xs font-semibold uppercase tracking-wider text-amber-600 dark:text-amber-400">
+                        <p className="text-xs font-semibold uppercase tracking-wider text-accent">
                           Best Time to Visit
                         </p>
                         <p className="text-sm text-foreground mt-0.5">{dest.bestTime}</p>
@@ -163,7 +160,7 @@ export default function TanzaniaToursPage() {
                       <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                         {dest.highlights.map((h) => (
                           <li key={h} className="flex items-start gap-2 text-sm text-muted-foreground">
-                            <Star className="size-3.5 text-amber-500 mt-1 shrink-0" />
+                            <Star className="mt-1 size-3.5 shrink-0 text-accent" />
                             {h}
                           </li>
                         ))}
@@ -177,7 +174,7 @@ export default function TanzaniaToursPage() {
                       <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                         {dest.activities.map((a) => (
                           <li key={a} className="flex items-start gap-2 text-sm text-muted-foreground">
-                            <Compass className="size-3.5 text-orange-500 mt-1 shrink-0" />
+                            <Compass className="mt-1 size-3.5 shrink-0 text-accent" />
                             {a}
                           </li>
                         ))}
@@ -211,22 +208,22 @@ export default function TanzaniaToursPage() {
       </section>
 
       {/* CTA */}
-      <section className="py-20 px-6 bg-gradient-to-br from-amber-900 via-orange-900 to-slate-900 relative overflow-hidden">
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_left,rgba(251,191,36,0.1),transparent_60%)]" />
-        <div className="max-w-4xl mx-auto text-center relative z-10">
+      <section className="relative overflow-hidden bg-[#08130E] px-6 py-20">
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_left,rgba(184,100,58,0.18),transparent_60%)]" />
+        <div className="relative z-10 mx-auto max-w-4xl text-center">
           <AnimatedSection>
-            <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">
+            <h2 className="mb-4 font-display text-3xl font-normal text-white sm:text-4xl">
               Begin Your Tanzania Journey
             </h2>
-            <p className="text-amber-200/80 text-lg max-w-2xl mx-auto mb-8">
+            <p className="mx-auto mb-8 max-w-2xl text-lg text-white/60">
               From the Serengeti to Zanzibar, let us craft your perfect Tanzanian adventure.
               Bespoke itineraries designed around your dreams.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <div className="flex flex-col justify-center gap-4 sm:flex-row">
               <TanzaniaTourInteractive tourName="Custom Tanzania Safari" isCTA />
               <a
                 href="/contact"
-                className="inline-flex items-center justify-center gap-2 h-11 px-6 rounded-lg border border-white/20 text-white hover:bg-white/10 transition-colors text-sm font-medium"
+                className="inline-flex h-11 items-center justify-center gap-2 rounded-full border border-white/20 px-6 text-sm font-medium text-white transition-colors hover:bg-white/10"
               >
                 Contact Us
               </a>

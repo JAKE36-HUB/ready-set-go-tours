@@ -23,14 +23,14 @@ export function CustomSafari() {
   const whatsappUrl = whatsappLink()
 
   return (
-    <section ref={ref} className="relative py-24 sm:py-28 bg-muted/70 dark:bg-stone-900 overflow-hidden">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid lg:grid-cols-2 gap-10 lg:gap-14 items-center">
+    <section ref={ref} className="relative overflow-hidden bg-muted/50 py-24 sm:py-28">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="grid items-center gap-10 lg:grid-cols-2 lg:gap-14">
           <motion.div
             initial={{ opacity: 0, x: -40 }}
             animate={isInView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.7 }}
-            className="relative rounded-3xl overflow-hidden aspect-[4/3] lg:aspect-auto lg:h-[520px] shadow-2xl"
+            className="relative aspect-[4/3] overflow-hidden rounded-[1.75rem] shadow-card lg:aspect-auto lg:h-[520px]"
           >
             <Image
               src="/images/local/pin_d21f86305bc5df0128814c1a93b7515a.jpg"
@@ -46,18 +46,18 @@ export function CustomSafari() {
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.7, delay: 0.15 }}
           >
-            <span className="text-xs font-semibold uppercase tracking-[0.2em] text-primary dark:text-amber-400">Custom Safaris</span>
-            <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-medium text-foreground mt-4 mb-5 leading-tight">
+            <span className="eyebrow">Custom safaris</span>
+            <h2 className="mb-5 mt-4 font-display text-3xl font-normal leading-tight text-foreground sm:text-4xl lg:text-5xl">
               Can&apos;t find exactly what you&apos;re looking for?
             </h2>
-            <p className="text-base text-muted-foreground leading-relaxed mb-6">
+            <p className="mb-6 text-base leading-relaxed text-muted-foreground">
               You don&apos;t have to choose from a list. Tell us what you want to experience — the parks you love, the pace you prefer, the places you&apos;ve always dreamed of. If you can dream it, we can build it.
             </p>
-            <ul className="space-y-3 mb-8">
+            <ul className="mb-8 space-y-3">
               {REASONS.map((reason) => (
                 <li key={reason} className="flex items-start gap-3 text-sm text-foreground">
-                  <span className="mt-0.5 flex items-center justify-center w-5 h-5 rounded-full bg-primary/15 text-primary dark:text-amber-400 shrink-0">
-                    <Check className="w-3 h-3" />
+                  <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-primary/10 text-primary">
+                    <Check className="h-3 w-3" />
                   </span>
                   {reason}
                 </li>
@@ -65,16 +65,16 @@ export function CustomSafari() {
             </ul>
             <div className="flex flex-wrap gap-4">
               <Link href={PLAN_SAFARI_ROUTE}>
-                <Button className="h-13 px-8 text-base font-semibold gradient-primary text-white border-0 shadow-premium hover:shadow-premium hover:scale-105 transition-all duration-300">
-                  Build My Safari <ArrowRight className="w-4 h-4 ml-2" />
+                <Button className="h-13 bg-primary px-8 text-base font-semibold text-primary-foreground hover:bg-primary/90">
+                  Build My Safari <ArrowRight className="ml-2 h-4 w-4" />
                 </Button>
               </Link>
               <Button
                 variant="outline"
                 onClick={() => window.open(whatsappUrl, "_blank", "noopener,noreferrer")}
-                className="h-13 px-8 text-base font-medium border-border hover:border-primary/40 hover:text-primary dark:hover:text-amber-400 transition-all"
+                className="h-13 border-border px-8 text-base font-medium transition-all hover:border-primary/40 hover:text-primary"
               >
-                <MessageCircle className="w-4 h-4 mr-2" />
+                <MessageCircle className="mr-2 h-4 w-4" />
                 WhatsApp Us
               </Button>
             </div>

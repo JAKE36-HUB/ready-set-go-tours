@@ -43,14 +43,14 @@ export default async function DealsPage() {
           className="object-cover"
           sizes="100vw"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/50 to-black/80" />
-        <div className="relative z-10 text-center px-6 max-w-4xl mx-auto">
+        <div className="absolute inset-0 bg-gradient-to-b from-[#08130E]/70 via-[#08130E]/45 to-[#08130E]/85" />
+        <div className="relative z-10 mx-auto max-w-4xl px-6 text-center">
           <AnimatedSection direction="none">
-            <span className="text-xs font-semibold uppercase tracking-[0.2em] text-amber-400">Deals & Offers</span>
-            <h1 className="font-display text-4xl sm:text-5xl lg:text-6xl font-medium text-white mt-4 mb-5 leading-tight">
+            <span className="text-xs font-semibold uppercase tracking-[0.24em] text-[#E4C9A3]">Deals & Offers</span>
+            <h1 className="mb-5 mt-4 font-display text-4xl font-normal leading-tight text-white sm:text-5xl lg:text-6xl">
               Great safaris, at a smarter price
             </h1>
-            <p className="text-lg text-white/70 max-w-2xl mx-auto">
+            <p className="mx-auto max-w-2xl text-lg text-white/65">
               Exclusive offers on safaris, Mount Kenya adventures, beach holidays, and group packages.
               Don&apos;t miss your chance to experience East Africa for less.
             </p>
@@ -61,17 +61,13 @@ export default async function DealsPage() {
       <DealsBrowser deals={deals} />
 
       {/* Why Book With Us */}
-      <section className="py-20 px-6 bg-gradient-to-b from-transparent to-emerald-950/5">
-        <div className="max-w-7xl mx-auto">
+      <section className="bg-secondary/40 px-6 py-20">
+        <div className="mx-auto max-w-7xl">
           <AnimatedSection>
-            <h2 className="font-display text-3xl sm:text-4xl font-medium text-center text-foreground mb-4">
-              Why book a{" "}
-              <span className="bg-gradient-to-r from-amber-500 to-orange-400 bg-clip-text text-transparent">
-                deal
-              </span>{" "}
-              with us
+            <h2 className="mb-4 text-center font-display text-3xl font-normal text-foreground sm:text-4xl">
+              Why book a <span className="italic text-accent">deal</span> with us
             </h2>
-            <p className="text-muted-foreground text-center max-w-2xl mx-auto mb-14">
+            <p className="mx-auto mb-14 max-w-2xl text-center text-muted-foreground">
               Our deals are carefully curated to give you the best value without compromising on the
               quality and authenticity of your East African experience.
             </p>
@@ -85,11 +81,11 @@ export default async function DealsPage() {
               { icon: Star, title: "24/7 Support", desc: "From booking to return, our team is available around the clock to assist you." },
             ].map((item) => (
               <AnimatedSection key={item.title}>
-                <div className="text-center p-6 rounded-xl bg-card ring-1 ring-foreground/10">
-                  <div className="size-12 rounded-full bg-emerald-100 dark:bg-emerald-950/50 flex items-center justify-center mx-auto mb-4">
-                    <item.icon className="size-6 text-emerald-600" />
+                <div className="rounded-2xl bg-card p-6 text-center ring-1 ring-border">
+                  <div className="mx-auto mb-4 flex size-12 items-center justify-center rounded-full bg-accent/10">
+                    <item.icon className="size-6 text-accent" />
                   </div>
-                  <h3 className="font-semibold text-foreground mb-2">{item.title}</h3>
+                  <h3 className="mb-2 font-semibold text-foreground">{item.title}</h3>
                   <p className="text-sm text-muted-foreground">{item.desc}</p>
                 </div>
               </AnimatedSection>
@@ -101,17 +97,17 @@ export default async function DealsPage() {
       {/* CTA */}
       <AnimatedSection>
         <div className="max-w-4xl mx-auto px-6 pb-20">
-          <div className="text-center p-10 rounded-3xl gradient-primary text-white shadow-premium">
-            <h2 className="font-display text-2xl font-medium mb-3">
+          <div className="rounded-3xl gradient-primary p-10 text-center text-white shadow-premium">
+            <h2 className="mb-3 font-display text-2xl font-normal">
               Don&apos;t Miss Out on These Deals
             </h2>
-            <p className="text-white/80 mb-6 max-w-md mx-auto">
+            <p className="mx-auto mb-6 max-w-md text-white/80">
               These offers are limited and subject to availability. Tell us which one you like and we&apos;ll hold it for you.
             </p>
             <div className="flex flex-wrap items-center justify-center gap-4">
               <Link
                 href={PLAN_SAFARI_ROUTE}
-                className="inline-flex items-center justify-center gap-2 h-12 px-6 rounded-xl bg-white text-stone-900 font-semibold hover:bg-stone-100 transition-all"
+                className="inline-flex h-12 items-center justify-center gap-2 rounded-full bg-white px-6 font-semibold text-primary transition-all hover:bg-white/90"
               >
                 Plan My Safari <ArrowRight className="size-4" />
               </Link>
@@ -119,7 +115,7 @@ export default async function DealsPage() {
                 href={whatsappLink()}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center justify-center gap-2 h-12 px-6 rounded-xl bg-white/10 hover:bg-white/20 text-white text-sm font-medium ring-1 ring-white/25 transition-all"
+                className="inline-flex h-12 items-center justify-center gap-2 rounded-full bg-white/10 px-6 text-sm font-medium text-white ring-1 ring-white/25 transition-all hover:bg-white/20"
               >
                 <MessageCircle className="size-4" />
                 WhatsApp a Safari Expert

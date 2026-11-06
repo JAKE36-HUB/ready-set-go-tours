@@ -24,6 +24,7 @@ export function Header() {
   // eslint-disable-next-line react-hooks/set-state-in-effect
   useEffect(() => { setMounted(true) }, [])
   const pathname = usePathname()
+  const transparent = !scrolled && pathname === "/"
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 50)
@@ -55,28 +56,38 @@ export function Header() {
     <>
       <motion.header
         className={cn(
-          "fixed top-0 left-0 right-0 z-50 transition-colors duration-300",
+          "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
           scrolled
-            ? "bg-white shadow-card dark:bg-stone-900"
-            : "bg-background/80 backdrop-blur-xl dark:bg-stone-900/70"
+            ? "border-b border-border/70 bg-background/90 backdrop-blur-xl shadow-[0_10px_40px_-28px_rgba(18,42,32,0.45)]"
+            : transparent
+              ? "bg-gradient-to-b from-black/45 via-black/10 to-transparent"
+              : "border-b border-transparent bg-background/70 backdrop-blur-xl"
         )}
         initial={{ y: -100 }}
         animate={{ y: 0 }}
         transition={{ duration: 0.6, ease: "easeOut" }}
       >
-        <div className="mx-auto flex h-20 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
+        <div className="mx-auto flex h-[4.5rem] max-w-7xl items-center justify-between px-4 sm:h-20 sm:px-6 lg:px-8">
           <Link href="/" className="flex items-center gap-2.5 group shrink-0">
             <Image
               src="/logo.png"
               alt="Ready Set Go Safaris"
               width={280}
               height={133}
-              className="h-20 w-auto object-contain transition-all duration-300"
+              className={cn(
+                "h-10 w-auto object-contain transition-all duration-300 sm:h-14",
+                transparent && "brightness-0 invert"
+              )}
               priority
             />
           </Link>
 
-          <nav className="hidden lg:flex items-center gap-1">
+          <nav
+            className={cn(
+              "hidden lg:flex items-center gap-0.5 rounded-full border px-1.5 py-1.5 backdrop-blur-md transition-colors duration-300",
+              transparent ? "border-white/15 bg-white/10" : "border-border/70 bg-card/60"
+            )}
+          >
             {NAV_ITEMS.map((item) => {
               const isActive = pathname === item.href || pathname.startsWith(item.href + "/")
               const hasChildren = item.children && item.children.length > 0
@@ -95,10 +106,14 @@ export function Header() {
                           setActiveDropdown(activeDropdown === item.href ? null : item.href)
                         }
                         className={cn(
-                          "flex items-center gap-1 px-3 py-2 rounded-lg text-sm font-medium transition-all duration-200",
+                          "flex items-center gap-1 rounded-full px-3.5 py-2 text-[13px] font-medium transition-all duration-200",
                           isActive
-                            ? "text-primary bg-primary/10 dark:text-amber-400 dark:bg-amber-900/30"
-                            : "text-stone-700 hover:text-primary hover:bg-primary/10 dark:text-stone-300 dark:hover:text-amber-400 dark:hover:bg-amber-900/20"
+                            ? transparent
+                              ? "bg-white text-primary"
+                              : "bg-primary text-primary-foreground"
+                            : transparent
+                              ? "text-white/80 hover:bg-white/10 hover:text-white"
+                              : "text-foreground/70 hover:bg-primary/10 hover:text-foreground"
                         )}
                       >
                         {item.label}
@@ -116,7 +131,7 @@ export function Header() {
                             animate={{ opacity: 1, y: 0, scale: 1 }}
                             exit={{ opacity: 0, y: 8, scale: 0.96 }}
                             transition={{ duration: 0.2, ease: "easeOut" }}
-                            className="absolute top-full left-0 mt-2 w-56 rounded-xl bg-white dark:bg-stone-900 shadow-card ring-1 ring-stone-900/5 dark:ring-stone-700/50 overflow-hidden"
+                            className="absolute top-full left-0 mt-2 w-60 rounded-2xl border border-border bg-card shadow-card overflow-hidden"
                           >
                             <div className="p-1.5">
                               {item.children!.map((child) => {
@@ -126,10 +141,10 @@ export function Header() {
                                     key={child.href}
                                     href={child.href}
                                     className={cn(
-                                      "flex items-center px-3 py-2.5 rounded-lg text-sm font-medium transition-all duration-150",
+                                      "flex items-center rounded-xl px-3 py-2.5 text-sm font-medium transition-all duration-150",
                                       isChildActive
-                                        ? "bg-primary/10 text-primary dark:bg-amber-900/30 dark:text-amber-400"
-                                        : "text-stone-700 hover:bg-stone-50 dark:text-stone-300 dark:hover:bg-stone-800"
+                                        ? "bg-primary/10 text-primary"
+                                        : "text-foreground/75 hover:bg-muted hover:text-foreground"
                                     )}
                                   >
                                     {child.label}
@@ -145,10 +160,14 @@ export function Header() {
                     <Link
                       href={item.href}
                       className={cn(
-                        "px-3 py-2 rounded-lg text-sm font-medium transition-all duration-200",
+                        "rounded-full px-3.5 py-2 text-[13px] font-medium transition-all duration-200",
                         isActive
-                          ? "text-primary bg-primary/10 dark:text-amber-400 dark:bg-amber-900/30"
-                          : "text-stone-700 hover:text-primary hover:bg-primary/10 dark:text-stone-300 dark:hover:text-amber-400 dark:hover:bg-amber-900/20"
+                          ? transparent
+                            ? "bg-white text-primary"
+                            : "bg-primary text-primary-foreground"
+                          : transparent
+                            ? "text-white/80 hover:bg-white/10 hover:text-white"
+                            : "text-foreground/70 hover:bg-primary/10 hover:text-foreground"
                       )}
                     >
                       {item.label}
@@ -164,7 +183,10 @@ export function Header() {
               variant="ghost"
               size="icon"
               onClick={() => setSearchOpen(true)}
-              className="hidden sm:inline-flex text-stone-700 hover:text-primary dark:text-stone-300"
+              className={cn(
+                "hidden rounded-full sm:inline-flex",
+                transparent ? "text-white/80 hover:bg-white/10 hover:text-white" : "text-foreground/70 hover:text-primary"
+              )}
               aria-label="Search"
             >
               <Search className="w-4 h-4" />
@@ -174,7 +196,10 @@ export function Header() {
               variant="ghost"
               size="icon"
               onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-              className="hidden sm:inline-flex text-stone-700 hover:text-primary dark:text-stone-300"
+              className={cn(
+                "hidden rounded-full sm:inline-flex",
+                transparent ? "text-white/80 hover:bg-white/10 hover:text-white" : "text-foreground/70 hover:text-primary"
+              )}
               aria-label="Toggle dark mode"
             >
               {mounted ? (theme === "dark" ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />) : <div className="w-4 h-4" />}
@@ -184,14 +209,19 @@ export function Header() {
               href={whatsappUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="hidden xl:inline-flex items-center gap-2 px-3 py-2 rounded-lg text-sm font-medium text-stone-700 hover:text-primary hover:bg-primary/10 dark:text-stone-300 dark:hover:text-amber-400 dark:hover:bg-amber-900/20 transition-all duration-200"
+              className={cn(
+                "hidden xl:inline-flex items-center gap-2 rounded-full px-3.5 py-2 text-[13px] font-medium transition-all duration-200",
+                transparent
+                  ? "text-white/80 hover:bg-white/10 hover:text-white"
+                  : "text-foreground/70 hover:bg-primary/10 hover:text-foreground"
+              )}
             >
               <MessageCircle className="w-3.5 h-3.5 shrink-0" />
               <span className="whitespace-nowrap">WhatsApp an Expert</span>
             </a>
 
             <Link href={PLAN_SAFARI_ROUTE}>
-              <Button className="hidden sm:inline-flex items-center gap-2 font-semibold gradient-primary text-white border-0 shadow-premium hover:shadow-premium hover:scale-105 transition-all duration-300">
+              <Button className="hidden h-10 items-center gap-2 rounded-full bg-primary px-5 font-semibold text-primary-foreground shadow-none hover:bg-primary/90 sm:inline-flex">
                 Plan My Safari
               </Button>
             </Link>
@@ -200,7 +230,7 @@ export function Header() {
               variant="ghost"
               size="icon"
               onClick={() => setMobileMenuOpen(true)}
-              className="lg:hidden text-stone-700 dark:text-stone-300"
+              className={cn("rounded-full lg:hidden", transparent ? "text-white hover:bg-white/10" : "text-foreground")}
               aria-label="Open menu"
             >
               <Menu className="w-5 h-5" />
@@ -237,13 +267,13 @@ function MobileNavContent({ onClose }: { onClose: () => void }) {
   const whatsappUrl = whatsappLink()
 
   return (
-    <div className="flex flex-col h-full bg-background dark:bg-stone-950">
-      <div className="flex items-center justify-between p-4 border-b border-stone-200 dark:border-stone-800">
+    <div className="flex flex-col h-full bg-background">
+      <div className="flex items-center justify-between p-4 border-b border-border">
         <Link href="/" className="flex items-center gap-2.5" onClick={onClose}>
           <div className="flex items-center justify-center w-9 h-9 rounded-xl gradient-primary text-white">
             <Compass className="w-4 h-4" />
           </div>
-          <span className="text-lg font-bold text-stone-900 dark:text-white">
+          <span className="font-display text-xl text-foreground">
             {COMPANY.shortName}
           </span>
         </Link>
@@ -269,10 +299,10 @@ function MobileNavContent({ onClose }: { onClose: () => void }) {
                   <button
                     onClick={() => toggleExpanded(item.href)}
                     className={cn(
-                      "flex w-full items-center justify-between px-3 py-3 rounded-lg text-sm font-medium transition-all duration-150",
+                      "flex w-full items-center justify-between rounded-xl px-3 py-3 text-sm font-medium transition-all duration-150",
                       isActive
-                        ? "bg-primary/10 text-primary dark:bg-amber-900/30 dark:text-amber-400"
-                        : "text-stone-700 hover:bg-stone-50 dark:text-stone-300 dark:hover:bg-stone-800"
+                        ? "bg-primary/10 text-primary"
+                        : "text-foreground/75 hover:bg-muted hover:text-foreground"
                     )}
                   >
                     {item.label}
@@ -292,17 +322,17 @@ function MobileNavContent({ onClose }: { onClose: () => void }) {
                         transition={{ duration: 0.2 }}
                         className="overflow-hidden"
                       >
-                        <div className="ml-3 mt-1 space-y-1 border-l-2 border-amber-200 dark:border-amber-900 pl-3">
+                        <div className="ml-3 mt-1 space-y-1 border-l-2 border-primary/20 pl-3">
                           {item.children!.map((child) => (
                             <Link
                               key={child.href}
                               href={child.href}
                               onClick={onClose}
                               className={cn(
-                                "block px-3 py-2.5 rounded-lg text-sm transition-all duration-150",
+                                "block rounded-xl px-3 py-2.5 text-sm transition-all duration-150",
                                 pathname === child.href
-                                  ? "bg-primary/10 text-primary font-medium dark:bg-amber-900/30 dark:text-amber-400"
-                                  : "text-stone-600 hover:bg-stone-50 dark:text-stone-400 dark:hover:bg-stone-800"
+                                  ? "bg-primary/10 font-medium text-primary"
+                                  : "text-foreground/65 hover:bg-muted hover:text-foreground"
                               )}
                             >
                               {child.label}
@@ -318,10 +348,10 @@ function MobileNavContent({ onClose }: { onClose: () => void }) {
                   href={item.href}
                   onClick={onClose}
                   className={cn(
-                    "flex items-center px-3 py-3 rounded-lg text-sm font-medium transition-all duration-150",
+                    "flex items-center rounded-xl px-3 py-3 text-sm font-medium transition-all duration-150",
                     isActive
-                      ? "bg-primary/10 text-primary dark:bg-amber-900/30 dark:text-amber-400"
-                      : "text-stone-700 hover:bg-stone-50 dark:text-stone-300 dark:hover:bg-stone-800"
+                      ? "bg-primary/10 text-primary"
+                      : "text-foreground/75 hover:bg-muted hover:text-foreground"
                   )}
                 >
                   {item.label}
@@ -332,7 +362,7 @@ function MobileNavContent({ onClose }: { onClose: () => void }) {
         })}
       </nav>
 
-      <div className="border-t border-stone-200 dark:border-stone-800 p-4 space-y-3">
+      <div className="border-t border-border p-4 space-y-3">
         <a
           href={whatsappUrl}
           target="_blank"
@@ -351,7 +381,7 @@ function MobileNavContent({ onClose }: { onClose: () => void }) {
         </Link>
         <a
           href={`tel:${COMPANY.phone}`}
-          className="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm text-stone-700 hover:bg-stone-50 dark:text-stone-300 dark:hover:bg-stone-800 transition-colors"
+          className="flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm text-foreground/75 hover:bg-muted hover:text-foreground transition-colors"
         >
           <Phone className="w-4 h-4 text-primary shrink-0" />
           <span className="whitespace-nowrap">{COMPANY.phone}</span>
@@ -414,22 +444,22 @@ function HeaderSearchModal({ onClose }: { onClose: () => void }) {
         transition={{ duration: 0.25, ease: "easeOut" }}
         className="w-full max-w-lg mx-4"
       >
-        <div className="bg-white dark:bg-stone-900 rounded-2xl shadow-2xl ring-1 ring-stone-900/10 dark:ring-stone-700/50 overflow-hidden">
+        <div className="bg-card rounded-2xl shadow-2xl ring-1 ring-border overflow-hidden">
           <div className="relative">
-            <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-stone-400" />
+            <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
             <input
               ref={inputRef}
               type="text"
               value={query}
               onChange={(e) => setQuery(e.target.value)}
               placeholder="Search destinations, tours, packages..."
-              className="w-full h-14 pl-12 pr-12 bg-transparent text-base text-stone-900 placeholder:text-stone-400 focus:outline-none dark:text-white dark:placeholder:text-stone-500"
+              className="w-full h-14 bg-transparent pl-12 pr-12 text-base text-foreground placeholder:text-muted-foreground focus:outline-none"
               aria-label="Search destinations, tours, packages"
             />
             {query && (
               <button
                 onClick={() => setQuery("")}
-                className="absolute right-4 top-1/2 -translate-y-1/2 text-stone-400 hover:text-stone-600 dark:hover:text-stone-300"
+                className="absolute right-4 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground"
                 aria-label="Clear search"
               >
                 <X className="w-4 h-4" />
@@ -437,25 +467,25 @@ function HeaderSearchModal({ onClose }: { onClose: () => void }) {
             )}
           </div>
           {results.length > 0 && (
-            <div className="border-t border-stone-100 dark:border-stone-800">
+            <div className="border-t border-border">
               <div className="p-2 space-y-0.5">
                 {results.map((result) => (
                   <Link
                     key={`${result.href}-${result.label}`}
                     href={result.href}
                     onClick={onClose}
-                    className="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm text-stone-700 hover:bg-stone-50 dark:text-stone-300 dark:hover:bg-stone-800 transition-colors"
+                    className="flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm text-foreground/75 hover:bg-muted hover:text-foreground transition-colors"
                   >
-                    <Search className="w-3.5 h-3.5 text-stone-400 shrink-0" />
+                    <Search className="w-3.5 h-3.5 text-muted-foreground shrink-0" />
                     {result.label}
                   </Link>
                 ))}
               </div>
             </div>
           )}
-          <div className="border-t border-stone-100 dark:border-stone-800 px-4 py-3 flex items-center gap-4 text-xs text-stone-400">
-            <span><kbd className="px-1.5 py-0.5 rounded bg-stone-100 dark:bg-stone-800 font-mono">ESC</kbd> to close</span>
-            <span><kbd className="px-1.5 py-0.5 rounded bg-stone-100 dark:bg-stone-800 font-mono">↑↓</kbd> to navigate</span>
+          <div className="border-t border-border px-4 py-3 flex items-center gap-4 text-xs text-muted-foreground">
+            <span><kbd className="px-1.5 py-0.5 rounded bg-muted font-mono">ESC</kbd> to close</span>
+            <span><kbd className="px-1.5 py-0.5 rounded bg-muted font-mono">↑↓</kbd> to navigate</span>
           </div>
         </div>
       </motion.div>

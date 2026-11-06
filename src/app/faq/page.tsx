@@ -47,17 +47,14 @@ export default function FAQPage() {
           className="object-cover"
           sizes="100vw"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black/70" />
-        <div className="relative z-10 text-center px-6 max-w-4xl mx-auto">
+        <div className="absolute inset-0 bg-gradient-to-b from-[#08130E]/65 via-[#08130E]/40 to-[#08130E]/85" />
+        <div className="relative z-10 mx-auto max-w-4xl px-6 text-center">
           <AnimatedSection direction="none">
-            <HelpCircle className="size-12 text-sky-400 mx-auto mb-4" />
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white mb-4">
-              Frequently Asked{" "}
-              <span className="bg-gradient-to-r from-sky-400 to-blue-300 bg-clip-text text-transparent">
-                Questions
-              </span>
+            <HelpCircle className="mx-auto mb-4 size-12 text-[#E4C9A3]" />
+            <h1 className="mb-4 font-display text-4xl font-normal text-white sm:text-5xl lg:text-6xl">
+              Frequently Asked <span className="italic text-[#E4C9A3]">Questions</span>
             </h1>
-            <p className="text-lg text-white/70 max-w-xl mx-auto">
+            <p className="mx-auto max-w-xl text-lg text-white/65">
               Everything you need to know about planning your East African safari and travel experience.
             </p>
           </AnimatedSection>
@@ -75,7 +72,7 @@ export default function FAQPage() {
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
                 placeholder="Search questions..."
-                className="w-full h-12 pl-12 pr-4 rounded-xl border border-input bg-card text-foreground placeholder:text-muted-foreground focus:border-sky-500 focus:ring-3 focus:ring-sky-500/20 outline-none transition-all text-sm"
+                className="h-12 w-full rounded-full border border-input bg-card pl-12 pr-4 text-sm text-foreground outline-none transition-all placeholder:text-muted-foreground focus:border-accent focus:ring-3 focus:ring-accent/20"
                 aria-label="Search frequently asked questions"
               />
             </div>
@@ -90,7 +87,7 @@ export default function FAQPage() {
                   onClick={() => { setActiveCategory(cat); setSearch(""); }}
                   className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${
                     activeCategory === cat && !search
-                      ? "bg-sky-500 text-white shadow-lg shadow-sky-500/25"
+                      ? "bg-primary text-primary-foreground shadow-lg shadow-primary/20"
                       : "bg-muted text-muted-foreground hover:bg-muted/80"
                   }`}
                 >
@@ -104,10 +101,10 @@ export default function FAQPage() {
           <AnimatedSection>
             <h2 className="sr-only">Frequently asked questions</h2>
             {items.length > 0 ? (
-              <Accordion className="ring-1 ring-foreground/10 rounded-2xl bg-card p-2">
+              <Accordion className="rounded-2xl bg-card p-2 ring-1 ring-border">
                 {items.map((item) => (
                   <AccordionItem key={item.id} value={`faq-${item.id}`} className="border-b border-border/50 last:border-0">
-                    <AccordionTrigger className="px-4 py-4 text-left text-foreground hover:no-underline hover:text-sky-600">
+                    <AccordionTrigger className="px-4 py-4 text-left text-foreground hover:no-underline hover:text-accent">
                       {item.question}
                     </AccordionTrigger>
                     <AccordionContent className="px-4 pb-4">
@@ -119,7 +116,7 @@ export default function FAQPage() {
                 ))}
               </Accordion>
             ) : (
-              <div className="text-center py-16 rounded-2xl bg-card ring-1 ring-foreground/10">
+              <div className="rounded-2xl bg-card py-16 text-center ring-1 ring-border">
                 <HelpCircle className="size-10 text-muted-foreground/30 mx-auto mb-3" />
                 <p className="text-muted-foreground">
                   No questions found. Try a different search term or category.
@@ -130,17 +127,17 @@ export default function FAQPage() {
 
           {/* Contact CTA */}
           <AnimatedSection>
-            <div className="mt-16 text-center p-10 rounded-2xl bg-gradient-to-br from-sky-50 to-blue-50 dark:from-sky-950/30 dark:to-blue-950/30 ring-1 ring-sky-100 dark:ring-sky-900/50">
-              <h2 className="text-2xl font-bold text-foreground mb-3">
+            <div className="mt-16 rounded-2xl bg-secondary/50 p-10 text-center ring-1 ring-border">
+              <h2 className="mb-3 font-display text-2xl font-normal text-foreground">
                 Still Have Questions?
               </h2>
-              <p className="text-muted-foreground mb-6 max-w-md mx-auto">
+              <p className="mx-auto mb-6 max-w-md text-muted-foreground">
                 Our travel experts are ready to help. Get in touch and we&apos;ll answer
                 any questions about your safari.
               </p>
               <a
                 href="/contact"
-                className="inline-flex items-center justify-center gap-2 h-11 px-6 rounded-lg bg-sky-500 hover:bg-sky-600 text-white text-sm font-medium transition-colors"
+                className="inline-flex h-11 items-center justify-center gap-2 rounded-full bg-primary px-6 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90"
               >
                 Contact Us
               </a>

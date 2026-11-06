@@ -55,20 +55,18 @@ export default function KenyaToursPage() {
           className="object-cover"
           sizes="100vw"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black/70" />
-        <div className="absolute inset-0 bg-gradient-to-r from-sky-900/30 to-orange-900/20" />
-        <div className="relative z-10 text-center px-6 max-w-4xl mx-auto">
+        <div className="absolute inset-0 bg-gradient-to-b from-[#08130E]/65 via-[#08130E]/40 to-[#08130E]/80" />
+        <div className="absolute inset-0 bg-gradient-to-r from-[#08130E]/50 via-transparent to-[#08130E]/50" />
+        <div className="relative z-10 mx-auto max-w-4xl px-6 text-center">
           <AnimatedSection direction="none">
-            <span className="inline-block px-4 py-1.5 rounded-full bg-sky-500/20 border border-sky-400/30 text-sky-300 text-sm font-medium mb-6 backdrop-blur-sm">
+            <span className="mb-6 inline-block text-xs font-semibold uppercase tracking-[0.24em] text-[#E4C9A3]">
               Expertly Curated Safari Experiences
             </span>
-            <h1 className="text-4xl sm:text-5xl lg:text-7xl font-bold text-white mb-6 leading-tight">
+            <h1 className="mb-6 font-display text-4xl font-normal leading-tight text-white sm:text-5xl lg:text-7xl">
               Explore{" "}
-              <span className="bg-gradient-to-r from-sky-400 to-blue-300 bg-clip-text text-transparent">
-                Kenya
-              </span>
+              <span className="italic text-[#E4C9A3]">Kenya</span>
             </h1>
-            <p className="text-lg sm:text-xl text-sky-100/80 max-w-2xl mx-auto leading-relaxed">
+            <p className="mx-auto max-w-2xl text-lg leading-relaxed text-white/65 sm:text-xl">
               From the rolling savannahs of the Masai Mara to the elephant herds beneath
               Kilimanjaro — discover why Kenya is Africa&apos;s most celebrated safari
               destination.
@@ -81,9 +79,8 @@ export default function KenyaToursPage() {
       <section className="py-20 px-6">
         <div className="max-w-4xl mx-auto text-center">
           <AnimatedSection>
-            <h2 className="text-3xl sm:text-4xl font-bold text-foreground mb-6">
-              Kenya: The{" "}
-              <span className="text-sky-500">Heart of Safari</span>
+            <h2 className="mb-6 font-display text-3xl font-normal text-foreground sm:text-4xl">
+              Kenya: The <span className="italic text-accent">Heart of Safari</span>
             </h2>
             <p className="text-lg text-muted-foreground leading-relaxed">
               Kenya offers an unparalleled safari experience, from the world-famous Great Migration
@@ -101,7 +98,7 @@ export default function KenyaToursPage() {
         <div className="max-w-7xl mx-auto">
           <AnimatedSection>
             <div className="text-center mb-16">
-              <h2 className="text-3xl sm:text-4xl font-bold text-foreground mb-4">
+              <h2 className="mb-4 font-display text-3xl font-normal text-foreground sm:text-4xl">
                 Kenya&apos;s Premier Destinations
               </h2>
               <p className="text-muted-foreground max-w-2xl mx-auto">
@@ -141,7 +138,7 @@ export default function KenyaToursPage() {
 
                   {/* Content */}
                   <div className="w-full lg:w-1/2 space-y-6">
-                    <h3 className="text-2xl sm:text-3xl font-bold text-foreground">
+                    <h3 className="font-display text-2xl font-normal text-foreground sm:text-3xl">
                       {dest.name}
                     </h3>
                     <p className="text-muted-foreground leading-relaxed">
@@ -149,10 +146,10 @@ export default function KenyaToursPage() {
                     </p>
 
                     {/* Best Time */}
-                    <div className="flex items-start gap-3 p-4 rounded-xl bg-sky-50 dark:bg-sky-950/30 border border-sky-100 dark:border-sky-900/50">
-                      <Calendar className="size-5 text-sky-500 mt-0.5 shrink-0" />
+                    <div className="flex items-start gap-3 rounded-xl border border-border bg-secondary/50 p-4">
+                      <Calendar className="mt-0.5 size-5 shrink-0 text-accent" />
                       <div>
-                        <p className="text-xs font-semibold uppercase tracking-wider text-sky-600 dark:text-sky-400">
+                        <p className="text-xs font-semibold uppercase tracking-wider text-accent">
                           Best Time to Visit
                         </p>
                         <p className="text-sm text-foreground mt-0.5">{dest.bestTime}</p>
@@ -167,7 +164,7 @@ export default function KenyaToursPage() {
                       <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                         {dest.highlights.map((h) => (
                           <li key={h} className="flex items-start gap-2 text-sm text-muted-foreground">
-                            <Star className="size-3.5 text-amber-500 mt-1 shrink-0" />
+                            <Star className="mt-1 size-3.5 shrink-0 text-accent" />
                             {h}
                           </li>
                         ))}
@@ -182,7 +179,7 @@ export default function KenyaToursPage() {
                       <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                         {dest.activities.map((a) => (
                           <li key={a} className="flex items-start gap-2 text-sm text-muted-foreground">
-                            <Compass className="size-3.5 text-orange-500 mt-1 shrink-0" />
+                            <Compass className="mt-1 size-3.5 shrink-0 text-accent" />
                             {a}
                           </li>
                         ))}
@@ -218,22 +215,22 @@ export default function KenyaToursPage() {
       </section>
 
       {/* Trip Planner CTA */}
-      <section className="py-20 px-6 bg-gradient-to-br from-sky-900 via-blue-900 to-slate-900 relative overflow-hidden">
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_right,rgba(251,146,60,0.12),transparent_60%)]" />
-        <div className="max-w-4xl mx-auto text-center relative z-10">
+      <section className="relative overflow-hidden bg-[#08130E] px-6 py-20">
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_right,rgba(184,100,58,0.18),transparent_60%)]" />
+        <div className="relative z-10 mx-auto max-w-4xl text-center">
           <AnimatedSection>
-            <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">
+            <h2 className="mb-4 font-display text-3xl font-normal text-white sm:text-4xl">
               Plan Your Kenya Adventure
             </h2>
-            <p className="text-sky-200/80 text-lg max-w-2xl mx-auto mb-8">
+            <p className="mx-auto mb-8 max-w-2xl text-lg text-white/60">
               Let our expert consultants craft a bespoke Kenya safari tailored to your interests,
               budget, and travel dates. Every itinerary is unique.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <div className="flex flex-col justify-center gap-4 sm:flex-row">
               <KenyaTourInteractive tourName="Custom Kenya Safari" isCTA />
               <a
                 href="/contact"
-                className="inline-flex items-center justify-center gap-2 h-11 px-6 rounded-lg border border-white/20 text-white hover:bg-white/10 transition-colors text-sm font-medium"
+                className="inline-flex h-11 items-center justify-center gap-2 rounded-full border border-white/20 px-6 text-sm font-medium text-white transition-colors hover:bg-white/10"
               >
                 Contact Us
               </a>

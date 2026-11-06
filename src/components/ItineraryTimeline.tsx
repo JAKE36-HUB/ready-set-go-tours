@@ -25,13 +25,13 @@ export function ItineraryTimeline({ itinerary }: { itinerary: ItineraryDay[] }) 
         <div className="space-y-6">
           {days.map((d, i) => (
             <div key={i} className="relative pl-12">
-              <div className="absolute left-0 top-1.5 w-[27px] h-[27px] rounded-full bg-primary/10 dark:bg-amber-400/10 ring-1 ring-primary/30 dark:ring-amber-400/30 flex items-center justify-center">
-                <span className="w-2 h-2 rounded-full bg-primary dark:bg-amber-400" />
+              <div className="absolute left-0 top-1.5 w-[27px] h-[27px] rounded-full bg-primary/10 ring-1 ring-primary/30 flex items-center justify-center">
+                <span className="h-2 w-2 rounded-full bg-primary" />
               </div>
 
               <div className="rounded-2xl bg-card ring-1 ring-foreground/10 p-5 sm:p-6">
                 <div className="flex flex-wrap items-center gap-2 mb-2">
-                  <span className="inline-flex items-center rounded-full bg-primary/10 dark:bg-amber-400/10 text-primary dark:text-amber-400 px-3 py-1 text-xs font-semibold">
+                  <span className="inline-flex items-center rounded-full bg-primary/10 text-primary px-3 py-1 text-xs font-semibold">
                     {d.day || `Day ${i + 1}`}
                   </span>
                   {d.title && (
@@ -51,13 +51,13 @@ export function ItineraryTimeline({ itinerary }: { itinerary: ItineraryDay[] }) 
                   <div className="flex flex-wrap gap-2 mt-4">
                     {d.meals && (
                       <span className="inline-flex items-center gap-1.5 text-xs bg-card ring-1 ring-foreground/10 text-foreground px-3 py-1.5 rounded-full">
-                        <Utensils className="size-3.5 text-primary dark:text-amber-400" />
+                        <Utensils className="size-3.5 text-primary" />
                         {d.meals}
                       </span>
                     )}
                     {d.accommodation && (
                       <span className="inline-flex items-center gap-1.5 text-xs bg-card ring-1 ring-foreground/10 text-foreground px-3 py-1.5 rounded-full">
-                        <Hotel className="size-3.5 text-primary dark:text-amber-400" />
+                        <Hotel className="size-3.5 text-primary" />
                         {d.accommodation}
                       </span>
                     )}
@@ -69,7 +69,7 @@ export function ItineraryTimeline({ itinerary }: { itinerary: ItineraryDay[] }) 
                     <div className="flex flex-wrap gap-2">
                       {d.activities.map((a) => (
                         <span key={a} className="inline-flex items-center gap-1.5 text-xs bg-card ring-1 ring-foreground/10 text-muted-foreground px-3 py-1.5 rounded-full">
-                          <Compass className="size-3.5 text-primary dark:text-amber-400" />
+                          <Compass className="size-3.5 text-primary" />
                           {a}
                         </span>
                       ))}
@@ -81,7 +81,7 @@ export function ItineraryTimeline({ itinerary }: { itinerary: ItineraryDay[] }) 
                   <div className="mt-3">
                     <div className="flex flex-wrap gap-1.5">
                       {d.highlights.map((h) => (
-                        <span key={h} className="inline-flex items-center gap-1 text-[11px] text-primary dark:text-amber-400/90">
+                        <span key={h} className="inline-flex items-center gap-1 text-[11px] text-primary/90">
                           <Sparkles className="size-3" />
                           {h}
                         </span>
@@ -108,7 +108,7 @@ export function OptionalActivitiesCard({
     <AnimatedSection>
       <div className="rounded-2xl bg-card ring-1 ring-foreground/10 p-6">
         <h3 className="font-semibold text-foreground mb-4 flex items-center gap-2">
-          <Compass className="size-5 text-primary dark:text-amber-400" />
+          <Compass className="size-5 text-primary" />
           Optional Activities
         </h3>
         <ul className="space-y-3">
@@ -143,7 +143,7 @@ export function PackageNotesCard({ notes }: { notes: string }) {
     <AnimatedSection>
       <div className="rounded-2xl bg-card ring-1 ring-foreground/10 p-6">
         <h3 className="font-semibold text-foreground mb-4 flex items-center gap-2">
-          <Sparkles className="size-5 text-primary dark:text-amber-400" />
+          <Sparkles className="size-5 text-primary" />
           Important Travel Information
         </h3>
         <div className="space-y-4">

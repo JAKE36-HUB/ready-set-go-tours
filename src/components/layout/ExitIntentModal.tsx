@@ -98,73 +98,88 @@ export function ExitIntentModal() {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 40, scale: 0.96 }}
             transition={{ type: "spring", damping: 26, stiffness: 320 }}
-            className="relative w-full max-w-md rounded-3xl bg-gradient-to-br from-slate-900 via-slate-800 to-emerald-950 p-8 ring-1 ring-white/10 shadow-2xl"
+            className="relative w-full max-w-md overflow-hidden rounded-3xl bg-[#08130E] p-8 ring-1 ring-white/10 shadow-2xl"
           >
+            <span className="pointer-events-none absolute -top-20 -right-16 h-56 w-56 rounded-full bg-accent/20 blur-3xl" />
+            <span className="pointer-events-none absolute -bottom-24 -left-16 h-48 w-48 rounded-full bg-[#E4C9A3]/10 blur-3xl" />
+
             <button
               type="button"
               onClick={() => setOpen(false)}
-              className="absolute top-4 right-4 text-white/40 hover:text-white transition-colors"
+              className="absolute top-4 right-4 z-10 text-white/40 transition-colors hover:text-white"
               aria-label="Close"
             >
               <X className="w-5 h-5" />
             </button>
 
             {done ? (
-              <div className="text-center py-4">
-                <div className="w-16 h-16 rounded-full bg-emerald-500/20 flex items-center justify-center mx-auto mb-5">
-                  <CheckCircle2 className="w-8 h-8 text-emerald-400" />
+              <div className="relative py-4 text-center">
+                <div className="mx-auto mb-5 flex h-16 w-16 items-center justify-center rounded-full bg-[#E4C9A3]/15 ring-1 ring-[#E4C9A3]/30">
+                  <CheckCircle2 className="h-8 w-8 text-[#E4C9A3]" />
                 </div>
-                <h3 className="text-xl font-bold text-white mb-2">See You Inside!</h3>
+                <h3 className="mb-2 font-display text-2xl font-normal text-white">See You Inside!</h3>
                 <p className="text-sm text-white/60">
-                  Your free safari guide is on its way to <span className="text-emerald-400 font-medium">{email}</span>.
+                  Your free safari guide is on its way to{" "}
+                  <span className="font-medium text-[#E4C9A3]">{email}</span>.
                 </p>
               </div>
             ) : (
-              <>
-                <div className="w-12 h-12 rounded-2xl bg-emerald-500/20 flex items-center justify-center mb-5">
-                  <Gift className="w-6 h-6 text-emerald-400" />
+              <div className="relative">
+                <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-2xl bg-accent/20 ring-1 ring-accent/30">
+                  <Gift className="h-6 w-6 text-[#E4C9A3]" />
                 </div>
-                <h3 className="text-2xl font-bold text-white mb-2">Wait — Grab Our Free Safari Guide First!</h3>
-                <p className="text-sm text-white/60 mb-6">
+                <h3 className="mb-2 font-display text-2xl font-normal leading-tight text-white">
+                  Wait — Grab Our Free Safari Guide First!
+                </h3>
+                <p className="mb-6 text-sm leading-relaxed text-white/60">
                   Before you go, download our insider guide to the best East Africa safaris — packed with routes,
                   prices and packing tips.
                 </p>
 
-                <div className="space-y-3 mb-5">
-                  <input
-                    type="email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    placeholder="Your email address"
-                    className="w-full h-12 px-4 rounded-xl bg-white/5 border border-white/10 text-white placeholder:text-white/30 focus:outline-none focus:border-emerald-400/50 focus:ring-1 focus:ring-emerald-400/30 text-sm"
-                  />
+                <div className="mb-5 space-y-3">
+                  <div className="relative">
+                    <Mail className="pointer-events-none absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-white/35" />
+                    <input
+                      type="email"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      placeholder="Your email address"
+                      className="h-12 w-full rounded-xl border border-white/10 bg-white/5 pl-11 pr-4 text-sm text-white placeholder:text-white/30 focus:border-[#E4C9A3]/50 focus:outline-none focus:ring-1 focus:ring-[#E4C9A3]/30"
+                    />
+                  </div>
                   <input
                     type="text"
                     value={name}
                     onChange={(e) => setName(e.target.value)}
                     placeholder="Your name (optional)"
-                    className="w-full h-12 px-4 rounded-xl bg-white/5 border border-white/10 text-white placeholder:text-white/30 focus:outline-none focus:border-emerald-400/50 focus:ring-1 focus:ring-emerald-400/30 text-sm"
+                    className="h-12 w-full rounded-xl border border-white/10 bg-white/5 px-4 text-sm text-white placeholder:text-white/30 focus:border-[#E4C9A3]/50 focus:outline-none focus:ring-1 focus:ring-[#E4C9A3]/30"
                   />
                 </div>
 
                 {error && (
-                  <p className="text-sm text-red-400 bg-red-500/10 rounded-lg px-4 py-2.5 mb-4 ring-1 ring-red-500/20">{error}</p>
+                  <p className="mb-4 rounded-lg bg-destructive/15 px-4 py-2.5 text-sm text-[#FCA5A5] ring-1 ring-destructive/30">
+                    {error}
+                  </p>
                 )}
 
                 <button
                   type="button"
                   onClick={handleSubmit}
                   disabled={submitting || !email.includes("@")}
-                  className="inline-flex items-center justify-center gap-2 w-full h-12 rounded-xl bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-400 hover:to-teal-500 text-white text-sm font-semibold shadow-lg shadow-emerald-500/25 transition-all disabled:opacity-50"
+                  className="inline-flex h-12 w-full items-center justify-center gap-2 rounded-full bg-[#E4C9A3] text-sm font-semibold text-[#1F4A38] shadow-lg shadow-black/25 transition-all hover:bg-[#F0DDC0] disabled:opacity-50"
                 >
-                  {submitting ? <Loader2 className="w-4 h-4 animate-spin" /> : <Send className="w-4 h-4" />}
+                  {submitting ? <Loader2 className="h-4 w-4 animate-spin" /> : <Send className="h-4 w-4" />}
                   {submitting ? "Sending..." : "Send Me the Free Guide"}
                 </button>
 
-                <button type="button" onClick={() => setOpen(false)} className="w-full text-center text-xs text-white/40 hover:text-white/70 mt-4 transition-colors">
+                <button
+                  type="button"
+                  onClick={() => setOpen(false)}
+                  className="mt-4 w-full text-center text-xs text-white/40 transition-colors hover:text-white/70"
+                >
                   No thanks, I&apos;ll keep planning
                 </button>
-              </>
+              </div>
             )}
           </motion.div>
         </motion.div>

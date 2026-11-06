@@ -30,9 +30,9 @@ export function TrustStrip() {
   const topStats = STATISTICS.slice(0, 4)
 
   return (
-    <section ref={ref} className="relative py-10 sm:py-14 bg-white dark:bg-slate-950 border-b border-slate-100 dark:border-slate-800">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 sm:gap-6">
+    <section ref={ref} className="relative border-b border-border bg-background py-10 sm:py-14">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="grid grid-cols-2 gap-4 sm:grid-cols-4 sm:gap-6">
           {topStats.map((stat, idx) => (
             <motion.div
               key={stat.label}
@@ -41,10 +41,10 @@ export function TrustStrip() {
               transition={{ duration: 0.4, delay: idx * 0.08 }}
               className="text-center"
             >
-              <div className="text-2xl sm:text-3xl font-bold text-amber-500 tabular-nums whitespace-nowrap">
+              <div className="whitespace-nowrap font-display text-2xl font-normal tabular-nums text-primary sm:text-3xl">
                 <Counter value={stat.value} isInView={isInView} />
               </div>
-              <div className="text-[11px] sm:text-xs text-slate-400 dark:text-slate-500 mt-0.5 font-medium">{stat.label}</div>
+              <div className="mt-0.5 text-[11px] font-medium text-muted-foreground sm:text-xs">{stat.label}</div>
             </motion.div>
           ))}
         </div>
@@ -52,14 +52,14 @@ export function TrustStrip() {
           initial={{ opacity: 0 }}
           animate={isInView ? { opacity: 1 } : {}}
           transition={{ duration: 0.4, delay: 0.4 }}
-          className="mt-5 pt-5 border-t border-slate-100 dark:border-slate-800/60"
+          className="mt-5 border-t border-border pt-5"
         >
           <div className="flex flex-wrap justify-center gap-x-6 sm:gap-x-8 gap-y-1.5">
             {TRUST_ITEMS.slice(0, 5).map((item, idx) => {
               const IconComponent = iconMap[item.icon]
               return (
-                <div key={idx} className="flex items-center gap-1.5 text-[11px] sm:text-xs text-slate-400 dark:text-slate-500">
-                  {IconComponent && <IconComponent className="w-3.5 h-3.5 text-emerald-500 shrink-0" />}
+                <div key={idx} className="flex items-center gap-1.5 text-[11px] text-muted-foreground sm:text-xs">
+                  {IconComponent && <IconComponent className="h-3.5 w-3.5 shrink-0 text-accent" />}
                   <span>{item.label}</span>
                 </div>
               )

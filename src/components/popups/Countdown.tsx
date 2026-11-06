@@ -48,14 +48,14 @@ export function Countdown({ endTime, compact }: Props) {
       {units.map((u, i) => (
         <div key={u.l + i} className="flex items-center gap-1.5">
           <div
-            className={`flex flex-col items-center justify-center rounded-lg bg-slate-900/70 backdrop-blur-sm
+            className={`flex flex-col items-center justify-center rounded-lg bg-white/10 backdrop-blur-sm
               ${compact ? "px-1.5 py-0.5 min-w-[1.75rem]" : "px-2.5 py-1.5 min-w-[3rem]"}
               border border-white/10`}
           >
             <span className={`font-bold tabular-nums text-white ${compact ? "text-sm" : "text-xl"}`}>{u.v}</span>
-            {!compact && <span className="text-[10px] uppercase tracking-wide text-slate-400">{u.l}</span>}
+            {!compact && <span className="text-[10px] uppercase tracking-wide text-white/50">{u.l}</span>}
           </div>
-          {i < units.length - 1 && <span className="text-slate-500 font-bold">:</span>}
+          {i < units.length - 1 && <span className="text-white/40 font-bold">:</span>}
         </div>
       ))}
     </div>

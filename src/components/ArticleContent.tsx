@@ -28,7 +28,7 @@ function renderInline(text: string): ReactNode[] {
         <Link
           key={`l${key++}`}
           href={match[2]}
-          className="text-sky-600 dark:text-sky-400 font-medium underline underline-offset-4 decoration-sky-500/40 hover:decoration-sky-500 transition-colors"
+          className="text-accent font-medium underline underline-offset-4 decoration-accent/40 hover:decoration-accent transition-colors"
         >
           {match[1]}
         </Link>,
@@ -48,8 +48,8 @@ function renderInline(text: string): ReactNode[] {
 
 function CtaSection() {
   return (
-    <section className="mt-14 rounded-3xl bg-gradient-to-br from-stone-900 via-stone-950 to-amber-950/60 p-7 sm:p-10 text-white ring-1 ring-white/10 shadow-xl">
-      <p className="text-xs font-semibold uppercase tracking-[0.2em] text-amber-400 mb-3">
+    <section className="mt-14 rounded-3xl bg-[#08130E] p-7 sm:p-10 text-white ring-1 ring-white/10 shadow-xl">
+      <p className="text-xs font-semibold uppercase tracking-[0.2em] text-accent mb-3">
         Ready Set Go Safaris
       </p>
       <p className="text-base sm:text-lg text-white/75 leading-relaxed mb-6">
@@ -65,7 +65,7 @@ function CtaSection() {
       <div className="flex flex-wrap gap-3">
         <Link
           href="/contact"
-          className="inline-flex items-center gap-2 h-12 px-6 rounded-xl bg-gradient-to-r from-amber-600 to-amber-500 hover:from-amber-500 hover:to-amber-400 text-white text-sm font-semibold shadow-lg shadow-amber-900/30 transition-all"
+          className="inline-flex items-center gap-2 h-12 px-6 rounded-full bg-[#E4C9A3] hover:bg-[#F0DDC0] text-[#1F4A38] text-sm font-semibold shadow-lg shadow-black/20 transition-all"
         >
           <Send className="size-4" />
           Request a Quote
@@ -76,14 +76,14 @@ function CtaSection() {
           )}
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-flex items-center gap-2 h-12 px-6 rounded-xl bg-[#25D366] hover:bg-[#1fb857] text-white text-sm font-semibold transition-all"
+          className="inline-flex items-center gap-2 h-12 px-6 rounded-full bg-[#25D366] hover:bg-[#1fb857] text-white text-sm font-semibold transition-all"
         >
           <MessageCircle className="size-4" />
           WhatsApp Us
         </a>
         <Link
           href="/holiday-packages"
-          className="inline-flex items-center gap-2 h-12 px-6 rounded-xl bg-white/10 hover:bg-white/20 text-white text-sm font-medium ring-1 ring-white/20 transition-all"
+          className="inline-flex items-center gap-2 h-12 px-6 rounded-full bg-white/10 hover:bg-white/20 text-white text-sm font-medium ring-1 ring-white/20 transition-all"
         >
           <Compass className="size-4" />
           Explore Kenya Safari Packages
@@ -91,11 +91,11 @@ function CtaSection() {
       </div>
       <p className="text-xs text-white/45 mt-6">
         Prefer to call?{" "}
-        <a href={`tel:${COMPANY.phone}`} className="text-amber-300 hover:underline">
+        <a href={`tel:${COMPANY.phone}`} className="text-[#E4C9A3] hover:underline">
           {COMPANY.phone}
         </a>{" "}
         · {COMPANY.hours} ·{" "}
-        <a href={PLAN_SAFARI_ROUTE} className="text-amber-300 hover:underline">
+        <a href={PLAN_SAFARI_ROUTE} className="text-[#E4C9A3] hover:underline">
           Start your safari plan online
         </a>
       </p>
@@ -129,7 +129,7 @@ export function ArticleContent({
               <li key={item.id}>
                 <a
                   href={`#${item.id}`}
-                  className="flex items-start gap-1.5 text-sm text-muted-foreground hover:text-sky-600 dark:hover:text-sky-400 transition-colors"
+                  className="flex items-start gap-1.5 text-sm text-muted-foreground hover:text-accent transition-colors"
                 >
                   <ArrowRight className="size-3.5 mt-0.5 shrink-0 opacity-60" />
                   <span>{item.text}</span>
@@ -181,7 +181,7 @@ export function ArticleContent({
                   <li key={j} className="flex gap-3 text-[15px] sm:text-base">
                     <span
                       aria-hidden
-                      className="mt-2 size-1.5 shrink-0 rounded-full bg-amber-500"
+                      className="mt-2 size-1.5 shrink-0 rounded-full bg-accent"
                     />
                     <span className="text-muted-foreground leading-relaxed">
                       {renderInline(item)}

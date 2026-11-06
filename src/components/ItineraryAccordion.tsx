@@ -40,7 +40,7 @@ export default function ItineraryAccordion({
                 aria-expanded={isOpen}
                 className="w-full flex items-center gap-3 p-4 sm:p-5 text-left hover:bg-foreground/[0.02] transition-colors"
               >
-                <span className="inline-flex items-center rounded-full bg-primary/10 dark:bg-amber-400/10 text-primary dark:text-amber-400 px-3 py-1 text-xs font-semibold shrink-0">
+                <span className="inline-flex items-center rounded-full bg-primary/10 text-primary px-3 py-1 text-xs font-semibold shrink-0">
                   {d.day || `Day ${i + 1}`}
                 </span>
                 <span className="font-display text-base sm:text-lg font-medium text-foreground leading-snug flex-1">
@@ -72,13 +72,13 @@ export default function ItineraryAccordion({
                       <div className="flex flex-wrap gap-2 mt-4">
                         {d.meals && (
                           <span className="inline-flex items-center gap-1.5 text-xs bg-card ring-1 ring-foreground/10 text-foreground px-3 py-1.5 rounded-full">
-                            <Utensils className="size-3.5 text-primary dark:text-amber-400" />
+                            <Utensils className="size-3.5 text-primary" />
                             {d.meals}
                           </span>
                         )}
                         {d.accommodation && (
                           <span className="inline-flex items-center gap-1.5 text-xs bg-card ring-1 ring-foreground/10 text-foreground px-3 py-1.5 rounded-full">
-                            <Hotel className="size-3.5 text-primary dark:text-amber-400" />
+                            <Hotel className="size-3.5 text-primary" />
                             {d.accommodation}
                           </span>
                         )}
@@ -93,7 +93,7 @@ export default function ItineraryAccordion({
                               key={a}
                               className="inline-flex items-center gap-1.5 text-xs bg-card ring-1 ring-foreground/10 text-muted-foreground px-3 py-1.5 rounded-full"
                             >
-                              <Compass className="size-3.5 text-primary dark:text-amber-400" />
+                              <Compass className="size-3.5 text-primary" />
                               {a}
                             </span>
                           ))}
@@ -107,7 +107,7 @@ export default function ItineraryAccordion({
                           {d.highlights.map((h) => (
                             <span
                               key={h}
-                              className="inline-flex items-center gap-1 text-[11px] text-primary dark:text-amber-400/90"
+                              className="inline-flex items-center gap-1 text-[11px] text-primary/90"
                             >
                               <Sparkles className="size-3" />
                               {h}

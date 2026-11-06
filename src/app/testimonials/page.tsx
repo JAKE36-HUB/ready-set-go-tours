@@ -20,7 +20,7 @@ function StarRating({ rating }: { rating: number }) {
       {Array.from({ length: 5 }, (_, i) => (
         <Star
           key={i}
-          className={`size-4 ${i < rating ? "text-amber-400 fill-amber-400" : "text-gray-300"}`}
+          className={`size-4 ${i < rating ? "fill-accent text-accent" : "text-muted-foreground/30"}`}
         />
       ))}
     </div>
@@ -62,16 +62,13 @@ export default function TestimonialsPage() {
           className="object-cover"
           sizes="100vw"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black/70" />
-        <div className="relative z-10 text-center px-6 max-w-4xl mx-auto">
+        <div className="absolute inset-0 bg-gradient-to-b from-[#08130E]/65 via-[#08130E]/40 to-[#08130E]/85" />
+        <div className="relative z-10 mx-auto max-w-4xl px-6 text-center">
           <AnimatedSection direction="none">
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white mb-4">
-              Traveler{" "}
-              <span className="bg-gradient-to-r from-amber-400 to-yellow-300 bg-clip-text text-transparent">
-                Reviews
-              </span>
+            <h1 className="mb-4 font-display text-4xl font-normal text-white sm:text-5xl lg:text-6xl">
+              Traveler <span className="italic text-[#E4C9A3]">Reviews</span>
             </h1>
-            <p className="text-lg text-white/70 max-w-xl mx-auto">
+            <p className="mx-auto max-w-xl text-lg text-white/65">
               Don&apos;t just take our word for it. Hear from the travelers who&apos;ve
               experienced the magic of East Africa with us.
             </p>
@@ -84,13 +81,13 @@ export default function TestimonialsPage() {
         <div className="max-w-4xl mx-auto">
           <AnimatedSection>
             <div className="relative">
-              <div className="overflow-hidden rounded-2xl bg-card ring-1 ring-foreground/10 p-8 sm:p-12 min-h-[280px] flex flex-col justify-center">
-                <Quote className="size-10 text-sky-500/20 mb-4" />
-                <p className="text-lg sm:text-xl text-foreground leading-relaxed mb-6 italic">
+              <div className="relative flex min-h-[280px] flex-col justify-center rounded-3xl bg-card p-8 ring-1 ring-border sm:p-12">
+                <Quote className="mb-4 size-10 text-accent/25" />
+                <p className="mb-6 font-display text-lg italic leading-relaxed text-foreground sm:text-xl">
                   &ldquo;{featured[currentSlide]?.text}&rdquo;
                 </p>
                 <div className="flex items-center gap-4">
-                  <div className="relative w-12 h-12 rounded-full overflow-hidden ring-2 ring-sky-500/20">
+                  <div className="relative size-12 overflow-hidden rounded-full ring-2 ring-accent/25">
                     <Image
                       src={featured[currentSlide]?.image || ""}
                       alt={featured[currentSlide]?.name || ""}
@@ -120,7 +117,7 @@ export default function TestimonialsPage() {
                       key={i}
                       onClick={() => { setCurrentSlide(i); resetAutoplay(); }}
                       className={`w-2.5 h-2.5 rounded-full transition-all ${
-                        i === currentSlide ? "bg-sky-500 w-8" : "bg-muted hover:bg-muted/80"
+                        i === currentSlide ? "w-8 bg-accent" : "bg-muted hover:bg-muted/80"
                       }`}
                       aria-label={`Go to testimonial ${i + 1}`}
                     />
@@ -152,7 +149,7 @@ export default function TestimonialsPage() {
       <section className="pb-20 px-6">
         <div className="max-w-7xl mx-auto">
           <AnimatedSection>
-            <h2 className="text-3xl sm:text-4xl font-bold text-foreground text-center mb-12">
+            <h2 className="mb-12 text-center font-display text-3xl font-normal text-foreground sm:text-4xl">
               All Reviews
             </h2>
           </AnimatedSection>
@@ -160,7 +157,7 @@ export default function TestimonialsPage() {
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {TESTIMONIALS.map((t, i) => (
               <AnimatedSection key={t.id} delay={i * 0.04}>
-                <div className="flex flex-col h-full p-6 rounded-2xl bg-card ring-1 ring-foreground/10 hover:shadow-lg transition-shadow">
+                <div className="flex h-full flex-col rounded-2xl bg-card p-6 ring-1 ring-border transition-shadow hover:shadow-lg">
                   <div className="flex items-center gap-3 mb-4">
                     <div className="relative w-11 h-11 rounded-full overflow-hidden">
                       <Image
@@ -195,13 +192,13 @@ export default function TestimonialsPage() {
       </section>
 
       {/* Video Testimonials */}
-      <section className="py-20 px-6 bg-muted/30">
-        <div className="max-w-5xl mx-auto">
+      <section className="bg-muted/30 px-6 py-20">
+        <div className="mx-auto max-w-5xl">
           <AnimatedSection>
-            <h2 className="text-3xl sm:text-4xl font-bold text-foreground text-center mb-4">
+            <h2 className="mb-4 text-center font-display text-3xl font-normal text-foreground sm:text-4xl">
               Video Stories
             </h2>
-            <p className="text-muted-foreground text-center mb-12 max-w-xl mx-auto">
+            <p className="mx-auto mb-12 max-w-xl text-center text-muted-foreground">
               Watch our travelers share their incredible East African experiences.
             </p>
           </AnimatedSection>
@@ -209,7 +206,7 @@ export default function TestimonialsPage() {
           <div className="grid sm:grid-cols-3 gap-6">
             {VIDEO_TESTIMONIALS.map((v, i) => (
               <AnimatedSection key={v.id} delay={i * 0.1}>
-                <div className="group relative aspect-video rounded-2xl overflow-hidden cursor-pointer ring-1 ring-foreground/10">
+                <div className="group relative aspect-video cursor-pointer overflow-hidden rounded-2xl ring-1 ring-border">
                   <Image
                     src={v.thumbnail}
                     alt={v.name}
@@ -242,7 +239,7 @@ export default function TestimonialsPage() {
       <section className="py-16 px-6">
         <div className="max-w-4xl mx-auto">
           <AnimatedSection>
-            <div className="text-center p-10 rounded-2xl bg-card ring-1 ring-foreground/10">
+            <div className="rounded-2xl bg-card p-10 text-center ring-1 ring-border">
               <div className="flex items-center justify-center gap-2 mb-4">
                 <svg className="size-8" viewBox="0 0 24 24">
                   <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 01-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z" fill="#4285F4"/>
@@ -257,7 +254,7 @@ export default function TestimonialsPage() {
               </div>
               <p className="text-3xl font-bold text-foreground mb-1">4.9 / 5.0</p>
               <p className="text-muted-foreground text-sm mb-6">Based on 850+ Google Reviews</p>
-              <Button variant="outline" className="border-sky-200 text-sky-600 hover:bg-sky-50">
+              <Button variant="outline" className="rounded-full border-accent/30 text-accent hover:bg-accent/5">
                 View on Google
               </Button>
             </div>
@@ -266,13 +263,13 @@ export default function TestimonialsPage() {
       </section>
 
       {/* Statistics */}
-      <section className="py-16 px-6 bg-gradient-to-br from-sky-900 via-blue-900 to-slate-900">
-        <div className="max-w-6xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-6">
+      <section className="bg-[#08130E] bg-gradient-to-br from-[#08130E] via-[#0C1511] to-[#08130E] px-6 py-16">
+        <div className="mx-auto grid max-w-6xl grid-cols-2 gap-6 md:grid-cols-4">
           {STATISTICS.slice(0, 4).map((stat, i) => (
             <AnimatedSection key={stat.label} delay={i * 0.05}>
               <div className="text-center">
-                <div className="text-3xl sm:text-4xl font-bold text-white mb-1">{stat.value}</div>
-                <div className="text-sm text-sky-200/70">{stat.label}</div>
+                <div className="mb-1 font-display text-3xl font-normal text-white sm:text-4xl">{stat.value}</div>
+                <div className="text-sm text-white/55">{stat.label}</div>
               </div>
             </AnimatedSection>
           ))}

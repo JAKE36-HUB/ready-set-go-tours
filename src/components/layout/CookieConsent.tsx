@@ -35,30 +35,30 @@ export function CookieConsent() {
       }`}
     >
       <div className="mx-auto max-w-6xl">
-        <div className="relative rounded-2xl bg-white dark:bg-slate-900 shadow-2xl ring-1 ring-slate-900/10 dark:ring-slate-700/50 p-5 sm:p-6">
+        <div className="relative rounded-2xl bg-card shadow-2xl ring-1 ring-border p-5 sm:p-6">
           <button
             onClick={decline}
-            className="absolute top-3 right-3 text-slate-400 hover:text-slate-600 dark:hover:text-slate-300 transition-colors"
+            className="absolute top-3 right-3 text-muted-foreground hover:text-foreground transition-colors"
             aria-label="Close"
           >
             <X className="w-4 h-4" />
           </button>
 
           <div className="flex flex-col sm:flex-row items-start gap-4 pr-8">
-            <div className="flex items-center justify-center w-10 h-10 rounded-xl bg-sky-50 dark:bg-sky-900/30 text-sky-600 dark:text-sky-400 shrink-0">
+            <div className="flex items-center justify-center w-10 h-10 rounded-xl bg-accent/10 text-accent shrink-0">
               <Cookie className="w-5 h-5" />
             </div>
             <div className="flex-1 min-w-0">
-              <p className="text-sm font-medium text-slate-900 dark:text-white mb-1">
+              <p className="text-sm font-medium text-foreground mb-1">
                 Cookie Notice
               </p>
-              <p className="text-sm text-slate-600 dark:text-slate-400">
+              <p className="text-sm text-muted-foreground">
                 We use cookies to enhance your browsing experience, analyze site traffic, and
                 personalize content. By clicking &ldquo;Accept All&rdquo;, you consent to our use of
                 cookies. See our{" "}
                 <Link
                   href="/privacy-policy"
-                  className="text-sky-600 dark:text-sky-400 hover:underline font-medium"
+                  className="font-medium text-accent hover:underline"
                 >
                   Privacy Policy
                 </Link>{" "}
@@ -75,7 +75,7 @@ export function CookieConsent() {
               </Button>
               <Button
                 onClick={accept}
-                className="text-sm h-9 px-5 bg-gradient-to-r from-sky-500 to-cyan-400 text-white border-0 hover:shadow-lg transition-all"
+                className="text-sm h-9 px-5 bg-primary text-primary-foreground border-0 hover:bg-primary/90 hover:shadow-lg transition-all"
               >
                 Accept All
               </Button>

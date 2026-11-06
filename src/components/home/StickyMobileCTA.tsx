@@ -20,19 +20,19 @@ export function StickyMobileCTA() {
 
   return (
     <div
-      className="fixed bottom-0 left-0 right-0 z-50 bg-background/95 dark:bg-stone-900/95 backdrop-blur-lg border-t border-border p-3 md:hidden transition-transform duration-300 ease-out"
+      className="fixed bottom-0 left-0 right-0 z-50 border-t border-border bg-background/95 p-3 backdrop-blur-lg transition-transform duration-300 ease-out md:hidden"
       style={{ transform: show ? "translateY(0)" : "translateY(100%)" }}
     >
       <div className="flex items-center gap-3 max-w-lg mx-auto">
         <Button
-          className="flex-1 h-11 text-sm font-semibold bg-[#25D366] hover:bg-[#1fb857] text-white border-0"
+          className="h-11 flex-1 border-0 bg-[#25D366] text-sm font-semibold text-white hover:bg-[#1fb857]"
           onClick={() => window.open(whatsappUrl, "_blank", "noopener,noreferrer")}
         >
-          <MessageCircle className="w-4 h-4" />
+          <MessageCircle className="h-4 w-4" />
           WhatsApp
         </Button>
         <Link href={PLAN_SAFARI_ROUTE} className="flex-[2]">
-          <Button className="w-full h-11 text-sm font-semibold gradient-primary text-white border-0 shadow-lg shadow-amber-900/20">
+          <Button className="h-11 w-full bg-primary text-sm font-semibold text-primary-foreground hover:bg-primary/90">
             Plan My Safari
           </Button>
         </Link>

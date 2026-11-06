@@ -14,9 +14,9 @@ export default function KenyaTourInteractive({ tourName, isCTA }: Props) {
     return (
       <Button
         onClick={() => openBookingModal(tourName)}
-        className="bg-gradient-to-r from-sky-500 to-blue-600 hover:from-sky-400 hover:to-blue-500 text-white px-8 h-11 shadow-lg shadow-sky-500/25"
+        className="h-11 bg-accent px-8 text-white shadow-lg shadow-accent/20 hover:bg-accent/90"
       >
-        <Plane className="size-4 mr-2" />
+        <Plane className="mr-2 size-4" />
         Get a Free Quote
       </Button>
     );
@@ -25,9 +25,9 @@ export default function KenyaTourInteractive({ tourName, isCTA }: Props) {
   return (
     <Button
       onClick={() => openBookingModal(tourName)}
-      className="bg-gradient-to-r from-sky-500 to-blue-600 hover:from-sky-400 hover:to-blue-500 text-white px-6"
+      className="bg-accent px-6 text-white hover:bg-accent/90"
     >
-      <Plane className="size-4 mr-2" />
+      <Plane className="mr-2 size-4" />
       Get a Free Quote
     </Button>
   );

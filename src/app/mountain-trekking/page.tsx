@@ -42,20 +42,17 @@ export default function MountainTrekkingPage() {
           className="object-cover"
           sizes="100vw"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-slate-900/50 via-slate-900/30 to-slate-900/70" />
-        <div className="relative z-10 text-center px-6 max-w-4xl mx-auto">
+        <div className="absolute inset-0 bg-gradient-to-b from-[#08130E]/65 via-[#08130E]/40 to-[#08130E]/85" />
+        <div className="relative z-10 mx-auto max-w-4xl px-6 text-center">
           <AnimatedSection direction="none">
-            <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-white text-sm font-medium mb-6">
+            <span className="mb-6 inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-1.5 text-sm font-medium text-white backdrop-blur-md">
               <Mountain className="size-4" />
               Summit Africa
             </span>
-            <h1 className="text-4xl sm:text-5xl lg:text-7xl font-bold text-white mb-6 leading-tight">
-              Mountain{" "}
-              <span className="bg-gradient-to-r from-violet-300 to-slate-200 bg-clip-text text-transparent">
-                Trekking
-              </span>
+            <h1 className="mb-6 font-display text-4xl font-normal leading-tight text-white sm:text-5xl lg:text-7xl">
+              Mountain <span className="italic text-[#E4C9A3]">Trekking</span>
             </h1>
-            <p className="text-lg sm:text-xl text-white/80 max-w-2xl mx-auto leading-relaxed">
+            <p className="mx-auto max-w-2xl text-lg leading-relaxed text-white/65 sm:text-xl">
               Conquer Africa&apos;s highest peaks with expert guides. From Mount Kenya to Kilimanjaro,
               our treks deliver adventure, endurance, and breathtaking summit views.
             </p>
@@ -69,23 +66,20 @@ export default function MountainTrekkingPage() {
           {/* Header & Sort */}
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-12">
             <AnimatedSection>
-              <h2 className="text-3xl sm:text-4xl font-bold text-slate-900 dark:text-white">
-                Our Trekking{" "}
-                <span className="bg-gradient-to-r from-violet-500 to-slate-500 bg-clip-text text-transparent">
-                  Packages
-                </span>
+              <h2 className="font-display text-3xl font-normal text-foreground sm:text-4xl">
+                Our Trekking <span className="italic text-accent">Packages</span>
               </h2>
-              <p className="text-slate-500 dark:text-slate-400 mt-2">
+              <p className="mt-2 text-muted-foreground">
                 {packages.length} mountain trek{packages.length !== 1 ? "s" : ""} available
               </p>
             </AnimatedSection>
             <AnimatedSection>
               <div className="flex items-center gap-2">
-                <ArrowUpDown className="size-4 text-slate-400" />
+                <ArrowUpDown className="size-4 text-muted-foreground" />
                 <select
                   value={sortBy}
                   onChange={(e) => setSortBy(e.target.value)}
-                  className="text-sm bg-transparent border border-slate-200 dark:border-slate-700 rounded-lg px-3 py-1.5 outline-none focus:border-violet-500 text-slate-700 dark:text-slate-300"
+                  className="rounded-full border border-border bg-transparent px-3 py-1.5 text-sm text-foreground outline-none focus:border-accent"
                   aria-label="Sort mountain treks"
                 >
                   {SORT_OPTIONS.map((opt) => (
@@ -101,19 +95,19 @@ export default function MountainTrekkingPage() {
           {/* Card Grid */}
           {packages.length === 0 ? (
             <div className="text-center py-20">
-              <Compass className="size-16 text-slate-300 mx-auto mb-4" />
-              <p className="text-slate-400 text-lg">No mountain trekking packages available yet.</p>
+              <Compass className="mx-auto mb-4 size-16 text-muted-foreground/40" />
+              <p className="text-lg text-muted-foreground">No mountain trekking packages available yet.</p>
             </div>
           ) : (
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
               {packages.map((pkg, idx) => (
                 <AnimatedSection key={pkg.id} delay={idx * 0.1}>
-                  <div className="group relative bg-white dark:bg-slate-800 rounded-3xl overflow-hidden border border-slate-100 dark:border-slate-700 hover:shadow-2xl hover:-translate-y-2 transition-all duration-500">
+                  <div className="group relative overflow-hidden rounded-3xl border border-border bg-card transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl">
                     <div className="relative h-56 overflow-hidden">
                       <Image src={pkg.image} alt={pkg.name} fill className="object-cover transition-transform duration-700 group-hover:scale-110" />
-                      <div className="absolute inset-0 bg-gradient-to-t from-slate-900/60 to-transparent" />
-                      <div className="absolute top-3 left-3">
-                        <Badge className="bg-violet-500 text-white text-xs font-semibold px-3 py-1 border-0">
+                      <div className="absolute inset-0 bg-gradient-to-t from-[#08130E]/70 to-transparent" />
+                      <div className="absolute left-3 top-3">
+                        <Badge className="rounded-full border-0 bg-[#E4C9A3] px-3 py-1 text-xs font-semibold text-[#1F4A38]">
                           Mountain Trek
                         </Badge>
                       </div>
@@ -128,29 +122,29 @@ export default function MountainTrekkingPage() {
                       </div>
                     </div>
                     <div className="p-6">
-                      <h3 className="text-lg font-bold text-slate-900 dark:text-white mb-3 group-hover:text-violet-600 dark:group-hover:text-violet-400 transition-colors">
+                      <h3 className="mb-3 text-lg font-bold text-foreground transition-colors group-hover:text-accent">
                         {pkg.name}
                       </h3>
-                      <div className="grid grid-cols-2 gap-2 mb-4">
-                        <div className="flex items-center gap-2 text-xs text-slate-500 dark:text-slate-400">
-                          <Clock className="w-3.5 h-3.5 text-violet-500 shrink-0" />
+                      <div className="mb-4 grid grid-cols-2 gap-2">
+                        <div className="flex items-center gap-2 text-xs text-muted-foreground">
+                          <Clock className="size-3.5 shrink-0 text-accent" />
                           {pkg.duration}
                         </div>
-                        <div className="flex items-center gap-2 text-xs text-slate-500 dark:text-slate-400">
-                          <Hotel className="w-3.5 h-3.5 text-violet-500 shrink-0" />
+                        <div className="flex items-center gap-2 text-xs text-muted-foreground">
+                          <Hotel className="size-3.5 shrink-0 text-accent" />
                           <span className="truncate">{pkg.accommodation}</span>
                         </div>
                       </div>
-                      <div className="border-t border-slate-100 dark:border-slate-700 pt-4 mb-5">
+                      <div className="mb-5 border-t border-border pt-4">
                         <div className="grid grid-cols-2 gap-x-2 gap-y-1.5">
                           {pkg.activities.slice(0, 4).map((a) => (
-                            <span key={a} className="flex items-center gap-1.5 text-xs text-slate-500 dark:text-slate-400">
-                              <Check className="w-3 h-3 text-emerald-500 shrink-0" />
+                            <span key={a} className="flex items-center gap-1.5 text-xs text-muted-foreground">
+                              <Check className="size-3 shrink-0 text-accent" />
                               {a}
                             </span>
                           ))}
                           {pkg.activities.length > 4 && (
-                            <span className="text-xs text-violet-600 dark:text-violet-400 ml-5">
+                            <span className="ml-5 text-xs text-accent">
                               +{pkg.activities.length - 4} more
                             </span>
                           )}
@@ -159,13 +153,13 @@ export default function MountainTrekkingPage() {
                       <div className="flex items-center gap-3">
                         <Link
                           href={`/holiday-packages/${pkg.slug}`}
-                          className="flex-1 inline-flex items-center justify-center gap-2 h-11 rounded-xl bg-slate-100 dark:bg-slate-700 hover:bg-slate-200 dark:hover:bg-slate-600 text-slate-700 dark:text-slate-200 text-sm font-medium transition-all duration-300"
+                          className="inline-flex h-11 flex-1 items-center justify-center gap-2 rounded-full bg-secondary text-sm font-medium text-foreground transition-all duration-300 hover:bg-secondary/70"
                         >
                           View Safari <ArrowRight className="size-4" />
                         </Link>
                         <Button
                           onClick={() => openBookingModal(pkg.name)}
-                          className="flex-1 h-11 text-sm font-semibold bg-gradient-to-r from-violet-500 to-slate-600 hover:from-violet-600 hover:to-slate-700 text-white border-0 shadow-md hover:shadow-lg transition-all duration-300"
+                          className="h-11 flex-1 border-0 bg-primary text-sm font-semibold text-primary-foreground shadow-md transition-all duration-300 hover:bg-primary/90 hover:shadow-lg"
                         >
                           Get a Free Quote
                         </Button>

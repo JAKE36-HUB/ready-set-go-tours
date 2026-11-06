@@ -15,52 +15,46 @@ export function HoneymoonSection() {
   const honeymoons = HONEYMOON_PACKAGES.slice(0, 3)
 
   return (
-    <section ref={ref} className="relative py-24 sm:py-28 overflow-hidden bg-stone-950 text-white">
-      <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-rose-500/10 rounded-full blur-[160px]" />
-        <div className="absolute bottom-0 right-1/4 w-[400px] h-[400px] bg-amber-500/10 rounded-full blur-[140px]" />
+    <section ref={ref} className="relative overflow-hidden bg-[#0C1511] py-24 text-white sm:py-28">
+      <div className="pointer-events-none absolute inset-0">
+        <div className="absolute left-1/4 top-0 h-[500px] w-[500px] rounded-full bg-accent/12 blur-[160px]" />
+        <div className="absolute bottom-0 right-1/4 h-[400px] w-[400px] rounded-full bg-primary/25 blur-[140px]" />
       </div>
 
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.7 }}
-          className="max-w-2xl text-center mx-auto mb-14"
+          className="mx-auto mb-14 max-w-2xl text-center"
         >
-          <span className="text-xs font-semibold uppercase tracking-[0.2em] text-rose-300">Honeymoons</span>
-          <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-medium mt-4 mb-4 leading-tight">
+          <span className="text-xs font-semibold uppercase tracking-[0.24em] text-[#E4C9A3]">Honeymoons</span>
+          <h2 className="mb-4 mt-4 font-display text-3xl font-normal leading-tight sm:text-4xl lg:text-5xl">
             Your honeymoon should be more than a holiday.
           </h2>
-          <p className="text-base text-white/70 leading-relaxed">
+          <p className="text-base leading-relaxed text-white/65">
             Safari by day. Romance by night. Candlelit bush dinners, sunrise game drives and a beach to melt into — we&apos;ll handle every detail.
           </p>
-          <div className="flex flex-wrap justify-center gap-4 mt-8">
+          <div className="mt-8 flex flex-wrap justify-center gap-4">
             <Link href={PLAN_SAFARI_ROUTE} className="group">
-              <Button className="h-13 px-8 rounded-full text-base font-semibold bg-gradient-to-r from-rose-500 to-orange-500 hover:from-rose-600 hover:to-orange-600 text-white border-0 shadow-lg shadow-rose-900/30 hover:shadow-[0_12px_40px_-8px_rgba(244,63,94,0.6)] hover:-translate-y-0.5 transition-all duration-300">
-                <Heart className="w-4 h-4 mr-2 transition-transform duration-300 group-hover:scale-110" />
+              <Button className="h-13 rounded-full bg-accent px-8 text-base font-semibold text-accent-foreground hover:bg-accent/90">
+                <Heart className="mr-2 h-4 w-4 transition-transform duration-300 group-hover:scale-110" />
                 Design Our Honeymoon
               </Button>
             </Link>
             <Link href="/honeymoon-packages" className="group">
               <Button
                 variant="outline"
-                className="relative h-13 px-8 text-base font-semibold overflow-hidden rounded-full
-                  border border-rose-300/30 bg-white/[0.06] text-white
-                  backdrop-blur-sm shadow-[0_8px_30px_-8px_rgba(244,63,94,0.45)]
-                  transition-all duration-300 ease-out
-                  hover:border-rose-300/60 hover:bg-white/[0.12] hover:shadow-[0_12px_40px_-8px_rgba(244,63,94,0.7)] hover:-translate-y-0.5
-                  active:translate-y-0"
+                className="h-13 rounded-full border-white/20 bg-white/5 px-8 text-base font-semibold text-white backdrop-blur-sm transition-all duration-300 hover:border-white/40 hover:bg-white/10 hover:text-white"
               >
-                <span className="pointer-events-none absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/25 to-transparent transition-transform duration-700 group-hover:translate-x-full" />
-                <span className="relative z-10">Explore All Honeymoons</span>
-                <ArrowRight className="relative z-10 w-4 h-4 ml-2 transition-transform duration-300 group-hover:translate-x-1" />
+                Explore All Honeymoons
+                <ArrowRight className="ml-2 h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
               </Button>
             </Link>
           </div>
         </motion.div>
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 lg:gap-8">
           {honeymoons.map((hp, idx) => (
             <motion.div
               key={hp.id}
@@ -68,24 +62,24 @@ export function HoneymoonSection() {
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.5, delay: idx * 0.1 }}
             >
-              <Link href={`/honeymoon-packages/${hp.slug}`} className="group block relative rounded-3xl overflow-hidden h-80 ring-1 ring-white/10 hover:ring-rose-400/40 transition-all duration-500">
+              <Link href={`/honeymoon-packages/${hp.slug}`} className="group relative block h-80 overflow-hidden rounded-[1.75rem] ring-1 ring-white/10 transition-all duration-500 hover:ring-accent/50">
                 <Image
                   src={hp.image}
                   alt={hp.name}
                   fill
                   sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                  className="object-cover transition-transform duration-700 group-hover:scale-110"
+                  className="object-cover transition-transform duration-700 group-hover:scale-105"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-stone-950/90 via-stone-950/25 to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#08130E]/95 via-[#08130E]/25 to-transparent" />
                 <div className="absolute inset-x-0 bottom-0 p-6">
-                  <div className="flex items-center gap-3 text-xs text-white/70 mb-2">
-                    <span className="flex items-center gap-1.5"><Clock className="w-3.5 h-3.5 text-rose-300" />{hp.duration}</span>
+                  <div className="mb-2 flex items-center gap-3 text-xs text-white/70">
+                    <span className="flex items-center gap-1.5"><Clock className="h-3.5 w-3.5 text-[#E4C9A3]" />{hp.duration}</span>
                     <span className="flex items-center gap-1.5">
-                      <Heart className="w-3.5 h-3.5 text-rose-400" />
+                      <Heart className="h-3.5 w-3.5 text-accent" />
                       From ${hp.price.toLocaleString()}
                     </span>
                   </div>
-                  <h3 className="font-display text-xl font-medium text-white leading-snug">
+                  <h3 className="font-display text-xl font-normal leading-snug text-white">
                     {hp.name}
                   </h3>
                 </div>

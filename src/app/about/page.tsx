@@ -58,23 +58,21 @@ export default function AboutPage() {
       ]} />
       <main className="min-h-screen">
       {/* Hero */}
-      <section className="relative py-32 px-6 bg-gradient-to-br from-sky-900 via-blue-900 to-slate-900 overflow-hidden">
+      <section className="relative overflow-hidden bg-[#08130E] px-6 py-32">
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,rgba(184,100,58,0.18),transparent_60%)]" />
         <div className="absolute inset-0 opacity-[0.04]" style={{ backgroundImage: "radial-gradient(circle at 1px 1px, white 1px, transparent 0)", backgroundSize: "40px 40px" }} />
-        <div className="relative z-10 max-w-4xl mx-auto text-center">
+        <div className="relative z-10 mx-auto max-w-4xl text-center">
           <AnimatedSection direction="none">
-            <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-white text-sm font-medium mb-6">
+            <span className="mb-6 inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-1.5 text-sm font-medium text-white backdrop-blur-md">
               <Compass className="size-4" />
               East Africa Safari Experts
             </span>
-            <h1 className="text-4xl sm:text-5xl lg:text-7xl font-bold text-white mb-6 leading-tight">
-              We Turn{" "}
-              <span className="bg-gradient-to-r from-sky-300 to-amber-200 bg-clip-text text-transparent">
-                Wanderlust
-              </span>
+            <h1 className="mb-6 font-display text-4xl font-normal leading-tight text-white sm:text-5xl lg:text-7xl">
+              We Turn <span className="italic text-[#E4C9A3]">Wanderlust</span>
               <br />
               {" "}into Safari
             </h1>
-            <p className="text-lg sm:text-xl text-white/70 max-w-2xl mx-auto leading-relaxed">
+            <p className="mx-auto max-w-2xl text-lg leading-relaxed text-white/65 sm:text-xl">
               We craft unforgettable East African adventures — one
               thoughtfully planned itinerary at a time.
             </p>
@@ -87,9 +85,9 @@ export default function AboutPage() {
         <div className="max-w-5xl mx-auto">
           <div className="grid sm:grid-cols-2 gap-8">
             <AnimatedSection direction="left">
-              <div className="h-full p-8 sm:p-10 rounded-2xl bg-gradient-to-br from-sky-50 to-white dark:from-sky-950/20 dark:to-slate-900 ring-1 ring-sky-200 dark:ring-sky-800/30">
-                <Eye className="size-10 text-sky-500 mb-5" />
-                <h2 className="text-2xl sm:text-3xl font-bold text-foreground mb-4">Our Vision</h2>
+              <div className="h-full rounded-2xl bg-card p-8 ring-1 ring-border sm:p-10">
+                <Eye className="mb-5 size-10 text-accent" />
+                <h2 className="mb-4 font-display text-2xl font-normal text-foreground sm:text-3xl">Our Vision</h2>
                 <p className="text-muted-foreground leading-relaxed text-base">
                   To be East Africa&apos;s most trusted and transformative travel company — connecting
                   the world with the wild heart of Africa through authentic, responsible, and
@@ -98,9 +96,9 @@ export default function AboutPage() {
               </div>
             </AnimatedSection>
             <AnimatedSection direction="right">
-              <div className="h-full p-8 sm:p-10 rounded-2xl bg-gradient-to-br from-amber-50 to-white dark:from-amber-950/20 dark:to-slate-900 ring-1 ring-amber-200 dark:ring-amber-800/30">
-                <Target className="size-10 text-amber-500 mb-5" />
-                <h2 className="text-2xl sm:text-3xl font-bold text-foreground mb-4">Our Mission</h2>
+              <div className="h-full rounded-2xl bg-secondary/50 p-8 ring-1 ring-border sm:p-10">
+                <Target className="mb-5 size-10 text-accent" />
+                <h2 className="mb-4 font-display text-2xl font-normal text-foreground sm:text-3xl">Our Mission</h2>
                 <p className="text-muted-foreground leading-relaxed text-base">
                   To craft bespoke safaris that immerse travelers in East Africa&apos;s breathtaking
                   landscapes, wildlife, and cultures — while driving positive change for
@@ -117,11 +115,11 @@ export default function AboutPage() {
         <div className="max-w-6xl mx-auto">
           <AnimatedSection>
             <div className="text-center mb-14">
-              <span className="inline-flex items-center gap-2 text-sm font-semibold uppercase tracking-wider text-sky-500 mb-3">
+              <span className="mb-3 inline-flex items-center gap-2 text-sm font-semibold uppercase tracking-wider text-accent">
                 <Star className="size-4" />
                 What We Stand For
               </span>
-              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground">
+              <h2 className="font-display text-3xl font-normal text-foreground sm:text-4xl lg:text-5xl">
                 Our Core Values
               </h2>
             </div>
@@ -130,11 +128,11 @@ export default function AboutPage() {
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {VALUES.map((v, i) => (
               <AnimatedSection key={v.title} delay={i * 0.08}>
-                <div className="group relative h-full p-7 rounded-2xl bg-card ring-1 ring-foreground/10 hover:ring-sky-500/20 hover:shadow-xl transition-all duration-300">
-                  <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-sky-500 to-sky-600 flex items-center justify-center mb-5 shadow-lg shadow-sky-500/20">
-                    <v.icon className="size-6 text-white" />
+                <div className="group relative h-full rounded-2xl bg-card p-7 ring-1 ring-border transition-all duration-300 hover:shadow-xl hover:ring-accent/20">
+                  <div className="mb-5 flex size-12 items-center justify-center rounded-xl bg-accent/10">
+                    <v.icon className="size-6 text-accent" />
                   </div>
-                  <h3 className="text-lg font-bold text-foreground mb-3">{v.title}</h3>
+                  <h3 className="mb-3 font-display text-lg font-normal text-foreground">{v.title}</h3>
                   <p className="text-sm text-muted-foreground leading-relaxed">{v.desc}</p>
                 </div>
               </AnimatedSection>
@@ -145,19 +143,20 @@ export default function AboutPage() {
 
       {/* Community & Conservation Impact */}
       <section className="relative py-24 px-6 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-emerald-950 via-emerald-900 to-slate-900" />
+        <div className="absolute inset-0 bg-[#08130E]" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_left,rgba(184,100,58,0.16),transparent_60%)]" />
         <div className="absolute inset-0 opacity-[0.04]" style={{ backgroundImage: "radial-gradient(circle at 1px 1px, white 1px, transparent 0)", backgroundSize: "40px 40px" }} />
-        <div className="relative z-10 max-w-6xl mx-auto">
+        <div className="relative z-10 mx-auto max-w-6xl">
           <AnimatedSection>
-            <div className="text-center mb-14">
-              <span className="inline-flex items-center gap-2 bg-emerald-500/15 text-emerald-300 text-xs font-semibold uppercase tracking-[0.2em] px-4 py-1.5 rounded-full ring-1 ring-emerald-500/20 mb-4">
+            <div className="mb-14 text-center">
+              <span className="mb-4 inline-flex items-center gap-2 rounded-full bg-accent/15 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.2em] text-[#E4C9A3] ring-1 ring-accent/20">
                 <Heart className="size-3.5" />
                 Our Impact
               </span>
-              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white">
+              <h2 className="font-display text-3xl font-normal text-white sm:text-4xl lg:text-5xl">
                 Travel That Gives Back
               </h2>
-              <p className="text-emerald-200/60 mt-4 max-w-lg mx-auto">
+              <p className="mx-auto mt-4 max-w-lg text-white/55">
                 Every safari with us supports conservation, empowers communities, and protects
                 Africa&apos;s wild places.
               </p>
@@ -167,10 +166,10 @@ export default function AboutPage() {
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-14">
             {IMPACT_STATS.map((s, i) => (
               <AnimatedSection key={s.label} delay={i * 0.08}>
-                <div className="text-center p-6 rounded-2xl bg-white/5 backdrop-blur-sm border border-white/10 hover:bg-white/10 transition-colors">
-                  <s.icon className="size-8 text-emerald-400 mx-auto mb-3" />
-                  <div className="text-3xl sm:text-4xl font-bold text-white mb-1">{s.value}</div>
-                  <div className="text-sm text-emerald-200/60">{s.label}</div>
+                <div className="rounded-2xl border border-white/10 bg-white/5 p-6 text-center backdrop-blur-sm transition-colors hover:bg-white/10">
+                  <s.icon className="mx-auto mb-3 size-8 text-accent" />
+                  <div className="mb-1 font-display text-3xl font-normal text-white sm:text-4xl">{s.value}</div>
+                  <div className="text-sm text-white/55">{s.label}</div>
                 </div>
               </AnimatedSection>
             ))}
@@ -178,14 +177,14 @@ export default function AboutPage() {
 
           <AnimatedSection>
             <div className="max-w-3xl mx-auto text-center">
-              <div className="p-8 sm:p-10 rounded-2xl bg-white/5 backdrop-blur-sm border border-white/10">
-                <span className="text-5xl text-emerald-400/30 block mb-4">&ldquo;</span>
-                <blockquote className="text-lg sm:text-xl text-emerald-100/80 leading-relaxed font-light italic mb-4">
+              <div className="rounded-2xl border border-white/10 bg-white/5 p-8 backdrop-blur-sm sm:p-10">
+                <span className="mb-4 block font-display text-5xl text-accent/40">&ldquo;</span>
+                <blockquote className="mb-4 font-display text-lg font-normal italic leading-relaxed text-white/75 sm:text-xl">
                   Travel is the only thing you buy that makes you richer. But a safari — that stays
                   with you forever. The red dust, the golden light, the silence of the savannah at
                   dawn — it changes something deep inside you.
                 </blockquote>
-                <p className="text-sm text-emerald-300/50 font-medium tracking-wide">
+                <p className="text-sm font-medium tracking-wide text-[#E4C9A3]/70">
                   &mdash; Ready Set Go Tours & Travel
                 </p>
               </div>
@@ -195,19 +194,19 @@ export default function AboutPage() {
       </section>
 
       {/* Statistics */}
-      <section className="py-20 px-6 bg-gradient-to-br from-sky-900 via-blue-900 to-slate-900">
-        <div className="max-w-6xl mx-auto">
+      <section className="bg-[#0C1511] px-6 py-20">
+        <div className="mx-auto max-w-6xl">
           <AnimatedSection>
-            <h2 className="text-3xl sm:text-4xl font-bold text-white text-center mb-14">
+            <h2 className="mb-14 text-center font-display text-3xl font-normal text-white sm:text-4xl">
               By the Numbers
             </h2>
           </AnimatedSection>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+          <div className="grid grid-cols-2 gap-6 md:grid-cols-4">
             {STATISTICS.slice(0, 8).map((stat, i) => (
               <AnimatedSection key={stat.label} delay={i * 0.05}>
-                <div className="text-center p-6 rounded-2xl bg-white/5 backdrop-blur-sm border border-white/10">
-                  <div className="text-3xl sm:text-4xl font-bold text-white mb-1">{stat.value}</div>
-                  <div className="text-sm text-sky-200/70">{stat.label}</div>
+                <div className="rounded-2xl border border-white/10 bg-white/5 p-6 text-center backdrop-blur-sm">
+                  <div className="mb-1 font-display text-3xl font-normal text-white sm:text-4xl">{stat.value}</div>
+                  <div className="text-sm text-white/55">{stat.label}</div>
                 </div>
               </AnimatedSection>
             ))}
@@ -219,16 +218,16 @@ export default function AboutPage() {
       <section className="py-20 px-6">
         <div className="max-w-3xl mx-auto text-center">
           <AnimatedSection>
-            <h2 className="text-3xl sm:text-4xl font-bold text-foreground mb-4">
+            <h2 className="mb-4 font-display text-3xl font-normal text-foreground sm:text-4xl">
               Ready to Start Your Safari?
             </h2>
-            <p className="text-muted-foreground max-w-lg mx-auto mb-8">
+            <p className="mx-auto mb-8 max-w-lg text-muted-foreground">
               Let our experts craft a personalized East African adventure that fits your style,
               budget, and dreams.
             </p>
             <Link
               href="/contact"
-              className="inline-flex items-center gap-2 h-12 px-8 rounded-xl bg-gradient-to-r from-sky-500 to-blue-600 hover:from-sky-400 hover:to-blue-500 text-white font-semibold shadow-lg shadow-sky-500/25 transition-all duration-200"
+              className="inline-flex h-12 items-center gap-2 rounded-full bg-primary px-8 font-semibold text-primary-foreground shadow-lg shadow-primary/20 transition-all duration-200 hover:bg-primary/90"
             >
               <HeadphonesIcon className="size-4" />
               Get a Free Quote

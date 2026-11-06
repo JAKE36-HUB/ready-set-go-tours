@@ -4,10 +4,10 @@ import { useState, useEffect } from "react"
 import Image from "next/image"
 import Link from "next/link"
 import { motion } from "framer-motion"
-import { MessageCircle } from "lucide-react"
+import { ArrowRight, MessageCircle } from "lucide-react"
 
 import { Button } from "@/components/ui/button"
-import { COMPANY, PLAN_SAFARI_ROUTE, whatsappLink } from "@/lib/constants"
+import { PLAN_SAFARI_ROUTE, whatsappLink } from "@/lib/constants"
 
 const HERO_IMAGES = [
   "/images/local/pin_212b2433f246414a170ec177d76168f2.jpg",
@@ -51,7 +51,7 @@ export function HeroSection() {
 
   return (
     <section
-      className="relative h-screen min-h-[640px] flex items-center overflow-hidden bg-stone-950"
+      className="relative flex h-[100svh] min-h-[680px] items-end overflow-hidden bg-[#08130E] sm:items-center"
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
     >
@@ -67,7 +67,7 @@ export function HeroSection() {
               alt={`African safari landscape ${i + 1}`}
               fill
               sizes="100vw"
-              className="object-cover scale-110 brightness-[0.9] contrast-[1.05]"
+              className="object-cover scale-105 brightness-[0.82] contrast-[1.04]"
               priority={i === 0}
               fetchPriority={i === 0 ? "high" : "low"}
               loading={i === 0 ? "eager" : "lazy"}
@@ -77,125 +77,106 @@ export function HeroSection() {
       </div>
 
       <div className="absolute inset-0 hero-overlay" />
-      <div className="absolute inset-0 bg-gradient-to-r from-black/40 via-transparent to-black/20" />
+      <div className="absolute inset-0 bg-gradient-to-r from-[#08130E]/85 via-[#08130E]/30 to-transparent" />
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_78%_18%,rgba(216,164,122,0.16),transparent_42%)]" />
 
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute -top-40 -right-40 w-96 h-96 bg-amber-500/10 rounded-full blur-[150px]" />
-        <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-orange-500/10 rounded-full blur-[120px]" />
-      </div>
-
-      <div className="absolute bottom-28 left-1/2 -translate-x-1/2 z-20 flex items-center gap-2.5">
-        {HERO_IMAGES.map((img, i) => (
-          <button
-            key={img}
-            onClick={() => setCurrentImage(i)}
-            aria-label={`Image ${i + 1}`}
-            className={`h-1 rounded-full overflow-hidden transition-all duration-300 ${
-              i === currentImage
-                ? "w-16 bg-white/25 cursor-default"
-                : "w-7 bg-white/30 hover:bg-white/50"
-            }`}
-          >
-            {i === currentImage && (
-              <div
-                className="h-full bg-amber-400/90 rounded-full"
-                style={{ width: `${progress}%` }}
-              />
-            )}
-          </button>
-        ))}
-      </div>
-
-      <div className="relative z-10 w-full">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="max-w-4xl mx-auto lg:mx-0 text-center lg:text-left">
+      <div className="relative z-10 w-full pb-28 pt-32 sm:pb-32">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="max-w-3xl">
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 16 }}
               animate={mounted ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.5, delay: 0.1 }}
-              className="inline-flex items-center gap-2 bg-white/5 backdrop-blur-md rounded-full px-4 py-1.5 mb-6 ring-1 ring-white/15"
+              transition={{ duration: 0.5, delay: 0.05 }}
+              className="mb-7 flex items-center gap-3"
             >
-              <span className="relative flex size-2">
-                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-amber-400 opacity-75" />
-                <span className="relative inline-flex size-2 rounded-full bg-amber-400" />
-              </span>
-              <span className="text-xs font-medium text-white/70 tracking-[0.2em] uppercase">
-                {COMPANY.tagline}
+              <span className="h-px w-10 bg-[#D8A47A]" />
+              <span className="text-[10px] font-semibold uppercase tracking-[0.28em] text-white/70 sm:text-[11px]">
+                Private safaris · Kenya &amp; Tanzania
               </span>
             </motion.div>
 
             <motion.h1
-              initial={{ opacity: 0 }}
-              animate={mounted ? { opacity: 1 } : {}}
-              transition={{ duration: 0.8, delay: 0.2 }}
-              className="font-display text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-medium text-white leading-[1.02] mb-4 tracking-tight"
+              initial={{ opacity: 0, y: 24 }}
+              animate={mounted ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.8, delay: 0.15 }}
+              className="font-display text-[clamp(3.25rem,9vw,7.5rem)] font-normal leading-[0.92] tracking-[-0.035em] text-white"
             >
-              Kenya is{" "}
-              <span className="italic text-transparent bg-clip-text bg-gradient-to-r from-amber-200 via-amber-300 to-orange-200">
-                waiting.
-              </span>
+              Wild by nature.
+              <span className="mt-1 block italic text-[#E4C9A3]">Yours by design.</span>
             </motion.h1>
 
             <motion.p
               initial={{ opacity: 0, y: 20 }}
               animate={mounted ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.6, delay: 0.6 }}
-              className="font-display text-xl sm:text-2xl md:text-3xl text-white/90 mb-4 leading-snug"
+              transition={{ duration: 0.6, delay: 0.4 }}
+              className="mt-7 max-w-xl text-base leading-relaxed text-white/70 sm:text-lg"
             >
-              Let&apos;s build your safari.
-            </motion.p>
-
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              animate={mounted ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.6, delay: 0.75 }}
-              className="text-base sm:text-lg text-white/70 max-w-xl mb-8 leading-relaxed font-light tracking-wide"
-            >
-              Tell us what you want to experience. We&apos;ll design the trip around you.
+              Tailor-made journeys through Kenya and Tanzania — designed around your pace, your people
+              and the moments you&apos;ll remember.
             </motion.p>
 
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={mounted ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.6, delay: 0.85 }}
-              className="flex flex-wrap gap-4 justify-center lg:justify-start"
+              transition={{ duration: 0.6, delay: 0.55 }}
+              className="mt-9 flex flex-wrap gap-3"
             >
               <Link href={PLAN_SAFARI_ROUTE}>
-                <Button className="group relative h-14 px-8 text-base font-semibold gradient-primary text-white border-0 shadow-2xl shadow-amber-900/30 hover:scale-105 transition-all duration-300 overflow-hidden">
-                  <span className="relative z-10 flex items-center gap-2">
-                    Plan My Safari
-                  </span>
+                <Button className="h-14 rounded-full bg-[#E8D5B5] px-8 text-base font-semibold text-[#12251B] shadow-none hover:bg-[#F1E2C8]">
+                  Start planning
+                  <ArrowRight className="ml-2 size-4" />
                 </Button>
               </Link>
               <Button
                 variant="outline"
                 onClick={() => window.open(whatsappUrl, "_blank", "noopener,noreferrer")}
-                className="h-14 px-8 text-base font-medium bg-white/5 border-white/20 text-white/90 hover:bg-white/10 hover:text-white hover:border-white/40 transition-all duration-300"
+                className="h-14 rounded-full border-white/25 bg-white/5 px-7 text-base font-medium text-white backdrop-blur-md hover:border-white/45 hover:bg-white/10 hover:text-white"
               >
-                <MessageCircle className="w-4 h-4" />
-                WhatsApp a Safari Expert
+                <MessageCircle className="mr-2 size-4" />
+                WhatsApp an expert
               </Button>
             </motion.div>
 
             <motion.div
-              initial={{ opacity: 0, y: 10 }}
-              animate={mounted ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.6, delay: 1.0 }}
-              className="mt-8 flex flex-wrap items-center justify-center lg:justify-start gap-x-6 gap-y-2 text-sm text-white/60 tracking-wide"
+              initial={{ opacity: 0 }}
+              animate={mounted ? { opacity: 1 } : {}}
+              transition={{ duration: 0.6, delay: 0.7 }}
+              className="mt-10 flex flex-wrap items-center gap-x-5 gap-y-2 text-[10px] font-medium uppercase tracking-[0.18em] text-white/50 sm:text-[11px]"
             >
-              <span className="flex items-center gap-2">
-                <span className="w-1 h-1 rounded-full bg-amber-400" />
-                Private Safaris
-              </span>
-              <span className="flex items-center gap-2">
-                <span className="w-1 h-1 rounded-full bg-amber-400" />
-                Custom Itineraries
-              </span>
-              <span className="flex items-center gap-2">
-                <span className="w-1 h-1 rounded-full bg-amber-400" />
-                Local Safari Experts
-              </span>
+              <span>Tailor-made itineraries</span>
+              <span className="hidden h-1 w-1 rounded-full bg-white/25 sm:block" />
+              <span>Local safari guides</span>
+              <span className="hidden h-1 w-1 rounded-full bg-white/25 sm:block" />
+              <span>Reply within 24 hours</span>
             </motion.div>
+          </div>
+        </div>
+      </div>
+
+      <div className="absolute bottom-8 left-0 right-0 z-20">
+        <div className="mx-auto flex max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
+          <div className="flex items-center gap-2.5">
+            {HERO_IMAGES.map((img, i) => (
+              <button
+                key={img}
+                onClick={() => setCurrentImage(i)}
+                aria-label={`Image ${i + 1}`}
+                className={`h-[3px] overflow-hidden rounded-full transition-all duration-300 ${
+                  i === currentImage ? "w-16 bg-white/20" : "w-8 bg-white/20 hover:bg-white/35"
+                }`}
+              >
+                {i === currentImage && (
+                  <div
+                    className="h-full rounded-full bg-[#E4C9A3]"
+                    style={{ width: `${progress}%` }}
+                  />
+                )}
+              </button>
+            ))}
+          </div>
+          <div className="hidden items-center gap-3 text-[10px] uppercase tracking-[0.28em] text-white/40 lg:flex">
+            <span>Scroll to explore</span>
+            <span className="h-px w-12 bg-white/25" />
           </div>
         </div>
       </div>

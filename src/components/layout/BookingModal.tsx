@@ -207,7 +207,7 @@ export function BookingModal({ open, onOpenChange, initialPackage }: BookingModa
     type: string = "text",
   ) => (
     <div className="space-y-1.5">
-      <Label htmlFor={name} className="text-xs font-medium text-slate-700 dark:text-slate-300">
+      <Label htmlFor={name} className="text-xs font-medium text-foreground/80">
         {label}
       </Label>
       <Input
@@ -218,7 +218,7 @@ export function BookingModal({ open, onOpenChange, initialPackage }: BookingModa
         className="h-10 text-sm"
       />
       {errors[name]?.message && (
-        <p className="text-xs text-red-500 mt-1">{errors[name]?.message}</p>
+        <p className="text-xs text-destructive mt-1">{errors[name]?.message}</p>
       )}
     </div>
   )
@@ -237,13 +237,13 @@ export function BookingModal({ open, onOpenChange, initialPackage }: BookingModa
             animate={{ scale: 1 }}
             transition={{ delay: 0.2, type: "spring", stiffness: 200, damping: 15 }}
           >
-            <CheckCircle className="w-20 h-20 text-emerald-500 mb-6" />
+            <CheckCircle className="w-20 h-20 text-primary mb-6" />
           </motion.div>
           <motion.h3
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.4 }}
-            className="text-2xl font-bold text-slate-900 dark:text-white mb-2"
+            className="text-2xl font-display font-normal text-foreground mb-2"
           >
             Booking Request Sent!
           </motion.h3>
@@ -251,7 +251,7 @@ export function BookingModal({ open, onOpenChange, initialPackage }: BookingModa
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.5 }}
-            className="text-slate-500 dark:text-slate-400 max-w-sm mb-8"
+            className="text-muted-foreground max-w-sm mb-8"
           >
             Thank you for your interest. Our luxury travel team will reach out within 24 hours to
             craft your perfect East African safari.
@@ -265,7 +265,7 @@ export function BookingModal({ open, onOpenChange, initialPackage }: BookingModa
               onClick={() => {
                 onOpenChange(false)
               }}
-              className="bg-gradient-to-r from-sky-600 to-blue-700 hover:from-sky-500 hover:to-blue-600 text-white px-8"
+              className="bg-primary hover:bg-primary/90 text-primary-foreground px-8"
             >
               Close
             </Button>
@@ -282,11 +282,11 @@ export function BookingModal({ open, onOpenChange, initialPackage }: BookingModa
           transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
           className="flex flex-col items-center justify-center py-16 px-6 text-center"
         >
-          <XCircle className="w-20 h-20 text-red-400 mb-6" />
-          <h3 className="text-2xl font-bold text-slate-900 dark:text-white mb-2">
+          <XCircle className="w-20 h-20 text-destructive mb-6" />
+          <h3 className="text-2xl font-display font-normal text-foreground mb-2">
             Submission Failed
           </h3>
-          <p className="text-slate-500 dark:text-slate-400 max-w-sm mb-8">
+          <p className="text-muted-foreground max-w-sm mb-8">
             {errorMessage || "Something went wrong while sending your booking request. Please try again or contact us directly."}
           </p>
           <div className="flex gap-3">
@@ -298,7 +298,7 @@ export function BookingModal({ open, onOpenChange, initialPackage }: BookingModa
             </Button>
             <Button
               onClick={() => handleSubmit(onSubmit)()}
-              className="bg-gradient-to-r from-sky-600 to-blue-700 hover:from-sky-500 hover:to-blue-600 text-white"
+              className="bg-primary hover:bg-primary/90 text-primary-foreground"
             >
               <Send className="w-4 h-4 mr-2" />
               Retry
@@ -314,9 +314,9 @@ export function BookingModal({ open, onOpenChange, initialPackage }: BookingModa
           {/* Personal Information */}
           <div>
             {sectionHeader(
-              <Users className="w-4 h-4 text-sky-600" />,
+              <Users className="w-4 h-4 text-primary" />,
               "Personal Information",
-              "border-sky-200 text-sky-800 dark:border-sky-800 dark:text-sky-300",
+              "border-border text-foreground",
             )}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               {renderField("fullName", "Full Name", "John Doe")}
@@ -329,16 +329,16 @@ export function BookingModal({ open, onOpenChange, initialPackage }: BookingModa
           {/* Trip Details */}
           <div>
             {sectionHeader(
-              <MapPin className="w-4 h-4 text-orange-500" />,
+              <MapPin className="w-4 h-4 text-accent" />,
               "Trip Details",
-              "border-orange-200 text-orange-700 dark:border-orange-800 dark:text-orange-300",
+              "border-border text-foreground",
             )}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               {/* Destination */}
               <div className="space-y-1.5">
                 <Label
                   htmlFor="destination"
-                  className="text-xs font-medium text-slate-700 dark:text-slate-300"
+                  className="text-xs font-medium text-foreground/80"
                 >
                   Destination
                 </Label>
@@ -369,7 +369,7 @@ export function BookingModal({ open, onOpenChange, initialPackage }: BookingModa
                   </SelectContent>
                 </Select>
                 {errors.destination?.message && (
-                  <p className="text-xs text-red-500 mt-1">{errors.destination?.message}</p>
+                  <p className="text-xs text-destructive mt-1">{errors.destination?.message}</p>
                 )}
               </div>
 
@@ -377,9 +377,9 @@ export function BookingModal({ open, onOpenChange, initialPackage }: BookingModa
               <div className="space-y-1.5">
                 <Label
                   htmlFor="package"
-                  className="text-xs font-medium text-slate-700 dark:text-slate-300"
+                  className="text-xs font-medium text-foreground/80"
                 >
-                  Tour Package <span className="text-slate-400 font-normal">(optional)</span>
+                  Tour Package <span className="text-muted-foreground/70 font-normal">(optional)</span>
                 </Label>
                 <Select
                   value={watchedPackage || ""}
@@ -402,12 +402,12 @@ export function BookingModal({ open, onOpenChange, initialPackage }: BookingModa
               <div className="space-y-1.5">
                 <Label
                   htmlFor="travelDate"
-                  className="text-xs font-medium text-slate-700 dark:text-slate-300"
+                  className="text-xs font-medium text-foreground/80"
                 >
                   Preferred Travel Date
                 </Label>
                 <div className="relative">
-                  <Calendar className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400 pointer-events-none" />
+                  <Calendar className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground pointer-events-none" />
                   <Input
                     id="travelDate"
                     type="date"
@@ -416,7 +416,7 @@ export function BookingModal({ open, onOpenChange, initialPackage }: BookingModa
                   />
                 </div>
                 {errors.travelDate?.message && (
-                  <p className="text-xs text-red-500 mt-1">{errors.travelDate?.message}</p>
+                  <p className="text-xs text-destructive mt-1">{errors.travelDate?.message}</p>
                 )}
               </div>
 
@@ -424,12 +424,12 @@ export function BookingModal({ open, onOpenChange, initialPackage }: BookingModa
               <div className="space-y-1.5">
                 <Label
                   htmlFor="days"
-                  className="text-xs font-medium text-slate-700 dark:text-slate-300"
+                  className="text-xs font-medium text-foreground/80"
                 >
                   Number of Days
                 </Label>
                 <div className="relative">
-                  <Clock className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400 pointer-events-none" />
+                  <Clock className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground pointer-events-none" />
                   <Input
                     id="days"
                     type="number"
@@ -440,7 +440,7 @@ export function BookingModal({ open, onOpenChange, initialPackage }: BookingModa
                   />
                 </div>
                 {errors.days?.message && (
-                  <p className="text-xs text-red-500 mt-1">{errors.days?.message}</p>
+                  <p className="text-xs text-destructive mt-1">{errors.days?.message}</p>
                 )}
               </div>
             </div>
@@ -449,21 +449,21 @@ export function BookingModal({ open, onOpenChange, initialPackage }: BookingModa
           {/* Travel Party & Budget */}
           <div>
             {sectionHeader(
-              <DollarSign className="w-4 h-4 text-amber-500" />,
+              <DollarSign className="w-4 h-4 text-accent" />,
               "Travel Party & Budget",
-              "border-amber-200 text-amber-700 dark:border-amber-800 dark:text-amber-300",
+              "border-border text-foreground",
             )}
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
               {/* Adults */}
               <div className="space-y-1.5">
                 <Label
                   htmlFor="adults"
-                  className="text-xs font-medium text-slate-700 dark:text-slate-300"
+                  className="text-xs font-medium text-foreground/80"
                 >
                   Adults
                 </Label>
                 <div className="relative">
-                  <Users className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400 pointer-events-none" />
+                  <Users className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground pointer-events-none" />
                   <Input
                     id="adults"
                     type="number"
@@ -474,7 +474,7 @@ export function BookingModal({ open, onOpenChange, initialPackage }: BookingModa
                   />
                 </div>
                 {errors.adults?.message && (
-                  <p className="text-xs text-red-500 mt-1">{errors.adults?.message}</p>
+                  <p className="text-xs text-destructive mt-1">{errors.adults?.message}</p>
                 )}
               </div>
 
@@ -482,12 +482,12 @@ export function BookingModal({ open, onOpenChange, initialPackage }: BookingModa
               <div className="space-y-1.5">
                 <Label
                   htmlFor="children"
-                  className="text-xs font-medium text-slate-700 dark:text-slate-300"
+                  className="text-xs font-medium text-foreground/80"
                 >
-                  Children <span className="text-slate-400 font-normal">(optional)</span>
+                  Children <span className="text-muted-foreground/70 font-normal">(optional)</span>
                 </Label>
                 <div className="relative">
-                  <Users className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400 pointer-events-none" />
+                  <Users className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground pointer-events-none" />
                   <Input
                     id="children"
                     type="number"
@@ -498,7 +498,7 @@ export function BookingModal({ open, onOpenChange, initialPackage }: BookingModa
                   />
                 </div>
                 {errors.children?.message && (
-                  <p className="text-xs text-red-500 mt-1">{errors.children?.message}</p>
+                  <p className="text-xs text-destructive mt-1">{errors.children?.message}</p>
                 )}
               </div>
 
@@ -506,7 +506,7 @@ export function BookingModal({ open, onOpenChange, initialPackage }: BookingModa
               <div className="space-y-1.5">
                 <Label
                   htmlFor="budget"
-                  className="text-xs font-medium text-slate-700 dark:text-slate-300"
+                  className="text-xs font-medium text-foreground/80"
                 >
                   Budget Range
                 </Label>
@@ -526,7 +526,7 @@ export function BookingModal({ open, onOpenChange, initialPackage }: BookingModa
                   </SelectContent>
                 </Select>
                 {errors.budget?.message && (
-                  <p className="text-xs text-red-500 mt-1">{errors.budget?.message}</p>
+                  <p className="text-xs text-destructive mt-1">{errors.budget?.message}</p>
                 )}
               </div>
             </div>
@@ -535,16 +535,16 @@ export function BookingModal({ open, onOpenChange, initialPackage }: BookingModa
           {/* Special Requests */}
           <div>
             {sectionHeader(
-              <FileText className="w-4 h-4 text-slate-500" />,
+              <FileText className="w-4 h-4 text-muted-foreground" />,
               "Special Requests",
-              "border-slate-200 text-slate-700 dark:border-slate-700 dark:text-slate-300",
+              "border-border text-foreground",
             )}
             <div className="space-y-1.5">
               <Label
                 htmlFor="specialRequests"
-                className="text-xs font-medium text-slate-700 dark:text-slate-300"
+                className="text-xs font-medium text-foreground/80"
               >
-                Anything we should know? <span className="text-slate-400 font-normal">(optional)</span>
+                Anything we should know? <span className="text-muted-foreground/70 font-normal">(optional)</span>
               </Label>
               <Textarea
                 id="specialRequests"
@@ -558,11 +558,11 @@ export function BookingModal({ open, onOpenChange, initialPackage }: BookingModa
         </div>
 
         {/* Footer */}
-        <div className="sticky bottom-0 bg-white dark:bg-slate-900 border-t border-slate-200 dark:border-slate-700 px-6 py-4 rounded-b-xl">
+        <div className="sticky bottom-0 bg-card border-t border-border px-6 py-4 rounded-b-xl">
           <Button
             type="submit"
             disabled={status === "submitting"}
-            className="w-full h-12 bg-gradient-to-r from-sky-600 to-blue-700 hover:from-sky-500 hover:to-blue-600 text-white font-semibold text-base shadow-lg shadow-sky-200 dark:shadow-sky-900/30 transition-all duration-300 disabled:opacity-60"
+            className="w-full h-12 bg-primary hover:bg-primary/90 text-primary-foreground font-semibold text-base shadow-lg shadow-primary/20 transition-all duration-300 disabled:opacity-60"
           >
             {status === "submitting" ? (
               <span className="flex items-center justify-center gap-2">
@@ -576,7 +576,7 @@ export function BookingModal({ open, onOpenChange, initialPackage }: BookingModa
               </span>
             )}
           </Button>
-          <p className="text-xs text-slate-400 text-center mt-3">
+          <p className="text-xs text-muted-foreground text-center mt-3">
             We typically respond within 24 hours
           </p>
         </div>
@@ -588,7 +588,7 @@ export function BookingModal({ open, onOpenChange, initialPackage }: BookingModa
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent
         showCloseButton={false}
-        className="sm:max-w-2xl w-full p-0 gap-0 rounded-2xl overflow-hidden bg-white dark:bg-slate-900 shadow-2xl ring-1 ring-slate-900/10 dark:ring-slate-700/50"
+        className="sm:max-w-2xl w-full p-0 gap-0 rounded-2xl overflow-hidden bg-card shadow-2xl ring-1 ring-border"
       >
         <AnimatePresence mode="wait">
           <motion.div
@@ -599,14 +599,14 @@ export function BookingModal({ open, onOpenChange, initialPackage }: BookingModa
             transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
           >
             {/* Header */}
-            <div className="relative bg-gradient-to-r from-sky-900 via-blue-900 to-slate-900 px-6 py-5">
-              <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,rgba(251,146,60,0.15),transparent_50%)]" />
+            <div className="relative bg-[#08130E] px-6 py-5">
+              <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,rgba(184,100,58,0.22),transparent_55%)]" />
               <div className="relative z-10">
                 <DialogHeader>
-                  <DialogTitle className="text-xl font-bold text-white">
+                  <DialogTitle className="text-xl font-display font-normal text-white">
                     Book Your Dream Safari
                   </DialogTitle>
-                  <DialogDescription className="text-sky-200/80 text-sm">
+                  <DialogDescription className="text-white/60 text-sm">
                     Fill in your details and our luxury travel consultants will curate the perfect
                     East African experience for you.
                   </DialogDescription>

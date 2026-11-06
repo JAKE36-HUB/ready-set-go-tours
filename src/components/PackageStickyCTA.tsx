@@ -27,7 +27,7 @@ export default function PackageStickyCTA({
 
   return (
     <div
-      className="fixed bottom-0 left-0 right-0 z-50 bg-background/95 dark:bg-stone-900/95 backdrop-blur-lg border-t border-border p-3 lg:hidden transition-transform duration-300 ease-out"
+      className="fixed bottom-0 left-0 right-0 z-50 bg-background/95 backdrop-blur-lg border-t border-border p-3 lg:hidden transition-transform duration-300 ease-out"
       style={{ transform: show ? "translateY(0)" : "translateY(100%)" }}
     >
       <div className="flex items-center gap-3 max-w-lg mx-auto">
@@ -50,7 +50,7 @@ export default function PackageStickyCTA({
         </a>
         <Link
           href={PLAN_SAFARI_ROUTE}
-          className="flex-1 inline-flex items-center justify-center gap-2 h-11 rounded-xl gradient-primary text-white text-sm font-semibold shadow-lg"
+          className="flex-1 inline-flex items-center justify-center gap-2 h-11 rounded-full gradient-primary text-white text-sm font-semibold shadow-lg"
         >
           Plan This {noun}
           <ArrowRight className="size-4" />

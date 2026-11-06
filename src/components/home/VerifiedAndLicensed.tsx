@@ -100,43 +100,43 @@ export function VerifiedAndLicensed() {
   return (
     <section
       id="verified-and-licensed"
-      className="relative py-20 sm:py-24 bg-background dark:bg-stone-950 scroll-mt-24"
+      className="relative scroll-mt-24 bg-background py-20 sm:py-24"
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {/* Intro */}
-        <div className="text-center mb-12 max-w-2xl mx-auto">
-          <span className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.2em] text-primary dark:text-amber-400">
-            <BadgeCheck className="w-3.5 h-3.5" aria-hidden="true" />
+        <div className="mx-auto mb-12 max-w-2xl text-center">
+          <span className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.24em] text-accent">
+            <BadgeCheck className="h-3.5 w-3.5" aria-hidden="true" />
             Open To Scrutiny
           </span>
-          <h2 className="font-display text-3xl sm:text-4xl font-medium text-foreground mt-3 mb-4 leading-tight">
+          <h2 className="mb-4 mt-3 font-display text-3xl font-normal leading-tight text-foreground sm:text-4xl">
             Verified &amp; Licensed
           </h2>
-          <p className="text-base text-muted-foreground leading-relaxed">{intro}</p>
+          <p className="text-base leading-relaxed text-muted-foreground">{intro}</p>
         </div>
 
         {/* Licence — regulatory credential, not an endorsement. */}
         {licence?.licenceNumber && licence.url ? (
-          <div className="mb-8 max-w-2xl mx-auto">
-            <div className="flex flex-col sm:flex-row sm:items-center gap-4 rounded-2xl border border-primary/25 bg-primary/5 px-6 py-5">
-              <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-primary/15">
+          <div className="mx-auto mb-8 max-w-2xl">
+            <div className="flex flex-col gap-4 rounded-2xl border border-primary/20 bg-primary/5 px-6 py-5 sm:flex-row sm:items-center">
+              <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-primary/10">
                 <ShieldCheck
-                  className="w-5 h-5 text-primary dark:text-amber-400"
+                  className="h-5 w-5 text-primary"
                   aria-hidden="true"
                 />
               </span>
               <div className="flex-1 text-center sm:text-left">
-                <p className="font-display text-lg font-medium text-foreground leading-tight">
+                <p className="font-display text-lg font-normal leading-tight text-foreground">
                   {licence.name} licence
                 </p>
-                <p className="text-sm text-muted-foreground mt-0.5">
+                <p className="mt-0.5 text-sm text-muted-foreground">
                   Licence No.{" "}
                   <span className="font-semibold text-foreground">{licence.licenceNumber}</span>
                 </p>
               </div>
               <SourceLink
                 credential={licence}
-                className="inline-flex items-center justify-center gap-2 rounded-xl border border-border bg-card px-5 py-2.5 text-sm font-semibold text-foreground hover:border-primary/40 hover:bg-muted/50 transition-all duration-300"
+                className="inline-flex items-center justify-center gap-2 rounded-full border border-border bg-card px-5 py-2.5 text-sm font-semibold text-foreground transition-all duration-300 hover:border-primary/40 hover:bg-muted/50"
               />
             </div>
           </div>
@@ -145,16 +145,16 @@ export function VerifiedAndLicensed() {
         {/* Independent listings */}
         {profiles.length > 0 ? (
           <div className="mb-12">
-            <ul className="flex flex-col sm:flex-row flex-wrap gap-4 justify-center">
+            <ul className="flex flex-col flex-wrap justify-center gap-4 sm:flex-row">
               {profiles.map((profile) => (
                 <li
                   key={profile.id}
-                  className="group w-full sm:w-[248px] rounded-2xl border border-border bg-card px-5 py-7 text-center transition-all duration-300 hover:border-primary/30 hover:shadow-lg hover:-translate-y-0.5"
+                  className="group w-full rounded-2xl border border-border bg-card px-5 py-7 text-center shadow-card transition-all duration-300 hover:-translate-y-0.5 hover:border-primary/30 hover:shadow-card-hover sm:w-[248px]"
                 >
                   <div className="flex justify-center">
                     <CredentialMark
                       credential={profile}
-                      className="h-12 rounded-md border border-stone-300 px-3.5 dark:border-stone-700"
+                      className="h-12 rounded-md border border-border px-3.5"
                     />
                   </div>
                   <p className="mt-3.5 text-sm font-medium leading-tight text-muted-foreground">
@@ -169,7 +169,7 @@ export function VerifiedAndLicensed() {
                 </li>
               ))}
             </ul>
-            <p className="mt-6 text-xs text-muted-foreground text-center max-w-2xl mx-auto">
+            <p className="mx-auto mt-6 max-w-2xl text-center text-xs text-muted-foreground">
               Each link opens our own listing on that platform in a new tab. Platform names and marks
               belong to their respective owners and are shown only to identify where to find us.
             </p>
@@ -177,47 +177,47 @@ export function VerifiedAndLicensed() {
         ) : null}
 
         {/* CTA */}
-        <div className="text-center max-w-2xl mx-auto">
-          <h3 className="font-display text-2xl sm:text-3xl font-medium text-foreground mb-3">
+        <div className="mx-auto max-w-2xl text-center">
+          <h3 className="mb-3 font-display text-2xl font-normal text-foreground sm:text-3xl">
             Ready to plan your safari?
           </h3>
-          <p className="text-base text-muted-foreground leading-relaxed mb-8">
+          <p className="mb-8 text-base leading-relaxed text-muted-foreground">
             Tell us the parks, dates and pace you have in mind and our team will build an itinerary
             around them.
           </p>
 
-          <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-3 sm:gap-4">
+          <div className="flex flex-col items-stretch justify-center gap-3 sm:flex-row sm:items-center sm:gap-4">
             <Link
               href={PACKAGES_ROUTE}
-              className="inline-flex items-center justify-center gap-2 h-12 px-7 text-base font-semibold rounded-xl gradient-primary text-white shadow-premium hover:shadow-premium hover:scale-[1.03] transition-all duration-300"
+              className="inline-flex h-12 items-center justify-center gap-2 rounded-full bg-primary px-7 text-base font-semibold text-primary-foreground transition-all duration-300 hover:bg-primary/90"
             >
               Explore Safari Packages
-              <ArrowRight className="w-4 h-4" aria-hidden="true" />
+              <ArrowRight className="h-4 w-4" aria-hidden="true" />
             </Link>
 
             <a
               href={whatsappLink()}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center justify-center gap-2 h-12 px-7 text-base font-semibold rounded-xl border border-[#25D366]/40 bg-[#25D366]/10 text-foreground hover:bg-[#25D366]/20 transition-all duration-300"
+              className="inline-flex h-12 items-center justify-center gap-2 rounded-full border border-[#25D366]/40 bg-[#25D366]/10 px-7 text-base font-semibold text-foreground transition-all duration-300 hover:bg-[#25D366]/20"
             >
-              <MessageCircle className="w-4 h-4 text-[#25D366]" aria-hidden="true" />
+              <MessageCircle className="h-4 w-4 text-[#25D366]" aria-hidden="true" />
               Request a Safari Quote
             </a>
           </div>
 
-          <p className="text-xs text-muted-foreground mt-6">
+          <p className="mt-6 text-xs text-muted-foreground">
             Prefer email?{" "}
             <a
               href={`mailto:${COMPANY.email}`}
-              className="font-medium text-primary dark:text-amber-400 hover:underline"
+              className="font-medium text-primary hover:underline"
             >
               {COMPANY.email}
             </a>{" "}
             or start a{" "}
             <Link
               href={PLAN_SAFARI_ROUTE}
-              className="font-medium text-primary dark:text-amber-400 hover:underline"
+              className="font-medium text-primary hover:underline"
             >
               safari plan
             </Link>

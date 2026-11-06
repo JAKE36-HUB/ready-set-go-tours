@@ -90,7 +90,7 @@ export function AdaptiveImage({
 
   return (
     <div
-      className={cn("relative w-full overflow-hidden bg-slate-200 dark:bg-slate-800", className)}
+      className={cn("relative w-full overflow-hidden bg-muted", className)}
       style={containerStyle}
     >
       {size ? (
@@ -121,7 +121,7 @@ export function AdaptiveImage({
           />
         </>
       ) : (
-        <div className="absolute inset-0 animate-pulse bg-slate-300 dark:bg-slate-700" />
+        <div className="absolute inset-0 animate-pulse bg-muted" />
       )}
       {overlay && (
         <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" style={{ zIndex: 2 }} />
@@ -180,13 +180,13 @@ export function SmartImageInfo({ src }: { src: string | null | undefined }) {
 
   const badge =
     info.orientation === "portrait"
-      ? { label: "Portrait", cls: "bg-violet-100 text-violet-700 dark:bg-violet-950 dark:text-violet-400" }
+      ? { label: "Portrait", cls: "bg-accent/10 text-accent" }
       : info.orientation === "landscape"
-        ? { label: "Landscape", cls: "bg-sky-100 text-sky-700 dark:bg-sky-950 dark:text-sky-400" }
-        : { label: "Square", cls: "bg-emerald-100 text-emerald-700 dark:bg-emerald-950 dark:text-emerald-400" }
+        ? { label: "Landscape", cls: "bg-secondary text-primary" }
+        : { label: "Square", cls: "bg-primary/10 text-primary" }
 
   return (
-    <div className="flex flex-wrap items-center gap-1.5 text-[10px] text-slate-500 dark:text-slate-400">
+    <div className="flex flex-wrap items-center gap-1.5 text-[10px] text-muted-foreground">
       <span className="font-mono tabular-nums">
         {info.w} × {info.h}px
       </span>

@@ -46,11 +46,11 @@ export function WhatsAppButton() {
         className="flex items-center gap-2.5"
         aria-label="Chat with us on WhatsApp"
       >
-        <span className="hidden sm:inline-flex items-center h-11 pl-4 pr-5 rounded-2xl bg-[#25D366] shadow-xl shadow-emerald-900/20 text-sm font-semibold text-white group-hover:brightness-110 transition-all">
+        <span className="hidden sm:inline-flex items-center h-11 pl-4 pr-5 rounded-2xl bg-[#25D366] shadow-xl shadow-black/20 text-sm font-semibold text-white group-hover:brightness-110 transition-all">
           WhatsApp
         </span>
-        <span className="relative flex w-14 h-14 shrink-0 items-center justify-center rounded-full bg-[#25D366] text-white shadow-lg shadow-emerald-600/30 group-hover:scale-110 group-hover:shadow-emerald-600/50 active:scale-95 transition-all duration-300">
-          <span className="absolute inset-0 rounded-full bg-emerald-400 animate-ping opacity-20" />
+        <span className="relative flex w-14 h-14 shrink-0 items-center justify-center rounded-full bg-[#25D366] text-white shadow-lg shadow-black/25 group-hover:scale-110 group-hover:shadow-black/40 active:scale-95 transition-all duration-300">
+          <span className="absolute inset-0 rounded-full bg-[#25D366] animate-ping opacity-20" />
           <WhatsAppIcon className="w-7 h-7 relative z-10" />
         </span>
       </a>

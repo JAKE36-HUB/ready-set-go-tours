@@ -82,7 +82,7 @@ export function PackageOfTheDay({ frequency = "day" }: { frequency?: "day" | "we
   if (!loaded) {
     return (
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-12">
-        <div className="h-80 md:h-72 rounded-2xl bg-stone-200 dark:bg-stone-800 animate-pulse" />
+        <div className="h-80 rounded-[1.75rem] bg-muted animate-pulse md:h-72" />
       </div>
     )
   }
@@ -98,7 +98,7 @@ export function PackageOfTheDay({ frequency = "day" }: { frequency?: "day" | "we
         initial={{ opacity: 0, y: 24 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
-        className="relative overflow-hidden rounded-2xl"
+        className="relative overflow-hidden rounded-[1.75rem] border border-border/60"
       >
         <Image
           src={pkg.image}
@@ -108,19 +108,19 @@ export function PackageOfTheDay({ frequency = "day" }: { frequency?: "day" | "we
           className="object-cover"
           sizes="100vw"
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-black/85 via-black/60 to-black/25" />
-        <div className="relative z-10 p-6 sm:p-8 lg:p-10 flex flex-col min-h-[300px] md:min-h-[280px] justify-center">
-          <div className="flex flex-wrap items-center gap-3 mb-3">
-            <Badge className="gap-1.5 bg-amber-400 text-stone-900 border-transparent text-xs font-semibold px-3 py-1.5">
+        <div className="absolute inset-0 bg-gradient-to-r from-[#08130E]/90 via-[#08130E]/65 to-[#08130E]/20" />
+        <div className="relative z-10 flex min-h-[300px] flex-col justify-center p-6 sm:p-8 lg:p-10 md:min-h-[280px]">
+          <div className="mb-3 flex flex-wrap items-center gap-3">
+            <Badge className="gap-1.5 border-transparent bg-accent px-3 py-1.5 text-xs font-semibold text-accent-foreground">
               <Sparkles className="size-3.5" />
               {resp.label}
             </Badge>
-            <Badge className="bg-white/10 text-white border-white/20 text-xs font-semibold px-3 py-1.5 capitalize">
+            <Badge className="border-white/20 bg-white/10 px-3 py-1.5 text-xs font-semibold capitalize text-white">
               {typeLabel[pkg.type] || pkg.type || "Safari"}
             </Badge>
           </div>
 
-          <h3 className="font-display text-2xl sm:text-3xl lg:text-4xl font-medium text-white leading-tight max-w-3xl">
+          <h3 className="max-w-3xl font-display text-2xl font-normal leading-tight text-white sm:text-3xl lg:text-4xl">
             {pkg.name}
           </h3>
 
@@ -131,7 +131,7 @@ export function PackageOfTheDay({ frequency = "day" }: { frequency?: "day" | "we
             </span>
             <span className="inline-flex items-center gap-1.5">
               <span className="text-white/60">From</span>
-              <span className="text-lg font-semibold text-amber-300">
+              <span className="text-lg font-semibold text-[#E4C9A3]">
                 ${pkg.price.toLocaleString()}
               </span>
               <span className="text-white/60">/person</span>
@@ -139,11 +139,11 @@ export function PackageOfTheDay({ frequency = "day" }: { frequency?: "day" | "we
           </div>
 
           {highlights.length > 0 && (
-            <ul className="mt-4 flex flex-wrap gap-2 max-w-2xl">
+            <ul className="mt-4 flex max-w-2xl flex-wrap gap-2">
               {highlights.map((h) => (
                 <li
                   key={h}
-                  className="text-xs text-white/85 bg-white/10 border border-white/15 rounded-full px-3 py-1"
+                  className="rounded-full border border-white/15 bg-white/10 px-3 py-1 text-xs text-white/85"
                 >
                   {h}
                 </li>
@@ -153,8 +153,8 @@ export function PackageOfTheDay({ frequency = "day" }: { frequency?: "day" | "we
 
           <div className="mt-6">
             <Link href={`/holiday-packages/${pkg.slug}`}>
-              <Button size="lg">
-                View Package <ArrowRight className="size-4 ml-2" />
+              <Button size="lg" className="bg-[#E8D5B5] text-[#12251B] hover:bg-[#F1E2C8]">
+                View Package <ArrowRight className="ml-2 size-4" />
               </Button>
             </Link>
           </div>

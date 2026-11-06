@@ -30,13 +30,13 @@ export function ScratchCard({ prize, promoCode, onRevealed }: Props) {
     ctxRef.current = ctx
     ctx.scale(dpr, dpr)
     const grad = ctx.createLinearGradient(0, 0, W, H)
-    grad.addColorStop(0, "#94a3b8")
-    grad.addColorStop(1, "#64748b")
+    grad.addColorStop(0, "#E4C9A3")
+    grad.addColorStop(1, "#B8643A")
     ctx.fillStyle = grad
     ctx.beginPath()
     ctx.roundRect(0, 0, W, H, 14)
     ctx.fill()
-    ctx.fillStyle = "#334155"
+    ctx.fillStyle = "#1F4A38"
     ctx.font = "bold 16px sans-serif"
     ctx.textAlign = "center"
     ctx.textBaseline = "middle"
@@ -74,11 +74,11 @@ export function ScratchCard({ prize, promoCode, onRevealed }: Props) {
   return (
     <div className="flex flex-col items-center gap-3">
       <div className="relative overflow-hidden rounded-xl" style={{ width: W, height: H }}>
-        <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-amber-50 to-orange-100">
+        <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-secondary to-[#EADCC4]">
           <div className="text-center px-4">
-            <p className="text-lg font-extrabold text-slate-900">{revealed ? `🎉 ${prize}` : "???"}</p>
+            <p className="text-lg font-extrabold text-foreground">{revealed ? `🎉 ${prize}` : "???"}</p>
             {promoCode && (
-              <p className="text-xs mt-0.5 font-mono font-bold text-amber-700">CODE: {promoCode}</p>
+              <p className="text-xs mt-0.5 font-mono font-bold text-accent">CODE: {promoCode}</p>
             )}
           </div>
         </div>
@@ -106,7 +106,7 @@ export function ScratchCard({ prize, promoCode, onRevealed }: Props) {
       <motion.p
         initial={{ opacity: 0 }}
         animate={{ opacity: revealed ? 1 : 0 }}
-        className="text-xs text-slate-500 dark:text-slate-400 text-center"
+        className="text-xs text-muted-foreground text-center"
       >
         Scratch to reveal your reward!
       </motion.p>

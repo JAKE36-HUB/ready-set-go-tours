@@ -29,7 +29,7 @@ export default function SimilarPackages({
           </h2>
           <Link
             href="/holiday-packages"
-            className="inline-flex items-center gap-1.5 text-sm text-primary dark:text-amber-400 hover:underline shrink-0"
+            className="inline-flex shrink-0 items-center gap-1.5 text-sm text-primary hover:underline"
           >
             View all <ArrowRight className="size-4" />
           </Link>
@@ -40,7 +40,7 @@ export default function SimilarPackages({
             <Link
               key={p.slug}
               href={`/holiday-packages/${p.slug}`}
-              className="group flex flex-col bg-card rounded-2xl ring-1 ring-foreground/10 overflow-hidden hover:shadow-xl hover:-translate-y-1 transition-all duration-300"
+              className="group flex flex-col overflow-hidden rounded-[1.5rem] border border-border bg-card shadow-card transition-all duration-300 hover:-translate-y-1 hover:shadow-card-hover"
             >
               <div className="relative aspect-[16/10] overflow-hidden">
                 <Image
@@ -51,7 +51,7 @@ export default function SimilarPackages({
                   sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
-                <div className="absolute bottom-3 right-3 rounded-xl bg-stone-950/70 backdrop-blur px-3 py-1.5 text-white ring-1 ring-white/15">
+                <div className="absolute bottom-3 right-3 rounded-2xl bg-[#08130E]/70 px-3 py-1.5 text-white ring-1 ring-white/15 backdrop-blur">
                   <span className="text-sm font-semibold leading-none">
                     ${p.price.toLocaleString()}
                     <span className="text-[10px] font-normal text-white/60"> /pp</span>
@@ -66,7 +66,7 @@ export default function SimilarPackages({
                   {p.description}
                 </p>
                 <div className="flex items-center gap-2 text-xs text-muted-foreground pt-3 border-t border-foreground/5">
-                  <Clock className="size-3.5 text-primary dark:text-amber-400" />
+                  <Clock className="size-3.5 text-accent" />
                   {p.duration}
                 </div>
               </div>

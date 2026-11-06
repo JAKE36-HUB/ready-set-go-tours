@@ -129,42 +129,42 @@ export default async function HoneymoonDetailPage({
           className="object-cover"
           sizes="100vw"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
-        <div className="absolute inset-0 bg-gradient-to-r from-rose-950/40 via-transparent to-rose-950/40" />
-        <div className="relative z-10 w-full max-w-7xl mx-auto px-6 pb-10">
+        <div className="absolute inset-0 bg-gradient-to-t from-[#08130E]/85 via-[#08130E]/45 to-[#08130E]/20" />
+        <div className="absolute inset-0 bg-gradient-to-r from-[#08130E]/45 via-transparent to-[#08130E]/45" />
+        <div className="relative z-10 mx-auto w-full max-w-7xl px-6 pb-10">
           <Link
             href="/honeymoon-packages"
-            className="inline-flex items-center gap-1.5 text-white/70 hover:text-white text-sm mb-4 transition-colors"
+            className="mb-4 inline-flex items-center gap-1.5 text-sm text-white/70 transition-colors hover:text-white"
           >
             <ArrowLeft className="size-4" />
             Back to Honeymoon Packages
           </Link>
-          <div className="flex items-center gap-3 mb-3">
-            <span className="inline-flex items-center gap-1.5 bg-rose-500/20 backdrop-blur-sm rounded-full px-3 py-1 text-xs font-bold text-rose-300 border border-rose-500/30">
-              <Heart className="size-3 fill-rose-400" />
+          <div className="mb-3 flex items-center gap-3">
+            <span className="inline-flex items-center gap-1.5 rounded-full border border-accent/30 bg-accent/20 px-3 py-1 text-xs font-semibold text-[#E4C9A3] backdrop-blur-sm">
+              <Heart className="size-3 fill-current" />
               Honeymoon
             </span>
-            <span className="inline-flex items-center gap-1.5 text-xs text-white/60 bg-white/10 px-3 py-1.5 rounded-full">
+            <span className="inline-flex items-center gap-1.5 rounded-full bg-white/10 px-3 py-1.5 text-xs text-white/70">
               <Clock className="size-3" />
               {pkg.duration}
             </span>
           </div>
-          <h1 className="font-display text-3xl sm:text-4xl lg:text-5xl font-medium text-white mb-3 leading-tight">{pkg.name}</h1>
+          <h1 className="mb-3 font-display text-3xl font-normal leading-tight text-white sm:text-4xl lg:text-5xl">{pkg.name}</h1>
         </div>
       </section>
 
-      <section className="sticky top-0 z-30 bg-white/90 dark:bg-slate-950/90 backdrop-blur-md border-b border-foreground/5">
-        <div className="max-w-7xl mx-auto px-6 py-3 flex flex-wrap items-center justify-between gap-4">
+      <section className="sticky top-0 z-30 border-b border-border bg-background/90 backdrop-blur-md">
+        <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-4 px-6 py-3">
           <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
             <div>
-              <span className="text-[10px] text-muted-foreground uppercase tracking-wider">Non-resident</span>
+              <span className="text-[10px] uppercase tracking-wider text-muted-foreground">Non-resident</span>
               <div className="flex items-baseline gap-1">
                 <span className="text-2xl font-bold text-foreground">${pkg.price.toLocaleString()}</span>
                 <span className="text-xs text-muted-foreground">{honeymoonPriceSuffix(pkg.priceBasis)}</span>
               </div>
             </div>
-            <div className="pl-3 border-l border-foreground/10">
-              <span className="text-[10px] text-muted-foreground uppercase tracking-wider">Citizen / Resident</span>
+            <div className="border-l border-border pl-3">
+              <span className="text-[10px] uppercase tracking-wider text-muted-foreground">Citizen / Resident</span>
               <div className="text-sm font-semibold text-foreground">KES {(pkg.priceKES ?? pkg.price * USD_TO_KES).toLocaleString()}</div>
             </div>
           </div>
@@ -173,14 +173,14 @@ export default async function HoneymoonDetailPage({
               href={whatsappPackageLink(pkg.name)}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 h-11 px-5 rounded-xl bg-card border border-border hover:border-rose-300 dark:hover:border-rose-500/40 hover:bg-rose-50 dark:hover:bg-rose-950/20 text-foreground text-sm font-medium transition-all"
+              className="inline-flex h-11 items-center gap-2 rounded-full border border-border bg-card px-5 text-sm font-medium text-foreground transition-all hover:border-accent/40 hover:bg-accent/5"
             >
-              <MessageCircle className="size-4 text-rose-500" />
+              <MessageCircle className="size-4 text-accent" />
               WhatsApp a Safari Expert
             </a>
             <Link
               href={PLAN_SAFARI_ROUTE}
-              className="inline-flex items-center gap-2 h-11 px-6 rounded-xl bg-gradient-to-r from-rose-500 to-orange-500 hover:from-rose-600 hover:to-orange-600 text-white text-sm font-semibold shadow-lg shadow-rose-900/20 transition-all"
+              className="inline-flex h-11 items-center gap-2 rounded-full bg-primary px-6 text-sm font-semibold text-primary-foreground transition-all hover:bg-primary/90"
             >
               Design Our Honeymoon <ArrowRight className="size-4" />
             </Link>
@@ -193,27 +193,27 @@ export default async function HoneymoonDetailPage({
           <div className="grid lg:grid-cols-3 gap-12">
             <div className="lg:col-span-2 space-y-12">
               <AnimatedSection>
-                <h2 className="font-display text-2xl font-medium text-foreground mb-4">About This Package</h2>
+                <h2 className="font-display text-2xl font-normal text-foreground mb-4">About This Package</h2>
                 <p className="text-muted-foreground leading-relaxed text-lg">{pkg.description}</p>
               </AnimatedSection>
 
               {pkg.itinerary && pkg.itinerary.length > 0 && (
                 <AnimatedSection>
-                  <h2 className="font-display text-2xl font-medium text-foreground mb-4">Day-by-Day Itinerary</h2>
+                  <h2 className="font-display text-2xl font-normal text-foreground mb-4">Day-by-Day Itinerary</h2>
                   <ol className="space-y-3">
                     {pkg.itinerary.map((step, i) => (
                       <li
                         key={`${step.day}-${i}`}
-                        className="flex gap-4 p-4 sm:p-5 rounded-xl bg-card ring-1 ring-foreground/5"
+                        className="flex gap-4 rounded-xl bg-card p-4 ring-1 ring-border sm:p-5"
                       >
                         <span
                           aria-hidden
-                          className="shrink-0 inline-flex items-center justify-center size-10 rounded-full bg-rose-500/10 ring-1 ring-rose-500/20 text-rose-600 dark:text-rose-400 text-sm font-bold"
+                          className="inline-flex size-10 shrink-0 items-center justify-center rounded-full bg-accent/10 text-sm font-bold text-accent ring-1 ring-accent/20"
                         >
                           {i + 1}
                         </span>
                         <div className="min-w-0">
-                          <p className="text-[10px] uppercase tracking-wider font-semibold text-rose-500">
+                          <p className="text-[10px] font-semibold uppercase tracking-wider text-accent">
                             {step.day}
                           </p>
                           <h3 className="font-semibold text-foreground mt-0.5">{step.title}</h3>
@@ -226,11 +226,11 @@ export default async function HoneymoonDetailPage({
               )}
 
               <AnimatedSection>
-                <h2 className="font-display text-2xl font-medium text-foreground mb-4">Highlights</h2>
+                <h2 className="font-display text-2xl font-normal text-foreground mb-4">Highlights</h2>
                 <div className="grid sm:grid-cols-2 gap-3">
                   {pkg.highlights.map((h: string) => (
-                    <div key={h} className="flex items-start gap-3 p-4 rounded-xl bg-card ring-1 ring-foreground/5">
-                      <Heart className="size-5 text-rose-500 shrink-0 mt-0.5 fill-rose-500/20" />
+                    <div key={h} className="flex items-start gap-3 rounded-xl bg-card p-4 ring-1 ring-border">
+                      <Heart className="mt-0.5 size-5 shrink-0 fill-accent/20 text-accent" />
                       <span className="text-sm text-foreground">{h}</span>
                     </div>
                   ))}
@@ -238,11 +238,11 @@ export default async function HoneymoonDetailPage({
               </AnimatedSection>
 
               <AnimatedSection>
-                <h2 className="font-display text-2xl font-medium text-foreground mb-4">Activities</h2>
+                <h2 className="font-display text-2xl font-normal text-foreground mb-4">Activities</h2>
                 <div className="flex flex-wrap gap-2">
                   {pkg.activities.map((a: string) => (
-                    <span key={a} className="inline-flex items-center gap-1.5 text-sm bg-card ring-1 ring-foreground/10 text-foreground px-4 py-2 rounded-full">
-                      <Sparkles className="size-4 text-rose-500 shrink-0" />
+                    <span key={a} className="inline-flex items-center gap-1.5 rounded-full bg-card px-4 py-2 text-sm text-foreground ring-1 ring-border">
+                      <Sparkles className="size-4 shrink-0 text-accent" />
                       {a}
                     </span>
                   ))}
@@ -252,32 +252,32 @@ export default async function HoneymoonDetailPage({
 
             <div className="space-y-6">
               <AnimatedSection>
-                <div className="rounded-2xl bg-card ring-1 ring-foreground/10 p-6 space-y-5">
+                <div className="space-y-5 rounded-2xl bg-card p-6 ring-1 ring-border">
                   <h3 className="font-semibold text-foreground">Trip Details</h3>
                   <div className="space-y-4">
                     <div className="flex items-start gap-3">
-                      <Clock className="size-5 text-rose-500 shrink-0 mt-0.5" />
+                      <Clock className="mt-0.5 size-5 shrink-0 text-accent" />
                       <div>
                         <p className="text-sm font-medium text-foreground">Duration</p>
                         <p className="text-sm text-muted-foreground">{pkg.duration}</p>
                       </div>
                     </div>
                     <div className="flex items-start gap-3">
-                      <MapPin className="size-5 text-rose-500 shrink-0 mt-0.5" />
+                      <MapPin className="mt-0.5 size-5 shrink-0 text-accent" />
                       <div>
                         <p className="text-sm font-medium text-foreground">Accommodation</p>
                         <p className="text-sm text-muted-foreground">{pkg.accommodation}</p>
                       </div>
                     </div>
                     <div className="flex items-start gap-3">
-                      <Gift className="size-5 text-rose-500 shrink-0 mt-0.5" />
+                      <Gift className="mt-0.5 size-5 shrink-0 text-accent" />
                       <div>
                         <p className="text-sm font-medium text-foreground">Meals</p>
                         <p className="text-sm text-muted-foreground">{pkg.meals}</p>
                       </div>
                     </div>
                     <div className="flex items-start gap-3">
-                      <Shield className="size-5 text-rose-500 shrink-0 mt-0.5" />
+                      <Shield className="mt-0.5 size-5 shrink-0 text-accent" />
                       <div>
                         <p className="text-sm font-medium text-foreground">Transport</p>
                         <p className="text-sm text-muted-foreground">{pkg.transport}</p>
@@ -288,12 +288,12 @@ export default async function HoneymoonDetailPage({
               </AnimatedSection>
 
               <AnimatedSection>
-                <div className="rounded-2xl bg-card ring-1 ring-foreground/10 p-6">
+                <div className="rounded-2xl bg-card p-6 ring-1 ring-border">
                   <h3 className="font-semibold text-foreground mb-4">What&apos;s Included</h3>
                   <ul className="space-y-3">
                     {pkg.included.map((item: string) => (
                       <li key={item} className="flex items-start gap-3 text-sm text-muted-foreground">
-                        <Check className="size-4 text-rose-500 shrink-0 mt-0.5" />
+                        <Check className="mt-0.5 size-4 shrink-0 text-accent" />
                         {item}
                       </li>
                     ))}
@@ -304,16 +304,16 @@ export default async function HoneymoonDetailPage({
               <PaymentPolicy />
 
               <AnimatedSection>
-                <div className="rounded-3xl p-8 text-center bg-gradient-to-r from-rose-500 to-orange-500 text-white shadow-lg shadow-rose-900/20">
-                  <Heart className="size-8 text-white/90 mx-auto mb-2 fill-white/40" />
-                  <h3 className="font-display text-xl font-medium mb-2">Design your honeymoon</h3>
-                  <p className="text-sm text-white/80 mb-6">
+                <div className="rounded-3xl bg-[#08130E] p-8 text-center text-white ring-1 ring-white/10">
+                  <Heart className="mx-auto mb-2 size-8 fill-accent/30 text-accent" />
+                  <h3 className="mb-2 font-display text-xl font-normal">Design your honeymoon</h3>
+                  <p className="mb-6 text-sm text-white/70">
                     Tell us your dates, and we&apos;ll shape the itinerary around you both.
                   </p>
                   <div className="space-y-3">
                     <Link
                       href={PLAN_SAFARI_ROUTE}
-                      className="flex items-center justify-center gap-2 w-full h-12 rounded-xl bg-white text-rose-700 font-semibold hover:bg-rose-50 transition-all"
+                      className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-accent font-semibold text-white transition-all hover:bg-accent/90"
                     >
                       Plan My Safari <ArrowRight className="size-4" />
                     </Link>
@@ -321,7 +321,7 @@ export default async function HoneymoonDetailPage({
                       href={whatsappPackageLink(pkg.name)}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex items-center justify-center gap-2 w-full h-12 rounded-xl bg-white/10 hover:bg-white/20 text-white text-sm font-medium ring-1 ring-white/25 transition-all"
+                      className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-white/10 text-sm font-medium text-white ring-1 ring-white/25 transition-all hover:bg-white/20"
                     >
                       <MessageCircle className="size-4" />
                       WhatsApp a Safari Expert

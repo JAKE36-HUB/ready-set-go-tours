@@ -44,19 +44,19 @@ export default async function HoneymoonPage() {
           className="object-cover"
           sizes="100vw"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black/70" />
-        <div className="absolute inset-0 bg-gradient-to-r from-rose-950/40 via-transparent to-rose-950/40" />
+        <div className="absolute inset-0 bg-gradient-to-b from-[#08130E]/65 via-[#08130E]/40 to-[#08130E]/80" />
+        <div className="absolute inset-0 bg-gradient-to-r from-[#08130E]/45 via-transparent to-[#08130E]/45" />
 
-        <div className="relative z-10 text-center px-6 max-w-3xl mx-auto">
+        <div className="relative z-10 mx-auto max-w-3xl px-6 text-center">
           <AnimatedSection>
-            <span className="text-xs font-semibold uppercase tracking-[0.2em] text-rose-300">Honeymoons</span>
-            <h1 className="font-display text-4xl sm:text-5xl lg:text-6xl font-medium text-white mt-4 mb-5 leading-tight">
+            <span className="text-xs font-semibold uppercase tracking-[0.24em] text-[#E4C9A3]">Honeymoons</span>
+            <h1 className="mb-5 mt-4 font-display text-4xl font-normal leading-tight text-white sm:text-5xl lg:text-6xl">
               Travel as a couple.{" "}
-              <span className="block bg-gradient-to-r from-rose-300 via-rose-200 to-pink-200 bg-clip-text text-transparent">
+              <span className="block italic text-[#E4C9A3]">
                 Not as tourists.
               </span>
             </h1>
-            <p className="text-lg text-white/60 max-w-xl mx-auto">
+            <p className="mx-auto max-w-xl text-lg text-white/60">
               Handcrafted romantic escapes across East Africa. From private safari adventures to
               secluded beachfront villas — your dream honeymoon begins here.
             </p>
@@ -68,14 +68,12 @@ export default async function HoneymoonPage() {
       <HoneymoonGrid packages={packages} />
 
       {/* Why Honeymoon With Us */}
-      <section className="py-20 px-6 bg-gradient-to-b from-transparent to-rose-50/50 dark:to-rose-950/10">
-        <div className="max-w-7xl mx-auto">
+      <section className="bg-secondary/40 px-6 py-20">
+        <div className="mx-auto max-w-7xl">
           <AnimatedSection>
-            <h2 className="font-display text-3xl sm:text-4xl font-medium text-center text-foreground mb-4">
+            <h2 className="mb-4 text-center font-display text-3xl font-normal text-foreground sm:text-4xl">
               Why couple up for your{" "}
-              <span className="bg-gradient-to-r from-rose-500 to-pink-400 bg-clip-text text-transparent">
-                Honeymoon
-              </span>{" "}
+              <span className="italic text-accent">Honeymoon</span>{" "}
               with us
             </h2>
             <p className="text-muted-foreground text-center max-w-2xl mx-auto mb-14">
@@ -92,11 +90,11 @@ export default async function HoneymoonPage() {
               { icon: Star, title: "Flexible Planning", desc: "Customize every detail from accommodation to activities. Your honeymoon, your way." },
             ].map((item) => (
               <AnimatedSection key={item.title}>
-                <div className="text-center p-6 rounded-xl bg-card ring-1 ring-foreground/10">
-                  <div className="size-12 rounded-full bg-rose-100 dark:bg-rose-950/50 flex items-center justify-center mx-auto mb-4">
-                    <item.icon className="size-6 text-rose-600" />
+                <div className="rounded-2xl bg-card p-6 text-center ring-1 ring-border">
+                  <div className="mx-auto mb-4 flex size-12 items-center justify-center rounded-full bg-accent/10">
+                    <item.icon className="size-6 text-accent" />
                   </div>
-                  <h3 className="font-semibold text-foreground mb-2">{item.title}</h3>
+                  <h3 className="mb-2 font-semibold text-foreground">{item.title}</h3>
                   <p className="text-sm text-muted-foreground">{item.desc}</p>
                 </div>
               </AnimatedSection>
@@ -109,9 +107,9 @@ export default async function HoneymoonPage() {
       <section className="py-20 px-6">
         <div className="max-w-4xl mx-auto">
           <AnimatedSection>
-            <div className="relative p-10 rounded-3xl bg-gradient-to-br from-rose-50 to-pink-50 dark:from-rose-950/20 dark:to-pink-950/20 ring-1 ring-rose-100 dark:ring-rose-900/30 text-center">
-              <Quote className="size-10 text-rose-300/50 mx-auto mb-6" />
-              <blockquote className="font-display text-xl sm:text-2xl text-slate-700 dark:text-slate-200 font-medium italic leading-relaxed mb-6">
+            <div className="relative rounded-3xl bg-secondary/60 p-10 text-center ring-1 ring-border">
+              <Quote className="mx-auto mb-6 size-10 text-accent/40" />
+              <blockquote className="mb-6 font-display text-xl font-normal italic leading-relaxed text-foreground sm:text-2xl">
                 &ldquo;Our honeymoon in Kenya was absolutely perfect. Every detail was thought of —
                 from the champagne sundowner in the Mara to the private dinner on the beach in Diani.
                 We will treasure these memories forever.&rdquo;
@@ -127,16 +125,16 @@ export default async function HoneymoonPage() {
       <section className="pb-20 px-6">
         <div className="max-w-4xl mx-auto">
           <AnimatedSection>
-            <div className="text-center p-10 rounded-3xl bg-gradient-to-br from-slate-900 to-stone-900 ring-1 ring-slate-700 text-white">
-              <Heart className="size-10 text-rose-400 mx-auto mb-4" />
-              <h2 className="font-display text-2xl font-medium mb-3">Ready to Plan Your Romantic Escape?</h2>
-              <p className="text-white/60 mb-6 max-w-md mx-auto">
+            <div className="rounded-3xl bg-[#08130E] p-10 text-center text-white ring-1 ring-white/10">
+              <Heart className="mx-auto mb-4 size-10 text-accent" />
+              <h2 className="mb-3 font-display text-2xl font-normal">Ready to Plan Your Romantic Escape?</h2>
+              <p className="mx-auto mb-6 max-w-md text-white/60">
                 Tell us your dates and we&apos;ll shape the rest — candlelit dinners, sunrise drives and a beach to melt into.
               </p>
               <div className="flex flex-wrap items-center justify-center gap-4">
                 <Link
                   href={PLAN_SAFARI_ROUTE}
-                  className="inline-flex items-center justify-center gap-2 h-12 px-6 rounded-xl bg-gradient-to-r from-rose-500 to-orange-500 hover:from-rose-600 hover:to-orange-600 text-white text-sm font-semibold transition-all shadow-lg shadow-rose-900/30"
+                  className="inline-flex h-12 items-center justify-center gap-2 rounded-full bg-accent px-6 text-sm font-semibold text-white transition-all hover:bg-accent/90"
                 >
                   Design Our Honeymoon <ArrowRight className="size-4" />
                 </Link>
@@ -144,7 +142,7 @@ export default async function HoneymoonPage() {
                   href={whatsappLink()}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center justify-center gap-2 h-12 px-6 rounded-xl bg-white/10 hover:bg-white/20 text-white text-sm font-medium transition-all ring-1 ring-white/20"
+                  className="inline-flex h-12 items-center justify-center gap-2 rounded-full bg-white/10 px-6 text-sm font-medium text-white ring-1 ring-white/20 transition-all hover:bg-white/20"
                 >
                   <MessageCircle className="size-4" />
                   WhatsApp a Safari Expert

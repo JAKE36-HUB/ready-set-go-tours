@@ -25,17 +25,14 @@ export default function GalleryPage() {
     <main className="min-h-screen">
       {/* Hero */}
       <section className="relative h-[45vh] min-h-[350px] flex items-center justify-center overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-sky-900 via-blue-900 to-slate-900" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(56,189,248,0.1),transparent_70%)]" />
-        <div className="relative z-10 text-center px-6">
+        <div className="absolute inset-0 bg-gradient-to-br from-[#08130E] via-[#0C1511] to-[#08130E]" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(184,100,58,0.12),transparent_70%)]" />
+        <div className="relative z-10 px-6 text-center">
           <AnimatedSection direction="none">
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white mb-4">
-              Our{" "}
-              <span className="bg-gradient-to-r from-sky-400 to-cyan-300 bg-clip-text text-transparent">
-                Gallery
-              </span>
+            <h1 className="mb-4 font-display text-4xl font-normal text-white sm:text-5xl lg:text-6xl">
+              Our <span className="italic text-[#E4C9A3]">Gallery</span>
             </h1>
-            <p className="text-lg text-sky-200/70 max-w-xl mx-auto">
+            <p className="mx-auto max-w-xl text-lg text-white/60">
               A visual journey through the stunning landscapes, wildlife, and cultures of East Africa.
             </p>
           </AnimatedSection>
@@ -51,7 +48,7 @@ export default function GalleryPage() {
               onClick={() => setActiveCategory(cat)}
               className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${
                 activeCategory === cat
-                  ? "bg-sky-500 text-white shadow-lg shadow-sky-500/25"
+                  ? "bg-primary text-primary-foreground shadow-lg shadow-primary/20"
                   : "bg-muted text-muted-foreground hover:bg-muted/80"
               }`}
             >
@@ -72,7 +69,7 @@ export default function GalleryPage() {
                 <AnimatedSection delay={Math.min(i * 0.03, 0.3)}>
                   <button
                     onClick={() => openLightbox(i)}
-                    className="group relative w-full overflow-hidden rounded-xl cursor-pointer"
+                    className="group relative w-full cursor-pointer overflow-hidden rounded-2xl"
                   >
                     <Image
                       src={img.src}

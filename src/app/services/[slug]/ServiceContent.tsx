@@ -17,39 +17,11 @@ const iconMap: Record<string, typeof Hotel> = {
   Hotel, Plane, Heart, Shield, HeadphonesIcon, Award, Sparkles, Compass,
 }
 
-const serviceConfig: Record<string, { accent: string; accentBg: string; accentText: string; gradient: string; gradient2: string; icon: typeof Hotel }> = {
-  "safaris-guided-tours": {
-    accent: "amber",
-    accentBg: "bg-amber-50 dark:bg-amber-950/30",
-    accentText: "text-amber-600 dark:text-amber-400",
-    gradient: "from-amber-500 to-orange-600",
-    gradient2: "from-amber-900 via-orange-900 to-slate-900",
-    icon: Compass,
-  },
-  "hotel-bookings": {
-    accent: "sky",
-    accentBg: "bg-sky-50 dark:bg-sky-950/30",
-    accentText: "text-sky-600 dark:text-sky-400",
-    gradient: "from-sky-500 to-blue-600",
-    gradient2: "from-sky-900 via-blue-900 to-slate-900",
-    icon: Hotel,
-  },
-  "air-ticketing": {
-    accent: "emerald",
-    accentBg: "bg-emerald-50 dark:bg-emerald-950/30",
-    accentText: "text-emerald-600 dark:text-emerald-400",
-    gradient: "from-emerald-500 to-teal-600",
-    gradient2: "from-emerald-900 via-teal-900 to-slate-900",
-    icon: Plane,
-  },
-  "massage-wellness": {
-    accent: "violet",
-    accentBg: "bg-violet-50 dark:bg-violet-950/30",
-    accentText: "text-violet-600 dark:text-violet-400",
-    gradient: "from-violet-500 to-purple-600",
-    gradient2: "from-violet-900 via-purple-900 to-slate-900",
-    icon: Heart,
-  },
+const serviceConfig: Record<string, { icon: typeof Hotel }> = {
+  "safaris-guided-tours": { icon: Compass },
+  "hotel-bookings": { icon: Hotel },
+  "air-ticketing": { icon: Plane },
+  "massage-wellness": { icon: Heart },
 }
 
 const HOW_IT_WORKS: Record<string, { step: string; title: string; desc: string }[]> = {
@@ -116,20 +88,20 @@ export default function ServiceContent({ service }: Props) {
   return (
     <main className="min-h-screen">
       {/* Hero */}
-      <section className="relative h-[60vh] min-h-[480px] flex items-center justify-center overflow-hidden">
+      <section className="relative flex h-[60vh] min-h-[480px] items-center justify-center overflow-hidden">
         <Image src={service.image} alt={service.title} fill priority className="object-cover" sizes="100vw" />
-        <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black/70" />
-        <div className="absolute inset-0 bg-gradient-to-r from-black/30 to-transparent" />
-        <div className="relative z-10 text-center px-6 max-w-4xl mx-auto">
+        <div className="absolute inset-0 bg-gradient-to-b from-[#08130E]/65 via-[#08130E]/40 to-[#08130E]/85" />
+        <div className="absolute inset-0 bg-gradient-to-r from-[#08130E]/40 to-transparent" />
+        <div className="relative z-10 mx-auto max-w-4xl px-6 text-center">
           <AnimatedSection direction="none">
-            <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-white text-sm font-medium mb-6">
+            <span className="mb-6 inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-1.5 text-sm font-medium text-white backdrop-blur-md">
               <HeroIcon className="size-4" />
               {service.title}
             </span>
-            <h1 className="text-4xl sm:text-5xl lg:text-7xl font-bold text-white mb-6 leading-tight">
+            <h1 className="mb-6 font-display text-4xl font-normal leading-tight text-white sm:text-5xl lg:text-7xl">
               {service.tagline}
             </h1>
-            <p className="text-lg sm:text-xl text-white/70 max-w-2xl mx-auto leading-relaxed">
+            <p className="mx-auto max-w-2xl text-lg leading-relaxed text-white/65 sm:text-xl">
               {truncateAtWord(service.description, 180)}
             </p>
           </AnimatedSection>
@@ -138,13 +110,13 @@ export default function ServiceContent({ service }: Props) {
 
       {/* Trust Stats */}
       {trustStats.length > 0 && (
-        <section className="relative -mt-12 z-20 px-6">
-          <div className="max-w-5xl mx-auto">
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-px rounded-2xl overflow-hidden ring-1 ring-white/10 bg-white/5 backdrop-blur-xl shadow-2xl">
-              {trustStats.map((stat, i) => (
-                <div key={stat.label} className="bg-white dark:bg-slate-900 p-5 text-center">
-                  <div className={`text-2xl sm:text-3xl font-bold ${cfg.accentText}`}>{stat.value}</div>
-                  <div className="text-xs text-muted-foreground mt-0.5">{stat.label}</div>
+        <section className="relative z-20 -mt-12 px-6">
+          <div className="mx-auto max-w-5xl">
+            <div className="grid grid-cols-2 gap-px overflow-hidden rounded-2xl bg-border shadow-2xl ring-1 ring-border md:grid-cols-4">
+              {trustStats.map((stat) => (
+                <div key={stat.label} className="bg-card p-5 text-center">
+                  <div className="font-display text-2xl font-normal text-accent sm:text-3xl">{stat.value}</div>
+                  <div className="mt-0.5 text-xs text-muted-foreground">{stat.label}</div>
                 </div>
               ))}
             </div>
@@ -153,45 +125,43 @@ export default function ServiceContent({ service }: Props) {
       )}
 
       {/* Description */}
-      <section className="py-20 px-6">
-        <div className="max-w-4xl mx-auto">
+      <section className="px-6 py-20">
+        <div className="mx-auto max-w-4xl">
           <AnimatedSection>
-            <h2 className="text-3xl sm:text-4xl font-bold text-foreground text-center mb-8">
+            <h2 className="mb-8 text-center font-display text-3xl font-normal text-foreground sm:text-4xl">
               About Our{" "}
-              <span className={`bg-gradient-to-r ${cfg.gradient} bg-clip-text text-transparent`}>
-                {service.title}
-              </span>{" "}
+              <span className="italic text-accent">{service.title}</span>{" "}
               Service
             </h2>
-            <p className="text-lg text-muted-foreground leading-relaxed">{service.description}</p>
+            <p className="text-lg leading-relaxed text-muted-foreground">{service.description}</p>
           </AnimatedSection>
         </div>
       </section>
 
       {/* Features */}
-      <section className={`py-20 px-6 ${cfg.accentBg}`}>
-        <div className="max-w-5xl mx-auto">
+      <section className="bg-secondary/40 px-6 py-20">
+        <div className="mx-auto max-w-5xl">
           <AnimatedSection>
-            <h2 className="text-3xl sm:text-4xl font-bold text-foreground text-center mb-4">
+            <h2 className="mb-4 text-center font-display text-3xl font-normal text-foreground sm:text-4xl">
               What We Offer
             </h2>
-            <p className="text-muted-foreground text-center max-w-lg mx-auto mb-12">
+            <p className="mx-auto mb-12 max-w-lg text-center text-muted-foreground">
               Everything included with our {service.title.toLowerCase()} service.
             </p>
           </AnimatedSection>
-          <div className="grid sm:grid-cols-2 gap-4">
+          <div className="grid gap-4 sm:grid-cols-2">
             {service.features.map((f, i) => (
               <AnimatedSection key={f} delay={i * 0.05}>
                 <motion.div
                   initial={{ opacity: 0, x: -10 }}
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true }}
-                  className="flex items-start gap-3 p-5 rounded-xl bg-card border border-foreground/10 hover:shadow-md transition-shadow"
+                  className="flex items-start gap-3 rounded-xl border border-border bg-card p-5 transition-shadow hover:shadow-md"
                 >
-                  <div className={`w-8 h-8 rounded-lg ${cfg.accentBg} flex items-center justify-center shrink-0 mt-0.5`}>
-                    <Check className={`size-4 ${cfg.accentText}`} />
+                  <div className="mt-0.5 flex size-8 shrink-0 items-center justify-center rounded-lg bg-accent/10">
+                    <Check className="size-4 text-accent" />
                   </div>
-                  <span className="text-[15px] text-foreground leading-relaxed">{f}</span>
+                  <span className="text-[15px] leading-relaxed text-foreground">{f}</span>
                 </motion.div>
               </AnimatedSection>
             ))}
@@ -201,28 +171,25 @@ export default function ServiceContent({ service }: Props) {
 
       {/* How It Works */}
       {steps.length > 0 && (
-        <section className="py-20 px-6">
-          <div className="max-w-5xl mx-auto">
+        <section className="px-6 py-20">
+          <div className="mx-auto max-w-5xl">
             <AnimatedSection>
-              <h2 className="text-3xl sm:text-4xl font-bold text-foreground text-center mb-4">
-                How It{" "}
-                <span className={`bg-gradient-to-r ${cfg.gradient} bg-clip-text text-transparent`}>
-                  Works
-                </span>
+              <h2 className="mb-4 text-center font-display text-3xl font-normal text-foreground sm:text-4xl">
+                How It <span className="italic text-accent">Works</span>
               </h2>
-              <p className="text-muted-foreground text-center max-w-lg mx-auto mb-14">
+              <p className="mx-auto mb-14 max-w-lg text-center text-muted-foreground">
                 Booking your {service.title.toLowerCase()} with us is simple and stress-free.
               </p>
             </AnimatedSection>
-            <div className="grid sm:grid-cols-3 gap-8">
+            <div className="grid gap-8 sm:grid-cols-3">
               {steps.map((step, i) => (
                 <AnimatedSection key={step.step} delay={i * 0.1}>
-                  <div className="text-center p-6 rounded-2xl bg-card ring-1 ring-foreground/10 hover:shadow-lg transition-shadow h-full">
-                    <div className={`w-14 h-14 rounded-2xl bg-gradient-to-br ${cfg.gradient} flex items-center justify-center mx-auto mb-5 shadow-lg`}>
-                      <span className="text-white font-bold text-lg">{step.step}</span>
+                  <div className="h-full rounded-2xl bg-card p-6 text-center ring-1 ring-border transition-shadow hover:shadow-lg">
+                    <div className="mx-auto mb-5 flex size-14 items-center justify-center rounded-2xl bg-primary shadow-lg shadow-primary/20">
+                      <span className="font-display text-lg text-primary-foreground">{step.step}</span>
                     </div>
-                    <h3 className="text-lg font-bold text-foreground mb-3">{step.title}</h3>
-                    <p className="text-sm text-muted-foreground leading-relaxed">{step.desc}</p>
+                    <h3 className="mb-3 font-display text-lg font-normal text-foreground">{step.title}</h3>
+                    <p className="text-sm leading-relaxed text-muted-foreground">{step.desc}</p>
                   </div>
                 </AnimatedSection>
               ))}
@@ -234,31 +201,31 @@ export default function ServiceContent({ service }: Props) {
       {/* Decorative Image */}
       <section className="relative h-[40vh] min-h-[300px] overflow-hidden">
         <Image src={service.image} alt={service.title} fill className="object-cover" sizes="100vw" />
-        <div className="absolute inset-0 bg-gradient-to-r from-black/50 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-r from-[#08130E]/60 to-transparent" />
       </section>
 
       {/* Benefits */}
-      <section className="py-20 px-6">
-        <div className="max-w-5xl mx-auto">
+      <section className="px-6 py-20">
+        <div className="mx-auto max-w-5xl">
           <AnimatedSection>
-            <h2 className="text-3xl sm:text-4xl font-bold text-foreground text-center mb-4">
+            <h2 className="mb-4 text-center font-display text-3xl font-normal text-foreground sm:text-4xl">
               Why Book With Us
             </h2>
-            <p className="text-muted-foreground text-center max-w-lg mx-auto mb-12">
+            <p className="mx-auto mb-12 max-w-lg text-center text-muted-foreground">
               Here&apos;s what sets our {service.title.toLowerCase()} service apart.
             </p>
           </AnimatedSection>
-          <div className="grid sm:grid-cols-3 gap-6">
+          <div className="grid gap-6 sm:grid-cols-3">
             {service.benefits.map((b, i) => {
               const BIcon = iconMap[b.icon] || Compass
               return (
                 <AnimatedSection key={b.title} delay={i * 0.08}>
-                  <div className={`h-full p-6 rounded-2xl ${cfg.accentBg} ring-1 ring-${cfg.accent}-200 dark:ring-${cfg.accent}-800/30 text-center hover:shadow-lg transition-shadow`}>
-                    <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${cfg.gradient} flex items-center justify-center mx-auto mb-4 shadow-lg`}>
-                      <BIcon className="size-6 text-white" />
+                  <div className="h-full rounded-2xl bg-secondary/40 p-6 text-center ring-1 ring-border transition-shadow hover:shadow-lg">
+                    <div className="mx-auto mb-4 flex size-12 items-center justify-center rounded-xl bg-primary shadow-lg shadow-primary/20">
+                      <BIcon className="size-6 text-primary-foreground" />
                     </div>
-                    <h3 className="text-lg font-bold text-foreground mb-2">{b.title}</h3>
-                    <p className="text-sm text-muted-foreground leading-relaxed">{b.desc}</p>
+                    <h3 className="mb-2 font-display text-lg font-normal text-foreground">{b.title}</h3>
+                    <p className="text-sm leading-relaxed text-muted-foreground">{b.desc}</p>
                   </div>
                 </AnimatedSection>
               )
@@ -269,37 +236,34 @@ export default function ServiceContent({ service }: Props) {
 
       {/* Testimonials */}
       {serviceTestimonials.length > 0 && (
-        <section className={`py-20 px-6 ${cfg.accentBg}`}>
-          <div className="max-w-5xl mx-auto">
+        <section className="bg-secondary/40 px-6 py-20">
+          <div className="mx-auto max-w-5xl">
             <AnimatedSection>
-              <h2 className="text-3xl sm:text-4xl font-bold text-foreground text-center mb-4">
-                What Our{" "}
-                <span className={`bg-gradient-to-r ${cfg.gradient} bg-clip-text text-transparent`}>
-                  Guests Say
-                </span>
+              <h2 className="mb-4 text-center font-display text-3xl font-normal text-foreground sm:text-4xl">
+                What Our <span className="italic text-accent">Guests Say</span>
               </h2>
-              <p className="text-muted-foreground text-center max-w-lg mx-auto mb-12">
+              <p className="mx-auto mb-12 max-w-lg text-center text-muted-foreground">
                 Real feedback from travelers who used our {service.title.toLowerCase()} service.
               </p>
             </AnimatedSection>
-            <div className="grid sm:grid-cols-2 gap-6">
+            <div className="grid gap-6 sm:grid-cols-2">
               {serviceTestimonials.map((t) => (
                 <AnimatedSection key={t.id}>
-                  <div className="p-6 rounded-2xl bg-card ring-1 ring-foreground/10 h-full flex flex-col">
-                    <div className="flex items-center gap-3 mb-4">
-                      <div className="relative w-10 h-10 rounded-full overflow-hidden ring-2 ring-foreground/10">
+                  <div className="flex h-full flex-col rounded-2xl bg-card p-6 ring-1 ring-border">
+                    <div className="mb-4 flex items-center gap-3">
+                      <div className="relative size-10 overflow-hidden rounded-full ring-2 ring-border">
                         <Image src={t.image} alt={t.name} fill className="object-cover" sizes="40px" />
                       </div>
                       <div>
-                        <p className="font-semibold text-sm text-foreground">{t.name}</p>
-                        <div className="flex items-center gap-1 mt-0.5">
+                        <p className="text-sm font-semibold text-foreground">{t.name}</p>
+                        <div className="mt-0.5 flex items-center gap-1">
                           {Array.from({ length: 5 }).map((_, i) => (
-                            <Star key={i} className={`size-3 ${i < t.rating ? "text-amber-400 fill-amber-400" : "text-muted"}`} />
+                            <Star key={i} className={`size-3 ${i < t.rating ? "fill-accent text-accent" : "text-muted"}`} />
                           ))}
                         </div>
                       </div>
                     </div>
-                    <p className="text-sm text-muted-foreground leading-relaxed flex-1 italic">
+                    <p className="flex-1 text-sm italic leading-relaxed text-muted-foreground">
                       &ldquo;{t.text.slice(0, 200)}{t.text.length > 200 ? "..." : ""}&rdquo;
                     </p>
                   </div>
@@ -311,24 +275,24 @@ export default function ServiceContent({ service }: Props) {
       )}
 
       {/* Why Us */}
-      <section className="py-20 px-6">
-        <div className="max-w-4xl mx-auto">
+      <section className="px-6 py-20">
+        <div className="mx-auto max-w-4xl">
           <AnimatedSection>
-            <h2 className="text-3xl sm:text-4xl font-bold text-foreground text-center mb-4">
+            <h2 className="mb-4 text-center font-display text-3xl font-normal text-foreground sm:text-4xl">
               Why Choose {COMPANY.shortName}
             </h2>
-            <p className="text-muted-foreground text-center max-w-lg mx-auto mb-12">
+            <p className="mx-auto mb-12 max-w-lg text-center text-muted-foreground">
               What makes us different when it comes to {service.title.toLowerCase()}.
             </p>
           </AnimatedSection>
           <div className="space-y-4">
             {service.whyUs.map((item, i) => (
               <AnimatedSection key={i} delay={i * 0.06}>
-                <div className="flex items-start gap-4 p-5 rounded-xl bg-card border border-foreground/10 hover:shadow-md transition-shadow">
-                  <div className={`w-8 h-8 rounded-full ${cfg.accentBg} flex items-center justify-center shrink-0 mt-0.5`}>
-                    <Star className={`size-4 ${cfg.accentText} fill-current`} />
+                <div className="flex items-start gap-4 rounded-xl border border-border bg-card p-5 transition-shadow hover:shadow-md">
+                  <div className="mt-0.5 flex size-8 shrink-0 items-center justify-center rounded-full bg-accent/10">
+                    <Star className="size-4 fill-current text-accent" />
                   </div>
-                  <p className="text-[15px] text-foreground leading-relaxed">{item}</p>
+                  <p className="text-[15px] leading-relaxed text-foreground">{item}</p>
                 </div>
               </AnimatedSection>
             ))}
@@ -339,28 +303,28 @@ export default function ServiceContent({ service }: Props) {
       {/* Decorative Image */}
       <section className="relative h-[35vh] min-h-[260px] overflow-hidden">
         <Image src={service.image} alt={service.title} fill className="object-cover" sizes="100vw" />
-        <div className="absolute inset-0 bg-gradient-to-l from-black/40 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-l from-[#08130E]/50 to-transparent" />
       </section>
 
       {/* FAQs */}
-      <section className="py-20 px-6">
-        <div className="max-w-4xl mx-auto">
+      <section className="px-6 py-20">
+        <div className="mx-auto max-w-4xl">
           <AnimatedSection>
-            <h2 className="text-3xl sm:text-4xl font-bold text-foreground text-center mb-4">
+            <h2 className="mb-4 text-center font-display text-3xl font-normal text-foreground sm:text-4xl">
               Frequently Asked Questions
             </h2>
-            <p className="text-muted-foreground text-center max-w-lg mx-auto mb-12">
+            <p className="mx-auto mb-12 max-w-lg text-center text-muted-foreground">
               Quick answers to common questions about our {service.title.toLowerCase()} service.
             </p>
           </AnimatedSection>
-          <Accordion className="ring-1 ring-foreground/10 rounded-2xl bg-card p-2">
+          <Accordion className="rounded-2xl bg-card p-2 ring-1 ring-border">
             {service.faqs.map((faq, i) => (
               <AccordionItem key={i} value={`faq-${i}`} className="border-b border-border/50 last:border-0">
-                <AccordionTrigger className="px-4 py-4 text-left text-foreground hover:no-underline text-sm font-medium">
+                <AccordionTrigger className="px-4 py-4 text-left text-sm font-medium text-foreground hover:no-underline">
                   {faq.q}
                 </AccordionTrigger>
                 <AccordionContent className="px-4 pb-4">
-                  <p className="text-sm text-muted-foreground leading-relaxed">{faq.a}</p>
+                  <p className="text-sm leading-relaxed text-muted-foreground">{faq.a}</p>
                 </AccordionContent>
               </AccordionItem>
             ))}
@@ -369,22 +333,22 @@ export default function ServiceContent({ service }: Props) {
       </section>
 
       {/* CTA */}
-      <section className={`py-20 px-6 bg-gradient-to-br ${cfg.gradient2} relative overflow-hidden`}>
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_right,rgba(255,255,255,0.08),transparent_60%)]" />
-        <div className="max-w-3xl mx-auto text-center relative z-10">
+      <section className="relative overflow-hidden bg-[#08130E] px-6 py-20">
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_right,rgba(184,100,58,0.18),transparent_60%)]" />
+        <div className="relative z-10 mx-auto max-w-3xl text-center">
           <AnimatedSection>
-            <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">
+            <h2 className="mb-4 font-display text-3xl font-normal text-white sm:text-4xl">
               Ready to Get Started?
             </h2>
-            <p className="text-white/70 text-lg max-w-xl mx-auto mb-8">
+            <p className="mx-auto mb-8 max-w-xl text-lg text-white/60">
               Reach out today and let us take care of the details. We&apos;re here to help
               with every step of your {service.title.toLowerCase()} booking.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <div className="flex flex-col justify-center gap-4 sm:flex-row">
               <button
                 type="button"
                 onClick={() => openBookingModal(service.title)}
-                className="inline-flex items-center justify-center gap-2 h-12 px-8 rounded-xl bg-gradient-to-r from-emerald-500 to-emerald-600 hover:from-emerald-400 hover:to-emerald-500 text-white font-semibold shadow-lg shadow-emerald-500/25 transition-all"
+                className="inline-flex h-12 items-center justify-center gap-2 rounded-full bg-[#E4C9A3] px-8 font-semibold text-[#1F4A38] shadow-lg shadow-black/20 transition-all hover:bg-[#F0DDC0]"
               >
                 Get a Free Quote
               </button>
@@ -392,7 +356,7 @@ export default function ServiceContent({ service }: Props) {
                 href={whatsappPackageLink(service.title)}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center justify-center gap-2 h-12 px-8 rounded-xl border border-white/20 text-white hover:bg-white/10 transition-colors"
+                className="inline-flex h-12 items-center justify-center gap-2 rounded-full border border-white/20 px-8 text-white transition-colors hover:bg-white/10"
               >
                 <Phone className="size-4" />
                 WhatsApp Us

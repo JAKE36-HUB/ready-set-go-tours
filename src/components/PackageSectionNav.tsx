@@ -49,7 +49,7 @@ export default function PackageSectionNav({ items }: { items: SectionNavItem[] }
                 className={cn(
                   "px-3 py-1.5 text-sm rounded-full transition-colors whitespace-nowrap",
                   active === it.id
-                    ? "bg-primary/10 dark:bg-amber-400/10 text-primary dark:text-amber-400 font-medium"
+                    ? "bg-primary/10 text-primary font-medium"
                     : "text-muted-foreground hover:text-foreground"
                 )}
               >

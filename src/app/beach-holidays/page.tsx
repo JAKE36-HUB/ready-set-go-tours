@@ -37,20 +37,17 @@ export default function BeachHolidaysPage() {
           className="object-cover"
           sizes="100vw"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-sky-900/40 via-transparent to-sky-900/60" />
-        <div className="relative z-10 text-center px-6 max-w-4xl mx-auto">
+        <div className="absolute inset-0 bg-gradient-to-b from-[#08130E]/65 via-[#08130E]/40 to-[#08130E]/85" />
+        <div className="relative z-10 mx-auto max-w-4xl px-6 text-center">
           <AnimatedSection direction="none">
-            <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-white text-sm font-medium mb-6">
+            <span className="mb-6 inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-1.5 text-sm font-medium text-white backdrop-blur-md">
               <Waves className="size-4" />
               Coastal Paradise
             </span>
-            <h1 className="text-4xl sm:text-5xl lg:text-7xl font-bold text-white mb-6 leading-tight">
-              Beach{" "}
-              <span className="bg-gradient-to-r from-cyan-300 to-sky-200 bg-clip-text text-transparent">
-                Holidays
-              </span>
+            <h1 className="mb-6 font-display text-4xl font-normal leading-tight text-white sm:text-5xl lg:text-7xl">
+              Beach <span className="italic text-[#E4C9A3]">Holidays</span>
             </h1>
-            <p className="text-lg sm:text-xl text-white/80 max-w-2xl mx-auto leading-relaxed">
+            <p className="mx-auto max-w-2xl text-lg leading-relaxed text-white/65 sm:text-xl">
               Crystal-clear waters, powdery white sands, and world-class resorts along the Indian
               Ocean coastline of Kenya and Tanzania.
             </p>
@@ -62,9 +59,8 @@ export default function BeachHolidaysPage() {
       <section className="py-20 px-6">
         <div className="max-w-4xl mx-auto text-center">
           <AnimatedSection>
-            <h2 className="text-3xl sm:text-4xl font-bold text-foreground mb-6">
-              Your Dream{" "}
-              <span className="text-sky-500">Coastal Escape</span>
+            <h2 className="mb-6 font-display text-3xl font-normal text-foreground sm:text-4xl">
+              Your Dream <span className="italic text-accent">Coastal Escape</span>
             </h2>
             <p className="text-lg text-muted-foreground leading-relaxed">
               From the legendary Diani Beach to the spice-scented shores of Zanzibar, the East
@@ -80,7 +76,7 @@ export default function BeachHolidaysPage() {
       <section className="pb-20 px-6">
         <div className="max-w-7xl mx-auto">
           <AnimatedSection>
-            <h2 className="text-3xl sm:text-4xl font-bold text-foreground mb-12 text-center">
+            <h2 className="mb-12 text-center font-display text-3xl font-normal text-foreground sm:text-4xl">
               Coastal Destinations
             </h2>
           </AnimatedSection>
@@ -88,7 +84,7 @@ export default function BeachHolidaysPage() {
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
             {BEACH_DESTINATIONS.map((beach, i) => (
               <AnimatedSection key={beach.id} delay={i * 0.05}>
-                <div className="group flex flex-col bg-card rounded-2xl ring-1 ring-foreground/10 overflow-hidden hover:shadow-xl transition-all duration-300 h-full">
+                <div className="group flex h-full flex-col overflow-hidden rounded-2xl bg-card ring-1 ring-border transition-all duration-300 hover:shadow-xl">
                   {/* Image */}
                   <Link href={beachHref(beach.slug)} className="relative aspect-[4/3] overflow-hidden block">
                     <Image
@@ -101,7 +97,7 @@ export default function BeachHolidaysPage() {
                     <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
                     <div className="absolute top-3 right-3">
                       <div className="flex items-center gap-1 px-2 py-1 rounded-full bg-white/20 backdrop-blur-md text-white text-xs font-medium">
-                        <Star className="size-3 text-amber-400 fill-amber-400" />
+                        <Star className="size-3 fill-accent text-accent" />
                         {beach.rating}
                       </div>
                     </div>
@@ -115,8 +111,8 @@ export default function BeachHolidaysPage() {
 
                   {/* Content */}
                   <div className="flex flex-col flex-1 p-5">
-                    <h3 className="text-lg font-bold text-foreground mb-2">
-                      <Link href={beachHref(beach.slug)} className="hover:text-sky-600 transition-colors">
+                    <h3 className="mb-2 text-lg font-bold text-foreground">
+                      <Link href={beachHref(beach.slug)} className="transition-colors hover:text-accent">
                         {beach.name}
                       </Link>
                     </h3>
@@ -126,11 +122,11 @@ export default function BeachHolidaysPage() {
 
                     <div className="space-y-1.5 mb-3 text-xs text-muted-foreground">
                       <div className="flex items-center gap-1.5">
-                        <Hotel className="size-3.5 text-sky-500" />
+                        <Hotel className="size-3.5 text-accent" />
                         <span>{beach.accommodation}</span>
                       </div>
                       <div className="flex items-center gap-1.5">
-                        <Clock className="size-3.5 text-sky-500" />
+                        <Clock className="size-3.5 text-accent" />
                         <span>{beach.duration}</span>
                       </div>
                     </div>
@@ -139,7 +135,7 @@ export default function BeachHolidaysPage() {
                       {beach.highlights.slice(0, 3).map((h) => (
                         <span
                           key={h}
-                          className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-sky-50 dark:bg-sky-950/30 text-[10px] text-sky-600 dark:text-sky-400"
+                          className="inline-flex items-center gap-1 rounded-full bg-accent/10 px-2 py-0.5 text-[10px] text-accent"
                         >
                           <Compass className="size-2.5" />
                           {h}
@@ -162,7 +158,7 @@ export default function BeachHolidaysPage() {
                     <div className="space-y-2">
                       <Link
                         href={beachHref(beach.slug)}
-                        className="flex items-center justify-center gap-2 w-full h-10 rounded-lg bg-gradient-to-r from-cyan-500 to-sky-600 hover:from-cyan-400 hover:to-sky-500 text-white text-sm font-medium transition-all"
+                        className="flex h-10 w-full items-center justify-center gap-2 rounded-full bg-primary text-sm font-medium text-primary-foreground transition-all hover:bg-primary/90"
                       >
                         View Details
                         <ArrowRight className="size-4" />
@@ -185,14 +181,14 @@ export default function BeachHolidaysPage() {
       </section>
 
       {/* Resort Suggestions */}
-      <section className="py-20 px-6 bg-gradient-to-b from-sky-50/50 to-transparent dark:from-sky-950/20">
-        <div className="max-w-7xl mx-auto">
+      <section className="bg-secondary/40 px-6 py-20">
+        <div className="mx-auto max-w-7xl">
           <AnimatedSection>
-            <div className="text-center mb-12">
-              <h2 className="text-3xl sm:text-4xl font-bold text-foreground mb-4">
-                Recommended <span className="text-sky-500">Resorts & Stays</span>
+            <div className="mb-12 text-center">
+              <h2 className="mb-4 font-display text-3xl font-normal text-foreground sm:text-4xl">
+                Recommended <span className="italic text-accent">Resorts &amp; Stays</span>
               </h2>
-              <p className="text-muted-foreground max-w-xl mx-auto">
+              <p className="mx-auto max-w-xl text-muted-foreground">
                 Handpicked accommodations for the ultimate beach experience.
               </p>
             </div>
@@ -201,9 +197,9 @@ export default function BeachHolidaysPage() {
           <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
             {RESORTS.map((resort, i) => (
               <AnimatedSection key={resort.name} delay={i * 0.05}>
-                <div className="flex items-start gap-4 p-5 bg-card rounded-2xl ring-1 ring-foreground/10 hover:shadow-lg transition-shadow">
-                  <div className="w-12 h-12 rounded-xl bg-sky-100 dark:bg-sky-900/30 flex items-center justify-center shrink-0">
-                    <Palmtree className="size-6 text-sky-500" />
+                <div className="flex items-start gap-4 rounded-2xl bg-card p-5 ring-1 ring-border transition-shadow hover:shadow-lg">
+                  <div className="flex size-12 shrink-0 items-center justify-center rounded-xl bg-accent/10">
+                    <Palmtree className="size-6 text-accent" />
                   </div>
                   <div>
                     <h3 className="font-bold text-foreground">{resort.name}</h3>
@@ -215,8 +211,8 @@ export default function BeachHolidaysPage() {
                       <Badge variant="secondary" className="text-[10px]">
                         {resort.type}
                       </Badge>
-                      <span className="flex items-center gap-0.5 text-xs text-amber-500">
-                        <Star className="size-3 fill-amber-500" />
+                      <span className="flex items-center gap-0.5 text-xs text-accent">
+                        <Star className="size-3 fill-accent" />
                         {resort.rating}
                       </span>
                     </div>
@@ -229,21 +225,21 @@ export default function BeachHolidaysPage() {
       </section>
 
       {/* CTA */}
-      <section className="py-20 px-6 bg-gradient-to-br from-cyan-900 via-sky-900 to-blue-900 relative overflow-hidden">
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,rgba(56,189,248,0.15),transparent_60%)]" />
-        <div className="max-w-4xl mx-auto text-center relative z-10">
+      <section className="relative overflow-hidden bg-[#08130E] px-6 py-20">
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,rgba(184,100,58,0.18),transparent_60%)]" />
+        <div className="relative z-10 mx-auto max-w-4xl text-center">
           <AnimatedSection>
-            <Anchor className="size-10 text-cyan-300 mx-auto mb-4" />
-            <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">
+            <Anchor className="mx-auto mb-4 size-10 text-accent" />
+            <h2 className="mb-4 font-display text-3xl font-normal text-white sm:text-4xl">
               Plan Your Beach Escape
             </h2>
-            <p className="text-cyan-200/80 text-lg max-w-2xl mx-auto mb-8">
+            <p className="mx-auto mb-8 max-w-2xl text-lg text-white/60">
               Combine a wildlife safari with a beach holiday for the ultimate East African
               experience. We handle all transfers and logistics.
             </p>
             <Button
               onClick={() => openBookingModal("Beach Holiday Package")}
-              className="bg-gradient-to-r from-cyan-400 to-sky-500 hover:from-cyan-300 hover:to-sky-400 text-white px-8 h-11 shadow-lg shadow-cyan-500/25"
+              className="h-11 bg-accent px-8 text-white shadow-lg shadow-accent/20 hover:bg-accent/90"
             >
               Get a Free Quote
             </Button>

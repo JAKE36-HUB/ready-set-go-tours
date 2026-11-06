@@ -45,7 +45,7 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 24,
     fontWeight: "bold",
-    color: "#1e293b",
+    color: "#131C17",
     marginBottom: 6,
   },
   subtitle: {
@@ -79,12 +79,12 @@ const styles = StyleSheet.create({
   },
   value: {
     fontSize: 10,
-    color: "#1e293b",
+    color: "#131C17",
     flex: 1,
   },
   highlightItem: {
     fontSize: 10,
-    color: "#1e293b",
+    color: "#131C17",
     marginBottom: 4,
     paddingLeft: 12,
   },
@@ -264,7 +264,7 @@ export default function PdfItinerary({ data, buttonLabel = "Download Itinerary",
       document={<ItineraryDocument data={data} />}
       fileName={`${data.name.replace(/\s+/g, "-").toLowerCase()}-itinerary.pdf`}
       className={cn(
-        "inline-flex items-center justify-center gap-2 h-11 px-5 rounded-xl bg-emerald-500 hover:bg-emerald-600 text-white text-sm font-medium transition-all duration-300 shadow-lg shadow-emerald-500/25 hover:shadow-emerald-500/40",
+        "inline-flex items-center justify-center gap-2 h-11 px-5 rounded-full gradient-primary text-white text-sm font-medium transition-all duration-300 shadow-lg shadow-primary/20 hover:shadow-primary/35",
         className
       )}
     >

@@ -40,14 +40,14 @@ export default async function HolidayPackagesPage({
           className="object-cover"
           sizes="100vw"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black/70" />
-        <div className="relative z-10 text-center px-6 max-w-4xl mx-auto">
+        <div className="absolute inset-0 bg-gradient-to-b from-[#08130E]/65 via-[#08130E]/40 to-[#08130E]/80" />
+        <div className="relative z-10 mx-auto max-w-4xl px-6 text-center">
           <AnimatedSection direction="none">
-            <span className="text-xs font-semibold uppercase tracking-[0.2em] text-amber-400">Holiday Packages</span>
-            <h1 className="font-display text-4xl sm:text-5xl lg:text-6xl font-medium text-white mt-4 mb-5 leading-tight">
+            <span className="text-xs font-semibold uppercase tracking-[0.24em] text-[#E4C9A3]">Holiday Packages</span>
+            <h1 className="mb-5 mt-4 font-display text-4xl font-normal leading-tight text-white sm:text-5xl lg:text-6xl">
               Safaris worth planning a trip around
             </h1>
-            <p className="text-lg text-white/70 max-w-xl mx-auto">
+            <p className="mx-auto max-w-xl text-lg text-white/70">
               Curated safari, beach, and adventure packages — each one fully customisable to the way you travel.
             </p>
           </AnimatedSection>

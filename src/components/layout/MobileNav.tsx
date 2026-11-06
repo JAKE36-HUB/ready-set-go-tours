@@ -67,9 +67,9 @@ export function MobileNav({ isOpen, onClose }: MobileNavProps) {
             animate={{ x: 0 }}
             exit={{ x: "100%" }}
             transition={{ type: "spring", damping: 28, stiffness: 300 }}
-            className="absolute right-0 top-0 bottom-0 w-full max-w-sm bg-white dark:bg-slate-950 shadow-2xl flex flex-col"
+            className="absolute right-0 top-0 bottom-0 w-full max-w-sm bg-background shadow-2xl flex flex-col"
           >
-            <div className="flex items-center justify-between p-4 border-b border-slate-100 dark:border-slate-800">
+            <div className="flex items-center justify-between p-4 border-b border-border">
               <Link href="/" className="flex items-center gap-2.5 shrink-0" onClick={onClose}>
                 <Image
                   src="/logo.png"
@@ -106,8 +106,8 @@ export function MobileNav({ isOpen, onClose }: MobileNavProps) {
                           className={cn(
                             "flex w-full items-center justify-between px-4 py-3.5 rounded-xl text-sm font-medium transition-all duration-150",
                             isActive
-                              ? "bg-sky-50 text-sky-700 dark:bg-sky-900/30 dark:text-sky-400"
-                              : "text-slate-700 hover:bg-slate-50 dark:text-slate-300 dark:hover:bg-slate-800"
+                              ? "bg-secondary text-primary"
+                              : "text-foreground/80 hover:bg-secondary/60 hover:text-foreground"
                           )}
                         >
                           {item.label}
@@ -127,7 +127,7 @@ export function MobileNav({ isOpen, onClose }: MobileNavProps) {
                               transition={{ duration: 0.2 }}
                               className="overflow-hidden"
                             >
-                              <div className="ml-4 mt-1 space-y-1 border-l-2 border-sky-100 dark:border-sky-900 pl-3">
+                              <div className="ml-4 mt-1 space-y-1 border-l-2 border-accent/25 pl-3">
                                 {item.children!.map((child) => (
                                   <Link
                                     key={child.href}
@@ -136,8 +136,8 @@ export function MobileNav({ isOpen, onClose }: MobileNavProps) {
                                     className={cn(
                                       "block px-4 py-3 rounded-xl text-sm transition-all duration-150",
                                       pathname === child.href
-                                        ? "bg-sky-50 text-sky-700 font-medium dark:bg-sky-900/30 dark:text-sky-400"
-                                        : "text-slate-600 hover:bg-slate-50 dark:text-slate-400 dark:hover:bg-slate-800"
+                                        ? "bg-secondary font-medium text-primary"
+                                        : "text-muted-foreground hover:bg-secondary/60 hover:text-foreground"
                                     )}
                                   >
                                     {child.label}
@@ -155,8 +155,8 @@ export function MobileNav({ isOpen, onClose }: MobileNavProps) {
                         className={cn(
                           "flex items-center px-4 py-3.5 rounded-xl text-sm font-medium transition-all duration-150",
                           isActive
-                            ? "bg-sky-50 text-sky-700 dark:bg-sky-900/30 dark:text-sky-400"
-                            : "text-slate-700 hover:bg-slate-50 dark:text-slate-300 dark:hover:bg-slate-800"
+                            ? "bg-secondary text-primary"
+                            : "text-foreground/80 hover:bg-secondary/60 hover:text-foreground"
                         )}
                       >
                         {item.label}
@@ -165,16 +165,16 @@ export function MobileNav({ isOpen, onClose }: MobileNavProps) {
                   </motion.div>
                 )
               })}
-                <motion.div variants={itemVariants} className="pt-2 mt-2 border-t border-slate-100 dark:border-slate-800">
+                <motion.div variants={itemVariants} className="mt-2 border-t border-border pt-2">
                   <button
                     onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-                    className="flex w-full items-center gap-3 px-4 py-3.5 rounded-xl text-sm font-medium text-slate-700 hover:bg-slate-50 dark:text-slate-300 dark:hover:bg-slate-800 transition-all"
+                    className="flex w-full items-center gap-3 px-4 py-3.5 rounded-xl text-sm font-medium text-foreground/80 transition-all hover:bg-secondary/60 hover:text-foreground"
                   >
                     {mounted ? (
                       theme === "dark" ? (
-                        <><Sun className="w-4 h-4 text-amber-500" /> Light Mode</>
+                        <><Sun className="w-4 h-4 text-accent" /> Light Mode</>
                       ) : (
-                        <><Moon className="w-4 h-4 text-sky-500" /> Dark Mode</>
+                        <><Moon className="w-4 h-4 text-primary" /> Dark Mode</>
                       )
                     ) : (
                       <div className="w-4 h-4" />
@@ -183,7 +183,7 @@ export function MobileNav({ isOpen, onClose }: MobileNavProps) {
                   <Link
                     href="/admin"
                     onClick={onClose}
-                    className="mt-2 flex w-full items-center justify-center gap-2 px-4 py-3 rounded-xl text-sm font-semibold bg-slate-900 dark:bg-slate-800 text-white hover:bg-slate-700 transition-colors"
+                    className="mt-2 flex w-full items-center justify-center gap-2 px-4 py-3 rounded-xl text-sm font-semibold bg-primary text-primary-foreground transition-colors hover:bg-primary/90"
                   >
                     <ShieldCheck className="w-4 h-4" />
                     Admin Panel
@@ -195,36 +195,36 @@ export function MobileNav({ isOpen, onClose }: MobileNavProps) {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.3, duration: 0.3 }}
-              className="border-t border-slate-100 dark:border-slate-800 p-4 space-y-4"
+              className="border-t border-border p-4 space-y-4"
             >
               <div className="space-y-2">
                 <a
                   href={`tel:${CONTACT_INFO.phone}`}
-                  className="flex items-center gap-3 px-4 py-3 rounded-xl text-sm text-slate-700 hover:bg-slate-50 dark:text-slate-300 dark:hover:bg-slate-800 transition-colors"
+                  className="flex items-center gap-3 px-4 py-3 rounded-xl text-sm text-foreground/80 transition-colors hover:bg-secondary/60 hover:text-foreground"
                 >
-                  <Phone className="w-4 h-4 text-emerald-500" />
+                  <Phone className="w-4 h-4 text-accent" />
                   {CONTACT_INFO.phone}
                 </a>
                 <a
                   href={`mailto:${CONTACT_INFO.email}`}
-                  className="flex items-center gap-3 px-4 py-3 rounded-xl text-sm text-slate-700 hover:bg-slate-50 dark:text-slate-300 dark:hover:bg-slate-800 transition-colors"
+                  className="flex items-center gap-3 px-4 py-3 rounded-xl text-sm text-foreground/80 transition-colors hover:bg-secondary/60 hover:text-foreground"
                 >
-                  <Mail className="w-4 h-4 text-sky-500" />
+                  <Mail className="w-4 h-4 text-accent" />
                   {CONTACT_INFO.email}
                 </a>
                 <a
                   href={`mailto:${CONTACT_INFO.bookingsEmail}`}
-                  className="flex items-center gap-3 px-4 py-3 rounded-xl text-sm text-slate-700 hover:bg-slate-50 dark:text-slate-300 dark:hover:bg-slate-800 transition-colors"
+                  className="flex items-center gap-3 px-4 py-3 rounded-xl text-sm text-foreground/80 transition-colors hover:bg-secondary/60 hover:text-foreground"
                 >
-                  <Mail className="w-4 h-4 text-sky-500" />
+                  <Mail className="w-4 h-4 text-accent" />
                   {CONTACT_INFO.bookingsEmail}
                 </a>
-                <div className="flex items-center gap-3 px-4 py-3 rounded-xl text-sm text-slate-700 dark:text-slate-300">
-                  <MapPin className="w-4 h-4 text-orange-500" />
+                <div className="flex items-center gap-3 px-4 py-3 rounded-xl text-sm text-foreground/80">
+                  <MapPin className="w-4 h-4 text-accent" />
                   {CONTACT_INFO.address}
                 </div>
-                <div className="flex items-center gap-3 px-4 py-3 rounded-xl text-sm text-slate-700 dark:text-slate-300">
-                  <Clock className="w-4 h-4 text-amber-500" />
+                <div className="flex items-center gap-3 px-4 py-3 rounded-xl text-sm text-foreground/80">
+                  <Clock className="w-4 h-4 text-accent" />
                   {CONTACT_INFO.hours}
                 </div>
               </div>
@@ -236,7 +236,7 @@ export function MobileNav({ isOpen, onClose }: MobileNavProps) {
                     href={social.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center justify-center w-10 h-10 rounded-full bg-slate-100 text-slate-600 hover:bg-sky-100 hover:text-sky-600 dark:bg-slate-800 dark:text-slate-400 dark:hover:bg-sky-900/50 dark:hover:text-sky-400 transition-all duration-200"
+                    className="flex items-center justify-center w-10 h-10 rounded-full bg-secondary text-muted-foreground transition-all duration-200 hover:bg-primary hover:text-primary-foreground"
                     aria-label={social.name}
                   >
                     <SocialIcon name={social.icon} />
@@ -247,7 +247,7 @@ export function MobileNav({ isOpen, onClose }: MobileNavProps) {
               <Link
                 href="/contact"
                 onClick={onClose}
-                className="flex items-center justify-center w-full py-3.5 rounded-xl bg-gradient-to-r from-sky-500 to-cyan-400 text-white font-medium shadow-lg hover:shadow-xl hover:scale-[1.02] transition-all duration-300"
+                className="flex w-full items-center justify-center rounded-full bg-primary py-3.5 font-medium text-primary-foreground shadow-lg shadow-primary/20 transition-all duration-300 hover:scale-[1.02] hover:bg-primary/90 hover:shadow-xl"
               >
                 Get a Free Quote
               </Link>

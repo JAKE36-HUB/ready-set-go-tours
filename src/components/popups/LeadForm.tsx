@@ -89,7 +89,7 @@ export function LeadForm({ popupId, config, variant, popupName, onSuccess }: Pro
         className="text-center py-4"
       >
         <div className="text-4xl mb-2">🎉</div>
-        <p className="font-semibold text-slate-900 dark:text-white text-sm">
+        <p className="font-display text-base font-normal text-foreground">
           {config.leadForm.successMessage || "Thank you! We'll be in touch soon."}
         </p>
       </motion.div>
@@ -100,7 +100,7 @@ export function LeadForm({ popupId, config, variant, popupName, onSuccess }: Pro
     <form onSubmit={submit} className="space-y-2.5">
       {fields.map((f) => (
         <div key={f}>
-          <label className="block text-[11px] font-medium text-slate-500 dark:text-slate-400 mb-1">
+          <label className="block text-[11px] font-medium text-muted-foreground mb-1">
             {FIELD_LABELS[f] || f}
           </label>
           {FIELD_TYPES[f] === "textarea" ? (
@@ -108,8 +108,8 @@ export function LeadForm({ popupId, config, variant, popupName, onSuccess }: Pro
               value={values[f] || ""}
               onChange={(e) => update(f, e.target.value)}
               rows={2}
-              className="w-full rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 px-3 py-2 text-sm
-                outline-none focus:ring-2 focus:ring-amber-500/50 text-slate-900 dark:text-white resize-none"
+              className="w-full rounded-lg border border-border bg-background px-3 py-2 text-sm
+                outline-none focus:ring-2 focus:ring-primary/40 text-foreground resize-none"
             />
           ) : (
             <input
@@ -118,22 +118,22 @@ export function LeadForm({ popupId, config, variant, popupName, onSuccess }: Pro
               value={values[f] || ""}
               onChange={(e) => update(f, e.target.value)}
               placeholder={f === "budget" ? "e.g. $1,500 – $2,500" : ""}
-              className="w-full rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 px-3 py-2 text-sm
-                outline-none focus:ring-2 focus:ring-amber-500/50 text-slate-900 dark:text-white"
+              className="w-full rounded-lg border border-border bg-background px-3 py-2 text-sm
+                outline-none focus:ring-2 focus:ring-primary/40 text-foreground"
             />
           )}
         </div>
       ))}
-      {error && <p className="text-xs text-red-500">{error}</p>}
+      {error && <p className="text-xs text-destructive">{error}</p>}
       <button
         type="submit"
         disabled={status === "sending"}
-        className="w-full rounded-lg bg-gradient-to-r from-amber-500 to-orange-500 py-2.5 text-sm font-bold text-white shadow-md
-          hover:from-amber-400 hover:to-orange-400 active:scale-[0.98] transition disabled:opacity-60"
+        className="w-full rounded-full bg-primary py-2.5 text-sm font-bold text-primary-foreground shadow-md
+          hover:bg-primary/90 active:scale-[0.98] transition disabled:opacity-60"
       >
         {status === "sending" ? "Sending..." : config.leadForm.submitLabel || "Submit"}
       </button>
-      <p className="text-[10px] text-center text-slate-400">
+      <p className="text-[10px] text-center text-muted-foreground">
         🔒 Your details are safe. No spam, ever.
       </p>
     </form>

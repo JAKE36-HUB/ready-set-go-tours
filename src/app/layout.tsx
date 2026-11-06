@@ -1,6 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { GeistSans } from "geist/font/sans";
-import { Fraunces } from "next/font/google";
+import { Newsreader } from "next/font/google";
 import "./globals.css";
 import { SupabaseProvider } from "@/lib/supabase-auth";
 import { ThemeProvider } from "@/components/layout/ThemeProvider";
@@ -11,18 +11,19 @@ import Script from "next/script";
 import { ClientWidgets } from "@/components/ClientWidgets";
 import { COMPANY } from "@/lib/constants";
 
-const FrauncesFont = Fraunces({
+const NewsreaderFont = Newsreader({
   subsets: ["latin"],
   variable: "--font-display",
   display: "swap",
+  style: ["normal", "italic"],
 });
 
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
   themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#faf8f4" },
-    { media: "(prefers-color-scheme: dark)", color: "#12110e" },
+    { media: "(prefers-color-scheme: light)", color: "#F6F3EA" },
+    { media: "(prefers-color-scheme: dark)", color: "#0C1511" },
   ],
 };
 
@@ -93,7 +94,7 @@ export default function RootLayout({
       lang="en"
       suppressHydrationWarning
       data-scroll-behavior="smooth"
-      className={`${GeistSans.variable} ${FrauncesFont.variable} antialiased`}
+      className={`${GeistSans.variable} ${NewsreaderFont.variable} antialiased`}
     >
       <head>
       </head>

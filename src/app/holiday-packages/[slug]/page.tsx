@@ -69,11 +69,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 const typeColors: Record<string, string> = {
-  safari: "bg-white/90 text-stone-900 border-transparent",
-  group: "bg-white/90 text-stone-900 border-transparent",
-  luxury: "bg-white/90 text-stone-900 border-transparent",
-  mountain: "bg-white/90 text-stone-900 border-transparent",
-  beach: "bg-white/90 text-stone-900 border-transparent",
+  safari: "bg-background/90 text-foreground border-transparent",
+  group: "bg-background/90 text-foreground border-transparent",
+  luxury: "bg-background/90 text-foreground border-transparent",
+  mountain: "bg-background/90 text-foreground border-transparent",
+  beach: "bg-background/90 text-foreground border-transparent",
 };
 
 interface PackageRow {
@@ -200,13 +200,13 @@ export default async function PackageDetailPage({
               {pkg.duration}
             </span>
           </div>
-          <h1 className="font-display text-4xl sm:text-5xl lg:text-6xl font-medium text-white mb-3 leading-tight">{pkg.name}</h1>
+          <h1 className="mb-3 font-display text-4xl font-normal leading-tight text-white sm:text-5xl lg:text-6xl">{pkg.name}</h1>
           <p className="text-sm text-white/60">{COMPANY.tagline}</p>
         </div>
       </section>
 
       {/* Pricing Bar */}
-      <section className="sticky top-0 z-30 bg-white/90 dark:bg-slate-950/90 backdrop-blur-md border-b border-foreground/5">
+      <section className="sticky top-0 z-30 border-b border-foreground/5 bg-background/90 backdrop-blur-xl">
         <div className="max-w-7xl mx-auto px-6 py-3 flex flex-wrap items-center justify-between gap-4">
           <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
             <div>
@@ -228,14 +228,14 @@ export default async function PackageDetailPage({
               href={whatsappPackageLink(pkg.name)}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 h-11 px-5 rounded-xl bg-card border border-border hover:border-primary/40 hover:bg-primary/5 text-foreground text-sm font-medium transition-all"
+              className="inline-flex h-11 items-center gap-2 rounded-full border border-border bg-card px-5 text-sm font-medium text-foreground transition-all hover:border-primary/40 hover:bg-primary/5"
             >
-              <MessageCircle className="size-4 text-primary dark:text-amber-400" />
+              <MessageCircle className="size-4 text-primary" />
               WhatsApp a Safari Expert
             </a>
             <Link
               href={PLAN_SAFARI_ROUTE}
-              className="inline-flex items-center gap-2 h-11 px-6 rounded-xl gradient-primary text-white text-sm font-semibold shadow-premium hover:shadow-premium transition-all"
+              className="inline-flex h-11 items-center gap-2 rounded-full bg-primary px-6 text-sm font-semibold text-primary-foreground transition-all hover:bg-primary/90"
             >
               Plan This {noun} <ArrowRight className="size-4" />
             </Link>
@@ -255,7 +255,7 @@ export default async function PackageDetailPage({
                   {ratesLines.length > 0 && (
                     <div className="mt-6 rounded-2xl border-2 border-primary/30 bg-primary/5 p-6 shadow-sm">
                       <h3 className="flex items-center gap-2 font-display text-lg font-semibold text-foreground mb-2">
-                        <BadgeDollarSign className="size-5 text-primary dark:text-amber-400 shrink-0" />
+                        <BadgeDollarSign className="size-5 text-primary shrink-0" />
                         Rates &amp; seasons
                       </h3>
                       {ratesLines.map((line, i) => (
@@ -274,7 +274,7 @@ export default async function PackageDetailPage({
                   <div className="grid sm:grid-cols-2 gap-3">
                     {pkg.highlights.map((h: string) => (
                       <div key={h} className="flex items-start gap-3 p-4 rounded-xl bg-card ring-1 ring-foreground/5">
-                        <Compass className="size-5 text-primary dark:text-amber-400 shrink-0 mt-0.5" />
+                        <Compass className="size-5 text-primary shrink-0 mt-0.5" />
                         <span className="text-sm text-foreground">{h}</span>
                       </div>
                     ))}
@@ -288,7 +288,7 @@ export default async function PackageDetailPage({
                   <div className="flex flex-wrap gap-2">
                     {pkg.activities.map((a: string) => (
                       <span key={a} className="inline-flex items-center gap-1.5 text-sm bg-card ring-1 ring-foreground/10 text-foreground px-4 py-2 rounded-full">
-                        <Compass className="size-4 text-primary dark:text-amber-400 shrink-0" />
+                        <Compass className="size-4 text-primary shrink-0" />
                         {a}
                       </span>
                     ))}
@@ -308,28 +308,28 @@ export default async function PackageDetailPage({
                   <h3 className="font-semibold text-foreground">Trip Details</h3>
                   <div className="space-y-4">
                     <div className="flex items-start gap-3">
-                      <Clock className="size-5 text-primary dark:text-amber-400 shrink-0 mt-0.5" />
+                      <Clock className="size-5 text-primary shrink-0 mt-0.5" />
                       <div>
                         <p className="text-sm font-medium text-foreground">Duration</p>
                         <p className="text-sm text-muted-foreground">{pkg.duration}</p>
                       </div>
                     </div>
                     <div className="flex items-start gap-3">
-                      <Hotel className="size-5 text-primary dark:text-amber-400 shrink-0 mt-0.5" />
+                      <Hotel className="size-5 text-primary shrink-0 mt-0.5" />
                       <div>
                         <p className="text-sm font-medium text-foreground">Accommodation</p>
                         <p className="text-sm text-muted-foreground">{pkg.accommodation}</p>
                       </div>
                     </div>
                     <div className="flex items-start gap-3">
-                      <Utensils className="size-5 text-primary dark:text-amber-400 shrink-0 mt-0.5" />
+                      <Utensils className="size-5 text-primary shrink-0 mt-0.5" />
                       <div>
                         <p className="text-sm font-medium text-foreground">Meals</p>
                         <p className="text-sm text-muted-foreground">{pkg.meals}</p>
                       </div>
                     </div>
                     <div className="flex items-start gap-3">
-                      <Car className="size-5 text-primary dark:text-amber-400 shrink-0 mt-0.5" />
+                      <Car className="size-5 text-primary shrink-0 mt-0.5" />
                       <div>
                         <p className="text-sm font-medium text-foreground">Transport</p>
                         <p className="text-sm text-muted-foreground">{pkg.transport}</p>
@@ -346,7 +346,7 @@ export default async function PackageDetailPage({
                     <ul className="space-y-3">
                       {pkg.included.map((item: string) => (
                         <li key={item} className="flex items-start gap-3 text-sm text-muted-foreground">
-                          <Check className="size-4 text-primary dark:text-amber-400 shrink-0 mt-0.5" />
+                          <Check className="size-4 text-primary shrink-0 mt-0.5" />
                           {item}
                         </li>
                       ))}
@@ -361,7 +361,7 @@ export default async function PackageDetailPage({
                   <ul className="space-y-3">
                     {pkg.excluded.map((item: string) => (
                       <li key={item} className="flex items-start gap-3 text-sm text-muted-foreground">
-                        <X className="size-4 text-rose-400 shrink-0 mt-0.5" />
+                        <X className="mt-0.5 size-4 shrink-0 text-muted-foreground/60" />
                         {item}
                       </li>
                     ))}
@@ -376,15 +376,15 @@ export default async function PackageDetailPage({
               <PaymentPolicy />
 
               <AnimatedSection>
-                <div className="rounded-3xl p-8 text-center gradient-primary text-white shadow-premium">
-                  <h3 className="font-display text-xl font-medium mb-2">Ready to plan this {noun.toLowerCase()}?</h3>
-                  <p className="text-sm text-white/80 mb-6">
+                <div className="rounded-[1.75rem] p-8 text-center gradient-primary text-white shadow-premium">
+                  <h3 className="mb-2 font-display text-xl font-normal">Ready to plan this {noun.toLowerCase()}?</h3>
+                  <p className="mb-6 text-sm text-white/80">
                     Tell us your dates, and we&apos;ll shape this itinerary exactly around you. No templates, no pressure.
                   </p>
                   <div className="space-y-3">
                     <Link
                       href={PLAN_SAFARI_ROUTE}
-                      className="flex items-center justify-center gap-2 w-full h-12 rounded-xl bg-white text-stone-900 font-semibold hover:bg-stone-100 transition-all"
+                      className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-[#E8D5B5] font-semibold text-[#12251B] transition-all hover:bg-[#F1E2C8]"
                     >
                       Plan My {noun} <ArrowRight className="size-4" />
                     </Link>
@@ -392,7 +392,7 @@ export default async function PackageDetailPage({
                       href={whatsappPackageLink(pkg.name)}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex items-center justify-center gap-2 w-full h-12 rounded-xl bg-white/10 hover:bg-white/20 text-white text-sm font-medium ring-1 ring-white/25 transition-all"
+                      className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-white/10 text-sm font-medium text-white ring-1 ring-white/25 transition-all hover:bg-white/20"
                     >
                       <MessageCircle className="size-4" />
                       WhatsApp a Safari Expert

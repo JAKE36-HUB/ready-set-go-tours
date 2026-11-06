@@ -22,12 +22,12 @@ import {
 import emailjs from "@emailjs/browser";
 
 const CONTACT_INFO = [
-  { icon: MapPin, label: "Visit Us", value: COMPANY.address, desc: "Our Nairobi headquarters", color: "text-sky-500", bg: "bg-sky-500/10", gradient: "from-sky-500/20 to-blue-600/10" },
-  { icon: Phone, label: "Call Us", value: COMPANY.phone, desc: "Mon–Sat 8AM–6PM EAT", color: "text-emerald-500", bg: "bg-emerald-500/10", gradient: "from-emerald-500/20 to-teal-600/10" },
-  { icon: Mail, label: "Email Us", value: COMPANY.email, desc: "We reply within 24hrs", color: "text-amber-500", bg: "bg-amber-500/10", gradient: "from-amber-500/20 to-orange-600/10" },
-  { icon: Mail, label: "Bookings", value: COMPANY.bookingsEmail, desc: "For safari & travel bookings", color: "text-orange-500", bg: "bg-orange-500/10", gradient: "from-orange-500/20 to-rose-600/10" },
-  { icon: MessageCircle, label: "WhatsApp", value: COMPANY.whatsapp, desc: "Fastest response", color: "text-green-500", bg: "bg-green-500/10", gradient: "from-green-500/20 to-emerald-600/10" },
-  { icon: Clock, label: "Office Hours", value: COMPANY.hours, desc: "East Africa Time (EAT)", color: "text-violet-500", bg: "bg-violet-500/10", gradient: "from-violet-500/20 to-purple-600/10" },
+  { icon: MapPin, label: "Visit Us", value: COMPANY.address, desc: "Our Nairobi headquarters", color: "text-accent", bg: "bg-accent/10", gradient: "from-accent/15 to-accent/5" },
+  { icon: Phone, label: "Call Us", value: COMPANY.phone, desc: "Mon–Sat 8AM–6PM EAT", color: "text-accent", bg: "bg-accent/10", gradient: "from-accent/15 to-accent/5" },
+  { icon: Mail, label: "Email Us", value: COMPANY.email, desc: "We reply within 24hrs", color: "text-accent", bg: "bg-accent/10", gradient: "from-accent/15 to-accent/5" },
+  { icon: Mail, label: "Bookings", value: COMPANY.bookingsEmail, desc: "For safari & travel bookings", color: "text-accent", bg: "bg-accent/10", gradient: "from-accent/15 to-accent/5" },
+  { icon: MessageCircle, label: "WhatsApp", value: COMPANY.whatsapp, desc: "Fastest response", color: "text-[#1F4A38]", bg: "bg-[#25D366]/15", gradient: "from-[#25D366]/15 to-accent/5" },
+  { icon: Clock, label: "Office Hours", value: COMPANY.hours, desc: "East Africa Time (EAT)", color: "text-accent", bg: "bg-accent/10", gradient: "from-accent/15 to-accent/5" },
 ];
 
 const DESTINATIONS = [
@@ -210,21 +210,18 @@ export default function ContactPage() {
           className="object-cover"
           sizes="100vw"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/50 to-black/80" />
-        <div className="absolute inset-0 bg-gradient-to-r from-sky-900/30 to-transparent" />
-        <div className="relative z-10 text-center px-6 max-w-4xl mx-auto">
+        <div className="absolute inset-0 bg-gradient-to-b from-[#08130E]/70 via-[#08130E]/45 to-[#08130E]/85" />
+        <div className="absolute inset-0 bg-gradient-to-r from-[#08130E]/40 via-transparent to-[#08130E]/40" />
+        <div className="relative z-10 mx-auto max-w-4xl px-6 text-center">
           <AnimatedSection direction="none">
-            <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-md rounded-full px-5 py-2 mb-6 border border-white/20">
-              <MessageCircle className="size-4 text-sky-400" />
+            <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-5 py-2 backdrop-blur-md">
+              <MessageCircle className="size-4 text-[#E4C9A3]" />
               <span className="text-sm font-semibold text-white/90">We&apos;re Here to Help</span>
             </div>
-            <h1 className="text-4xl sm:text-5xl lg:text-7xl font-bold text-white mb-4 tracking-tight">
-              Let&apos;s Plan Your{" "}
-              <span className="bg-gradient-to-r from-sky-300 via-blue-300 to-cyan-200 bg-clip-text text-transparent">
-                Safari
-              </span>
+            <h1 className="mb-4 font-display text-4xl font-normal tracking-tight text-white sm:text-5xl lg:text-7xl">
+              Let&apos;s Plan Your <span className="italic text-[#E4C9A3]">Safari</span>
             </h1>
-            <p className="text-lg sm:text-xl text-white/60 max-w-2xl mx-auto leading-relaxed">
+            <p className="mx-auto max-w-2xl text-lg leading-relaxed text-white/60 sm:text-xl">
               Tell us your dream adventure and our Nairobi-based team will craft the perfect
               East African experience — from the Mara to Zanzibar.
             </p>
@@ -234,19 +231,19 @@ export default function ContactPage() {
       </section>
 
       {/* Trust Strip */}
-      <section className="py-12 px-6 border-b border-sky-100 dark:border-sky-950">
-        <div className="max-w-6xl mx-auto">
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
+      <section className="border-b border-border px-6 py-12">
+        <div className="mx-auto max-w-6xl">
+          <div className="grid grid-cols-2 gap-6 lg:grid-cols-4">
             {TRUST_STATS.map((stat) => (
               <motion.div
                 key={stat.label}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                className="flex items-center gap-4 p-4 rounded-xl bg-gradient-to-br from-sky-50 to-blue-50 dark:from-sky-950/30 dark:to-blue-950/30"
+                className="flex items-center gap-4 rounded-2xl bg-secondary/40 p-4 ring-1 ring-border"
               >
-                <div className="size-12 rounded-full bg-sky-500/10 flex items-center justify-center shrink-0">
-                  <stat.icon className="size-5 text-sky-600 dark:text-sky-400" />
+                <div className="flex size-12 shrink-0 items-center justify-center rounded-full bg-accent/10">
+                  <stat.icon className="size-5 text-accent" />
                 </div>
                 <div>
                   <p className="text-xl font-bold text-foreground">{stat.value}</p>
@@ -262,7 +259,7 @@ export default function ContactPage() {
       <section className="py-16 px-6">
         <div className="max-w-6xl mx-auto">
           <AnimatedSection className="text-center mb-12">
-            <h2 className="text-3xl sm:text-4xl font-bold text-foreground mb-3">
+            <h2 className="mb-3 font-display text-3xl font-normal text-foreground sm:text-4xl">
               Reach Out to Us
             </h2>
             <p className="text-muted-foreground max-w-xl mx-auto">
@@ -274,7 +271,7 @@ export default function ContactPage() {
               <AnimatedSection key={info.label} delay={i * 0.05}>
                 <motion.div
                   whileHover={{ y: -4, scale: 1.02 }}
-                  className="relative group p-6 rounded-2xl bg-gradient-to-br from-card to-card/50 ring-1 ring-foreground/5 hover:ring-2 hover:ring-sky-500/20 transition-all duration-300 h-full overflow-hidden"
+                  className="group relative h-full overflow-hidden rounded-2xl bg-gradient-to-br from-card to-card/50 p-6 ring-1 ring-border transition-all duration-300 hover:ring-2 hover:ring-accent/20"
                 >
                   <div className={`absolute inset-0 bg-gradient-to-br ${info.gradient} opacity-0 group-hover:opacity-100 transition-opacity duration-500`} />
                   <div className="relative z-10 flex flex-col items-center text-center">
@@ -299,18 +296,18 @@ export default function ContactPage() {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-green-600 via-green-700 to-emerald-800 p-8 sm:p-12"
+            className="relative overflow-hidden rounded-3xl bg-[#08130E] p-8 sm:p-12"
           >
-            <div className="absolute top-0 right-0 w-64 h-64 bg-white/5 rounded-full -translate-y-1/2 translate-x-1/2" />
-            <div className="absolute bottom-0 left-0 w-48 h-48 bg-white/5 rounded-full translate-y-1/2 -translate-x-1/2" />
-            <div className="relative z-10 flex flex-col sm:flex-row items-center justify-between gap-6">
+            <div className="absolute right-0 top-0 size-64 -translate-y-1/2 translate-x-1/2 rounded-full bg-accent/10" />
+            <div className="absolute bottom-0 left-0 size-48 -translate-x-1/2 translate-y-1/2 rounded-full bg-accent/10" />
+            <div className="relative z-10 flex flex-col items-center justify-between gap-6 sm:flex-row">
               <div className="text-center sm:text-left">
-                <div className="inline-flex items-center gap-2 bg-white/15 rounded-full px-4 py-1.5 mb-4">
-                  <MessageCircle className="size-4 text-green-300" />
-                  <span className="text-xs font-semibold text-green-200 uppercase tracking-wider">Fastest Response</span>
+                <div className="mb-4 inline-flex items-center gap-2 rounded-full bg-white/10 px-4 py-1.5">
+                  <MessageCircle className="size-4 text-[#E4C9A3]" />
+                  <span className="text-xs font-semibold uppercase tracking-wider text-[#E4C9A3]">Fastest Response</span>
                 </div>
-                <h3 className="text-2xl sm:text-3xl font-bold text-white mb-2">Chat With Us on WhatsApp</h3>
-                <p className="text-green-200/80 max-w-md">
+                <h3 className="mb-2 font-display text-2xl font-normal text-white sm:text-3xl">Chat With Us on WhatsApp</h3>
+                <p className="max-w-md text-white/60">
                   Get an instant response from our team. Tap the button below to start a conversation right now.
                 </p>
               </div>
@@ -318,7 +315,7 @@ export default function ContactPage() {
                 href={whatsappLink()}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 h-14 px-8 rounded-xl bg-white text-green-700 font-bold text-base hover:bg-green-50 transition-all shadow-xl hover:shadow-2xl shrink-0"
+                className="inline-flex h-14 shrink-0 items-center gap-2 rounded-full bg-accent px-8 text-base font-bold text-white shadow-xl transition-all hover:bg-accent/90 hover:shadow-2xl"
               >
                 <MessageCircle className="size-5" />
                 WhatsApp Us
@@ -332,7 +329,7 @@ export default function ContactPage() {
       <section className="py-16 px-6">
         <div className="max-w-6xl mx-auto">
           <AnimatedSection className="text-center mb-12">
-            <h2 className="text-3xl sm:text-4xl font-bold text-foreground mb-3">
+            <h2 className="mb-3 font-display text-3xl font-normal text-foreground sm:text-4xl">
               Or Send Us a Message
             </h2>
             <p className="text-muted-foreground max-w-xl mx-auto">
@@ -343,8 +340,8 @@ export default function ContactPage() {
           <div className="grid lg:grid-cols-5 gap-10">
             {/* Map */}
             <AnimatedSection direction="left" className="lg:col-span-2">
-              <div className="sticky top-24 rounded-2xl overflow-hidden ring-1 ring-foreground/10 h-[500px]">
-                <div className="absolute inset-0 bg-gradient-to-b from-sky-900/10 to-transparent z-10 pointer-events-none" />
+              <div className="sticky top-24 h-[500px] overflow-hidden rounded-2xl ring-1 ring-border">
+                <div className="pointer-events-none absolute inset-0 z-10 bg-gradient-to-b from-[#08130E]/10 to-transparent" />
                 <iframe
                   src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3191.687!2d36.6839!3d-1.3131!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMcKwMTgnNDcuMiJTIDM2wrA0MCcwMi4wIkU!5e0!3m2!1sen!2ske!4v1"
                   width="100%"
@@ -356,9 +353,9 @@ export default function ContactPage() {
                   title="Ready Set Go Tours office location"
                 />
               </div>
-              <div className="mt-4 p-4 rounded-xl bg-sky-50 dark:bg-sky-950/30 ring-1 ring-sky-100 dark:ring-sky-900">
+              <div className="mt-4 rounded-xl bg-secondary/50 p-4 ring-1 ring-border">
                 <div className="flex items-start gap-3">
-                  <Building2 className="size-5 text-sky-600 dark:text-sky-400 mt-0.5 shrink-0" />
+                  <Building2 className="mt-0.5 size-5 shrink-0 text-accent" />
                   <div>
                     <p className="text-sm font-semibold text-foreground">{COMPANY.shortName}</p>
                     <p className="text-xs text-muted-foreground mt-0.5">
@@ -371,10 +368,10 @@ export default function ContactPage() {
 
             {/* Form */}
             <AnimatedSection direction="right" className="lg:col-span-3">
-              <div className="rounded-2xl bg-card ring-1 ring-foreground/10 overflow-hidden">
+              <div className="overflow-hidden rounded-2xl bg-card ring-1 ring-border">
                 {/* Step Progress */}
-                <div className="bg-gradient-to-r from-sky-900 via-blue-900 to-slate-900 px-8 py-6">
-                  <h2 className="text-2xl font-bold text-white mb-4">Plan Your Safari</h2>
+                <div className="bg-gradient-to-r from-[#08130E] via-[#0C1511] to-[#08130E] px-8 py-6">
+                  <h2 className="mb-4 font-display text-2xl font-normal text-white">Plan Your Safari</h2>
                   <div className="flex items-center gap-1">
                     {steps.map((s, i) => {
                       const Icon = stepIcons[i];
@@ -383,15 +380,15 @@ export default function ContactPage() {
                       return (
                         <div key={s} className="flex items-center gap-1 flex-1">
                           <div className={`flex items-center justify-center size-8 rounded-full text-xs font-bold transition-all duration-300 ${
-                            isCompleted ? "bg-emerald-500 text-white" :
-                            isCurrent ? "bg-sky-500 text-white ring-2 ring-sky-300" :
+                            isCompleted ? "bg-accent text-white" :
+                            isCurrent ? "bg-accent text-white ring-2 ring-[#E4C9A3]" :
                             "bg-white/10 text-white/50"
                           }`}>
                             {isCompleted ? <CheckCircle className="size-4" /> : <Icon className="size-3.5" />}
                           </div>
                           {i < steps.length - 1 && (
                             <div className={`h-0.5 flex-1 transition-all duration-300 ${
-                              isCompleted ? "bg-emerald-500" : "bg-white/10"
+                              isCompleted ? "bg-accent" : "bg-white/10"
                             }`} />
                           )}
                         </div>
@@ -401,7 +398,7 @@ export default function ContactPage() {
                   <div className="flex justify-between mt-1.5">
                     {stepLabels.map((l, i) => (
                       <span key={l} className={`text-[10px] font-medium uppercase tracking-wider ${
-                        steps.indexOf(step) >= i ? "text-sky-200" : "text-white/30"
+                        steps.indexOf(step) >= i ? "text-[#E4C9A3]" : "text-white/30"
                       }`}>{l}</span>
                     ))}
                   </div>
@@ -414,9 +411,9 @@ export default function ContactPage() {
                       animate={{ scale: 1 }}
                       transition={{ type: "spring", stiffness: 200, damping: 15 }}
                     >
-                      <CheckCircle className="size-20 text-emerald-500" />
+                      <CheckCircle className="size-20 text-primary" />
                     </motion.div>
-                    <h3 className="text-2xl font-bold text-foreground mt-2">Message Sent Successfully!</h3>
+                    <h3 className="mt-2 text-2xl font-bold text-foreground">Message Sent Successfully!</h3>
                     <p className="text-muted-foreground max-w-sm">
                       Thank you for reaching out. One of our travel consultants will contact you within 24 hours to discuss your dream safari.
                     </p>
@@ -425,8 +422,8 @@ export default function ContactPage() {
                         Send Another Message
                       </Button>
                       <Link href="/holiday-packages">
-                        <Button className="bg-gradient-to-r from-sky-500 to-blue-600 text-white">
-                          Browse Packages <ArrowRight className="size-4 ml-1" />
+                        <Button className="rounded-full bg-primary text-primary-foreground hover:bg-primary/90">
+                          Browse Packages <ArrowRight className="ml-1 size-4" />
                         </Button>
                       </Link>
                     </div>
@@ -445,7 +442,7 @@ export default function ContactPage() {
                           {step === "personal" && (
                             <div className="space-y-5">
                               <div>
-                                <h3 className="text-sm font-semibold uppercase tracking-wider text-sky-500 mb-4 flex items-center gap-2">
+                                <h3 className="text-sm font-semibold uppercase tracking-wider text-accent mb-4 flex items-center gap-2">
                                   <Mail className="size-4" /> Personal Information
                                 </h3>
                                 <div className="grid sm:grid-cols-2 gap-4">
@@ -477,14 +474,14 @@ export default function ContactPage() {
                           {step === "trip" && (
                             <div className="space-y-5">
                               <div>
-                                <h3 className="text-sm font-semibold uppercase tracking-wider text-orange-500 mb-4 flex items-center gap-2">
+                                <h3 className="text-sm font-semibold uppercase tracking-wider text-accent mb-4 flex items-center gap-2">
                                   <MapPin className="size-4" /> Trip Details
                                 </h3>
                                 <div className="grid sm:grid-cols-2 gap-4">
                                   <div className="space-y-1.5">
                                     <Label htmlFor="destination" className="text-xs">Destination *</Label>
                                     <select id="destination" {...register("destination")}
-                                      className="flex h-9 w-full rounded-lg border border-input bg-transparent px-2.5 py-1 text-sm outline-none focus:border-sky-500 focus:ring-3 focus:ring-sky-500/20">
+                                      className="flex h-9 w-full rounded-lg border border-input bg-transparent px-2.5 py-1 text-sm outline-none focus:border-accent focus:ring-3 focus:ring-accent/20">
                                       <option value="">Select destination</option>
                                       {DESTINATIONS.map((d) => (<option key={d} value={d}>{d}</option>))}
                                     </select>
@@ -493,7 +490,7 @@ export default function ContactPage() {
                                   <div className="space-y-1.5">
                                     <Label htmlFor="package" className="text-xs">Package (optional)</Label>
                                     <select id="package" {...register("package")}
-                                      className="flex h-9 w-full rounded-lg border border-input bg-transparent px-2.5 py-1 text-sm outline-none focus:border-sky-500 focus:ring-3 focus:ring-sky-500/20">
+                                      className="flex h-9 w-full rounded-lg border border-input bg-transparent px-2.5 py-1 text-sm outline-none focus:border-accent focus:ring-3 focus:ring-accent/20">
                                       <option value="">Select package</option>
                                       {PACKAGES.map((p) => (<option key={p} value={p}>{p}</option>))}
                                     </select>
@@ -511,7 +508,7 @@ export default function ContactPage() {
                                   <div className="space-y-1.5">
                                     <Label htmlFor="budget" className="text-xs">Budget Range *</Label>
                                     <select id="budget" {...register("budget")}
-                                      className="flex h-9 w-full rounded-lg border border-input bg-transparent px-2.5 py-1 text-sm outline-none focus:border-sky-500 focus:ring-3 focus:ring-sky-500/20">
+                                      className="flex h-9 w-full rounded-lg border border-input bg-transparent px-2.5 py-1 text-sm outline-none focus:border-accent focus:ring-3 focus:ring-accent/20">
                                       <option value="">Select budget</option>
                                       {BUDGET_RANGES.map((b) => (<option key={b} value={b}>{b}</option>))}
                                     </select>
@@ -525,7 +522,7 @@ export default function ContactPage() {
                           {step === "party" && (
                             <div className="space-y-5">
                               <div>
-                                <h3 className="text-sm font-semibold uppercase tracking-wider text-amber-500 mb-4 flex items-center gap-2">
+                                <h3 className="text-sm font-semibold uppercase tracking-wider text-accent mb-4 flex items-center gap-2">
                                   <Users className="size-4" /> Travel Party
                                 </h3>
                                 <div className="grid sm:grid-cols-2 gap-4">
@@ -553,10 +550,10 @@ export default function ContactPage() {
                           {step === "review" && (
                             <div className="space-y-5">
                               <div>
-                                <h3 className="text-sm font-semibold uppercase tracking-wider text-emerald-500 mb-4 flex items-center gap-2">
+                                <h3 className="text-sm font-semibold uppercase tracking-wider text-accent mb-4 flex items-center gap-2">
                                   <CheckCircle className="size-4" /> Review Your Request
                                 </h3>
-                                <div className="rounded-xl bg-slate-50 dark:bg-slate-800/50 p-5 space-y-3">
+                                <div className="space-y-3 rounded-xl bg-secondary/50 p-5">
                                   <div className="grid grid-cols-2 gap-3 text-sm">
                                     <div><span className="text-muted-foreground">Name:</span> <span className="font-medium">{values.fullName}</span></div>
                                     <div><span className="text-muted-foreground">Email:</span> <span className="font-medium">{values.email}</span></div>
@@ -570,7 +567,7 @@ export default function ContactPage() {
                                     {values.children && <div><span className="text-muted-foreground">Children:</span> <span className="font-medium">{values.children}</span></div>}
                                   </div>
                                   {values.specialRequests && (
-                                    <div className="pt-3 border-t border-slate-200 dark:border-slate-700">
+                                    <div className="border-t border-border pt-3">
                                       <span className="text-xs text-muted-foreground">Special Requests:</span>
                                       <p className="text-sm text-foreground mt-1">{values.specialRequests}</p>
                                     </div>
@@ -584,7 +581,7 @@ export default function ContactPage() {
                     </div>
 
                     {/* Navigation */}
-                    <div className="flex items-center justify-between pt-6 border-t border-slate-100 dark:border-slate-700 mt-6">
+                    <div className="mt-6 flex items-center justify-between border-t border-border pt-6">
                       <div>
                         {step !== "personal" && (
                           <Button type="button" variant="outline" onClick={prevStep} className="h-10 px-5 text-sm">
@@ -593,12 +590,12 @@ export default function ContactPage() {
                         )}
                       </div>
                       {step !== "review" ? (
-                        <Button type="button" onClick={nextStep} className="h-10 px-6 text-sm bg-gradient-to-r from-sky-500 to-blue-600 text-white hover:from-sky-400 hover:to-blue-500 shadow-lg shadow-sky-500/25">
-                          Continue <ChevronRight className="size-4 ml-1" />
+                        <Button type="button" onClick={nextStep} className="h-10 rounded-full bg-primary px-6 text-sm text-primary-foreground shadow-lg shadow-primary/20 hover:bg-primary/90">
+                          Continue <ChevronRight className="ml-1 size-4" />
                         </Button>
                       ) : (
                         <Button type="submit" disabled={status === "submitting"}
-                          className="h-10 px-8 text-sm bg-gradient-to-r from-emerald-500 to-teal-600 text-white hover:from-emerald-400 hover:to-teal-500 shadow-lg shadow-emerald-500/25 font-semibold">
+                          className="h-10 rounded-full bg-accent px-8 text-sm font-semibold text-white shadow-lg shadow-accent/20 hover:bg-accent/90">
                           {status === "submitting" ? (
                             <><Loader2 className="size-4 mr-2 animate-spin" /> Sending...</>
                           ) : (
@@ -619,35 +616,35 @@ export default function ContactPage() {
       </section>
 
       {/* Bottom CTA */}
-      <section className="py-20 px-6 bg-gradient-to-br from-slate-900 via-sky-950 to-slate-900 relative overflow-hidden">
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,rgba(14,165,233,0.08),transparent_60%)]" />
-        <div className="max-w-4xl mx-auto text-center relative z-10">
+      <section className="relative overflow-hidden bg-[#08130E] px-6 py-20">
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,rgba(184,100,58,0.18),transparent_60%)]" />
+        <div className="relative z-10 mx-auto max-w-4xl text-center">
           <AnimatedSection>
-            <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">
+            <h2 className="mb-4 font-display text-3xl font-normal text-white sm:text-4xl">
               Ready for the Adventure of a Lifetime?
             </h2>
-            <p className="text-sky-200/70 text-lg max-w-2xl mx-auto mb-8">
+            <p className="mx-auto mb-8 max-w-2xl text-lg text-white/60">
               Whether you&apos;re dreaming of the Great Migration, Kilimanjaro, or Zanzibar&apos;s beaches —
               we&apos;re here to make it happen.
             </p>
-            <div className="flex flex-col sm:flex-row flex-wrap gap-4 justify-center">
+            <div className="flex flex-col flex-wrap justify-center gap-4 sm:flex-row">
               <a
                 href={`tel:${COMPANY.phone}`}
-                className="inline-flex items-center justify-center gap-2 min-h-12 px-5 py-2 rounded-xl bg-white/10 hover:bg-white/20 text-white text-sm font-medium transition-all ring-1 ring-white/20 text-center break-all"
+                className="inline-flex min-h-12 items-center justify-center gap-2 break-all rounded-full bg-white/10 px-5 py-2 text-center text-sm font-medium text-white ring-1 ring-white/20 transition-all hover:bg-white/20"
               >
                 <Phone className="size-4 shrink-0" />
                 {COMPANY.phone}
               </a>
               <a
                 href={`mailto:${COMPANY.email}`}
-                className="inline-flex items-center justify-center gap-2 min-h-12 px-5 py-2 rounded-xl bg-gradient-to-r from-sky-500 to-blue-600 hover:from-sky-400 hover:to-blue-500 text-white text-sm font-semibold shadow-xl shadow-sky-500/25 transition-all text-center break-all"
+                className="inline-flex min-h-12 items-center justify-center gap-2 break-all rounded-full bg-accent px-5 py-2 text-center text-sm font-semibold text-white shadow-xl transition-all hover:bg-accent/90"
               >
                 <Mail className="size-4 shrink-0" />
                 {COMPANY.email}
               </a>
               <a
                 href={`mailto:${COMPANY.bookingsEmail}`}
-                className="inline-flex items-center justify-center gap-2 min-h-12 px-5 py-2 rounded-xl bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-400 hover:to-amber-400 text-white text-sm font-semibold shadow-xl shadow-orange-500/25 transition-all text-center break-all"
+                className="inline-flex min-h-12 items-center justify-center gap-2 break-all rounded-full bg-white/10 px-5 py-2 text-center text-sm font-semibold text-white ring-1 ring-white/20 transition-all hover:bg-white/20"
               >
                 <Mail className="size-4 shrink-0" />
                 {COMPANY.bookingsEmail}

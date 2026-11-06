@@ -240,7 +240,7 @@ export function PlanMySafari() {
             {/* Progress header */}
             <div className="mb-10">
               <div className="flex items-center justify-between mb-3">
-                <p className="text-xs font-semibold uppercase tracking-[0.2em] text-primary dark:text-amber-400">
+                <p className="text-xs font-semibold uppercase tracking-[0.2em] text-primary">
                   Plan My Safari
                 </p>
                 <p className="text-xs text-muted-foreground">
@@ -265,7 +265,7 @@ export function PlanMySafari() {
                       i < step
                         ? "bg-primary text-primary-foreground border-primary"
                         : i === step
-                          ? "border-primary text-primary dark:text-amber-400"
+                          ? "border-primary text-primary"
                           : "border-border text-muted-foreground"
                     )}
                     aria-label={`Step ${i + 1}: ${s.title}`}
@@ -304,7 +304,7 @@ export function PlanMySafari() {
                             className={cn(
                               "h-11 rounded-xl text-sm font-medium border transition-all",
                               form.whenMonth === m
-                                ? "border-primary bg-primary/10 text-primary dark:text-amber-400"
+                                ? "border-primary bg-primary/10 text-primary"
                                 : "border-border bg-card text-foreground hover:border-primary/40"
                             )}
                           >
@@ -353,8 +353,8 @@ export function PlanMySafari() {
                               : "border-border bg-card hover:border-primary/40"
                           )}
                         >
-                          <opt.icon className={cn("w-6 h-6", active ? "text-primary dark:text-amber-400" : "text-muted-foreground")} />
-                          <span className={cn("text-sm font-medium", active ? "text-primary dark:text-amber-400" : "text-foreground")}>
+                          <opt.icon className={cn("w-6 h-6", active ? "text-primary" : "text-muted-foreground")} />
+                          <span className={cn("text-sm font-medium", active ? "text-primary" : "text-foreground")}>
                             {opt.label}
                           </span>
                         </button>
@@ -379,8 +379,8 @@ export function PlanMySafari() {
                               : "border-border bg-card hover:border-primary/40"
                           )}
                         >
-                          <opt.icon className={cn("w-5 h-5 shrink-0", active ? "text-primary dark:text-amber-400" : "text-muted-foreground")} />
-                          <span className={cn("text-sm font-medium", active ? "text-primary dark:text-amber-400" : "text-foreground")}>
+                          <opt.icon className={cn("w-5 h-5 shrink-0", active ? "text-primary" : "text-muted-foreground")} />
+                          <span className={cn("text-sm font-medium", active ? "text-primary" : "text-foreground")}>
                             {opt.label}
                           </span>
                         </button>
@@ -405,8 +405,8 @@ export function PlanMySafari() {
                               : "border-border bg-card hover:border-primary/40"
                           )}
                         >
-                          <opt.icon className={cn("w-5 h-5 shrink-0", active ? "text-primary dark:text-amber-400" : "text-muted-foreground")} />
-                          <span className={cn("text-sm font-medium leading-tight", active ? "text-primary dark:text-amber-400" : "text-foreground")}>
+                          <opt.icon className={cn("w-5 h-5 shrink-0", active ? "text-primary" : "text-muted-foreground")} />
+                          <span className={cn("text-sm font-medium leading-tight", active ? "text-primary" : "text-foreground")}>
                             {opt.label}
                           </span>
                         </button>
@@ -528,7 +528,7 @@ export function PlanMySafari() {
             </AnimatePresence>
 
             {error && (
-              <p className="mt-6 text-sm text-red-600 dark:text-red-400 bg-red-500/10 rounded-xl px-4 py-3">
+              <p className="mt-6 rounded-xl bg-destructive/10 px-4 py-3 text-sm text-destructive">
                 {error}
               </p>
             )}
@@ -570,7 +570,7 @@ export function PlanMySafari() {
             className="text-center py-10"
           >
             <div className="mx-auto w-20 h-20 rounded-full bg-primary/10 flex items-center justify-center mb-6">
-              <CheckCircle2 className="w-10 h-10 text-primary dark:text-amber-400" />
+              <CheckCircle2 className="w-10 h-10 text-primary" />
             </div>
             <h1 className="font-display text-3xl sm:text-4xl font-medium text-foreground mb-3 leading-tight">
               Your safari plan is on the way!
@@ -608,7 +608,7 @@ export function PlanMySafari() {
           sizes="100vw"
           className="object-cover"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-stone-950/40 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#08130E]/50 to-transparent" />
       </div>
     </div>
   )

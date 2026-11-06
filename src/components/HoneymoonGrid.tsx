@@ -45,19 +45,19 @@ export default function HoneymoonGrid({ packages }: { packages: HoneymoonCard[] 
   return (
     <>
       {/* Filter tabs */}
-      <section className="py-10 px-6 bg-gradient-to-b from-rose-50/50 to-transparent dark:from-rose-950/10">
-        <div className="max-w-7xl mx-auto">
-          <div className="flex flex-wrap gap-2 justify-center">
+      <section className="bg-gradient-to-b from-accent/5 to-transparent px-6 py-10">
+        <div className="mx-auto max-w-7xl">
+          <div className="flex flex-wrap justify-center gap-2">
             {typeDefs.map((t) => {
               const Icon = t.icon;
               return (
                 <button
                   key={t.key}
                   onClick={() => setSelected(t.key)}
-                  className={`inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-medium transition-all border ${
+                  className={`inline-flex items-center gap-2 rounded-full border px-5 py-2.5 text-sm font-medium transition-all ${
                     selected === t.key
-                      ? "bg-gradient-to-r from-rose-500 to-orange-500 text-white border-transparent shadow-lg shadow-rose-900/20"
-                      : "bg-card border-border text-muted-foreground hover:border-rose-300 dark:hover:border-rose-500/40 hover:text-foreground"
+                      ? "border-transparent bg-primary text-primary-foreground shadow-card"
+                      : "border-border bg-card text-muted-foreground hover:border-accent/40 hover:text-foreground"
                   }`}
                 >
                   <Icon className="size-4" />
@@ -92,9 +92,9 @@ export default function HoneymoonGrid({ packages }: { packages: HoneymoonCard[] 
                     initial={{ opacity: 0, y: 30 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.5, delay: idx * 0.1 }}
-                    className="group relative bg-card rounded-3xl overflow-hidden border border-border hover:shadow-2xl hover:-translate-y-1 transition-all duration-500"
+                    className="group relative overflow-hidden rounded-[1.75rem] border border-border bg-card shadow-card transition-all duration-500 hover:-translate-y-1 hover:shadow-card-hover"
                   >
-                    <div className="relative h-56 sm:h-64 overflow-hidden">
+                    <div className="relative h-56 overflow-hidden sm:h-64">
                       <Image
                         src={pkg.image}
                         alt={pkg.name}
@@ -103,12 +103,12 @@ export default function HoneymoonGrid({ packages }: { packages: HoneymoonCard[] 
                         sizes="(max-width: 768px) 100vw, 50vw"
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
-                      <div className="absolute top-4 left-4 inline-flex items-center gap-1.5 bg-white/90 backdrop-blur rounded-full px-3 py-1 text-xs font-semibold text-rose-700">
-                        <Heart className="size-3 fill-rose-500 text-rose-500" />
+                      <div className="absolute left-4 top-4 inline-flex items-center gap-1.5 rounded-full bg-background/90 px-3 py-1 text-xs font-semibold text-accent backdrop-blur">
+                        <Heart className="size-3 fill-accent text-accent" />
                         Honeymoon
                       </div>
                       <div className="absolute bottom-4 left-4 right-4">
-                        <h3 className="font-display text-2xl font-medium text-white">{pkg.name}</h3>
+                        <h3 className="font-display text-2xl font-normal text-white">{pkg.name}</h3>
                         <div className="flex items-center gap-3 text-sm text-white/70 mt-1">
                           <span className="flex items-center gap-1">
                             <Clock className="size-3.5" />
@@ -148,7 +148,7 @@ export default function HoneymoonGrid({ packages }: { packages: HoneymoonCard[] 
                         <div className="grid grid-cols-2 gap-2">
                           {pkg.highlights.map((h: string) => (
                             <div key={h} className="flex items-start gap-2 text-sm text-muted-foreground">
-                              <Heart className="size-3.5 text-rose-400 shrink-0 mt-0.5 fill-rose-400" />
+                              <Heart className="mt-0.5 size-3.5 shrink-0 fill-accent text-accent" />
                               {h}
                             </div>
                           ))}
@@ -160,7 +160,7 @@ export default function HoneymoonGrid({ packages }: { packages: HoneymoonCard[] 
                         <div className="grid grid-cols-2 gap-1.5">
                           {pkg.included.map((i: string) => (
                             <div key={i} className="flex items-center gap-1.5 text-xs text-muted-foreground">
-                              <Check className="size-3 text-rose-400 shrink-0" />
+                              <Check className="size-3 shrink-0 text-accent" />
                               {i}
                             </div>
                           ))}
@@ -170,13 +170,13 @@ export default function HoneymoonGrid({ packages }: { packages: HoneymoonCard[] 
                       <div className="flex gap-3">
                         <Link
                           href={`/honeymoon-packages/${pkg.slug}`}
-                          className="flex-1 inline-flex items-center justify-center gap-2 h-12 rounded-xl border border-border bg-card hover:border-rose-300 dark:hover:border-rose-500/40 hover:bg-rose-50 dark:hover:bg-rose-950/20 text-foreground text-sm font-medium transition-all duration-300"
+                          className="inline-flex h-12 flex-1 items-center justify-center gap-2 rounded-full border border-border bg-card text-sm font-medium text-foreground transition-all duration-300 hover:border-accent/40 hover:bg-accent/5"
                         >
                           View Safari <ArrowRight className="size-4" />
                         </Link>
                         <Link
                           href={PLAN_SAFARI_ROUTE}
-                          className="flex-1 inline-flex items-center justify-center h-12 rounded-xl bg-gradient-to-r from-rose-500 to-orange-500 hover:from-rose-600 hover:to-orange-600 text-white text-sm font-semibold shadow-lg shadow-rose-900/20 transition-all duration-300"
+                          className="inline-flex h-12 flex-1 items-center justify-center rounded-full bg-accent text-sm font-semibold text-accent-foreground transition-all duration-300 hover:bg-accent/90"
                         >
                           Design Our Honeymoon
                         </Link>
@@ -196,7 +196,7 @@ export default function HoneymoonGrid({ packages }: { packages: HoneymoonCard[] 
                             included: pkg.included,
                           }}
                           buttonLabel="Download itinerary PDF"
-                          className="bg-transparent p-0 h-auto rounded-none text-xs font-medium text-rose-600 dark:text-rose-400 underline underline-offset-4 hover:text-rose-700 dark:hover:text-rose-300 transition-colors"
+                          className="h-auto rounded-none bg-transparent p-0 text-xs font-medium text-accent underline underline-offset-4 transition-colors hover:text-accent/80"
                         />
                       </div>
                     </div>

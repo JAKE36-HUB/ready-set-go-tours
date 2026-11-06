@@ -14,21 +14,21 @@ export const metadata: Metadata = {
 export default function NotFound() {
   return (
     <div className="min-h-[80vh] flex flex-col items-center justify-center px-4">
-      <div className="flex items-center justify-center w-20 h-20 rounded-2xl bg-gradient-to-r from-sky-500 to-cyan-400 text-white shadow-lg mb-8">
-        <Compass className="w-10 h-10" />
+      <div className="mb-8 flex size-20 items-center justify-center rounded-2xl bg-primary text-primary-foreground shadow-lg">
+        <Compass className="size-10" />
       </div>
-      <h1 className="text-6xl font-bold text-slate-900 dark:text-white mb-4">404</h1>
-      <h2 className="text-2xl font-semibold text-slate-700 dark:text-slate-300 mb-2">
+      <h1 className="mb-4 font-display text-6xl font-normal text-foreground">404</h1>
+      <h2 className="mb-2 text-2xl font-semibold text-foreground/80">
         Page Not Found
       </h2>
-      <p className="text-slate-500 dark:text-slate-400 text-center max-w-md mb-8">
+      <p className="mb-8 max-w-md text-center text-muted-foreground">
         Looks like you&apos;ve wandered off the beaten path. Let us guide you back to your adventure.
       </p>
       <Link
         href="/"
-        className="inline-flex items-center gap-2 h-12 px-8 rounded-xl bg-gradient-to-r from-sky-500 to-cyan-400 text-white font-medium shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300"
+        className="inline-flex h-12 items-center gap-2 rounded-full bg-primary px-8 font-medium text-primary-foreground shadow-lg transition-all duration-300 hover:scale-105 hover:shadow-xl"
       >
-        <Compass className="w-5 h-5" />
+        <Compass className="size-5" />
         Return Home
       </Link>
     </div>

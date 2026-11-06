@@ -33,12 +33,12 @@ export default function PrivacyPolicyPage() {
         { name: "Privacy Policy", item: "/privacy-policy" },
       ]} />
       <main className="min-h-screen pt-28 pb-20 px-6">
-      <div className="max-w-3xl mx-auto">
-        <div className="flex items-center gap-3 mb-8">
-          <div className="w-10 h-10 rounded-xl bg-sky-50 dark:bg-sky-900/30 flex items-center justify-center">
-            <Shield className="w-5 h-5 text-sky-500" />
+      <div className="mx-auto max-w-3xl">
+        <div className="mb-8 flex items-center gap-3">
+          <div className="flex size-10 items-center justify-center rounded-xl bg-accent/10">
+            <Shield className="size-5 text-accent" />
           </div>
-          <h1 className="text-3xl font-bold text-foreground">Privacy Policy</h1>
+          <h1 className="font-display text-3xl font-normal text-foreground">Privacy Policy</h1>
         </div>
         <div className="prose prose-slate dark:prose-invert max-w-none">
           <p>

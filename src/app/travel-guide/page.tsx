@@ -58,16 +58,13 @@ export default function TravelGuidePage() {
           className="object-cover"
           sizes="100vw"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black/70" />
-        <div className="relative z-10 text-center px-6 max-w-4xl mx-auto">
+        <div className="absolute inset-0 bg-gradient-to-b from-[#08130E]/65 via-[#08130E]/40 to-[#08130E]/85" />
+        <div className="relative z-10 mx-auto max-w-4xl px-6 text-center">
           <AnimatedSection direction="none">
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white mb-4">
-              Travel{" "}
-              <span className="bg-gradient-to-r from-emerald-400 to-sky-300 bg-clip-text text-transparent">
-                Guide
-              </span>
+            <h1 className="mb-4 font-display text-4xl font-normal text-white sm:text-5xl lg:text-6xl">
+              Travel <span className="italic text-[#E4C9A3]">Guide</span>
             </h1>
-            <p className="text-lg text-white/70 max-w-xl mx-auto">
+            <p className="mx-auto max-w-xl text-lg text-white/65">
               Expert insights, destination guides, and insider tips from our team of East Africa specialists.
             </p>
           </AnimatedSection>
@@ -81,7 +78,7 @@ export default function TravelGuidePage() {
             {/* Featured Article */}
             <AnimatedSection>
               <Link href={`/travel-guide/${featured.slug}`}>
-              <article className="group relative rounded-2xl overflow-hidden ring-1 ring-foreground/10 mb-12 cursor-pointer">
+              <article className="group relative mb-12 cursor-pointer overflow-hidden rounded-2xl ring-1 ring-border">
                 <div className="relative aspect-[16/9] sm:aspect-[2/1]">
                   <Image
                     src={featured.image}
@@ -93,10 +90,10 @@ export default function TravelGuidePage() {
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
                   <div className="absolute bottom-0 left-0 right-0 p-6 sm:p-10">
-                    <span className="inline-block px-3 py-1 rounded-full bg-sky-500 text-white text-xs font-semibold mb-3">
+                    <span className="mb-3 inline-block rounded-full bg-[#E4C9A3] px-3 py-1 text-xs font-semibold text-[#1F4A38]">
                       {featured.category}
                     </span>
-                    <h2 className="text-2xl sm:text-3xl font-bold text-white mb-3 group-hover:text-sky-300 transition-colors">
+                    <h2 className="mb-3 font-display text-2xl font-normal text-white transition-colors group-hover:text-[#E4C9A3] sm:text-3xl">
                       {featured.title}
                     </h2>
                     <p className="text-white/70 text-sm sm:text-base max-w-2xl mb-4 hidden sm:block">
@@ -127,7 +124,7 @@ export default function TravelGuidePage() {
               {posts.map((post, i) => (
                 <AnimatedSection key={post.id} delay={i * 0.05}>
                   <Link href={`/travel-guide/${post.slug}`}>
-                  <article className="group flex flex-col bg-card rounded-2xl ring-1 ring-foreground/10 overflow-hidden hover:shadow-lg transition-shadow h-full">
+                  <article className="group flex h-full flex-col overflow-hidden rounded-2xl bg-card ring-1 ring-border transition-shadow hover:shadow-lg">
                     <div className="relative aspect-[16/10] overflow-hidden">
                       <Image
                         src={post.image}
@@ -138,13 +135,13 @@ export default function TravelGuidePage() {
                         loading="lazy"
                       />
                       <div className="absolute top-3 left-3">
-                        <span className="px-2.5 py-1 rounded-full bg-sky-500 text-white text-[10px] font-semibold">
+                        <span className="rounded-full bg-accent px-2.5 py-1 text-[10px] font-semibold text-white">
                           {post.category}
                         </span>
                       </div>
                     </div>
                     <div className="flex flex-col flex-1 p-5">
-                      <h3 className="text-base font-bold text-foreground mb-2 line-clamp-2 group-hover:text-sky-600 transition-colors">
+                      <h3 className="mb-2 line-clamp-2 text-base font-bold text-foreground transition-colors group-hover:text-accent">
                         {post.title}
                       </h3>
                       <p className="text-sm text-muted-foreground mb-4 line-clamp-2 flex-1">
@@ -161,7 +158,7 @@ export default function TravelGuidePage() {
                             {post.date}
                           </span>
                         </div>
-                        <span className="flex items-center gap-1 text-sky-500 font-medium group-hover:gap-2 transition-all">
+                        <span className="flex items-center gap-1 font-medium text-accent transition-all group-hover:gap-2">
                           Read <ArrowRight className="size-3" />
                         </span>
                       </div>
@@ -177,9 +174,9 @@ export default function TravelGuidePage() {
           <aside className="w-full lg:w-80 shrink-0 space-y-8">
             {/* Categories */}
             <AnimatedSection direction="right" delay={0}>
-              <div className="p-6 rounded-2xl bg-card ring-1 ring-foreground/10">
-                <h3 className="font-bold text-foreground mb-4 flex items-center gap-2">
-                  <Tag className="size-4 text-sky-500" />
+              <div className="rounded-2xl bg-card p-6 ring-1 ring-border">
+                <h3 className="mb-4 flex items-center gap-2 font-bold text-foreground">
+                  <Tag className="size-4 text-accent" />
                   Categories
                 </h3>
                 <ul className="space-y-2">
@@ -187,7 +184,7 @@ export default function TravelGuidePage() {
                     const count = BLOG_POSTS.filter((p) => p.category === cat).length;
                     return (
                       <li key={cat}>
-                        <button className="flex items-center justify-between w-full text-sm text-muted-foreground hover:text-sky-500 transition-colors py-1.5">
+                        <button className="flex w-full items-center justify-between py-1.5 text-sm text-muted-foreground transition-colors hover:text-accent">
                           {cat}
                           <span className="text-xs bg-muted px-2 py-0.5 rounded-full">{count}</span>
                         </button>
@@ -200,9 +197,9 @@ export default function TravelGuidePage() {
 
             {/* Recent Posts */}
             <AnimatedSection direction="right" delay={0.1}>
-              <div className="p-6 rounded-2xl bg-card ring-1 ring-foreground/10">
-                <h3 className="font-bold text-foreground mb-4 flex items-center gap-2">
-                  <Clock className="size-4 text-sky-500" />
+              <div className="rounded-2xl bg-card p-6 ring-1 ring-border">
+                <h3 className="mb-4 flex items-center gap-2 font-bold text-foreground">
+                  <Clock className="size-4 text-accent" />
                   Recent Posts
                 </h3>
                 <div className="space-y-4">
@@ -220,7 +217,7 @@ export default function TravelGuidePage() {
                         />
                       </div>
                       <div>
-                        <h4 className="text-xs font-semibold text-foreground line-clamp-2 group-hover:text-sky-500 transition-colors">
+                        <h4 className="line-clamp-2 text-xs font-semibold text-foreground transition-colors group-hover:text-accent">
                           {post.title}
                         </h4>
                         <p className="text-[10px] text-muted-foreground mt-1">{post.date}</p>
@@ -234,16 +231,16 @@ export default function TravelGuidePage() {
 
             {/* Tags */}
             <AnimatedSection direction="right" delay={0.2}>
-              <div className="p-6 rounded-2xl bg-card ring-1 ring-foreground/10">
-                <h3 className="font-bold text-foreground mb-4 flex items-center gap-2">
-                  <Tag className="size-4 text-sky-500" />
+              <div className="rounded-2xl bg-card p-6 ring-1 ring-border">
+                <h3 className="mb-4 flex items-center gap-2 font-bold text-foreground">
+                  <Tag className="size-4 text-accent" />
                   Popular Tags
                 </h3>
                 <div className="flex flex-wrap gap-2">
                   {TAGS.map((tag) => (
                     <span
                       key={tag}
-                      className="px-3 py-1.5 rounded-full bg-muted text-xs text-muted-foreground hover:bg-sky-50 hover:text-sky-600 cursor-pointer transition-colors"
+                      className="cursor-pointer rounded-full bg-muted px-3 py-1.5 text-xs text-muted-foreground transition-colors hover:bg-accent/10 hover:text-accent"
                     >
                       {tag}
                     </span>
