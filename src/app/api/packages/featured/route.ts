@@ -35,7 +35,7 @@ export async function GET(req: NextRequest) {
 
     const { data, error } = await getSupabaseAdmin()
       .from("tour_packages")
-      .select("name, slug, type, image, price, duration, highlights, description")
+      .select("name, slug, type, image, price, duration, highlights, description, notes")
 
     if (error) {
       return NextResponse.json({ pkg: null, freq, label: "Package of the Day", bucketId: 0 })

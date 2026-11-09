@@ -287,6 +287,15 @@ export default function EditPackagePage() {
             <div className="border-t border-slate-100 dark:border-slate-800 pt-6 space-y-2">
               <Label>Important Travel Information &amp; Seasonal Notes</Label>
               <Textarea value={form.notes} onChange={(e) => setForm((p) => ({ ...p, notes: e.target.value }))} rows={5} />
+              <p className="text-xs leading-relaxed text-slate-500 dark:text-slate-400">
+                <span className="font-semibold text-slate-700 dark:text-slate-300">Seasonal pricing:</span>{" "}
+                start a paragraph with <code className="rounded bg-slate-100 px-1 py-0.5 dark:bg-slate-800">Rates &amp; seasons</code>{" "}
+                and list each season as{" "}
+                <code className="rounded bg-slate-100 px-1 py-0.5 dark:bg-slate-800">High/peak season (dates): $X per person sharing, $Y solo traveller.</code>{" "}
+                and{" "}
+                <code className="rounded bg-slate-100 px-1 py-0.5 dark:bg-slate-800">Low/shoulder season (dates): $A per person sharing, $B solo traveller.</code>{" "}
+                The website will automatically show a high vs low season comparison.
+              </p>
             </div>
           </div>
         </motion.div>

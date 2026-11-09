@@ -7,7 +7,7 @@ import { getSupabase } from "@/lib/supabase";
 import { buildMetaDescription, tourMetaTitle } from "@/lib/seo";
 import { TourPackageJsonLd, BreadcrumbJsonLd } from "@/components/JsonLd";
 import {
-  Clock, Check, X, ArrowLeft, BadgeDollarSign,
+  Clock, Check, X, ArrowLeft, BadgeDollarSign, Leaf,
   Hotel, Utensils, Car, Compass, MessageCircle, ArrowRight,
 } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
@@ -18,6 +18,8 @@ import ItineraryAccordion from "@/components/ItineraryAccordion";
 import PackageSectionNav from "@/components/PackageSectionNav";
 import PackageStickyCTA from "@/components/PackageStickyCTA";
 import SimilarPackages, { type SimilarPackage } from "@/components/SimilarPackages";
+import { SeasonPricePanel } from "@/components/SeasonPricing";
+import { parseSeasonPricing, stripSeasonRates } from "@/lib/season-pricing";
 import type { ItineraryDay, OptionalActivity } from "@/lib/tour";
 
 export const revalidate = 3600;
@@ -46,7 +48,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const suffix = row.type === "beach" ? "Beach Holiday" : "Safari";
   const base = /safari|beach/i.test(row.name) ? row.name : `${row.name} ${suffix}`;
   const title = tourMetaTitle(slug, base, row.price);
-  const description = buildDescription(row.description);
+  const description = buildDescription(stripSeasonRates(row.description));
 
   return {
     title: { absolute: title },
@@ -122,6 +124,15 @@ export default async function PackageDetailPage({
 
   const noun = pkg.type === "beach" ? "Beach Holiday" : "Safari";
 
+  // High/low season rates are stored as free text in the notes field. Parse
+  // them into structured data so the page can show a real comparison.
+  const seasonPricing = parseSeasonPricing({
+    notes: pkg.notes,
+    description: pkg.description,
+    price: pkg.price,
+  });
+  const fromPrice = seasonPricing?.fromPrice ?? pkg.price;
+
   // Rates & seasons live in the notes field. Pull them out so they can be shown
   // in a clearly visible callout instead of being buried in the small print.
   const noteSections = pkg.notes
@@ -148,7 +159,7 @@ export default async function PackageDetailPage({
   try {
     const { data } = await getSupabase()
       .from("tour_packages")
-      .select("name, slug, image, price, duration, description")
+      .select("name, slug, image, price, duration, description, notes")
       .eq("type", pkg.type)
       .neq("slug", slug)
       .order("name")
@@ -167,7 +178,7 @@ export default async function PackageDetailPage({
         name={pkg.name}
         description={pkg.description}
         image={pkg.image}
-        price={pkg.price}
+        price={fromPrice}
         duration={pkg.duration}
         url={`/holiday-packages/${slug}`}
       />
@@ -210,12 +221,26 @@ export default async function PackageDetailPage({
         <div className="max-w-7xl mx-auto px-6 py-3 flex flex-wrap items-center justify-between gap-4">
           <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
             <div>
-              <span className="text-[10px] text-muted-foreground uppercase tracking-wider">Non-resident</span>
-              <div className="flex items-baseline gap-1">
-                <span className="text-2xl font-bold text-foreground">${pkg.price.toLocaleString()}</span>
+              <span className="text-[10px] text-muted-foreground uppercase tracking-wider">
+                Non-resident{seasonPricing?.hasComparison ? " · from" : ""}
+              </span>
+              <div className="flex flex-wrap items-baseline gap-1">
+                <span className="text-2xl font-bold text-foreground">${fromPrice.toLocaleString()}</span>
                 <span className="text-xs text-muted-foreground">/ person</span>
+                {seasonPricing?.hasComparison && (
+                  <span className="ml-1 inline-flex items-center gap-1 rounded-full bg-[#6FBF8B]/15 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-[#2F7D52] dark:text-[#8FD6A6]">
+                    <Leaf className="size-2.5" />
+                    Low season
+                  </span>
+                )}
               </div>
             </div>
+            {seasonPricing?.hasComparison && seasonPricing.high && (
+              <div className="pl-3 border-l border-foreground/10">
+                <span className="text-[10px] text-muted-foreground uppercase tracking-wider">High season</span>
+                <div className="text-sm font-semibold text-foreground">${seasonPricing.high.price.toLocaleString()}</div>
+              </div>
+            )}
             {pkg.priceKES && (
               <div className="pl-3 border-l border-foreground/10">
                 <span className="text-[10px] text-muted-foreground uppercase tracking-wider">Citizen / Resident</span>
@@ -251,8 +276,10 @@ export default async function PackageDetailPage({
               <div id="overview" className="scroll-mt-28">
                 <AnimatedSection>
                   <h2 className="font-display text-2xl font-medium text-foreground mb-4">About This {noun}</h2>
-                  <p className="text-muted-foreground leading-relaxed text-lg">{pkg.description}</p>
-                  {ratesLines.length > 0 && (
+                  <p className="text-muted-foreground leading-relaxed text-lg">{stripSeasonRates(pkg.description)}</p>
+                  {seasonPricing ? (
+                    <SeasonPricePanel pricing={seasonPricing} className="mt-6" />
+                  ) : ratesLines.length > 0 ? (
                     <div className="mt-6 rounded-2xl border-2 border-primary/30 bg-primary/5 p-6 shadow-sm">
                       <h3 className="flex items-center gap-2 font-display text-lg font-semibold text-foreground mb-2">
                         <BadgeDollarSign className="size-5 text-primary shrink-0" />
@@ -264,7 +291,7 @@ export default async function PackageDetailPage({
                         </p>
                       ))}
                     </div>
-                  )}
+                  ) : null}
                 </AnimatedSection>
               </div>
 
@@ -416,6 +443,8 @@ export default async function PackageDetailPage({
       price={pkg.price}
       priceKES={pkg.priceKES}
       noun={noun}
+      fromPrice={seasonPricing?.hasComparison ? seasonPricing.fromPrice : null}
+      seasonLabel={seasonPricing?.hasComparison ? "low season" : null}
     />
     </>
   )

@@ -8,6 +8,8 @@ import { Clock, ArrowRight, Sparkles } from "lucide-react"
 
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
+import { parseSeasonPricing } from "@/lib/season-pricing"
+import { SeasonPriceInline } from "@/components/SeasonPricing"
 
 interface FeaturedPkg {
   name: string
@@ -18,6 +20,7 @@ interface FeaturedPkg {
   duration: string
   highlights: string[]
   description: string
+  notes?: string | null
 }
 
 interface FeaturedResp {
@@ -91,6 +94,12 @@ export function PackageOfTheDay({ frequency = "day" }: { frequency?: "day" | "we
 
   const pkg = resp.pkg
   const highlights = (pkg.highlights || []).slice(0, 3)
+  const season = parseSeasonPricing({
+    notes: pkg.notes,
+    description: pkg.description,
+    price: pkg.price,
+  })
+  const fromPrice = season?.fromPrice ?? pkg.price
 
   return (
     <section className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-12">
@@ -130,12 +139,15 @@ export function PackageOfTheDay({ frequency = "day" }: { frequency?: "day" | "we
               {pkg.duration}
             </span>
             <span className="inline-flex items-center gap-1.5">
-              <span className="text-white/60">From</span>
+              <span className="text-white/60">
+                From{season?.hasComparison ? " · low season" : ""}
+              </span>
               <span className="text-lg font-semibold text-[#F7CE84]">
-                ${pkg.price.toLocaleString()}
+                ${fromPrice.toLocaleString()}
               </span>
               <span className="text-white/60">/person</span>
             </span>
+            <SeasonPriceInline pricing={season} />
           </div>
 
           {highlights.length > 0 && (

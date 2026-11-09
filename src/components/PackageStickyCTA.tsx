@@ -10,13 +10,18 @@ export default function PackageStickyCTA({
   price,
   priceKES,
   noun,
+  fromPrice,
+  seasonLabel,
 }: {
   name: string;
   price: number;
   priceKES: number | null;
   noun: string;
+  fromPrice?: number | null;
+  seasonLabel?: string | null;
 }) {
   const [show, setShow] = useState(false);
+  const displayPrice = fromPrice ?? price;
 
   useEffect(() => {
     const onScroll = () => setShow(window.scrollY > 600);
@@ -32,8 +37,13 @@ export default function PackageStickyCTA({
     >
       <div className="flex items-center gap-3 max-w-lg mx-auto">
         <div className="flex flex-col leading-tight shrink-0">
+          {fromPrice && seasonLabel && (
+            <span className="text-[9px] font-semibold uppercase tracking-wider text-[#2F7D52] dark:text-[#8FD6A6]">
+              From · {seasonLabel}
+            </span>
+          )}
           <span className="text-base font-bold text-foreground">
-            ${price.toLocaleString()}
+            ${displayPrice.toLocaleString()}
           </span>
           <span className="text-[10px] text-muted-foreground">
             {priceKES ? `KES ${priceKES.toLocaleString()}` : "per person"}

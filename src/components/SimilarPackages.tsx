@@ -1,6 +1,8 @@
 import Image from "next/image";
 import Link from "next/link";
 import { Clock, ArrowRight } from "lucide-react";
+import { parseSeasonPricing, stripSeasonRates } from "@/lib/season-pricing";
+import { SeasonPriceRows } from "@/components/SeasonPricing";
 
 export interface SimilarPackage {
   name: string;
@@ -9,6 +11,7 @@ export interface SimilarPackage {
   price: number;
   duration: string;
   description: string;
+  notes?: string | null;
 }
 
 export default function SimilarPackages({
@@ -36,7 +39,13 @@ export default function SimilarPackages({
         </div>
 
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {packages.map((p) => (
+          {packages.map((p) => {
+            const season = parseSeasonPricing({
+              notes: p.notes,
+              description: p.description,
+              price: p.price,
+            });
+            return (
             <Link
               key={p.slug}
               href={`/holiday-packages/${p.slug}`}
@@ -52,8 +61,11 @@ export default function SimilarPackages({
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
                 <div className="absolute bottom-3 right-3 rounded-2xl bg-[#06101C]/70 px-3 py-1.5 text-white ring-1 ring-white/15 backdrop-blur">
+                  <span className="block text-[9px] uppercase tracking-wider text-white/60">
+                    {season?.hasComparison ? "From · low season" : "From"}
+                  </span>
                   <span className="text-sm font-semibold leading-none">
-                    ${p.price.toLocaleString()}
+                    ${(season?.fromPrice ?? p.price).toLocaleString()}
                     <span className="text-[10px] font-normal text-white/60"> /pp</span>
                   </span>
                 </div>
@@ -63,15 +75,17 @@ export default function SimilarPackages({
                   {p.name}
                 </h3>
                 <p className="text-sm text-muted-foreground line-clamp-2 mb-4 flex-1">
-                  {p.description}
+                  {stripSeasonRates(p.description)}
                 </p>
+                <SeasonPriceRows pricing={season} className="mb-4" />
                 <div className="flex items-center gap-2 text-xs text-muted-foreground pt-3 border-t border-foreground/5">
                   <Clock className="size-3.5 text-accent" />
                   {p.duration}
                 </div>
               </div>
             </Link>
-          ))}
+            );
+          })}
         </div>
       </div>
     </section>

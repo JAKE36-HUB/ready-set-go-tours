@@ -6,6 +6,8 @@ import Link from "next/link";
 import { Badge } from "@/components/ui/badge";
 import AnimatedSection from "@/components/AnimatedSection";
 import { PACKAGE_FILTERS, PLAN_SAFARI_ROUTE } from "@/lib/constants";
+import { parseSeasonPricing, stripSeasonRates } from "@/lib/season-pricing";
+import { SeasonPriceRows } from "@/components/SeasonPricing";
 import { Clock, Bed, Utensils, Car, ArrowUpDown, ArrowRight } from "lucide-react";
 
 const SORT_OPTIONS = [
@@ -39,6 +41,7 @@ export interface PackageCard {
   activities: string[];
   highlights: string[];
   priceKES: number | null;
+  notes?: string | null;
 }
 
 export default function PackagesBrowser({
@@ -53,8 +56,21 @@ export default function PackagesBrowser({
   );
   const [sortBy, setSortBy] = useState<string>("price-asc");
 
+  const enriched = useMemo(
+    () =>
+      packages.map((p) => ({
+        ...p,
+        season: parseSeasonPricing({
+          notes: p.notes,
+          description: p.description,
+          price: p.price,
+        }),
+      })),
+    [packages]
+  );
+
   const filtered = useMemo(() => {
-    let pkgs = [...packages];
+    let pkgs = [...enriched];
 
     if (activeFilter !== "All") {
       pkgs = pkgs.filter(
@@ -64,10 +80,16 @@ export default function PackagesBrowser({
 
     switch (sortBy) {
       case "price-asc":
-        pkgs.sort((a, b) => a.price - b.price);
+        pkgs.sort(
+          (a, b) =>
+            (a.season?.fromPrice ?? a.price) - (b.season?.fromPrice ?? b.price)
+        );
         break;
       case "price-desc":
-        pkgs.sort((a, b) => b.price - a.price);
+        pkgs.sort(
+          (a, b) =>
+            (b.season?.fromPrice ?? b.price) - (a.season?.fromPrice ?? a.price)
+        );
         break;
       case "duration":
         pkgs.sort(
@@ -81,7 +103,7 @@ export default function PackagesBrowser({
     }
 
     return pkgs;
-  }, [activeFilter, sortBy, packages]);
+  }, [activeFilter, sortBy, enriched]);
 
   return (
     <>
@@ -149,9 +171,11 @@ export default function PackagesBrowser({
                       </Badge>
                     </div>
                     <div className="absolute bottom-3 right-3 rounded-2xl bg-[#06101C]/70 px-3 py-2 text-white ring-1 ring-white/15 backdrop-blur">
-                      <span className="text-[10px] uppercase tracking-wider text-white/60 block">From</span>
+                      <span className="text-[10px] uppercase tracking-wider text-white/60 block">
+                        {pkg.season?.hasComparison ? "From · low season" : "From"}
+                      </span>
                       <span className="text-lg font-semibold leading-none">
-                        ${pkg.price.toLocaleString()}
+                        ${(pkg.season?.fromPrice ?? pkg.price).toLocaleString()}
                         <span className="text-xs font-normal text-white/60"> /pp</span>
                       </span>
                     </div>
@@ -163,7 +187,7 @@ export default function PackagesBrowser({
                       {pkg.name}
                     </h3>
                     <p className="text-sm text-muted-foreground line-clamp-2 mb-5 flex-1">
-                      {pkg.description}
+                      {stripSeasonRates(pkg.description)}
                     </p>
 
                     <div className="grid grid-cols-2 gap-x-4 gap-y-2.5 mb-6">
@@ -184,6 +208,8 @@ export default function PackagesBrowser({
                         {pkg.transport}
                       </div>
                     </div>
+
+                    <SeasonPriceRows pricing={pkg.season} className="mb-4" />
 
                     {pkg.priceKES && (
                       <div className="mb-2 flex items-center gap-1.5 text-xs text-muted-foreground">
