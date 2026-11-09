@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect, useRef } from "react"
+import { useState, useEffect } from "react"
 import Image from "next/image"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
@@ -10,6 +10,7 @@ import { useTheme } from "next-themes"
 
 import { Button } from "@/components/ui/button"
 import { Sheet, SheetContent, SheetClose } from "@/components/ui/sheet"
+import { SearchModal } from "@/components/layout/SearchModal"
 import { NAV_ITEMS, COMPANY, PLAN_SAFARI_ROUTE, whatsappLink } from "@/lib/constants"
 import { cn } from "@/lib/utils"
 
@@ -48,6 +49,18 @@ export function Header() {
     }
     window.addEventListener("keydown", handleKeyDown)
     return () => window.removeEventListener("keydown", handleKeyDown)
+  }, [])
+
+  // Cmd/Ctrl+K opens search from anywhere on the page.
+  useEffect(() => {
+    const handleShortcut = (event: KeyboardEvent) => {
+      if ((event.metaKey || event.ctrlKey) && event.key.toLowerCase() === "k") {
+        event.preventDefault()
+        setSearchOpen((open) => !open)
+      }
+    }
+    window.addEventListener("keydown", handleShortcut)
+    return () => window.removeEventListener("keydown", handleShortcut)
   }, [])
 
   const whatsappUrl = whatsappLink()
@@ -187,7 +200,9 @@ export function Header() {
                 "hidden rounded-full sm:inline-flex",
                 transparent ? "text-white/80 hover:bg-white/10 hover:text-white" : "text-foreground/70 hover:text-primary"
               )}
-              aria-label="Search"
+              aria-label="Search (Ctrl+K)"
+              aria-keyshortcuts="Control+K Meta+K"
+              title="Search (Ctrl+K)"
             >
               <Search className="w-4 h-4" />
             </Button>
@@ -241,20 +256,28 @@ export function Header() {
 
       <Sheet open={mobileMenuOpen} onOpenChange={setMobileMenuOpen}>
         <SheetContent side="right" className="w-full sm:max-w-sm p-0">
-          <MobileNavContent onClose={() => setMobileMenuOpen(false)} />
+          <MobileNavContent
+            onClose={() => setMobileMenuOpen(false)}
+            onSearch={() => {
+              setMobileMenuOpen(false)
+              setSearchOpen(true)
+            }}
+          />
         </SheetContent>
       </Sheet>
 
-      <AnimatePresence>
-        {searchOpen && (
-          <HeaderSearchModal onClose={() => setSearchOpen(false)} />
-        )}
-      </AnimatePresence>
+      <SearchModal isOpen={searchOpen} onClose={() => setSearchOpen(false)} />
     </>
   )
 }
 
-function MobileNavContent({ onClose }: { onClose: () => void }) {
+function MobileNavContent({
+  onClose,
+  onSearch,
+}: {
+  onClose: () => void
+  onSearch: () => void
+}) {
   const [expandedItems, setExpandedItems] = useState<string[]>([])
   const pathname = usePathname()
 
@@ -284,6 +307,20 @@ function MobileNavContent({ onClose }: { onClose: () => void }) {
         >
           <X className="w-5 h-5" />
         </SheetClose>
+      </div>
+
+      <div className="px-4 pt-4">
+        <button
+          type="button"
+          onClick={onSearch}
+          className="flex w-full items-center gap-3 rounded-xl border border-border bg-muted/50 px-3.5 py-3 text-left text-sm text-muted-foreground transition-colors hover:border-primary/30 hover:bg-muted hover:text-foreground"
+        >
+          <Search className="size-4 shrink-0" />
+          <span className="flex-1">Search safaris, destinations, guides…</span>
+          <kbd className="hidden rounded border border-border bg-card px-1.5 py-0.5 font-mono text-[10px] sm:inline-block">
+            Ctrl K
+          </kbd>
+        </button>
       </div>
 
       <nav className="flex-1 overflow-y-auto p-4 space-y-1">
@@ -388,107 +425,5 @@ function MobileNavContent({ onClose }: { onClose: () => void }) {
         </a>
       </div>
     </div>
-  )
-}
-
-function HeaderSearchModal({ onClose }: { onClose: () => void }) {
-  const [query, setQuery] = useState("")
-  const [results, setResults] = useState<{ label: string; href: string }[]>([])
-  const inputRef = useRef<HTMLInputElement>(null)
-
-  useEffect(() => {
-    inputRef.current?.focus()
-  }, [])
-
-  useEffect(() => {
-    if (!query.trim()) {
-      // eslint-disable-next-line react-hooks/set-state-in-effect
-      setResults([])
-      return
-    }
-    const q = query.toLowerCase()
-    const matches: { label: string; href: string }[] = []
-    NAV_ITEMS.forEach((item) => {
-      if (item.children) {
-        item.children.forEach((child) => {
-          if (
-            child.label.toLowerCase().includes(q) ||
-            child.href.toLowerCase().includes(q)
-          ) {
-            matches.push({ label: child.label, href: child.href })
-          }
-        })
-      }
-      if (item.label.toLowerCase().includes(q) && item.href !== "/") {
-        matches.push({ label: item.label, href: item.href })
-      }
-    })
-    setResults(matches.slice(0, 8))
-  }, [query])
-
-  return (
-    <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-      transition={{ duration: 0.2 }}
-      className="fixed inset-0 z-[60] flex items-start justify-center pt-[15vh] bg-black/60 backdrop-blur-sm"
-      onClick={(e) => {
-        if (e.target === e.currentTarget) onClose()
-      }}
-    >
-      <motion.div
-        initial={{ opacity: 0, y: -20, scale: 0.95 }}
-        animate={{ opacity: 1, y: 0, scale: 1 }}
-        exit={{ opacity: 0, y: -20, scale: 0.95 }}
-        transition={{ duration: 0.25, ease: "easeOut" }}
-        className="w-full max-w-lg mx-4"
-      >
-        <div className="bg-card rounded-2xl shadow-2xl ring-1 ring-border overflow-hidden">
-          <div className="relative">
-            <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
-            <input
-              ref={inputRef}
-              type="text"
-              value={query}
-              onChange={(e) => setQuery(e.target.value)}
-              placeholder="Search destinations, tours, packages..."
-              className="w-full h-14 bg-transparent pl-12 pr-12 text-base text-foreground placeholder:text-muted-foreground focus:outline-none"
-              aria-label="Search destinations, tours, packages"
-            />
-            {query && (
-              <button
-                onClick={() => setQuery("")}
-                className="absolute right-4 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground"
-                aria-label="Clear search"
-              >
-                <X className="w-4 h-4" />
-              </button>
-            )}
-          </div>
-          {results.length > 0 && (
-            <div className="border-t border-border">
-              <div className="p-2 space-y-0.5">
-                {results.map((result) => (
-                  <Link
-                    key={`${result.href}-${result.label}`}
-                    href={result.href}
-                    onClick={onClose}
-                    className="flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm text-foreground/75 hover:bg-muted hover:text-foreground transition-colors"
-                  >
-                    <Search className="w-3.5 h-3.5 text-muted-foreground shrink-0" />
-                    {result.label}
-                  </Link>
-                ))}
-              </div>
-            </div>
-          )}
-          <div className="border-t border-border px-4 py-3 flex items-center gap-4 text-xs text-muted-foreground">
-            <span><kbd className="px-1.5 py-0.5 rounded bg-muted font-mono">ESC</kbd> to close</span>
-            <span><kbd className="px-1.5 py-0.5 rounded bg-muted font-mono">↑↓</kbd> to navigate</span>
-          </div>
-        </div>
-      </motion.div>
-    </motion.div>
   )
 }
