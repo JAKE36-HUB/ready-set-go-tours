@@ -1,4 +1,4 @@
-﻿import Image from "next/image";
+import Image from "next/image";
 import Link from "next/link";
 import AnimatedSection from "@/components/AnimatedSection";
 import { BreadcrumbJsonLd } from "@/components/JsonLd";
@@ -43,10 +43,10 @@ export default async function DealsPage() {
           className="object-cover"
           sizes="100vw"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-[#08130E]/70 via-[#08130E]/45 to-[#08130E]/85" />
+        <div className="absolute inset-0 bg-gradient-to-b from-[#06101C]/70 via-[#06101C]/45 to-[#06101C]/85" />
         <div className="relative z-10 mx-auto max-w-4xl px-6 text-center">
           <AnimatedSection direction="none">
-            <span className="text-xs font-semibold uppercase tracking-[0.24em] text-[#E4C9A3]">Deals & Offers</span>
+            <span className="text-xs font-semibold uppercase tracking-[0.24em] text-[#F7CE84]">Deals & Offers</span>
             <h1 className="mb-5 mt-4 font-display text-4xl font-normal leading-tight text-white sm:text-5xl lg:text-6xl">
               Great safaris, at a smarter price
             </h1>

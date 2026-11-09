@@ -181,21 +181,21 @@ export function AiChat() {
                 animate={{ opacity: 1, y: 0, scale: 1 }}
                 exit={{ opacity: 0, y: 12, scale: 0.96 }}
                 transition={{ duration: 0.3, ease: "easeOut" }}
-                className="fixed bottom-44 right-4 sm:right-6 z-40 w-[calc(100vw-3rem)] max-w-[300px] sm:w-72 overflow-hidden rounded-2xl bg-[#08130E] shadow-2xl shadow-black/40 ring-1 ring-white/10"
+                className="fixed bottom-44 right-4 sm:right-6 z-40 w-[calc(100vw-3rem)] max-w-[300px] sm:w-72 overflow-hidden rounded-2xl bg-[#06101C] shadow-2xl shadow-black/40 ring-1 ring-white/10"
               >
-                <span className="block h-1 bg-gradient-to-r from-[#B8643A] via-[#E4C9A3] to-[#B8643A]" />
+                <span className="block h-1 bg-gradient-to-r from-[#F5A623] via-[#F7CE84] to-[#F5A623]" />
                 <div className="relative px-5 pt-5 pb-5">
                   <button
                     onClick={() => setTeaser(false)}
-                    className="absolute top-4 right-4 w-6 h-6 rounded-full text-[#FAF7F2]/40 hover:text-[#FAF7F2] hover:bg-white/5 flex items-center justify-center transition-colors"
+                    className="absolute top-4 right-4 w-6 h-6 rounded-full text-[#FBFCFE]/40 hover:text-[#FBFCFE] hover:bg-white/5 flex items-center justify-center transition-colors"
                     aria-label="Dismiss"
                   >
                     <X className="w-3.5 h-3.5" />
                   </button>
-                  <h3 className="font-display text-lg leading-snug text-[#FAF7F2] pr-7">
+                  <h3 className="font-display text-lg leading-snug text-[#FBFCFE] pr-7">
                     Your safari begins with a single question.
                   </h3>
-                  <p className="mt-2.5 text-xs leading-relaxed text-[#FAF7F2]/70">
+                  <p className="mt-2.5 text-xs leading-relaxed text-[#FBFCFE]/70">
                     Ask our Kenya-based team anything — from the best time to cross the Mara to which
                     lodge overlooks the savannah. We&apos;re one message away.
                   </p>
@@ -218,7 +218,7 @@ export function AiChat() {
             className="fixed bottom-24 right-4 sm:right-6 z-40 group flex items-center gap-2.5"
             aria-label="Open live chat"
           >
-            <span className="hidden sm:inline-flex items-center h-11 pl-4 pr-5 rounded-2xl bg-[#08130E] shadow-xl shadow-black/20 ring-1 ring-white/10 text-sm font-semibold text-[#FAF7F2] group-hover:ring-accent/60 transition-all">
+            <span className="hidden sm:inline-flex items-center h-11 pl-4 pr-5 rounded-2xl bg-[#06101C] shadow-xl shadow-black/20 ring-1 ring-white/10 text-sm font-semibold text-[#FBFCFE] group-hover:ring-accent/60 transition-all">
               Live chat
             </span>
             <span className="relative inline-flex w-14 h-14 shrink-0">
@@ -228,7 +228,7 @@ export function AiChat() {
               <span className="relative flex w-14 h-14 items-center justify-center rounded-full gradient-primary text-white shadow-lg shadow-black/30 group-hover:scale-110 group-hover:shadow-black/50 transition-all duration-300">
                 <HeadphonesIcon className="w-6 h-6" />
               </span>
-              <span className="absolute top-0.5 right-0.5 w-3.5 h-3.5 rounded-full bg-[#6FBF8B] ring-2 ring-[#08130E]" />
+              <span className="absolute top-0.5 right-0.5 w-3.5 h-3.5 rounded-full bg-[#6FBF8B] ring-2 ring-[#06101C]" />
             </span>
           </button>
         </>
@@ -245,7 +245,7 @@ export function AiChat() {
             className="fixed bottom-24 right-6 z-50 w-[380px] max-w-[calc(100vw-2rem)] h-[560px] max-h-[calc(100vh-170px)] bg-card rounded-3xl shadow-2xl shadow-black/20 ring-1 ring-border flex flex-col overflow-hidden"
           >
             {/* Header */}
-            <div className="relative shrink-0 overflow-hidden px-4 pt-4 pb-3 bg-[#08130E]">
+            <div className="relative shrink-0 overflow-hidden px-4 pt-4 pb-3 bg-[#06101C]">
               <span className="absolute -top-10 -right-8 w-32 h-32 rounded-full bg-accent/20 blur-md" />
               <span className="absolute -bottom-14 -left-10 w-36 h-36 rounded-full bg-white/5 blur-md" />
               <div className="relative flex items-center gap-3">
@@ -253,7 +253,7 @@ export function AiChat() {
                   <div className="w-11 h-11 rounded-full bg-white/10 backdrop-blur ring-2 ring-white/20 flex items-center justify-center text-white text-sm font-bold">
                     RSG
                   </div>
-                  <span className="absolute -bottom-0.5 -right-0.5 w-3 h-3 rounded-full bg-[#6FBF8B] ring-2 ring-[#08130E] animate-pulse" />
+                  <span className="absolute -bottom-0.5 -right-0.5 w-3 h-3 rounded-full bg-[#6FBF8B] ring-2 ring-[#06101C] animate-pulse" />
                 </div>
                 <div className="min-w-0 flex-1">
                   <p className="text-[15px] font-display font-normal text-white leading-tight tracking-tight">Ready Set Go Safaris</p>

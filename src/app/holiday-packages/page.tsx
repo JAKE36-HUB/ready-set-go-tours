@@ -1,4 +1,4 @@
-﻿import Image from "next/image";
+import Image from "next/image";
 import AnimatedSection from "@/components/AnimatedSection";
 import { BreadcrumbJsonLd } from "@/components/JsonLd";
 import { getSupabase } from "@/lib/supabase";
@@ -40,10 +40,10 @@ export default async function HolidayPackagesPage({
           className="object-cover"
           sizes="100vw"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-[#08130E]/65 via-[#08130E]/40 to-[#08130E]/80" />
+        <div className="absolute inset-0 bg-gradient-to-b from-[#06101C]/65 via-[#06101C]/40 to-[#06101C]/80" />
         <div className="relative z-10 mx-auto max-w-4xl px-6 text-center">
           <AnimatedSection direction="none">
-            <span className="text-xs font-semibold uppercase tracking-[0.24em] text-[#E4C9A3]">Holiday Packages</span>
+            <span className="text-xs font-semibold uppercase tracking-[0.24em] text-[#F7CE84]">Holiday Packages</span>
             <h1 className="mb-5 mt-4 font-display text-4xl font-normal leading-tight text-white sm:text-5xl lg:text-6xl">
               Safaris worth planning a trip around
             </h1>

@@ -30,13 +30,13 @@ export function ScratchCard({ prize, promoCode, onRevealed }: Props) {
     ctxRef.current = ctx
     ctx.scale(dpr, dpr)
     const grad = ctx.createLinearGradient(0, 0, W, H)
-    grad.addColorStop(0, "#E4C9A3")
-    grad.addColorStop(1, "#B8643A")
+    grad.addColorStop(0, "#F7CE84")
+    grad.addColorStop(1, "#F5A623")
     ctx.fillStyle = grad
     ctx.beginPath()
     ctx.roundRect(0, 0, W, H, 14)
     ctx.fill()
-    ctx.fillStyle = "#1F4A38"
+    ctx.fillStyle = "#0B2A4A"
     ctx.font = "bold 16px sans-serif"
     ctx.textAlign = "center"
     ctx.textBaseline = "middle"
@@ -74,7 +74,7 @@ export function ScratchCard({ prize, promoCode, onRevealed }: Props) {
   return (
     <div className="flex flex-col items-center gap-3">
       <div className="relative overflow-hidden rounded-xl" style={{ width: W, height: H }}>
-        <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-secondary to-[#EADCC4]">
+        <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-secondary to-[#F8E3B8]">
           <div className="text-center px-4">
             <p className="text-lg font-extrabold text-foreground">{revealed ? `🎉 ${prize}` : "???"}</p>
             {promoCode && (

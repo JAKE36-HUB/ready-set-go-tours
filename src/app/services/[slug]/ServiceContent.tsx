@@ -90,8 +90,8 @@ export default function ServiceContent({ service }: Props) {
       {/* Hero */}
       <section className="relative flex h-[60vh] min-h-[480px] items-center justify-center overflow-hidden">
         <Image src={service.image} alt={service.title} fill priority className="object-cover" sizes="100vw" />
-        <div className="absolute inset-0 bg-gradient-to-b from-[#08130E]/65 via-[#08130E]/40 to-[#08130E]/85" />
-        <div className="absolute inset-0 bg-gradient-to-r from-[#08130E]/40 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-b from-[#06101C]/65 via-[#06101C]/40 to-[#06101C]/85" />
+        <div className="absolute inset-0 bg-gradient-to-r from-[#06101C]/40 to-transparent" />
         <div className="relative z-10 mx-auto max-w-4xl px-6 text-center">
           <AnimatedSection direction="none">
             <span className="mb-6 inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-1.5 text-sm font-medium text-white backdrop-blur-md">
@@ -201,7 +201,7 @@ export default function ServiceContent({ service }: Props) {
       {/* Decorative Image */}
       <section className="relative h-[40vh] min-h-[300px] overflow-hidden">
         <Image src={service.image} alt={service.title} fill className="object-cover" sizes="100vw" />
-        <div className="absolute inset-0 bg-gradient-to-r from-[#08130E]/60 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-r from-[#06101C]/60 to-transparent" />
       </section>
 
       {/* Benefits */}
@@ -303,7 +303,7 @@ export default function ServiceContent({ service }: Props) {
       {/* Decorative Image */}
       <section className="relative h-[35vh] min-h-[260px] overflow-hidden">
         <Image src={service.image} alt={service.title} fill className="object-cover" sizes="100vw" />
-        <div className="absolute inset-0 bg-gradient-to-l from-[#08130E]/50 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-l from-[#06101C]/50 to-transparent" />
       </section>
 
       {/* FAQs */}
@@ -333,8 +333,8 @@ export default function ServiceContent({ service }: Props) {
       </section>
 
       {/* CTA */}
-      <section className="relative overflow-hidden bg-[#08130E] px-6 py-20">
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_right,rgba(184,100,58,0.18),transparent_60%)]" />
+      <section className="relative overflow-hidden bg-[#06101C] px-6 py-20">
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_right,rgba(245,166,35,0.18),transparent_60%)]" />
         <div className="relative z-10 mx-auto max-w-3xl text-center">
           <AnimatedSection>
             <h2 className="mb-4 font-display text-3xl font-normal text-white sm:text-4xl">
@@ -348,7 +348,7 @@ export default function ServiceContent({ service }: Props) {
               <button
                 type="button"
                 onClick={() => openBookingModal(service.title)}
-                className="inline-flex h-12 items-center justify-center gap-2 rounded-full bg-[#E4C9A3] px-8 font-semibold text-[#1F4A38] shadow-lg shadow-black/20 transition-all hover:bg-[#F0DDC0]"
+                className="inline-flex h-12 items-center justify-center gap-2 rounded-full bg-[#F7CE84] px-8 font-semibold text-[#0B2A4A] shadow-lg shadow-black/20 transition-all hover:bg-[#F8D79A]"
               >
                 Get a Free Quote
               </button>

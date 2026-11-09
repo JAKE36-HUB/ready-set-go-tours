@@ -15,7 +15,7 @@ export default async function OpengraphImage() {
           display: "flex",
           flexDirection: "column",
           justifyContent: "space-between",
-          background: "linear-gradient(130deg, #08130E 0%, #173B2C 52%, #1F4A38 100%)",
+          background: "linear-gradient(130deg, #06101C 0%, #081F38 52%, #0B2A4A 100%)",
           color: "#ffffff",
           padding: "64px 72px",
           position: "relative",
@@ -31,7 +31,7 @@ export default async function OpengraphImage() {
             width: "520px",
             height: "520px",
             borderRadius: "50%",
-            background: "linear-gradient(180deg, #F0DDC0 0%, #E4C9A3 45%, #B8643A 100%)",
+            background: "linear-gradient(180deg, #FFE3A8 0%, #F5A623 55%, #D98708 100%)",
             opacity: 0.9,
           }}
         />
@@ -43,7 +43,7 @@ export default async function OpengraphImage() {
             width: "300px",
             height: "300px",
             borderRadius: "50%",
-            background: "#E4C9A3",
+            background: "#F7CE84",
           }}
         />
 
@@ -56,7 +56,7 @@ export default async function OpengraphImage() {
             width: "900px",
             height: "520px",
             borderRadius: "50%",
-            background: "#06301f",
+            background: "#081F38",
           }}
         />
         <div
@@ -67,7 +67,7 @@ export default async function OpengraphImage() {
             width: "1000px",
             height: "560px",
             borderRadius: "50%",
-            background: "#052315",
+            background: "#0A2742",
           }}
         />
         <div
@@ -77,7 +77,7 @@ export default async function OpengraphImage() {
             left: "0px",
             width: "100%",
             height: "120px",
-            background: "linear-gradient(180deg, rgba(4,35,22,0) 0%, #04170d 100%)",
+            background: "linear-gradient(180deg, rgba(8,31,56,0) 0%, #030B14 100%)",
           }}
         />
 
@@ -91,8 +91,8 @@ export default async function OpengraphImage() {
               width: "64px",
               height: "64px",
               borderRadius: "20px",
-              background: "linear-gradient(135deg, #E4C9A3, #B8643A)",
-              color: "#1F4A38",
+              background: "linear-gradient(135deg, #F7CE84, #F5A623)",
+              color: "#0B2A4A",
               fontSize: "26px",
               fontWeight: 900,
             }}
@@ -103,7 +103,7 @@ export default async function OpengraphImage() {
             <div style={{ fontSize: "30px", fontWeight: 900, letterSpacing: "-0.5px" }}>
               Ready Set Go Tours &amp; Travel
             </div>
-            <div style={{ fontSize: "18px", color: "#C9B492", marginTop: "2px" }}>
+            <div style={{ fontSize: "18px", color: "#F7CE84", marginTop: "2px" }}>
               Nairobi, Kenya · East Africa
             </div>
           </div>
@@ -121,7 +121,7 @@ export default async function OpengraphImage() {
           >
             Luxury Kenya &amp; Tanzania Safaris
           </div>
-          <div style={{ fontSize: "24px", color: "#D6D3C8", marginTop: "18px", lineHeight: 1.4 }}>
+          <div style={{ fontSize: "24px", color: "#C7D3E2", marginTop: "18px", lineHeight: 1.4 }}>
             Bespoke private &amp; group safaris · Beach holidays · Mountaineering
           </div>
         </div>
@@ -156,9 +156,9 @@ export default async function OpengraphImage() {
               </div>
             ))}
           </div>
-          <div style={{ display: "flex", flexDirection: "column", alignItems: "flex-end", fontSize: "18px", color: "#E4C9A3", fontWeight: 700 }}>
+          <div style={{ display: "flex", flexDirection: "column", alignItems: "flex-end", fontSize: "18px", color: "#F7CE84", fontWeight: 700 }}>
             <div>readysetgosafaris.com</div>
-            <div style={{ color: "#A9B5AC", fontWeight: 400 }}>Private &amp; group safaris from $650/person</div>
+            <div style={{ color: "#A8B8CB", fontWeight: 400 }}>Private &amp; group safaris from $650/person</div>
           </div>
         </div>
       </div>

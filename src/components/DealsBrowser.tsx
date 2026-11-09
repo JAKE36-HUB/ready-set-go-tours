@@ -41,7 +41,7 @@ function DealCardView({ deal }: { deal: DealCard }) {
           <Tag className="size-3" />
           {deal.discount}
         </div>
-        <div className="absolute bottom-3 right-3 rounded-2xl bg-[#08130E]/70 px-3 py-2 text-white ring-1 ring-white/15 backdrop-blur">
+        <div className="absolute bottom-3 right-3 rounded-2xl bg-[#06101C]/70 px-3 py-2 text-white ring-1 ring-white/15 backdrop-blur">
           <span className="text-[10px] uppercase tracking-wider text-white/60 block">Was</span>
           <span className="text-sm font-semibold line-through text-white/60">${deal.originalPrice.toLocaleString()}</span>
         </div>

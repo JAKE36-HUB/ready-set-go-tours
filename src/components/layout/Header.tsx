@@ -58,7 +58,7 @@ export function Header() {
         className={cn(
           "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
           scrolled
-            ? "border-b border-border/70 bg-background/90 backdrop-blur-xl shadow-[0_10px_40px_-28px_rgba(18,42,32,0.45)]"
+            ? "border-b border-border/70 bg-background/90 backdrop-blur-xl shadow-[0_10px_40px_-28px_rgba(11,42,74,0.45)]"
             : transparent
               ? "bg-gradient-to-b from-black/45 via-black/10 to-transparent"
               : "border-b border-transparent bg-background/70 backdrop-blur-xl"
@@ -106,7 +106,7 @@ export function Header() {
                           setActiveDropdown(activeDropdown === item.href ? null : item.href)
                         }
                         className={cn(
-                          "flex items-center gap-1 rounded-full px-3.5 py-2 text-[13px] font-medium transition-all duration-200",
+                          "nav-underline flex items-center gap-1 rounded-full px-3.5 py-2 text-[13px] font-medium transition-all duration-200",
                           isActive
                             ? transparent
                               ? "bg-white text-primary"
@@ -160,7 +160,7 @@ export function Header() {
                     <Link
                       href={item.href}
                       className={cn(
-                        "rounded-full px-3.5 py-2 text-[13px] font-medium transition-all duration-200",
+                        "nav-underline rounded-full px-3.5 py-2 text-[13px] font-medium transition-all duration-200",
                         isActive
                           ? transparent
                             ? "bg-white text-primary"

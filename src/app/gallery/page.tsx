@@ -25,12 +25,12 @@ export default function GalleryPage() {
     <main className="min-h-screen">
       {/* Hero */}
       <section className="relative h-[45vh] min-h-[350px] flex items-center justify-center overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-[#08130E] via-[#0C1511] to-[#08130E]" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(184,100,58,0.12),transparent_70%)]" />
+        <div className="absolute inset-0 bg-gradient-to-br from-[#06101C] via-[#06101C] to-[#06101C]" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(245,166,35,0.12),transparent_70%)]" />
         <div className="relative z-10 px-6 text-center">
           <AnimatedSection direction="none">
             <h1 className="mb-4 font-display text-4xl font-normal text-white sm:text-5xl lg:text-6xl">
-              Our <span className="italic text-[#E4C9A3]">Gallery</span>
+              Our <span className="italic text-[#F7CE84]">Gallery</span>
             </h1>
             <p className="mx-auto max-w-xl text-lg text-white/60">
               A visual journey through the stunning landscapes, wildlife, and cultures of East Africa.

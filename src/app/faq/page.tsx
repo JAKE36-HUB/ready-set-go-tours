@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { useState } from "react";
 import Image from "next/image";
@@ -47,12 +47,12 @@ export default function FAQPage() {
           className="object-cover"
           sizes="100vw"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-[#08130E]/65 via-[#08130E]/40 to-[#08130E]/85" />
+        <div className="absolute inset-0 bg-gradient-to-b from-[#06101C]/65 via-[#06101C]/40 to-[#06101C]/85" />
         <div className="relative z-10 mx-auto max-w-4xl px-6 text-center">
           <AnimatedSection direction="none">
-            <HelpCircle className="mx-auto mb-4 size-12 text-[#E4C9A3]" />
+            <HelpCircle className="mx-auto mb-4 size-12 text-[#F7CE84]" />
             <h1 className="mb-4 font-display text-4xl font-normal text-white sm:text-5xl lg:text-6xl">
-              Frequently Asked <span className="italic text-[#E4C9A3]">Questions</span>
+              Frequently Asked <span className="italic text-[#F7CE84]">Questions</span>
             </h1>
             <p className="mx-auto max-w-xl text-lg text-white/65">
               Everything you need to know about planning your East African safari and travel experience.

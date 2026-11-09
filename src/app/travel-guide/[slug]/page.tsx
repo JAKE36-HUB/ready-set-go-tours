@@ -113,9 +113,9 @@ export default async function BlogPostPage({ params }: Props) {
           className="object-cover"
           sizes="100vw"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-[#08130E]/65 via-[#08130E]/40 to-[#08130E]/85" />
+        <div className="absolute inset-0 bg-gradient-to-b from-[#06101C]/65 via-[#06101C]/40 to-[#06101C]/85" />
         <div className="relative z-10 mx-auto max-w-3xl px-6 text-center">
-          <span className="mb-4 inline-block rounded-full bg-[#E4C9A3] px-3 py-1 text-xs font-semibold text-[#1F4A38]">
+          <span className="mb-4 inline-block rounded-full bg-[#F7CE84] px-3 py-1 text-xs font-semibold text-[#0B2A4A]">
             {post.category}
           </span>
           <h1 className="mb-4 font-display text-3xl font-normal leading-tight text-white sm:text-4xl lg:text-5xl">

@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { useState, useCallback, useEffect, useRef } from "react";
 import Image from "next/image";
@@ -62,11 +62,11 @@ export default function TestimonialsPage() {
           className="object-cover"
           sizes="100vw"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-[#08130E]/65 via-[#08130E]/40 to-[#08130E]/85" />
+        <div className="absolute inset-0 bg-gradient-to-b from-[#06101C]/65 via-[#06101C]/40 to-[#06101C]/85" />
         <div className="relative z-10 mx-auto max-w-4xl px-6 text-center">
           <AnimatedSection direction="none">
             <h1 className="mb-4 font-display text-4xl font-normal text-white sm:text-5xl lg:text-6xl">
-              Traveler <span className="italic text-[#E4C9A3]">Reviews</span>
+              Traveler <span className="italic text-[#F7CE84]">Reviews</span>
             </h1>
             <p className="mx-auto max-w-xl text-lg text-white/65">
               Don&apos;t just take our word for it. Hear from the travelers who&apos;ve
@@ -263,7 +263,7 @@ export default function TestimonialsPage() {
       </section>
 
       {/* Statistics */}
-      <section className="bg-[#08130E] bg-gradient-to-br from-[#08130E] via-[#0C1511] to-[#08130E] px-6 py-16">
+      <section className="bg-[#06101C] bg-gradient-to-br from-[#06101C] via-[#06101C] to-[#06101C] px-6 py-16">
         <div className="mx-auto grid max-w-6xl grid-cols-2 gap-6 md:grid-cols-4">
           {STATISTICS.slice(0, 4).map((stat, i) => (
             <AnimatedSection key={stat.label} delay={i * 0.05}>

@@ -8,6 +8,7 @@ import { Clock, Bed, ArrowRight } from "lucide-react"
 
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
+import { TiltCard } from "@/components/motion/TiltCard"
 import { TOUR_PACKAGES, PLAN_SAFARI_ROUTE } from "@/lib/constants"
 
 const FEATURED_SLUGS = [
@@ -56,7 +57,7 @@ export function FeaturedSafaris() {
 
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 lg:gap-8">
           {packages.map((pkg, idx) => (
-            <motion.div
+            <TiltCard
               key={pkg.slug}
               initial={{ opacity: 0, y: 30 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
@@ -76,7 +77,7 @@ export function FeaturedSafaris() {
                     {typeLabel[pkg.type] || "Safari"}
                   </Badge>
                 </div>
-                <div className="absolute bottom-3 right-3 rounded-2xl bg-[#08130E]/70 px-3 py-2 text-white ring-1 ring-white/15 backdrop-blur">
+                <div className="absolute bottom-3 right-3 rounded-2xl bg-[#06101C]/70 px-3 py-2 text-white ring-1 ring-white/15 backdrop-blur">
                   <span className="block text-[10px] uppercase tracking-wider text-white/60">From</span>
                   <span className="text-lg font-semibold leading-none">${pkg.price.toLocaleString()}<span className="text-xs font-normal text-white/60"> /pp</span></span>
                 </div>
@@ -105,7 +106,7 @@ export function FeaturedSafaris() {
                   </Link>
                 </div>
               </div>
-            </motion.div>
+            </TiltCard>
           ))}
         </div>
 

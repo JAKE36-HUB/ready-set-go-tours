@@ -1,4 +1,4 @@
-﻿import type { Metadata } from "next";
+import type { Metadata } from "next";
 import Image from "next/image";
 import { MapPin, Calendar, Star, Compass, Hotel } from "lucide-react";
 import { TANZANIA_DESTINATIONS_INFO, COMPANY } from "@/lib/constants";
@@ -55,16 +55,16 @@ export default function TanzaniaToursPage() {
           className="object-cover"
           sizes="100vw"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-[#08130E]/65 via-[#08130E]/40 to-[#08130E]/80" />
-        <div className="absolute inset-0 bg-gradient-to-r from-[#08130E]/50 via-transparent to-[#08130E]/50" />
+        <div className="absolute inset-0 bg-gradient-to-b from-[#06101C]/65 via-[#06101C]/40 to-[#06101C]/80" />
+        <div className="absolute inset-0 bg-gradient-to-r from-[#06101C]/50 via-transparent to-[#06101C]/50" />
         <div className="relative z-10 mx-auto max-w-4xl px-6 text-center">
           <AnimatedSection direction="none">
-            <span className="mb-6 inline-block text-xs font-semibold uppercase tracking-[0.24em] text-[#E4C9A3]">
+            <span className="mb-6 inline-block text-xs font-semibold uppercase tracking-[0.24em] text-[#F7CE84]">
               The Ultimate East African Safari
             </span>
             <h1 className="mb-6 font-display text-4xl font-normal leading-tight text-white sm:text-5xl lg:text-7xl">
               Discover{" "}
-              <span className="italic text-[#E4C9A3]">Tanzania</span>
+              <span className="italic text-[#F7CE84]">Tanzania</span>
             </h1>
             <p className="mx-auto max-w-2xl text-lg leading-relaxed text-white/65 sm:text-xl">
               Stand on the rim of the Ngorongoro Crater, watch wildebeest cross the Mara River,
@@ -208,8 +208,8 @@ export default function TanzaniaToursPage() {
       </section>
 
       {/* CTA */}
-      <section className="relative overflow-hidden bg-[#08130E] px-6 py-20">
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_left,rgba(184,100,58,0.18),transparent_60%)]" />
+      <section className="relative overflow-hidden bg-[#06101C] px-6 py-20">
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_left,rgba(245,166,35,0.18),transparent_60%)]" />
         <div className="relative z-10 mx-auto max-w-4xl text-center">
           <AnimatedSection>
             <h2 className="mb-4 font-display text-3xl font-normal text-white sm:text-4xl">

@@ -384,7 +384,7 @@ export default async function PackageDetailPage({
                   <div className="space-y-3">
                     <Link
                       href={PLAN_SAFARI_ROUTE}
-                      className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-[#E8D5B5] font-semibold text-[#12251B] transition-all hover:bg-[#F1E2C8]"
+                      className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-[#F8D79A] font-semibold text-[#0B2A4A] transition-all hover:bg-[#FFB627]"
                     >
                       Plan My {noun} <ArrowRight className="size-4" />
                     </Link>

@@ -58,8 +58,8 @@ export default function AboutPage() {
       ]} />
       <main className="min-h-screen">
       {/* Hero */}
-      <section className="relative overflow-hidden bg-[#08130E] px-6 py-32">
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,rgba(184,100,58,0.18),transparent_60%)]" />
+      <section className="relative overflow-hidden bg-[#06101C] px-6 py-32">
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,rgba(245,166,35,0.18),transparent_60%)]" />
         <div className="absolute inset-0 opacity-[0.04]" style={{ backgroundImage: "radial-gradient(circle at 1px 1px, white 1px, transparent 0)", backgroundSize: "40px 40px" }} />
         <div className="relative z-10 mx-auto max-w-4xl text-center">
           <AnimatedSection direction="none">
@@ -68,7 +68,7 @@ export default function AboutPage() {
               East Africa Safari Experts
             </span>
             <h1 className="mb-6 font-display text-4xl font-normal leading-tight text-white sm:text-5xl lg:text-7xl">
-              We Turn <span className="italic text-[#E4C9A3]">Wanderlust</span>
+              We Turn <span className="italic text-[#F7CE84]">Wanderlust</span>
               <br />
               {" "}into Safari
             </h1>
@@ -143,13 +143,13 @@ export default function AboutPage() {
 
       {/* Community & Conservation Impact */}
       <section className="relative py-24 px-6 overflow-hidden">
-        <div className="absolute inset-0 bg-[#08130E]" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_left,rgba(184,100,58,0.16),transparent_60%)]" />
+        <div className="absolute inset-0 bg-[#06101C]" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_left,rgba(245,166,35,0.16),transparent_60%)]" />
         <div className="absolute inset-0 opacity-[0.04]" style={{ backgroundImage: "radial-gradient(circle at 1px 1px, white 1px, transparent 0)", backgroundSize: "40px 40px" }} />
         <div className="relative z-10 mx-auto max-w-6xl">
           <AnimatedSection>
             <div className="mb-14 text-center">
-              <span className="mb-4 inline-flex items-center gap-2 rounded-full bg-accent/15 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.2em] text-[#E4C9A3] ring-1 ring-accent/20">
+              <span className="mb-4 inline-flex items-center gap-2 rounded-full bg-accent/15 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.2em] text-[#F7CE84] ring-1 ring-accent/20">
                 <Heart className="size-3.5" />
                 Our Impact
               </span>
@@ -184,7 +184,7 @@ export default function AboutPage() {
                   with you forever. The red dust, the golden light, the silence of the savannah at
                   dawn — it changes something deep inside you.
                 </blockquote>
-                <p className="text-sm font-medium tracking-wide text-[#E4C9A3]/70">
+                <p className="text-sm font-medium tracking-wide text-[#F7CE84]/70">
                   &mdash; Ready Set Go Tours & Travel
                 </p>
               </div>
@@ -194,7 +194,7 @@ export default function AboutPage() {
       </section>
 
       {/* Statistics */}
-      <section className="bg-[#0C1511] px-6 py-20">
+      <section className="bg-[#06101C] px-6 py-20">
         <div className="mx-auto max-w-6xl">
           <AnimatedSection>
             <h2 className="mb-14 text-center font-display text-3xl font-normal text-white sm:text-4xl">

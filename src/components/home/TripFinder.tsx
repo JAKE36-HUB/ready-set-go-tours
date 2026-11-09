@@ -40,7 +40,7 @@ export function TripFinder() {
   return (
     <section className="relative z-20 -mt-24 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
-        <div className="rounded-[2rem] border border-border/70 bg-background/95 p-6 shadow-[0_40px_100px_-50px_rgba(18,42,32,0.5)] backdrop-blur-xl sm:p-8">
+        <div className="rounded-[2rem] border border-border/70 bg-background/95 p-6 shadow-[0_40px_100px_-50px_rgba(11,42,74,0.5)] backdrop-blur-xl sm:p-8">
           <div className="mb-6 flex flex-wrap items-end justify-between gap-3">
             <div>
               <p className="eyebrow mb-2">
@@ -60,7 +60,7 @@ export function TripFinder() {
               <Link
                 key={trip.title}
                 href={trip.href}
-                className={`group relative h-52 overflow-hidden rounded-[1.25rem] border border-border/60 transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_24px_50px_-28px_rgba(18,42,32,0.45)] sm:h-64 ${
+                className={`group relative h-52 overflow-hidden rounded-[1.25rem] border border-border/60 transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_24px_50px_-28px_rgba(11,42,74,0.45)] sm:h-64 ${
                   trip.wide ? "col-span-2 md:col-span-1" : ""
                 }`}
               >
@@ -72,7 +72,7 @@ export function TripFinder() {
                   className="object-cover brightness-[0.95] transition-transform duration-700 group-hover:scale-105"
                   loading={i < 3 ? "eager" : "lazy"}
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#08130E]/90 via-[#08130E]/25 to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#06101C]/90 via-[#06101C]/25 to-transparent" />
                 <div className="absolute inset-x-0 bottom-0 flex items-end justify-between gap-2 p-4">
                   <div>
                     <h3 className="font-display text-lg font-normal leading-tight text-white">

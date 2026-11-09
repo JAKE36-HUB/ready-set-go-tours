@@ -1,4 +1,4 @@
-﻿import type { Metadata } from "next";
+import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { Calendar, User, Tag, Clock, ArrowRight } from "lucide-react";
@@ -58,11 +58,11 @@ export default function TravelGuidePage() {
           className="object-cover"
           sizes="100vw"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-[#08130E]/65 via-[#08130E]/40 to-[#08130E]/85" />
+        <div className="absolute inset-0 bg-gradient-to-b from-[#06101C]/65 via-[#06101C]/40 to-[#06101C]/85" />
         <div className="relative z-10 mx-auto max-w-4xl px-6 text-center">
           <AnimatedSection direction="none">
             <h1 className="mb-4 font-display text-4xl font-normal text-white sm:text-5xl lg:text-6xl">
-              Travel <span className="italic text-[#E4C9A3]">Guide</span>
+              Travel <span className="italic text-[#F7CE84]">Guide</span>
             </h1>
             <p className="mx-auto max-w-xl text-lg text-white/65">
               Expert insights, destination guides, and insider tips from our team of East Africa specialists.
@@ -90,10 +90,10 @@ export default function TravelGuidePage() {
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
                   <div className="absolute bottom-0 left-0 right-0 p-6 sm:p-10">
-                    <span className="mb-3 inline-block rounded-full bg-[#E4C9A3] px-3 py-1 text-xs font-semibold text-[#1F4A38]">
+                    <span className="mb-3 inline-block rounded-full bg-[#F7CE84] px-3 py-1 text-xs font-semibold text-[#0B2A4A]">
                       {featured.category}
                     </span>
-                    <h2 className="mb-3 font-display text-2xl font-normal text-white transition-colors group-hover:text-[#E4C9A3] sm:text-3xl">
+                    <h2 className="mb-3 font-display text-2xl font-normal text-white transition-colors group-hover:text-[#F7CE84] sm:text-3xl">
                       {featured.title}
                     </h2>
                     <p className="text-white/70 text-sm sm:text-base max-w-2xl mb-4 hidden sm:block">

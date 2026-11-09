@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { useState } from "react";
 import Image from "next/image";
@@ -26,7 +26,7 @@ const CONTACT_INFO = [
   { icon: Phone, label: "Call Us", value: COMPANY.phone, desc: "Mon–Sat 8AM–6PM EAT", color: "text-accent", bg: "bg-accent/10", gradient: "from-accent/15 to-accent/5" },
   { icon: Mail, label: "Email Us", value: COMPANY.email, desc: "We reply within 24hrs", color: "text-accent", bg: "bg-accent/10", gradient: "from-accent/15 to-accent/5" },
   { icon: Mail, label: "Bookings", value: COMPANY.bookingsEmail, desc: "For safari & travel bookings", color: "text-accent", bg: "bg-accent/10", gradient: "from-accent/15 to-accent/5" },
-  { icon: MessageCircle, label: "WhatsApp", value: COMPANY.whatsapp, desc: "Fastest response", color: "text-[#1F4A38]", bg: "bg-[#25D366]/15", gradient: "from-[#25D366]/15 to-accent/5" },
+  { icon: MessageCircle, label: "WhatsApp", value: COMPANY.whatsapp, desc: "Fastest response", color: "text-[#0B2A4A]", bg: "bg-[#25D366]/15", gradient: "from-[#25D366]/15 to-accent/5" },
   { icon: Clock, label: "Office Hours", value: COMPANY.hours, desc: "East Africa Time (EAT)", color: "text-accent", bg: "bg-accent/10", gradient: "from-accent/15 to-accent/5" },
 ];
 
@@ -210,16 +210,16 @@ export default function ContactPage() {
           className="object-cover"
           sizes="100vw"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-[#08130E]/70 via-[#08130E]/45 to-[#08130E]/85" />
-        <div className="absolute inset-0 bg-gradient-to-r from-[#08130E]/40 via-transparent to-[#08130E]/40" />
+        <div className="absolute inset-0 bg-gradient-to-b from-[#06101C]/70 via-[#06101C]/45 to-[#06101C]/85" />
+        <div className="absolute inset-0 bg-gradient-to-r from-[#06101C]/40 via-transparent to-[#06101C]/40" />
         <div className="relative z-10 mx-auto max-w-4xl px-6 text-center">
           <AnimatedSection direction="none">
             <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-5 py-2 backdrop-blur-md">
-              <MessageCircle className="size-4 text-[#E4C9A3]" />
+              <MessageCircle className="size-4 text-[#F7CE84]" />
               <span className="text-sm font-semibold text-white/90">We&apos;re Here to Help</span>
             </div>
             <h1 className="mb-4 font-display text-4xl font-normal tracking-tight text-white sm:text-5xl lg:text-7xl">
-              Let&apos;s Plan Your <span className="italic text-[#E4C9A3]">Safari</span>
+              Let&apos;s Plan Your <span className="italic text-[#F7CE84]">Safari</span>
             </h1>
             <p className="mx-auto max-w-2xl text-lg leading-relaxed text-white/60 sm:text-xl">
               Tell us your dream adventure and our Nairobi-based team will craft the perfect
@@ -296,15 +296,15 @@ export default function ContactPage() {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="relative overflow-hidden rounded-3xl bg-[#08130E] p-8 sm:p-12"
+            className="relative overflow-hidden rounded-3xl bg-[#06101C] p-8 sm:p-12"
           >
             <div className="absolute right-0 top-0 size-64 -translate-y-1/2 translate-x-1/2 rounded-full bg-accent/10" />
             <div className="absolute bottom-0 left-0 size-48 -translate-x-1/2 translate-y-1/2 rounded-full bg-accent/10" />
             <div className="relative z-10 flex flex-col items-center justify-between gap-6 sm:flex-row">
               <div className="text-center sm:text-left">
                 <div className="mb-4 inline-flex items-center gap-2 rounded-full bg-white/10 px-4 py-1.5">
-                  <MessageCircle className="size-4 text-[#E4C9A3]" />
-                  <span className="text-xs font-semibold uppercase tracking-wider text-[#E4C9A3]">Fastest Response</span>
+                  <MessageCircle className="size-4 text-[#F7CE84]" />
+                  <span className="text-xs font-semibold uppercase tracking-wider text-[#F7CE84]">Fastest Response</span>
                 </div>
                 <h3 className="mb-2 font-display text-2xl font-normal text-white sm:text-3xl">Chat With Us on WhatsApp</h3>
                 <p className="max-w-md text-white/60">
@@ -341,7 +341,7 @@ export default function ContactPage() {
             {/* Map */}
             <AnimatedSection direction="left" className="lg:col-span-2">
               <div className="sticky top-24 h-[500px] overflow-hidden rounded-2xl ring-1 ring-border">
-                <div className="pointer-events-none absolute inset-0 z-10 bg-gradient-to-b from-[#08130E]/10 to-transparent" />
+                <div className="pointer-events-none absolute inset-0 z-10 bg-gradient-to-b from-[#06101C]/10 to-transparent" />
                 <iframe
                   src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3191.687!2d36.6839!3d-1.3131!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMcKwMTgnNDcuMiJTIDM2wrA0MCcwMi4wIkU!5e0!3m2!1sen!2ske!4v1"
                   width="100%"
@@ -370,7 +370,7 @@ export default function ContactPage() {
             <AnimatedSection direction="right" className="lg:col-span-3">
               <div className="overflow-hidden rounded-2xl bg-card ring-1 ring-border">
                 {/* Step Progress */}
-                <div className="bg-gradient-to-r from-[#08130E] via-[#0C1511] to-[#08130E] px-8 py-6">
+                <div className="bg-gradient-to-r from-[#06101C] via-[#06101C] to-[#06101C] px-8 py-6">
                   <h2 className="mb-4 font-display text-2xl font-normal text-white">Plan Your Safari</h2>
                   <div className="flex items-center gap-1">
                     {steps.map((s, i) => {
@@ -381,7 +381,7 @@ export default function ContactPage() {
                         <div key={s} className="flex items-center gap-1 flex-1">
                           <div className={`flex items-center justify-center size-8 rounded-full text-xs font-bold transition-all duration-300 ${
                             isCompleted ? "bg-accent text-white" :
-                            isCurrent ? "bg-accent text-white ring-2 ring-[#E4C9A3]" :
+                            isCurrent ? "bg-accent text-white ring-2 ring-[#F7CE84]" :
                             "bg-white/10 text-white/50"
                           }`}>
                             {isCompleted ? <CheckCircle className="size-4" /> : <Icon className="size-3.5" />}
@@ -398,7 +398,7 @@ export default function ContactPage() {
                   <div className="flex justify-between mt-1.5">
                     {stepLabels.map((l, i) => (
                       <span key={l} className={`text-[10px] font-medium uppercase tracking-wider ${
-                        steps.indexOf(step) >= i ? "text-[#E4C9A3]" : "text-white/30"
+                        steps.indexOf(step) >= i ? "text-[#F7CE84]" : "text-white/30"
                       }`}>{l}</span>
                     ))}
                   </div>
@@ -616,8 +616,8 @@ export default function ContactPage() {
       </section>
 
       {/* Bottom CTA */}
-      <section className="relative overflow-hidden bg-[#08130E] px-6 py-20">
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,rgba(184,100,58,0.18),transparent_60%)]" />
+      <section className="relative overflow-hidden bg-[#06101C] px-6 py-20">
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,rgba(245,166,35,0.18),transparent_60%)]" />
         <div className="relative z-10 mx-auto max-w-4xl text-center">
           <AnimatedSection>
             <h2 className="mb-4 font-display text-3xl font-normal text-white sm:text-4xl">

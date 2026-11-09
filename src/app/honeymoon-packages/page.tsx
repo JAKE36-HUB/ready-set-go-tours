@@ -1,4 +1,4 @@
-﻿import Image from "next/image";
+import Image from "next/image";
 import Link from "next/link";
 import { Heart, Quote, Star, Shield, Gift, MessageCircle, ArrowRight } from "lucide-react";
 import { BreadcrumbJsonLd } from "@/components/JsonLd";
@@ -44,15 +44,15 @@ export default async function HoneymoonPage() {
           className="object-cover"
           sizes="100vw"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-[#08130E]/65 via-[#08130E]/40 to-[#08130E]/80" />
-        <div className="absolute inset-0 bg-gradient-to-r from-[#08130E]/45 via-transparent to-[#08130E]/45" />
+        <div className="absolute inset-0 bg-gradient-to-b from-[#06101C]/65 via-[#06101C]/40 to-[#06101C]/80" />
+        <div className="absolute inset-0 bg-gradient-to-r from-[#06101C]/45 via-transparent to-[#06101C]/45" />
 
         <div className="relative z-10 mx-auto max-w-3xl px-6 text-center">
           <AnimatedSection>
-            <span className="text-xs font-semibold uppercase tracking-[0.24em] text-[#E4C9A3]">Honeymoons</span>
+            <span className="text-xs font-semibold uppercase tracking-[0.24em] text-[#F7CE84]">Honeymoons</span>
             <h1 className="mb-5 mt-4 font-display text-4xl font-normal leading-tight text-white sm:text-5xl lg:text-6xl">
               Travel as a couple.{" "}
-              <span className="block italic text-[#E4C9A3]">
+              <span className="block italic text-[#F7CE84]">
                 Not as tourists.
               </span>
             </h1>
@@ -125,7 +125,7 @@ export default async function HoneymoonPage() {
       <section className="pb-20 px-6">
         <div className="max-w-4xl mx-auto">
           <AnimatedSection>
-            <div className="rounded-3xl bg-[#08130E] p-10 text-center text-white ring-1 ring-white/10">
+            <div className="rounded-3xl bg-[#06101C] p-10 text-center text-white ring-1 ring-white/10">
               <Heart className="mx-auto mb-4 size-10 text-accent" />
               <h2 className="mb-3 font-display text-2xl font-normal">Ready to Plan Your Romantic Escape?</h2>
               <p className="mx-auto mb-6 max-w-md text-white/60">

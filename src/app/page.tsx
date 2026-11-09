@@ -1,5 +1,7 @@
 import dynamic from "next/dynamic"
 
+import { DestinationMarquee } from "@/components/home/DestinationMarquee"
+
 const HeroSection = dynamic(() => import("@/components/home/HeroSection").then((m) => m.HeroSection))
 const TripFinder = dynamic(() => import("@/components/home/TripFinder").then((m) => m.TripFinder))
 const PackageOfTheDay = dynamic(() => import("@/components/home/PackageOfTheDay").then((m) => m.PackageOfTheDay))
@@ -18,6 +20,7 @@ export default function Home() {
   return (
     <>
       <HeroSection />
+      <DestinationMarquee />
       <TripFinder />
       <PackageOfTheDay />
       <FeaturedSafaris />

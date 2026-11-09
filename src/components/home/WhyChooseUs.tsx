@@ -6,13 +6,23 @@ import { motion, useInView } from "framer-motion"
 import { Shield, Car, Users, HeadphonesIcon, Package, MapPin, type LucideIcon } from "lucide-react"
 
 import { Button } from "@/components/ui/button"
-import { WHY_CHOOSE_US, PLAN_SAFARI_ROUTE } from "@/lib/constants"
+import { TiltCard } from "@/components/motion/TiltCard"
+import { AnimatedCounter } from "@/components/motion/AnimatedCounter"
+import { WHY_CHOOSE_US, PLAN_SAFARI_ROUTE, TOUR_PACKAGES, DESTINATIONS } from "@/lib/constants"
 
 const whyIconMap: Record<string, LucideIcon> = { Shield, Car, Users, HeadphonesIcon, Package, MapPin }
 
 export function WhyChooseUs() {
   const ref = useRef<HTMLDivElement>(null)
   const isInView = useInView(ref, { once: true, margin: "-100px" })
+
+  const totalDestinations = DESTINATIONS.kenya.length + DESTINATIONS.tanzania.length
+  const stats = [
+    { value: TOUR_PACKAGES.length, suffix: "+", label: "Safari itineraries" },
+    { value: totalDestinations, suffix: "", label: "Parks & destinations" },
+    { value: 24, suffix: "h", label: "Average reply time" },
+    { value: 2, suffix: "", label: "Countries covered" },
+  ]
 
   return (
     <section id="why-readysetgo" className="relative scroll-mt-24 bg-muted/50 py-24 sm:py-28">
@@ -37,7 +47,7 @@ export function WhyChooseUs() {
           {WHY_CHOOSE_US.map((item, idx) => {
             const IconComponent = whyIconMap[item.icon] || Shield
             return (
-              <motion.div
+              <TiltCard
                 key={item.id}
                 initial={{ opacity: 0, y: 30 }}
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
@@ -55,10 +65,28 @@ export function WhyChooseUs() {
                 </div>
                 <h3 className="mb-2 font-display text-lg font-normal text-foreground">{item.title}</h3>
                 <p className="text-sm leading-relaxed text-muted-foreground">{item.description}</p>
-              </motion.div>
+              </TiltCard>
             )
           })}
         </div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.6, delay: 0.35 }}
+          className="mt-16 grid grid-cols-2 gap-px overflow-hidden rounded-[1.75rem] border border-border bg-border lg:grid-cols-4"
+        >
+          {stats.map((stat) => (
+            <div key={stat.label} className="bg-card px-6 py-8 text-center">
+              <div className="font-display text-4xl font-normal text-foreground sm:text-5xl">
+                <AnimatedCounter value={stat.value} suffix={stat.suffix} />
+              </div>
+              <div className="mt-2 text-[10px] font-semibold uppercase tracking-[0.2em] text-muted-foreground sm:text-xs">
+                {stat.label}
+              </div>
+            </div>
+          ))}
+        </motion.div>
 
         <motion.div
           initial={{ opacity: 0 }}

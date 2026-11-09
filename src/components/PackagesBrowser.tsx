@@ -148,7 +148,7 @@ export default function PackagesBrowser({
                         {typeLabel[pkg.type] || "Safari"}
                       </Badge>
                     </div>
-                    <div className="absolute bottom-3 right-3 rounded-2xl bg-[#08130E]/70 px-3 py-2 text-white ring-1 ring-white/15 backdrop-blur">
+                    <div className="absolute bottom-3 right-3 rounded-2xl bg-[#06101C]/70 px-3 py-2 text-white ring-1 ring-white/15 backdrop-blur">
                       <span className="text-[10px] uppercase tracking-wider text-white/60 block">From</span>
                       <span className="text-lg font-semibold leading-none">
                         ${pkg.price.toLocaleString()}

@@ -37,7 +37,7 @@ const hoverClass = (h: string) =>
   h === "pulse" ? "animate-pulse" : h === "grow" ? "hover:scale-105" : h === "shake" ? "hover:animate-[wiggle_0.4s_ease-in-out]" : ""
 
 const ctaStyle = (cta: PopupCTA) => ({
-  backgroundColor: cta.bgColor || "#1F4A38",
+  backgroundColor: cta.bgColor || "#0B2A4A",
   color: cta.textColor || "#ffffff",
 })
 
@@ -55,7 +55,7 @@ function ContentSection({ config, light }: { config: PopupConfig; light?: boolea
       {c.badges.length > 0 && (
         <div className="flex flex-wrap gap-1.5 justify-center">
           {c.badges.map((b) => (
-            <span key={b} className={`text-[10px] font-semibold px-2 py-0.5 rounded-full border border-accent/30 uppercase tracking-wide ${light ? "bg-white/15 text-[#E4C9A3]" : "bg-accent/10 text-accent"}`}>
+            <span key={b} className={`text-[10px] font-semibold px-2 py-0.5 rounded-full border border-accent/30 uppercase tracking-wide ${light ? "bg-white/15 text-[#F7CE84]" : "bg-accent/10 text-accent"}`}>
               {b}
             </span>
           ))}
@@ -65,7 +65,7 @@ function ContentSection({ config, light }: { config: PopupConfig; light?: boolea
         <h2 className={`font-display text-2xl font-normal leading-tight ${light ? "text-white" : "text-foreground"}`}>{title}</h2>
       )}
       {c.subtitle && (
-        <p className={`text-sm font-semibold ${light ? "text-[#E4C9A3]" : "text-primary"}`}>{c.subtitle}</p>
+        <p className={`text-sm font-semibold ${light ? "text-[#F7CE84]" : "text-primary"}`}>{c.subtitle}</p>
       )}
       {c.description && (
         <p className={`text-sm leading-relaxed ${light ? "text-white/70" : "text-muted-foreground"}`}>{c.description}</p>
@@ -76,13 +76,13 @@ function ContentSection({ config, light }: { config: PopupConfig; light?: boolea
             <span className={`text-base line-through ${light ? "text-white/50" : "text-muted-foreground/70"}`}>{c.priceBefore}</span>
           )}
           {c.priceNow && (
-            <span className={`text-2xl font-extrabold ${light ? "text-[#E4C9A3]" : "text-accent"}`}>{c.priceNow}</span>
+            <span className={`text-2xl font-extrabold ${light ? "text-[#F7CE84]" : "text-accent"}`}>{c.priceNow}</span>
           )}
         </div>
       )}
       {c.promoCode && (
         <p className={`text-xs ${light ? "text-white/70" : "text-muted-foreground"}`}>
-          Promo code: <span className={`font-mono font-bold ${light ? "text-[#E4C9A3]" : "text-accent"}`}>{c.promoCode}</span>
+          Promo code: <span className={`font-mono font-bold ${light ? "text-[#F7CE84]" : "text-accent"}`}>{c.promoCode}</span>
         </p>
       )}
     </>
@@ -139,7 +139,7 @@ function UrgencyRow({ config }: { config: PopupConfig }) {
           </p>
           <div className="h-1.5 w-full max-w-[220px] mx-auto bg-muted rounded-full overflow-hidden">
             <motion.div
-              className="h-full bg-gradient-to-r from-accent to-[#8f4a2c]"
+              className="h-full bg-gradient-to-r from-accent to-[#C77A06]"
               animate={{ width: `${Math.max(8, (seats / 20) * 100)}%` }}
               transition={{ duration: 1 }}
             />
@@ -337,7 +337,7 @@ export function PopupShell({ popup, onClose, onCTA, onLeadSuccess }: Props) {
               <div className="absolute inset-0 bg-gradient-to-r from-black/85 via-black/70 to-black/40" />
             </>
           )}
-          <div className={`relative ${imageUrl ? "text-white" : "bg-[#08130E] text-white"} px-6 py-4`}>
+          <div className={`relative ${imageUrl ? "text-white" : "bg-[#06101C] text-white"} px-6 py-4`}>
             <div className="max-w-4xl mx-auto flex flex-col md:flex-row items-center gap-3 text-center md:text-left">
               <div className="flex-1 min-w-0">
                 <ContentSection config={cfg} light />
@@ -366,7 +366,7 @@ export function PopupShell({ popup, onClose, onCTA, onLeadSuccess }: Props) {
         role="dialog"
         aria-modal="true"
       >
-        <div className="bg-[#08130E] text-white shadow-2xl border-t border-white/10">
+        <div className="bg-[#06101C] text-white shadow-2xl border-t border-white/10">
           <div className="max-w-6xl mx-auto px-4 py-3 flex items-center gap-3 flex-wrap">
             <div className="flex-1 min-w-[200px]">
               <p className="text-sm font-bold truncate">{c.title}</p>
@@ -400,7 +400,7 @@ export function PopupShell({ popup, onClose, onCTA, onLeadSuccess }: Props) {
           {imageUrl ? (
             <AdaptiveImage src={imageUrl} alt="" maxHeight={170} contain backdrop className="rounded-t-2xl" />
           ) : (
-            <div className="h-2 bg-gradient-to-r from-accent via-[#E4C9A3] to-accent" />
+            <div className="h-2 bg-gradient-to-r from-accent via-[#F7CE84] to-accent" />
           )}
           <div className="p-4 flex flex-col gap-2 text-center">
             <ContentSection config={cfg} />
@@ -427,7 +427,7 @@ export function PopupShell({ popup, onClose, onCTA, onLeadSuccess }: Props) {
           {imageUrl ? (
             <AdaptiveImage src={imageUrl} alt="" maxHeight={300} overlay contain backdrop />
           ) : (
-            <div className="w-full h-40 bg-[#08130E]" />
+            <div className="w-full h-40 bg-[#06101C]" />
           )}
             <button onClick={onClose} aria-label="Close popup" className="absolute top-3 right-3 rounded-full bg-black/40 hover:bg-black/60 p-1.5 text-white transition">
               <X className="w-4 h-4" />
@@ -454,7 +454,7 @@ export function PopupShell({ popup, onClose, onCTA, onLeadSuccess }: Props) {
               <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/50 to-black/30" />
             </>
           ) : (
-            <div className="w-full h-full bg-[#08130E]" />
+            <div className="w-full h-full bg-[#06101C]" />
           )}
         </div>
         <div className="relative h-full flex items-center justify-center p-6">

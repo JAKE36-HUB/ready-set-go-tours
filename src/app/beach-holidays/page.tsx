@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import Image from "next/image";
 import Link from "next/link";
@@ -37,7 +37,7 @@ export default function BeachHolidaysPage() {
           className="object-cover"
           sizes="100vw"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-[#08130E]/65 via-[#08130E]/40 to-[#08130E]/85" />
+        <div className="absolute inset-0 bg-gradient-to-b from-[#06101C]/65 via-[#06101C]/40 to-[#06101C]/85" />
         <div className="relative z-10 mx-auto max-w-4xl px-6 text-center">
           <AnimatedSection direction="none">
             <span className="mb-6 inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-1.5 text-sm font-medium text-white backdrop-blur-md">
@@ -45,7 +45,7 @@ export default function BeachHolidaysPage() {
               Coastal Paradise
             </span>
             <h1 className="mb-6 font-display text-4xl font-normal leading-tight text-white sm:text-5xl lg:text-7xl">
-              Beach <span className="italic text-[#E4C9A3]">Holidays</span>
+              Beach <span className="italic text-[#F7CE84]">Holidays</span>
             </h1>
             <p className="mx-auto max-w-2xl text-lg leading-relaxed text-white/65 sm:text-xl">
               Crystal-clear waters, powdery white sands, and world-class resorts along the Indian
@@ -225,8 +225,8 @@ export default function BeachHolidaysPage() {
       </section>
 
       {/* CTA */}
-      <section className="relative overflow-hidden bg-[#08130E] px-6 py-20">
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,rgba(184,100,58,0.18),transparent_60%)]" />
+      <section className="relative overflow-hidden bg-[#06101C] px-6 py-20">
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,rgba(245,166,35,0.18),transparent_60%)]" />
         <div className="relative z-10 mx-auto max-w-4xl text-center">
           <AnimatedSection>
             <Anchor className="mx-auto mb-4 size-10 text-accent" />

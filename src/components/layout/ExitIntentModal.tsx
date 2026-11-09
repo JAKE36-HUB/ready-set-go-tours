@@ -98,10 +98,10 @@ export function ExitIntentModal() {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 40, scale: 0.96 }}
             transition={{ type: "spring", damping: 26, stiffness: 320 }}
-            className="relative w-full max-w-md overflow-hidden rounded-3xl bg-[#08130E] p-8 ring-1 ring-white/10 shadow-2xl"
+            className="relative w-full max-w-md overflow-hidden rounded-3xl bg-[#06101C] p-8 ring-1 ring-white/10 shadow-2xl"
           >
             <span className="pointer-events-none absolute -top-20 -right-16 h-56 w-56 rounded-full bg-accent/20 blur-3xl" />
-            <span className="pointer-events-none absolute -bottom-24 -left-16 h-48 w-48 rounded-full bg-[#E4C9A3]/10 blur-3xl" />
+            <span className="pointer-events-none absolute -bottom-24 -left-16 h-48 w-48 rounded-full bg-[#F7CE84]/10 blur-3xl" />
 
             <button
               type="button"
@@ -114,19 +114,19 @@ export function ExitIntentModal() {
 
             {done ? (
               <div className="relative py-4 text-center">
-                <div className="mx-auto mb-5 flex h-16 w-16 items-center justify-center rounded-full bg-[#E4C9A3]/15 ring-1 ring-[#E4C9A3]/30">
-                  <CheckCircle2 className="h-8 w-8 text-[#E4C9A3]" />
+                <div className="mx-auto mb-5 flex h-16 w-16 items-center justify-center rounded-full bg-[#F7CE84]/15 ring-1 ring-[#F7CE84]/30">
+                  <CheckCircle2 className="h-8 w-8 text-[#F7CE84]" />
                 </div>
                 <h3 className="mb-2 font-display text-2xl font-normal text-white">See You Inside!</h3>
                 <p className="text-sm text-white/60">
                   Your free safari guide is on its way to{" "}
-                  <span className="font-medium text-[#E4C9A3]">{email}</span>.
+                  <span className="font-medium text-[#F7CE84]">{email}</span>.
                 </p>
               </div>
             ) : (
               <div className="relative">
                 <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-2xl bg-accent/20 ring-1 ring-accent/30">
-                  <Gift className="h-6 w-6 text-[#E4C9A3]" />
+                  <Gift className="h-6 w-6 text-[#F7CE84]" />
                 </div>
                 <h3 className="mb-2 font-display text-2xl font-normal leading-tight text-white">
                   Wait — Grab Our Free Safari Guide First!
@@ -144,7 +144,7 @@ export function ExitIntentModal() {
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
                       placeholder="Your email address"
-                      className="h-12 w-full rounded-xl border border-white/10 bg-white/5 pl-11 pr-4 text-sm text-white placeholder:text-white/30 focus:border-[#E4C9A3]/50 focus:outline-none focus:ring-1 focus:ring-[#E4C9A3]/30"
+                      className="h-12 w-full rounded-xl border border-white/10 bg-white/5 pl-11 pr-4 text-sm text-white placeholder:text-white/30 focus:border-[#F7CE84]/50 focus:outline-none focus:ring-1 focus:ring-[#F7CE84]/30"
                     />
                   </div>
                   <input
@@ -152,7 +152,7 @@ export function ExitIntentModal() {
                     value={name}
                     onChange={(e) => setName(e.target.value)}
                     placeholder="Your name (optional)"
-                    className="h-12 w-full rounded-xl border border-white/10 bg-white/5 px-4 text-sm text-white placeholder:text-white/30 focus:border-[#E4C9A3]/50 focus:outline-none focus:ring-1 focus:ring-[#E4C9A3]/30"
+                    className="h-12 w-full rounded-xl border border-white/10 bg-white/5 px-4 text-sm text-white placeholder:text-white/30 focus:border-[#F7CE84]/50 focus:outline-none focus:ring-1 focus:ring-[#F7CE84]/30"
                   />
                 </div>
 
@@ -166,7 +166,7 @@ export function ExitIntentModal() {
                   type="button"
                   onClick={handleSubmit}
                   disabled={submitting || !email.includes("@")}
-                  className="inline-flex h-12 w-full items-center justify-center gap-2 rounded-full bg-[#E4C9A3] text-sm font-semibold text-[#1F4A38] shadow-lg shadow-black/25 transition-all hover:bg-[#F0DDC0] disabled:opacity-50"
+                  className="inline-flex h-12 w-full items-center justify-center gap-2 rounded-full bg-[#F7CE84] text-sm font-semibold text-[#0B2A4A] shadow-lg shadow-black/25 transition-all hover:bg-[#F8D79A] disabled:opacity-50"
                 >
                   {submitting ? <Loader2 className="h-4 w-4 animate-spin" /> : <Send className="h-4 w-4" />}
                   {submitting ? "Sending..." : "Send Me the Free Guide"}

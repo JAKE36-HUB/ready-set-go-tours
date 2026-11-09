@@ -48,7 +48,7 @@ function renderInline(text: string): ReactNode[] {
 
 function CtaSection() {
   return (
-    <section className="mt-14 rounded-3xl bg-[#08130E] p-7 sm:p-10 text-white ring-1 ring-white/10 shadow-xl">
+    <section className="mt-14 rounded-3xl bg-[#06101C] p-7 sm:p-10 text-white ring-1 ring-white/10 shadow-xl">
       <p className="text-xs font-semibold uppercase tracking-[0.2em] text-accent mb-3">
         Ready Set Go Safaris
       </p>
@@ -65,7 +65,7 @@ function CtaSection() {
       <div className="flex flex-wrap gap-3">
         <Link
           href="/contact"
-          className="inline-flex items-center gap-2 h-12 px-6 rounded-full bg-[#E4C9A3] hover:bg-[#F0DDC0] text-[#1F4A38] text-sm font-semibold shadow-lg shadow-black/20 transition-all"
+          className="inline-flex items-center gap-2 h-12 px-6 rounded-full bg-[#F7CE84] hover:bg-[#F8D79A] text-[#0B2A4A] text-sm font-semibold shadow-lg shadow-black/20 transition-all"
         >
           <Send className="size-4" />
           Request a Quote
@@ -91,11 +91,11 @@ function CtaSection() {
       </div>
       <p className="text-xs text-white/45 mt-6">
         Prefer to call?{" "}
-        <a href={`tel:${COMPANY.phone}`} className="text-[#E4C9A3] hover:underline">
+        <a href={`tel:${COMPANY.phone}`} className="text-[#F7CE84] hover:underline">
           {COMPANY.phone}
         </a>{" "}
         · {COMPANY.hours} ·{" "}
-        <a href={PLAN_SAFARI_ROUTE} className="text-[#E4C9A3] hover:underline">
+        <a href={PLAN_SAFARI_ROUTE} className="text-[#F7CE84] hover:underline">
           Start your safari plan online
         </a>
       </p>

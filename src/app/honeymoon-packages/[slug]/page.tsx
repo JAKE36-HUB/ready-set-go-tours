@@ -129,8 +129,8 @@ export default async function HoneymoonDetailPage({
           className="object-cover"
           sizes="100vw"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-[#08130E]/85 via-[#08130E]/45 to-[#08130E]/20" />
-        <div className="absolute inset-0 bg-gradient-to-r from-[#08130E]/45 via-transparent to-[#08130E]/45" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#06101C]/85 via-[#06101C]/45 to-[#06101C]/20" />
+        <div className="absolute inset-0 bg-gradient-to-r from-[#06101C]/45 via-transparent to-[#06101C]/45" />
         <div className="relative z-10 mx-auto w-full max-w-7xl px-6 pb-10">
           <Link
             href="/honeymoon-packages"
@@ -140,7 +140,7 @@ export default async function HoneymoonDetailPage({
             Back to Honeymoon Packages
           </Link>
           <div className="mb-3 flex items-center gap-3">
-            <span className="inline-flex items-center gap-1.5 rounded-full border border-accent/30 bg-accent/20 px-3 py-1 text-xs font-semibold text-[#E4C9A3] backdrop-blur-sm">
+            <span className="inline-flex items-center gap-1.5 rounded-full border border-accent/30 bg-accent/20 px-3 py-1 text-xs font-semibold text-[#F7CE84] backdrop-blur-sm">
               <Heart className="size-3 fill-current" />
               Honeymoon
             </span>
@@ -304,7 +304,7 @@ export default async function HoneymoonDetailPage({
               <PaymentPolicy />
 
               <AnimatedSection>
-                <div className="rounded-3xl bg-[#08130E] p-8 text-center text-white ring-1 ring-white/10">
+                <div className="rounded-3xl bg-[#06101C] p-8 text-center text-white ring-1 ring-white/10">
                   <Heart className="mx-auto mb-2 size-8 fill-accent/30 text-accent" />
                   <h3 className="mb-2 font-display text-xl font-normal">Design your honeymoon</h3>
                   <p className="mb-6 text-sm text-white/70">

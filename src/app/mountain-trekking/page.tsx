@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { useState } from "react";
 import Image from "next/image";
@@ -42,7 +42,7 @@ export default function MountainTrekkingPage() {
           className="object-cover"
           sizes="100vw"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-[#08130E]/65 via-[#08130E]/40 to-[#08130E]/85" />
+        <div className="absolute inset-0 bg-gradient-to-b from-[#06101C]/65 via-[#06101C]/40 to-[#06101C]/85" />
         <div className="relative z-10 mx-auto max-w-4xl px-6 text-center">
           <AnimatedSection direction="none">
             <span className="mb-6 inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-1.5 text-sm font-medium text-white backdrop-blur-md">
@@ -50,7 +50,7 @@ export default function MountainTrekkingPage() {
               Summit Africa
             </span>
             <h1 className="mb-6 font-display text-4xl font-normal leading-tight text-white sm:text-5xl lg:text-7xl">
-              Mountain <span className="italic text-[#E4C9A3]">Trekking</span>
+              Mountain <span className="italic text-[#F7CE84]">Trekking</span>
             </h1>
             <p className="mx-auto max-w-2xl text-lg leading-relaxed text-white/65 sm:text-xl">
               Conquer Africa&apos;s highest peaks with expert guides. From Mount Kenya to Kilimanjaro,
@@ -105,9 +105,9 @@ export default function MountainTrekkingPage() {
                   <div className="group relative overflow-hidden rounded-3xl border border-border bg-card transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl">
                     <div className="relative h-56 overflow-hidden">
                       <Image src={pkg.image} alt={pkg.name} fill className="object-cover transition-transform duration-700 group-hover:scale-110" />
-                      <div className="absolute inset-0 bg-gradient-to-t from-[#08130E]/70 to-transparent" />
+                      <div className="absolute inset-0 bg-gradient-to-t from-[#06101C]/70 to-transparent" />
                       <div className="absolute left-3 top-3">
-                        <Badge className="rounded-full border-0 bg-[#E4C9A3] px-3 py-1 text-xs font-semibold text-[#1F4A38]">
+                        <Badge className="rounded-full border-0 bg-[#F7CE84] px-3 py-1 text-xs font-semibold text-[#0B2A4A]">
                           Mountain Trek
                         </Badge>
                       </div>

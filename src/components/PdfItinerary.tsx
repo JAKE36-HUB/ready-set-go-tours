@@ -17,20 +17,20 @@ const styles = StyleSheet.create({
     marginBottom: 30,
     paddingBottom: 20,
     borderBottomWidth: 2,
-    borderBottomColor: "#059669",
+    borderBottomColor: "#0B2A4A",
   },
   logoText: {
     fontSize: 20,
     fontWeight: "bold",
-    color: "#059669",
+    color: "#0B2A4A",
   },
   logoSub: {
     fontSize: 9,
-    color: "#6b7280",
+    color: "#5A6B80",
     marginTop: 2,
   },
   badge: {
-    backgroundColor: "#059669",
+    backgroundColor: "#0B2A4A",
     paddingHorizontal: 12,
     paddingVertical: 6,
     borderRadius: 4,
@@ -45,12 +45,12 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 24,
     fontWeight: "bold",
-    color: "#131C17",
+    color: "#0A1628",
     marginBottom: 6,
   },
   subtitle: {
     fontSize: 11,
-    color: "#6b7280",
+    color: "#5A6B80",
     marginBottom: 24,
     lineHeight: 1.6,
   },
@@ -60,13 +60,13 @@ const styles = StyleSheet.create({
   sectionTitle: {
     fontSize: 13,
     fontWeight: "bold",
-    color: "#059669",
+    color: "#0B2A4A",
     textTransform: "uppercase",
     letterSpacing: 1,
     marginBottom: 8,
     paddingBottom: 4,
     borderBottomWidth: 1,
-    borderBottomColor: "#e5e7eb",
+    borderBottomColor: "#E3E8F0",
   },
   row: {
     flexDirection: "row",
@@ -74,23 +74,23 @@ const styles = StyleSheet.create({
   },
   label: {
     fontSize: 10,
-    color: "#6b7280",
+    color: "#5A6B80",
     width: 100,
   },
   value: {
     fontSize: 10,
-    color: "#131C17",
+    color: "#0A1628",
     flex: 1,
   },
   highlightItem: {
     fontSize: 10,
-    color: "#131C17",
+    color: "#0A1628",
     marginBottom: 4,
     paddingLeft: 12,
   },
   bullet: {
     fontSize: 10,
-    color: "#059669",
+    color: "#0B2A4A",
     marginRight: 6,
   },
   bulletRow: {
@@ -105,22 +105,22 @@ const styles = StyleSheet.create({
     right: 40,
     paddingTop: 15,
     borderTopWidth: 1,
-    borderTopColor: "#e5e7eb",
+    borderTopColor: "#E3E8F0",
     flexDirection: "row",
     justifyContent: "space-between",
   },
   footerText: {
     fontSize: 8,
-    color: "#9ca3af",
+    color: "#7B8BA0",
   },
   description: {
     fontSize: 10,
-    color: "#4b5563",
+    color: "#4A5B70",
     lineHeight: 1.7,
     marginBottom: 20,
   },
   priceBox: {
-    backgroundColor: "#f0fdf4",
+    backgroundColor: "#FFF4DE",
     padding: 12,
     borderRadius: 4,
     marginBottom: 20,
@@ -130,12 +130,12 @@ const styles = StyleSheet.create({
   },
   priceLabel: {
     fontSize: 10,
-    color: "#6b7280",
+    color: "#5A6B80",
   },
   priceValue: {
     fontSize: 18,
     fontWeight: "bold",
-    color: "#059669",
+    color: "#0B2A4A",
   },
   contactRow: {
     flexDirection: "row",
@@ -143,7 +143,7 @@ const styles = StyleSheet.create({
   },
   contactItem: {
     fontSize: 8,
-    color: "#9ca3af",
+    color: "#7B8BA0",
   },
 })
 

@@ -65,7 +65,7 @@ export function Footer() {
   const whatsappUrl = whatsappLink()
 
   return (
-    <footer className="relative overflow-hidden bg-[#08130E] text-white/70">
+    <footer className="relative overflow-hidden bg-[#06101C] text-white/70">
       <div className="pointer-events-none absolute inset-0">
         <div className="absolute left-1/4 top-0 h-96 w-96 rounded-full bg-primary/20 blur-3xl" />
         <div className="absolute bottom-0 right-1/4 h-96 w-96 rounded-full bg-accent/10 blur-3xl" />
@@ -90,7 +90,7 @@ export function Footer() {
             <div className="flex flex-col gap-3 sm:flex-row">
               <Link
                 href={PLAN_SAFARI_ROUTE}
-                className="inline-flex items-center justify-center gap-2 rounded-full bg-[#E8D5B5] px-5 py-3 text-sm font-semibold text-[#12251B] transition-all duration-300 hover:bg-[#F1E2C8]"
+                className="inline-flex items-center justify-center gap-2 rounded-full bg-[#F8D79A] px-5 py-3 text-sm font-semibold text-[#0B2A4A] transition-all duration-300 hover:bg-[#FFB627]"
               >
                 Plan My Safari
               </Link>
@@ -159,7 +159,7 @@ export function Footer() {
                   <li key={link.href}>
                     <Link
                       href={link.href}
-                      className="group flex items-center gap-1.5 text-sm text-white/55 transition-colors duration-200 hover:text-[#E4C9A3]"
+                      className="group flex items-center gap-1.5 text-sm text-white/55 transition-colors duration-200 hover:text-[#F7CE84]"
                     >
                       <ChevronRight className="h-3 w-3 -ml-0 text-accent/0 transition-all duration-200 group-hover:ml-0 group-hover:text-accent" />
                       {link.label}
@@ -178,7 +178,7 @@ export function Footer() {
               <li>
                 <a
                   href={`tel:${CONTACT_INFO.phone}`}
-                  className="flex items-start gap-3 text-sm text-white/55 transition-colors duration-200 hover:text-[#E4C9A3]"
+                  className="flex items-start gap-3 text-sm text-white/55 transition-colors duration-200 hover:text-[#F7CE84]"
                 >
                   <Phone className="mt-0.5 h-4 w-4 shrink-0 text-accent" />
                   {CONTACT_INFO.phone}
@@ -187,7 +187,7 @@ export function Footer() {
               <li>
                 <a
                   href={`mailto:${CONTACT_INFO.bookingsEmail}`}
-                  className="flex items-start gap-3 text-sm text-white/55 transition-colors duration-200 hover:text-[#E4C9A3]"
+                  className="flex items-start gap-3 text-sm text-white/55 transition-colors duration-200 hover:text-[#F7CE84]"
                 >
                   <Mail className="mt-0.5 h-4 w-4 shrink-0 text-accent" />
                   {CONTACT_INFO.bookingsEmail}
@@ -232,7 +232,7 @@ export function Footer() {
                 </div>
                 <Button
                   type="submit"
-                  className="h-11 bg-[#E8D5B5] px-4 text-[#12251B] hover:bg-[#F1E2C8]"
+                  className="h-11 bg-[#F8D79A] px-4 text-[#0B2A4A] hover:bg-[#FFB627]"
                   aria-label="Subscribe to newsletter"
                 >
                   <ArrowRight className="h-4 w-4" />
@@ -242,7 +242,7 @@ export function Footer() {
                 <motion.p
                   initial={{ opacity: 0, y: 5 }}
                   animate={{ opacity: 1, y: 0 }}
-                  className="mt-2 text-sm text-[#86C2A4]"
+                  className="mt-2 text-sm text-[#7FB2E0]"
                 >
                   Thank you for subscribing!
                 </motion.p>
@@ -250,7 +250,7 @@ export function Footer() {
             </div>
 
             <div className="flex flex-col items-start justify-end gap-4 text-sm text-white/40 sm:flex-row sm:items-center">
-              <Link href="/privacy-policy" className="transition-colors hover:text-[#E4C9A3]">
+              <Link href="/privacy-policy" className="transition-colors hover:text-[#F7CE84]">
                 Privacy Policy
               </Link>
             </div>

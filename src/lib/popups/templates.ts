@@ -47,7 +47,7 @@ export const POPUP_TEMPLATES: PopupTemplate[] = [
       ctas: [
         {
           id: "c1", label: "Book Safari", url: "/contact", newTab: false,
-          bgColor: "#f59e0b", textColor: "#ffffff", hoverAnimation: "pulse" as const, icon: "🎯", type: "url",
+          bgColor: "#F5A623", textColor: "#1A1206", hoverAnimation: "pulse" as const, icon: "🎯", type: "url",
         },
         {
           id: "c2", label: "Chat on WhatsApp", url: wa("Hi! I'm interested in the Great Migration safari"), newTab: true,
@@ -99,7 +99,7 @@ export const POPUP_TEMPLATES: PopupTemplate[] = [
       ctas: [
         {
           id: "c1", label: "View Packages", url: "/beach-holidays", newTab: false,
-          bgColor: "#0ea5e9", textColor: "#ffffff", hoverAnimation: "grow" as const, icon: "🗓️", type: "url",
+          bgColor: "#0B2A4A", textColor: "#ffffff", hoverAnimation: "grow" as const, icon: "🗓️", type: "url",
         },
         {
           id: "c2", label: "WhatsApp Us", url: wa("Hi! I'd like more info on the Diani Beach holiday"), newTab: true,
@@ -151,7 +151,7 @@ export const POPUP_TEMPLATES: PopupTemplate[] = [
       ctas: [
         {
           id: "c1", label: "Book Safari", url: "/kenya-tours", newTab: false,
-          bgColor: "#f59e0b", textColor: "#ffffff", hoverAnimation: "grow" as const, icon: "🎯", type: "url",
+          bgColor: "#F5A623", textColor: "#1A1206", hoverAnimation: "grow" as const, icon: "🎯", type: "url",
         },
         {
           id: "c2", label: "Chat on WhatsApp", url: wa("Hi! I'm interested in the Maasai Mara safari"), newTab: true,
@@ -203,7 +203,7 @@ export const POPUP_TEMPLATES: PopupTemplate[] = [
       ctas: [
         {
           id: "c1", label: "View Packages", url: "/honeymoon-packages", newTab: false,
-          bgColor: "#ec4899", textColor: "#ffffff", hoverAnimation: "pulse" as const, icon: "💍", type: "url",
+          bgColor: "#0B2A4A", textColor: "#ffffff", hoverAnimation: "pulse" as const, icon: "💍", type: "url",
         },
       ],
       targeting: {
@@ -251,7 +251,7 @@ export const POPUP_TEMPLATES: PopupTemplate[] = [
       ctas: [
         {
           id: "c1", label: "Claim Offer", url: "/contact", newTab: false,
-          bgColor: "#ef4444", textColor: "#ffffff", hoverAnimation: "shake" as const, icon: "⚡", type: "url",
+          bgColor: "#B3261E", textColor: "#ffffff", hoverAnimation: "shake" as const, icon: "⚡", type: "url",
         },
         {
           id: "c2", label: "Chat on WhatsApp", url: wa("Hi! I'd like to claim the Amboseli special"), newTab: true,
@@ -303,11 +303,11 @@ export const POPUP_TEMPLATES: PopupTemplate[] = [
       ctas: [
         {
           id: "c1", label: "View Packages", url: "/holiday-packages", newTab: false,
-          bgColor: "#0d9488", textColor: "#ffffff", hoverAnimation: "grow" as const, icon: "🗓️", type: "url",
+          bgColor: "#0B2A4A", textColor: "#ffffff", hoverAnimation: "grow" as const, icon: "🗓️", type: "url",
         },
         {
           id: "c2", label: "Download Brochure", url: "/brochure.pdf", newTab: true,
-          bgColor: "#475569", textColor: "#ffffff", hoverAnimation: "none" as const, icon: "📄", type: "download",
+          bgColor: "#0B2A4A", textColor: "#ffffff", hoverAnimation: "none" as const, icon: "📄", type: "download",
         },
       ],
       targeting: {
@@ -355,7 +355,7 @@ export const POPUP_TEMPLATES: PopupTemplate[] = [
       ctas: [
         {
           id: "c1", label: "View Packages", url: "/holiday-packages", newTab: false,
-          bgColor: "#22c55e", textColor: "#ffffff", hoverAnimation: "grow" as const, icon: "🚀", type: "url",
+          bgColor: "#0B2A4A", textColor: "#ffffff", hoverAnimation: "grow" as const, icon: "🚀", type: "url",
         },
       ],
       targeting: {
@@ -403,7 +403,7 @@ export const POPUP_TEMPLATES: PopupTemplate[] = [
       ctas: [
         {
           id: "c1", label: "Get My Quote", url: "/contact", newTab: false,
-          bgColor: "#8b5cf6", textColor: "#ffffff", hoverAnimation: "pulse" as const, icon: "🚀", type: "url",
+          bgColor: "#0B2A4A", textColor: "#ffffff", hoverAnimation: "pulse" as const, icon: "🚀", type: "url",
         },
       ],
       targeting: {
@@ -451,7 +451,7 @@ export const POPUP_TEMPLATES: PopupTemplate[] = [
       ctas: [
         {
           id: "c1", label: "Claim Offer", url: "/deals", newTab: false,
-          bgColor: "#f97316", textColor: "#ffffff", hoverAnimation: "shake" as const, icon: "🔥", type: "url",
+          bgColor: "#F5A623", textColor: "#1A1206", hoverAnimation: "shake" as const, icon: "🔥", type: "url",
         },
         {
           id: "c2", label: "WhatsApp", url: wa("Hi! Any last minute safari deals available?"), newTab: true,
@@ -503,7 +503,7 @@ export const POPUP_TEMPLATES: PopupTemplate[] = [
       ctas: [
         {
           id: "c1", label: "Book Safari", url: "/contact", newTab: false,
-          bgColor: "#dc2626", textColor: "#ffffff", hoverAnimation: "pulse" as const, icon: "🎁", type: "url",
+          bgColor: "#B3261E", textColor: "#ffffff", hoverAnimation: "pulse" as const, icon: "🎁", type: "url",
         },
       ],
       targeting: {
@@ -551,7 +551,7 @@ export const POPUP_TEMPLATES: PopupTemplate[] = [
       ctas: [
         {
           id: "c1", label: "Book Safari", url: "/contact", newTab: false,
-          bgColor: "#7c3aed", textColor: "#ffffff", hoverAnimation: "grow" as const, icon: "🎆", type: "url",
+          bgColor: "#0B2A4A", textColor: "#ffffff", hoverAnimation: "grow" as const, icon: "🎆", type: "url",
         },
       ],
       targeting: {

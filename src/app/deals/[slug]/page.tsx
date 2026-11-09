@@ -143,8 +143,8 @@ export default async function DealDetailPage({
           className="object-cover"
           sizes="100vw"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-[#08130E]/85 via-[#08130E]/45 to-[#08130E]/20" />
-        <div className="absolute inset-0 bg-gradient-to-r from-[#08130E]/45 via-transparent to-[#08130E]/45" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#06101C]/85 via-[#06101C]/45 to-[#06101C]/20" />
+        <div className="absolute inset-0 bg-gradient-to-r from-[#06101C]/45 via-transparent to-[#06101C]/45" />
         <div className="relative z-10 mx-auto w-full max-w-7xl px-6 pb-10">
           <Link
             href="/deals"
@@ -154,7 +154,7 @@ export default async function DealDetailPage({
             Back to Deals
           </Link>
           <div className="mb-3 flex items-center gap-3">
-            <span className="inline-flex items-center gap-1.5 rounded-full bg-[#E4C9A3] px-3 py-1.5 text-xs font-bold text-[#1F4A38] backdrop-blur">
+            <span className="inline-flex items-center gap-1.5 rounded-full bg-[#F7CE84] px-3 py-1.5 text-xs font-bold text-[#0B2A4A] backdrop-blur">
               <Percent className="size-3" />
               {deal.discount}
             </span>
@@ -371,7 +371,7 @@ export default async function DealDetailPage({
                         sizes="(max-width: 768px) 100vw, 33vw"
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
-                      <div className="absolute left-3 top-3 flex items-center gap-1.5 rounded-full bg-[#E4C9A3] px-2.5 py-1 text-xs font-semibold text-[#1F4A38] backdrop-blur">
+                      <div className="absolute left-3 top-3 flex items-center gap-1.5 rounded-full bg-[#F7CE84] px-2.5 py-1 text-xs font-semibold text-[#0B2A4A] backdrop-blur">
                         <Percent className="size-3" />
                         {related.discount}
                       </div>

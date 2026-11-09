@@ -608,7 +608,7 @@ export function PlanMySafari() {
           sizes="100vw"
           className="object-cover"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-[#08130E]/50 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#06101C]/50 to-transparent" />
       </div>
     </div>
   )

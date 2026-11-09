@@ -15,7 +15,7 @@ export function HoneymoonSection() {
   const honeymoons = HONEYMOON_PACKAGES.slice(0, 3)
 
   return (
-    <section ref={ref} className="relative overflow-hidden bg-[#0C1511] py-24 text-white sm:py-28">
+    <section ref={ref} className="relative overflow-hidden bg-[#06101C] py-24 text-white sm:py-28">
       <div className="pointer-events-none absolute inset-0">
         <div className="absolute left-1/4 top-0 h-[500px] w-[500px] rounded-full bg-accent/12 blur-[160px]" />
         <div className="absolute bottom-0 right-1/4 h-[400px] w-[400px] rounded-full bg-primary/25 blur-[140px]" />
@@ -28,7 +28,7 @@ export function HoneymoonSection() {
           transition={{ duration: 0.7 }}
           className="mx-auto mb-14 max-w-2xl text-center"
         >
-          <span className="text-xs font-semibold uppercase tracking-[0.24em] text-[#E4C9A3]">Honeymoons</span>
+          <span className="text-xs font-semibold uppercase tracking-[0.24em] text-[#F7CE84]">Honeymoons</span>
           <h2 className="mb-4 mt-4 font-display text-3xl font-normal leading-tight sm:text-4xl lg:text-5xl">
             Your honeymoon should be more than a holiday.
           </h2>
@@ -70,10 +70,10 @@ export function HoneymoonSection() {
                   sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                   className="object-cover transition-transform duration-700 group-hover:scale-105"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#08130E]/95 via-[#08130E]/25 to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#06101C]/95 via-[#06101C]/25 to-transparent" />
                 <div className="absolute inset-x-0 bottom-0 p-6">
                   <div className="mb-2 flex items-center gap-3 text-xs text-white/70">
-                    <span className="flex items-center gap-1.5"><Clock className="h-3.5 w-3.5 text-[#E4C9A3]" />{hp.duration}</span>
+                    <span className="flex items-center gap-1.5"><Clock className="h-3.5 w-3.5 text-[#F7CE84]" />{hp.duration}</span>
                     <span className="flex items-center gap-1.5">
                       <Heart className="h-3.5 w-3.5 text-accent" />
                       From ${hp.price.toLocaleString()}

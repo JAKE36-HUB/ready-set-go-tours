@@ -51,7 +51,7 @@ export default function SimilarPackages({
                   sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
-                <div className="absolute bottom-3 right-3 rounded-2xl bg-[#08130E]/70 px-3 py-1.5 text-white ring-1 ring-white/15 backdrop-blur">
+                <div className="absolute bottom-3 right-3 rounded-2xl bg-[#06101C]/70 px-3 py-1.5 text-white ring-1 ring-white/15 backdrop-blur">
                   <span className="text-sm font-semibold leading-none">
                     ${p.price.toLocaleString()}
                     <span className="text-[10px] font-normal text-white/60"> /pp</span>

@@ -599,8 +599,8 @@ export function BookingModal({ open, onOpenChange, initialPackage }: BookingModa
             transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
           >
             {/* Header */}
-            <div className="relative bg-[#08130E] px-6 py-5">
-              <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,rgba(184,100,58,0.22),transparent_55%)]" />
+            <div className="relative bg-[#06101C] px-6 py-5">
+              <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,rgba(245,166,35,0.22),transparent_55%)]" />
               <div className="relative z-10">
                 <DialogHeader>
                   <DialogTitle className="text-xl font-display font-normal text-white">

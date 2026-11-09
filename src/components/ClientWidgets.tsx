@@ -11,10 +11,12 @@ const VisitorTracker = dynamic(() => import("@/components/admin/VisitorTracker")
 const PopupEngine = dynamic(() => import("@/components/popups/PopupEngine").then(m => m.PopupEngine), { ssr: false })
 const ExitIntentModal = dynamic(() => import("@/components/layout/ExitIntentModal").then(m => m.ExitIntentModal), { ssr: false })
 const BookingModalHost = dynamic(() => import("@/components/layout/BookingModalHost").then(m => m.BookingModalHost), { ssr: false })
+const ScrollProgress = dynamic(() => import("@/components/motion/ScrollProgress").then(m => m.ScrollProgress), { ssr: false })
 
 export function ClientWidgets() {
   return (
     <>
+      <ScrollProgress />
       <VisitorTracker />
       <AiChat />
       <WhatsAppButton />

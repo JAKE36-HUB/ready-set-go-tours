@@ -7,6 +7,7 @@ import { motion, useInView } from "framer-motion"
 import { Clock, Calendar, ArrowRight, MapPin } from "lucide-react"
 
 import { Button } from "@/components/ui/button"
+import { TiltCard } from "@/components/motion/TiltCard"
 import { DESTINATIONS } from "@/lib/constants"
 
 export function FeaturedDestinations() {
@@ -40,7 +41,7 @@ export function FeaturedDestinations() {
           {allDestinations.map((dest, idx) => {
             const isKenya = dest.id <= 8
             return (
-              <motion.div
+              <TiltCard
                 key={dest.id}
                 initial={{ opacity: 0, y: 40 }}
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
@@ -79,7 +80,7 @@ export function FeaturedDestinations() {
                     Explore Destination <ArrowRight className="h-3.5 w-3.5" />
                   </Link>
                 </div>
-              </motion.div>
+              </TiltCard>
             )
           })}
         </div>

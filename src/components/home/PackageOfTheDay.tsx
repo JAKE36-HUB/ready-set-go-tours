@@ -108,7 +108,7 @@ export function PackageOfTheDay({ frequency = "day" }: { frequency?: "day" | "we
           className="object-cover"
           sizes="100vw"
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-[#08130E]/90 via-[#08130E]/65 to-[#08130E]/20" />
+        <div className="absolute inset-0 bg-gradient-to-r from-[#06101C]/90 via-[#06101C]/65 to-[#06101C]/20" />
         <div className="relative z-10 flex min-h-[300px] flex-col justify-center p-6 sm:p-8 lg:p-10 md:min-h-[280px]">
           <div className="mb-3 flex flex-wrap items-center gap-3">
             <Badge className="gap-1.5 border-transparent bg-accent px-3 py-1.5 text-xs font-semibold text-accent-foreground">
@@ -131,7 +131,7 @@ export function PackageOfTheDay({ frequency = "day" }: { frequency?: "day" | "we
             </span>
             <span className="inline-flex items-center gap-1.5">
               <span className="text-white/60">From</span>
-              <span className="text-lg font-semibold text-[#E4C9A3]">
+              <span className="text-lg font-semibold text-[#F7CE84]">
                 ${pkg.price.toLocaleString()}
               </span>
               <span className="text-white/60">/person</span>
@@ -153,7 +153,7 @@ export function PackageOfTheDay({ frequency = "day" }: { frequency?: "day" | "we
 
           <div className="mt-6">
             <Link href={`/holiday-packages/${pkg.slug}`}>
-              <Button size="lg" className="bg-[#E8D5B5] text-[#12251B] hover:bg-[#F1E2C8]">
+              <Button size="lg" className="bg-[#F8D79A] text-[#0B2A4A] hover:bg-[#FFB627]">
                 View Package <ArrowRight className="ml-2 size-4" />
               </Button>
             </Link>

@@ -1,4 +1,4 @@
-﻿"use client"
+"use client"
 
 import Image from "next/image"
 import Link from "next/link"
@@ -28,7 +28,7 @@ export default function ServicesPage() {
           className="object-cover"
           sizes="100vw"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-[#08130E]/65 via-[#08130E]/45 to-[#08130E]/85" />
+        <div className="absolute inset-0 bg-gradient-to-b from-[#06101C]/65 via-[#06101C]/45 to-[#06101C]/85" />
         <div className="absolute inset-0 opacity-[0.04]" style={{ backgroundImage: "radial-gradient(circle at 1px 1px, white 1px, transparent 0)", backgroundSize: "40px 40px" }} />
         <div className="relative z-10 mx-auto max-w-4xl text-center">
           <AnimatedSection direction="none">
@@ -37,7 +37,7 @@ export default function ServicesPage() {
               Beyond the Safari
             </span>
             <h1 className="mb-6 font-display text-4xl font-normal leading-tight text-white sm:text-5xl lg:text-7xl">
-              Our <span className="italic text-[#E4C9A3]">Services</span>
+              Our <span className="italic text-[#F7CE84]">Services</span>
             </h1>
             <p className="mx-auto max-w-2xl text-lg leading-relaxed text-white/65 sm:text-xl">
               From flights and accommodation to wellness and relaxation — we handle every detail
@@ -77,7 +77,7 @@ export default function ServicesPage() {
                     <div className="group relative w-full lg:w-1/2">
                       <div className="relative aspect-[4/3] overflow-hidden rounded-2xl shadow-xl">
                         <Image src={service.image} alt={service.title} fill className="object-cover transition-transform duration-700 group-hover:scale-105" sizes="(max-width: 1024px) 100vw, 50vw" />
-                        <div className="absolute inset-0 bg-gradient-to-t from-[#08130E]/60 via-transparent to-transparent" />
+                        <div className="absolute inset-0 bg-gradient-to-t from-[#06101C]/60 via-transparent to-transparent" />
                         <div className="absolute left-4 top-4">
                           <span className="inline-flex items-center gap-1.5 rounded-full border border-white/10 bg-white/15 px-3 py-1 text-xs font-medium text-white backdrop-blur-md">
                             <Icon className="size-3" />
@@ -132,8 +132,8 @@ export default function ServicesPage() {
       </section>
 
       {/* CTA */}
-      <section className="relative overflow-hidden bg-[#08130E] px-6 py-20">
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_right,rgba(184,100,58,0.18),transparent_60%)]" />
+      <section className="relative overflow-hidden bg-[#06101C] px-6 py-20">
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_right,rgba(245,166,35,0.18),transparent_60%)]" />
         <div className="relative z-10 mx-auto max-w-4xl text-center">
           <AnimatedSection>
             <h2 className="mb-4 font-display text-3xl font-normal text-white sm:text-4xl">
@@ -146,7 +146,7 @@ export default function ServicesPage() {
               <Link
                 href={whatsappLink()}
                 target="_blank"
-                className="inline-flex h-12 items-center justify-center gap-2 rounded-full bg-[#E4C9A3] px-8 font-semibold text-[#1F4A38] shadow-lg shadow-black/20 transition-all hover:bg-[#F0DDC0]"
+                className="inline-flex h-12 items-center justify-center gap-2 rounded-full bg-[#F7CE84] px-8 font-semibold text-[#0B2A4A] shadow-lg shadow-black/20 transition-all hover:bg-[#F8D79A]"
               >
                 WhatsApp Us
               </Link>
