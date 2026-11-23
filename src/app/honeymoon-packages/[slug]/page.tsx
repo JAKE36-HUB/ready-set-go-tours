@@ -13,6 +13,16 @@ import AnimatedSection from "@/components/AnimatedSection";
 import { PaymentPolicy } from "@/components/PaymentPolicy";
 
 export const revalidate = 3600;
+export const dynamicParams = true;
+
+export async function generateStaticParams(): Promise<{ slug: string }[]> {
+  try {
+    const { data } = await getSupabase().from("honeymoon_packages").select("slug");
+    return (data ?? []).map((row) => ({ slug: row.slug }));
+  } catch {
+    return [];
+  }
+}
 
 interface Props {
   params: Promise<{ slug: string }>;
@@ -37,7 +47,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   const base = /safari/i.test(row.name) ? row.name : `${row.name} Safari`;
   const title = tourMetaTitle(slug, base, row.price);
-  const description = buildDescription(row.description);
+  const description = buildDescription(`${row.name}: ${row.description}`);
 
   return {
     title: { absolute: title },

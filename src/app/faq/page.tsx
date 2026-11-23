@@ -4,7 +4,7 @@ import { useState } from "react";
 import Image from "next/image";
 import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from "@/components/ui/accordion";
 import AnimatedSection from "@/components/AnimatedSection";
-import { FAQ_ITEMS, COMPANY } from "@/lib/constants";
+import { FAQ_ITEMS } from "@/lib/constants";
 import { HelpCircle, Search } from "lucide-react";
 
 const FAQ_CATEGORIES: Record<string, number[]> = {
@@ -123,6 +123,36 @@ export default function FAQPage() {
                 </p>
               </div>
             )}
+          </AnimatedSection>
+
+          {/* Full, crawlable answer list — accordion panels are not rendered
+              until a visitor opens them, so this keeps all answers in the HTML. */}
+          <AnimatedSection>
+            <div className="mt-16">
+              <h2 className="font-display text-2xl font-normal text-foreground mb-2">
+                All safari questions, answered
+              </h2>
+              <p className="mb-6 text-sm leading-relaxed text-muted-foreground">
+                A complete list of the questions travellers ask us most often,
+                from visas and vaccination advice to food, tipping and what to
+                pack for a Kenya or Tanzania safari.
+              </p>
+              <div className="space-y-2">
+                {FAQ_ITEMS.map((item) => (
+                  <details
+                    key={item.id}
+                    className="group rounded-xl bg-card p-4 ring-1 ring-border"
+                  >
+                    <summary className="cursor-pointer list-none text-sm font-medium text-foreground marker:content-none">
+                      {item.question}
+                    </summary>
+                    <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
+                      {item.answer}
+                    </p>
+                  </details>
+                ))}
+              </div>
+            </div>
           </AnimatedSection>
 
           {/* Contact CTA */}

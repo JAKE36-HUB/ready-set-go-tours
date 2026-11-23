@@ -4,13 +4,23 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { USD_TO_KES, PLAN_SAFARI_ROUTE, whatsappPackageLink } from "@/lib/constants";
 import { getSupabase } from "@/lib/supabase";
-import { buildMetaDescription, tourMetaTitle } from "@/lib/seo";
+import { buildMetaDescription, dealMetaTitle } from "@/lib/seo";
 import { TourPackageJsonLd, BreadcrumbJsonLd } from "@/components/JsonLd";
 import { Tag, Clock, Users, Gift, Percent, Star, Shield, Check, ArrowLeft, Calendar, Hotel, Utensils, MessageCircle, ArrowRight } from "lucide-react";
 import AnimatedSection from "@/components/AnimatedSection";
 import { PaymentPolicy } from "@/components/PaymentPolicy";
 
 export const revalidate = 60;
+export const dynamicParams = true;
+
+export async function generateStaticParams(): Promise<{ slug: string }[]> {
+  try {
+    const { data } = await getSupabase().from("deals").select("slug");
+    return (data ?? []).map((row) => ({ slug: row.slug }));
+  } catch {
+    return [];
+  }
+}
 
 interface Props {
   params: Promise<{ slug: string }>;
@@ -34,8 +44,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   if (!row) return {};
 
   const base = /safari/i.test(row.title) ? row.title : `${row.title} Safari`;
-  const title = tourMetaTitle(slug, base, row.dealPrice);
-  const description = buildDescription(row.description);
+  const title = dealMetaTitle(slug, base, row.dealPrice);
+  const description = buildDescription(`${row.title}: ${row.description}`);
   const image = row.image ?? "/opengraph-image";
 
   return {

@@ -85,6 +85,19 @@ export function tourMetaTitle(slug: string, fallbackName: string, price: number)
   return truncateAtWord(name, 60 - suffix.length).replace(/…$/, "") || name;
 }
 
+/**
+ * Deal pages share slugs with some holiday packages, so give them their own
+ * titles — otherwise Google sees two URLs with the exact same SERP title and
+ * frequently drops one as "Crawled – currently not indexed".
+ */
+export function dealMetaTitle(slug: string, fallbackName: string, price: number): string {
+  const name = TOUR_TITLES[slug] ?? fallbackName.replace(/\s+/g, " ").trim();
+  const title = `Deal: ${name}`;
+  const suffix = ` $${price.toLocaleString("en-US")}`;
+  if (title.length + suffix.length <= 60) return `${title}${suffix}`;
+  return `${truncateAtWord(title, 60 - suffix.length).replace(/…$/, "")}${suffix}`;
+}
+
 /** Short SERP titles for the travel guides that are long enough to get cut off. */
 const GUIDE_TITLES: Record<string, string> = {
   "best-time-to-visit-masai-mara": "Best Time to Visit the Masai Mara (Month by Month)",

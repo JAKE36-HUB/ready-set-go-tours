@@ -23,6 +23,16 @@ import { parseSeasonPricing, stripSeasonRates } from "@/lib/season-pricing";
 import type { ItineraryDay, OptionalActivity } from "@/lib/tour";
 
 export const revalidate = 3600;
+export const dynamicParams = true;
+
+export async function generateStaticParams(): Promise<{ slug: string }[]> {
+  try {
+    const { data } = await getSupabase().from("tour_packages").select("slug");
+    return (data ?? []).map((row) => ({ slug: row.slug }));
+  } catch {
+    return [];
+  }
+}
 
 interface Props {
   params: Promise<{ slug: string }>;
@@ -48,7 +58,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const suffix = row.type === "beach" ? "Beach Holiday" : "Safari";
   const base = /safari|beach/i.test(row.name) ? row.name : `${row.name} ${suffix}`;
   const title = tourMetaTitle(slug, base, row.price);
-  const description = buildDescription(stripSeasonRates(row.description));
+  const description = buildDescription(`${row.name}. ${stripSeasonRates(row.description)}`);
 
   return {
     title: { absolute: title },
