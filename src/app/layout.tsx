@@ -187,11 +187,7 @@ export default function RootLayout({
                 ['pointerdown', 'keydown', 'scroll', 'touchstart'].forEach(function(e){
                   window.addEventListener(e, load, { once: true, passive: true });
                 });
-                if ('requestIdleCallback' in window) {
-                  requestIdleCallback(load, { timeout: 12000 });
-                } else {
-                  setTimeout(load, 6000);
-                }
+                setTimeout(load, 12000);
               })();
             `,
           }}
