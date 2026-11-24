@@ -1,18 +1,22 @@
 "use client"
 
 import { useState, useEffect } from "react"
+import dynamic from "next/dynamic"
 import Image from "next/image"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-import { motion, AnimatePresence } from "framer-motion"
 import { Compass, Menu, Search, Phone, Moon, Sun, ChevronDown, X, MessageCircle } from "lucide-react"
 import { useTheme } from "next-themes"
 
 import { Button } from "@/components/ui/button"
 import { Sheet, SheetContent, SheetClose } from "@/components/ui/sheet"
-import { SearchModal } from "@/components/layout/SearchModal"
 import { NAV_ITEMS, COMPANY, PLAN_SAFARI_ROUTE, whatsappLink } from "@/lib/constants"
 import { cn } from "@/lib/utils"
+
+const SearchModal = dynamic(
+  () => import("@/components/layout/SearchModal").then((m) => m.SearchModal),
+  { ssr: false }
+)
 
 export function Header() {
   const [scrolled, setScrolled] = useState(false)
@@ -67,18 +71,15 @@ export function Header() {
 
   return (
     <>
-      <motion.header
+      <header
         className={cn(
-          "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
+          "header-drop fixed top-0 left-0 right-0 z-50 transition-all duration-300",
           scrolled
             ? "border-b border-border/70 bg-background/90 backdrop-blur-xl shadow-[0_10px_40px_-28px_rgba(11,42,74,0.45)]"
             : transparent
               ? "bg-gradient-to-b from-black/45 via-black/10 to-transparent"
               : "border-b border-transparent bg-background/70 backdrop-blur-xl"
         )}
-        initial={{ y: -100 }}
-        animate={{ y: 0 }}
-        transition={{ duration: 0.6, ease: "easeOut" }}
       >
         <div className="mx-auto flex h-[4.5rem] max-w-7xl items-center justify-between px-4 sm:h-20 sm:px-6 lg:px-8">
           <Link href="/" className="flex items-center gap-2.5 group shrink-0">
@@ -137,37 +138,29 @@ export function Header() {
                           )}
                         />
                       </button>
-                      <AnimatePresence>
-                        {activeDropdown === item.href && (
-                          <motion.div
-                            initial={{ opacity: 0, y: 8, scale: 0.96 }}
-                            animate={{ opacity: 1, y: 0, scale: 1 }}
-                            exit={{ opacity: 0, y: 8, scale: 0.96 }}
-                            transition={{ duration: 0.2, ease: "easeOut" }}
-                            className="absolute top-full left-0 mt-2 w-60 rounded-2xl border border-border bg-card shadow-card overflow-hidden"
-                          >
-                            <div className="p-1.5">
-                              {item.children!.map((child) => {
-                                const isChildActive = pathname === child.href
-                                return (
-                                  <Link
-                                    key={child.href}
-                                    href={child.href}
-                                    className={cn(
-                                      "flex items-center rounded-xl px-3 py-2.5 text-sm font-medium transition-all duration-150",
-                                      isChildActive
-                                        ? "bg-primary/10 text-primary"
-                                        : "text-foreground/75 hover:bg-muted hover:text-foreground"
-                                    )}
-                                  >
-                                    {child.label}
-                                  </Link>
-                                )
-                              })}
-                            </div>
-                          </motion.div>
-                        )}
-                      </AnimatePresence>
+                      {activeDropdown === item.href && (
+                        <div className="dropdown-in absolute top-full left-0 mt-2 w-60 rounded-2xl border border-border bg-card shadow-card overflow-hidden">
+                          <div className="p-1.5">
+                            {item.children!.map((child) => {
+                              const isChildActive = pathname === child.href
+                              return (
+                                <Link
+                                  key={child.href}
+                                  href={child.href}
+                                  className={cn(
+                                    "flex items-center rounded-xl px-3 py-2.5 text-sm font-medium transition-all duration-150",
+                                    isChildActive
+                                      ? "bg-primary/10 text-primary"
+                                      : "text-foreground/75 hover:bg-muted hover:text-foreground"
+                                  )}
+                                >
+                                  {child.label}
+                                </Link>
+                              )
+                            })}
+                          </div>
+                        </div>
+                      )}
                     </>
                   ) : (
                     <Link
@@ -252,7 +245,7 @@ export function Header() {
             </Button>
           </div>
         </div>
-      </motion.header>
+      </header>
 
       <Sheet open={mobileMenuOpen} onOpenChange={setMobileMenuOpen}>
         <SheetContent side="right" className="w-full sm:max-w-sm p-0">
@@ -350,15 +343,8 @@ function MobileNavContent({
                       )}
                     />
                   </button>
-                  <AnimatePresence>
-                    {isExpanded && (
-                      <motion.div
-                        initial={{ height: 0, opacity: 0 }}
-                        animate={{ height: "auto", opacity: 1 }}
-                        exit={{ height: 0, opacity: 0 }}
-                        transition={{ duration: 0.2 }}
-                        className="overflow-hidden"
-                      >
+                  {isExpanded && (
+                    <div className="dropdown-in overflow-hidden">
                         <div className="ml-3 mt-1 space-y-1 border-l-2 border-primary/20 pl-3">
                           {item.children!.map((child) => (
                             <Link
@@ -376,9 +362,8 @@ function MobileNavContent({
                             </Link>
                           ))}
                         </div>
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
+                    </div>
+                  )}
                 </>
               ) : (
                 <Link

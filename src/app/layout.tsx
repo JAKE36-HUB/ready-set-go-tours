@@ -2,7 +2,6 @@ import type { Metadata, Viewport } from "next";
 import { GeistSans } from "geist/font/sans";
 import { Newsreader } from "next/font/google";
 import "./globals.css";
-import { SupabaseProvider } from "@/lib/supabase-auth";
 import { ThemeProvider } from "@/components/layout/ThemeProvider";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
@@ -97,6 +96,10 @@ export default function RootLayout({
       className={`${GeistSans.variable} ${NewsreaderFont.variable} antialiased`}
     >
       <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
+        <link rel="preconnect" href="https://www.googletagmanager.com" />
+        <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
       </head>
       <body className="min-h-screen flex flex-col bg-background text-foreground">
         <script
@@ -159,51 +162,33 @@ export default function RootLayout({
           }}
         />
         <Analytics />
-        <Script
-          id="gtag-ads"
-          strategy="afterInteractive"
-          src="https://www.googletagmanager.com/gtag/js?id=AW-18369134468"
-        />
-        <Script id="gtag-ads-init" strategy="afterInteractive">
+        <Script id="gtag-init" strategy="lazyOnload">
           {`
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
             gtag('config', 'AW-18369134468');
+            ${process.env.NEXT_PUBLIC_GA4_ID ? `gtag('config', '${process.env.NEXT_PUBLIC_GA4_ID}');` : ""}
           `}
         </Script>
-        {process.env.NEXT_PUBLIC_GA4_ID && (
-          <>
-            <Script
-              id="ga4"
-              strategy="afterInteractive"
-              src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GA4_ID}`}
-            />
-            <Script id="ga4-init" strategy="afterInteractive">
-              {`
-                window.dataLayer = window.dataLayer || [];
-                function gtag(){dataLayer.push(arguments);}
-                gtag('js', new Date());
-                gtag('config', '${process.env.NEXT_PUBLIC_GA4_ID}');
-              `}
-            </Script>
-          </>
-        )}
+        <Script
+          id="gtag-ads"
+          strategy="lazyOnload"
+          src="https://www.googletagmanager.com/gtag/js?id=AW-18369134468"
+        />
         {process.env.NEXT_PUBLIC_CLARITY_ID && (
-          <Script id="microsoft-clarity" strategy="afterInteractive">
+          <Script id="microsoft-clarity" strategy="lazyOnload">
             {`
               (function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);})(window,document,"clarity","script","${process.env.NEXT_PUBLIC_CLARITY_ID}");
             `}
           </Script>
         )}
-        <SupabaseProvider>
         <ThemeProvider>
           <Header />
           <main className="flex-1">{children}</main>
           <Footer />
           <ClientWidgets />
         </ThemeProvider>
-        </SupabaseProvider>
       </body>
     </html>
   );

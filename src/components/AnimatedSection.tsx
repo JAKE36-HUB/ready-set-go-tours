@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, type Variants } from "framer-motion";
+import { useEffect, useRef, useState } from "react";
 import { cn } from "@/lib/utils";
 
 interface AnimatedSectionProps {
@@ -10,30 +10,57 @@ interface AnimatedSectionProps {
   direction?: "up" | "down" | "left" | "right" | "none";
 }
 
-const directionVariants: Record<string, Variants> = {
-  up: { hidden: { opacity: 0, y: 40 }, visible: { opacity: 1, y: 0 } },
-  down: { hidden: { opacity: 0, y: -40 }, visible: { opacity: 1, y: 0 } },
-  left: { hidden: { opacity: 0, x: -40 }, visible: { opacity: 1, x: 0 } },
-  right: { hidden: { opacity: 0, x: 40 }, visible: { opacity: 1, x: 0 } },
-  none: { hidden: { opacity: 0 }, visible: { opacity: 1 } },
-};
-
+/**
+ * Lightweight scroll-reveal using IntersectionObserver + CSS. Avoids shipping
+ * framer-motion on every public page just for a one-off fade-in.
+ */
 export default function AnimatedSection({
   children,
   className,
   delay = 0,
   direction = "up",
 }: AnimatedSectionProps) {
+  const ref = useRef<HTMLDivElement>(null);
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    if (typeof IntersectionObserver === "undefined") {
+      el.classList.add("reveal-section-visible");
+      return;
+    }
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setVisible(true);
+          observer.disconnect();
+        }
+      },
+      { rootMargin: "0px 0px -60px 0px" }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
+  const transform = {
+    up: "translateY(16px)",
+    down: "translateY(-16px)",
+    left: "translateX(24px)",
+    right: "translateX(-24px)",
+    none: "none",
+  }[direction];
+
   return (
-    <motion.div
-      initial="hidden"
-      whileInView="visible"
-      viewport={{ once: true, margin: "-60px" }}
-      variants={directionVariants[direction]}
-      transition={{ duration: 0.6, delay, ease: [0.22, 1, 0.36, 1] }}
-      className={cn(className)}
+    <div
+      ref={ref}
+      className={cn("reveal-section", visible && "reveal-section-visible", className)}
+      style={{
+        "--reveal-transform": transform,
+        "--reveal-delay": `${delay}ms`,
+      } as React.CSSProperties}
     >
       {children}
-    </motion.div>
+    </div>
   );
 }

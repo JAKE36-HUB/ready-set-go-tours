@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { SupabaseProvider } from "@/lib/supabase-auth";
 import AdminShell from "./AdminShell";
 
 export const metadata: Metadata = {
@@ -11,5 +12,9 @@ export const metadata: Metadata = {
 };
 
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
-  return <AdminShell>{children}</AdminShell>;
+  return (
+    <SupabaseProvider>
+      <AdminShell>{children}</AdminShell>
+    </SupabaseProvider>
+  );
 }

@@ -3,7 +3,6 @@
 import { useState } from "react"
 import Image from "next/image"
 import Link from "next/link"
-import { motion } from "framer-motion"
 import { Phone, Mail, MapPin, Clock, ArrowRight, Heart, ChevronRight, ShieldCheck, MessageCircle } from "lucide-react"
 
 import { Button } from "@/components/ui/button"
@@ -239,13 +238,9 @@ export function Footer() {
                 </Button>
               </form>
               {subscribed && (
-                <motion.p
-                  initial={{ opacity: 0, y: 5 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  className="mt-2 text-sm text-[#7FB2E0]"
-                >
+                <p className="dropdown-in mt-2 text-sm text-[#7FB2E0]">
                   Thank you for subscribing!
-                </motion.p>
+                </p>
               )}
             </div>
 

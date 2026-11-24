@@ -1,13 +1,11 @@
 "use client"
 
-import { useState, useEffect, useRef } from "react"
+import { useState, useEffect } from "react"
 import Image from "next/image"
 import Link from "next/link"
-import { motion, useMotionValue, useSpring, useTransform } from "framer-motion"
 import { ArrowRight, MessageCircle } from "lucide-react"
 
 import { Button } from "@/components/ui/button"
-import { Magnetic } from "@/components/motion/Magnetic"
 import { PLAN_SAFARI_ROUTE, whatsappLink } from "@/lib/constants"
 
 const HERO_IMAGES = [
@@ -19,42 +17,20 @@ const HERO_IMAGES = [
 const SLIDE_DURATION = 7000
 
 export function HeroSection() {
-  const [mounted, setMounted] = useState(false)
   const [currentImage, setCurrentImage] = useState(0)
   const [paused, setPaused] = useState(false)
   const [progress, setProgress] = useState(0)
 
-  const pointerX = useMotionValue(0)
-  const pointerY = useMotionValue(0)
-  const smoothX = useSpring(pointerX, { stiffness: 60, damping: 22, mass: 0.6 })
-  const smoothY = useSpring(pointerY, { stiffness: 60, damping: 22, mass: 0.6 })
-  const imageX = useTransform(smoothX, [-0.5, 0.5], ["-1.6%", "1.6%"])
-  const imageY = useTransform(smoothY, [-0.5, 0.5], ["-1.6%", "1.6%"])
-
-  const handlePointerMove = (event: React.MouseEvent<HTMLElement>) => {
-    const rect = event.currentTarget.getBoundingClientRect()
-    pointerX.set((event.clientX - rect.left) / rect.width - 0.5)
-    pointerY.set((event.clientY - rect.top) / rect.height - 0.5)
-  }
-
-  const resetPointer = () => {
-    pointerX.set(0)
-    pointerY.set(0)
-  }
-
-  // eslint-disable-next-line react-hooks/set-state-in-effect
-  useEffect(() => { setMounted(true) }, [])
-
   useEffect(() => {
-    if (!mounted || paused) return
+    if (paused) return
     const timer = setTimeout(() => {
       setCurrentImage((prev) => (prev + 1) % HERO_IMAGES.length)
     }, SLIDE_DURATION)
     return () => clearTimeout(timer)
-  }, [mounted, paused, currentImage])
+  }, [paused, currentImage])
 
   useEffect(() => {
-    if (!mounted || paused) return
+    if (paused) return
     // eslint-disable-next-line react-hooks/set-state-in-effect
     setProgress(0)
     const start = Date.now()
@@ -64,7 +40,7 @@ export function HeroSection() {
       if (pct >= 100) clearInterval(interval)
     }, 50)
     return () => clearInterval(interval)
-  }, [mounted, paused, currentImage])
+  }, [paused, currentImage])
 
   const whatsappUrl = whatsappLink()
 
@@ -72,13 +48,9 @@ export function HeroSection() {
     <section
       className="relative flex h-[100svh] min-h-[680px] items-end overflow-hidden bg-[#06101C] sm:items-center"
       onMouseEnter={() => setPaused(true)}
-      onMouseMove={handlePointerMove}
-      onMouseLeave={() => {
-        setPaused(false)
-        resetPointer()
-      }}
+      onMouseLeave={() => setPaused(false)}
     >
-      <motion.div className="absolute inset-0" style={{ x: imageX, y: imageY, scale: 1.06 }}>
+      <div className="absolute inset-0 scale-[1.06]">
         {HERO_IMAGES.map((img, i) => (
           <div
             key={img}
@@ -97,7 +69,7 @@ export function HeroSection() {
             />
           </div>
         ))}
-      </motion.div>
+      </div>
 
       <div className="absolute inset-0 hero-overlay" />
       <div className="absolute inset-0 bg-gradient-to-r from-[#06101C]/85 via-[#06101C]/30 to-transparent" />
@@ -106,76 +78,47 @@ export function HeroSection() {
       <div className="relative z-10 w-full pb-28 pt-32 sm:pb-32">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="max-w-3xl">
-            <motion.div
-              initial={{ opacity: 0, y: 16 }}
-              animate={mounted ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.5, delay: 0.05 }}
-              className="mb-7 flex items-center gap-3"
-            >
+            <div className="hero-rise hero-rise-1 mb-7 flex items-center gap-3">
               <span className="h-px w-10 bg-[#F8C566]" />
               <span className="text-[10px] font-semibold uppercase tracking-[0.28em] text-white/70 sm:text-[11px]">
                 Private safaris · Kenya &amp; Tanzania
               </span>
-            </motion.div>
+            </div>
 
-            <motion.h1
-              initial={{ opacity: 0, y: 24 }}
-              animate={mounted ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.8, delay: 0.15 }}
-              className="font-display text-[clamp(3.25rem,9vw,7.5rem)] font-normal leading-[0.92] tracking-[-0.035em] text-white"
-            >
+            <h1 className="hero-rise hero-rise-2 font-display text-[clamp(3.25rem,9vw,7.5rem)] font-normal leading-[0.92] tracking-[-0.035em] text-white">
               Wild by nature.
               <span className="mt-1 block italic text-[#F7CE84]">Yours by design.</span>
-            </motion.h1>
+            </h1>
 
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              animate={mounted ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.6, delay: 0.4 }}
-              className="mt-7 max-w-xl text-base leading-relaxed text-white/70 sm:text-lg"
-            >
+            <p className="hero-rise hero-rise-3 mt-7 max-w-xl text-base leading-relaxed text-white/70 sm:text-lg">
               Tailor-made journeys through Kenya and Tanzania — designed around your pace, your people
               and the moments you&apos;ll remember.
-            </motion.p>
+            </p>
 
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={mounted ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.6, delay: 0.55 }}
-              className="mt-9 flex flex-wrap gap-3"
-            >
-              <Magnetic>
-                <Link href={PLAN_SAFARI_ROUTE}>
-                  <Button className="h-14 rounded-full bg-[#F8D79A] px-8 text-base font-semibold text-[#0B2A4A] shadow-none hover:bg-[#FFB627]">
-                    Start planning
-                    <ArrowRight className="ml-2 size-4" />
-                  </Button>
-                </Link>
-              </Magnetic>
-              <Magnetic>
-                <Button
-                  variant="outline"
-                  onClick={() => window.open(whatsappUrl, "_blank", "noopener,noreferrer")}
-                  className="h-14 rounded-full border-white/25 bg-white/5 px-7 text-base font-medium text-white backdrop-blur-md hover:border-white/45 hover:bg-white/10 hover:text-white"
-                >
-                  <MessageCircle className="mr-2 size-4" />
-                  WhatsApp an expert
+            <div className="hero-rise hero-rise-4 mt-9 flex flex-wrap gap-3">
+              <Link href={PLAN_SAFARI_ROUTE}>
+                <Button className="h-14 rounded-full bg-[#F8D79A] px-8 text-base font-semibold text-[#0B2A4A] shadow-none hover:bg-[#FFB627]">
+                  Start planning
+                  <ArrowRight className="ml-2 size-4" />
                 </Button>
-              </Magnetic>
-            </motion.div>
+              </Link>
+              <Button
+                variant="outline"
+                onClick={() => window.open(whatsappUrl, "_blank", "noopener,noreferrer")}
+                className="h-14 rounded-full border-white/25 bg-white/5 px-7 text-base font-medium text-white backdrop-blur-md hover:border-white/45 hover:bg-white/10 hover:text-white"
+              >
+                <MessageCircle className="mr-2 size-4" />
+                WhatsApp an expert
+              </Button>
+            </div>
 
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={mounted ? { opacity: 1 } : {}}
-              transition={{ duration: 0.6, delay: 0.7 }}
-              className="mt-10 flex flex-wrap items-center gap-x-5 gap-y-2 text-[10px] font-medium uppercase tracking-[0.18em] text-white/50 sm:text-[11px]"
-            >
+            <div className="hero-fade mt-10 flex flex-wrap items-center gap-x-5 gap-y-2 text-[10px] font-medium uppercase tracking-[0.18em] text-white/50 sm:text-[11px]">
               <span>Tailor-made itineraries</span>
               <span className="hidden h-1 w-1 rounded-full bg-white/25 sm:block" />
               <span>Local safari guides</span>
               <span className="hidden h-1 w-1 rounded-full bg-white/25 sm:block" />
               <span>Reply within 24 hours</span>
-            </motion.div>
+            </div>
           </div>
         </div>
       </div>

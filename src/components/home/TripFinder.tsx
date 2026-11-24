@@ -56,7 +56,7 @@ export function TripFinder() {
           </div>
 
           <div className="grid grid-cols-2 gap-3 md:grid-cols-3 lg:grid-cols-5 sm:gap-4">
-            {TRIPS.map((trip, i) => (
+            {TRIPS.map((trip) => (
               <Link
                 key={trip.title}
                 href={trip.href}
@@ -70,7 +70,7 @@ export function TripFinder() {
                   fill
                   sizes="(min-width: 1024px) 20vw, (min-width: 768px) 33vw, 50vw"
                   className="object-cover brightness-[0.95] transition-transform duration-700 group-hover:scale-105"
-                  loading={i < 3 ? "eager" : "lazy"}
+                  loading="lazy"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-[#06101C]/90 via-[#06101C]/25 to-transparent" />
                 <div className="absolute inset-x-0 bottom-0 flex items-end justify-between gap-2 p-4">
