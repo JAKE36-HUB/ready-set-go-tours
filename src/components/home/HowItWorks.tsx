@@ -1,16 +1,11 @@
-"use client"
-
-import { useRef } from "react"
 import Link from "next/link"
-import { motion, useInView } from "framer-motion"
 import { ArrowRight, MessageCircle, ClipboardCheck, FileCheck, Plane, Heart, type LucideIcon } from "lucide-react"
 
 import { Button } from "@/components/ui/button"
 import { BOOKING_STEPS, PLAN_SAFARI_ROUTE } from "@/lib/constants"
+import { Reveal } from "@/components/Reveal"
 
 export function HowItWorks() {
-  const ref = useRef<HTMLDivElement>(null)
-  const isInView = useInView(ref, { once: true, margin: "-100px" })
 
   const iconMap: Record<string, LucideIcon> = {
     MessageCircle, ClipboardCheck, FileCheck, Plane, Heart,
@@ -30,11 +25,7 @@ export function HowItWorks() {
       </div>
 
       <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <motion.div
-          ref={ref}
-          initial={{ opacity: 0, y: 40 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.7 }}
+        <Reveal
           className="mx-auto mb-16 max-w-2xl text-center"
         >
           <span className="eyebrow">
@@ -46,15 +37,12 @@ export function HowItWorks() {
           <p className="mx-auto max-w-xl text-base text-muted-foreground">
             Five simple steps between &ldquo;what if&rdquo; and boarding your safari.
           </p>
-        </motion.div>
+        </Reveal>
 
         <div className="grid gap-8 lg:grid-cols-5 lg:gap-4">
           {steps.map((step, idx) => (
-            <motion.div
+            <Reveal
               key={step.title}
-              initial={{ opacity: 0, y: 30 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.5, delay: idx * 0.12 }}
               className="relative flex flex-col items-center text-center"
             >
               {idx < steps.length - 1 && (
@@ -72,14 +60,11 @@ export function HowItWorks() {
               <p className="max-w-[220px] text-sm leading-relaxed text-muted-foreground">
                 {step.description}
               </p>
-            </motion.div>
+            </Reveal>
           ))}
         </div>
 
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.5, delay: 0.7 }}
+        <Reveal
           className="mt-16 text-center"
         >
           <Link href={PLAN_SAFARI_ROUTE}>
@@ -88,7 +73,7 @@ export function HowItWorks() {
             </Button>
           </Link>
           <p className="mt-3 text-xs text-muted-foreground">No commitment required. Get a custom quote from our team.</p>
-        </motion.div>
+        </Reveal>
       </div>
     </section>
   )

@@ -1,27 +1,18 @@
-"use client"
-
-import { useRef } from "react"
 import Image from "next/image"
 import Link from "next/link"
-import { motion, useInView } from "framer-motion"
 import { Users, Calendar, ArrowRight } from "lucide-react"
 
 import { Button } from "@/components/ui/button"
 import { BLOG_POSTS } from "@/lib/constants"
+import { Reveal } from "@/components/Reveal"
 
 export function BlogPreview() {
-  const ref = useRef<HTMLDivElement>(null)
-  const isInView = useInView(ref, { once: true, margin: "-100px" })
   const posts = BLOG_POSTS.slice(0, 3)
 
   return (
     <section className="relative py-28 bg-white dark:bg-slate-950">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <motion.div
-          ref={ref}
-          initial={{ opacity: 0, y: 40 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.7 }}
+        <Reveal
           className="flex flex-col lg:flex-row lg:items-end lg:justify-between mb-14 gap-6"
         >
           <div>
@@ -35,15 +26,12 @@ export function BlogPreview() {
               Read Our Guides <ArrowRight className="w-4 h-4 ml-2" />
             </Button>
           </Link>
-        </motion.div>
+        </Reveal>
 
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
-          {posts.map((post, idx) => (
-            <motion.div
+          {posts.map((post) => (
+            <Reveal
               key={post.id}
-              initial={{ opacity: 0, y: 30 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.5, delay: idx * 0.1 }}
             >
               <Link href={`/travel-guide/${post.slug}`} className="group block">
                 <div className="bg-slate-50 dark:bg-slate-800 rounded-3xl overflow-hidden border border-slate-100 dark:border-slate-700 hover:shadow-xl hover:-translate-y-1 transition-all duration-500">
@@ -66,7 +54,7 @@ export function BlogPreview() {
                   </div>
                 </div>
               </Link>
-            </motion.div>
+            </Reveal>
           ))}
         </div>
       </div>

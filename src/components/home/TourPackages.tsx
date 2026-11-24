@@ -1,14 +1,11 @@
-"use client"
-
-import { useRef } from "react"
 import Image from "next/image"
 import Link from "next/link"
-import { motion, useInView } from "framer-motion"
 import { Clock, Bed, Check, ArrowRight } from "lucide-react"
 
 import { Badge } from "@/components/ui/badge"
 import { TOUR_PACKAGES } from "@/lib/constants"
 import { cn } from "@/lib/utils"
+import { Reveal } from "@/components/Reveal"
 
 const badgeColors: Record<string, string> = {
   luxury: "bg-gradient-to-r from-amber-500 to-orange-500 text-white border-0",
@@ -20,18 +17,12 @@ const badgeColors: Record<string, string> = {
 }
 
 export function TourPackages({ onReserve }: { onReserve?: (name: string) => void }) {
-  const ref = useRef<HTMLDivElement>(null)
-  const isInView = useInView(ref, { once: true, margin: "-100px" })
   const safariPackages = TOUR_PACKAGES.filter((p) => p.type === "safari" || p.type === "group")
 
   return (
     <section className="relative py-28 bg-slate-50 dark:bg-slate-900">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <motion.div
-          ref={ref}
-          initial={{ opacity: 0, y: 40 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.7 }}
+        <Reveal
           className="text-center mb-14"
         >
           <span className="text-sm font-semibold text-amber-600 dark:text-amber-400 uppercase tracking-[0.2em]">
@@ -43,15 +34,12 @@ export function TourPackages({ onReserve }: { onReserve?: (name: string) => void
           <p className="text-lg text-slate-500 dark:text-slate-400 max-w-xl mx-auto">
             Hand-crafted private safaris and daily joining group tours — see Africa your way.
           </p>
-        </motion.div>
+        </Reveal>
 
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
-            {safariPackages.map((pkg, idx) => (
-              <motion.div
+            {safariPackages.map((pkg) => (
+              <Reveal
                 key={pkg.id}
-                initial={{ opacity: 0, y: 30 }}
-                animate={isInView ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.5, delay: idx * 0.05 }}
                 className="group relative bg-white dark:bg-slate-800 rounded-3xl overflow-hidden border border-slate-100 dark:border-slate-700 hover:shadow-2xl hover:-translate-y-2 transition-all duration-500"
               >
                 <div className="relative h-56 overflow-hidden">
@@ -107,7 +95,7 @@ export function TourPackages({ onReserve }: { onReserve?: (name: string) => void
                     </button>
                   </div>
                 </div>
-              </motion.div>
+              </Reveal>
             ))}
           </div>
       </div>

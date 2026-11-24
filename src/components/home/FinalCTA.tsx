@@ -1,23 +1,18 @@
-"use client"
-
-import { useRef } from "react"
 import Image from "next/image"
 import Link from "next/link"
-import { motion, useInView } from "framer-motion"
 import { ArrowRight, MessageCircle } from "lucide-react"
 
 import { Button } from "@/components/ui/button"
 import { Magnetic } from "@/components/motion/Magnetic"
 import { PLAN_SAFARI_ROUTE, whatsappLink } from "@/lib/constants"
+import { Reveal } from "@/components/Reveal"
 
 export function FinalCTA() {
-  const ref = useRef<HTMLDivElement>(null)
-  const isInView = useInView(ref, { once: true, margin: "-100px" })
 
   const whatsappUrl = whatsappLink()
 
   return (
-    <section ref={ref} className="relative overflow-hidden bg-[#06101C] py-28 sm:py-32">
+    <section className="relative overflow-hidden bg-[#06101C] py-28 sm:py-32">
       <div className="absolute inset-0">
         <Image
           src="/images/local/pin_cef6d689ef0cdfd6df6180dee63f669c.jpg"
@@ -31,10 +26,7 @@ export function FinalCTA() {
       </div>
 
       <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8, ease: "easeOut" }}
+        <Reveal
           className="mx-auto max-w-3xl text-center"
         >
           <span className="text-xs font-semibold uppercase tracking-[0.24em] text-[#F7CE84]">Ready when you are</span>
@@ -55,7 +47,7 @@ export function FinalCTA() {
             <Magnetic>
               <Button
                 variant="outline"
-                onClick={() => window.open(whatsappUrl, "_blank", "noopener,noreferrer")}
+                render={<a href={whatsappUrl} target="_blank" rel="noopener noreferrer" />}
                 className="h-14 rounded-full border-white/20 bg-white/5 px-10 text-base font-semibold text-white backdrop-blur-md transition-all duration-300 hover:border-white/40 hover:bg-white/10 hover:text-white"
               >
                 <MessageCircle className="mr-2 h-5 w-5" />
@@ -68,7 +60,7 @@ export function FinalCTA() {
             <span className="flex items-center gap-2"><span className="h-1.5 w-1.5 rounded-full bg-accent" />Honest, local advice</span>
             <span className="flex items-center gap-2"><span className="h-1.5 w-1.5 rounded-full bg-accent" />Reply within 24 hours</span>
           </div>
-        </motion.div>
+        </Reveal>
       </div>
     </section>
   )

@@ -1,18 +1,16 @@
 "use client"
 
-import { useEffect, useRef, useState } from "react"
+import { useEffect, useState } from "react"
 import Image from "next/image"
-import { motion, useInView } from "framer-motion"
 import { Quote, Star } from "lucide-react"
 import useEmblaCarousel from "embla-carousel-react"
 import Autoplay from "embla-carousel-autoplay"
 
 import { TESTIMONIALS } from "@/lib/constants"
 import { cn } from "@/lib/utils"
+import { Reveal } from "@/components/Reveal"
 
 export function TestimonialsCarousel() {
-  const ref = useRef<HTMLDivElement>(null)
-  const isInView = useInView(ref, { once: true, margin: "-100px" })
   const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true, align: "start" }, [Autoplay({ delay: 4000, stopOnInteraction: false, stopOnMouseEnter: true })])
 
   const [selectedIndex, setSelectedIndex] = useState(0)
@@ -29,13 +27,10 @@ export function TestimonialsCarousel() {
   }, [emblaApi])
 
   return (
-    <section ref={ref} className="relative overflow-hidden bg-background py-24 sm:py-28">
+    <section className="relative overflow-hidden bg-background py-24 sm:py-28">
       <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-border to-transparent" />
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.7 }}
+        <Reveal
           className="mx-auto mb-14 max-w-2xl text-center"
         >
           <span className="eyebrow">Testimonials</span>
@@ -45,7 +40,7 @@ export function TestimonialsCarousel() {
           <p className="mx-auto max-w-xl text-base text-muted-foreground">
             Stories from travellers who came for the wildlife and left with a whole lot more.
           </p>
-        </motion.div>
+        </Reveal>
 
         <div className="relative">
           <div className="overflow-hidden" ref={emblaRef}>

@@ -304,11 +304,26 @@
     opacity: 1;
     transform: none;
   }
+  /* Keep opacity at 1 so static content is never hidden if animations are
+     paused (background tabs, headless crawlers, reduced-motion). */
+  @keyframes css-reveal-in {
+    from { opacity: 1; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .css-reveal {
+    animation: css-reveal-in 600ms cubic-bezier(0.22, 1, 0.36, 1) var(--reveal-delay, 0ms) both;
+  }
   @keyframes dropdown-in {
     from { opacity: 0; transform: translateY(8px) scale(0.96); }
     to { opacity: 1; transform: translateY(0) scale(1); }
   }
   .dropdown-in { animation: dropdown-in 200ms ease-out both; }
+  .magnetic {
+    transition: transform 280ms cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .magnetic:hover {
+    transform: translateY(-2px) scale(1.03);
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {

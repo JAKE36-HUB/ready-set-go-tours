@@ -162,19 +162,39 @@ export default function RootLayout({
           }}
         />
         <Analytics />
-        <Script id="gtag-init" strategy="lazyOnload">
-          {`
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-            gtag('config', 'AW-18369134468');
-            ${process.env.NEXT_PUBLIC_GA4_ID ? `gtag('config', '${process.env.NEXT_PUBLIC_GA4_ID}');` : ""}
-          `}
-        </Script>
-        <Script
-          id="gtag-ads"
-          strategy="lazyOnload"
-          src="https://www.googletagmanager.com/gtag/js?id=AW-18369134468"
+        {/* Define the gtag queue immediately so conversions are never lost,
+            but load the heavy Google loader only when the browser is idle. */}
+        <script
+          id="gtag-init"
+          dangerouslySetInnerHTML={{
+            __html: `
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+              gtag('config', 'AW-18369134468');
+              ${process.env.NEXT_PUBLIC_GA4_ID ? `gtag('config', '${process.env.NEXT_PUBLIC_GA4_ID}');` : ""}
+              (function(){
+                var load = function(){
+                  if (document.getElementById('gtag-loader')) return;
+                  var s = document.createElement('script');
+                  s.id = 'gtag-loader';
+                  s.async = true;
+                  s.src = 'https://www.googletagmanager.com/gtag/js?id=AW-18369134468';
+                  document.head.appendChild(s);
+                };
+                // Real visitors load it on their first interaction; idle
+                // browsers/crawlers load it much later, off the critical path.
+                ['pointerdown', 'keydown', 'scroll', 'touchstart'].forEach(function(e){
+                  window.addEventListener(e, load, { once: true, passive: true });
+                });
+                if ('requestIdleCallback' in window) {
+                  requestIdleCallback(load, { timeout: 12000 });
+                } else {
+                  setTimeout(load, 6000);
+                }
+              })();
+            `,
+          }}
         />
         {process.env.NEXT_PUBLIC_CLARITY_ID && (
           <Script id="microsoft-clarity" strategy="lazyOnload">

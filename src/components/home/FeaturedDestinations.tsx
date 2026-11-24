@@ -1,29 +1,21 @@
-"use client"
-
-import { useRef } from "react"
 import Image from "next/image"
 import Link from "next/link"
-import { motion, useInView } from "framer-motion"
 import { Clock, Calendar, ArrowRight, MapPin } from "lucide-react"
 
 import { Button } from "@/components/ui/button"
 import { TiltCard } from "@/components/motion/TiltCard"
 import { DESTINATIONS } from "@/lib/constants"
+import { Reveal } from "@/components/Reveal"
 
 export function FeaturedDestinations() {
-  const ref = useRef<HTMLDivElement>(null)
-  const isInView = useInView(ref, { once: true, margin: "-100px" })
 
   const allDestinations = [...DESTINATIONS.kenya, ...DESTINATIONS.tanzania].slice(0, 6)
 
   return (
-    <section ref={ref} className="relative overflow-hidden bg-muted/40 py-24 sm:py-28">
+    <section className="relative overflow-hidden bg-muted/40 py-24 sm:py-28">
       <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-border to-transparent" />
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.7 }}
+        <Reveal
           className="mb-14 flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between"
         >
           <div>
@@ -35,17 +27,14 @@ export function FeaturedDestinations() {
           <p className="max-w-md text-base leading-relaxed text-muted-foreground">
             From the Masai Mara to the Serengeti, Amboseli&apos;s elephants to the Ngorongoro Crater — start deciding where your story happens.
           </p>
-        </motion.div>
+        </Reveal>
 
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 lg:gap-8">
-          {allDestinations.map((dest, idx) => {
+          {allDestinations.map((dest) => {
             const isKenya = dest.id <= 8
             return (
               <TiltCard
                 key={dest.id}
-                initial={{ opacity: 0, y: 40 }}
-                animate={isInView ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.6, delay: idx * 0.05 }}
                 className="group relative overflow-hidden rounded-[1.75rem] border border-border bg-card shadow-card transition-all duration-500 hover:-translate-y-1 hover:shadow-card-hover"
               >
                 <div className="relative h-56 overflow-hidden sm:h-64">
@@ -85,10 +74,7 @@ export function FeaturedDestinations() {
           })}
         </div>
 
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={isInView ? { opacity: 1 } : {}}
-          transition={{ duration: 0.5, delay: 0.6 }}
+        <Reveal
           className="mt-12 text-center"
         >
           <Link href="/kenya-tours">
@@ -96,7 +82,7 @@ export function FeaturedDestinations() {
               Explore All Destinations <ArrowRight className="ml-2 h-4 w-4" />
             </Button>
           </Link>
-        </motion.div>
+        </Reveal>
       </div>
     </section>
   )

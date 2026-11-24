@@ -1,13 +1,12 @@
-﻿"use client"
+"use client"
 
-import { useRef } from "react"
 import Image from "next/image"
 import Link from "next/link"
-import { motion, useInView } from "framer-motion"
 import { Star, Check, Compass, ArrowRight, Hotel, Globe, Sparkles, type LucideIcon } from "lucide-react"
 
 import { Button } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
+import { Reveal } from "@/components/Reveal"
 
 const HOME_SERVICES = [
   {
@@ -58,17 +57,12 @@ const serviceColorMap: Record<string, { from: string; to: string; text: string; 
 }
 
 export function MoreServices({ onReserve }: { onReserve?: (name: string) => void }) {
-  const ref = useRef<HTMLDivElement>(null)
-  const isInView = useInView(ref, { once: true, margin: "-80px" })
 
   return (
-    <section ref={ref} className="relative py-28 bg-slate-50 dark:bg-slate-900 overflow-hidden">
+    <section className="relative py-28 bg-slate-50 dark:bg-slate-900 overflow-hidden">
       <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-amber-200/50 to-transparent" />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.7 }}
+        <Reveal
           className="text-center mb-14"
         >
           <span className="inline-flex items-center gap-2 bg-amber-500/15 text-amber-600 dark:text-amber-400 text-xs font-semibold uppercase tracking-[0.2em] px-4 py-1.5 rounded-full ring-1 ring-amber-500/20 mb-5">
@@ -84,17 +78,14 @@ export function MoreServices({ onReserve }: { onReserve?: (name: string) => void
           <p className="text-lg text-slate-500 dark:text-slate-400 max-w-xl mx-auto">
             From flights and accommodation to relaxation — we handle every detail so you just enjoy the journey.
           </p>
-        </motion.div>
+        </Reveal>
 
         <div className="grid md:grid-cols-3 gap-6 lg:gap-8">
-          {HOME_SERVICES.map((service, idx) => {
+          {HOME_SERVICES.map((service) => {
             const c = serviceColorMap[service.color]
             return (
-              <motion.div
+              <Reveal
                 key={service.title}
-                initial={{ opacity: 0, y: 30 }}
-                animate={isInView ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.5, delay: idx * 0.1 }}
                 className="relative bg-white dark:bg-slate-800 rounded-3xl border border-slate-200 dark:border-slate-700 hover:shadow-2xl hover:-translate-y-1.5 transition-all duration-500 overflow-hidden group"
               >
                 <div className="relative h-48 overflow-hidden">
@@ -172,15 +163,12 @@ export function MoreServices({ onReserve }: { onReserve?: (name: string) => void
                     </Link>
                   </div>
                 </div>
-              </motion.div>
+              </Reveal>
             )
           })}
         </div>
 
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.5, delay: 0.5 }}
+        <Reveal
           className="text-center mt-12"
         >
           <Link href="/services">
@@ -188,7 +176,7 @@ export function MoreServices({ onReserve }: { onReserve?: (name: string) => void
               View All Services <ArrowRight className="w-4 h-4 ml-2" />
             </Button>
           </Link>
-        </motion.div>
+        </Reveal>
       </div>
     </section>
   )

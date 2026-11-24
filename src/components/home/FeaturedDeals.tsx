@@ -1,19 +1,17 @@
 "use client"
 
-import { useState, useRef, useEffect } from "react"
+import { useState, useEffect } from "react"
 import Image from "next/image"
 import Link from "next/link"
-import { motion, useInView } from "framer-motion"
 import { Percent, Clock, Hotel, ChevronLeft, ChevronRight } from "lucide-react"
 import useEmblaCarousel from "embla-carousel-react"
 import Autoplay from "embla-carousel-autoplay"
 
 import { DEALS } from "@/lib/constants"
 import { DealUrgency } from "@/components/DealUrgency"
+import { Reveal } from "@/components/Reveal"
 
 export function FeaturedDeals() {
-  const sectionRef = useRef<HTMLDivElement>(null)
-  const isInView = useInView(sectionRef, { once: true, margin: "-100px" })
   const deals = DEALS.slice(0, 5)
 
   const [emblaRef, emblaApi] = useEmblaCarousel(
@@ -35,15 +33,12 @@ export function FeaturedDeals() {
   }, [emblaApi])
 
   return (
-    <section ref={sectionRef} className="relative py-24 overflow-hidden bg-gradient-to-br from-slate-900 via-slate-800 to-emerald-950">
+    <section className="relative py-24 overflow-hidden bg-gradient-to-br from-slate-900 via-slate-800 to-emerald-950">
       <div className="absolute inset-0 opacity-[0.04]" style={{ backgroundImage: "radial-gradient(circle at 1px 1px, white 1px, transparent 0)", backgroundSize: "40px 40px" }} />
       <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-emerald-500/10 rounded-full blur-[160px]" />
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6 }}
+        <Reveal
           className="text-center mb-12"
         >
           <span className="inline-flex items-center gap-2 bg-emerald-500/15 text-emerald-300 text-xs font-semibold uppercase tracking-[0.2em] px-4 py-1.5 rounded-full ring-1 ring-emerald-500/20 mb-4">
@@ -61,7 +56,7 @@ export function FeaturedDeals() {
               Save Up to 30%
             </span>
           </div>
-        </motion.div>
+        </Reveal>
 
         <div className="overflow-hidden -mx-4 sm:-mx-6 lg:-mx-8" ref={emblaRef}>
           <div className="flex">
@@ -130,16 +125,13 @@ export function FeaturedDeals() {
           </button>
         </div>
 
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={isInView ? { opacity: 1 } : {}}
-          transition={{ duration: 0.5, delay: 0.5 }}
+        <Reveal
           className="text-center mt-8"
         >
           <Link href="/deals" className="inline-flex items-center gap-2 text-sm text-white/50 hover:text-white transition-colors">
             See All Deals & Offers <ChevronRight className="size-4" />
           </Link>
-        </motion.div>
+        </Reveal>
       </div>
     </section>
   )

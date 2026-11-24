@@ -1,13 +1,10 @@
-"use client"
-
-import { useRef } from "react"
 import Image from "next/image"
 import Link from "next/link"
-import { motion, useInView } from "framer-motion"
 import { MessageCircle, ArrowRight, Check } from "lucide-react"
 
 import { Button } from "@/components/ui/button"
 import { PLAN_SAFARI_ROUTE, whatsappLink } from "@/lib/constants"
+import { Reveal } from "@/components/Reveal"
 
 const REASONS = [
   "A specific park you have your heart set on",
@@ -17,19 +14,14 @@ const REASONS = [
 ]
 
 export function CustomSafari() {
-  const ref = useRef<HTMLDivElement>(null)
-  const isInView = useInView(ref, { once: true, margin: "-100px" })
 
   const whatsappUrl = whatsappLink()
 
   return (
-    <section ref={ref} className="relative overflow-hidden bg-muted/50 py-24 sm:py-28">
+    <section className="relative overflow-hidden bg-muted/50 py-24 sm:py-28">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="grid items-center gap-10 lg:grid-cols-2 lg:gap-14">
-          <motion.div
-            initial={{ opacity: 0, x: -40 }}
-            animate={isInView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.7 }}
+          <Reveal
             className="relative aspect-[4/3] overflow-hidden rounded-[1.75rem] shadow-card lg:aspect-auto lg:h-[520px]"
           >
             <Image
@@ -39,12 +31,9 @@ export function CustomSafari() {
               sizes="(min-width: 1024px) 50vw, 100vw"
               className="object-cover"
             />
-          </motion.div>
+          </Reveal>
 
-          <motion.div
-            initial={{ opacity: 0, y: 40 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.7, delay: 0.15 }}
+          <Reveal
           >
             <span className="eyebrow">Custom safaris</span>
             <h2 className="mb-5 mt-4 font-display text-3xl font-normal leading-tight text-foreground sm:text-4xl lg:text-5xl">
@@ -71,14 +60,14 @@ export function CustomSafari() {
               </Link>
               <Button
                 variant="outline"
-                onClick={() => window.open(whatsappUrl, "_blank", "noopener,noreferrer")}
+                render={<a href={whatsappUrl} target="_blank" rel="noopener noreferrer" />}
                 className="h-13 border-border px-8 text-base font-medium transition-all hover:border-primary/40 hover:text-primary"
               >
                 <MessageCircle className="mr-2 h-4 w-4" />
                 WhatsApp Us
               </Button>
             </div>
-          </motion.div>
+          </Reveal>
         </div>
       </div>
     </section>

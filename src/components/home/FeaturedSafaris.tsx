@@ -1,15 +1,12 @@
-"use client"
-
-import { useRef } from "react"
 import Image from "next/image"
 import Link from "next/link"
-import { motion, useInView } from "framer-motion"
 import { Clock, Bed, ArrowRight } from "lucide-react"
 
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { TiltCard } from "@/components/motion/TiltCard"
 import { TOUR_PACKAGES, PLAN_SAFARI_ROUTE } from "@/lib/constants"
+import { Reveal } from "@/components/Reveal"
 
 const FEATURED_SLUGS = [
   "maasai-mara-3-days-group",
@@ -30,20 +27,15 @@ const typeLabel: Record<string, string> = {
 }
 
 export function FeaturedSafaris() {
-  const ref = useRef<HTMLDivElement>(null)
-  const isInView = useInView(ref, { once: true, margin: "-100px" })
 
   const packages = FEATURED_SLUGS
     .map((slug) => TOUR_PACKAGES.find((p) => p.slug === slug))
     .filter((p): p is NonNullable<typeof p> => Boolean(p))
 
   return (
-    <section ref={ref} className="relative overflow-hidden bg-background py-24 sm:py-28">
+    <section className="relative overflow-hidden bg-background py-24 sm:py-28">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.7 }}
+        <Reveal
           className="mx-auto mb-14 max-w-2xl text-center"
         >
           <span className="eyebrow">Find your safari</span>
@@ -53,15 +45,12 @@ export function FeaturedSafaris() {
           <p className="mx-auto max-w-xl text-base text-muted-foreground">
             Private and group journeys across Kenya and Tanzania — each one fully customisable.
           </p>
-        </motion.div>
+        </Reveal>
 
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 lg:gap-8">
-          {packages.map((pkg, idx) => (
+          {packages.map((pkg) => (
             <TiltCard
               key={pkg.slug}
-              initial={{ opacity: 0, y: 30 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.5, delay: idx * 0.08 }}
               className="group relative flex flex-col overflow-hidden rounded-[1.75rem] border border-border bg-card shadow-card transition-all duration-500 hover:-translate-y-1.5 hover:shadow-card-hover"
             >
               <div className="relative h-60 overflow-hidden">
@@ -110,10 +99,7 @@ export function FeaturedSafaris() {
           ))}
         </div>
 
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={isInView ? { opacity: 1 } : {}}
-          transition={{ duration: 0.5, delay: 0.5 }}
+        <Reveal
           className="mt-12 text-center"
         >
           <Link href="/holiday-packages">
@@ -121,7 +107,7 @@ export function FeaturedSafaris() {
               Explore All Safaris <ArrowRight className="ml-2 h-4 w-4" />
             </Button>
           </Link>
-        </motion.div>
+        </Reveal>
       </div>
     </section>
   )

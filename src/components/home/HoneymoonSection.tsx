@@ -1,31 +1,23 @@
-"use client"
-
-import { useRef } from "react"
 import Image from "next/image"
 import Link from "next/link"
-import { motion, useInView } from "framer-motion"
 import { Heart, Clock, ArrowRight } from "lucide-react"
 
 import { Button } from "@/components/ui/button"
 import { HONEYMOON_PACKAGES, PLAN_SAFARI_ROUTE } from "@/lib/constants"
+import { Reveal } from "@/components/Reveal"
 
 export function HoneymoonSection() {
-  const ref = useRef<HTMLDivElement>(null)
-  const isInView = useInView(ref, { once: true, margin: "-100px" })
   const honeymoons = HONEYMOON_PACKAGES.slice(0, 3)
 
   return (
-    <section ref={ref} className="relative overflow-hidden bg-[#06101C] py-24 text-white sm:py-28">
+    <section className="relative overflow-hidden bg-[#06101C] py-24 text-white sm:py-28">
       <div className="pointer-events-none absolute inset-0">
         <div className="absolute left-1/4 top-0 h-[500px] w-[500px] rounded-full bg-accent/12 blur-[160px]" />
         <div className="absolute bottom-0 right-1/4 h-[400px] w-[400px] rounded-full bg-primary/25 blur-[140px]" />
       </div>
 
       <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.7 }}
+        <Reveal
           className="mx-auto mb-14 max-w-2xl text-center"
         >
           <span className="text-xs font-semibold uppercase tracking-[0.24em] text-[#F7CE84]">Honeymoons</span>
@@ -52,15 +44,12 @@ export function HoneymoonSection() {
               </Button>
             </Link>
           </div>
-        </motion.div>
+        </Reveal>
 
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 lg:gap-8">
-          {honeymoons.map((hp, idx) => (
-            <motion.div
+          {honeymoons.map((hp) => (
+            <Reveal
               key={hp.id}
-              initial={{ opacity: 0, y: 30 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.5, delay: idx * 0.1 }}
             >
               <Link href={`/honeymoon-packages/${hp.slug}`} className="group relative block h-80 overflow-hidden rounded-[1.75rem] ring-1 ring-white/10 transition-all duration-500 hover:ring-accent/50">
                 <Image
@@ -84,7 +73,7 @@ export function HoneymoonSection() {
                   </h3>
                 </div>
               </Link>
-            </motion.div>
+            </Reveal>
           ))}
         </div>
       </div>
